@@ -395,7 +395,7 @@ def start_master(etcd):
         # No point in trying to start master services and fail. Just return.
         return
 
-    # TODO: Make sure below relation is handled on change
+    # TODO: Make sure below relation is handled on change id:86 gh:87
     # https://github.com/kubernetes/kubernetes/issues/43461
     handle_etcd_relation(etcd)
 
@@ -1030,7 +1030,7 @@ def get_config_args():
 
 
 def configure_apiserver():
-    # TODO: investigate if it's possible to use config file to store args
+    # TODO: investigate if it's possible to use config file to store args id:118 gh:119
     # https://github.com/juju-solutions/bundle-canonical-kubernetes/issues/315
     # Handle api-extra-args config option
     to_add, to_remove = get_config_args()
@@ -1073,7 +1073,7 @@ def configure_apiserver():
     api_opts.add('logtostderr', 'true')
     api_opts.add('insecure-bind-address', '127.0.0.1')
     api_opts.add('insecure-port', '8080')
-    api_opts.add('storage-backend', 'etcd2')  # FIXME: add etcd3 support
+    api_opts.add('storage-backend', 'etcd2')  # FIXME: add etcd3 support id:91 gh:92
 
     admission_control = [
         'Initializers',
@@ -1118,7 +1118,7 @@ def configure_controller_manager():
     layer_options = layer.options('tls-client')
     ca_cert_path = layer_options.get('ca_certificate_path')
 
-    # Default to 3 minute resync. TODO: Make this configureable?
+    # Default to 3 minute resync. TODO: Make this configureable? id:51 gh:52
     controller_opts.add('min-resync-period', '3m')
     controller_opts.add('v', '2')
     controller_opts.add('root-ca-file', ca_cert_path)

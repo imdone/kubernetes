@@ -203,7 +203,7 @@ type testContext struct {
 func setup(t *testing.T, workerCount int) *testContext {
 	masterConfig, tearDownMaster := apitesting.StartTestServerOrDie(t)
 
-	// TODO: Disable logging here until we resolve teardown issues which result in
+	// TODO: Disable logging here until we resolve teardown issues which result in id:2437 gh:2452
 	// massive log spam. Another path forward would be to refactor
 	// StartTestServerOrDie to work with the etcd instance already started by the
 	// integration test scripts.
@@ -868,7 +868,7 @@ func TestCustomResourceCascadingDeletion(t *testing.T) {
 // TestMixedRelationships ensures that owner/dependent relationships work
 // between core and custom resources.
 //
-// TODO: Consider how this could be represented with table-style tests (e.g. a
+// TODO: Consider how this could be represented with table-style tests (e.g. a id:2547 gh:2562
 // before/after expected object graph given a delete operation targetting a
 // specific node in the before graph with certain delete options).
 func TestMixedRelationships(t *testing.T) {

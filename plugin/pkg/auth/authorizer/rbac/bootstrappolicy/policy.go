@@ -105,10 +105,10 @@ func NodeRules() []rbac.PolicyRule {
 		rbac.NewRule("update", "patch").Groups(legacyGroup).Resources("nodes/status").RuleOrDie(),
 		rbac.NewRule("update", "patch", "delete").Groups(legacyGroup).Resources("nodes").RuleOrDie(),
 
-		// TODO: restrict to the bound node as creator in the NodeRestrictions admission plugin
+		// TODO: restrict to the bound node as creator in the NodeRestrictions admission plugin id:1442 gh:1448
 		rbac.NewRule("create", "update", "patch").Groups(legacyGroup).Resources("events").RuleOrDie(),
 
-		// TODO: restrict to pods scheduled on the bound node once field selectors are supported by list/watch authorization
+		// TODO: restrict to pods scheduled on the bound node once field selectors are supported by list/watch authorization id:1461 gh:1467
 		rbac.NewRule(Read...).Groups(legacyGroup).Resources("pods").RuleOrDie(),
 
 		// Needed for the node to create/delete mirror pods.
@@ -128,7 +128,7 @@ func NodeRules() []rbac.PolicyRule {
 		// Needed for persistent volumes
 		// Use the NodeRestriction admission plugin to limit a node to get pv/pvc objects referenced by pods bound to itself.
 		rbac.NewRule("get").Groups(legacyGroup).Resources("persistentvolumeclaims", "persistentvolumes").RuleOrDie(),
-		// TODO: add to the Node authorizer and restrict to endpoints referenced by pods or PVs bound to the node
+		// TODO: add to the Node authorizer and restrict to endpoints referenced by pods or PVs bound to the node id:1609 gh:1615
 		// Needed for glusterfs volumes
 		rbac.NewRule("get").Groups(legacyGroup).Resources("endpoints").RuleOrDie(),
 		// Used to create a certificatesigningrequest for a node-specific client certificate, and watch
@@ -168,7 +168,7 @@ func ClusterRoles() []rbac.ClusterRole {
 			// a role which provides minimal resource access to allow a "normal" user to learn information about themselves
 			ObjectMeta: metav1.ObjectMeta{Name: "system:basic-user"},
 			Rules: []rbac.PolicyRule{
-				// TODO add future selfsubjectrulesreview, project request APIs, project listing APIs
+				// TODO add future selfsubjectrulesreview, project request APIs, project listing APIs id:1539 gh:1545
 				rbac.NewRule("create").Groups(authorizationGroup).Resources("selfsubjectaccessreviews").RuleOrDie(),
 			},
 		},
@@ -349,7 +349,7 @@ func ClusterRoles() []rbac.ClusterRole {
 				eventsRule(),
 
 				// this is for leaderlease access
-				// TODO: scope this to the kube-system namespace
+				// TODO: scope this to the kube-system namespace id:1583 gh:1589
 				rbac.NewRule("create").Groups(legacyGroup).Resources("endpoints").RuleOrDie(),
 				rbac.NewRule("get", "update", "patch", "delete").Groups(legacyGroup).Resources("endpoints").Names("kube-scheduler").RuleOrDie(),
 

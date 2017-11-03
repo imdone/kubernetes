@@ -46,7 +46,7 @@ func (l *logFiles) String() string {
 func (l *logFiles) Set(value string) error {
 	// Someone else is calling flag.Parse after the flags are parsed in the
 	// test framework. Use this to avoid the flag being parsed twice.
-	// TODO(random-liu): Figure out who is parsing the flags.
+	// TODO (random-liu): Figure out who is parsing the flags. id:2668 gh:2683
 	if flag.Parsed() {
 		return nil
 	}
@@ -79,7 +79,7 @@ var requiredLogs = []LogFileData{
 		Files:             []string{"/var/log/cloud-init.log"},
 		JournalctlCommand: []string{"-u", "cloud*"},
 	},
-	// TODO(random-liu): Make docker.log non-required.
+	// TODO (random-liu): Make docker.log non-required. id:2407 gh:2423
 	{
 		Name:              "docker.log",
 		Files:             []string{"/var/log/docker.log", "/var/log/upstart/docker.log"},

@@ -32,7 +32,7 @@ func (az *Cloud) CreateFileShare(name, storageAccount, storageType, location str
 		// find a storage account
 		accounts, err = az.getStorageAccounts()
 		if err != nil {
-			// TODO: create a storage account and container
+			// TODO: create a storage account and container id:378 gh:380
 			return "", "", err
 		}
 	}

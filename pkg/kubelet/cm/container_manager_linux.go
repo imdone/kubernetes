@@ -190,7 +190,7 @@ func validateSystemRequirements(mountUtil mount.Interface) (features, error) {
 	return f, nil
 }
 
-// TODO(vmarmol): Add limits to the system containers.
+// TODO (vmarmol): Add limits to the system containers. id:773 gh:774
 // Takes the absolute name of the specified containers.
 // Empty container name disables use of the specified container.
 func NewContainerManager(mountUtil mount.Interface, cadvisorInterface cadvisor.Interface, nodeConfig NodeConfig, failSwapOn bool, devicePluginEnabled bool, recorder record.EventRecorder) (ContainerManager, error) {
@@ -424,7 +424,7 @@ func (cm *containerManagerImpl) setupNode(activePods ActivePodsFunc) error {
 		// runtime processes need to be in. For now, we still check the
 		// cgroup for docker periodically, so that kubelet can recognize
 		// the cgroup for docker and serve stats for the runtime.
-		// TODO(#27097): Fix this after NodeSpec is clearly defined.
+		// TODO (#27097): Fix this after NodeSpec is clearly defined. id:871 gh:878
 		cm.periodicTasks = append(cm.periodicTasks, func() {
 			glog.V(4).Infof("[ContainerManager]: Adding periodic tasks for docker CRI integration")
 			cont, err := getContainerNameForProcess(dockerProcessName, dockerPidFile)
@@ -616,7 +616,7 @@ func (cm *containerManagerImpl) setFsCapacity() error {
 	return nil
 }
 
-// TODO: move the GetResources logic to PodContainerManager.
+// TODO: move the GetResources logic to PodContainerManager. id:815 gh:816
 func (cm *containerManagerImpl) GetResources(pod *v1.Pod, container *v1.Container) (*kubecontainer.RunContainerOptions, error) {
 	opts := &kubecontainer.RunContainerOptions{}
 	// Allocate should already be called during predicateAdmitHandler.Admit(),
@@ -709,7 +709,7 @@ func getPidsForProcess(name, pidFile string) ([]int, error) {
 
 // Ensures that the Docker daemon is in the desired container.
 // Temporarily export the function to be used by dockershim.
-// TODO(yujuhong): Move this function to dockershim once kubelet migrates to
+// TODO (yujuhong): Move this function to dockershim once kubelet migrates to id:760 gh:761
 // dockershim as the default.
 func EnsureDockerInContainer(dockerAPIVersion *utilversion.Version, oomScoreAdj int, manager *fs.Manager) error {
 	type process struct{ name, file string }

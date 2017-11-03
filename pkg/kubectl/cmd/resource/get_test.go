@@ -100,7 +100,7 @@ func (t *testPrinter) PrintObj(obj runtime.Object, out io.Writer) error {
 	return t.Err
 }
 
-// TODO: implement HandledResources()
+// TODO: implement HandledResources() id:728 gh:729
 func (t *testPrinter) HandledResources() []string {
 	return []string{}
 }

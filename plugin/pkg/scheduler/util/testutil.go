@@ -112,7 +112,7 @@ func (g TestGroup) SelfLink(resource, name string) string {
 		return fmt.Sprintf("/api/%s/%s/%s", g.externalGroupVersion.Version, resource, name)
 	}
 
-	// TODO: will need a /apis prefix once we have proper multi-group
+	// TODO: will need a /apis prefix once we have proper multi-group id:1545 gh:1551
 	// support
 	if name == "" {
 		return fmt.Sprintf("/apis/%s/%s/%s", g.externalGroupVersion.Group, g.externalGroupVersion.Version, resource)
@@ -128,7 +128,7 @@ func (g TestGroup) ResourcePathWithPrefix(prefix, resource, namespace, name stri
 	if g.externalGroupVersion.Group == api.GroupName {
 		path = "/api/" + g.externalGroupVersion.Version
 	} else {
-		// TODO: switch back once we have proper multiple group support
+		// TODO: switch back once we have proper multiple group support id:1472 gh:1478
 		// path = "/apis/" + g.Group + "/" + Version(group...)
 		path = "/apis/" + g.externalGroupVersion.Group + "/" + g.externalGroupVersion.Version
 	}

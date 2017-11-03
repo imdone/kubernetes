@@ -82,7 +82,7 @@ type WebhookSource interface {
 func NewGenericAdmissionWebhook(configFile io.Reader) (*GenericAdmissionWebhook, error) {
 	kubeconfigFile := ""
 	if configFile != nil {
-		// TODO: move this to a versioned configuration file format
+		// TODO: move this to a versioned configuration file format id:3785 gh:3802
 		var config AdmissionConfig
 		d := yaml.NewYAMLOrJSONDecoder(configFile, 4096)
 		err := d.Decode(&config)
@@ -127,7 +127,7 @@ var (
 	_ = genericadmissioninit.WantsExternalKubeClientSet(&GenericAdmissionWebhook{})
 )
 
-// TODO find a better way wire this, but keep this pull small for now.
+// TODO find a better way wire this, but keep this pull small for now. id:3607 gh:3622
 func (a *GenericAdmissionWebhook) SetAuthenticationInfoResolverWrapper(wrapper AuthenticationInfoResolverWrapper) {
 	if wrapper != nil {
 		a.authInfoResolver = wrapper(a.authInfoResolver)
@@ -238,7 +238,7 @@ func (a *GenericAdmissionWebhook) Admit(attr admission.Attributes) error {
 	}
 	if len(errs) > 1 {
 		for i := 1; i < len(errs); i++ {
-			// TODO: merge status errors; until then, just return the first one.
+			// TODO: merge status errors; until then, just return the first one. id:3689 gh:3704
 			utilruntime.HandleError(errs[i])
 		}
 	}
@@ -289,7 +289,7 @@ func (a *GenericAdmissionWebhook) hookClient(h *v1alpha1.ExternalAdmissionHook) 
 		return nil, err
 	}
 
-	// TODO: cache these instead of constructing one each time
+	// TODO: cache these instead of constructing one each time id:3864 gh:3879
 	restConfig, err := a.authInfoResolver.ClientConfigFor(serverName)
 	if err != nil {
 		return nil, err

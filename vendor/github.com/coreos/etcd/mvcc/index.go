@@ -154,7 +154,7 @@ func (ti *treeIndex) Compact(rev int64) map[revision]struct{} {
 	available := make(map[revision]struct{})
 	var emptyki []*keyIndex
 	plog.Printf("store.index: compact %d", rev)
-	// TODO: do not hold the lock for long time?
+	// TODO: do not hold the lock for long time? id:2765 gh:2780
 	// This is probably OK. Compacting 10M keys takes O(10ms).
 	ti.Lock()
 	defer ti.Unlock()

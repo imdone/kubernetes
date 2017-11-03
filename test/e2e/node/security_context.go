@@ -108,7 +108,7 @@ var _ = SIGDescribe("Security Context [Feature:SecurityContext]", func() {
 	})
 
 	It("should support seccomp alpha unconfined annotation on the container [Feature:Seccomp]", func() {
-		// TODO: port to SecurityContext as soon as seccomp is out of alpha
+		// TODO: port to SecurityContext as soon as seccomp is out of alpha id:2541 gh:2556
 		pod := scTestPod(false, false)
 		pod.Annotations[v1.SeccompContainerAnnotationKeyPrefix+"test-container"] = "unconfined"
 		pod.Annotations[v1.SeccompPodAnnotationKey] = "docker/default"
@@ -117,7 +117,7 @@ var _ = SIGDescribe("Security Context [Feature:SecurityContext]", func() {
 	})
 
 	It("should support seccomp alpha unconfined annotation on the pod [Feature:Seccomp]", func() {
-		// TODO: port to SecurityContext as soon as seccomp is out of alpha
+		// TODO: port to SecurityContext as soon as seccomp is out of alpha id:2266 gh:2277
 		pod := scTestPod(false, false)
 		pod.Annotations[v1.SeccompPodAnnotationKey] = "unconfined"
 		pod.Spec.Containers[0].Command = []string{"grep", "ecc", "/proc/self/status"}
@@ -125,7 +125,7 @@ var _ = SIGDescribe("Security Context [Feature:SecurityContext]", func() {
 	})
 
 	It("should support seccomp alpha docker/default annotation [Feature:Seccomp]", func() {
-		// TODO: port to SecurityContext as soon as seccomp is out of alpha
+		// TODO: port to SecurityContext as soon as seccomp is out of alpha id:2398 gh:2413
 		pod := scTestPod(false, false)
 		pod.Annotations[v1.SeccompContainerAnnotationKeyPrefix+"test-container"] = "docker/default"
 		pod.Spec.Containers[0].Command = []string{"grep", "ecc", "/proc/self/status"}
@@ -133,7 +133,7 @@ var _ = SIGDescribe("Security Context [Feature:SecurityContext]", func() {
 	})
 
 	It("should support seccomp default which is unconfined [Feature:Seccomp]", func() {
-		// TODO: port to SecurityContext as soon as seccomp is out of alpha
+		// TODO: port to SecurityContext as soon as seccomp is out of alpha id:2315 gh:2330
 		pod := scTestPod(false, false)
 		pod.Spec.Containers[0].Command = []string{"grep", "ecc", "/proc/self/status"}
 		f.TestContainerOutput(v1.SeccompPodAnnotationKey, pod, 0, []string{"0"}) // seccomp disabled

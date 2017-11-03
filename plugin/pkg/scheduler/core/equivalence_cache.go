@@ -115,7 +115,7 @@ func (ec *EquivalenceCache) PredicateWithECache(
 	if algorithmCache, exist := ec.algorithmCache[nodeName]; exist {
 		if cachePredicate, exist := algorithmCache.predicatesCache.Get(predicateKey); exist {
 			predicateMap := cachePredicate.(PredicateMap)
-			// TODO(resouer) Is it possible a race that cache failed to update immediately?
+			// TODO (resouer) Is it possible a race that cache failed to update immediately? id:1449 gh:1455
 			if hostPredicate, ok := predicateMap[equivalenceHash]; ok {
 				if hostPredicate.Fit {
 					return true, []algorithm.PredicateFailureReason{}, false
@@ -180,7 +180,7 @@ func (ec *EquivalenceCache) InvalidateCachedPredicateItemForPodAdd(pod *v1.Pod, 
 	// But when a pod is deleted, existing inter pod affinity may become invalid.
 	// (e.g. this pod was preferred by some else, or vice versa)
 	//
-	// NOTE: assumptions above will not stand when we implemented features like
+	// NOTE: assumptions above will not stand when we implemented features like id:1468 gh:1470
 	// RequiredDuringSchedulingRequiredDuringExecution.
 
 	// NoDiskConflict: the newly scheduled pod fits to existing pods on this node,

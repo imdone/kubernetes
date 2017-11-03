@@ -690,7 +690,7 @@ func (b *Builder) walkType(u types.Universe, useName *types.Name, in tc.Type) *t
 		}
 		out.Kind = types.Array
 		out.Elem = b.walkType(u, nil, t.Elem())
-		// TODO: need to store array length, otherwise raw type name
+		// TODO: need to store array length, otherwise raw type name id:4033 gh:4053
 		// cannot be properly written.
 		return out
 	case *tc.Chan:
@@ -700,7 +700,7 @@ func (b *Builder) walkType(u types.Universe, useName *types.Name, in tc.Type) *t
 		}
 		out.Kind = types.Chan
 		out.Elem = b.walkType(u, nil, t.Elem())
-		// TODO: need to store direction, otherwise raw type name
+		// TODO: need to store direction, otherwise raw type name id:3831 gh:3847
 		// cannot be properly written.
 		return out
 	case *tc.Basic:

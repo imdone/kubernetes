@@ -43,7 +43,7 @@ func NewSummaryProvider(statsProvider StatsProvider) SummaryProvider {
 
 // Get provides a new Summary with the stats from Kubelet.
 func (sp *summaryProviderImpl) Get() (*statsapi.Summary, error) {
-	// TODO(timstclair): Consider returning a best-effort response if any of
+	// TODO (timstclair): Consider returning a best-effort response if any of id:1006 gh:1012
 	// the following errors occur.
 	node, err := sp.provider.GetNode()
 	if err != nil {

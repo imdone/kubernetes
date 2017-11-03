@@ -70,7 +70,7 @@ func fmtRawDoc(rawDoc string) string {
 		case len(line) == 0: // Keep paragraphs
 			delPrevChar()
 			buffer.WriteString("\n\n")
-		case strings.HasPrefix(leading, "TODO"): // Ignore one line TODOs
+		case strings.HasPrefix(leading, "TODO"): // Ignore one line TODO s id:3776 gh:3792
 		case strings.HasPrefix(leading, "+"): // Ignore instructions to the generators
 		default:
 			if strings.HasPrefix(line, " ") || strings.HasPrefix(line, "\t") {

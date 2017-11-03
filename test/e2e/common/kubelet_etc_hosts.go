@@ -90,7 +90,7 @@ func (config *KubeletManagedHostConfig) createPodWithHostNetwork() {
 
 func assertManagedStatus(
 	config *KubeletManagedHostConfig, podName string, expectedIsManaged bool, name string) {
-	// TODO: workaround for https://github.com/kubernetes/kubernetes/issues/34256
+	// TODO: workaround for https://github.com/kubernetes/kubernetes/issues/34256 id:2220 gh:2235
 	//
 	// Retry until timeout for the contents of /etc/hosts to show
 	// up. Note: if /etc/hosts is properly mounted, then this will

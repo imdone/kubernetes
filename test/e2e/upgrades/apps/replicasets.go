@@ -37,7 +37,7 @@ const (
 	scaleNum = 2
 )
 
-// TODO: Test that the replicaset stays available during master (and maybe
+// TODO: Test that the replicaset stays available during master (and maybe id:2403 gh:2419
 // node and cluster upgrades).
 
 // ReplicaSetUpgradeTest tests that a replicaset survives upgrade.

@@ -46,10 +46,10 @@ func init() {
 	install.Install(groupFactoryRegistry, registry, Scheme)
 
 	// we need to add the options to empty v1
-	// TODO fix the server code to avoid this
+	// TODO fix the server code to avoid this id:4076 gh:4096
 	metav1.AddToGroupVersion(Scheme, schema.GroupVersion{Version: "v1"})
 
-	// TODO: keep the generic API server from wanting this
+	// TODO: keep the generic API server from wanting this id:3694 gh:3709
 	unversioned := schema.GroupVersion{Group: "", Version: "v1"}
 	Scheme.AddUnversionedTypes(unversioned,
 		&metav1.Status{},

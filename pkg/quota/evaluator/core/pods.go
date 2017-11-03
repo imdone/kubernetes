@@ -58,7 +58,7 @@ var podResources = []api.ResourceName{
 	api.ResourcePods,
 }
 
-// NOTE: it was a mistake, but if a quota tracks cpu or memory related resources,
+// NOTE: it was a mistake, but if a quota tracks cpu or memory related resources, id:1265 gh:1271
 // the incoming pod is required to have those values set.  we should not repeat
 // this mistake for other future resources (gpus, ephemeral-storage,etc).
 // do not add more resources to this list!
@@ -97,7 +97,7 @@ func (p *podEvaluator) Constraints(required []api.ResourceName, item runtime.Obj
 	// Pod level resources are often set during admission control
 	// As a consequence, we want to verify that resources are valid prior
 	// to ever charging quota prematurely in case they are not.
-	// TODO remove this entire section when we have a validation step in admission.
+	// TODO remove this entire section when we have a validation step in admission. id:1171 gh:1177
 	allErrs := field.ErrorList{}
 	fldPath := field.NewPath("spec").Child("containers")
 	for i, ctr := range pod.Spec.Containers {
@@ -275,7 +275,7 @@ func PodUsageFunc(obj runtime.Object, clock clock.Clock) (api.ResourceList, erro
 
 	requests := api.ResourceList{}
 	limits := api.ResourceList{}
-	// TODO: ideally, we have pod level requests and limits in the future.
+	// TODO: ideally, we have pod level requests and limits in the future. id:1344 gh:1350
 	for i := range pod.Spec.Containers {
 		requests = quota.Add(requests, pod.Spec.Containers[i].Resources.Requests)
 		limits = quota.Add(limits, pod.Spec.Containers[i].Resources.Limits)

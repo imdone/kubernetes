@@ -326,7 +326,7 @@ exports.dirname = function(path) {
 
 exports.basename = function(path, ext) {
   var f = splitPathRe.exec(path)[2] || '';
-  // TODO: make this comparison case-insensitive on windows?
+  // TODO: make this comparison case-insensitive on windows? id:2741 gh:2756
   if (ext && f.substr(-1 * ext.length) === ext) {
     f = f.substr(0, f.length - ext.length);
   }

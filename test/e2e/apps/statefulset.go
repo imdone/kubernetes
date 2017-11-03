@@ -1012,7 +1012,7 @@ func (m *mysqlGaleraTester) name() string {
 
 func (m *mysqlGaleraTester) mysqlExec(cmd, ns, podName string) string {
 	cmd = fmt.Sprintf("/usr/bin/mysql -u root -B -e '%v'", cmd)
-	// TODO: Find a readiness probe for mysql that guarantees writes will
+	// TODO: Find a readiness probe for mysql that guarantees writes will id:2364 gh:2379
 	// succeed and ditch retries. Current probe only reads, so there's a window
 	// for a race.
 	return kubectlExecWithRetries(fmt.Sprintf("--namespace=%v", ns), "exec", podName, "--", "/bin/sh", "-c", cmd)

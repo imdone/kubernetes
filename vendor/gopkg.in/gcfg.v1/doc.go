@@ -122,13 +122,13 @@
 // filtered out programmatically. To ignore extra data warnings, wrap the
 // gcfg.Read*Into invocation into a call to gcfg.FatalOnly.
 //
-// TODO
+// TODO id:3114 gh:3129
 //
 // The following is a list of changes under consideration:
 //  - documentation
 //    - self-contained syntax documentation
 //    - more practical examples
-//    - move TODOs to issue tracker (eventually)
+//    - move TODO s to issue tracker (eventually) id:3577 gh:3592
 //  - syntax
 //    - reconsider valid escape sequences
 //      (gitconfig doesn't support \r in value, \t in subsection name, etc.)

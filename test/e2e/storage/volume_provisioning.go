@@ -482,7 +482,7 @@ var _ = SIGDescribe("Dynamic Provisioning", func() {
 			testDynamicProvisioning(test, c, claim, class)
 		})
 
-		// NOTE: Slow!  The test will wait up to 5 minutes (framework.ClaimProvisionTimeout)
+		// NOTE: Slow!  The test will wait up to 5 minutes (framework.ClaimProvisionTimeout) id:2402 gh:2417
 		// when there is no regression.
 		It("should not provision a volume in an unmanaged GCE zone. [Slow]", func() {
 			framework.SkipUnlessProviderIs("gce", "gke")
@@ -546,7 +546,7 @@ var _ = SIGDescribe("Dynamic Provisioning", func() {
 			// This case tests for the regressions of a bug fixed by PR #21268
 			// REGRESSION: Deleting the PVC before the PV is provisioned can result in the PV
 			// not being deleted.
-			// NOTE:  Polls until no PVs are detected, times out at 5 minutes.
+			// NOTE: Polls until no PVs are detected, times out at 5 minutes. id:2319 gh:2334
 
 			framework.SkipUnlessProviderIs("openstack", "gce", "aws", "gke", "vsphere", "azure")
 
@@ -865,7 +865,7 @@ func newStorageClass(t storageClassTest, ns string, suffix string) *storage.Stor
 	}
 }
 
-// TODO: remove when storage.k8s.io/v1beta1 and beta storage class annotations
+// TODO: remove when storage.k8s.io/v1beta1 and beta storage class annotations id:2352 gh:2367
 // are removed.
 func newBetaStorageClass(t storageClassTest, suffix string) *storagebeta.StorageClass {
 	pluginName := t.provisioner

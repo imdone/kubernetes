@@ -38,7 +38,7 @@ var _ = framework.KubeDescribe("Docker features [Feature:Docker]", func() {
 
 	Context("when shared PID namespace is enabled", func() {
 		It("processes in different containers of the same pod should be able to see each other", func() {
-			// TODO(yguo0905): Change this test to run unless the runtime is
+			// TODO (yguo0905): Change this test to run unless the runtime is id:2324 gh:2339
 			// Docker and its version is <1.13.
 			By("Check whether shared PID namespace is supported.")
 			isEnabled, err := isSharedPIDNamespaceSupported()

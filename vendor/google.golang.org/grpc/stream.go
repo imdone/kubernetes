@@ -178,7 +178,7 @@ func newClientStream(ctx context.Context, desc *StreamDesc, cc *ClientConn, meth
 	for {
 		t, put, err = cc.getTransport(ctx, gopts)
 		if err != nil {
-			// TODO(zhaoq): Probably revisit the error handling.
+			// TODO (zhaoq): Probably revisit the error handling. id:3395 gh:3410
 			if _, ok := status.FromError(err); ok {
 				return nil, err
 			}
@@ -245,7 +245,7 @@ func newClientStream(ctx context.Context, desc *StreamDesc, cc *ClientConn, meth
 			cs.finish(ErrClientConnClosing)
 			cs.closeTransportStream(ErrClientConnClosing)
 		case <-s.Done():
-			// TODO: The trace of the RPC is terminated here when there is no pending
+			// TODO: The trace of the RPC is terminated here when there is no pending id:3386 gh:3402
 			// I/O, which is probably not the optimal solution.
 			cs.finish(s.Status().Err())
 			cs.closeTransportStream(nil)
@@ -319,7 +319,7 @@ func (cs *clientStream) SendMsg(m interface{}) (err error) {
 		}
 		cs.mu.Unlock()
 	}
-	// TODO Investigate how to signal the stats handling party.
+	// TODO Investigate how to signal the stats handling party. id:3695 gh:3710
 	// generate error stats if err != nil && err != io.EOF?
 	defer func() {
 		if err != nil {
@@ -332,7 +332,7 @@ func (cs *clientStream) SendMsg(m interface{}) (err error) {
 			// Specialize the process for server streaming. SendMesg is only called
 			// once when creating the stream object. io.EOF needs to be skipped when
 			// the rpc is early finished (before the stream object is created.).
-			// TODO: It is probably better to move this into the generated code.
+			// TODO: It is probably better to move this into the generated code. id:3109 gh:3124
 			if !cs.desc.ClientStreams && cs.desc.ServerStreams {
 				err = nil
 			}

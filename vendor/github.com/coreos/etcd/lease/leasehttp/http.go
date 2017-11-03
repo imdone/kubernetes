@@ -82,7 +82,7 @@ func (h *leaseHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, err.Error(), http.StatusBadRequest)
 			return
 		}
-		// TODO: fill out ResponseHeader
+		// TODO: fill out ResponseHeader id:2763 gh:2778
 		resp := &pb.LeaseKeepAliveResponse{ID: lreq.ID, TTL: ttl}
 		v, err = resp.Marshal()
 		if err != nil {
@@ -107,7 +107,7 @@ func (h *leaseHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, lease.ErrLeaseNotFound.Error(), http.StatusNotFound)
 			return
 		}
-		// TODO: fill out ResponseHeader
+		// TODO: fill out ResponseHeader id:2623 gh:2638
 		resp := &leasepb.LeaseInternalResponse{
 			LeaseTimeToLiveResponse: &pb.LeaseTimeToLiveResponse{
 				Header:     &pb.ResponseHeader{},
@@ -141,7 +141,7 @@ func (h *leaseHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 // RenewHTTP renews a lease at a given primary server.
-// TODO: Batch request in future?
+// TODO: Batch request in future? id:2674 gh:2690
 func RenewHTTP(ctx context.Context, id lease.LeaseID, url string, rt http.RoundTripper) (int64, error) {
 	// will post lreq protobuf to leader
 	lreq, err := (&pb.LeaseKeepAliveRequest{ID: int64(id)}).Marshal()

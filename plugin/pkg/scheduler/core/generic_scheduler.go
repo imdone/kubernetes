@@ -178,7 +178,7 @@ func (g *genericScheduler) selectHost(priorityList schedulerapi.HostPriorityList
 // preempt finds nodes with pods that can be preempted to make room for "pod" to
 // schedule. It chooses one of the nodes and preempts the pods on the node and
 // returns the node and the list of preempted pods if such a node is found.
-// TODO(bsalamat): Add priority-based scheduling. More info: today one or more
+// TODO (bsalamat): Add priority-based scheduling. More info: today one or more id:1616 gh:1622
 // pending pods (different from the pod that triggered the preemption(s)) may
 // schedule into some portion of the resources freed up by the preemption(s)
 // before the pod that triggered the preemption(s) has a chance to schedule
@@ -338,7 +338,7 @@ func podFitsOnNode(pod *v1.Pod, meta algorithm.PredicateMetadata, info *schedule
 
 			if eCacheAvailable {
 				// update equivalence cache with newly computed fit & reasons
-				// TODO(resouer) should we do this in another thread? any race?
+				// TODO (resouer) should we do this in another thread? any race? id:1605 gh:1611
 				ecache.UpdateCachedPredicateItem(pod.GetName(), info.Node().GetName(), predicateKey, fit, reasons, equivalenceHash)
 			}
 		}
@@ -504,7 +504,7 @@ func EqualPriorityMap(_ *v1.Pod, _ interface{}, nodeInfo *schedulercache.NodeInf
 // 2. Ties are broken by sum of priorities of all victims.
 // 3. If there are still ties, node with the minimum number of victims is picked.
 // 4. If there are still ties, the first such node is picked (sort of randomly).
-//TODO(bsalamat): Try to reuse the "nodeScore" slices in order to save GC time.
+//TODO (bsalamat): Try to reuse the "nodeScore" slices in order to save GC time. id:1590 gh:1596
 func pickOneNodeForPreemption(nodesToPods map[*v1.Node][]*v1.Pod) *v1.Node {
 	type nodeScore struct {
 		node            *v1.Node
@@ -659,10 +659,10 @@ func nodePassesExtendersForPreemption(
 // lower priority pods are gone. If so, it sorts all the lower priority pods by
 // their priority and starts from the highest priority one, tries to keep as
 // many of them as possible while checking that the "pod" can still fit on the node.
-// NOTE: This function assumes that it is never called if "pod" cannot be scheduled
+// NOTE: This function assumes that it is never called if "pod" cannot be scheduled id:1450 gh:1456
 // due to pod affinity, node affinity, or node anti-affinity reasons. None of
 // these predicates can be satisfied by removing more pods from the node.
-// TODO(bsalamat): Add support for PodDisruptionBudget.
+// TODO (bsalamat): Add support for PodDisruptionBudget. id:1469 gh:1475
 func selectVictimsOnNode(
 	pod *v1.Pod,
 	meta algorithm.PredicateMetadata,
@@ -697,7 +697,7 @@ func selectVictimsOnNode(
 	// we are almost done and this node is not suitable for preemption. The only condition
 	// that we should check is if the "pod" is failing to schedule due to pod affinity
 	// failure.
-	// TODO(bsalamat): Consider checking affinity to lower priority pods if feasible with reasonable performance.
+	// TODO (bsalamat): Consider checking affinity to lower priority pods if feasible with reasonable performance. id:1617 gh:1623
 	if fits, _, err := podFitsOnNode(pod, meta, nodeInfoCopy, fitPredicates, nil); !fits {
 		if err != nil {
 			glog.Warningf("Encountered error while selecting victims on node %v: %v", nodeInfo.Node().Name, err)
@@ -742,7 +742,7 @@ func nodesWherePreemptionMightHelp(pod *v1.Pod, nodes []*v1.Node, failedPredicat
 				predicates.ErrNodeUnknownCondition:
 				unresolvableReasonExist = true
 				break
-				// TODO(bsalamat): Please add affinity failure cases once we have specific affinity failure errors.
+				// TODO (bsalamat): Please add affinity failure cases once we have specific affinity failure errors. id:1606 gh:1612
 			}
 		}
 		if !found || !unresolvableReasonExist {
@@ -759,7 +759,7 @@ func nodesWherePreemptionMightHelp(pod *v1.Pod, nodes []*v1.Node, failedPredicat
 // considered for preemption.
 // We look at the node that is nominated for this pod and as long as there are
 // terminating pods on the node, we don't consider this for preempting more pods.
-// TODO(bsalamat): Revisit this algorithm once scheduling by priority is added.
+// TODO (bsalamat): Revisit this algorithm once scheduling by priority is added. id:1591 gh:1597
 func podEligibleToPreemptOthers(pod *v1.Pod, nodeNameToInfo map[string]*schedulercache.NodeInfo) bool {
 	if nodeName, found := pod.Annotations[NominatedNodeAnnotationKey]; found {
 		if nodeInfo, found := nodeNameToInfo[nodeName]; found {

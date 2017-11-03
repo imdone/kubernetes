@@ -81,7 +81,7 @@ func (r *RemoteRuntimeService) Version(apiVersion string) (*runtimeapi.VersionRe
 // the sandbox is in ready state.
 func (r *RemoteRuntimeService) RunPodSandbox(config *runtimeapi.PodSandboxConfig) (string, error) {
 	// Use 2 times longer timeout for sandbox operation (4 mins by default)
-	// TODO: Make the pod sandbox timeout configurable.
+	// TODO: Make the pod sandbox timeout configurable. id:990 gh:996
 	ctx, cancel := getContextWithTimeout(r.timeout * 2)
 	defer cancel()
 
@@ -462,7 +462,7 @@ func (r *RemoteRuntimeService) ContainerStats(containerID string) (*runtimeapi.C
 
 func (r *RemoteRuntimeService) ListContainerStats(filter *runtimeapi.ContainerStatsFilter) ([]*runtimeapi.ContainerStats, error) {
 	// Do not set timeout, because writable layer stats collection takes time.
-	// TODO(random-liu): Should we assume runtime should cache the result, and set timeout here?
+	// TODO (random-liu): Should we assume runtime should cache the result, and set timeout here? id:1108 gh:1114
 	ctx, cancel := getContextWithCancel()
 	defer cancel()
 

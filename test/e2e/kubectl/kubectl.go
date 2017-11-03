@@ -123,31 +123,31 @@ var (
 	// Extended pod logging options were introduced in #13780 (v1.1.0) so we don't expect tests
 	// that rely on extended pod logging options to work on clusters before that.
 	//
-	// TODO(ihmccreery): remove once we don't care about v1.0 anymore, (tentatively in v1.3).
+	// TODO (ihmccreery): remove once we don't care about v1.0 anymore, (tentatively in v1.3). id:2469 gh:2484
 	extendedPodLogFilterVersion = utilversion.MustParseSemantic("v1.1.0")
 
 	// NodePorts were made optional in #12831 (v1.1.0) so we don't expect tests that used to
 	// require NodePorts but no longer include them to work on clusters before that.
 	//
-	// TODO(ihmccreery): remove once we don't care about v1.0 anymore, (tentatively in v1.3).
+	// TODO (ihmccreery): remove once we don't care about v1.0 anymore, (tentatively in v1.3). id:2255 gh:2270
 	nodePortsOptionalVersion = utilversion.MustParseSemantic("v1.1.0")
 
 	// Jobs were introduced in v1.1, so we don't expect tests that rely on jobs to work on
 	// clusters before that.
 	//
-	// TODO(ihmccreery): remove once we don't care about v1.0 anymore, (tentatively in v1.3).
+	// TODO (ihmccreery): remove once we don't care about v1.0 anymore, (tentatively in v1.3). id:2387 gh:2402
 	jobsVersion = utilversion.MustParseSemantic("v1.1.0")
 
 	// Deployments were introduced by default in v1.2, so we don't expect tests that rely on
 	// deployments to work on clusters before that.
 	//
-	// TODO(ihmccreery): remove once we don't care about v1.1 anymore, (tentatively in v1.4).
+	// TODO (ihmccreery): remove once we don't care about v1.1 anymore, (tentatively in v1.4). id:2304 gh:2320
 	deploymentsVersion = utilversion.MustParseSemantic("v1.2.0-alpha.7.726")
 
 	// Pod probe parameters were introduced in #15967 (v1.2) so we don't expect tests that use
 	// these probe parameters to work on clusters before that.
 	//
-	// TODO(ihmccreery): remove once we don't care about v1.1 anymore, (tentatively in v1.4).
+	// TODO (ihmccreery): remove once we don't care about v1.1 anymore, (tentatively in v1.4). id:2337 gh:2352
 	podProbeParametersVersion = utilversion.MustParseSemantic("v1.2.0-alpha.4")
 
 	// 'kubectl create quota' was introduced in #28351 (v1.4) so we don't expect tests that use
@@ -292,7 +292,7 @@ var _ = SIGDescribe("Kubectl client", func() {
 	waitForOrFailWithDebug := func(atLeast int) {
 		pods, err := clusterState().WaitFor(atLeast, framework.PodStartTimeout)
 		if err != nil || len(pods) < atLeast {
-			// TODO: Generalize integrating debug info into these tests so we always get debug info when we need it
+			// TODO: Generalize integrating debug info into these tests so we always get debug info when we need it id:2470 gh:2485
 			framework.DumpAllNamespaceInfo(f.ClientSet, ns)
 			framework.Failf("Verified %v of %v pods , error : %v", len(pods), atLeast, err)
 		}
@@ -410,7 +410,7 @@ var _ = SIGDescribe("Kubectl client", func() {
 			if err != nil {
 				framework.Failf("Error creating blocking reader: %v", err)
 			}
-			// NOTE this is solely for test cleanup!
+			// NOTE this is solely for test cleanup! id:2256 gh:2271
 			defer closer.Close()
 
 			By("executing a command in the container with pseudo-interactive stdin")
@@ -562,7 +562,7 @@ var _ = SIGDescribe("Kubectl client", func() {
 				framework.Failf("Pod %q of Job %q should still be running", runTestPod.Name, "run-test-3")
 			}
 
-			// NOTE: we cannot guarantee our output showed up in the container logs before stdin was closed, so we have
+			// NOTE: we cannot guarantee our output showed up in the container logs before stdin was closed, so we have id:2388 gh:2403
 			// to loop test.
 			err = wait.PollImmediate(time.Second, time.Minute, func() (bool, error) {
 				if !framework.CheckPodsRunningReady(c, ns, []string{runTestPod.Name}, 1*time.Second) {
@@ -1516,7 +1516,7 @@ metadata:
 	})
 
 	framework.KubeDescribe("Proxy server", func() {
-		// TODO: test proxy options (static, prefix, etc)
+		// TODO: test proxy options (static, prefix, etc) id:2305 gh:2321
 		framework.ConformanceIt("should support proxy with --port 0 ", func() {
 			By("starting the proxy server")
 			port, cmd, err := startProxyServer()

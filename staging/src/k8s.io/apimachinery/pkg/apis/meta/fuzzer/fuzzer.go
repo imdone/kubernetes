@@ -58,7 +58,7 @@ func genericFuzzerFuncs(codecs runtimeserializer.CodecFactory) []interface{} {
 			j.Kind = ""
 		},
 		func(j *runtime.Object, c fuzz.Continue) {
-			// TODO: uncomment when round trip starts from a versioned object
+			// TODO: uncomment when round trip starts from a versioned object id:3498 gh:3513
 			if true { //c.RandBool() {
 				*j = &runtime.Unknown{
 					// We do not set TypeMeta here because it is not carried through a round trip

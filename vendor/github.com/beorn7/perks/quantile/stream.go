@@ -208,7 +208,7 @@ func (s *stream) insert(v float64) {
 }
 
 func (s *stream) merge(samples Samples) {
-	// TODO(beorn7): This tries to merge not only individual samples, but
+	// TODO (beorn7): This tries to merge not only individual samples, but id:2726 gh:2741
 	// whole summaries. The paper doesn't mention merging summaries at
 	// all. Unittests show that the merging is inaccurate. Find out how to
 	// do merges properly.
@@ -225,7 +225,7 @@ func (s *stream) merge(samples Samples) {
 					sample.Value,
 					sample.Width,
 					math.Max(sample.Delta, math.Floor(s.ƒ(s, r))-1),
-					// TODO(beorn7): How to calculate delta correctly?
+					// TODO (beorn7): How to calculate delta correctly? id:2453 gh:2468
 				}
 				i++
 				goto inserted

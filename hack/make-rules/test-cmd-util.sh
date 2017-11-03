@@ -196,7 +196,7 @@ function check-curl-proxy-code()
   return 1
 }
 
-# TODO: Remove this function when we do the retry inside the kubectl commands. See #15333.
+# TODO: Remove this function when we do the retry inside the kubectl commands. See #15333. id:241 gh:242
 function kubectl-with-retry()
 {
   ERROR_FILE="${KUBE_TEMP}/kubectl-error"
@@ -255,7 +255,7 @@ setup() {
   kube::log::status "Running kubectl with no options"
   "${KUBE_OUTPUT_HOSTBIN}/kubectl"
 
-  # TODO: we need to note down the current default namespace and set back to this
+  # TODO: we need to note down the current default namespace and set back to this id:245 gh:246
   # namespace after the tests are done.
   kubectl config view
   CONTEXT="test"
@@ -3863,7 +3863,7 @@ run_stateful_set_tests() {
   kube::test::wait_object_assert 'statefulset nginx' "{{$statefulset_observed_generation}}" '2'
   # Typically we'd wait and confirm that N>1 replicas are up, but this framework
   # doesn't start  the scheduler, so pet-0 will block all others.
-  # TODO: test robust scaling in an e2e.
+  # TODO: test robust scaling in an e2e. id:198 gh:199
   wait-for-pods-with-label "app=nginx-statefulset" "nginx-0"
 
   ### Clean up

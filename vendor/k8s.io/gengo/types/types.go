@@ -120,7 +120,7 @@ type Package struct {
 	DocComments []string
 
 	// All comments from doc.go, if any.
-	// TODO: remove Comments and use DocComments everywhere.
+	// TODO: remove Comments and use DocComments everywhere. id:4071 gh:4091
 	Comments []string
 
 	// Types within this package, indexed by their name (*not* including
@@ -314,7 +314,7 @@ type Type struct {
 	// If Kind == func, this is the signature of the function.
 	Signature *Signature
 
-	// TODO: Add:
+	// TODO: Add: id:3629 gh:3644
 	// * channel direction
 	// * array length
 }
@@ -385,7 +385,7 @@ func (m Member) String() string {
 
 // Signature is a function's signature.
 type Signature struct {
-	// TODO: store the parameter names, not just types.
+	// TODO: store the parameter names, not just types. id:4034 gh:4054
 
 	// If a method of some type, this is the type it's a member of.
 	Receiver   *Type

@@ -17,7 +17,7 @@ limitations under the License.
 package ipvs
 
 //
-// NOTE: this needs to be tested in e2e since it uses ipvs for everything.
+// NOTE: this needs to be tested in e2e since it uses ipvs for everything. id:1238 gh:1244
 //
 
 import (
@@ -317,7 +317,7 @@ func updateServiceMap(
 		changes.items = make(map[types.NamespacedName]*serviceChange)
 	}()
 
-	// TODO: If this will appear to be computationally expensive, consider
+	// TODO: If this will appear to be computationally expensive, consider id:1291 gh:1297
 	// computing this incrementally similarly to serviceMap.
 	result.hcServices = make(map[types.NamespacedName]uint16)
 	for svcPortName, info := range serviceMap {
@@ -451,7 +451,7 @@ func (scm *serviceChangeMap) update(namespacedName *types.NamespacedName, previo
 
 // Translates single Service object to proxyServiceMap.
 //
-// NOTE: service object should NOT be modified.
+// NOTE: service object should NOT be modified. id:1252 gh:1258
 func serviceToServiceMap(service *api.Service) proxyServiceMap {
 	if service == nil {
 		return nil
@@ -472,7 +472,7 @@ func serviceToServiceMap(service *api.Service) proxyServiceMap {
 
 // internal struct for endpoints information
 type endpointsInfo struct {
-	endpoint string // TODO: should be an endpointString type
+	endpoint string // TODO: should be an endpointString type id:1158 gh:1164
 	isLocal  bool
 }
 
@@ -553,7 +553,7 @@ func updateEndpointsMap(
 		return
 	}
 
-	// TODO: If this will appear to be computationally expensive, consider
+	// TODO: If this will appear to be computationally expensive, consider id:1215 gh:1221
 	// computing this incrementally similarly to endpointsMap.
 	result.hcEndpoints = make(map[types.NamespacedName]int)
 	localIPs := getLocalIPs(endpointsMap)
@@ -567,7 +567,7 @@ func updateEndpointsMap(
 // Translates single Endpoints object to proxyEndpointsMap.
 // This function is used for incremental updated of endpointsMap.
 //
-// NOTE: endpoints object should NOT be modified.
+// NOTE: endpoints object should NOT be modified. id:1239 gh:1245
 func endpointsToEndpointsMap(endpoints *api.Endpoints, hostname string) proxyEndpointsMap {
 	if endpoints == nil {
 		return nil
@@ -680,7 +680,7 @@ func CanUseIPVSProxier() (bool, error) {
 	return true, nil
 }
 
-// TODO: make it simpler.
+// TODO: make it simpler. id:1292 gh:1298
 // CleanupIptablesLeftovers removes all iptables rules and chains created by the Proxier
 // It returns true if an error was encountered. Errors are logged.
 func cleanupIptablesLeftovers(ipt utiliptables.Interface) (encounteredError bool) {
@@ -900,7 +900,7 @@ func (proxier *Proxier) syncProxyRules() {
 
 	glog.V(3).Infof("Syncing ipvs Proxier rules")
 
-	// TODO: UT output result
+	// TODO: UT output result id:1253 gh:1259
 	// Begin install iptables
 	// Get iptables-save output so we can check for existing chains and rules.
 	// This will be a map of chain name to chain with rules as stored in iptables-save/iptables-restore
@@ -1203,7 +1203,7 @@ func (proxier *Proxier) syncProxyRules() {
 	writeLine(proxier.natRules, "COMMIT")
 
 	// Sync iptables rules.
-	// NOTE: NoFlushTables is used so we don't flush non-kubernetes chains in the table.
+	// NOTE: NoFlushTables is used so we don't flush non-kubernetes chains in the table. id:1159 gh:1165
 	proxier.iptablesData.Reset()
 	proxier.iptablesData.Write(proxier.natChains.Bytes())
 	proxier.iptablesData.Write(proxier.natRules.Bytes())
@@ -1252,7 +1252,7 @@ func (proxier *Proxier) syncProxyRules() {
 	}
 
 	// Finish housekeeping.
-	// TODO: these could be made more consistent.
+	// TODO: these could be made more consistent. id:1216 gh:1222
 	for _, svcIP := range staleServices.List() {
 		if err := utilproxy.ClearUDPConntrackForIP(proxier.exec, svcIP); err != nil {
 			glog.Errorf("Failed to delete stale service IP %s connections, error: %v", svcIP, err)
@@ -1495,7 +1495,7 @@ func openLocalPort(lp *utilproxy.LocalPort) (utilproxy.Closeable, error) {
 	// is using a port and we give that same port out to a Service.  That would
 	// be bad because iptables would silently claim the traffic but the process
 	// would never know.
-	// NOTE: We should not need to have a real listen()ing socket - bind()
+	// NOTE: We should not need to have a real listen()ing socket - bind() id:1240 gh:1246
 	// should be enough, but I can't figure out a way to e2e test without
 	// it.  Tools like 'ss' and 'netstat' do not show sockets that are
 	// bind()ed but not listen()ed, and at least the default debian netcat

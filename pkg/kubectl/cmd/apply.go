@@ -412,7 +412,7 @@ func (pr pruneResource) String() string {
 func getRESTMappings(mapper meta.RESTMapper, pruneResources *[]pruneResource) (namespaced, nonNamespaced []*meta.RESTMapping, err error) {
 	if len(*pruneResources) == 0 {
 		// default whitelist
-		// TODO: need to handle the older api versions - e.g. v1beta1 jobs. Github issue: #35991
+		// TODO: need to handle the older api versions - e.g. v1beta1 jobs. Github issue: #35991 id:681 gh:682
 		*pruneResources = []pruneResource{
 			{"", "v1", "ConfigMap", true},
 			{"", "v1", "Endpoints", true},

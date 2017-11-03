@@ -345,7 +345,7 @@ func truncatePodHostnameIfNeeded(podName, hostname string) (string, error) {
 // GeneratePodHostNameAndDomain creates a hostname and domain name for a pod,
 // given that pod's spec and annotations or returns an error.
 func (kl *Kubelet) GeneratePodHostNameAndDomain(pod *v1.Pod) (string, string, error) {
-	// TODO(vmarmol): Handle better.
+	// TODO (vmarmol): Handle better. id:901 gh:907
 	clusterDomain := kl.clusterDomain
 
 	hostname := pod.Name
@@ -399,7 +399,7 @@ func (kl *Kubelet) GenerateRunContainerOptions(pod *v1.Pod, container *v1.Contai
 	volumes := kl.volumeManager.GetMountedVolumesForPod(podName)
 
 	opts.PortMappings = kubecontainer.MakePortMappings(container)
-	// TODO(random-liu): Move following convert functions into pkg/kubelet/container
+	// TODO (random-liu): Move following convert functions into pkg/kubelet/container id:929 gh:935
 	devices, err := kl.makeDevices(pod, container)
 	if err != nil {
 		return nil, false, err
@@ -694,7 +694,7 @@ func (kl *Kubelet) makeEnvironmentVariables(pod *v1.Pod, container *v1.Container
 		// So, the master may set service env vars, or kubelet may.  In case both are doing
 		// it, we delete the key from the kubelet-generated ones so we don't have duplicate
 		// env vars.
-		// TODO: remove this next line once all platforms use apiserver+Pods.
+		// TODO: remove this next line once all platforms use apiserver+Pods. id:1085 gh:1091
 		delete(serviceEnv, envVar.Name)
 
 		tmpEnv[envVar.Name] = runtimeVal
@@ -711,7 +711,7 @@ func (kl *Kubelet) makeEnvironmentVariables(pod *v1.Pod, container *v1.Container
 		// So, the master may set service env vars, or kubelet may.  In case both are doing
 		// it, we skip the key from the kubelet-generated ones so we don't have duplicate
 		// env vars.
-		// TODO: remove this next line once all platforms use apiserver+Pods.
+		// TODO: remove this next line once all platforms use apiserver+Pods. id:973 gh:979
 		if _, present := tmpEnv[k]; !present {
 			result = append(result, kubecontainer.EnvVar{Name: k, Value: v})
 		}
@@ -753,7 +753,7 @@ func containerResourceRuntimeValue(fs *v1.ResourceFieldSelector, pod *v1.Pod, co
 }
 
 // One of the following arguments must be non-nil: runningPod, status.
-// TODO: Modify containerRuntime.KillPod() to accept the right arguments.
+// TODO: Modify containerRuntime.KillPod() to accept the right arguments. id:956 gh:962
 func (kl *Kubelet) killPod(pod *v1.Pod, runningPod *kubecontainer.Pod, status *kubecontainer.PodStatus, gracePeriodOverride *int64) error {
 	var p kubecontainer.Pod
 	if runningPod != nil {
@@ -928,7 +928,7 @@ func (kl *Kubelet) removeOrphanedPodStatuses(pods []*v1.Pod, mirrorPods []*v1.Po
 // HandlePodCleanups performs a series of cleanup work, including terminating
 // pod workers, killing unwanted pods, and removing orphaned volumes/pod
 // directories.
-// NOTE: This function is executed by the main sync loop, so it
+// NOTE: This function is executed by the main sync loop, so it id:902 gh:908
 // should not contain any blocking calls.
 func (kl *Kubelet) HandlePodCleanups() error {
 	// The kubelet lacks checkpointing, so we need to introspect the set of pods
@@ -951,7 +951,7 @@ func (kl *Kubelet) HandlePodCleanups() error {
 	// Pod phase progresses monotonically. Once a pod has reached a final state,
 	// it should never leave regardless of the restart policy. The statuses
 	// of such pods should not be changed, and there is no need to sync them.
-	// TODO: the logic here does not handle two cases:
+	// TODO: the logic here does not handle two cases: id:930 gh:936
 	//   1. If the containers were removed immediately after they died, kubelet
 	//      may fail to generate correct statuses, let alone filtering correctly.
 	//   2. If kubelet restarted before writing the terminated status for a pod
@@ -965,7 +965,7 @@ func (kl *Kubelet) HandlePodCleanups() error {
 		desiredPods[pod.UID] = empty{}
 	}
 	// Stop the workers for no-longer existing pods.
-	// TODO: is here the best place to forget pod workers?
+	// TODO: is here the best place to forget pod workers? id:1086 gh:1092
 	kl.podWorkers.ForgetNonExistingPodWorkers(desiredPods)
 	kl.probeManager.CleanupPods(activePods)
 
@@ -984,7 +984,7 @@ func (kl *Kubelet) HandlePodCleanups() error {
 	// Note that we just killed the unwanted pods. This may not have reflected
 	// in the cache. We need to bypass the cache to get the latest set of
 	// running pods to clean up the volumes.
-	// TODO: Evaluate the performance impact of bypassing the runtime cache.
+	// TODO: Evaluate the performance impact of bypassing the runtime cache. id:974 gh:980
 	runningPods, err = kl.containerRuntime.GetPods(false)
 	if err != nil {
 		glog.Errorf("Error listing containers: %#v", err)
@@ -1123,7 +1123,7 @@ func (kl *Kubelet) validateContainerLogStatus(podName string, podStatus *v1.PodS
 }
 
 // GetKubeletContainerLogs returns logs from the container
-// TODO: this method is returning logs of random container attempts, when it should be returning the most recent attempt
+// TODO: this method is returning logs of random container attempts, when it should be returning the most recent attempt id:957 gh:963
 // or all of them.
 func (kl *Kubelet) GetKubeletContainerLogs(podFullName, containerName string, logOptions *v1.PodLogOptions, stdout, stderr io.Writer) error {
 	// Pod workers periodically write status to statusManager. If status is not
@@ -1151,9 +1151,9 @@ func (kl *Kubelet) GetKubeletContainerLogs(podFullName, containerName string, lo
 		podStatus = pod.Status
 	}
 
-	// TODO: Consolidate the logic here with kuberuntime.GetContainerLogs, here we convert container name to containerID,
+	// TODO: Consolidate the logic here with kuberuntime.GetContainerLogs, here we convert container name to containerID, id:903 gh:909
 	// but inside kuberuntime we convert container id back to container name and restart count.
-	// TODO: After separate container log lifecycle management, we should get log based on the existing log files
+	// TODO: After separate container log lifecycle management, we should get log based on the existing log files id:931 gh:937
 	// instead of container status.
 	containerID, err := kl.validateContainerLogStatus(pod.Name, &podStatus, containerName, logOptions.Previous)
 	if err != nil {
@@ -1170,7 +1170,7 @@ func (kl *Kubelet) GetKubeletContainerLogs(podFullName, containerName string, lo
 	if kl.dockerLegacyService != nil {
 		// dockerLegacyService should only be non-nil when we actually need it, so
 		// inject it into the runtimeService.
-		// TODO(random-liu): Remove this hack after deprecating unsupported log driver.
+		// TODO (random-liu): Remove this hack after deprecating unsupported log driver. id:1087 gh:1093
 		return kl.dockerLegacyService.GetContainerLogs(pod, containerID, logOptions, stdout, stderr)
 	}
 	return kl.containerRuntime.GetContainerLogs(pod, containerID, logOptions, stdout, stderr)
@@ -1468,7 +1468,7 @@ func (kl *Kubelet) convertToAPIContainerStatuses(pod *v1.Pod, podStatus *kubecon
 	for _, container := range containers {
 		if isInitContainer {
 			// If the init container is terminated with exit code 0, it won't be restarted.
-			// TODO(random-liu): Handle this in a cleaner way.
+			// TODO (random-liu): Handle this in a cleaner way. id:1047 gh:1053
 			s := podStatus.FindContainerStatusByName(container.Name)
 			if s != nil && s.State == kubecontainer.ContainerStateExited && s.ExitCode == 0 {
 				continue
@@ -1518,7 +1518,7 @@ func (kl *Kubelet) convertToAPIContainerStatuses(pod *v1.Pod, podStatus *kubecon
 
 // ServeLogs returns logs of current machine.
 func (kl *Kubelet) ServeLogs(w http.ResponseWriter, req *http.Request) {
-	// TODO: whitelist logs we are willing to serve
+	// TODO: whitelist logs we are willing to serve id:958 gh:964
 	kl.logServer.ServeHTTP(w, req)
 }
 
@@ -1545,7 +1545,7 @@ func (kl *Kubelet) RunInContainer(podFullName string, podUID types.UID, containe
 	if container == nil {
 		return nil, fmt.Errorf("container not found (%q)", containerName)
 	}
-	// TODO(tallclair): Pass a proper timeout value.
+	// TODO (tallclair): Pass a proper timeout value. id:904 gh:910
 	return kl.runner.RunInContainer(container.ID, cmd, 0)
 }
 
@@ -1729,7 +1729,7 @@ func (kl *Kubelet) cleanupOrphanedPodCgroups(cgroupPods map[types.UID]cm.CgroupN
 // Returns true if the pod is using a host pid, pic, or network namespace, the pod is using a non-namespaced
 // capability, the pod contains a privileged container, or the pod has a host path volume.
 //
-// NOTE: when if a container shares any namespace with another container it must also share the user namespace
+// NOTE: when if a container shares any namespace with another container it must also share the user namespace id:1012 gh:1018
 // or it will not have the correct capabilities in the namespace.  This means that host user namespace
 // is enabled per pod, not per container.
 func (kl *Kubelet) enableHostUserNamespace(pod *v1.Pod) bool {

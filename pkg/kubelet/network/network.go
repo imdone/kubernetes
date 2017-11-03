@@ -16,7 +16,7 @@ limitations under the License.
 
 package network
 
-// TODO: Consider making this value configurable.
+// TODO: Consider making this value configurable. id:1059 gh:1065
 const DefaultInterfaceName = "eth0"
 
 // UseDefaultMTU is a marker value that indicates the plugin should determine its own MTU

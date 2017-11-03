@@ -49,7 +49,7 @@ type ServiceLoadBalancerGeneratorV1 struct {
 	ServiceCommonGeneratorV1
 }
 
-// TODO: is this really necessary?
+// TODO: is this really necessary? id:825 gh:826
 type ServiceExternalNameGeneratorV1 struct {
 	ServiceCommonGeneratorV1
 }
@@ -179,7 +179,7 @@ func (s ServiceExternalNameGeneratorV1) Generate(params map[string]interface{}) 
 }
 
 // validate validates required fields are set to support structured generation
-// TODO(xiangpengzhao): validate ports are identity mapped for headless service when we enforce that in validation.validateServicePort.
+// TODO (xiangpengzhao): validate ports are identity mapped for headless service when we enforce that in validation.validateServicePort. id:769 gh:770
 func (s ServiceCommonGeneratorV1) validate() error {
 	if len(s.Name) == 0 {
 		return fmt.Errorf("name must be specified")

@@ -58,7 +58,7 @@ type quotaEvaluator struct {
 	// registry that knows how to measure usage for objects
 	registry quota.Registry
 
-	// TODO these are used together to bucket items by namespace and then batch them up for processing.
+	// TODO these are used together to bucket items by namespace and then batch them up for processing. id:1536 gh:1542
 	// The technique is valuable for rollup activities to avoid fanout and reduce resource contention.
 	// We could move this into a library if another component needed it.
 	// queue is indexed by namespace, so that we bundle up on a per-namespace basis

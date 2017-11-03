@@ -34,14 +34,14 @@ import (
 )
 
 // DeleteResource returns a function that will handle a resource deletion
-// TODO admission here becomes solely validating admission
+// TODO admission here becomes solely validating admission id:3984 gh:4004
 func DeleteResource(r rest.GracefulDeleter, allowsOptions bool, scope RequestScope, admit admission.Interface) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		// For performance tracking purposes.
 		trace := utiltrace.New("Delete " + req.URL.Path)
 		defer trace.LogIfLong(500 * time.Millisecond)
 
-		// TODO: we either want to remove timeout or document it (if we document, move timeout out of this function and declare it in api_installer)
+		// TODO: we either want to remove timeout or document it (if we document, move timeout out of this function and declare it in api_installer) id:3358 gh:3373
 		timeout := parseTimeout(req.URL.Query().Get("timeout"))
 
 		namespace, name, err := scope.Namer.Name(req)
@@ -167,7 +167,7 @@ func DeleteResource(r rest.GracefulDeleter, allowsOptions bool, scope RequestSco
 // DeleteCollection returns a function that will handle a collection deletion
 func DeleteCollection(r rest.CollectionDeleter, checkBody bool, scope RequestScope, admit admission.Interface) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
-		// TODO: we either want to remove timeout or document it (if we document, move timeout out of this function and declare it in api_installer)
+		// TODO: we either want to remove timeout or document it (if we document, move timeout out of this function and declare it in api_installer) id:3877 gh:3892
 		timeout := parseTimeout(req.URL.Query().Get("timeout"))
 
 		namespace, err := scope.Namer.Namespace(req)
@@ -188,7 +188,7 @@ func DeleteCollection(r rest.CollectionDeleter, checkBody bool, scope RequestSco
 				return
 			}
 		}
-		// TODO: avoid calling Handles twice
+		// TODO: avoid calling Handles twice id:3614 gh:3629
 		if validatingAdmission, ok := admit.(admission.ValidationInterface); ok && validatingAdmission.Handles(admission.Delete) {
 			userInfo, _ := request.UserFrom(ctx)
 
@@ -207,13 +207,13 @@ func DeleteCollection(r rest.CollectionDeleter, checkBody bool, scope RequestSco
 		}
 
 		// transform fields
-		// TODO: DecodeParametersInto should do this.
+		// TODO: DecodeParametersInto should do this. id:3789 gh:3801
 		if listOptions.FieldSelector != nil {
 			fn := func(label, value string) (newLabel, newValue string, err error) {
 				return scope.Convertor.ConvertFieldLabel(scope.Kind.GroupVersion().String(), scope.Kind.Kind, label, value)
 			}
 			if listOptions.FieldSelector, err = listOptions.FieldSelector.Transform(fn); err != nil {
-				// TODO: allow bad request to set field causes based on query parameters
+				// TODO: allow bad request to set field causes based on query parameters id:3985 gh:4005
 				err = errors.NewBadRequest(err.Error())
 				scope.err(err, w, req)
 				return

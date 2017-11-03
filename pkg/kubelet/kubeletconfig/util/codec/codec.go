@@ -28,7 +28,7 @@ import (
 	"k8s.io/kubernetes/pkg/kubelet/apis/kubeletconfig"
 )
 
-// TODO(mtaufen): allow an encoder to be injected into checkpoint objects at creation time? (then we could ultimately instantiate only one encoder)
+// TODO (mtaufen): allow an encoder to be injected into checkpoint objects at creation time? (then we could ultimately instantiate only one encoder) id:977 gh:983
 
 // NewJSONEncoder generates a new runtime.Encoder that encodes objects to JSON
 func NewJSONEncoder(groupName string) (runtime.Encoder, error) {

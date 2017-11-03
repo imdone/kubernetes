@@ -158,7 +158,7 @@ type ioHandler interface {
 	ReadFile(filename string) ([]byte, error)
 }
 
-//TODO: check if priming the iscsi interface is actually needed
+//TODO: check if priming the iscsi interface is actually needed id:1525 gh:1531
 
 type osIOHandler struct{}
 

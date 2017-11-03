@@ -138,7 +138,7 @@ type ContainerInfo struct {
 	Stats []*ContainerStats `json:"stats,omitempty"`
 }
 
-// TODO(vmarmol): Refactor to not need this equality comparison.
+// TODO (vmarmol): Refactor to not need this equality comparison. id:2816 gh:2831
 // ContainerInfo may be (un)marshaled by json or other en/decoder. In that
 // case, the Timestamp field in each stats/sample may not be precisely
 // en/decoded.  This will lead to small but acceptable differences between a
@@ -562,7 +562,7 @@ func (a *ContainerStats) Eq(b *ContainerStats) bool {
 
 // Checks equality of the stats values.
 func (a *ContainerStats) StatsEq(b *ContainerStats) bool {
-	// TODO(vmarmol): Consider using this through reflection.
+	// TODO (vmarmol): Consider using this through reflection. id:3055 gh:3070
 	if !reflect.DeepEqual(a.Cpu, b.Cpu) {
 		return false
 	}

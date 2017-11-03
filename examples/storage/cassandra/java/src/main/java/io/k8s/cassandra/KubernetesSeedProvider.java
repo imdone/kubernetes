@@ -79,7 +79,7 @@ public class KubernetesSeedProvider implements SeedProvider {
         // Create default seeds
         defaultSeeds = createDefaultSeeds();
 
-        // TODO: Load the CA cert when it is available on all platforms.
+        // TODO: Load the CA cert when it is available on all platforms. id:194 gh:195
         trustAll = new TrustManager[] {
             new X509TrustManager() {
                 public void checkServerTrusted(X509Certificate[] certs, String authType) {}
@@ -122,7 +122,7 @@ public class KubernetesSeedProvider implements SeedProvider {
             logger.info("Getting endpoints from " + url);
             HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
 
-            // TODO: Remove this once the CA cert is propagated everywhere, and replace
+            // TODO: Remove this once the CA cert is propagated everywhere, and replace id:231 gh:232
             // with loading the CA cert.
             conn.setHostnameVerifier(trustAllHosts);
 

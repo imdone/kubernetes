@@ -865,7 +865,7 @@ func (o *Buffer) dec_new_map(p *Properties, base structPointer) error {
 				return err
 			}
 		default:
-			// TODO: Should we silently skip this instead?
+			// TODO: Should we silently skip this instead? id:2823 gh:2838
 			return fmt.Errorf("proto: bad map data tag %d", raw[0])
 		}
 	}

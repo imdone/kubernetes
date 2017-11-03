@@ -302,16 +302,16 @@ func (kl *Kubelet) initialNode() (*v1.Node, error) {
 			return nil, fmt.Errorf("failed to get instances from cloud provider")
 		}
 
-		// TODO(roberthbailey): Can we do this without having credentials to talk
+		// TODO (roberthbailey): Can we do this without having credentials to talk id:897 gh:903
 		// to the cloud provider?
-		// TODO: ExternalID is deprecated, we'll have to drop this code
+		// TODO: ExternalID is deprecated, we'll have to drop this code id:925 gh:931
 		externalID, err := instances.ExternalID(kl.nodeName)
 		if err != nil {
 			return nil, fmt.Errorf("failed to get external ID from cloud provider: %v", err)
 		}
 		node.Spec.ExternalID = externalID
 
-		// TODO: We can't assume that the node has credentials to talk to the
+		// TODO: We can't assume that the node has credentials to talk to the id:955 gh:961
 		// cloudprovider from arbitrary nodes. At most, we should talk to a
 		// local metadata server here.
 		if node.Spec.ProviderID == "" {
@@ -429,7 +429,7 @@ func (kl *Kubelet) tryUpdateNodeStatus(tryNumber int) error {
 // message for the node.
 func (kl *Kubelet) recordNodeStatusEvent(eventType, event string) {
 	glog.V(2).Infof("Recording %s event message for node %s", event, kl.nodeName)
-	// TODO: This requires a transaction, either both node status is updated
+	// TODO: This requires a transaction, either both node status is updated id:969 gh:975
 	// and event is recorded or neither should happen, see issue #6055.
 	kl.recorder.Eventf(kl.nodeRef, eventType, event, "Node %s status is now: %s", kl.nodeName, event)
 }
@@ -455,10 +455,10 @@ func (kl *Kubelet) setNodeAddress(node *v1.Node) error {
 		if !ok {
 			return fmt.Errorf("failed to get instances from cloud provider")
 		}
-		// TODO(roberthbailey): Can we do this without having credentials to talk
+		// TODO (roberthbailey): Can we do this without having credentials to talk id:867 gh:873
 		// to the cloud provider?
-		// TODO(justinsb): We can if CurrentNodeName() was actually CurrentNode() and returned an interface
-		// TODO: If IP addresses couldn't be fetched from the cloud provider, should kubelet fallback on the other methods for getting the IP below?
+		// TODO (justinsb): We can if CurrentNodeName() was actually CurrentNode() and returned an interface id:898 gh:904
+		// TODO: If IP addresses couldn't be fetched from the cloud provider, should kubelet fallback on the other methods for getting the IP below? id:926 gh:932
 		nodeAddresses, err := instances.NodeAddresses(kl.nodeName)
 		if err != nil {
 			return fmt.Errorf("failed to get node address from cloud provider: %v", err)
@@ -548,11 +548,11 @@ func (kl *Kubelet) setNodeStatusMachineInfo(node *v1.Node) {
 		}
 	}
 
-	// TODO: Post NotReady if we cannot get MachineInfo from cAdvisor. This needs to start
+	// TODO: Post NotReady if we cannot get MachineInfo from cAdvisor. This needs to start id:1082 gh:1088
 	// cAdvisor locally, e.g. for test-cmd.sh, and in integration test.
 	info, err := kl.GetCachedMachineInfo()
 	if err != nil {
-		// TODO(roberthbailey): This is required for test-cmd.sh to pass.
+		// TODO (roberthbailey): This is required for test-cmd.sh to pass. id:970 gh:976
 		// See if the test should be updated instead.
 		node.Status.Capacity[v1.ResourceCPU] = *resource.NewMilliQuantity(0, resource.DecimalSI)
 		node.Status.Capacity[v1.ResourceMemory] = resource.MustParse("0Gi")
@@ -576,7 +576,7 @@ func (kl *Kubelet) setNodeStatusMachineInfo(node *v1.Node) {
 
 		if node.Status.NodeInfo.BootID != "" &&
 			node.Status.NodeInfo.BootID != info.BootID {
-			// TODO: This requires a transaction, either both node status is updated
+			// TODO: This requires a transaction, either both node status is updated id:868 gh:874
 			// and event is recorded or neither should happen, see issue #6055.
 			kl.recorder.Eventf(kl.nodeRef, v1.EventTypeWarning, events.NodeRebooted,
 				"Node %s has been rebooted, boot id: %s", kl.nodeName, info.BootID)
@@ -584,7 +584,7 @@ func (kl *Kubelet) setNodeStatusMachineInfo(node *v1.Node) {
 		node.Status.NodeInfo.BootID = info.BootID
 
 		if utilfeature.DefaultFeatureGate.Enabled(features.LocalStorageCapacityIsolation) {
-			// TODO: all the node resources should use GetCapacity instead of deriving the
+			// TODO: all the node resources should use GetCapacity instead of deriving the id:899 gh:905
 			// capacity for every node status request
 			initialCapacity := kl.containerManager.GetCapacity()
 			if initialCapacity != nil {
@@ -660,7 +660,7 @@ func (kl *Kubelet) setNodeStatusVersionInfo(node *v1.Node) {
 	node.Status.NodeInfo.ContainerRuntimeVersion = fmt.Sprintf("%s://%s", kl.containerRuntime.Type(), runtimeVersion)
 
 	node.Status.NodeInfo.KubeletVersion = version.Get().String()
-	// TODO: kube-proxy might be different version from kubelet in the future
+	// TODO: kube-proxy might be different version from kubelet in the future id:927 gh:933
 	node.Status.NodeInfo.KubeProxyVersion = version.Get().String()
 }
 
@@ -717,7 +717,7 @@ func (kl *Kubelet) setNodeStatusInfo(node *v1.Node) {
 
 // Set Ready condition for the node.
 func (kl *Kubelet) setNodeReadyCondition(node *v1.Node) {
-	// NOTE(aaronlevy): NodeReady condition needs to be the last in the list of node conditions.
+	// NOTE (aaronlevy): NodeReady condition needs to be the last in the list of node conditions. id:1083 gh:1089
 	// This is due to an issue with version skewed kubelet and master components.
 	// ref: https://github.com/kubernetes/kubernetes/issues/16961
 	currentTime := metav1.NewTime(kl.clock.Now())
@@ -742,7 +742,7 @@ func (kl *Kubelet) setNodeReadyCondition(node *v1.Node) {
 	}
 
 	// Append AppArmor status if it's enabled.
-	// TODO(tallclair): This is a temporary message until node feature reporting is added.
+	// TODO (tallclair): This is a temporary message until node feature reporting is added. id:971 gh:977
 	if newNodeReadyCondition.Status == v1.ConditionTrue &&
 		kl.appArmorValidator != nil && kl.appArmorValidator.ValidateHost() == nil {
 		newNodeReadyCondition.Message = fmt.Sprintf("%s. AppArmor enabled", newNodeReadyCondition.Message)
@@ -784,7 +784,7 @@ func (kl *Kubelet) setNodeReadyCondition(node *v1.Node) {
 }
 
 // setNodeMemoryPressureCondition for the node.
-// TODO: this needs to move somewhere centralized...
+// TODO: this needs to move somewhere centralized... id:869 gh:875
 func (kl *Kubelet) setNodeMemoryPressureCondition(node *v1.Node) {
 	currentTime := metav1.NewTime(kl.clock.Now())
 	var condition *v1.NodeCondition
@@ -840,7 +840,7 @@ func (kl *Kubelet) setNodeMemoryPressureCondition(node *v1.Node) {
 }
 
 // setNodeDiskPressureCondition for the node.
-// TODO: this needs to move somewhere centralized...
+// TODO: this needs to move somewhere centralized... id:900 gh:906
 func (kl *Kubelet) setNodeDiskPressureCondition(node *v1.Node) {
 	currentTime := metav1.NewTime(kl.clock.Now())
 	var condition *v1.NodeCondition
@@ -929,7 +929,7 @@ func (kl *Kubelet) setNodeOODCondition(node *v1.Node) {
 }
 
 // Maintains Node.Spec.Unschedulable value from previous run of tryUpdateNodeStatus()
-// TODO: why is this a package var?
+// TODO: why is this a package var? id:928 gh:934
 var oldNodeUnschedulable bool
 
 // record if node schedulable change.
@@ -955,7 +955,7 @@ func (kl *Kubelet) setNodeVolumesInUseStatus(node *v1.Node) {
 
 // setNodeStatus fills in the Status fields of the given Node, overwriting
 // any fields that are currently set.
-// TODO(madhusudancs): Simplify the logic for setting node conditions and
+// TODO (madhusudancs): Simplify the logic for setting node conditions and id:1084 gh:1090
 // refactor the node status condition code out to a different file.
 func (kl *Kubelet) setNodeStatus(node *v1.Node) {
 	for _, f := range kl.setNodeStatusFuncs {

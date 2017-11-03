@@ -31,7 +31,7 @@ import (
 	"k8s.io/kubernetes/pkg/cloudprovider/providers/gce"
 )
 
-// TODO: These should really just use the GCE API client library or at least use
+// TODO: These should really just use the GCE API client library or at least use id:2303 gh:2319
 // better formatted output from the --format flag.
 
 func CreateGCEStaticIP(name string) (string, error) {

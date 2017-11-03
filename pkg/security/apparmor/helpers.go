@@ -22,7 +22,7 @@ import (
 	"k8s.io/api/core/v1"
 )
 
-// TODO: Move these values into the API package.
+// TODO: Move these values into the API package. id:1370 gh:1376
 const (
 	// The prefix to an annotation key specifying a container profile.
 	ContainerAnnotationKeyPrefix = "container.apparmor.security.beta.kubernetes.io/"

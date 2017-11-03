@@ -19,7 +19,7 @@ import (
 
 var (
 	gorootSrc            = filepath.Join(build.Default.GOROOT, "src")
-	ignoreTags           = []string{"appengine", "ignore"} //TODO: appengine is a special case for now: https://github.com/tools/godep/issues/353
+	ignoreTags           = []string{"appengine", "ignore"} //TODO: appengine is a special case for now: https://github.com/tools/godep/issues/353 id:3029 gh:3044
 	versionMatch         = regexp.MustCompile(`\Ago\d+\.\d+\z`)
 	versionNegativeMatch = regexp.MustCompile(`\A\!go\d+\.\d+\z`)
 )

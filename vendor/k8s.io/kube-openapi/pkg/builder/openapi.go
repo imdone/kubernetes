@@ -32,7 +32,7 @@ import (
 
 const (
 	OpenAPIVersion = "2.0"
-	// TODO: Make this configurable.
+	// TODO: Make this configurable. id:4074 gh:4094
 	extensionPrefix = "x-kubernetes-"
 )
 

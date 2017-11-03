@@ -926,7 +926,7 @@ func Convert_extensions_IngressSpec_To_v1beta1_IngressSpec(in *extensions.Ingres
 }
 
 func autoConvert_v1beta1_IngressStatus_To_extensions_IngressStatus(in *v1beta1.IngressStatus, out *extensions.IngressStatus, s conversion.Scope) error {
-	// TODO: Inefficient conversion - can we improve it?
+	// TODO: Inefficient conversion - can we improve it? id:420 gh:421
 	if err := s.Convert(&in.LoadBalancer, &out.LoadBalancer, 0); err != nil {
 		return err
 	}
@@ -939,7 +939,7 @@ func Convert_v1beta1_IngressStatus_To_extensions_IngressStatus(in *v1beta1.Ingre
 }
 
 func autoConvert_extensions_IngressStatus_To_v1beta1_IngressStatus(in *extensions.IngressStatus, out *v1beta1.IngressStatus, s conversion.Scope) error {
-	// TODO: Inefficient conversion - can we improve it?
+	// TODO: Inefficient conversion - can we improve it? id:368 gh:369
 	if err := s.Convert(&in.LoadBalancer, &out.LoadBalancer, 0); err != nil {
 		return err
 	}

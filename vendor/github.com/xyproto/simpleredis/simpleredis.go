@@ -318,7 +318,7 @@ func (rh *HashMap) Has(elementid, key string) (bool, error) {
 
 // Check if a given elementid exists as a hash map at all
 func (rh *HashMap) Exists(elementid string) (bool, error) {
-	// TODO: key is not meant to be a wildcard, check for "*"
+	// TODO: key is not meant to be a wildcard, check for "*" id:3261 gh:3276
 	return hasKey(rh.pool, rh.id+":"+elementid, rh.dbindex)
 }
 

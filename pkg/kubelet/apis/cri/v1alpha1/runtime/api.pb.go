@@ -1239,7 +1239,7 @@ func (m *KeyValue) GetValue() string {
 
 // LinuxContainerResources specifies Linux specific configuration for
 // resources.
-// TODO: Consider using Resources from opencontainers/runtime-spec/specs-go
+// TODO: Consider using Resources from opencontainers/runtime-spec/specs-go id:799 gh:800
 // directly.
 type LinuxContainerResources struct {
 	// CPU CFS (Completely Fair Scheduler) period. Default: 0 (not specified).
@@ -1666,7 +1666,7 @@ type ContainerConfig struct {
 	LogPath string `protobuf:"bytes,11,opt,name=log_path,json=logPath,proto3" json:"log_path,omitempty"`
 	// Variables for interactive containers, these have very specialized
 	// use-cases (e.g. debugging).
-	// TODO: Determine if we need to continue supporting these fields that are
+	// TODO: Determine if we need to continue supporting these fields that are id:812 gh:813
 	// part of Kubernetes's Container Spec.
 	Stdin     bool `protobuf:"varint,12,opt,name=stdin,proto3" json:"stdin,omitempty"`
 	StdinOnce bool `protobuf:"varint,13,opt,name=stdin_once,json=stdinOnce,proto3" json:"stdin_once,omitempty"`
@@ -3576,7 +3576,7 @@ type RuntimeServiceClient interface {
 	// StopContainer stops a running container with a grace period (i.e., timeout).
 	// This call is idempotent, and must not return an error if the container has
 	// already been stopped.
-	// TODO: what must the runtime do after the grace period is reached?
+	// TODO: what must the runtime do after the grace period is reached? id:757 gh:758
 	StopContainer(ctx context.Context, in *StopContainerRequest, opts ...grpc.CallOption) (*StopContainerResponse, error)
 	// RemoveContainer removes the container. If the container is running, the
 	// container must be forcibly removed.
@@ -3841,7 +3841,7 @@ type RuntimeServiceServer interface {
 	// StopContainer stops a running container with a grace period (i.e., timeout).
 	// This call is idempotent, and must not return an error if the container has
 	// already been stopped.
-	// TODO: what must the runtime do after the grace period is reached?
+	// TODO: what must the runtime do after the grace period is reached? id:827 gh:828
 	StopContainer(context.Context, *StopContainerRequest) (*StopContainerResponse, error)
 	// RemoveContainer removes the container. If the container is running, the
 	// container must be forcibly removed.

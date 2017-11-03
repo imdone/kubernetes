@@ -133,7 +133,7 @@ type Cluster struct {
 }
 
 // StatPoint represents the basic structure of a single Stat reported
-// TODO: This is the first step to introduce stats in openstorage.
+// TODO: This is the first step to introduce stats in openstorage. id:2749 gh:2764
 //       Follow up task is to introduce an API for logging stats
 type StatPoint struct {
 	// Name of the Stat

@@ -35,7 +35,7 @@ import (
 // that can be used to provide a more current view of a requested object.  It requires interpreting
 // resourceVersions for comparisons.
 // Implementations must be thread-safe.
-// TODO find a way to layer this into an informer/lister
+// TODO find a way to layer this into an informer/lister id:3954 gh:3975
 type MutationCache interface {
 	GetByKey(key string) (interface{}, bool, error)
 	ByIndex(indexName, indexKey string) ([]interface{}, error)

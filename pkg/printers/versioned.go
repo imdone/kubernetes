@@ -57,7 +57,7 @@ func (p *VersionedPrinter) PrintObj(obj runtime.Object, w io.Writer) error {
 	return p.printer.PrintObj(converted, w)
 }
 
-// TODO: implement HandledResources()
+// TODO: implement HandledResources() id:1211 gh:1217
 func (p *VersionedPrinter) HandledResources() []string {
 	return []string{}
 }

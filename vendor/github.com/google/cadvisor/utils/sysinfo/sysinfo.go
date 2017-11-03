@@ -38,7 +38,7 @@ func GetBlockDeviceInfo(sysfs sysfs.SysFs) (map[string]info.DiskInfo, error) {
 	for _, disk := range disks {
 		name := disk.Name()
 		// Ignore non-disk devices.
-		// TODO(rjnagal): Maybe just match hd, sd, and dm prefixes.
+		// TODO (rjnagal): Maybe just match hd, sd, and dm prefixes. id:2837 gh:2853
 		if strings.HasPrefix(name, "loop") || strings.HasPrefix(name, "ram") || strings.HasPrefix(name, "sr") {
 			continue
 		}
@@ -154,7 +154,7 @@ func GetCacheInfo(sysFs sysfs.SysFs, id int) ([]sysfs.CacheInfo, error) {
 }
 
 func GetNetworkStats(name string) (info.InterfaceStats, error) {
-	// TODO(rjnagal): Take syfs as an argument.
+	// TODO (rjnagal): Take syfs as an argument. id:2921 gh:2936
 	sysFs := sysfs.NewRealSysFs()
 	return getNetworkStats(name, sysFs)
 }

@@ -77,7 +77,7 @@ func (jobStrategy) PrepareForUpdate(ctx genericapirequest.Context, obj, old runt
 // Validate validates a new job.
 func (jobStrategy) Validate(ctx genericapirequest.Context, obj runtime.Object) field.ErrorList {
 	job := obj.(*batch.Job)
-	// TODO: move UID generation earlier and do this in defaulting logic?
+	// TODO: move UID generation earlier and do this in defaulting logic? id:1349 gh:1355
 	if job.Spec.ManualSelector == nil || *job.Spec.ManualSelector == false {
 		generateSelector(job)
 	}
@@ -129,7 +129,7 @@ func generateSelector(obj *batch.Job) {
 	// labels.
 }
 
-// TODO: generalize generateSelector so it can work for other controller
+// TODO: generalize generateSelector so it can work for other controller id:1388 gh:1394
 // objects such as ReplicaSet.  Can use pkg/api/meta to generically get the
 // UID, but need some way to generically access the selector and pod labels
 // fields.

@@ -56,7 +56,7 @@ func CheckClusterHealth(client clientset.Interface) error {
 			failMessage: "More than one Node unhealthy",
 			f:           nodesHealthy,
 		},
-		// TODO: Add a check for ComponentStatuses here?
+		// TODO: Add a check for ComponentStatuses here? id:226 gh:225
 	}
 
 	// Run slightly different health checks depending on control plane hosting type

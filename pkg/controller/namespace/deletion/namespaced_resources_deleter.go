@@ -163,7 +163,7 @@ func (d *namespacedResourcesDeleter) Delete(nsName string) error {
 func (d *namespacedResourcesDeleter) initOpCache() {
 	// pre-fill opCache with the discovery info
 	//
-	// TODO(sttts): get rid of opCache and http 405 logic around it and trust discovery info
+	// TODO (sttts): get rid of opCache and http 405 logic around it and trust discovery info id:561 gh:562
 	resources, err := d.discoverResourcesFn()
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("unable to get all supported resources from server: %v", err))
@@ -261,7 +261,7 @@ type updateNamespaceFunc func(namespace *v1.Namespace) (*v1.Namespace, error)
 
 // retryOnConflictError retries the specified fn if there was a conflict error
 // it will return an error if the UID for an object changes across retry operations.
-// TODO RetryOnConflict should be a generic concept in client code
+// TODO RetryOnConflict should be a generic concept in client code id:580 gh:581
 func (d *namespacedResourcesDeleter) retryOnConflictError(namespace *v1.Namespace, fn updateNamespaceFunc) (result *v1.Namespace, err error) {
 	latestNamespace := namespace
 	for {
@@ -353,7 +353,7 @@ func (d *namespacedResourcesDeleter) deleteCollection(
 	}
 
 	// this is strange, but we need to special case for both MethodNotSupported and NotFound errors
-	// TODO: https://github.com/kubernetes/kubernetes/issues/22413
+	// TODO: https://github.com/kubernetes/kubernetes/issues/22413 id:544 gh:546
 	// we have a resource returned in the discovery API that supports no top-level verbs:
 	//  /apis/extensions/v1beta1/namespaces/default/replicationcontrollers
 	// when working with this resource type, we will get a literal not found error rather than expected method not supported
@@ -394,7 +394,7 @@ func (d *namespacedResourcesDeleter) listCollection(
 	}
 
 	// this is strange, but we need to special case for both MethodNotSupported and NotFound errors
-	// TODO: https://github.com/kubernetes/kubernetes/issues/22413
+	// TODO: https://github.com/kubernetes/kubernetes/issues/22413 id:588 gh:589
 	// we have a resource returned in the discovery API that supports no top-level verbs:
 	//  /apis/extensions/v1beta1/namespaces/default/replicationcontrollers
 	// when working with this resource type, we will get a literal not found error rather than expected method not supported
@@ -505,7 +505,7 @@ func (d *namespacedResourcesDeleter) deleteAllContent(
 	if err != nil {
 		return estimate, err
 	}
-	// TODO(sttts): get rid of opCache and pass the verbs (especially "deletecollection") down into the deleter
+	// TODO (sttts): get rid of opCache and pass the verbs (especially "deletecollection") down into the deleter id:620 gh:621
 	deletableResources := discovery.FilteredBy(discovery.SupportsAllVerbs{Verbs: []string{"delete"}}, resources)
 	groupVersionResources, err := discovery.GroupVersionResources(deletableResources)
 	if err != nil {

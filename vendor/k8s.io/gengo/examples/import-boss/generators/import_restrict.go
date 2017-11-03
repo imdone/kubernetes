@@ -136,7 +136,7 @@ func (importRuleFile) AssembleFile(f *generator.File, path string) error {
 	return nil
 }
 
-// TODO: make a flag to enable this, or expose this information in some other way.
+// TODO: make a flag to enable this, or expose this information in some other way. id:4014 gh:4034
 func (importRuleFile) listEntireImportTree(f *generator.File, path string) error {
 	// If the file exists, populate its current imports. This is mostly to help
 	// humans figure out what they need to fix.

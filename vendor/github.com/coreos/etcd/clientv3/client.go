@@ -398,7 +398,7 @@ func isHaltErr(ctx context.Context, err error) bool {
 	// Treat Internal codes as if something failed, leaving the
 	// system in an inconsistent state, but retrying could make progress.
 	// (e.g., failed in middle of send, corrupted frame)
-	// TODO: are permanent Internal errors possible from grpc?
+	// TODO: are permanent Internal errors possible from grpc? id:2507 gh:2518
 	return code != codes.Unavailable && code != codes.Internal
 }
 

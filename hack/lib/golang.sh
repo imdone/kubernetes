@@ -185,7 +185,7 @@ readonly KUBE_TEST_SERVER_PLATFORMS=("${KUBE_SERVER_PLATFORMS[@]}")
 # laptops-versus-not.
 readonly KUBE_PARALLEL_BUILD_MEMORY=11
 
-# TODO(pipejakob) gke-certificates-controller is included here to exercise its
+# TODO (pipejakob) gke-certificates-controller is included here to exercise its id:239 gh:240
 # compilation, but it doesn't need to be distributed in any of our tars. Its
 # code is only living in this repo temporarily until it finds a new home.
 readonly KUBE_ALL_TARGETS=(
@@ -296,7 +296,7 @@ kube::golang::create_gopath_tree() {
 
   mkdir -p "${go_pkg_basedir}"
 
-  # TODO: This symlink should be relative.
+  # TODO: This symlink should be relative. id:190 gh:191
   if [[ ! -e "${go_pkg_dir}" || "$(readlink ${go_pkg_dir})" != "${KUBE_ROOT}" ]]; then
     ln -snf "${KUBE_ROOT}" "${go_pkg_dir}"
   fi
@@ -436,7 +436,7 @@ kube::golang::fallback_if_stdlib_not_installable() {
 
 # Builds the toolchain necessary for building kube. This needs to be
 # built only on the host platform.
-# TODO: Find this a proper home.
+# TODO: Find this a proper home. id:196 gh:197
 # Ideally, not a shell script because testing shell scripts is painful.
 kube::golang::build_kube_toolchain() {
   local targets=(

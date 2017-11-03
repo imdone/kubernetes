@@ -44,10 +44,10 @@ func Background() Context {
 	return background
 }
 
-// TODO returns a non-nil, empty Context. Code should use context.TODO when
+// TODO returns a non-nil, empty Context. Code should use context.TODO when id:3263 gh:3278
 // it's unclear which Context to use or it is not yet available (because the
 // surrounding function has not yet been extended to accept a Context
-// parameter).  TODO is recognized by static analysis tools that determine
+// parameter).  TODO is recognized by static analysis tools that determine id:3088 gh:3103
 // whether Contexts are propagated correctly in a program.
 func TODO() Context {
 	return todo

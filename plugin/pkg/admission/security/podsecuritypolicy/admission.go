@@ -154,7 +154,7 @@ func (c *podSecurityPolicyPlugin) Admit(a admission.Attributes) error {
 	}
 
 	// sort by name to make order deterministic
-	// TODO(liggitt): add priority field to allow admins to bucket differently
+	// TODO (liggitt): add priority field to allow admins to bucket differently id:1440 gh:1446
 	sort.SliceStable(matchedPolicies, func(i, j int) bool {
 		return strings.Compare(matchedPolicies[i].Name, matchedPolicies[j].Name) < 0
 	})
@@ -166,7 +166,7 @@ func (c *podSecurityPolicyPlugin) Admit(a admission.Attributes) error {
 		return admission.NewForbidden(a, fmt.Errorf("no providers available to validate pod request"))
 	}
 
-	// TODO(liggitt): allow spec mutation during initializing updates?
+	// TODO (liggitt): allow spec mutation during initializing updates? id:1459 gh:1465
 	specMutationAllowed := a.GetOperation() == admission.Create
 
 	// all containers in a single pod must validate under a single provider or we will reject the request
@@ -287,7 +287,7 @@ func (c *podSecurityPolicyPlugin) createProvidersFromPolicies(psps []*extensions
 // getMatchingPolicies returns policies from the lister.  For now this returns everything
 // in the future it can filter based on UserInfo and permissions.
 //
-// TODO: this will likely need optimization since the initial implementation will
+// TODO: this will likely need optimization since the initial implementation will id:1508 gh:1514
 // always query for authorization.  Needs scale testing and possibly checking against
 // a cache.
 func getMatchingPolicies(lister extensionslisters.PodSecurityPolicyLister, user user.Info, sa user.Info, authz authorizer.Authorizer, namespace string) ([]*extensions.PodSecurityPolicy, error) {

@@ -145,11 +145,11 @@ func (c *ClientCache) clientConfigForVersion(requiredVersion *schema.GroupVersio
 		}
 		config.GroupVersion = requiredVersion
 	} else {
-		// TODO remove this hack.  This is allowing the GetOptions to be serialized.
+		// TODO remove this hack.  This is allowing the GetOptions to be serialized. id:700 gh:701
 		config.GroupVersion = &schema.GroupVersion{Group: "", Version: "v1"}
 	}
 
-	// TODO this isn't what we want.  Each clientset should be setting defaults as it sees fit.
+	// TODO this isn't what we want.  Each clientset should be setting defaults as it sees fit. id:785 gh:786
 	oldclient.SetKubernetesDefaults(&config)
 
 	if requiredVersion != nil {

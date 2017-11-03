@@ -65,7 +65,7 @@ func (g *genClientset) Imports(c *generator.Context) (imports []string) {
 }
 
 func (g *genClientset) GenerateType(c *generator.Context, t *types.Type, w io.Writer) error {
-	// TODO: We actually don't need any type information to generate the clientset,
+	// TODO: We actually don't need any type information to generate the clientset, id:4005 gh:4025
 	// perhaps we can adapt the go2ild framework to this kind of usage.
 	sw := generator.NewSnippetWriter(w, c, "$", "$")
 

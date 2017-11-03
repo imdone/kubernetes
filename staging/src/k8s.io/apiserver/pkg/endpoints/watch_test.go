@@ -269,7 +269,7 @@ func TestWatchRead(t *testing.T) {
 			ExpectedContentType: "application/json", // legacy behavior
 			MediaType:           "application/json",
 		},
-		// TODO: yaml stream serialization requires that RawExtension.MarshalJSON
+		// TODO: yaml stream serialization requires that RawExtension.MarshalJSON id:3427 gh:3440
 		// be able to understand nested encoding (since yaml calls json.Marshal
 		// rather than yaml.Marshal, which results in the raw bytes being in yaml).
 		/*{
@@ -384,7 +384,7 @@ func TestWatchHTTPAccept(t *testing.T) {
 		t.Errorf("unexpected error: %v", err)
 	}
 
-	// TODO: once this is fixed, this test will change
+	// TODO: once this is fixed, this test will change id:3887 gh:3899
 	if response.StatusCode != http.StatusNotAcceptable {
 		t.Errorf("Unexpected response %#v", response)
 	}

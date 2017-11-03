@@ -165,4 +165,4 @@ func TestCategories(t *testing.T) {
 	registrytest.AssertCategories(t, storage, expected)
 }
 
-// TODO TestUpdateStatus
+// TODO TestUpdateStatus id:1269 gh:1275

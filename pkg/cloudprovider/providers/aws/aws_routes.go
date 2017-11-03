@@ -28,7 +28,7 @@ import (
 func (c *Cloud) findRouteTable(clusterName string) (*ec2.RouteTable, error) {
 	// This should be unnecessary (we already filter on TagNameKubernetesCluster,
 	// and something is broken if cluster name doesn't match, but anyway...
-	// TODO: All clouds should be cluster-aware by default
+	// TODO: All clouds should be cluster-aware by default id:376 gh:378
 	var tables []*ec2.RouteTable
 
 	if c.cfg.Global.RouteTableID != "" {
@@ -183,7 +183,7 @@ func (c *Cloud) CreateRoute(clusterName string, nameHint string, route *cloudpro
 	}
 
 	request := &ec2.CreateRouteInput{}
-	// TODO: use ClientToken for idempotency?
+	// TODO: use ClientToken for idempotency? id:500 gh:501
 	request.DestinationCidrBlock = aws.String(route.DestinationCIDR)
 	request.InstanceId = instance.InstanceId
 	request.RouteTableId = table.RouteTableId

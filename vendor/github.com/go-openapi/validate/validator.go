@@ -302,7 +302,7 @@ func (p *ParamValidator) Validate(data interface{}) *Result {
 	tpe := reflect.TypeOf(data)
 	kind := tpe.Kind()
 
-	// TODO: validate type
+	// TODO: validate type id:2714 gh:2731
 	for _, validator := range p.validators {
 		if validator.Applies(p.param, kind) {
 			if err := validator.Validate(data); err != nil {

@@ -26,7 +26,7 @@ import (
 // CheckCodec makes sure that the codec can encode objects like internalType,
 // decode all of the external types listed, and also decode them into the given
 // object. (Will modify internalObject.) (Assumes JSON serialization.)
-// TODO: verify that the correct external version is chosen on encode...
+// TODO: verify that the correct external version is chosen on encode... id:3673 gh:3688
 func CheckCodec(c Codec, internalType Object, externalTypes ...schema.GroupVersionKind) error {
 	if _, err := Encode(c, internalType); err != nil {
 		return fmt.Errorf("Internal type not encodable: %v", err)

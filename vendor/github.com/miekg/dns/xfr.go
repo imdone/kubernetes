@@ -176,7 +176,7 @@ func (t *Transfer) Out(w ResponseWriter, q *Msg, ch chan *Envelope) error {
 		// Compress?
 		r.SetReply(q)
 		r.Authoritative = true
-		// assume it fits TODO(miek): fix
+		// assume it fits TODO (miek): fix id:2996 gh:3011
 		r.Answer = append(r.Answer, x.RR...)
 		if err := w.WriteMsg(r); err != nil {
 			return err

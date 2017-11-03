@@ -63,7 +63,7 @@ func TestMetricsDuGetCapacity(t *testing.T) {
 		t.Errorf("Unexpected value for empty directory; expected %v, got %v", e, a)
 	}
 
-	// TODO(pwittroc): Figure out a way to test these values for correctness, maybe by formatting and mounting a file
+	// TODO (pwittroc): Figure out a way to test these values for correctness, maybe by formatting and mounting a file id:1433 gh:1439
 	// as a filesystem
 	if a := actual.Capacity.Value(); a <= 0 {
 		t.Errorf("Expected Capacity %d to be greater than 0.", a)

@@ -112,7 +112,7 @@ type Lessor interface {
 }
 
 // lessor implements Lessor interface.
-// TODO: use clockwork for testability.
+// TODO: use clockwork for testability. id:2879 gh:2894
 type lessor struct {
 	mu sync.Mutex
 
@@ -120,7 +120,7 @@ type lessor struct {
 	// demotec will be closed if the lessor is demoted.
 	demotec chan struct{}
 
-	// TODO: probably this should be a heap with a secondary
+	// TODO: probably this should be a heap with a secondary id:2516 gh:2531
 	// id index.
 	// Now it is O(N) to loop over the leases to find expired ones.
 	// We want to make Grant, Revoke, and findExpiredLeases all O(logN) and
@@ -180,7 +180,7 @@ func newLessor(b backend.Backend, minLeaseTTL int64) *lessor {
 // The old primary leader cannot affect the correctness since its proposal has a
 // smaller term and will not be committed.
 //
-// TODO: raft follower do not forward lease management proposals. There might be a
+// TODO: raft follower do not forward lease management proposals. There might be a id:2764 gh:2779
 // very small window (within second normally which depends on go scheduling) that
 // a raft follow is the primary between the raft leader demotion and lessor demotion.
 // Usually this should not be a problem. Lease should not be that sensitive to timing.
@@ -200,7 +200,7 @@ func (le *lessor) Grant(id LeaseID, ttl int64) (*Lease, error) {
 		return nil, ErrLeaseNotFound
 	}
 
-	// TODO: when lessor is under high load, it should give out lease
+	// TODO: when lessor is under high load, it should give out lease id:2624 gh:2639
 	// with longer TTL to reduce renew load.
 	l := &Lease{
 		ID:      id,
@@ -458,7 +458,7 @@ func (le *lessor) findExpiredLeases() []*Lease {
 	leases := make([]*Lease, 0, 16)
 
 	for _, l := range le.leaseMap {
-		// TODO: probably should change to <= 100-500 millisecond to
+		// TODO: probably should change to <= 100-500 millisecond to id:2675 gh:2691
 		// make up committing latency.
 		if l.expired() {
 			leases = append(leases, l)
@@ -474,7 +474,7 @@ func (le *lessor) initAndRecover() {
 
 	tx.UnsafeCreateBucket(leaseBucketName)
 	_, vs := tx.UnsafeRange(leaseBucketName, int64ToBytes(0), int64ToBytes(math.MaxInt64), 0)
-	// TODO: copy vs and do decoding outside tx lock if lock contention becomes an issue.
+	// TODO: copy vs and do decoding outside tx lock if lock contention becomes an issue. id:2880 gh:2895
 	for i := range vs {
 		var lpb leasepb.Lease
 		err := lpb.Unmarshal(vs[i])

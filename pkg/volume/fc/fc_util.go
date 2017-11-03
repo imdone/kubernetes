@@ -51,7 +51,7 @@ func (handler *osIOHandler) WriteFile(filename string, data []byte, perm os.File
 }
 
 // given a disk path like /dev/sdx, find the devicemapper parent
-// TODO #23192 Convert this code to use the generic code in ../util
+// TODO #23192 Convert this code to use the generic code in ../util id:1379 gh:1385
 // which is used by the iSCSI implementation
 func findMultipathDeviceMapper(disk string, io ioHandler) string {
 	sys_path := "/sys/block/"

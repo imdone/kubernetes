@@ -49,7 +49,7 @@ func (c CurlyRouter) selectRoutes(ws *WebService, requestTokens []string) sortab
 	for _, each := range ws.routes {
 		matches, paramCount, staticCount := c.matchesRouteByPathTokens(each.pathParts, requestTokens)
 		if matches {
-			candidates.add(curlyRoute{each, paramCount, staticCount}) // TODO make sure Routes() return pointers?
+			candidates.add(curlyRoute{each, paramCount, staticCount}) // TODO make sure Routes() return pointers? id:2857 gh:2872
 		}
 	}
 	sort.Sort(sort.Reverse(candidates))

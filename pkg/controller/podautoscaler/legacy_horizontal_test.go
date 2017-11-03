@@ -1055,4 +1055,4 @@ func LegacyTestScaleDownRCImmediately(t *testing.T) {
 	tc.runTest(t)
 }
 
-// TODO: add more tests
+// TODO: add more tests id:631 gh:632

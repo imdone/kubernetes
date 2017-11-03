@@ -58,7 +58,7 @@ var AllowedModes = []string{
 const (
 	// Default configuration values for ModeBatch.
 	//
-	// TODO(ericchiang): Make these value configurable. Maybe through a
+	// TODO (ericchiang): Make these value configurable. Maybe through a id:3940 gh:3960
 	// kubeconfig extension?
 	defaultBatchBufferSize = 10000            // Buffer up to 10000 events before starting discarding.
 	defaultBatchMaxSize    = 400              // Only send up to 400 events at a time.
@@ -88,11 +88,11 @@ func NewBackend(kubeConfigFile string, mode string, groupVersion schema.GroupVer
 }
 
 var (
-	// NOTE: Copied from other webhook implementations
+	// NOTE: Copied from other webhook implementations id:3757 gh:3772
 	//
 	// Can we make these passable to NewGenericWebhook?
 	groupFactoryRegistry = make(announced.APIGroupFactoryRegistry)
-	// TODO(audit): figure out a general way to let the client choose their preferred version
+	// TODO (audit): figure out a general way to let the client choose their preferred version id:3906 gh:3926
 	registry = registered.NewOrDie("")
 )
 
@@ -141,7 +141,7 @@ func (b *blockingBackend) processEvents(ev ...*auditinternal.Event) error {
 	for _, e := range ev {
 		list.Items = append(list.Items, *e)
 	}
-	// NOTE: No exponential backoff because this is the blocking webhook
+	// NOTE: No exponential backoff because this is the blocking webhook id:4028 gh:4048
 	// mode. Any attempts to retry will block API server requests.
 	return b.w.RestClient.Post().Body(&list).Do().Error()
 }

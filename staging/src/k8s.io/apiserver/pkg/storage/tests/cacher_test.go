@@ -70,7 +70,7 @@ func GetAttrs(obj runtime.Object) (labels.Set, fields.Set, bool, error) {
 }
 
 // PodToSelectableFields returns a field set that represents the object
-// TODO: fields are not labels, and the validation rules for them do not apply.
+// TODO: fields are not labels, and the validation rules for them do not apply. id:3904 gh:3924
 func PodToSelectableFields(pod *example.Pod) fields.Set {
 	// The purpose of allocation with a given number of elements is to reduce
 	// amount of allocations needed to create the fields.Set. If you add any

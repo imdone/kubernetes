@@ -61,7 +61,7 @@ func matchImageTagOrSHA(inspected dockertypes.ImageInspect, image string) bool {
 			if strings.HasSuffix(image, tag) || strings.HasSuffix(tag, image) {
 				return true
 			} else {
-				// TODO: We need to remove this hack when project atomic based
+				// TODO: We need to remove this hack when project atomic based id:856 gh:861
 				// docker distro(s) like centos/fedora/rhel image fix problems on
 				// their end.
 				// Say the tag is "docker.io/busybox:latest"
@@ -163,7 +163,7 @@ func matchImageIDOnly(inspected dockertypes.ImageInspect, image string) bool {
 }
 
 // isImageNotFoundError returns whether the err is caused by image not found in docker
-// TODO: Use native error tester once ImageNotFoundError is supported in docker-engine client(eg. ImageRemove())
+// TODO: Use native error tester once ImageNotFoundError is supported in docker-engine client(eg. ImageRemove()) id:887 gh:894
 func isImageNotFoundError(err error) bool {
 	if err != nil {
 		return strings.Contains(err.Error(), "No such image:")

@@ -33,7 +33,7 @@ type BackoffConfig struct {
 	// MaxDelay is the upper bound of backoff delay.
 	MaxDelay time.Duration
 
-	// TODO(stevvooe): The following fields are not exported, as allowing
+	// TODO (stevvooe): The following fields are not exported, as allowing id:3478 gh:3493
 	// changes would violate the current gRPC specification for backoff. If
 	// gRPC decides to allow more interesting backoff strategies, these fields
 	// may be opened up in the future.

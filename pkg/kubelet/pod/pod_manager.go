@@ -163,12 +163,12 @@ func (pm *basicManager) UpdatePod(pod *v1.Pod) {
 func (pm *basicManager) updatePodsInternal(pods ...*v1.Pod) {
 	for _, pod := range pods {
 		if pm.secretManager != nil {
-			// TODO: Consider detecting only status update and in such case do
+			// TODO: Consider detecting only status update and in such case do id:1061 gh:1067
 			// not register pod, as it doesn't really matter.
 			pm.secretManager.RegisterPod(pod)
 		}
 		if pm.configMapManager != nil {
-			// TODO: Consider detecting only status update and in such case do
+			// TODO: Consider detecting only status update and in such case do id:988 gh:994
 			// not register pod, as it doesn't really matter.
 			pm.configMapManager.RegisterPod(pod)
 		}

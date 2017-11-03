@@ -25,7 +25,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 )
 
-// TODO these tests don't add much value for testing things that have groups
+// TODO these tests don't add much value for testing things that have groups id:205 gh:206
 
 func TestResourcePathWithPrefix(t *testing.T) {
 	testCases := []struct {

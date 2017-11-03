@@ -79,7 +79,7 @@ func (a int64Amount) AsInt64() (int64, bool) {
 		return a.value, true
 	}
 	if a.scale < 0 {
-		// TODO: attempt to reduce factors, although it is assumed that factors are reduced prior
+		// TODO: attempt to reduce factors, although it is assumed that factors are reduced prior id:2559 gh:2574
 		// to the int64Amount being created.
 		return 0, false
 	}

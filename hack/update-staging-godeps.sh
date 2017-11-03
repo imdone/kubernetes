@@ -24,7 +24,7 @@ source "${KUBE_ROOT}/hack/lib/init.sh"
 # Ensure you have a clean working directory before starting
 kube::util::ensure_clean_working_dir
 
-# NOTE: All output from this script needs to be copied back to the calling
+# NOTE: All output from this script needs to be copied back to the calling id:200 gh:201
 # source tree.  This is managed in kube::build::copy_output in build/common.sh.
 # If the output set is changed update that function.
 

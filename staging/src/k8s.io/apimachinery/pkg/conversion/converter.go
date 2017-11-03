@@ -469,7 +469,7 @@ func (f FieldMatchingFlags) IsSet(flag FieldMatchingFlags) bool {
 // Not safe for objects with cyclic references!
 func (c *Converter) Convert(src, dest interface{}, flags FieldMatchingFlags, meta *Meta) error {
 	if len(c.genericConversions) > 0 {
-		// TODO: avoid scope allocation
+		// TODO: avoid scope allocation id:3272 gh:3287
 		s := &scope{converter: c, flags: flags, meta: meta}
 		for _, fn := range c.genericConversions {
 			if ok, err := fn(src, dest, s); ok {
@@ -659,7 +659,7 @@ func (c *Converter) defaultConvert(sv, dv reflect.Value, scope *scope) error {
 			}
 			dkv := reflect.New(dt.Elem()).Elem()
 			scope.setKeys(sk.Interface(), dk.Interface())
-			// TODO:  sv.MapIndex(sk) may return a value with CanAddr() == false,
+			// TODO: sv.MapIndex(sk) may return a value with CanAddr() == false, id:3767 gh:3782
 			// because a map[string]struct{} does not allow a pointer reference.
 			// Calling a custom conversion function defined for the map value
 			// will panic. Example is PodInfo map[string]ContainerStatus.
@@ -787,7 +787,7 @@ func (a structAdaptor) confirmSet(key string, v reflect.Value) bool {
 // and some maps.
 func (c *Converter) convertKV(skv, dkv kvValue, scope *scope) error {
 	if skv == nil || dkv == nil {
-		// TODO: add keys to stack to support really understandable error messages.
+		// TODO: add keys to stack to support really understandable error messages. id:3503 gh:3518
 		return fmt.Errorf("Unable to convert %#v to %#v", skv, dkv)
 	}
 

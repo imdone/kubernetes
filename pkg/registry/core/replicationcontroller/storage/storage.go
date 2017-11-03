@@ -79,7 +79,7 @@ func NewREST(optsGetter generic.RESTOptionsGetter) (*REST, *StatusREST) {
 	}
 	options := &generic.StoreOptions{RESTOptions: optsGetter, AttrFunc: replicationcontroller.GetAttrs}
 	if err := store.CompleteWithOptions(options); err != nil {
-		panic(err) // TODO: Propagate error up
+		panic(err) // TODO: Propagate error up id:1276 gh:1282
 	}
 
 	statusStore := *store
@@ -160,7 +160,7 @@ func (r *ScaleREST) Update(ctx genericapirequest.Context, name string, objInfo r
 	}
 
 	oldScale := scaleFromRC(rc)
-	// TODO: should this pass validation?
+	// TODO: should this pass validation? id:1322 gh:1328
 	obj, err := objInfo.UpdatedObject(ctx, oldScale)
 	if err != nil {
 		return nil, false, err

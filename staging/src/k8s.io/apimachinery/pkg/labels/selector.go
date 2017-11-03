@@ -844,7 +844,7 @@ func SelectorFromSet(ls Set) Selector {
 		if err == nil {
 			requirements = append(requirements, *r)
 		} else {
-			//TODO: double check errors when input comes from serialization?
+			//TODO: double check errors when input comes from serialization? id:3847 gh:3862
 			return internalSelector{}
 		}
 	}
@@ -873,7 +873,7 @@ func SelectorFromValidatedSet(ls Set) Selector {
 // requirements. This function is suitable for those callers that perform additional
 // processing on selector requirements.
 // See the documentation for Parse() function for more details.
-// TODO: Consider exporting the internalSelector type instead.
+// TODO: Consider exporting the internalSelector type instead. id:3274 gh:3291
 func ParseToRequirements(selector string) ([]Requirement, error) {
 	return parse(selector)
 }

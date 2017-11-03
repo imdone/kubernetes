@@ -45,7 +45,7 @@ func updateReplicationControllerStatus(c v1core.ReplicationControllerInterface, 
 	}
 	// Save the generation number we acted on, otherwise we might wrongfully indicate
 	// that we've seen a spec update when we retry.
-	// TODO: This can clobber an update if we allow multiple agents to write to the
+	// TODO: This can clobber an update if we allow multiple agents to write to the id:670 gh:671
 	// same status.
 	newStatus.ObservedGeneration = rc.Generation
 

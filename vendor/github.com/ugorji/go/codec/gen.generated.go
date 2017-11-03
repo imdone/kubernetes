@@ -62,7 +62,7 @@ for {{var "j"}} := 0; !r.CheckBreak(); {{var "j"}}++ {
 		{{var "v"}}[{{var "mk"}}] = {{var "mv"}}
 	}
 }
-} // else len==0: TODO: Should we clear map entries?
+} // else len==0: TODO: Should we clear map entries? id:3077 gh:3092
 z.DecSendContainerState(codecSelfer_containerMapEnd{{ .Sfx }})
 `
 

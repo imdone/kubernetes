@@ -81,7 +81,7 @@ func Packages(_ *generator.Context, arguments *args.GeneratorArgs) generator.Pac
 						// Use the privatized version of the
 						// type name as the file name.
 						//
-						// TODO: make a namer that converts
+						// TODO: make a namer that converts id:3828 gh:3843
 						// camelCase to '-' separation for file
 						// names?
 						OptionalName: c.Namers["private"].Name(t),
@@ -163,7 +163,7 @@ func (g *genSet) GenerateType(c *generator.Context, t *types.Type, w io.Writer) 
 }
 
 func (g *genSet) lessBody(sw *generator.SnippetWriter, t *types.Type) {
-	// TODO: make this recursive, handle pointers and multiple nested structs...
+	// TODO: make this recursive, handle pointers and multiple nested structs... id:3971 gh:3991
 	switch t.Kind {
 	case types.Struct:
 		for _, m := range types.FlattenMembers(t.Members) {

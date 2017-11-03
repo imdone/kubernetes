@@ -34,7 +34,7 @@ func rValuesAtPath(v interface{}, path string, createPath, caseSensitive, nilTer
 		if c == "" { // no actual component, illegal syntax
 			return nil
 		} else if caseSensitive && c != "*" && strings.ToLower(c[0:1]) == c[0:1] {
-			// TODO normalize case for user
+			// TODO normalize case for user id:2725 gh:2740
 			return nil // don't support unexported fields
 		}
 
@@ -84,7 +84,7 @@ func rValuesAtPath(v interface{}, path string, createPath, caseSensitive, nilTer
 			}
 
 			if createPath && value.Kind() == reflect.Ptr && value.IsNil() {
-				// TODO if the value is the terminus it should not be created
+				// TODO if the value is the terminus it should not be created id:2452 gh:2467
 				// if the value to be set to its position is nil.
 				value.Set(reflect.New(value.Type().Elem()))
 				value = value.Elem()
@@ -126,7 +126,7 @@ func rValuesAtPath(v interface{}, path string, createPath, caseSensitive, nilTer
 				i := int(*index)
 				if i >= value.Len() { // check out of bounds
 					if createPath {
-						// TODO resize slice
+						// TODO resize slice id:2562 gh:2577
 					} else {
 						continue
 					}

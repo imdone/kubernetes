@@ -17,7 +17,7 @@ package v2
 import (
 	"time"
 
-	// TODO(rjnagal): Remove dependency after moving all stats structs from v1.
+	// TODO (rjnagal): Remove dependency after moving all stats structs from v1. id:2655 gh:2670
 	// using v1 now for easy conversion.
 	"github.com/google/cadvisor/info/v1"
 )
@@ -34,7 +34,7 @@ type CpuSpec struct {
 	// Units: milli-cpus.
 	MaxLimit uint64 `json:"max_limit"`
 	// Cpu affinity mask.
-	// TODO(rjnagal): Add a library to convert mask string to set of cpu bitmask.
+	// TODO (rjnagal): Add a library to convert mask string to set of cpu bitmask. id:2958 gh:2973
 	Mask string `json:"mask,omitempty"`
 	// CPUQuota Default is disabled
 	Quota uint64 `json:"quota,omitempty"`

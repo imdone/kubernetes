@@ -59,7 +59,7 @@ func addGinkgoImports(rootNode *ast.File) {
 	}
 
 	if len(importDecl.Specs) == 0 {
-		// TODO: might need to create a import decl here
+		// TODO: might need to create a import decl here id:2932 gh:2947
 		panic("unimplemented : expected to find an imports block")
 	}
 

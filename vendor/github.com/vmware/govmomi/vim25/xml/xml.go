@@ -10,7 +10,7 @@ package xml
 //    Annotated XML spec: http://www.xml.com/axml/testaxml.htm
 //    XML name spaces: http://www.w3.org/TR/REC-xml-names/
 
-// TODO(rsc):
+// TODO (rsc): id:3121 gh:3136
 //	Test error handling.
 
 import (
@@ -552,7 +552,7 @@ func (d *Decoder) rawToken() (Token, error) {
 
 	case '?':
 		// <?: Processing instruction.
-		// TODO(rsc): Should parse the <?xml declaration to make sure the version is 1.0.
+		// TODO (rsc): Should parse the <?xml declaration to make sure the version is 1.0. id:3221 gh:3236
 		var target string
 		if target, ok = d.name(); !ok {
 			if d.err == nil {
@@ -1918,7 +1918,7 @@ func Escape(w io.Writer, s []byte) {
 // procInstEncoding parses the `encoding="..."` or `encoding='...'`
 // value out of the provided string, returning "" if not found.
 func procInstEncoding(s string) string {
-	// TODO: this parsing is somewhat lame and not exact.
+	// TODO: this parsing is somewhat lame and not exact. id:2868 gh:2883
 	// It works for all actual cases, though.
 	idx := strings.Index(s, "encoding=")
 	if idx == -1 {

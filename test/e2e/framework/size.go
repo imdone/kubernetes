@@ -39,8 +39,8 @@ func ResizeGroup(group string, size int32) error {
 		defer CoreDump(TestContext.ReportDir)
 	}
 	if TestContext.Provider == "gce" || TestContext.Provider == "gke" {
-		// TODO: make this hit the compute API directly instead of shelling out to gcloud.
-		// TODO: make gce/gke implement InstanceGroups, so we can eliminate the per-provider logic
+		// TODO: make this hit the compute API directly instead of shelling out to gcloud. id:2230 gh:2245
+		// TODO: make gce/gke implement InstanceGroups, so we can eliminate the per-provider logic id:2459 gh:2474
 		output, err := exec.Command("gcloud", "compute", "instance-groups", "managed", "resize",
 			group, fmt.Sprintf("--size=%v", size),
 			"--project="+TestContext.CloudConfig.ProjectID, "--zone="+TestContext.CloudConfig.Zone).CombinedOutput()
@@ -60,8 +60,8 @@ func ResizeGroup(group string, size int32) error {
 
 func GetGroupNodes(group string) ([]string, error) {
 	if TestContext.Provider == "gce" || TestContext.Provider == "gke" {
-		// TODO: make this hit the compute API directly instead of shelling out to gcloud.
-		// TODO: make gce/gke implement InstanceGroups, so we can eliminate the per-provider logic
+		// TODO: make this hit the compute API directly instead of shelling out to gcloud. id:2109 gh:2124
+		// TODO: make gce/gke implement InstanceGroups, so we can eliminate the per-provider logic id:2377 gh:2392
 		output, err := exec.Command("gcloud", "compute", "instance-groups", "managed",
 			"list-instances", group, "--project="+TestContext.CloudConfig.ProjectID,
 			"--zone="+TestContext.CloudConfig.Zone).CombinedOutput()
@@ -84,8 +84,8 @@ func GetGroupNodes(group string) ([]string, error) {
 
 func GroupSize(group string) (int, error) {
 	if TestContext.Provider == "gce" || TestContext.Provider == "gke" {
-		// TODO: make this hit the compute API directly instead of shelling out to gcloud.
-		// TODO: make gce/gke implement InstanceGroups, so we can eliminate the per-provider logic
+		// TODO: make this hit the compute API directly instead of shelling out to gcloud. id:2242 gh:2257
+		// TODO: make gce/gke implement InstanceGroups, so we can eliminate the per-provider logic id:2231 gh:2246
 		output, err := exec.Command("gcloud", "compute", "instance-groups", "managed",
 			"list-instances", group, "--project="+TestContext.CloudConfig.ProjectID,
 			"--zone="+TestContext.CloudConfig.Zone).CombinedOutput()

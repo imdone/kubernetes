@@ -55,7 +55,7 @@ type CachedDiscoveryInterface interface {
 	// Fresh is supposed to tell the caller whether or not to retry if the cache
 	// fails to find something (false = retry, true = no need to retry).
 	//
-	// TODO: this needs to be revisited, this interface can't be locked properly
+	// TODO: this needs to be revisited, this interface can't be locked properly id:3462 gh:3477
 	// and doesn't make a lot of sense.
 	Fresh() bool
 	// Invalidate enforces that no cached data is used in the future that is older than the current time.
@@ -192,7 +192,7 @@ func (d *DiscoveryClient) serverResources() ([]*metav1.APIResourceList, error) {
 			gv := schema.GroupVersion{Group: apiGroup.Name, Version: version.Version}
 			resources, err := d.ServerResourcesForGroupVersion(version.GroupVersion)
 			if err != nil {
-				// TODO: maybe restrict this to NotFound errors
+				// TODO: maybe restrict this to NotFound errors id:3943 gh:3963
 				failedGroups[gv] = err
 				continue
 			}
@@ -255,7 +255,7 @@ func (d *DiscoveryClient) serverPreferredResources() ([]*metav1.APIResourceList,
 			groupVersion := schema.GroupVersion{Group: apiGroup.Name, Version: version.Version}
 			apiResourceList, err := d.ServerResourcesForGroupVersion(version.GroupVersion)
 			if err != nil {
-				// TODO: maybe restrict this to NotFound errors
+				// TODO: maybe restrict this to NotFound errors id:3760 gh:3775
 				failedGroups[groupVersion] = err
 				continue
 			}

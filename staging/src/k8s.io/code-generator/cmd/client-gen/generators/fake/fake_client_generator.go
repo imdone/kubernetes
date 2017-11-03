@@ -31,7 +31,7 @@ import (
 
 func PackageForGroup(gv clientgentypes.GroupVersion, typeList []*types.Type, clientsetPackage string, inputPackage string, boilerplate []byte) generator.Package {
 	outputPackage := strings.ToLower(filepath.Join(clientsetPackage, "typed", gv.Group.NonEmpty(), gv.Version.NonEmpty(), "fake"))
-	// TODO: should make this a function, called by here and in client-generator.go
+	// TODO: should make this a function, called by here and in client-generator.go id:3594 gh:3609
 	realClientPackage := filepath.Join(clientsetPackage, "typed", gv.Group.NonEmpty(), gv.Version.NonEmpty())
 	return &generator.DefaultPackage{
 		PackageName: "fake",
@@ -84,7 +84,7 @@ func PackageForGroup(gv clientgentypes.GroupVersion, typeList []*types.Type, cli
 
 func PackageForClientset(customArgs *clientgenargs.CustomArgs, fakeClientsetPackage string, boilerplate []byte) generator.Package {
 	return &generator.DefaultPackage{
-		// TODO: we'll generate fake clientset for different release in the future.
+		// TODO: we'll generate fake clientset for different release in the future. id:4004 gh:4024
 		// Package name and path are hard coded for now.
 		PackageName: "fake",
 		PackagePath: filepath.Join(fakeClientsetPackage, "fake"),

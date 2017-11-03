@@ -178,7 +178,7 @@ func newDockerContainerHandler(
 	id := ContainerNameToDockerId(name)
 
 	// Add the Containers dir where the log files are stored.
-	// FIXME: Give `otherStorageDir` a more descriptive name.
+	// FIXME: Give `otherStorageDir` a more descriptive name. id:2956 gh:2971
 	otherStorageDir := path.Join(storageDir, pathToContainersDir, id)
 
 	rwLayerID, err := getRwLayerID(id, storageDir, storageDriver, dockerVersion)
@@ -209,7 +209,7 @@ func newDockerContainerHandler(
 		zfsFilesystem = path.Join(zfsParent, rwLayerID)
 	}
 
-	// TODO: extract object mother method
+	// TODO: extract object mother method id:2831 gh:2846
 	handler := &dockerContainerHandler{
 		id:                 id,
 		client:             client,
@@ -329,7 +329,7 @@ func (h *dockerFsHandler) Usage() common.FsUsage {
 	if h.thinPoolWatcher != nil {
 		thinPoolUsage, err := h.thinPoolWatcher.GetUsage(h.deviceID)
 		if err != nil {
-			// TODO: ideally we should keep track of how many times we failed to get the usage for this
+			// TODO: ideally we should keep track of how many times we failed to get the usage for this id:2815 gh:2830
 			// device vs how many refreshes of the cache there have been, and display an error e.g. if we've
 			// had at least 1 refresh and we still can't find the device.
 			glog.V(5).Infof("unable to get fs usage from thin pool for device %s: %v", h.deviceID, err)
@@ -451,7 +451,7 @@ func (self *dockerContainerHandler) getFsStats(stats *info.ContainerStats) error
 	return nil
 }
 
-// TODO(vmarmol): Get from libcontainer API instead of cgroup manager when we don't have to support older Dockers.
+// TODO (vmarmol): Get from libcontainer API instead of cgroup manager when we don't have to support older Dockers. id:3054 gh:3067
 func (self *dockerContainerHandler) GetStats() (*info.ContainerStats, error) {
 	stats, err := containerlibcontainer.GetStats(self.cgroupManager, self.rootFs, self.pid, self.ignoreMetrics)
 	if err != nil {

@@ -33,6 +33,6 @@ func TestBasic(t *testing.T) {
 	oomWatcher := NewOOMWatcher(mockCadvisor, fakeRecorder)
 	assert.NoError(t, oomWatcher.Start(node))
 
-	// TODO: Improve this test once cadvisor exports events.EventChannel as an interface
+	// TODO: Improve this test once cadvisor exports events.EventChannel as an interface id:1121 gh:1127
 	// and thereby allow using a mock version of cadvisor.
 }

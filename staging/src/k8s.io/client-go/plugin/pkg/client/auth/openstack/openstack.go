@@ -145,7 +145,7 @@ func newOpenstackAuthProvider(clusterAddress string, config map[string]string, p
 		}
 	}
 
-	// TODO: read/persist client configuration(OS_XXX env vars) in config
+	// TODO: read/persist client configuration(OS_XXX env vars) in config id:4043 gh:4063
 
 	return &openstackAuthProvider{
 		ttl:         ttlDuration,

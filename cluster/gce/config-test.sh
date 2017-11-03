@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# TODO(jbeda): Provide a way to override project
+# TODO (jbeda): Provide a way to override project id:18 gh:19
 # gcloud multiplexing for shared GCE/GKE tests.
 KUBE_ROOT=$(dirname "${BASH_SOURCE}")/../..
 source "${KUBE_ROOT}/cluster/gce/config-common.sh"
@@ -147,7 +147,7 @@ ENABLE_CLUSTER_MONITORING="${KUBE_ENABLE_CLUSTER_MONITORING:-influxdb}"
 # Optional: Enable Metrics Server. Metrics Server should be enable everywhere,
 # since it's a critical component, but in the first release we need a way to disable
 # this in case of stability issues.
-# TODO(piosz) remove this option once Metrics Server became a stable thing.
+# TODO (piosz) remove this option once Metrics Server became a stable thing. id:11 gh:12
 ENABLE_METRICS_SERVER="${KUBE_ENABLE_METRICS_SERVER:-true}"
 
 # One special node out of NUM_NODES would be created of this type if specified.
@@ -169,7 +169,7 @@ CONTROLLER_MANAGER_TEST_LOG_LEVEL="${CONTROLLER_MANAGER_TEST_LOG_LEVEL:-$TEST_CL
 SCHEDULER_TEST_LOG_LEVEL="${SCHEDULER_TEST_LOG_LEVEL:-$TEST_CLUSTER_LOG_LEVEL}"
 KUBEPROXY_TEST_LOG_LEVEL="${KUBEPROXY_TEST_LOG_LEVEL:-$TEST_CLUSTER_LOG_LEVEL}"
 
-# TODO: change this and flex e2e test when default flex volume install path is changed for GCI
+# TODO: change this and flex e2e test when default flex volume install path is changed for GCI id:17 gh:18
 # Set flex dir to one that's readable from controller-manager container and writable by the flex e2e test.
 if [[ "${MASTER_OS_DISTRIBUTION}" == "gci" ]]; then
     CONTROLLER_MANAGER_TEST_VOLUME_PLUGIN_DIR="--flex-volume-plugin-dir=/etc/srv/kubernetes/kubelet-plugins/volume/exec"
@@ -202,7 +202,7 @@ KUBEPROXY_TEST_ARGS="${KUBEPROXY_TEST_ARGS:-} ${TEST_CLUSTER_API_CONTENT_TYPE}"
 # To avoid situation during cluster upgrade when there are two instances
 # of fluentd running on a node, kubelet need to mark node on which
 # fluentd is not running as a manifest pod with appropriate label.
-# TODO(piosz): remove this in 1.8
+# TODO (piosz): remove this in 1.8 id:69 gh:70
 NODE_LABELS="${KUBE_NODE_LABELS:-beta.kubernetes.io/fluentd-ds-ready=true}"
 
 # NON_MASTER_NODE_LABELS are labels will only be applied on non-master nodes.
@@ -348,7 +348,7 @@ HAIRPIN_MODE="${HAIRPIN_MODE:-promiscuous-bridge}" # promiscuous-bridge, hairpin
 E2E_STORAGE_TEST_ENVIRONMENT=${KUBE_E2E_STORAGE_TEST_ENVIRONMENT:-false}
 
 # Optional: if set to true, a image puller is deployed. Only for use in e2e clusters.
-# TODO: Pipe this through GKE e2e clusters once we know it helps.
+# TODO: Pipe this through GKE e2e clusters once we know it helps. id:62 gh:63
 PREPULL_E2E_IMAGES="${PREPULL_E2E_IMAGES:-true}"
 
 # Evict pods whenever compute resource availability on the nodes gets below a threshold.
@@ -365,7 +365,7 @@ ENABLE_DEFAULT_STORAGE_CLASS="${ENABLE_DEFAULT_STORAGE_CLASS:-true}"
 # Upgrade test jobs that go from a version < 1.6 to a version >= 1.6 should override this to be true.
 ENABLE_LEGACY_ABAC="${ENABLE_LEGACY_ABAC:-false}" # true, false
 
-# TODO(dawn1107): Remove this once the flag is built into CVM image.
+# TODO (dawn1107): Remove this once the flag is built into CVM image. id:19 gh:20
 # Kernel panic upon soft lockup issue
 SOFTLOCKUP_PANIC="${SOFTLOCKUP_PANIC:-true}" # true, false
 
@@ -404,7 +404,7 @@ PROMETHEUS_TO_SD_ENDPOINT="${PROMETHEUS_TO_SD_ENDPOINT:-https://monitoring.googl
 PROMETHEUS_TO_SD_PREFIX="${PROMETHEUS_TO_SD_PREFIX:-custom.googleapis.com}"
 ENABLE_PROMETHEUS_TO_SD="${ENABLE_PROMETHEUS_TO_SD:-true}"
 
-# TODO(#51292): Make kube-proxy Daemonset default and remove the configuration here.
+# TODO (#51292): Make kube-proxy Daemonset default and remove the configuration here. id:12 gh:13
 # Optional: [Experiment Only] Run kube-proxy as a DaemonSet if set to true, run as static pods otherwise.
 KUBE_PROXY_DAEMONSET="${KUBE_PROXY_DAEMONSET:-false}" # true, false
 

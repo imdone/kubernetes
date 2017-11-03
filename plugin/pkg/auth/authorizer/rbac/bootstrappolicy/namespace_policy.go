@@ -100,7 +100,7 @@ func init() {
 			eventsRule(),
 		},
 	})
-	// TODO: Create util on Role+Binding for leader locking if more cases evolve.
+	// TODO: Create util on Role+Binding for leader locking if more cases evolve. id:1582 gh:1588
 	addNamespaceRole(metav1.NamespaceSystem, rbac.Role{
 		// role for the leader locking on supplied configmap
 		ObjectMeta: metav1.ObjectMeta{Name: "system::leader-locking-kube-controller-manager"},

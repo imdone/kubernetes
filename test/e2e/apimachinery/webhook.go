@@ -259,7 +259,7 @@ func testWebhook(f *framework.Framework) {
 	if !strings.Contains(err.Error(), expectedErrMsg) {
 		framework.Failf("expect error contains %q, got %q", expectedErrMsg, err.Error())
 	}
-	// TODO: Test if webhook can detect pod with non-compliant metadata.
+	// TODO: Test if webhook can detect pod with non-compliant metadata. id:2296 gh:2312
 	// Currently metadata is lost because webhook uses the external version of
 	// the objects, and the apiserver sends the internal objects.
 }

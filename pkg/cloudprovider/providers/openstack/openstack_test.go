@@ -378,7 +378,7 @@ func TestNodeAddresses(t *testing.T) {
 // This allows acceptance testing against an existing OpenStack
 // install, using the standard OS_* OpenStack client environment
 // variables.
-// FIXME: it would be better to hermetically test against canned JSON
+// FIXME: it would be better to hermetically test against canned JSON id:480 gh:481
 // requests/responses.
 func configFromEnv() (cfg Config, ok bool) {
 	cfg.Global.AuthUrl = os.Getenv("OS_AUTH_URL")

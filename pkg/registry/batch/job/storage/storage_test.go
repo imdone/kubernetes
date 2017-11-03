@@ -175,7 +175,7 @@ func TestWatch(t *testing.T) {
 	)
 }
 
-// TODO: test update /status
+// TODO: test update /status id:1176 gh:1180
 
 func newBool(val bool) *bool {
 	p := new(bool)

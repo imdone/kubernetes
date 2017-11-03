@@ -140,7 +140,7 @@ func enforceExistingCgroup(cgroupManager CgroupManager, cName string, rl v1.Reso
 
 // getCgroupConfig returns a ResourceConfig object that can be used to create or update cgroups via CgroupManager interface.
 func getCgroupConfig(rl v1.ResourceList) *ResourceConfig {
-	// TODO(vishh): Set CPU Quota if necessary.
+	// TODO (vishh): Set CPU Quota if necessary. id:836 gh:837
 	if rl == nil {
 		return nil
 	}

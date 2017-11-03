@@ -63,12 +63,12 @@ type PolicySpec struct {
 	// "/foo/*" matches all subpaths of foo
 	NonResourcePath string
 
-	// TODO: "expires" string in RFC3339 format.
+	// TODO: "expires" string in RFC3339 format. id:296 gh:297
 
-	// TODO: want a way to allow some users to restart containers of a pod but
+	// TODO: want a way to allow some users to restart containers of a pod but id:394 gh:395
 	// not delete or modify it.
 
-	// TODO: want a way to allow a controller to create a pod based only on a
+	// TODO: want a way to allow a controller to create a pod based only on a id:361 gh:362
 	// certain podTemplates.
 
 }

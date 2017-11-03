@@ -67,7 +67,7 @@ func NewBackendQuota(s *EtcdServer) Quota {
 }
 
 func (b *backendQuota) Available(v interface{}) bool {
-	// TODO: maybe optimize backend.Size()
+	// TODO: maybe optimize backend.Size() id:2846 gh:2861
 	return b.s.Backend().Size()+int64(b.Cost(v)) < b.maxBackendBytes
 }
 

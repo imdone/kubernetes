@@ -17,7 +17,7 @@
 set -euo pipefail
 
 function sql() {
-  # TODO(knz): Why does the more idiomatic read from stdin not produce any
+  # TODO (knz): Why does the more idiomatic read from stdin not produce any id:193 gh:194
   # output?
   kubectl exec "cockroachdb-${1}" -- /cockroach/cockroach sql \
       --host "cockroachdb-${1}.cockroachdb" \

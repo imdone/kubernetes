@@ -37,7 +37,7 @@
 package proto
 
 // Functions for parsing the Text protocol buffer format.
-// TODO: message sets.
+// TODO: message sets. id:2718 gh:2733
 
 import (
 	"encoding"
@@ -475,7 +475,7 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) error {
 		if tok.value == "[" {
 			// Looks like an extension or an Any.
 			//
-			// TODO: Check whether we need to handle
+			// TODO: Check whether we need to handle id:2801 gh:2816
 			// namespace rooted names (e.g. ".something.Foo").
 			extName, err := p.consumeExtName()
 			if err != nil {
@@ -532,7 +532,7 @@ func (p *textParser) readStruct(sv reflect.Value, terminator string) error {
 
 			var desc *ExtensionDesc
 			// This could be faster, but it's functional.
-			// TODO: Do something smarter than a linear scan.
+			// TODO: Do something smarter than a linear scan. id:2994 gh:3009
 			for _, d := range RegisteredExtensions(reflect.New(st).Interface().(Message)) {
 				if d.Name == extName {
 					desc = d
@@ -979,7 +979,7 @@ func (p *textParser) readAny(v reflect.Value, props *Properties) error {
 		default:
 			return p.errorf("expected '{' or '<', found %q", tok.value)
 		}
-		// TODO: Handle nested messages which implement encoding.TextUnmarshaler.
+		// TODO: Handle nested messages which implement encoding.TextUnmarshaler. id:2640 gh:2655
 		return p.readStruct(fv, terminator)
 	case reflect.Uint32:
 		if x, err := strconv.ParseUint(tok.value, 0, 32); err == nil {

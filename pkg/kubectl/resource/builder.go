@@ -96,7 +96,7 @@ Example resource specifications include:
    '-f rsrc.yaml'
    '--filename=rsrc.json'`)
 
-// TODO: expand this to include other errors.
+// TODO: expand this to include other errors. id:807 gh:808
 func IsUsageError(err error) bool {
 	if err == nil {
 		return false

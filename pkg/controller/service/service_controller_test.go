@@ -174,7 +174,7 @@ func TestCreateExternalLoadBalancer(t *testing.T) {
 	}
 }
 
-// TODO: Finish converting and update comments
+// TODO: Finish converting and update comments id:649 gh:650
 func TestUpdateNodesInExternalLoadBalancer(t *testing.T) {
 	nodes := []*v1.Node{
 		{ObjectMeta: metav1.ObjectMeta{Name: "node0"}},
@@ -304,7 +304,7 @@ func TestGetNodeConditionPredicate(t *testing.T) {
 	}
 }
 
-// TODO(a-robinson): Add tests for update/sync/delete.
+// TODO (a-robinson): Add tests for update/sync/delete. id:673 gh:674
 
 func TestProcessServiceUpdate(t *testing.T) {
 
@@ -425,9 +425,9 @@ func TestSyncService(t *testing.T) {
 
 			},
 			expectedFn: func(e error) error {
-				//TODO: Expected error is of the format fmt.Errorf("unexpected key format: %q", "invalid/key/string"),
-				//TODO: should find a way to test for dependent package errors in such a way that it wont break
-				//TODO:	our tests, currently we only test if there is an error.
+				//TODO: Expected error is of the format fmt.Errorf("unexpected key format: %q", "invalid/key/string"), id:624 gh:625
+				//TODO: should find a way to test for dependent package errors in such a way that it wont break id:600 gh:601
+				//TODO: our tests, currently we only test if there is an error. id:638 gh:639
 				//Error should be non-nil
 				if e == nil {
 					return fmt.Errorf("Expected=unexpected key format: %q, Obtained=nil", "invalid/key/string")
@@ -448,7 +448,7 @@ func TestSyncService(t *testing.T) {
 		},
 		*/
 
-		//TODO: see if we can add a test for valid but error throwing service, its difficult right now because synCService() currently runtime.HandleError
+		//TODO: see if we can add a test for valid but error throwing service, its difficult right now because synCService() currently runtime.HandleError id:650 gh:651
 		{
 			testName: "if valid service",
 			key:      "external-balancer",

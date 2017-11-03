@@ -16,7 +16,7 @@ type PrivateRdata interface {
 	// Pack is used when packing a private RR into a buffer.
 	Pack([]byte) (int, error)
 	// Unpack is used when unpacking a private RR from a buffer.
-	// TODO(miek): diff. signature than Pack, see edns0.go for instance.
+	// TODO (miek): diff. signature than Pack, see edns0.go for instance. id:2931 gh:2946
 	Unpack([]byte) (int, error)
 	// Copy copies the Rdata.
 	Copy(PrivateRdata) error
@@ -114,7 +114,7 @@ func PrivateHandle(rtypestr string, rtype uint16, generator func() PrivateRdata)
 		text := make([]string, 0, 2) // could be 0..N elements, median is probably 1
 	Fetch:
 		for {
-			// TODO(miek): we could also be returning _QUOTE, this might or might not
+			// TODO (miek): we could also be returning _QUOTE, this might or might not id:3193 gh:3208
 			// be an issue (basically parsing TXT becomes hard)
 			switch l = <-c; l.value {
 			case zNewline, zEOF:

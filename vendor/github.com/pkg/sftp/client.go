@@ -172,7 +172,7 @@ func (c *Client) ReadDir(p string) ([]os.FileInfo, error) {
 				attrs = append(attrs, fileInfoFromStat(attr, path.Base(filename)))
 			}
 		case ssh_FXP_STATUS:
-			// TODO(dfc) scope warning!
+			// TODO (dfc) scope warning! id:3201 gh:3216
 			err = normaliseError(unmarshalStatus(id, data))
 			done = true
 		default:

@@ -2000,7 +2000,7 @@ func describeIngressTLS(w PrefixWriter, ingTLS []extensions.IngressTLS) {
 	return
 }
 
-// TODO: Move from annotations into Ingress status.
+// TODO: Move from annotations into Ingress status. id:1232 gh:1238
 func describeIngressAnnotations(w PrefixWriter, annotations map[string]string) {
 	w.Write(LEVEL_0, "Annotations:\n")
 	for k, v := range annotations {
@@ -2495,7 +2495,7 @@ func (d *NodeDescriber) Describe(namespace, name string, describerSettings print
 		if ref, err := ref.GetReference(legacyscheme.Scheme, node); err != nil {
 			glog.Errorf("Unable to construct reference to '%#v': %v", node, err)
 		} else {
-			// TODO: We haven't decided the namespace for Node object yet.
+			// TODO: We haven't decided the namespace for Node object yet. id:1148 gh:1154
 			ref.UID = types.UID(ref.Name)
 			events, _ = d.Core().Events("").Search(legacyscheme.Scheme, ref)
 		}
@@ -2791,7 +2791,7 @@ func describeHorizontalPodAutoscaler(hpa *autoscaling.HorizontalPodAutoscaler, e
 		w.Write(LEVEL_0, "Min replicas:\t%s\n", minReplicas)
 		w.Write(LEVEL_0, "Max replicas:\t%d\n", hpa.Spec.MaxReplicas)
 
-		// TODO: switch to scale subresource once the required code is submitted.
+		// TODO: switch to scale subresource once the required code is submitted. id:1186 gh:1189
 		if strings.ToLower(hpa.Spec.ScaleTargetRef.Kind) == "replicationcontroller" {
 			w.Write(LEVEL_0, "ReplicationController pods:\t")
 			rc, err := d.client.Core().ReplicationControllers(hpa.Namespace).Get(hpa.Spec.ScaleTargetRef.Name, metav1.GetOptions{})
@@ -3407,7 +3407,7 @@ type Describers struct {
 // describer can print the exact object in its first argument (the remainder will be provided empty
 // values). If no function registered with Add can satisfy the passed objects, an ErrNoDescriber will
 // be returned
-// TODO: reorder and partial match extra.
+// TODO: reorder and partial match extra. id:1152 gh:1158
 func (d *Describers) DescribeObject(exact interface{}, extra ...interface{}) (string, error) {
 	exactType := reflect.TypeOf(exact)
 	fns, ok := d.searchFns[exactType]
@@ -3717,7 +3717,7 @@ func (list SortableVolumeMounts) Less(i, j int) bool {
 	return list[i].MountPath < list[j].MountPath
 }
 
-// TODO: get rid of this and plumb the caller correctly
+// TODO: get rid of this and plumb the caller correctly id:1209 gh:1215
 func versionedExtensionsClientV1beta1(internalClient clientset.Interface) clientextensionsv1beta1.ExtensionsV1beta1Interface {
 	if internalClient == nil {
 		return &clientextensionsv1beta1.ExtensionsV1beta1Client{}

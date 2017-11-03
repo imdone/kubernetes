@@ -59,7 +59,7 @@ ETCD_API="$(echo $VERSION_CONTENTS | cut -d '/' -f 2)"
 
 # Name is used only in case of etcd3 mode, to appropriate set the metadata
 # for the etcd data.
-# NOTE: NAME HAS TO BE EQUAL TO WHAT WE USE IN --name flag when starting etcd.
+# NOTE: NAME HAS TO BE EQUAL TO WHAT WE USE IN --name flag when starting etcd. id:150 gh:151
 NAME="${NAME:-etcd-$(hostname)}"
 
 # Port on which etcd is exposed.
@@ -69,12 +69,12 @@ event_etcd_port=4002
 # Wait until both etcd instances are up
 wait_for_etcd_up() {
   port=$1
-  # TODO: As of 3.0.x etcd versions, all 2.* and 3.* versions return
+  # TODO: As of 3.0.x etcd versions, all 2.* and 3.* versions return id:120 gh:121
   # {"health": "true"} on /health endpoint in healthy case.
   # However, we should come with a regex for it to avoid future break.
   health_ok="{\"health\": \"true\"}"
   for i in $(seq 120); do
-    # TODO: Is it enough to look into /health endpoint?
+    # TODO: Is it enough to look into /health endpoint? id:93 gh:94
     health=$(curl --silent http://127.0.0.1:${port}/health)
     if [ "${health}" == "${health_ok}" ]; then
       return 0
@@ -103,7 +103,7 @@ wait_for_etcd_and_apiserver_down() {
   for i in $(seq 120); do
     etcd=$(docker ps | grep etcd | grep -v etcd-empty-dir | grep -v etcd-monitor | wc -l)
     apiserver=$(docker ps | grep apiserver | wc -l)
-    # TODO: Theoretically it is possible, that apiserver and or etcd
+    # TODO: Theoretically it is possible, that apiserver and or etcd id:53 gh:54
     # are currently down, but Kubelet is now restarting them and they
     # will reappear again. We should avoid it.
     if [ "${etcd}" -eq "0" -a "${apiserver}" -eq "0" ]; then
@@ -151,7 +151,7 @@ if [ "${ETCD_API}" == "etcd2" ]; then
   mv *.snap "${BACKUP_DIR}/member/snap/" || true
   mv *.wal "${BACKUP_DIR}/member/wal/"
 
-  # TODO(jsz): This won't work with HA setups (e.g. do we need to set --name flag)?
+  # TODO (jsz): This won't work with HA setups (e.g. do we need to set --name flag)? id:114 gh:115
   echo "Starting etcd ${ETCD_VERSION} to restore data"
   image=$(docker run -d -v ${BACKUP_DIR}:/var/etcd/data \
     --net=host -p ${etcd_port}:${etcd_port} \
@@ -185,7 +185,7 @@ elif [ "${ETCD_API}" == "etcd3" ]; then
 
   # Run etcdctl snapshot restore command and wait until it is finished.
   # setting with --name in the etcd manifest file and then it seems to work.
-  # TODO(jsz): This command may not work in case of HA.
+  # TODO (jsz): This command may not work in case of HA. id:151 gh:152
   image=$(docker run -d -v ${BACKUP_DIR}:/var/tmp/backup --env ETCDCTL_API=3 \
     "gcr.io/google_containers/etcd:${ETCD_VERSION}" /bin/sh -c \
     "/usr/local/bin/etcdctl snapshot restore ${BACKUP_DIR}/${snapshot} --name ${NAME} --initial-cluster ${NAME}=http://localhost:2380; mv /${NAME}.etcd/member /var/tmp/backup/")

@@ -260,7 +260,7 @@ var _ = SIGDescribe("DaemonRestart [Disruptive]", func() {
 		framework.ScaleRC(f.ClientSet, f.InternalClientset, ns, rcName, numPods, true)
 
 		// Only check the keys, the pods can be different if the kubelet updated it.
-		// TODO: Can it really?
+		// TODO: Can it really? id:2135 gh:2150
 		existingKeys := sets.NewString()
 		newKeys := sets.NewString()
 		for _, k := range existingPods.ListKeys() {

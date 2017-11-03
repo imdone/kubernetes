@@ -65,7 +65,7 @@ type Element interface {
 type FieldMeta interface {
 	// GetFieldMergeType returns the type of merge strategy to use for this field
 	// maybe "merge", "replace" or "retainkeys"
-	// TODO: There maybe multiple strategies, so this may need to be a slice, map, or struct
+	// TODO: There maybe multiple strategies, so this may need to be a slice, map, or struct id:645 gh:647
 	// Address this in a follow up in the PR to introduce retainkeys strategy
 	GetFieldMergeType() string
 

@@ -725,7 +725,7 @@ func TestControllerUpdateStatusWithFailure(t *testing.T) {
 	}
 }
 
-// TODO: This test is too hairy for a unittest. It should be moved to an E2E suite.
+// TODO: This test is too hairy for a unittest. It should be moved to an E2E suite. id:551 gh:552
 func doTestControllerBurstReplicas(t *testing.T, burstReplicas, numReplicas int) {
 	labelMap := map[string]string{"foo": "bar"}
 	rsSpec := newReplicaSet(numReplicas, labelMap)

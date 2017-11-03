@@ -102,7 +102,7 @@ func (o *AggregatorOptions) Complete() error {
 }
 
 func (o AggregatorOptions) RunAggregator(stopCh <-chan struct{}) error {
-	// TODO have a "real" external address
+	// TODO have a "real" external address id:4073 gh:4093
 	if err := o.RecommendedOptions.SecureServing.MaybeDefaultWithSelfSignedCerts("localhost", nil, nil); err != nil {
 		return fmt.Errorf("error creating self-signed certificates: %v", err)
 	}

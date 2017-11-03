@@ -64,7 +64,7 @@ func NewCollector(collectorName string, configFile []byte, metricCountLimit int,
 
 	configInJSON.Endpoint.configure(containerHandler)
 
-	// TODO : Add checks for validity of config file (eg : Accurate JSON fields)
+	// TODO : Add checks for validity of config file (eg : Accurate JSON fields) id:3050 gh:3065
 
 	if len(configInJSON.MetricsConfig) == 0 {
 		return nil, fmt.Errorf("No metrics provided in config")

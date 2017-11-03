@@ -63,7 +63,7 @@ func (runner *runner) GetDnsSuffixSearchList() ([]string, error) {
 	// DNS Suffix Search List. . . . . . : example1.com
 	//                                     example2.com
 	//
-	// TODO: this does not work when the label is localized
+	// TODO: this does not work when the label is localized id:1424 gh:1430
 	suffixList := []string{}
 	if runtime.GOOS != "windows" {
 		glog.V(1).Infof("ipconfig not supported on GOOS=%s", runtime.GOOS)

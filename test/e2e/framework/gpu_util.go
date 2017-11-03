@@ -29,13 +29,13 @@ const (
 	// this uses the device plugin mechanism
 	NVIDIAGPUResourceName = "nvidia.com/gpu"
 
-	// TODO: Parametrize it by making it a feature in TestFramework.
+	// TODO: Parametrize it by making it a feature in TestFramework. id:2185 gh:2200
 	// so we can override the daemonset in other setups (non COS).
 	// GPUDevicePluginDSYAML is the official Google Device Plugin Daemonset NVIDIA GPU manifest for GKE
 	GPUDevicePluginDSYAML = "https://raw.githubusercontent.com/GoogleCloudPlatform/container-engine-accelerators/master/device-plugin-daemonset.yaml"
 )
 
-// TODO make this generic and not linked to COS only
+// TODO make this generic and not linked to COS only id:2223 gh:2238
 // NumberOfGPUs returs the number of GPUs advertised by a node
 // This is based on the Device Plugin system and expected to run on a COS based node
 // After the NVIDIA drivers were installed

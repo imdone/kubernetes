@@ -62,7 +62,7 @@ func (f *ring2Factory) PrinterForCommand(cmd *cobra.Command, isLocal bool, outpu
 			return nil, err
 		}
 	}
-	// TODO: used by the custom column implementation and the name implementation, break this dependency
+	// TODO: used by the custom column implementation and the name implementation, break this dependency id:740 gh:741
 	decoders := []runtime.Decoder{f.clientAccessFactory.Decoder(true), unstructured.UnstructuredJSONScheme}
 	encoder := f.clientAccessFactory.JSONEncoder()
 	return PrinterForCommand(cmd, outputOpts, mapper, typer, encoder, decoders, options)

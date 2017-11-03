@@ -26,7 +26,7 @@ import (
 
 var (
 	emptyImgStoreConfig = ImageStoreConfig{}
-	// TODO(tmrts): fill the pod configuration
+	// TODO (tmrts): fill the pod configuration id:1196 gh:1202
 	testPodConfig *runtimeapi.PodSandboxConfig = nil
 )
 
@@ -87,7 +87,7 @@ var testAuthConfig = map[string]runtimeapi.AuthConfig{
 func testNewImageStore(t *testing.T, cfg ImageStoreConfig) *ImageStore {
 	s, err := NewImageStore(cfg)
 	if err != nil {
-		// TODO(tmrts): Implement stringer for rktshim.ImageStoreConfig for test readability.
+		// TODO (tmrts): Implement stringer for rktshim.ImageStoreConfig for test readability. id:1039 gh:1043
 		t.Fatalf("rktshim.NewImageStore(%s) got error %q", cfg, err)
 	}
 

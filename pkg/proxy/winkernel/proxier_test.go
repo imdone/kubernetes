@@ -256,7 +256,7 @@ const testHostname = "test-hostname"
 
 func NewFakeProxier() *Proxier {
 	fakeHnsNetwork := getFakeHnsNetwork()
-	// TODO: Call NewProxier after refactoring out the goroutine
+	// TODO: Call NewProxier after refactoring out the goroutine id:1167 gh:1173
 	// invocation into a Run() method.
 	p := &Proxier{
 		serviceMap:       make(proxyServiceMap),
@@ -329,7 +329,7 @@ func TestLoadBalancer(t *testing.T) {
 	svcChain := string(servicePortChainName(svcPortName.String(), proto))
 	//lbChain := string(serviceLBChainName(svcPortName.String(), proto))
 
-	// TODO
+	// TODO id:1224 gh:1230
 
 }
 
@@ -377,7 +377,7 @@ func TestNodePort(t *testing.T) {
 	proto := strings.ToLower(string(api.ProtocolTCP))
 	svcChain := string(servicePortChainName(svcPortName.String(), proto))
 
-	// TODO
+	// TODO id:1248 gh:1254
 }
 
 func TestExternalIPsReject(t *testing.T) {
@@ -437,7 +437,7 @@ func TestNodePortReject(t *testing.T) {
 
 	fp.syncProxyRules()
 
-	// TODO
+	// TODO id:1301 gh:1307
 }
 
 func strPtr(s string) *string {
@@ -504,7 +504,7 @@ func TestOnlyLocalLoadBalancing(t *testing.T) {
 	nonLocalEpChain := string(servicePortEndpointChainName(svcPortName.String(), strings.ToLower(string(api.ProtocolTCP)), epStrLocal))
 	localEpChain := string(servicePortEndpointChainName(svcPortName.String(), strings.ToLower(string(api.ProtocolTCP)), epStrNonLocal))
 
-	// TODO
+	// TODO id:1262 gh:1267
 }
 
 func TestOnlyLocalNodePortsNoClusterCIDR(t *testing.T) {
@@ -569,7 +569,7 @@ func onlyLocalNodePorts(t *testing.T, fp *Proxier) {
 
 	fp.syncProxyRules()
 
-	// TODO
+	// TODO id:1168 gh:1174
 }
 
 func makeTestService(namespace, name string, svcFunc func(*api.Service)) *api.Service {
@@ -2028,4 +2028,4 @@ func Test_updateEndpointsMap(t *testing.T) {
 	}
 }
 
-// TODO(thockin): add *more* tests for syncProxyRules() or break it down further and test the pieces.
+// TODO (thockin): add *more* tests for syncProxyRules() or break it down further and test the pieces. id:1225 gh:1231

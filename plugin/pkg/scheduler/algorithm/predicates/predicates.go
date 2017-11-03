@@ -54,7 +54,7 @@ const (
 	DefaultMaxGCEPDVolumes = 16
 	// DefaultMaxAzureDiskVolumes defines the maximum number of PD Volumes for Azure
 	// Larger Azure VMs can actually have much more disks attached.
-	// TODO We should determine the max based on VM size
+	// TODO We should determine the max based on VM size id:1610 gh:1616
 	DefaultMaxAzureDiskVolumes = 16
 
 	// KubeMaxPDVols defines the maximum number of PD Volumes per kubelet
@@ -182,7 +182,7 @@ func isVolumeConflict(volume v1.Volume, pod *v1.Pod) bool {
 // - AWS EBS forbids any two pods mounting the same volume ID
 // - Ceph RBD forbids if any two pods share at least same monitor, and match pool and image.
 // - ISCSI forbids if any two pods share at least same IQN, LUN and Target
-// TODO: migrate this into some per-volume specific code?
+// TODO: migrate this into some per-volume specific code? id:1540 gh:1546
 func NoDiskConflict(pod *v1.Pod, meta algorithm.PredicateMetadata, nodeInfo *schedulercache.NodeInfo) (bool, []algorithm.PredicateFailureReason, error) {
 	for _, v := range pod.Spec.Volumes {
 		for _, ev := range nodeInfo.Pods() {
@@ -690,14 +690,14 @@ func podMatchesNodeLabels(pod *v1.Pod, node *v1.Node) bool {
 	if affinity != nil && affinity.NodeAffinity != nil {
 		nodeAffinity := affinity.NodeAffinity
 		// if no required NodeAffinity requirements, will do no-op, means select all nodes.
-		// TODO: Replace next line with subsequent commented-out line when implement RequiredDuringSchedulingRequiredDuringExecution.
+		// TODO: Replace next line with subsequent commented-out line when implement RequiredDuringSchedulingRequiredDuringExecution. id:1584 gh:1590
 		if nodeAffinity.RequiredDuringSchedulingIgnoredDuringExecution == nil {
 			// if nodeAffinity.RequiredDuringSchedulingRequiredDuringExecution == nil && nodeAffinity.RequiredDuringSchedulingIgnoredDuringExecution == nil {
 			return true
 		}
 
 		// Match node selector for requiredDuringSchedulingRequiredDuringExecution.
-		// TODO: Uncomment this block when implement RequiredDuringSchedulingRequiredDuringExecution.
+		// TODO: Uncomment this block when implement RequiredDuringSchedulingRequiredDuringExecution. id:1444 gh:1450
 		// if nodeAffinity.RequiredDuringSchedulingRequiredDuringExecution != nil {
 		// 	nodeSelectorTerms := nodeAffinity.RequiredDuringSchedulingRequiredDuringExecution.NodeSelectorTerms
 		// 	glog.V(10).Infof("Match for RequiredDuringSchedulingRequiredDuringExecution node selector terms %+v", nodeSelectorTerms)
@@ -976,7 +976,7 @@ func EssentialPredicates(pod *v1.Pod, meta algorithm.PredicateMetadata, nodeInfo
 		predicateFails = append(predicateFails, reasons...)
 	}
 
-	// TODO: PodFitsHostPorts is essential for now, but kubelet should ideally
+	// TODO: PodFitsHostPorts is essential for now, but kubelet should ideally id:1463 gh:1469
 	//       preempt pods to free up host ports too
 	fit, reasons, err = PodFitsHostPorts(pod, meta, nodeInfo)
 	if err != nil {
@@ -1044,7 +1044,7 @@ func (c *PodAffinityChecker) InterPodAffinityMatches(pod *v1.Pod, meta algorithm
 // anyPodMatchesPodAffinityTerm checks if any of given pods can match the specific podAffinityTerm.
 // First return value indicates whether a matching pod exists on a node that matches the topology key,
 // while the second return value indicates whether a matching pod exists anywhere.
-// TODO: Do we really need any pod matching, or all pods matching? I think the latter.
+// TODO: Do we really need any pod matching, or all pods matching? I think the latter. id:1611 gh:1617
 func (c *PodAffinityChecker) anyPodMatchesPodAffinityTerm(pod *v1.Pod, allPods []*v1.Pod, node *v1.Node, term *v1.PodAffinityTerm) (bool, bool, error) {
 	if len(term.TopologyKey) == 0 {
 		return false, false, fmt.Errorf("empty topologyKey is not allowed except for PreferredDuringScheduling pod anti-affinity")
@@ -1076,7 +1076,7 @@ func getPodAffinityTerms(podAffinity *v1.PodAffinity) (terms []v1.PodAffinityTer
 		if len(podAffinity.RequiredDuringSchedulingIgnoredDuringExecution) != 0 {
 			terms = podAffinity.RequiredDuringSchedulingIgnoredDuringExecution
 		}
-		// TODO: Uncomment this block when implement RequiredDuringSchedulingRequiredDuringExecution.
+		// TODO: Uncomment this block when implement RequiredDuringSchedulingRequiredDuringExecution. id:1541 gh:1547
 		//if len(podAffinity.RequiredDuringSchedulingRequiredDuringExecution) != 0 {
 		//	terms = append(terms, podAffinity.RequiredDuringSchedulingRequiredDuringExecution...)
 		//}
@@ -1089,7 +1089,7 @@ func getPodAntiAffinityTerms(podAntiAffinity *v1.PodAntiAffinity) (terms []v1.Po
 		if len(podAntiAffinity.RequiredDuringSchedulingIgnoredDuringExecution) != 0 {
 			terms = podAntiAffinity.RequiredDuringSchedulingIgnoredDuringExecution
 		}
-		// TODO: Uncomment this block when implement RequiredDuringSchedulingRequiredDuringExecution.
+		// TODO: Uncomment this block when implement RequiredDuringSchedulingRequiredDuringExecution. id:1585 gh:1591
 		//if len(podAntiAffinity.RequiredDuringSchedulingRequiredDuringExecution) != 0 {
 		//	terms = append(terms, podAntiAffinity.RequiredDuringSchedulingRequiredDuringExecution...)
 		//}

@@ -116,7 +116,7 @@ function create_resource_from_string() {
 }
 
 function reconcile_addons() {
-  # TODO: Remove the first command in future release.
+  # TODO: Remove the first command in future release. id:3 gh:4
   # Adding this for backward compatibility. Old addons have CLUSTER_SERVICE_LABEL=true and don't have
   # ADDON_MANAGER_LABEL=EnsureExists will still be reconciled.
   # Filter out `configured` message to not noisily log.

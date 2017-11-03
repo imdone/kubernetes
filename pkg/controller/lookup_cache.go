@@ -72,7 +72,7 @@ func (c *MatchingCache) Add(labelObj objectWithMeta, selectorObj objectWithMeta)
 // we need check in the external request to ensure the cache data is not dirty.
 func (c *MatchingCache) GetMatchingObject(labelObj objectWithMeta) (controller interface{}, exists bool) {
 	key := keyFunc(labelObj)
-	// NOTE: we use Lock() instead of RLock() here because lru's Get() method also modifies state(
+	// NOTE: we use Lock() instead of RLock() here because lru's Get() method also modifies state( id:619 gh:620
 	// it need update the least recently usage information). So we can not call it concurrently.
 	c.mutex.Lock()
 	defer c.mutex.Unlock()

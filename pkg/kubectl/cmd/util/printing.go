@@ -110,7 +110,7 @@ func ValidateOutputArgs(cmd *cobra.Command) error {
 // PrinterForCommand returns the printer for the outputOptions (if given) or
 // returns the default printer for the command. Requires that printer flags have
 // been added to cmd (see AddPrinterFlags).
-// TODO: remove the dependency on cmd object
+// TODO: remove the dependency on cmd object id:790 gh:791
 func PrinterForCommand(cmd *cobra.Command, outputOpts *printers.OutputOptions, mapper meta.RESTMapper, typer runtime.ObjectTyper, encoder runtime.Encoder, decoders []runtime.Decoder, options printers.PrintOptions) (printers.ResourcePrinter, error) {
 
 	if outputOpts == nil {
@@ -167,7 +167,7 @@ func extractOutputOptions(cmd *cobra.Command) *printers.OutputOptions {
 	}
 
 	// templates are logically optional for specifying a format.
-	// TODO once https://github.com/kubernetes/kubernetes/issues/12668 is fixed, this should fall back to GetFlagString
+	// TODO once https://github.com/kubernetes/kubernetes/issues/12668 is fixed, this should fall back to GetFlagString id:803 gh:804
 	var templateFile string
 	if flag := flags.Lookup("template"); flag != nil {
 		if flag.Value.Type() == "string" {
@@ -220,10 +220,10 @@ func maybeWrapSortingPrinter(cmd *cobra.Command, printer printers.ResourcePrinte
 
 // ValidResourceTypeList returns a multi-line string containing the valid resources. May
 // be called before the factory is initialized.
-// TODO: This function implementation should be replaced with a real implementation from the
+// TODO: This function implementation should be replaced with a real implementation from the id:748 gh:749
 //   discovery service.
 func ValidResourceTypeList(f ClientAccessFactory) string {
-	// TODO: Should attempt to use the cached discovery list or fallback to a static list
+	// TODO: Should attempt to use the cached discovery list or fallback to a static list id:721 gh:722
 	// that is calculated from code compiled into the factory.
 	return templates.LongDesc(`Valid resource types include:
 	

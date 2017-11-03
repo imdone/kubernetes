@@ -46,7 +46,7 @@ const (
 // VolumeOptions contains option information about a volume.
 type VolumeOptions struct {
 	// The attributes below are required by volume.Provisioner
-	// TODO: refactor all of this out of volumes when an admin can configure
+	// TODO: refactor all of this out of volumes when an admin can configure id:1434 gh:1440
 	// many kinds of provisioners.
 
 	// Reclamation policy for a persistent volume

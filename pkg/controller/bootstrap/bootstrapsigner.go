@@ -91,7 +91,7 @@ type BootstrapSigner struct {
 
 // NewBootstrapSigner returns a new *BootstrapSigner.
 //
-// TODO: Switch to shared informers
+// TODO: Switch to shared informers id:492 gh:493
 func NewBootstrapSigner(cl clientset.Interface, options BootstrapSignerOptions) *BootstrapSigner {
 	e := &BootstrapSigner{
 		client:          cl,

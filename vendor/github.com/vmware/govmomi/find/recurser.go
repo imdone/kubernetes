@@ -68,7 +68,7 @@ func (s *spec) traversable(o mo.Reference) bool {
 		return true
 	case "Folder":
 		if f, ok := o.(mo.Folder); ok {
-			// TODO: Not making use of this yet, but here we can optimize when searching the entire
+			// TODO: Not making use of this yet, but here we can optimize when searching the entire id:3084 gh:3097
 			// inventory across Datacenters for specific types, for example: 'govc ls -t VirtualMachine /**'
 			// should not traverse into a Datacenter's host, network or datatore folders.
 			if !s.traversableChildType(f.ChildType) {

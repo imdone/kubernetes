@@ -71,7 +71,7 @@ func RunClusterInfo(f cmdutil.Factory, out io.Writer, cmd *cobra.Command) error 
 		cmdNamespace = metav1.NamespaceSystem
 	}
 
-	// TODO use generalized labels once they are implemented (#341)
+	// TODO use generalized labels once they are implemented (#341) id:658 gh:659
 	b := f.NewBuilder().
 		NamespaceParam(cmdNamespace).DefaultNamespace().
 		SelectorParam("kubernetes.io/cluster-service=true").
@@ -127,7 +127,7 @@ func RunClusterInfo(f cmdutil.Factory, out io.Writer, cmd *cobra.Command) error 
 	out.Write([]byte("\nTo further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.\n"))
 	return err
 
-	// TODO consider printing more information about cluster
+	// TODO consider printing more information about cluster id:682 gh:683
 }
 
 func printService(out io.Writer, name, link string) {

@@ -27,8 +27,8 @@ import (
 	clientset "k8s.io/client-go/kubernetes"
 )
 
-// TODO: We should invent a dynamic mechanism for this using the dynamic client instead of hard-coding these functions per-type
-// TODO: We may want to retry if .Update() fails on 409 Conflict
+// TODO: We should invent a dynamic mechanism for this using the dynamic client instead of hard-coding these functions per-type id:184 gh:186
+// TODO: We may want to retry if .Update() fails on 409 Conflict id:147 gh:148
 
 // CreateOrUpdateConfigMap creates a ConfigMap if the target resource doesn't exist. If the resource exists already, this function will update the resource instead.
 func CreateOrUpdateConfigMap(client clientset.Interface, cm *v1.ConfigMap) error {

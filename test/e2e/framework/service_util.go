@@ -51,7 +51,7 @@ import (
 const (
 	// KubeProxyLagTimeout is the maximum time a kube-proxy daemon on a node is allowed
 	// to not notice a Service update, such as type=NodePort.
-	// TODO: This timeout should be O(10s), observed values are O(1m), 5m is very
+	// TODO: This timeout should be O(10s), observed values are O(1m), 5m is very id:2107 gh:2122
 	// liberal. Fix tracked in #20567.
 	KubeProxyLagTimeout = 5 * time.Minute
 
@@ -68,7 +68,7 @@ const (
 	LoadBalancerLagTimeoutAWS = 10 * time.Minute
 
 	// How long to wait for a load balancer to be created/modified.
-	//TODO: once support ticket 21807001 is resolved, reduce this timeout back to something reasonable
+	//TODO: once support ticket 21807001 is resolved, reduce this timeout back to something reasonable id:2375 gh:2390
 	LoadBalancerCreateTimeoutDefault = 20 * time.Minute
 	LoadBalancerCreateTimeoutLarge   = 2 * time.Hour
 
@@ -390,7 +390,7 @@ func (j *ServiceTestJig) WaitForEndpointOnNode(namespace, serviceName, nodeName 
 			Logf("Expect endpoints with subsets, got none.")
 			return false, nil
 		}
-		// TODO: Handle multiple endpoints
+		// TODO: Handle multiple endpoints id:2191 gh:2206
 		if len(endpoints.Subsets[0].Addresses) == 0 {
 			Logf("Expected Ready endpoints - found none")
 			return false, nil
@@ -538,7 +538,7 @@ func (j *ServiceTestJig) WaitForLoadBalancerOrFail(namespace, name string, timeo
 }
 
 func (j *ServiceTestJig) WaitForLoadBalancerDestroyOrFail(namespace, name string, ip string, port int, timeout time.Duration) *v1.Service {
-	// TODO: once support ticket 21807001 is resolved, reduce this timeout back to something reasonable
+	// TODO: once support ticket 21807001 is resolved, reduce this timeout back to something reasonable id:2229 gh:2244
 	defer func() {
 		if err := EnsureLoadBalancerResourcesDeleted(ip, strconv.Itoa(port)); err != nil {
 			Logf("Failed to delete cloud resources for service: %s %d (%v)", ip, port, err)
@@ -1044,7 +1044,7 @@ func (t *ServiceTestFixture) Cleanup() []error {
 		if err != nil {
 			errs = append(errs, err)
 		}
-		// TODO(mikedanese): Wait.
+		// TODO (mikedanese): Wait. id:2458 gh:2473
 		// Then, delete the RC altogether.
 		if err := t.Client.CoreV1().ReplicationControllers(t.Namespace).Delete(rcName, nil); err != nil {
 			if !errors.IsNotFound(err) {
@@ -1311,7 +1311,7 @@ func VerifyServeHostnameServiceUp(c clientset.Interface, ns, host string, expect
 		func() string {
 			cmd := buildCommand("wget -q -T 1 -O -")
 			Logf("Executing cmd %q in pod %v/%v", cmd, ns, execPodName)
-			// TODO: Use exec-over-http via the netexec pod instead of kubectl exec.
+			// TODO: Use exec-over-http via the netexec pod instead of kubectl exec. id:2108 gh:2123
 			output, err := RunHostCmd(ns, execPodName, cmd)
 			if err != nil {
 				Logf("error while kubectl execing %q in pod %v/%v: %v\nOutput: %v", cmd, ns, execPodName, err, output)
@@ -1334,7 +1334,7 @@ func VerifyServeHostnameServiceUp(c clientset.Interface, ns, host string, expect
 					gotEndpoints.Insert(trimmedEp)
 				}
 			}
-			// TODO: simply checking that the retrieved endpoints is a superset
+			// TODO: simply checking that the retrieved endpoints is a superset id:2376 gh:2391
 			// of the expected allows us to ignore intermitten network flakes that
 			// result in output like "wget timed out", but these should be rare
 			// and we need a better way to track how often it occurs.
@@ -1382,7 +1382,7 @@ func CleanupServiceResources(c clientset.Interface, loadBalancerName, zone strin
 		CleanupServiceGCEResources(c, loadBalancerName, zone)
 	}
 
-	// TODO: we need to add this function with other cloud providers, if there is a need.
+	// TODO: we need to add this function with other cloud providers, if there is a need. id:2241 gh:2256
 }
 
 func CleanupServiceGCEResources(c clientset.Interface, loadBalancerName, zone string) {

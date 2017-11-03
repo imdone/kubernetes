@@ -124,7 +124,7 @@ func isOWS(b byte) bool { return b == ' ' || b == '\t' }
 // trimOWS returns x with all optional whitespace removes from the
 // beginning and end.
 func trimOWS(x string) string {
-	// TODO: consider using strings.Trim(x, " \t") instead,
+	// TODO: consider using strings.Trim(x, " \t") instead, id:3336 gh:3347
 	// if and when it's fast enough. See issue 10292.
 	// But this ASCII-only code will probably always beat UTF-8
 	// aware code.

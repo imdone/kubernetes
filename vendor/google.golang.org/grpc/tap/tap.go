@@ -44,7 +44,7 @@ type Info struct {
 	// FullMethodName is the string of grpc method (in the format of
 	// /package.service/method).
 	FullMethodName string
-	// TODO: More to be added.
+	// TODO: More to be added. id:3572 gh:3587
 }
 
 // ServerInHandle defines the function which runs when a new stream is created

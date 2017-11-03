@@ -164,7 +164,7 @@ func (ipa *InterPodAffinity) CalculateInterPodAffinityPriority(pod *v1.Pod, node
 			// value as that of <existingPod>'s node by the constant <ipa.hardPodAffinityWeight>
 			if ipa.hardPodAffinityWeight > 0 {
 				terms := existingPodAffinity.PodAffinity.RequiredDuringSchedulingIgnoredDuringExecution
-				// TODO: Uncomment this block when implement RequiredDuringSchedulingRequiredDuringExecution.
+				// TODO: Uncomment this block when implement RequiredDuringSchedulingRequiredDuringExecution. id:1542 gh:1548
 				//if len(existingPodAffinity.PodAffinity.RequiredDuringSchedulingRequiredDuringExecution) != 0 {
 				//	terms = append(terms, existingPodAffinity.PodAffinity.RequiredDuringSchedulingRequiredDuringExecution...)
 				//}

@@ -259,7 +259,7 @@ func (s *ServiceController) processServiceUpdate(cachedService *cachedService, s
 		return err, retryToReturn
 	}
 	// Always update the cache upon success.
-	// NOTE: Since we update the cached service if and only if we successfully
+	// NOTE: Since we update the cached service if and only if we successfully id:598 gh:599
 	// processed it, a cached service being nil implies that it hasn't yet
 	// been successfully processed.
 	s.cache.set(key, cachedService)
@@ -297,7 +297,7 @@ func (s *ServiceController) createLoadBalancerIfNeeded(key string, service *v1.S
 	} else {
 		glog.V(2).Infof("Ensuring LB for service %s", key)
 
-		// TODO: We could do a dry-run here if wanted to avoid the spurious cloud-calls & events when we restart
+		// TODO: We could do a dry-run here if wanted to avoid the spurious cloud-calls & events when we restart id:636 gh:637
 
 		s.eventRecorder.Event(service, v1.EventTypeNormal, "EnsuringLoadBalancer", "Ensuring load balancer")
 		newState, err = s.ensureLoadBalancer(service)
@@ -308,7 +308,7 @@ func (s *ServiceController) createLoadBalancerIfNeeded(key string, service *v1.S
 	}
 
 	// Write the state if changed
-	// TODO: Be careful here ... what if there were other changes to the service?
+	// TODO: Be careful here ... what if there were other changes to the service? id:648 gh:649
 	if !v1helper.LoadBalancerStatusEqual(previousState, newState) {
 		// Make a copy so we don't mutate the shared informer cache
 		service = service.DeepCopy()
@@ -341,7 +341,7 @@ func (s *ServiceController) persistUpdate(service *v1.Service) error {
 				service.Namespace, service.Name, err)
 			return nil
 		}
-		// TODO: Try to resolve the conflict if the change was unrelated to load
+		// TODO: Try to resolve the conflict if the change was unrelated to load id:672 gh:673
 		// balancer status. For now, just pass it up the stack.
 		if errors.IsConflict(err) {
 			return fmt.Errorf("Not persisting update to service '%s/%s' that has been changed since we received it: %v",
@@ -508,7 +508,7 @@ func getPortsForLB(service *v1.Service) ([]*v1.ServicePort, error) {
 		if protocol == "" {
 			protocol = sp.Protocol
 		} else if protocol != sp.Protocol && wantsLoadBalancer(service) {
-			// TODO:  Convert error messages to use event recorder
+			// TODO: Convert error messages to use event recorder id:623 gh:624
 			return nil, fmt.Errorf("mixed protocol external load balancers are not supported.")
 		}
 	}
@@ -541,7 +541,7 @@ func portSlicesEqualForLB(x, y []*v1.ServicePort) bool {
 }
 
 func portEqualForLB(x, y *v1.ServicePort) bool {
-	// TODO: Should we check name?  (In theory, an LB could expose it)
+	// TODO: Should we check name?  (In theory, an LB could expose it) id:599 gh:600
 	if x.Name != y.Name {
 		return false
 	}
@@ -559,7 +559,7 @@ func portEqualForLB(x, y *v1.ServicePort) bool {
 	}
 
 	// We don't check TargetPort; that is not relevant for load balancing
-	// TODO: Should we blank it out?  Or just check it anyway?
+	// TODO: Should we blank it out?  Or just check it anyway? id:637 gh:638
 
 	return true
 }

@@ -35,7 +35,7 @@ func (k *DNSKEY) ReadPrivateKey(q io.Reader, file string) (crypto.PrivateKey, er
 	if m["private-key-format"] != "v1.2" && m["private-key-format"] != "v1.3" {
 		return nil, ErrPrivKey
 	}
-	// TODO(mg): check if the pubkey matches the private key
+	// TODO (mg): check if the pubkey matches the private key id:2975 gh:2991
 	algo, err := strconv.Atoi(strings.SplitN(m["algorithm"], " ", 2)[0])
 	if err != nil {
 		return nil, ErrPrivKey
@@ -150,7 +150,7 @@ func readPrivateKeyDSA(m map[string]string) (*dsa.PrivateKey, error) {
 func readPrivateKeyECDSA(m map[string]string) (*ecdsa.PrivateKey, error) {
 	p := new(ecdsa.PrivateKey)
 	p.D = big.NewInt(0)
-	// TODO: validate that the required flags are present
+	// TODO: validate that the required flags are present id:2929 gh:2944
 	for k, v := range m {
 		switch k {
 		case "privatekey":

@@ -41,7 +41,7 @@ func (m *MemMapFs) getData() map[string]*mem.FileData {
 	m.init.Do(func() {
 		m.data = make(map[string]*mem.FileData)
 		// Root should always exist, right?
-		// TODO: what about windows?
+		// TODO: what about windows? id:3166 gh:3181
 		m.data[FilePathSeparator] = mem.CreateDir(FilePathSeparator)
 	})
 	return m.data

@@ -81,7 +81,7 @@ func (c *Cloud) ensureLoadBalancer(namespacedName types.NamespacedName, loadBala
 		}
 
 		// We are supposed to specify one subnet per AZ.
-		// TODO: What happens if we have more than one subnet per AZ?
+		// TODO: What happens if we have more than one subnet per AZ? id:417 gh:418
 		createRequest.Subnets = stringPointerArray(subnetIDs)
 
 		createRequest.SecurityGroups = stringPointerArray(securityGroupIDs)
@@ -122,7 +122,7 @@ func (c *Cloud) ensureLoadBalancer(namespacedName types.NamespacedName, loadBala
 
 		dirty = true
 	} else {
-		// TODO: Sync internal vs non-internal
+		// TODO: Sync internal vs non-internal id:446 gh:444
 
 		{
 			// Sync subnets
@@ -255,7 +255,7 @@ func (c *Cloud) ensureLoadBalancer(namespacedName types.NamespacedName, loadBala
 			if proxyProtocol {
 				// Ensure the backend policy exists
 
-				// NOTE The documentation for the AWS API indicates we could get an HTTP 400
+				// NOTE The documentation for the AWS API indicates we could get an HTTP 400 id:433 gh:435
 				// back if a policy of the same name already exists. However, the aws-sdk does not
 				// seem to return an error to us in these cases. Therefore, this will issue an API
 				// request every time.

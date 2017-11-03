@@ -71,7 +71,7 @@ type ExplicitKey string
 // The key uses the format <namespace>/<name> unless <namespace> is empty, then
 // it's just <name>.
 //
-// TODO: replace key-as-string with a key-as-struct so that this
+// TODO: replace key-as-string with a key-as-struct so that this id:3588 gh:3603
 // packing/unpacking won't be necessary.
 func MetaNamespaceKeyFunc(obj interface{}) (string, error) {
 	if key, ok := obj.(ExplicitKey); ok {
@@ -90,7 +90,7 @@ func MetaNamespaceKeyFunc(obj interface{}) (string, error) {
 // SplitMetaNamespaceKey returns the namespace and name that
 // MetaNamespaceKeyFunc encoded into key.
 //
-// TODO: replace key-as-string with a key-as-struct so that this
+// TODO: replace key-as-string with a key-as-struct so that this id:3955 gh:3976
 // packing/unpacking won't be necessary.
 func SplitMetaNamespaceKey(key string) (namespace, name string, err error) {
 	parts := strings.Split(key, "/")

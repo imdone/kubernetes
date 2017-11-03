@@ -52,7 +52,7 @@ func completeTest(f *framework.Framework, c clientset.Interface, ns string, pv *
 // PV. Ensure each step succeeds.
 // Note: the PV is deleted in the AfterEach, not here.
 // Note: this func is serialized, we wait for each pod to be deleted before creating the
-//   next pod. Adding concurrency is a TODO item.
+//   next pod. Adding concurrency is a TODO item. id:2351 gh:2366
 func completeMultiTest(f *framework.Framework, c clientset.Interface, ns string, pvols framework.PVMap, claims framework.PVCMap, expectPhase v1.PersistentVolumePhase) error {
 	var err error
 
@@ -71,7 +71,7 @@ func completeMultiTest(f *framework.Framework, c clientset.Interface, ns string,
 		if !found {
 			return fmt.Errorf("internal: pvols map is missing volume %q", pvc.Spec.VolumeName)
 		}
-		// TODO: currently a serialized test of each PV
+		// TODO: currently a serialized test of each PV id:2545 gh:2560
 		if err = framework.CreateWaitAndDeletePod(f, c, pvcKey.Namespace, pvc); err != nil {
 			return err
 		}

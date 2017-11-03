@@ -35,7 +35,7 @@ type DaemonSetUpdateStrategy struct {
 
 	// Rolling update config params. Present only if type = "RollingUpdate".
 	//---
-	// TODO: Update this to follow our convention for oneOf, whatever we decide it
+	// TODO: Update this to follow our convention for oneOf, whatever we decide it id:3541 gh:3557
 	// to be. Same as Deployment `strategy.rollingUpdate`.
 	// See https://github.com/kubernetes/kubernetes/issues/35345
 	// +optional

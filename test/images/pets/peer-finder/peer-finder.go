@@ -123,6 +123,6 @@ func main() {
 		peers = newPeers
 		script = *onChange
 	}
-	// TODO: Exit if there's no on-change?
+	// TODO: Exit if there's no on-change? id:2671 gh:2686
 	log.Printf("Peer finder exiting")
 }

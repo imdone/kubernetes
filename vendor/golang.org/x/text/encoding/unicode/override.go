@@ -25,7 +25,7 @@ import (
 // of a fallback encoding are known to not be a BOM, for example, for valid HTML
 // and most encodings.
 func BOMOverride(fallback transform.Transformer) transform.Transformer {
-	// TODO: possibly allow a variadic argument of unicode encodings to allow
+	// TODO: possibly allow a variadic argument of unicode encodings to allow id:3437 gh:3452
 	// specifying details of which fallbacks are supported as well as
 	// specifying the details of the implementations. This would also allow for
 	// support for UTF-32, which should not be supported by default.
@@ -43,7 +43,7 @@ func (d *bomOverride) Reset() {
 }
 
 var (
-	// TODO: we could use decode functions here, instead of allocating a new
+	// TODO: we could use decode functions here, instead of allocating a new id:3248 gh:3263
 	// decoder on every NewDecoder as IgnoreBOM decoders can be stateless.
 	utf16le = UTF16(LittleEndian, IgnoreBOM)
 	utf16be = UTF16(BigEndian, IgnoreBOM)

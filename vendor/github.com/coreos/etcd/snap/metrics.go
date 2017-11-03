@@ -17,7 +17,7 @@ package snap
 import "github.com/prometheus/client_golang/prometheus"
 
 var (
-	// TODO: save_fsync latency?
+	// TODO: save_fsync latency? id:2698 gh:2713
 	saveDurations = prometheus.NewHistogram(prometheus.HistogramOpts{
 		Namespace: "etcd_debugging",
 		Subsystem: "snap",

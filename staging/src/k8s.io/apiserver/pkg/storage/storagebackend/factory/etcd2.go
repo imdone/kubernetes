@@ -66,7 +66,7 @@ func newTransportForETCD2(certFile, keyFile, caFile string) (*http.Transport, er
 		return nil, err
 	}
 	// Copied from etcd.DefaultTransport declaration.
-	// TODO: Determine if transport needs optimization
+	// TODO: Determine if transport needs optimization id:3457 gh:3472
 	tr := utilnet.SetTransportDefaults(&http.Transport{
 		Proxy: http.ProxyFromEnvironment,
 		Dial: (&net.Dialer{

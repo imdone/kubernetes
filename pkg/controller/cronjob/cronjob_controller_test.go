@@ -602,7 +602,7 @@ func TestCleanupFinishedJobs_DeleteOrNot(t *testing.T) {
 	}
 }
 
-// TODO: simulation where the controller randomly doesn't run, and randomly has errors starting jobs or deleting jobs,
+// TODO: simulation where the controller randomly doesn't run, and randomly has errors starting jobs or deleting jobs, id:498 gh:500
 // but over time, all jobs run as expected (assuming Allow and no deadline).
 
 // TestSyncOne_Status tests sj.UpdateStatus in syncOne

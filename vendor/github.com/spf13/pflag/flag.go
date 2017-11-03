@@ -637,7 +637,7 @@ func defaultUsage(f *FlagSet) {
 	f.PrintDefaults()
 }
 
-// NOTE: Usage is not just defaultUsage(CommandLine)
+// NOTE: Usage is not just defaultUsage(CommandLine) id:3207 gh:3222
 // because it serves (via godoc flag Usage) as the example
 // for how to write your own usage function.
 
@@ -879,7 +879,7 @@ func (f *FlagSet) parseSingleShortArg(shorthands string, args []string, fn parse
 			err = ErrHelp
 			return
 		}
-		//TODO continue on error
+		//TODO continue on error id:2785 gh:2801
 		err = f.failf("unknown shorthand flag: %q in -%s", c, shorthands)
 		return
 	}

@@ -74,7 +74,7 @@ func NewCmdDescribe(f cmdutil.Factory, out, cmdErr io.Writer) *cobra.Command {
 	options := &resource.FilenameOptions{}
 	describerSettings := &printers.DescriberSettings{}
 
-	// TODO: this should come from the factory, and may need to be loaded from the server, and so is probably
+	// TODO: this should come from the factory, and may need to be loaded from the server, and so is probably id:709 gh:710
 	//   going to have to be removed
 	validArgs := printersinternal.DescribableResources()
 	argAliases := kubectl.ResourceAliases(validArgs)

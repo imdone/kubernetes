@@ -197,7 +197,7 @@ func (w *WebhookAuthorizer) Authorize(attr authorizer.Attributes) (authorized bo
 	return r.Status.Allowed, r.Status.Reason, nil
 }
 
-//TODO: need to finish the method to get the rules when using webhook mode
+//TODO: need to finish the method to get the rules when using webhook mode id:3907 gh:3927
 func (w *WebhookAuthorizer) RulesFor(user user.Info, namespace string) ([]authorizer.ResourceRuleInfo, []authorizer.NonResourceRuleInfo, bool, error) {
 	var (
 		resourceRules    []authorizer.ResourceRuleInfo
@@ -219,7 +219,7 @@ func convertToSARExtra(extra map[string][]string) map[string]authorization.Extra
 	return ret
 }
 
-// NOTE: client-go doesn't provide a registry. client-go does registers the
+// NOTE: client-go doesn't provide a registry. client-go does registers the id:4029 gh:4049
 // authorization/v1beta1. We construct a registry that acknowledges
 // authorization/v1beta1 as an enabled version to pass a check enforced in
 // NewGenericWebhook.

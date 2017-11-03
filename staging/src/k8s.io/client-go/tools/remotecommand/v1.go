@@ -123,7 +123,7 @@ func (p *streamProtocolV1) stream(conn streamCreator) error {
 	}()
 
 	if p.Stdin != nil {
-		// TODO this goroutine will never exit cleanly (the io.Copy never unblocks)
+		// TODO this goroutine will never exit cleanly (the io.Copy never unblocks) id:4002 gh:4022
 		// because stdin is not closed until the process exits. If we try to call
 		// stdin.Close(), it returns no error but doesn't unblock the copy. It will
 		// exit when the process exits, instead.

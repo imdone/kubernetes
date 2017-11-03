@@ -205,7 +205,7 @@ func (gc *GarbageCollector) Sync(discoveryClient discovery.DiscoveryInterface, p
 
 		// Perform the monitor resync and wait for controllers to report cache sync.
 		//
-		// NOTE: It's possible that newResources will diverge from the resources
+		// NOTE: It's possible that newResources will diverge from the resources id:558 gh:559
 		// discovered by restMapper during the call to Reset, since they are
 		// distinct discovery clients invalidated at different times. For example,
 		// newResources may contain resources not returned in the restMapper's
@@ -287,7 +287,7 @@ func (gc *GarbageCollector) isDangling(reference metav1.OwnerReference, item *no
 		glog.V(5).Infof("according to the absentOwnerCache, object %s's owner %s/%s, %s does not exist", item.identity.UID, reference.APIVersion, reference.Kind, reference.Name)
 		return true, nil, nil
 	}
-	// TODO: we need to verify the reference resource is supported by the
+	// TODO: we need to verify the reference resource is supported by the id:577 gh:578
 	// system. If it's not a valid resource, the garbage collector should i)
 	// ignore the reference when decide if the object should be deleted, and
 	// ii) should update the object to remove such references. This is to
@@ -302,7 +302,7 @@ func (gc *GarbageCollector) isDangling(reference metav1.OwnerReference, item *no
 	if err != nil {
 		return false, nil, err
 	}
-	// TODO: It's only necessary to talk to the API server if the owner node
+	// TODO: It's only necessary to talk to the API server if the owner node id:541 gh:542
 	// is a "virtual" node. The local graph could lag behind the real
 	// status, but in practice, the difference is small.
 	owner, err = client.Resource(resource, item.identity.Namespace).Get(reference.Name, metav1.GetOptions{})
@@ -378,7 +378,7 @@ func (gc *GarbageCollector) attemptToDeleteItem(item *node) error {
 		glog.V(5).Infof("processing item %s returned at once, because its DeletionTimestamp is non-nil", item.identity)
 		return nil
 	}
-	// TODO: It's only necessary to talk to the API server if this is a
+	// TODO: It's only necessary to talk to the API server if this is a id:532 gh:533
 	// "virtual" node. The local graph could lag behind the real status, but in
 	// practice, the difference is small.
 	latest, err := gc.getObject(item.identity)
@@ -400,7 +400,7 @@ func (gc *GarbageCollector) attemptToDeleteItem(item *node) error {
 		return nil
 	}
 
-	// TODO: attemptToOrphanWorker() routine is similar. Consider merging
+	// TODO: attemptToOrphanWorker() routine is similar. Consider merging id:617 gh:618
 	// attemptToOrphanWorker() into attemptToDeleteItem() as well.
 	if item.isDeletingDependents() {
 		return gc.processDeletingDependentsItem(item)

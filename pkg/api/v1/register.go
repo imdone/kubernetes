@@ -33,7 +33,7 @@ func init() {
 	localSchemeBuilder.Register(addDefaultingFuncs, addConversionFuncs, addFastPathConversionFuncs)
 }
 
-// TODO: remove these global varialbes
+// TODO: remove these global varialbes id:289 gh:290
 // GroupName is the group name use in this package
 const GroupName = ""
 

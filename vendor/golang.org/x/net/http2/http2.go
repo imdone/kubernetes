@@ -265,7 +265,7 @@ func newBufferedWriter(w io.Writer) *bufferedWriter {
 // bufWriterPoolBufferSize is the size of bufio.Writer's
 // buffers created using bufWriterPool.
 //
-// TODO: pick a less arbitrary value? this is a bit under
+// TODO: pick a less arbitrary value? this is a bit under id:2891 gh:2906
 // (3 x typical 1500 byte MTU) at least. Other than that,
 // not much thought went into it.
 const bufWriterPoolBufferSize = 4 << 10

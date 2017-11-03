@@ -33,7 +33,7 @@ var _ = SIGDescribe("Empty [Feature:Empty]", func() {
 		c := f.ClientSet
 		ns := f.Namespace.Name
 
-		// TODO: respect --allow-notready-nodes flag in those functions.
+		// TODO: respect --allow-notready-nodes flag in those functions. id:2316 gh:2331
 		framework.ExpectNoError(framework.WaitForAllNodesSchedulable(c, framework.TestContext.NodeSchedulableTimeout))
 		framework.WaitForAllNodesHealthy(c, time.Minute)
 

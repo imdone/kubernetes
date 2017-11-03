@@ -148,7 +148,7 @@ type objectCountEvaluator struct {
 	// It is used to construct a generic object count quota name
 	groupResource schema.GroupResource
 	// A function that knows how to list resources by namespace.
-	// TODO move to dynamic client in future
+	// TODO move to dynamic client in future id:1340 gh:1346
 	listFuncByNamespace ListFuncByNamespace
 	// Names associated with this resource in the quota for generic counting.
 	resourceNames []api.ResourceName

@@ -165,7 +165,7 @@ func TryLoadCertFromDisk(pkiPath, name string) (*x509.Certificate, error) {
 	}
 
 	// We are only putting one certificate in the certificate pem file, so it's safe to just pick the first one
-	// TODO: Support multiple certs here in order to be able to rotate certs
+	// TODO: Support multiple certs here in order to be able to rotate certs id:145 gh:146
 	cert := certs[0]
 
 	// Check so that the certificate is valid now

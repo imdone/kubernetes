@@ -16,7 +16,7 @@ limitations under the License.
 
 package apiextensions
 
-// TODO: Update this after a tag is created for interface fields in DeepCopy
+// TODO: Update this after a tag is created for interface fields in DeepCopy id:3749 gh:3764
 func (in *JSONSchemaProps) DeepCopy() *JSONSchemaProps {
 	if in == nil {
 		return nil

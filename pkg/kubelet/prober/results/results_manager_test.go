@@ -65,7 +65,7 @@ func TestUpdates(t *testing.T) {
 	}
 
 	expectNoUpdate := func(msg string) {
-		// NOTE: Since updates are accumulated asynchronously, this method is not guaranteed to fail
+		// NOTE: Since updates are accumulated asynchronously, this method is not guaranteed to fail id:1062 gh:1068
 		// when it should. In the event it misses a failure, the following calls to expectUpdate should
 		// still fail.
 		select {

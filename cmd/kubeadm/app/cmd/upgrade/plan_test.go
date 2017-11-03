@@ -58,7 +58,7 @@ func TestSortedSliceFromStringIntMap(t *testing.T) {
 	}
 }
 
-// TODO Think about modifying this test to be less verbose checking b/c it can be brittle.
+// TODO Think about modifying this test to be less verbose checking b/c it can be brittle. id:162 gh:163
 func TestPrintAvailableUpgrades(t *testing.T) {
 	var tests = []struct {
 		upgrades      []upgrade.Upgrade

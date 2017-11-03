@@ -59,7 +59,7 @@ func CalculateNodeAffinityPriorityMap(pod *v1.Pod, meta interface{}, nodeInfo *s
 				continue
 			}
 
-			// TODO: Avoid computing it for all nodes if this becomes a performance problem.
+			// TODO: Avoid computing it for all nodes if this becomes a performance problem. id:1586 gh:1592
 			nodeSelector, err := v1helper.NodeSelectorRequirementsAsSelector(preferredSchedulingTerm.Preference.MatchExpressions)
 			if err != nil {
 				return schedulerapi.HostPriority{}, err

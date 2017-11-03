@@ -292,7 +292,7 @@ func (s *AuditLogConfig) MarshalJSON() ([]byte, error) {
 // Binding: Associates `members` with a `role`.
 type Binding struct {
 	// Condition: The condition that is associated with this binding.
-	// NOTE: an unsatisfied condition will not allow user access via
+	// NOTE: an unsatisfied condition will not allow user access via id:3656 gh:3671
 	// current
 	// binding. Different bindings, including their conditions, are
 	// examined

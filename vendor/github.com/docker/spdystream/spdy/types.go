@@ -193,7 +193,7 @@ type WindowUpdateFrame struct {
 	DeltaWindowSize uint32 // additional number of bytes to existing window size
 }
 
-// TODO: Implement credential frame and related methods.
+// TODO: Implement credential frame and related methods. id:2534 gh:2548
 
 // DataFrame is the unpacked, in-memory representation of a DATA frame.
 type DataFrame struct {

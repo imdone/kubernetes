@@ -51,5 +51,5 @@ type ImageManager interface {
 	// EnsureImageExists ensures that image specified in `container` exists.
 	EnsureImageExists(pod *v1.Pod, container *v1.Container, pullSecrets []v1.Secret) (string, string, error)
 
-	// TODO(ronl): consolidating image managing and deleting operation in this interface
+	// TODO (ronl): consolidating image managing and deleting operation in this interface id:963 gh:969
 }

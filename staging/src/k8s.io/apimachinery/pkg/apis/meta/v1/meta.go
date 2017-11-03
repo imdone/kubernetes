@@ -21,7 +21,7 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 )
 
-// TODO: move this, Object, List, and Type to a different package
+// TODO: move this, Object, List, and Type to a different package id:3237 gh:3252
 type ObjectMetaAccessor interface {
 	GetObjectMeta() Object
 }
@@ -73,7 +73,7 @@ type ListMetaAccessor interface {
 // Common lets you work with core metadata from any of the versioned or
 // internal API objects. Attempting to set or retrieve a field on an object that does
 // not support that field will be a no-op and return a default value.
-// TODO: move this, and TypeMeta and ListMeta, to a different package
+// TODO: move this, and TypeMeta and ListMeta, to a different package id:3763 gh:3778
 type Common interface {
 	GetResourceVersion() string
 	SetResourceVersion(version string)
@@ -84,7 +84,7 @@ type Common interface {
 // ListInterface lets you work with list metadata from any of the versioned or
 // internal API objects. Attempting to set or retrieve a field on an object that does
 // not support that field will be a no-op and return a default value.
-// TODO: move this, and TypeMeta and ListMeta, to a different package
+// TODO: move this, and TypeMeta and ListMeta, to a different package id:3499 gh:3514
 type ListInterface interface {
 	GetResourceVersion() string
 	SetResourceVersion(version string)
@@ -95,7 +95,7 @@ type ListInterface interface {
 }
 
 // Type exposes the type and APIVersion of versioned or internal API objects.
-// TODO: move this, and TypeMeta and ListMeta, to a different package
+// TODO: move this, and TypeMeta and ListMeta, to a different package id:3667 gh:3682
 type Type interface {
 	GetAPIVersion() string
 	SetAPIVersion(version string)

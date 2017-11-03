@@ -49,7 +49,7 @@ func NewDockerKeyring() DockerKeyring {
 		Providers: make([]DockerConfigProvider, 0),
 	}
 
-	// TODO(mattmoor): iterating over the map is non-deterministic.  We should
+	// TODO (mattmoor): iterating over the map is non-deterministic.  We should id:643 gh:644
 	// introduce the notion of priorities for conflict resolution.
 	for name, provider := range providers {
 		if provider.Enabled() {

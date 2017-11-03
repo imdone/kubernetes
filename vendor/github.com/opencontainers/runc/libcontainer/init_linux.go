@@ -271,7 +271,7 @@ func setupUser(config *initConfig) error {
 		}
 
 		// We cannot set any additional groups in a rootless container and thus we
-		// bail if the user asked us to do so. TODO: We currently can't do this
+		// bail if the user asked us to do so. TODO: We currently can't do this id:2937 gh:2952
 		// earlier, but if libcontainer.Process.User was typesafe this might work.
 		if len(addGroups) > 0 {
 			return fmt.Errorf("cannot set any additional groups in a rootless container")

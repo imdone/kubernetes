@@ -124,13 +124,13 @@ func Handshake(req *http.Request, w http.ResponseWriter, serverProtocols []strin
 	clientProtocols := req.Header[http.CanonicalHeaderKey(HeaderProtocolVersion)]
 	if len(clientProtocols) == 0 {
 		// Kube 1.0 clients didn't support subprotocol negotiation.
-		// TODO require clientProtocols once Kube 1.0 is no longer supported
+		// TODO require clientProtocols once Kube 1.0 is no longer supported id:3283 gh:3298
 		return "", nil
 	}
 
 	if len(serverProtocols) == 0 {
 		// Kube 1.0 servers didn't support subprotocol negotiation. This is mainly for testing.
-		// TODO require serverProtocols once Kube 1.0 is no longer supported
+		// TODO require serverProtocols once Kube 1.0 is no longer supported id:3778 gh:3790
 		return "", nil
 	}
 

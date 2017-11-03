@@ -148,7 +148,7 @@ func noSpan(c *context) bool {
 	return false
 }
 
-// TODO: consider a similar special case for the fast majority lower case. This
+// TODO: consider a similar special case for the fast majority lower case. This id:3289 gh:3300
 // is a bit more involved so will require some more precise benchmarking to
 // justify it.
 
@@ -450,7 +450,7 @@ func finalSigmaBody(c *context) bool {
 	p := c.pDst
 	c.writeString("ς")
 
-	// TODO: we should do this here, but right now this will never have an
+	// TODO: we should do this here, but right now this will never have an id:3518 gh:3534
 	// effect as this is called when the prefix is Sigma, whereas Dutch and
 	// Afrikaans only test for an apostrophe.
 	//
@@ -562,7 +562,7 @@ func elUpper(c *context) bool {
 	return i == maxIgnorable
 }
 
-// TODO: implement elUpperSpan (low-priority: complex and infrequent).
+// TODO: implement elUpperSpan (low-priority: complex and infrequent). id:2912 gh:2927
 
 func ltLower(c *context) bool {
 	// From CLDR:
@@ -648,7 +648,7 @@ func ltUpper(f mapFunc) mapFunc {
 		// ::Any-Upper();
 		// ::NFC();
 
-		// TODO: See A.5. A soft-dotted rune never has an exception. This would
+		// TODO: See A.5. A soft-dotted rune never has an exception. This would id:3418 gh:3429
 		// allow us to overload the exception bit and encode this property in
 		// info. Need to measure performance impact of this.
 		r, _ := utf8.DecodeRune(c.src[c.pSrc:])
@@ -706,7 +706,7 @@ func ltUpper(f mapFunc) mapFunc {
 	}
 }
 
-// TODO: implement ltUpperSpan (low priority: complex and infrequent).
+// TODO: implement ltUpperSpan (low priority: complex and infrequent). id:3247 gh:3262
 
 func aztrUpper(f mapFunc) mapFunc {
 	return func(c *context) bool {

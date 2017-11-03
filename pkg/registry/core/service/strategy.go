@@ -84,7 +84,7 @@ func (svcStrategy) Export(ctx genericapirequest.Context, obj runtime.Object, exa
 		// unexpected programmer error
 		return fmt.Errorf("unexpected object: %v", obj)
 	}
-	// TODO: service does not yet have a prepare create strategy (see above)
+	// TODO: service does not yet have a prepare create strategy (see above) id:1401 gh:1407
 	t.Status = api.ServiceStatus{}
 	if exact {
 		return nil

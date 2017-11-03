@@ -550,7 +550,7 @@ func (c *Certificate) Equal(other *Certificate) bool {
 // from the Basic Constraints requirement.
 // See http://www.entrust.net/knowledge-base/technote.cfm?tn=7869
 //
-// TODO(agl): remove this hack once their reissued root is sufficiently
+// TODO (agl): remove this hack once their reissued root is sufficiently id:2922 gh:2937
 // widespread.
 var entrustBrokenSPKI = []byte{
 	0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09,
@@ -615,7 +615,7 @@ func (c *Certificate) CheckSignatureFrom(parent *Certificate) (err error) {
 		return ErrUnsupportedAlgorithm
 	}
 
-	// TODO(agl): don't ignore the path length constraint.
+	// TODO (agl): don't ignore the path length constraint. id:3061 gh:3077
 
 	return parent.CheckSignature(c.SignatureAlgorithm, c.RawTBSCertificate, c.Signature)
 }

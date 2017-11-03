@@ -665,7 +665,7 @@ func TestTransformUnstructuredError(t *testing.T) {
 		},
 		{
 			// we default apiVersion for backwards compatibility with old clients
-			// TODO: potentially remove in 1.7
+			// TODO: potentially remove in 1.7 id:3806 gh:3818
 			Req:   &http.Request{},
 			Res:   &http.Response{StatusCode: http.StatusBadRequest, Body: ioutil.NopCloser(bytes.NewReader([]byte(`{"kind":"Status","status":"Failure","code":404}`)))},
 			ErrFn: apierrors.IsBadRequest,

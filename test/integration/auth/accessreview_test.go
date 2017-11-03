@@ -36,7 +36,7 @@ import (
 )
 
 // Inject into master an authorizer that uses user info.
-// TODO(etune): remove this test once a more comprehensive built-in authorizer is implemented.
+// TODO (etune): remove this test once a more comprehensive built-in authorizer is implemented. id:2502 gh:2517
 type sarAuthorizer struct{}
 
 func (sarAuthorizer) Authorize(a authorizer.Attributes) (bool, string, error) {

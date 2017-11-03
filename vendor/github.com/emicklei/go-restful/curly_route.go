@@ -19,7 +19,7 @@ func (s *sortableCurlyRoutes) add(route curlyRoute) {
 
 func (s sortableCurlyRoutes) routes() (routes []Route) {
 	for _, each := range s {
-		routes = append(routes, each.route) // TODO change return type
+		routes = append(routes, each.route) // TODO change return type id:2710 gh:2725
 	}
 	return routes
 }

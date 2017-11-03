@@ -57,7 +57,7 @@ func (p *IntegrationTestNodePreparer) PrepareNodes() error {
 			GenerateName: p.nodeNamePrefix,
 		},
 		Spec: v1.NodeSpec{
-			// TODO: investigate why this is needed.
+			// TODO: investigate why this is needed. id:2417 gh:2432
 			ExternalID: "foo",
 		},
 		Status: v1.NodeStatus{

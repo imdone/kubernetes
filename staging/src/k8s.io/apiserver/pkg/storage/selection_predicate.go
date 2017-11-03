@@ -123,7 +123,7 @@ func (s *SelectionPredicate) MatchesSingle() (string, bool) {
 	if len(s.Continue) > 0 {
 		return "", false
 	}
-	// TODO: should be namespace.name
+	// TODO: should be namespace.name id:3903 gh:3923
 	if name, ok := s.Field.RequiresExactMatch("metadata.name"); ok {
 		return name, true
 	}
@@ -133,7 +133,7 @@ func (s *SelectionPredicate) MatchesSingle() (string, bool) {
 // For any index defined by IndexFields, if a matcher can match only (a subset)
 // of objects that return <value> for a given index, a pair (<index name>, <value>)
 // wil be returned.
-// TODO: Consider supporting also labels.
+// TODO: Consider supporting also labels. id:4025 gh:4045
 func (s *SelectionPredicate) MatcherIndex() []MatchValue {
 	var result []MatchValue
 	for _, field := range s.IndexFields {

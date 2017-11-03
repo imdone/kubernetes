@@ -175,7 +175,7 @@ func runTest(f *framework.Framework) error {
 	if !cgroupManager.Exists(cm.CgroupName(expectedNAPodCgroup)) {
 		return fmt.Errorf("Expected Node Allocatable Cgroup Does not exist")
 	}
-	// TODO: Update cgroupManager to expose a Status interface to get current Cgroup Settings.
+	// TODO: Update cgroupManager to expose a Status interface to get current Cgroup Settings. id:2663 gh:2678
 	nodeList, err := f.ClientSet.CoreV1().Nodes().List(metav1.ListOptions{})
 	if err != nil {
 		return err

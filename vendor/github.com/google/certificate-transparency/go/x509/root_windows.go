@@ -119,7 +119,7 @@ func checkChainSSLServerPolicy(c *Certificate, chainCtx *syscall.CertChainContex
 		return err
 	}
 
-	// TODO(mkrautz): use the lChainIndex and lElementIndex fields
+	// TODO (mkrautz): use the lChainIndex and lElementIndex fields id:2838 gh:2849
 	// of the CertChainPolicyStatus to provide proper context, instead
 	// using c.
 	if status.Error != 0 {

@@ -202,7 +202,7 @@ func (b *photonPersistentDiskMounter) SetUp(fsGroup *int64) error {
 func (b *photonPersistentDiskMounter) SetUpAt(dir string, fsGroup *int64) error {
 	glog.V(4).Infof("Photon Persistent Disk setup %s to %s", b.pdID, dir)
 
-	// TODO: handle failed mounts here.
+	// TODO: handle failed mounts here. id:1381 gh:1387
 	notmnt, err := b.mounter.IsLikelyNotMountPoint(dir)
 	if err != nil && !os.IsNotExist(err) {
 		glog.Errorf("cannot validate mount point: %s %v", dir, err)
@@ -286,7 +286,7 @@ func (ppd *photonPersistentDisk) GetPath() string {
 	return ppd.plugin.host.GetPodVolumeDir(ppd.podUID, utilstrings.EscapeQualifiedNameForDisk(name), ppd.volName)
 }
 
-// TODO: supporting more access mode for PhotonController persistent disk
+// TODO: supporting more access mode for PhotonController persistent disk id:1501 gh:1507
 func (plugin *photonPersistentDiskPlugin) GetAccessModes() []v1.PersistentVolumeAccessMode {
 	return []v1.PersistentVolumeAccessMode{
 		v1.ReadWriteOnce,

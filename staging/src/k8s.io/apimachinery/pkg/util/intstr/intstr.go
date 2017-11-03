@@ -35,7 +35,7 @@ import (
 // JSON or YAML marshalling and unmarshalling, it produces or consumes the
 // inner type.  This allows you to have, for example, a JSON field that can
 // accept a name or number.
-// TODO: Rename to Int32OrString
+// TODO: Rename to Int32OrString id:3779 gh:3794
 //
 // +protobuf=true
 // +protobuf.options.(gogoproto.goproto_stringer)=false
@@ -57,7 +57,7 @@ const (
 // FromInt creates an IntOrString object with an int32 value. It is
 // your responsibility not to call this method with a value greater
 // than int32.
-// TODO: convert to (val int32)
+// TODO: convert to (val int32) id:3601 gh:3617
 func FromInt(val int) IntOrString {
 	if val > math.MaxInt32 || val < math.MinInt32 {
 		glog.Errorf("value: %d overflows int32\n%s\n", val, debug.Stack())

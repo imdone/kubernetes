@@ -22,7 +22,7 @@ import (
 // - http://www.unicode.org/Public/6.3.0/ucd/auxiliary/WordBreakTest.txt
 // - http://userguide.icu-project.org/transforms/casemappings
 
-// TODO:
+// TODO: id:3191 gh:3206
 // - Case folding
 // - Wide and Narrow?
 // - Segmenter option for title casing.
@@ -97,7 +97,7 @@ func Fold(opts ...Option) Caser {
 // An Option is used to modify the behavior of a Caser.
 type Option func(o options) options
 
-// TODO: consider these options to take a boolean as well, like FinalSigma.
+// TODO: consider these options to take a boolean as well, like FinalSigma. id:3515 gh:3530
 // The advantage of using this approach is that other providers of a lower-case
 // algorithm could set different defaults by prefixing a user-provided slice
 // of options with their own. This is handy, for instance, for the precis
@@ -113,13 +113,13 @@ var (
 	Compact Option = compact
 )
 
-// TODO: option to preserve a normal form, if applicable?
+// TODO: option to preserve a normal form, if applicable? id:2909 gh:2924
 
 type options struct {
 	noLower bool
 	simple  bool
 
-	// TODO: segmenter, max ignorable, alternative versions, etc.
+	// TODO: segmenter, max ignorable, alternative versions, etc. id:3344 gh:3359
 
 	ignoreFinalSigma bool
 }

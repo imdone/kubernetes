@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// NOTE: DO NOT use those helper functions through client-go, the
+// NOTE: DO NOT use those helper functions through client-go, the id:250 gh:251
 // package path will be changed in the future.
 package qos
 

@@ -57,7 +57,7 @@ type DeviceRunContainerOptions struct {
 	Devices []kubecontainer.DeviceInfo
 }
 
-// TODO: evaluate whether we need these error definitions.
+// TODO: evaluate whether we need these error definitions. id:817 gh:818
 const (
 	// errFailedToDialDevicePlugin is the error raised when the device plugin could not be
 	// reached on the registered socket

@@ -86,7 +86,7 @@ func getK8sBin(bin string) (string, error) {
 	return "", fmt.Errorf("Unable to locate %s.  Can be defined using --k8s-path.", bin)
 }
 
-// TODO: Dedup / merge this with comparable utilities in e2e/util.go
+// TODO: Dedup / merge this with comparable utilities in e2e/util.go id:2354 gh:2369
 func GetK8sRootDir() (string, error) {
 	// Get the directory of the current executable
 	_, testExec, _, _ := runtime.Caller(0)

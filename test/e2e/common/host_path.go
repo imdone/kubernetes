@@ -29,13 +29,13 @@ import (
 	. "github.com/onsi/ginkgo"
 )
 
-//TODO : Consolidate this code with the code for emptyDir.
+//TODO : Consolidate this code with the code for emptyDir. id:2219 gh:2234
 //This will require some smart.
 var _ = Describe("[sig-storage] HostPath", func() {
 	f := framework.NewDefaultFramework("hostpath")
 
 	BeforeEach(func() {
-		// TODO permission denied cleanup failures
+		// TODO permission denied cleanup failures id:2366 gh:2381
 		//cleanup before running the test.
 		_ = os.Remove("/tmp/test-file")
 	})
@@ -157,7 +157,7 @@ var _ = Describe("[sig-storage] HostPath", func() {
 		})
 	})
 
-	// TODO consolidate common code of this test and above
+	// TODO consolidate common code of this test and above id:2098 gh:2113
 	It("should support existing single file subPath", func() {
 		framework.SkipUnlessSSHKeyPresent()
 
@@ -214,7 +214,7 @@ func mount(source *v1.HostPathVolumeSource) []v1.Volume {
 	}
 }
 
-//TODO: To merge this with the emptyDir tests, we can make source a lambda.
+//TODO: To merge this with the emptyDir tests, we can make source a lambda. id:2300 gh:2315
 func testPodWithHostVol(path string, source *v1.HostPathVolumeSource) *v1.Pod {
 	podName := "pod-host-path-test"
 	privileged := true

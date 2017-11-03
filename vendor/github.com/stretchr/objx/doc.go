@@ -16,7 +16,7 @@
 //
 //     m, err := objx.FromJSON(json)
 //
-// NOTE: Any methods or functions with the `Must` prefix will panic if something goes wrong,
+// NOTE: Any methods or functions with the `Must` prefix will panic if something goes wrong, id:3169 gh:3184
 // the rest will be optimistic and try to figure things out without panicking.
 //
 // Use `Get` to access the value you're interested in.  You can use dot and array

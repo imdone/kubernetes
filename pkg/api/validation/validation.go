@@ -54,7 +54,7 @@ import (
 	"k8s.io/kubernetes/pkg/security/apparmor"
 )
 
-// TODO: delete this global variable when we enable the validation of common
+// TODO: delete this global variable when we enable the validation of common id:316 gh:317
 // fields by default.
 var RepairMalformedUpdates bool = genericvalidation.RepairMalformedUpdates
 
@@ -284,7 +284,7 @@ var ValidateClassName = NameIsDNSSubdomain
 // class name is valid.
 var ValidatePriorityClassName = NameIsDNSSubdomain
 
-// TODO update all references to these functions to point to the genericvalidation ones
+// TODO update all references to these functions to point to the genericvalidation ones id:213 gh:214
 // NameIsDNSSubdomain is a ValidateNameFunc for names that must be a DNS subdomain.
 func NameIsDNSSubdomain(name string, prefix bool) []string {
 	return apimachineryvalidation.NameIsDNSSubdomain(name, prefix)
@@ -330,7 +330,7 @@ func ValidateImmutableAnnotation(newVal string, oldVal string, annotation string
 // ValidateObjectMeta validates an object's metadata on creation. It expects that name generation has already
 // been performed.
 // It doesn't return an error for rootscoped resources with namespace, because namespace should already be cleared before.
-// TODO: Remove calls to this method scattered in validations of specific resources, e.g., ValidatePodUpdate.
+// TODO: Remove calls to this method scattered in validations of specific resources, e.g., ValidatePodUpdate. id:342 gh:343
 func ValidateObjectMeta(meta *metav1.ObjectMeta, requiresNamespace bool, nameFn ValidateNameFunc, fldPath *field.Path) field.ErrorList {
 	allErrs := genericvalidation.ValidateObjectMeta(meta, requiresNamespace, apimachineryvalidation.ValidateNameFunc(nameFn), fldPath)
 	// run additional checks for the finalizer name
@@ -836,7 +836,7 @@ func validateGlusterfsVolumeSource(glusterfs *api.GlusterfsVolumeSource, fldPath
 func validateFlockerVolumeSource(flocker *api.FlockerVolumeSource, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 	if len(flocker.DatasetName) == 0 && len(flocker.DatasetUUID) == 0 {
-		//TODO: consider adding a RequiredOneOf() error for this and similar cases
+		//TODO: consider adding a RequiredOneOf() error for this and similar cases id:290 gh:291
 		allErrs = append(allErrs, field.Required(fldPath, "one of datasetName and datasetUUID is required"))
 	}
 	if len(flocker.DatasetName) != 0 && len(flocker.DatasetUUID) != 0 {
@@ -1651,7 +1651,7 @@ func ValidatePersistentVolumeClaimUpdate(newPvc, oldPvc *api.PersistentVolumeCla
 	}
 
 	// storageclass annotation should be immutable after creation
-	// TODO: remove Beta when no longer needed
+	// TODO: remove Beta when no longer needed id:267 gh:268
 	allErrs = append(allErrs, ValidateImmutableAnnotation(newPvc.ObjectMeta.Annotations[v1.BetaStorageClassAnnotation], oldPvc.ObjectMeta.Annotations[v1.BetaStorageClassAnnotation], v1.BetaStorageClassAnnotation, field.NewPath("metadata"))...)
 
 	newPvc.Status = oldPvc.Status
@@ -2208,7 +2208,7 @@ func validateContainers(containers []api.Container, volumes sets.String, fldPath
 		} else {
 			allNames.Insert(ctr.Name)
 		}
-		// TODO: do not validate leading and trailing whitespace to preserve backward compatibility.
+		// TODO: do not validate leading and trailing whitespace to preserve backward compatibility. id:317 gh:318
 		// for example: https://github.com/openshift/origin/issues/14659 image = " " is special token in pod template
 		// others may have done similar
 		if len(ctr.Image) == 0 {
@@ -2313,7 +2313,7 @@ func validateAffinity(affinity *api.Affinity, fldPath *field.Path) field.ErrorLi
 
 	if affinity != nil {
 		if na := affinity.NodeAffinity; na != nil {
-			// TODO: Uncomment the next three lines once RequiredDuringSchedulingRequiredDuringExecution is implemented.
+			// TODO: Uncomment the next three lines once RequiredDuringSchedulingRequiredDuringExecution is implemented. id:214 gh:215
 			// if na.RequiredDuringSchedulingRequiredDuringExecution != nil {
 			//	allErrs = append(allErrs, ValidateNodeSelector(na.RequiredDuringSchedulingRequiredDuringExecution, fldPath.Child("requiredDuringSchedulingRequiredDuringExecution"))...)
 			// }
@@ -2344,7 +2344,7 @@ func validateTaintEffect(effect *api.TaintEffect, allowEmpty bool, fldPath *fiel
 
 	allErrors := field.ErrorList{}
 	switch *effect {
-	// TODO: Replace next line with subsequent commented-out line when implement TaintEffectNoScheduleNoAdmit.
+	// TODO: Replace next line with subsequent commented-out line when implement TaintEffectNoScheduleNoAdmit. id:343 gh:344
 	case api.TaintEffectNoSchedule, api.TaintEffectPreferNoSchedule, api.TaintEffectNoExecute:
 		// case api.TaintEffectNoSchedule, api.TaintEffectPreferNoSchedule, api.TaintEffectNoScheduleNoAdmit, api.TaintEffectNoExecute:
 	default:
@@ -2352,7 +2352,7 @@ func validateTaintEffect(effect *api.TaintEffect, allowEmpty bool, fldPath *fiel
 			string(api.TaintEffectNoSchedule),
 			string(api.TaintEffectPreferNoSchedule),
 			string(api.TaintEffectNoExecute),
-			// TODO: Uncomment this block when implement TaintEffectNoScheduleNoAdmit.
+			// TODO: Uncomment this block when implement TaintEffectNoScheduleNoAdmit. id:291 gh:292
 			// string(api.TaintEffectNoScheduleNoAdmit),
 		}
 		allErrors = append(allErrors, field.NotSupported(fldPath, effect, validValues))
@@ -2724,7 +2724,7 @@ func validateWeightedPodAffinityTerms(weightedPodAffinityTerms []api.WeightedPod
 // validatePodAntiAffinity tests that the specified podAntiAffinity fields have valid data
 func validatePodAntiAffinity(podAntiAffinity *api.PodAntiAffinity, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
-	// TODO:Uncomment below code once RequiredDuringSchedulingRequiredDuringExecution is implemented.
+	// TODO: Uncomment below code once RequiredDuringSchedulingRequiredDuringExecution is implemented. id:268 gh:269
 	// if podAntiAffinity.RequiredDuringSchedulingRequiredDuringExecution != nil {
 	//	allErrs = append(allErrs, validatePodAffinityTerms(podAntiAffinity.RequiredDuringSchedulingRequiredDuringExecution, false,
 	//		fldPath.Child("requiredDuringSchedulingRequiredDuringExecution"))...)
@@ -2743,7 +2743,7 @@ func validatePodAntiAffinity(podAntiAffinity *api.PodAntiAffinity, fldPath *fiel
 // validatePodAffinity tests that the specified podAffinity fields have valid data
 func validatePodAffinity(podAffinity *api.PodAffinity, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
-	// TODO:Uncomment below code once RequiredDuringSchedulingRequiredDuringExecution is implemented.
+	// TODO: Uncomment below code once RequiredDuringSchedulingRequiredDuringExecution is implemented. id:318 gh:319
 	// if podAffinity.RequiredDuringSchedulingRequiredDuringExecution != nil {
 	//	allErrs = append(allErrs, validatePodAffinityTerms(podAffinity.RequiredDuringSchedulingRequiredDuringExecution, false,
 	//		fldPath.Child("requiredDuringSchedulingRequiredDuringExecution"))...)
@@ -2792,7 +2792,7 @@ func ValidateAppArmorPodAnnotations(annotations map[string]string, spec *api.Pod
 		if !strings.HasPrefix(k, apparmor.ContainerAnnotationKeyPrefix) {
 			continue
 		}
-		// TODO: this belongs to admission, not general pod validation:
+		// TODO: this belongs to admission, not general pod validation: id:215 gh:217
 		if !utilfeature.DefaultFeatureGate.Enabled(features.AppArmor) {
 			allErrs = append(allErrs, field.Forbidden(fldPath.Key(k), "AppArmor is disabled by feature-gate"))
 			continue
@@ -2887,7 +2887,7 @@ func ValidatePodSecurityContext(securityContext *api.PodSecurityContext, spec *a
 func ValidateContainerUpdates(newContainers, oldContainers []api.Container, fldPath *field.Path) (allErrs field.ErrorList, stop bool) {
 	allErrs = field.ErrorList{}
 	if len(newContainers) != len(oldContainers) {
-		//TODO: Pinpoint the specific container that causes the invalid error after we have strategic merge diff
+		//TODO: Pinpoint the specific container that causes the invalid error after we have strategic merge diff id:344 gh:345
 		allErrs = append(allErrs, field.Forbidden(fldPath, "pod updates may not add or remove containers"))
 		return allErrs, true
 	}
@@ -2978,7 +2978,7 @@ func ValidatePodUpdate(newPod, oldPod *api.Pod) field.ErrorList {
 
 	if !apiequality.Semantic.DeepEqual(mungedPod.Spec, oldPod.Spec) {
 		// This diff isn't perfect, but it's a helluva lot better an "I'm not going to tell you what the difference is".
-		//TODO: Pinpoint the specific field that causes the invalid error after we have strategic merge diff
+		//TODO: Pinpoint the specific field that causes the invalid error after we have strategic merge diff id:292 gh:293
 		specDiff := diff.ObjectDiff(mungedPod.Spec, oldPod.Spec)
 		allErrs = append(allErrs, field.Forbidden(specPath, fmt.Sprintf("pod updates may not change fields other than `spec.containers[*].image`, `spec.initContainers[*].image`, `spec.activeDeadlineSeconds` or `spec.tolerations` (only additions to existing tolerations)\n%v", specDiff)))
 	}
@@ -3008,11 +3008,11 @@ func ValidatePodBinding(binding *api.Binding) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	if len(binding.Target.Kind) != 0 && binding.Target.Kind != "Node" {
-		// TODO: When validation becomes versioned, this gets more complicated.
+		// TODO: When validation becomes versioned, this gets more complicated. id:269 gh:270
 		allErrs = append(allErrs, field.NotSupported(field.NewPath("target", "kind"), binding.Target.Kind, []string{"Node", "<empty>"}))
 	}
 	if len(binding.Target.Name) == 0 {
-		// TODO: When validation becomes versioned, this gets more complicated.
+		// TODO: When validation becomes versioned, this gets more complicated. id:319 gh:320
 		allErrs = append(allErrs, field.Required(field.NewPath("target", "name"), ""))
 	}
 
@@ -3443,7 +3443,7 @@ func ValidateReadOnlyPersistentDisks(volumes []api.Volume, fldPath *field.Path) 
 				allErrs = append(allErrs, field.Invalid(idxPath.Child("gcePersistentDisk", "readOnly"), false, "must be true for replicated pods > 1; GCE PD can only be mounted on multiple machines if it is read-only"))
 			}
 		}
-		// TODO: What to do for AWS?  It doesn't support replicas
+		// TODO: What to do for AWS?  It doesn't support replicas id:293 gh:294
 	}
 	return allErrs
 }
@@ -3536,7 +3536,7 @@ func ValidateNode(node *api.Node) field.ErrorList {
 		allErrs = append(allErrs, field.Forbidden(field.NewPath("spec", "configSource"), "configSource may only be set if the DynamicKubeletConfig feature gate is enabled)"))
 	}
 
-	// TODO(rjnagal): Ignore PodCIDR till its completely implemented.
+	// TODO (rjnagal): Ignore PodCIDR till its completely implemented. id:345 gh:346
 	return allErrs
 }
 
@@ -3578,7 +3578,7 @@ func ValidateNodeUpdate(node, oldNode *api.Node) field.ErrorList {
 	allErrs := ValidateObjectMetaUpdate(&node.ObjectMeta, &oldNode.ObjectMeta, fldPath)
 	allErrs = append(allErrs, ValidateNodeSpecificAnnotations(node.ObjectMeta.Annotations, fldPath.Child("annotations"))...)
 
-	// TODO: Enable the code once we have better api object.status update model. Currently,
+	// TODO: Enable the code once we have better api object.status update model. Currently, id:358 gh:359
 	// anyone can update node status.
 	// if !apiequality.Semantic.DeepEqual(node.Status, api.NodeStatus{}) {
 	// 	allErrs = append(allErrs, field.Invalid("status", node.Status, "must be empty"))
@@ -3613,7 +3613,7 @@ func ValidateNodeUpdate(node, oldNode *api.Node) field.ErrorList {
 		}
 	}
 
-	// TODO: move reset function to its own location
+	// TODO: move reset function to its own location id:270 gh:271
 	// Ignore metadata changes now that they have been tested
 	oldNode.ObjectMeta = node.ObjectMeta
 	// Allow users to update capacity
@@ -3635,7 +3635,7 @@ func ValidateNodeUpdate(node, oldNode *api.Node) field.ErrorList {
 	}
 
 	// We made allowed changes to oldNode, and now we compare oldNode to node. Any remaining differences indicate changes to protected fields.
-	// TODO: Add a 'real' error type for this error and provide print actual diffs.
+	// TODO: Add a 'real' error type for this error and provide print actual diffs. id:320 gh:321
 	if !apiequality.Semantic.DeepEqual(oldNode, node) {
 		glog.V(4).Infof("Update failed validation %#v vs %#v", oldNode, node)
 		allErrs = append(allErrs, field.Forbidden(field.NewPath(""), "node updates may only change labels, taints, or capacity (or configSource, if the DynamicKubeletConfig feature gate is enabled)"))
@@ -3648,7 +3648,7 @@ func ValidateNodeUpdate(node, oldNode *api.Node) field.ErrorList {
 // Refer to docs/design/resources.md for more details.
 func validateResourceName(value string, fldPath *field.Path) field.ErrorList {
 	// Opaque integer resources (OIR) deprecation began in v1.8
-	// TODO: Remove warning after OIR deprecation cycle.
+	// TODO: Remove warning after OIR deprecation cycle. id:294 gh:295
 	if helper.IsOpaqueIntResourceName(api.ResourceName(value)) {
 		glog.Errorf("DEPRECATION WARNING! Opaque integer resources are deprecated starting with v1.8: %s", value)
 	}
@@ -3948,7 +3948,7 @@ func ValidateSecret(secret *api.Secret) field.ErrorList {
 		if _, exists := secret.Data[api.TLSPrivateKeyKey]; !exists {
 			allErrs = append(allErrs, field.Required(dataPath.Key(api.TLSPrivateKeyKey), ""))
 		}
-	// TODO: Verify that the key matches the cert.
+	// TODO: Verify that the key matches the cert. id:346 gh:347
 	default:
 		// no-op
 	}
@@ -4314,7 +4314,7 @@ func validateEndpointSubsets(subsets []api.EndpointSubset, oldSubsets []api.Endp
 
 		// EndpointSubsets must include endpoint address. For headless service, we allow its endpoints not to have ports.
 		if len(ss.Addresses) == 0 && len(ss.NotReadyAddresses) == 0 {
-			//TODO: consider adding a RequiredOneOf() error for this and similar cases
+			//TODO: consider adding a RequiredOneOf() error for this and similar cases id:359 gh:360
 			allErrs = append(allErrs, field.Required(idxPath, "must specify `addresses` or `notReadyAddresses`"))
 		}
 		for addr := range ss.Addresses {

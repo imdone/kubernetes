@@ -32,7 +32,7 @@ type ScaleExpansion interface {
 func (c *scales) Get(kind string, name string) (result *v1beta1.Scale, err error) {
 	result = &v1beta1.Scale{}
 
-	// TODO this method needs to take a proper unambiguous kind
+	// TODO this method needs to take a proper unambiguous kind id:3464 gh:3479
 	fullyQualifiedKind := schema.GroupVersionKind{Kind: kind}
 	resource, _ := meta.UnsafeGuessKindToResource(fullyQualifiedKind)
 
@@ -49,7 +49,7 @@ func (c *scales) Get(kind string, name string) (result *v1beta1.Scale, err error
 func (c *scales) Update(kind string, scale *v1beta1.Scale) (result *v1beta1.Scale, err error) {
 	result = &v1beta1.Scale{}
 
-	// TODO this method needs to take a proper unambiguous kind
+	// TODO this method needs to take a proper unambiguous kind id:3945 gh:3965
 	fullyQualifiedKind := schema.GroupVersionKind{Kind: kind}
 	resource, _ := meta.UnsafeGuessKindToResource(fullyQualifiedKind)
 

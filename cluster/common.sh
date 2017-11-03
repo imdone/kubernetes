@@ -28,14 +28,14 @@ source "${KUBE_ROOT}/hack/lib/util.sh"
 source "${KUBE_ROOT}/cluster/lib/logging.sh"
 # KUBE_RELEASE_VERSION_REGEX matches things like "v1.2.3" or "v1.2.3-alpha.4"
 #
-# NOTE This must match the version_regex in build/common.sh
+# NOTE This must match the version_regex in build/common.sh id:13 gh:14
 # kube::release::parse_and_validate_release_version()
 KUBE_RELEASE_VERSION_REGEX="^v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(-([a-zA-Z0-9]+)\\.(0|[1-9][0-9]*))?$"
 KUBE_RELEASE_VERSION_DASHED_REGEX="v(0|[1-9][0-9]*)-(0|[1-9][0-9]*)-(0|[1-9][0-9]*)(-([a-zA-Z0-9]+)-(0|[1-9][0-9]*))?"
 
 # KUBE_CI_VERSION_REGEX matches things like "v1.2.3-alpha.4.56+abcdefg" This
 #
-# NOTE This must match the version_regex in build/common.sh
+# NOTE This must match the version_regex in build/common.sh id:65 gh:66
 # kube::release::parse_and_validate_ci_version()
 KUBE_CI_VERSION_REGEX="^v(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)-([a-zA-Z0-9]+)\\.(0|[1-9][0-9]*)(\\.(0|[1-9][0-9]*)\\+[-0-9a-z]*)?$"
 KUBE_CI_VERSION_DASHED_REGEX="^v(0|[1-9][0-9]*)-(0|[1-9][0-9]*)-(0|[1-9][0-9]*)-([a-zA-Z0-9]+)-(0|[1-9][0-9]*)(-(0|[1-9][0-9]*)\\+[-0-9a-z]*)?"
@@ -194,7 +194,7 @@ function get-kubeconfig-basicauth() {
     # kube-up stores username/password in a an additional kubeconfig section
     # suffixed with "-basic-auth". Cloudproviders like GKE store in directly
     # in the top level section along with the other credential information.
-    # TODO: Handle this uniformly, either get rid of "basic-auth" or
+    # TODO: Handle this uniformly, either get rid of "basic-auth" or id:1 gh:2
     # consolidate its usage into a function across scripts in cluster/
     get-kubeconfig-user-basicauth "${user}-basic-auth"
   fi
@@ -368,13 +368,13 @@ function tars_from_version() {
   elif [[ ${KUBE_VERSION} =~ ${KUBE_RELEASE_VERSION_REGEX} ]]; then
     SERVER_BINARY_TAR_URL="https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/kubernetes-server-linux-amd64.tar.gz"
     SALT_TAR_URL="https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/kubernetes-salt.tar.gz"
-    # TODO: Clean this up.
+    # TODO: Clean this up. id:4 gh:5
     KUBE_MANIFESTS_TAR_URL="${SERVER_BINARY_TAR_URL/server-linux-amd64/manifests}"
     KUBE_MANIFESTS_TAR_HASH=$(curl ${KUBE_MANIFESTS_TAR_URL} --silent --show-error | ${sha1sum} | awk '{print $1}')
   elif [[ ${KUBE_VERSION} =~ ${KUBE_CI_VERSION_REGEX} ]]; then
     SERVER_BINARY_TAR_URL="https://storage.googleapis.com/kubernetes-release-dev/ci/${KUBE_VERSION}/kubernetes-server-linux-amd64.tar.gz"
     SALT_TAR_URL="https://storage.googleapis.com/kubernetes-release-dev/ci/${KUBE_VERSION}/kubernetes-salt.tar.gz"
-    # TODO: Clean this up.
+    # TODO: Clean this up. id:8 gh:9
     KUBE_MANIFESTS_TAR_URL="${SERVER_BINARY_TAR_URL/server-linux-amd64/manifests}"
     KUBE_MANIFESTS_TAR_HASH=$(curl ${KUBE_MANIFESTS_TAR_URL} --silent --show-error | ${sha1sum} | awk '{print $1}')
   else
@@ -509,7 +509,7 @@ function stage-images() {
 
 # Quote something appropriate for a yaml string.
 #
-# TODO(zmerlynn): Note that this function doesn't so much "quote" as
+# TODO (zmerlynn): Note that this function doesn't so much "quote" as id:14 gh:15
 # "strip out quotes", and we really should be using a YAML library for
 # this, but PyYAML isn't shipped by default, and *rant rant rant ... SIGH*
 function yaml-quote {
@@ -580,7 +580,7 @@ function build-kube-env {
      [[ "${master}" == "false" && "${NODE_OS_DISTRIBUTION}" == "container-linux" ]] || \
      [[ "${master}" == "true" && "${MASTER_OS_DISTRIBUTION}" == "ubuntu" ]] || \
      [[ "${master}" == "false" && "${NODE_OS_DISTRIBUTION}" == "ubuntu" ]] ; then
-    # TODO: Support fallback .tar.gz settings on Container Linux
+    # TODO: Support fallback .tar.gz settings on Container Linux id:66 gh:67
     server_binary_tar_url=$(split_csv "${SERVER_BINARY_TAR_URL}")
     salt_tar_url=$(split_csv "${SALT_TAR_URL}")
     kube_manifests_tar_url=$(split_csv "${KUBE_MANIFESTS_TAR_URL}")
@@ -915,7 +915,7 @@ EOF
   fi
   if [[ "${master}" == "true" && "${MASTER_OS_DISTRIBUTION}" == "container-linux" ]] || \
      [[ "${master}" == "false" && "${NODE_OS_DISTRIBUTION}" == "container-linux" ]]; then
-    # Container-Linux-only env vars. TODO(yifan): Make them available on other distros.
+    # Container-Linux-only env vars. TODO (yifan): Make them available on other distros. id:2 gh:3
     cat >>$file <<EOF
 KUBERNETES_CONTAINER_RUNTIME: $(yaml-quote ${CONTAINER_RUNTIME:-rkt})
 RKT_VERSION: $(yaml-quote ${RKT_VERSION:-})
@@ -965,7 +965,7 @@ function sha1sum-file() {
 #  - kubelet
 #  - kubecfg (for kubectl)
 #
-# TODO(roberthbailey): Replace easyrsa with a simple Go program to generate
+# TODO (roberthbailey): Replace easyrsa with a simple Go program to generate id:5 gh:6
 # the certs that we need.
 #
 # Assumed vars
@@ -1038,7 +1038,7 @@ function setup-easyrsa {
     mkdir easy-rsa-master/aggregator
     cp -r easy-rsa-master/easyrsa3/* easy-rsa-master/aggregator) &>${cert_create_debug_output} || {
     # If there was an error in the subshell, just die.
-    # TODO(roberthbailey): add better error handling here
+    # TODO (roberthbailey): add better error handling here id:9 gh:10
     cat "${cert_create_debug_output}" >&2
     echo "=== Failed to setup easy-rsa: Aborting ===" >&2
     exit 2
@@ -1082,7 +1082,7 @@ function generate-certs {
       --req-c= --req-st= --req-city= --req-email= --req-ou= \
       build-client-full kubecfg nopass) &>${cert_create_debug_output} || {
     # If there was an error in the subshell, just die.
-    # TODO(roberthbailey): add better error handling here
+    # TODO (roberthbailey): add better error handling here id:15 gh:16
     cat "${cert_create_debug_output}" >&2
     echo "=== Failed to generate master certificates: Aborting ===" >&2
     exit 2
@@ -1126,7 +1126,7 @@ function generate-aggregator-certs {
       --req-c= --req-st= --req-city= --req-email= --req-ou= \
       build-client-full proxy-clientcfg nopass) &>${cert_create_debug_output} || {
     # If there was an error in the subshell, just die.
-    # TODO(roberthbailey): add better error handling here
+    # TODO (roberthbailey): add better error handling here id:67 gh:68
     cat "${cert_create_debug_output}" >&2
     echo "=== Failed to generate aggregator certificates: Aborting ===" >&2
     exit 2

@@ -925,4 +925,4 @@ func TestProxyUpdatePortal(t *testing.T) {
 	waitForNumProxyLoops(t, p, 1)
 }
 
-// TODO(justinsb): Add test for nodePort conflict detection, once we have nodePort wired in
+// TODO (justinsb): Add test for nodePort conflict detection, once we have nodePort wired in id:1302 gh:1308

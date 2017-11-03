@@ -62,7 +62,7 @@ func New(fn ListPageFunc) *ListPager {
 	}
 }
 
-// TODO: introduce other types of paging functions - such as those that retrieve from a list
+// TODO: introduce other types of paging functions - such as those that retrieve from a list id:4054 gh:4074
 // of namespaces.
 
 // List returns a single list object, but attempts to retrieve smaller chunks from the

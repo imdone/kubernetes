@@ -34,7 +34,7 @@ const (
 	sshPort                = "22"
 	driverDir              = "test/e2e/testing-manifests/flexvolume/"
 	defaultVolumePluginDir = "/usr/libexec/kubernetes/kubelet-plugins/volume/exec"
-	// TODO: change this and config-test.sh when default flex volume install path is changed for GCI
+	// TODO: change this and config-test.sh when default flex volume install path is changed for GCI id:2269 gh:2284
 	// On gci, root is read-only and controller-manager containerized. Assume
 	// controller-manager has started with --flex-volume-plugin-dir equal to this
 	// (see cluster/gce/config-test.sh)

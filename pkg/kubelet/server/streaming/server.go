@@ -101,7 +101,7 @@ var DefaultConfig = Config{
 	SupportedPortForwardProtocols:   portforward.SupportedProtocols,
 }
 
-// TODO(tallclair): Add auth(n/z) interface & handling.
+// TODO (tallclair): Add auth(n/z) interface & handling. id:1201 gh:1207
 func NewServer(config Config, runtime Runtime) (Server, error) {
 	s := &server{
 		config:  config,
@@ -229,7 +229,7 @@ func (s *server) GetPortForward(req *runtimeapi.PortForwardRequest) (*runtimeapi
 
 func (s *server) Start(stayUp bool) error {
 	if !stayUp {
-		// TODO(tallclair): Implement this.
+		// TODO (tallclair): Implement this. id:1044 gh:1050
 		return errors.New("stayUp=false is not yet implemented")
 	}
 

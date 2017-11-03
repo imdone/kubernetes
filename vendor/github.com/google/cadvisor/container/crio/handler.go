@@ -59,7 +59,7 @@ type crioContainerHandler struct {
 	labels map[string]string
 	envs   map[string]string
 
-	// TODO
+	// TODO id:3052 gh:3068
 	// crio version handling...
 
 	// The container PID used to switch namespaces as required
@@ -72,7 +72,7 @@ type crioContainerHandler struct {
 	rootFs string
 
 	// The network mode of the container
-	// TODO
+	// TODO id:2652 gh:2667
 
 	// Filesystem handler.
 	fsHandler common.FsHandler
@@ -129,7 +129,7 @@ func newCrioContainerHandler(
 	}
 
 	// passed to fs handler below ...
-	// XXX: this is using the full container logpath, as constructed by the CRI
+	// XXX: this is using the full container logpath, as constructed by the CRI id:2955 gh:2970
 	// /var/log/pods/<pod_uuid>/container_instance.log
 	// It's not actually a log dir, as the CRI doesn't have per-container dirs
 	// under /var/log/pods/<pod_uuid>/
@@ -139,7 +139,7 @@ func newCrioContainerHandler(
 
 	// Determine the rootfs storage dir
 	rootfsStorageDir := cInfo.Root
-	// TODO(runcom): CRI-O doesn't strip /merged but we need to in order to
+	// TODO (runcom): CRI-O doesn't strip /merged but we need to in order to id:2830 gh:2845
 	// get device ID from root, otherwise, it's going to error out as overlay
 	// mounts doesn't have fixed dev ids.
 	rootfsStorageDir = strings.TrimSuffix(rootfsStorageDir, "/merged")
@@ -150,7 +150,7 @@ func newCrioContainerHandler(
 		rootfsStorageDir = filepath.Join(rootfsStorageDir, "diff")
 	}
 
-	// TODO: extract object mother method
+	// TODO: extract object mother method id:2814 gh:2829
 	handler := &crioContainerHandler{
 		id:                 id,
 		name:               name,
@@ -170,7 +170,7 @@ func newCrioContainerHandler(
 	handler.aliases = append(handler.aliases, cInfo.Name, id)
 	handler.labels = cInfo.Labels
 	handler.image = cInfo.Image
-	// TODO: we wantd to know graph driver DeviceId (dont think this is needed now)
+	// TODO: we wantd to know graph driver DeviceId (dont think this is needed now) id:3053 gh:3069
 
 	// ignore err and get zero as default, this happens with sandboxes, not sure why...
 	// kube isn't sending restart count in labels for sandboxes.
@@ -183,7 +183,7 @@ func newCrioContainerHandler(
 	if !ignoreMetrics.Has(container.DiskUsageMetrics) {
 		handler.fsHandler = common.NewFsHandler(common.DefaultPeriod, rootfsStorageDir, storageLogDir, fsInfo)
 	}
-	// TODO for env vars we wanted to show from container.Config.Env from whitelist
+	// TODO for env vars we wanted to show from container.Config.Env from whitelist id:2653 gh:2668
 	//for _, exposedEnv := range metadataEnvs {
 	//glog.Infof("TODO env whitelist: %v", exposedEnv)
 	//}

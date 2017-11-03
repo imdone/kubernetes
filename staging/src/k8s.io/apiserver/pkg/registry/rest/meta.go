@@ -39,7 +39,7 @@ func FillObjectMetaSystemFields(ctx genericapirequest.Context, meta metav1.Objec
 // the resource.  If the resource has no namespace, it is set to the value in
 // the context.
 //
-// TODO(sttts): move into pkg/genericapiserver/endpoints
+// TODO (sttts): move into pkg/genericapiserver/endpoints id:3430 gh:3445
 func ValidNamespace(ctx genericapirequest.Context, resource metav1.Object) bool {
 	ns, ok := genericapirequest.NamespaceFrom(ctx)
 	if len(resource.GetNamespace()) == 0 {

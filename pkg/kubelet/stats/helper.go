@@ -216,7 +216,7 @@ func latestContainerStats(info *cadvisorapiv2.ContainerInfo) (*cadvisorapiv2.Con
 func isMemoryUnlimited(v uint64) bool {
 	// Size after which we consider memory to be "unlimited". This is not
 	// MaxInt64 due to rounding by the kernel.
-	// TODO: cadvisor should export this https://github.com/google/cadvisor/blob/master/metrics/prometheus.go#L596
+	// TODO: cadvisor should export this https://github.com/google/cadvisor/blob/master/metrics/prometheus.go#L596 id:1007 gh:1013
 	const maxMemorySize = uint64(1 << 62)
 
 	return v > maxMemorySize

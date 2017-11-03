@@ -96,7 +96,7 @@ func TestSandboxStatus(t *testing.T) {
 	annotations := map[string]string{"annotation": "abc"}
 	config := makeSandboxConfigWithLabelsAndAnnotations("foo", "bar", "1", 0, labels, annotations)
 
-	// TODO: The following variables depend on the internal
+	// TODO: The following variables depend on the internal id:883 gh:889
 	// implementation of FakeDockerClient, and should be fixed.
 	fakeIP := "2.3.4.5"
 
@@ -152,7 +152,7 @@ func TestSandboxStatusAfterRestart(t *testing.T) {
 	ds, _, fClock := newTestDockerService()
 	config := makeSandboxConfig("foo", "bar", "1", 0)
 
-	// TODO: The following variables depend on the internal
+	// TODO: The following variables depend on the internal id:911 gh:917
 	// implementation of FakeDockerClient, and should be fixed.
 	fakeIP := "2.3.4.5"
 

@@ -27,8 +27,8 @@ func (t *caseFolder) Span(src []byte, atEOF bool) (n int, err error) {
 }
 
 func makeFold(o options) transform.SpanningTransformer {
-	// TODO: Special case folding, through option Language, Special/Turkic, or
+	// TODO: Special case folding, through option Language, Special/Turkic, or id:3192 gh:3207
 	// both.
-	// TODO: Implement Compact options.
+	// TODO: Implement Compact options. id:3516 gh:3531
 	return &caseFolder{}
 }

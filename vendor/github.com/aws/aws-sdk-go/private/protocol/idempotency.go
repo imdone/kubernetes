@@ -56,7 +56,7 @@ func SetIdempotencyToken(v reflect.Value) {
 	b := make([]byte, 16)
 	_, err := rand.Read(b)
 	if err != nil {
-		// TODO handle error
+		// TODO handle error id:2491 gh:2506
 		return
 	}
 

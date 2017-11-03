@@ -332,7 +332,7 @@ func autoConvert_v1beta1_JSON_To_apiextensions_JSON(in *JSON, out *apiextensions
 }
 
 func autoConvert_apiextensions_JSON_To_v1beta1_JSON(in *apiextensions.JSON, out *JSON, s conversion.Scope) error {
-	// FIXME: Type apiextensions.JSON is unsupported.
+	// FIXME: Type apiextensions.JSON is unsupported. id:3486 gh:3501
 	return nil
 }
 

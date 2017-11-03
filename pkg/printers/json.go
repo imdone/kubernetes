@@ -58,7 +58,7 @@ func (p *JSONPrinter) PrintObj(obj runtime.Object, w io.Writer) error {
 	return err
 }
 
-// TODO: implement HandledResources()
+// TODO: implement HandledResources() id:1153 gh:1159
 func (p *JSONPrinter) HandledResources() []string {
 	return []string{}
 }
@@ -99,7 +99,7 @@ func (p *YAMLPrinter) PrintObj(obj runtime.Object, w io.Writer) error {
 	return err
 }
 
-// TODO: implement HandledResources()
+// TODO: implement HandledResources() id:1210 gh:1216
 func (p *YAMLPrinter) HandledResources() []string {
 	return []string{}
 }

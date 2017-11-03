@@ -51,7 +51,7 @@
 //         mockObj.EXPECT().SomeMethod(3, "third"),
 //     )
 //
-// TODO:
+// TODO: id:2644 gh:2659
 //	- Handle different argument/return types (e.g. ..., chan, map, interface).
 package gomock
 
@@ -81,7 +81,7 @@ func NewController(t TestReporter) *Controller {
 }
 
 func (ctrl *Controller) RecordCall(receiver interface{}, method string, args ...interface{}) *Call {
-	// TODO: check arity, types.
+	// TODO: check arity, types. id:2947 gh:2962
 	margs := make([]Matcher, len(args))
 	for i, arg := range args {
 		if m, ok := arg.(Matcher); ok {

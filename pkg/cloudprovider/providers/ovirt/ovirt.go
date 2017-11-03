@@ -223,7 +223,7 @@ func (v *OVirtCloud) InstanceID(nodeName types.NodeName) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	// TODO: define a way to identify the provider instance to complete
+	// TODO: define a way to identify the provider instance to complete id:518 gh:519
 	// the format <provider_instance_id>/<instance_id>.
 	return "/" + instance.UUID, err
 }

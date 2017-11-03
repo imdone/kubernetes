@@ -422,7 +422,7 @@ func AddApplyAnnotationVarFlags(cmd *cobra.Command, applyAnnotation *bool) {
 }
 
 // AddGeneratorFlags adds flags common to resource generation commands
-// TODO: need to take a pass at other generator commands to use this set of flags
+// TODO: need to take a pass at other generator commands to use this set of flags id:747 gh:748
 func AddGeneratorFlags(cmd *cobra.Command, defaultGenerator string) {
 	cmd.Flags().String("generator", defaultGenerator, "The name of the API generator to use.")
 	AddDryRunFlag(cmd)
@@ -446,7 +446,7 @@ func ReadConfigDataFromReader(reader io.Reader, source string) ([]byte, error) {
 }
 
 // Merge requires JSON serialization
-// TODO: merge assumes JSON serialization, and does not properly abstract API retrieval
+// TODO: merge assumes JSON serialization, and does not properly abstract API retrieval id:720 gh:721
 func Merge(codec runtime.Codec, dst runtime.Object, fragment string) (runtime.Object, error) {
 	// encode dst into versioned json and apply fragment directly too it
 	target, err := runtime.Encode(codec, dst)

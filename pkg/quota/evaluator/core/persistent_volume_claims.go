@@ -106,7 +106,7 @@ func (p *pvcEvaluator) Handles(a admission.Attributes) bool {
 		// only handle the update if the object is initialized after the update.
 		return initialized
 	}
-	// TODO: when the ExpandPersistentVolumes feature gate is removed, remove
+	// TODO: when the ExpandPersistentVolumes feature gate is removed, remove id:1304 gh:1310
 	// the initializationCompletion check as well, because it will become a
 	// subset of the "initialized" condition.
 	initializationCompletion, err := util.IsInitializationCompletion(a)

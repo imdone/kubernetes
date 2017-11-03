@@ -173,7 +173,7 @@ func (options *Latex) TableCell(out *bytes.Buffer, text []byte, align int) {
 	out.Write(text)
 }
 
-// TODO: this
+// TODO: this id:3040 gh:3055
 func (options *Latex) Footnotes(out *bytes.Buffer, text func() bool) {
 
 }
@@ -253,7 +253,7 @@ func (options *Latex) StrikeThrough(out *bytes.Buffer, text []byte) {
 	out.WriteString("}")
 }
 
-// TODO: this
+// TODO: this id:3025 gh:3040
 func (options *Latex) FootnoteRef(out *bytes.Buffer, ref []byte, id int) {
 
 }
@@ -289,7 +289,7 @@ func escapeSpecialChars(out *bytes.Buffer, text []byte) {
 }
 
 func (options *Latex) Entity(out *bytes.Buffer, entity []byte) {
-	// TODO: convert this into a unicode character or something
+	// TODO: convert this into a unicode character or something id:3205 gh:3220
 	out.Write(entity)
 }
 

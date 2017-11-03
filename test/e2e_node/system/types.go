@@ -21,7 +21,7 @@ type KernelConfig struct {
 	// Name is the general name of the kernel configuration. It is used to
 	// match kernel configuration.
 	Name string `json:"name,omitempty"`
-	// TODO(yguo0905): Support the "or" operation, which will be the same
+	// TODO (yguo0905): Support the "or" operation, which will be the same id:2587 gh:2602
 	// as the "aliases".
 	//
 	// Aliases are aliases of the kernel configuration. Some configuration
@@ -71,7 +71,7 @@ type RuntimeSpec struct {
 // PackageSpec defines the required packages and their versions.
 // PackageSpec is only supported on OS distro with Debian package manager.
 //
-// TODO(yguo0905): Support operator OR of multiple packages for the case where
+// TODO (yguo0905): Support operator OR of multiple packages for the case where id:2428 gh:2443
 // either "foo (>=1.0)" or "bar (>=2.0)" is required.
 type PackageSpec struct {
 	// Name is the name of the package to be checked.
@@ -87,7 +87,7 @@ type PackageSpec struct {
 	VersionRange string `json:"versionRange,omitempty"`
 	// Description explains the reason behind this package requirements.
 	//
-	// TODO(yguo0905): Print the description where necessary.
+	// TODO (yguo0905): Print the description where necessary. id:2499 gh:2509
 	Description string `json:"description,omitempty"`
 }
 

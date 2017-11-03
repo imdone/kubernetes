@@ -65,7 +65,7 @@ func NewREST(optsGetter generic.RESTOptionsGetter) (*REST, *StatusREST, *Finaliz
 	}
 	options := &generic.StoreOptions{RESTOptions: optsGetter, AttrFunc: namespace.GetAttrs}
 	if err := store.CompleteWithOptions(options); err != nil {
-		panic(err) // TODO: Propagate error up
+		panic(err) // TODO: Propagate error up id:1352 gh:1359
 	}
 
 	statusStore := *store
@@ -137,7 +137,7 @@ func (r *REST) Delete(ctx genericapirequest.Context, name string, options *metav
 	}
 
 	// upon first request to delete, we switch the phase to start namespace termination
-	// TODO: enhance graceful deletion's calls to DeleteStrategy to allow phase change and finalizer patterns
+	// TODO: enhance graceful deletion's calls to DeleteStrategy to allow phase change and finalizer patterns id:1391 gh:1397
 	if namespace.DeletionTimestamp.IsZero() {
 		key, err := r.store.KeyFunc(ctx, name)
 		if err != nil {

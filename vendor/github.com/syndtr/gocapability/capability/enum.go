@@ -205,7 +205,7 @@ const (
 	// Override reserved space on ext2 filesystem
 	// Modify data journaling mode on ext3 filesystem (uses journaling
 	// resources)
-	// NOTE: ext2 honors fsuid when checking for resource overrides, so
+	// NOTE: ext2 honors fsuid when checking for resource overrides, so id:3073 gh:3087
 	// you can override using fsuid too
 	// Override size restrictions on IPC message queues
 	// Allow more than 64hz interrupts from the real-time clock

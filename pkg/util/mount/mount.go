@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// TODO(thockin): This whole pkg is pretty linux-centric.  As soon as we have
+// TODO (thockin): This whole pkg is pretty linux-centric.  As soon as we have id:1373 gh:1379
 // an alternate platform, we will need to abstract further.
 package mount
 
@@ -175,7 +175,7 @@ func GetDeviceNameFromMount(mounter Interface, mountPath string) (string, int, e
 	}
 
 	// Find the device name.
-	// FIXME if multiple devices mounted on the same mount path, only the first one is returned
+	// FIXME if multiple devices mounted on the same mount path, only the first one is returned id:1493 gh:1499
 	device := ""
 	// If mountPath is symlink, need get its target path.
 	slTarget, err := filepath.EvalSymlinks(mountPath)

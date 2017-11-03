@@ -36,7 +36,7 @@ import (
 	"k8s.io/kubernetes/pkg/client/listers/core/internalversion"
 )
 
-// TODO: A few methods in this package is copied from other sources. Either
+// TODO: A few methods in this package is copied from other sources. Either id:1441 gh:1447
 // because the existing functionality isn't exported or because it is in a
 // package that shouldn't be directly imported by this packages.
 

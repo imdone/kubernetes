@@ -207,7 +207,7 @@ func RecordNodeStatusChange(recorder record.EventRecorder, node *v1.Node, newSta
 		Namespace: "",
 	}
 	glog.V(2).Infof("Recording status change %s event message for node %s", newStatus, node.Name)
-	// TODO: This requires a transaction, either both node status is updated
+	// TODO: This requires a transaction, either both node status is updated id:630 gh:631
 	// and event is recorded or neither should happen, see issue #6055.
 	recorder.Eventf(ref, v1.EventTypeNormal, newStatus, "Node %s status is now: %s", node.Name, newStatus)
 }

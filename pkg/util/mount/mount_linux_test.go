@@ -32,7 +32,7 @@ func TestReadProcMountsFrom(t *testing.T) {
 /dev/1    /path/to/1   type1	flags 1 1
 /dev/2 /path/to/2 type2 flags,1,2=3 2 2
 `
-	// NOTE: readProcMountsFrom has been updated to using fnv.New32a()
+	// NOTE: readProcMountsFrom has been updated to using fnv.New32a() id:1414 gh:1420
 	mounts, err := parseProcMounts([]byte(successCase))
 	if err != nil {
 		t.Errorf("expected success, got %v", err)

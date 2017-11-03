@@ -190,7 +190,7 @@ func checkPermissions() error {
 	if uid := os.Getuid(); uid != 0 {
 		return fmt.Errorf("Kubelet needs to run as uid `0`. It is being run as %d", uid)
 	}
-	// TODO: Check if kubelet is running in the `initial` user namespace.
+	// TODO: Check if kubelet is running in the `initial` user namespace. id:228 gh:229
 	// http://man7.org/linux/man-pages/man7/user_namespaces.7.html
 	return nil
 }
@@ -492,7 +492,7 @@ func run(s *options.KubeletServer, kubeDeps *kubelet.Dependencies) (err error) {
 
 	rand.Seed(time.Now().UTC().UnixNano())
 
-	// TODO(vmarmol): Do this through container config.
+	// TODO (vmarmol): Do this through container config. id:167 gh:168
 	oomAdjuster := kubeDeps.OOMAdjuster
 	if err := oomAdjuster.ApplyOOMScoreAdj(0, int(s.OOMScoreAdj)); err != nil {
 		glog.Warning(err)
@@ -608,7 +608,7 @@ func kubeconfigClientConfig(s *options.KubeletServer) (*restclient.Config, error
 func createClientConfig(s *options.KubeletServer) (*restclient.Config, error) {
 	// If --kubeconfig was not provided, it will have a default path set in cmd/kubelet/app/options/options.go.
 	// We only use that default path when --require-kubeconfig=true. The default path is temporary until --require-kubeconfig is removed.
-	// TODO(#41161:v1.10.0): Remove the default kubeconfig path and --require-kubeconfig.
+	// TODO (#41161:v1.10.0): Remove the default kubeconfig path and --require-kubeconfig. id:137 gh:138
 	if s.BootstrapKubeconfig != "" || s.KubeConfig.Provided() || s.RequireKubeConfig == true {
 		return kubeconfigClientConfig(s)
 	} else {
@@ -639,8 +639,8 @@ func addChaosToClientConfig(s *options.KubeletServer, config *restclient.Config)
 	if s.ChaosChance != 0.0 {
 		config.WrapTransport = func(rt http.RoundTripper) http.RoundTripper {
 			seed := chaosclient.NewSeed(1)
-			// TODO: introduce a standard chaos package with more tunables - this is just a proof of concept
-			// TODO: introduce random latency and stalls
+			// TODO: introduce a standard chaos package with more tunables - this is just a proof of concept id:186 gh:183
+			// TODO: introduce random latency and stalls id:192 gh:193
 			return chaosclient.NewChaosRoundTripper(rt, chaosclient.LogChaos, seed.P(s.ChaosChance, chaosclient.ErrSimulatedConnectionResetByPeer))
 		}
 	}
@@ -661,7 +661,7 @@ func RunKubelet(kubeFlags *options.KubeletFlags, kubeCfg *kubeletconfiginternal.
 	// Setup event recorder if required.
 	makeEventRecorder(kubeDeps, nodeName)
 
-	// TODO(mtaufen): I moved the validation of these fields here, from UnsecuredKubeletConfig,
+	// TODO (mtaufen): I moved the validation of these fields here, from UnsecuredKubeletConfig, id:229 gh:230
 	//                so that I could remove the associated fields from KubeletConfiginternal. I would
 	//                prefer this to be done as part of an independent validation step on the
 	//                KubeletConfiguration. But as far as I can tell, we don't have an explicit
@@ -794,7 +794,7 @@ func CreateAndInitKubelet(kubeCfg *kubeletconfiginternal.KubeletConfiguration,
 	registerSchedulable bool,
 	nonMasqueradeCIDR string,
 	keepTerminatedPodVolumes bool) (k kubelet.Bootstrap, err error) {
-	// TODO: block until all sources have delivered at least one update to the channel, or break the sync loop
+	// TODO: block until all sources have delivered at least one update to the channel, or break the sync loop id:168 gh:169
 	// up into "per source" synchronizations
 
 	k, err = kubelet.NewMainKubelet(kubeCfg,
@@ -895,7 +895,7 @@ func BootstrapKubeletConfigController(defaultConfig *kubeletconfiginternal.Kubel
 }
 
 // RunDockershim only starts the dockershim in current process. This is only used for cri validate testing purpose
-// TODO(random-liu): Move this to a separate binary.
+// TODO (random-liu): Move this to a separate binary. id:138 gh:139
 func RunDockershim(f *options.KubeletFlags, c *kubeletconfiginternal.KubeletConfiguration) error {
 	r := &f.ContainerRuntimeOptions
 	// Create docker client.

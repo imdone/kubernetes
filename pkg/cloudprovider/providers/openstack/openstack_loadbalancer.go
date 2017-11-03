@@ -560,7 +560,7 @@ func getNodeSecurityGroupIDForLB(compute *gophercloud.ServiceClient, nodes []*v1
 	return nodeSecurityGroupIDs.List(), nil
 }
 
-// TODO: This code currently ignores 'region' and always creates a
+// TODO: This code currently ignores 'region' and always creates a id:441 gh:442
 // loadbalancer in only the current OpenStack region.  We should take
 // a list of regions (from config) and query/create loadbalancers in
 // each region.
@@ -611,7 +611,7 @@ func (lbaas *LbaasV2) EnsureLoadBalancer(clusterName string, apiService *v1.Serv
 	}
 
 	// Check for TCP protocol on each port
-	// TODO: Convert all error messages to use an event recorder
+	// TODO: Convert all error messages to use an event recorder id:510 gh:511
 	for _, port := range ports {
 		if port.Protocol != v1.ProtocolTCP {
 			return nil, fmt.Errorf("only TCP LoadBalancer is supported for openstack load balancers")

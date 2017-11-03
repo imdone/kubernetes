@@ -26,13 +26,13 @@ func NewHeuristicWatchCacheSizes(expectedRAMCapacityMB int) map[schema.GroupReso
 	// From our documentation, we officially recommend 120GB machines for
 	// 2000 nodes, and we scale from that point. Thus we assume ~60MB of
 	// capacity per node.
-	// TODO: Revisit this heuristics
+	// TODO: Revisit this heuristics id:1271 gh:1277
 	clusterSize := expectedRAMCapacityMB / 60
 
 	// We should specify cache size for a given resource only if it
 	// is supposed to have non-default value.
 	//
-	// TODO: Figure out which resource we should have non-default value.
+	// TODO: Figure out which resource we should have non-default value. id:1177 gh:1183
 	watchCacheSizes := make(map[schema.GroupResource]int)
 	watchCacheSizes[schema.GroupResource{Resource: "replicationcontrollers"}] = maxInt(5*clusterSize, 100)
 	watchCacheSizes[schema.GroupResource{Resource: "endpoints"}] = maxInt(10*clusterSize, 1000)

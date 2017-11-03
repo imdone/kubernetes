@@ -40,7 +40,7 @@ type simpleNameGenerator struct{}
 var SimpleNameGenerator NameGenerator = simpleNameGenerator{}
 
 const (
-	// TODO: make this flexible for non-core resources with alternate naming rules.
+	// TODO: make this flexible for non-core resources with alternate naming rules. id:3754 gh:3769
 	maxNameLength          = 63
 	randomLength           = 5
 	maxGeneratedNameLength = maxNameLength - randomLength

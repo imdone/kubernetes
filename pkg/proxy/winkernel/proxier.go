@@ -476,7 +476,7 @@ func NewProxier(
 
 	healthChecker := healthcheck.NewServer(hostname, recorder, nil, nil) // use default implementations of deps
 
-	// TODO : Make this a param
+	// TODO : Make this a param id:1222 gh:1228
 	hnsNetworkName := os.Getenv("KUBE_NETWORK")
 	if len(hnsNetworkName) == 0 {
 		return nil, fmt.Errorf("Environment variable KUBE_NETWORK not initialized")
@@ -518,7 +518,7 @@ func NewProxier(
 func CleanupLeftovers() (encounteredError bool) {
 	// Delete all Hns Load Balancer Policies
 	deleteAllHnsLoadBalancerPolicy()
-	// TODO
+	// TODO id:1246 gh:1252
 	// Delete all Hns Remote endpoints
 
 	return encounteredError
@@ -599,7 +599,7 @@ func getHnsLoadBalancer(endpoints []hcsshim.HNSEndpoint, isILB bool, vip string,
 
 		}
 	}
-	//TODO: sourceVip is not used. If required, expose this as a param
+	//TODO: sourceVip is not used. If required, expose this as a param id:1299 gh:1305
 	var sourceVip string
 	lb, err := hcsshim.AddLoadBalancer(
 		endpoints,
@@ -772,7 +772,7 @@ func (proxier *Proxier) updateServiceMap() (result updateServiceMapResult) {
 		changes.items = make(map[types.NamespacedName]*serviceChange)
 	}()
 
-	// TODO: If this will appear to be computationally expensive, consider
+	// TODO: If this will appear to be computationally expensive, consider id:1260 gh:1266
 	// computing this incrementally similarly to serviceMap.
 	result.hcServices = make(map[types.NamespacedName]uint16)
 	for svcPortName, info := range serviceMap {
@@ -838,7 +838,7 @@ func (proxier *Proxier) updateEndpointsMap() (result updateEndpointMapResult) {
 		return
 	}
 
-	// TODO: If this will appear to be computationally expensive, consider
+	// TODO: If this will appear to be computationally expensive, consider id:1166 gh:1172
 	// computing this incrementally similarly to endpointsMap.
 	result.hcEndpoints = make(map[types.NamespacedName]int)
 	localIPs := getLocalIPs(endpointsMap)
@@ -867,7 +867,7 @@ func getLocalIPs(endpointsMap proxyEndpointsMap) map[types.NamespacedName]sets.S
 // Translates single Endpoints object to proxyEndpointsMap.
 // This function is used for incremental updated of endpointsMap.
 //
-// NOTE: endpoints object should NOT be modified.
+// NOTE: endpoints object should NOT be modified. id:1223 gh:1229
 func endpointsToEndpointsMap(endpoints *api.Endpoints, hostname string) proxyEndpointsMap {
 	if endpoints == nil {
 		return nil
@@ -912,7 +912,7 @@ func endpointsToEndpointsMap(endpoints *api.Endpoints, hostname string) proxyEnd
 
 // Translates single Service object to proxyServiceMap.
 //
-// NOTE: service object should NOT be modified.
+// NOTE: service object should NOT be modified. id:1247 gh:1253
 func serviceToServiceMap(service *api.Service) proxyServiceMap {
 	if service == nil {
 		return nil
@@ -1129,9 +1129,9 @@ func (proxier *Proxier) syncProxyRules() {
 	}
 
 	// Finish housekeeping.
-	// TODO: these could be made more consistent.
+	// TODO: these could be made more consistent. id:1300 gh:1306
 	for _, svcIP := range staleServices.List() {
-		// TODO : Check if this is required to cleanup stale services here
+		// TODO : Check if this is required to cleanup stale services here id:1261 gh:1268
 		glog.V(5).Infof("Pending delete stale service IP %s connections", svcIP)
 	}
 

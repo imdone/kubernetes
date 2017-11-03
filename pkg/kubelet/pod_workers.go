@@ -118,7 +118,7 @@ type podWorkers struct {
 	workQueue queue.WorkQueue
 
 	// This function is run to sync the desired stated of pod.
-	// NOTE: This function has to be thread-safe - it can be called for
+	// NOTE: This function has to be thread-safe - it can be called for id:1106 gh:1112
 	// different pods at the same time.
 	syncPodFn syncPodFnType
 

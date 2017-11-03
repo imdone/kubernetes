@@ -1164,7 +1164,7 @@ Operation.prototype.encodeQueryParam = function(arg) {
 };
 
 /**
- * TODO revisit, might not want to leave '/'
+ * TODO revisit, might not want to leave '/' id:2484 gh:2499
  **/
 Operation.prototype.encodePathParam = function(pathParam) {
   var encParts, part, parts, i, len;
@@ -2714,7 +2714,7 @@ SwaggerHttp.prototype.isIE8 = function() {
 
 /*
  * JQueryHttpClient lets a browser take advantage of JQuery's cross-browser magic.
- * NOTE: when jQuery is available it will export both '$' and 'jQuery' to the global space.
+ * NOTE: when jQuery is available it will export both '$' and 'jQuery' to the global space. id:2605 gh:2620
  *       Since we are using closures here we need to alias it for internal use.
  */
 var JQueryHttpClient = function(options) {

@@ -455,7 +455,7 @@ func (d *decoder) scalar(n *node, out reflect.Value) (good bool) {
 		}
 	case reflect.Ptr:
 		if out.Type().Elem() == reflect.TypeOf(resolved) {
-			// TODO DOes this make sense? When is out a Ptr except when decoding a nil value?
+			// TODO DOes this make sense? When is out a Ptr except when decoding a nil value? id:3393 gh:3408
 			elem := reflect.New(out.Type().Elem())
 			elem.Elem().Set(reflect.ValueOf(resolved))
 			out.Set(elem)

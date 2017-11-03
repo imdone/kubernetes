@@ -99,7 +99,7 @@ func (o WardleServerOptions) Config() (*apiserver.Config, error) {
 	// register admission plugins
 	banflunder.Register(o.Admission.Plugins)
 
-	// TODO have a "real" external address
+	// TODO have a "real" external address id:3980 gh:4000
 	if err := o.RecommendedOptions.SecureServing.MaybeDefaultWithSelfSignedCerts("localhost", nil, []net.IP{net.ParseIP("127.0.0.1")}); err != nil {
 		return nil, fmt.Errorf("error creating self-signed certificates: %v", err)
 	}

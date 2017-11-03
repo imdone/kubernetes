@@ -25,7 +25,7 @@ import (
 // ImportTracker may be passed to a namer.RawNamer, to track the imports needed
 // for the types it names.
 //
-// TODO: pay attention to the package name (instead of renaming every package).
+// TODO: pay attention to the package name (instead of renaming every package). id:3972 gh:3992
 type DefaultImportTracker struct {
 	pathToName map[string]string
 	// forbidden names are in here. (e.g. "go" is a directory in which

@@ -34,7 +34,7 @@ func onAzure() bool {
 	return strings.Contains(string(data), MicrosoftCorporation)
 }
 
-// TODO: Implement method.
+// TODO: Implement method. id:2920 gh:2935
 func getAzureInstanceType() info.InstanceType {
 	return info.UnknownInstance
 }

@@ -42,7 +42,7 @@ func init() {
 // StartCompactor starts a compactor in the background to compact old version of keys that's not needed.
 // By default, we save the most recent 10 minutes data and compact versions > 10minutes ago.
 // It should be enough for slow watchers and to tolerate burst.
-// TODO: We might keep a longer history (12h) in the future once storage API can take advantage of past version of keys.
+// TODO: We might keep a longer history (12h) in the future once storage API can take advantage of past version of keys. id:3936 gh:3952
 func StartCompactor(ctx context.Context, client *clientv3.Client, compactInterval time.Duration) {
 	endpointsMapMu.Lock()
 	defer endpointsMapMu.Unlock()

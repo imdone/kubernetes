@@ -34,7 +34,7 @@ var _ = instrumentation.SIGDescribe("Kibana Logging Instances Is Alive [Feature:
 	f := framework.NewDefaultFramework("kibana-logging")
 
 	ginkgo.BeforeEach(func() {
-		// TODO: For now assume we are only testing cluster logging with Elasticsearch
+		// TODO: For now assume we are only testing cluster logging with Elasticsearch id:2250 gh:2265
 		// and Kibana on GCE. Once we are sure that Elasticsearch and Kibana cluster level logging
 		// works for other providers we should widen this scope of this test.
 		framework.SkipUnlessProviderIs("gce")

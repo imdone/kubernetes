@@ -91,7 +91,7 @@ func NewHorizontalController(
 ) *HorizontalController {
 	broadcaster := record.NewBroadcaster()
 	broadcaster.StartLogging(glog.Infof)
-	// TODO: remove the wrapper when every clients have moved to use the clientset.
+	// TODO: remove the wrapper when every clients have moved to use the clientset. id:566 gh:567
 	broadcaster.StartRecordingToSink(&v1core.EventSinkImpl{Interface: evtNamespacer.Events("")})
 	recorder := broadcaster.NewRecorder(scheme.Scheme, v1.EventSource{Component: "horizontal-pod-autoscaler"})
 
@@ -162,7 +162,7 @@ func (a *HorizontalController) deleteHPA(obj interface{}) {
 		return
 	}
 
-	// TODO: could we leak if we fail to get the key?
+	// TODO: could we leak if we fail to get the key? id:585 gh:586
 	a.queue.Forget(key)
 }
 

@@ -262,7 +262,7 @@ func TestUnschedulableNodes(t *testing.T) {
 	defer cleanupTest(t, context)
 
 	nodeLister := context.schedulerConfigFactory.GetNodeLister()
-	// NOTE: This test cannot run in parallel, because it is creating and deleting
+	// NOTE: This test cannot run in parallel, because it is creating and deleting id:2597 gh:2612
 	// non-namespaced objects (Nodes).
 	defer context.clientSet.CoreV1().Nodes().DeleteCollection(nil, metav1.ListOptions{})
 

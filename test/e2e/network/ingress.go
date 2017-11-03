@@ -70,7 +70,7 @@ var _ = SIGDescribe("Loadbalancing: L7", func() {
 	// test requires at least 5.
 	//
 	// Slow by design ~10m for each "It" block dominated by loadbalancer setup time
-	// TODO: write similar tests for nginx, haproxy and AWS Ingress.
+	// TODO: write similar tests for nginx, haproxy and AWS Ingress. id:2391 gh:2406
 	Describe("GCE [Slow] [Feature:Ingress]", func() {
 		var gceController *framework.GCEIngressController
 
@@ -142,7 +142,7 @@ var _ = SIGDescribe("Loadbalancing: L7", func() {
 			// ingress resources and backends we are not aware of.
 			Expect(framework.VerifyFirewallRule(fw, expFw, gceController.Cloud.Network, true)).NotTo(HaveOccurred())
 
-			// TODO: uncomment the restart test once we have a way to synchronize
+			// TODO: uncomment the restart test once we have a way to synchronize id:2308 gh:2323
 			// and know that the controller has resumed watching. If we delete
 			// the ingress before the controller is ready we will leak.
 			// By("restaring glbc")
@@ -153,7 +153,7 @@ var _ = SIGDescribe("Loadbalancing: L7", func() {
 			// framework.ExpectNoError(jig.verifyURL(fmt.Sprintf("https://%v/", ip), "", 30, 1*time.Second, httpClient))
 		})
 
-		// TODO: Implement a multizone e2e that verifies traffic reaches each
+		// TODO: Implement a multizone e2e that verifies traffic reaches each id:2341 gh:2356
 		// zone based on pod labels.
 	})
 	Describe("GCE [Slow] [Feature:NEG]", func() {
@@ -343,7 +343,7 @@ var _ = SIGDescribe("Loadbalancing: L7", func() {
 			jig.Class = "nginx"
 			nginxController = &framework.NginxIngressController{Ns: ns, Client: jig.Client}
 
-			// TODO: This test may fail on other platforms. We can simply skip it
+			// TODO: This test may fail on other platforms. We can simply skip it id:2474 gh:2491
 			// but we want to allow easy testing where a user might've hand
 			// configured firewalls.
 			if framework.ProviderIs("gce", "gke") {

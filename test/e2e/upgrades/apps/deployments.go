@@ -35,7 +35,7 @@ const (
 	deploymentName = "dp"
 )
 
-// TODO: Test that the deployment stays available during master (and maybe
+// TODO: Test that the deployment stays available during master (and maybe id:2271 gh:2286
 // node and cluster upgrades).
 
 // DeploymentUpgradeTest tests that a deployment is using the same replica

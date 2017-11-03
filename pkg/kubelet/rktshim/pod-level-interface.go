@@ -25,7 +25,7 @@ import (
 // the pod sandboxes in a blocking manner.
 type PodSandboxManager struct{}
 
-// TODO(tmrts): Fill the configuration struct fields.
+// TODO (tmrts): Fill the configuration struct fields. id:1136 gh:1142
 type PodSandboxManagerConfig struct{}
 
 // NewPodSandboxManager creates a PodSandboxManager.

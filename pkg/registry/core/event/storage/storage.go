@@ -34,12 +34,12 @@ func NewREST(optsGetter generic.RESTOptionsGetter, ttl uint64) *REST {
 	resource := api.Resource("events")
 	opts, err := optsGetter.GetRESTOptions(resource)
 	if err != nil {
-		panic(err) // TODO: Propagate error up
+		panic(err) // TODO: Propagate error up id:1351 gh:1357
 	}
 
 	// We explicitly do NOT do any decoration here - switching on Cacher
 	// for events will lead to too high memory consumption.
-	opts.Decorator = generic.UndecoratedStorage // TODO use watchCacheSize=-1 to signal UndecoratedStorage
+	opts.Decorator = generic.UndecoratedStorage // TODO use watchCacheSize=-1 to signal UndecoratedStorage id:1390 gh:1396
 
 	store := &genericregistry.Store{
 		NewFunc:       func() runtime.Object { return &api.Event{} },
@@ -56,7 +56,7 @@ func NewREST(optsGetter generic.RESTOptionsGetter, ttl uint64) *REST {
 	}
 	options := &generic.StoreOptions{RESTOptions: opts, AttrFunc: event.GetAttrs} // Pass in opts to use UndecoratedStorage
 	if err := store.CompleteWithOptions(options); err != nil {
-		panic(err) // TODO: Propagate error up
+		panic(err) // TODO: Propagate error up id:1312 gh:1318
 	}
 	return &REST{store}
 }

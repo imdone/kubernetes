@@ -35,7 +35,7 @@ import (
 	"k8s.io/kubernetes/pkg/registry/registrytest"
 )
 
-// TODO: allow for global factory override
+// TODO: allow for global factory override id:1173 gh:1179
 func newStorage(t *testing.T) (StatefulSetStorage, *etcdtesting.EtcdTestServer) {
 	etcdStorage, server := registrytest.NewEtcdStorage(t, apps.GroupName)
 	restOptions := generic.RESTOptions{StorageConfig: etcdStorage, Decorator: generic.UndecoratedStorage, DeleteCollectionWorkers: 1, ResourcePrefix: "statefulsets"}
@@ -99,11 +99,11 @@ func TestCreate(t *testing.T) {
 	test.TestCreate(
 		// valid
 		ps,
-		// TODO: Add an invalid case when we have validation.
+		// TODO: Add an invalid case when we have validation. id:1346 gh:1352
 	)
 }
 
-// TODO: Test updates to spec when we allow them.
+// TODO: Test updates to spec when we allow them. id:1342 gh:1348
 
 func TestStatusUpdate(t *testing.T) {
 	storage, server := newStorage(t)
@@ -295,4 +295,4 @@ func TestScaleUpdate(t *testing.T) {
 	}
 }
 
-// TODO: Test generation number.
+// TODO: Test generation number. id:1307 gh:1313

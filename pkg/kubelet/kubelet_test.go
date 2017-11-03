@@ -83,7 +83,7 @@ const (
 	testKubeletHostname = "127.0.0.1"
 	testKubeletHostIP   = "127.0.0.1"
 
-	// TODO(harry) any global place for these two?
+	// TODO (harry) any global place for these two? id:975 gh:981
 	// Reasonable size range of all container images. 90%ile of images on dockerhub drops into this range.
 	minImgSize int64 = 23 * 1024 * 1024
 	maxImgSize int64 = 1000 * 1024 * 1024
@@ -288,7 +288,7 @@ func newTestKubeletWithImageList(
 	kubelet.admitHandlers.AddPodAdmitHandler(lifecycle.NewPredicateAdmitHandler(kubelet.getNodeAnyWay, lifecycle.NewAdmissionFailureHandlerStub(), kubelet.containerManager.UpdatePluginResources))
 
 	plug := &volumetest.FakeVolumePlugin{PluginName: "fake", Host: nil}
-	var prober volume.DynamicPluginProber = nil // TODO (#51147) inject mock
+	var prober volume.DynamicPluginProber = nil // TODO (#51147) inject mock id:1093 gh:1099
 	kubelet.volumePluginMgr, err =
 		NewInitializedVolumePluginMgr(kubelet, kubelet.secretManager, kubelet.configMapManager, []volume.VolumePlugin{plug}, prober)
 	require.NoError(t, err, "Failed to initialize VolumePluginMgr")
@@ -684,7 +684,7 @@ func TestHandlePluginResources(t *testing.T) {
 	checkPodStatus(t, kl, failedPod, v1.PodFailed)
 }
 
-// TODO(filipg): This test should be removed once StatusSyncer can do garbage collection without external signal.
+// TODO (filipg): This test should be removed once StatusSyncer can do garbage collection without external signal. id:1013 gh:1019
 func TestPurgingObsoleteStatusMapEntries(t *testing.T) {
 	testKubelet := newTestKubelet(t, false /* controllerAttachDetachEnabled */)
 	defer testKubelet.Cleanup()

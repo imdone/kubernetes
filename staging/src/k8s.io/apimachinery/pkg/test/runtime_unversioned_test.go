@@ -21,7 +21,7 @@ import (
 	"reflect"
 	"testing"
 
-	// TODO: Ideally we should create the necessary package structure in e.g.,
+	// TODO: Ideally we should create the necessary package structure in e.g., id:3282 gh:3297
 	// pkg/conversion/test/... instead of importing pkg/api here.
 	apitesting "k8s.io/apimachinery/pkg/api/testing"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -70,7 +70,7 @@ func TestExperimentalEncodeDecodeStatus(t *testing.T) {
 		Reason:  metav1.StatusReasonUnknown,
 		Message: "",
 	}
-	// TODO: caesarxuchao: use the testapi.Extensions.Codec() once the PR that
+	// TODO: caesarxuchao: use the testapi.Extensions.Codec() once the PR that id:3777 gh:3793
 	// moves experimental from v1 to v1beta1 got merged.
 	_, codecs := TestScheme()
 	expCodec := apitesting.TestCodec(codecs, schema.GroupVersion{Group: "", Version: runtime.APIVersionInternal})

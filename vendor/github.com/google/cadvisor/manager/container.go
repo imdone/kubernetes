@@ -161,7 +161,7 @@ func (c *containerData) ReadFile(filepath string, inHostNamespace bool) ([]byte,
 	if err != nil {
 		return nil, err
 	}
-	// TODO(rjnagal): Optimize by just reading container's cgroup.proc file when in host namespace.
+	// TODO (rjnagal): Optimize by just reading container's cgroup.proc file when in host namespace. id:2918 gh:2933
 	rootfs := "/"
 	if !inHostNamespace {
 		rootfs = "/rootfs"
@@ -337,7 +337,7 @@ func newContainerData(containerName string, memoryCache *memory.InMemoryCache, h
 		// Create cpu load reader.
 		loadReader, err := cpuload.New()
 		if err != nil {
-			// TODO(rjnagal): Promote to warning once we support cpu load inside namespaces.
+			// TODO (rjnagal): Promote to warning once we support cpu load inside namespaces. id:3057 gh:3072
 			glog.Infof("Could not initialize cpu load reader for %q: %s", ref.Name, err)
 		} else {
 			cont.loadReader = loadReader
@@ -367,7 +367,7 @@ func (self *containerData) nextHousekeeping(lastHousekeeping time.Time) time.Tim
 				glog.Warningf("Failed to get RecentStats(%q) while determining the next housekeeping: %v", self.info.Name, err)
 			}
 		} else if len(stats) == 2 {
-			// TODO(vishnuk): Use no processes as a signal.
+			// TODO (vishnuk): Use no processes as a signal. id:2657 gh:2672
 			// Raise the interval if usage hasn't changed in the last housekeeping.
 			if stats[0].StatsEq(stats[1]) && (self.housekeepingInterval < self.maxHousekeepingInterval) {
 				self.housekeepingInterval *= 2
@@ -384,7 +384,7 @@ func (self *containerData) nextHousekeeping(lastHousekeeping time.Time) time.Tim
 	return lastHousekeeping.Add(jitter(self.housekeepingInterval, 1.0))
 }
 
-// TODO(vmarmol): Implement stats collecting as a custom collector.
+// TODO (vmarmol): Implement stats collecting as a custom collector. id:2960 gh:2975
 func (c *containerData) housekeeping() {
 	// Start any background goroutines - must be cleaned up in c.handler.Cleanup().
 	c.handler.Start()
@@ -523,7 +523,7 @@ func (c *containerData) updateStats() error {
 		return statsErr
 	}
 	if c.loadReader != nil {
-		// TODO(vmarmol): Cache this path.
+		// TODO (vmarmol): Cache this path. id:2835 gh:2851
 		path, err := c.handler.GetCgroupPath("cpu")
 		if err == nil {
 			loadStats, err := c.loadReader.GetCpuLoad(c.info.Name, path)

@@ -474,7 +474,7 @@ func parseKeyRequest(r *http.Request, clock clockwork.Clock) (etcdserverpb.Reque
 			`invalid value for "wait"`,
 		)
 	}
-	// TODO(jonboulle): define what parameters dir is/isn't compatible with?
+	// TODO (jonboulle): define what parameters dir is/isn't compatible with? id:2567 gh:2582
 	if dir, err = getBool(r.Form, "dir"); err != nil {
 		return emptyReq, false, etcdErr.NewRequestError(
 			etcdErr.EcodeInvalidField,

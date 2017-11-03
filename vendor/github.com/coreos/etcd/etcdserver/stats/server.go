@@ -28,7 +28,7 @@ import (
 type ServerStats struct {
 	Name string `json:"name"`
 	// ID is the raft ID of the node.
-	// TODO(jonboulle): use ID instead of name?
+	// TODO (jonboulle): use ID instead of name? id:2621 gh:2636
 	ID        string         `json:"id"`
 	State     raft.StateType `json:"state"`
 	StartTime time.Time      `json:"startTime"`
@@ -61,7 +61,7 @@ func (ss *ServerStats) JSON() []byte {
 	stats.SendingPkgRate, stats.SendingBandwidthRate = stats.SendRates()
 	stats.RecvingPkgRate, stats.RecvingBandwidthRate = stats.RecvRates()
 	b, err := json.Marshal(stats)
-	// TODO(jonboulle): appropriate error handling?
+	// TODO (jonboulle): appropriate error handling? id:2572 gh:2587
 	if err != nil {
 		log.Printf("stats: error marshalling server stats: %v", err)
 	}

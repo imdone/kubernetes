@@ -101,7 +101,7 @@ func getLocalNodeCPUDetails(f *framework.Framework) (cpuCapVal int64, cpuAllocVa
 	return cpuCap.Value(), (cpuCap.Value() - cpuRes.Value()), cpuRes.Value()
 }
 
-// TODO(balajismaniam): Make this func generic to all container runtimes.
+// TODO (balajismaniam): Make this func generic to all container runtimes. id:2355 gh:2370
 func waitForContainerRemoval(ctnPartName string) {
 	Eventually(func() bool {
 		err := exec.Command("/bin/sh", "-c", fmt.Sprintf("if [ -n \"$(docker ps -a | grep -i %s)\" ]; then exit 1; fi", ctnPartName)).Run()
@@ -136,7 +136,7 @@ func setOldKubeletConfig(f *framework.Framework, oldCfg *kubeletconfig.KubeletCo
 
 func enableCPUManagerInKubelet(f *framework.Framework) (oldCfg *kubeletconfig.KubeletConfiguration) {
 	// Run only if the container runtime is Docker.
-	// TODO(balajismaniam): Make this test generic to all container runtimes.
+	// TODO (balajismaniam): Make this test generic to all container runtimes. id:2612 gh:2628
 	framework.RunIfContainerRuntimeIs("docker")
 
 	// Enable CPU Manager in Kubelet with static policy.

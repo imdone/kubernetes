@@ -106,7 +106,7 @@ func ValidateNonnegativeQuantity(value resource.Quantity, fldPath *field.Path) f
 // Refer to docs/design/resources.md for more details.
 func validateResourceName(value string, fldPath *field.Path) field.ErrorList {
 	// Opaque integer resources (OIR) deprecation began in v1.8
-	// TODO: Remove warning after OIR deprecation cycle.
+	// TODO: Remove warning after OIR deprecation cycle. id:266 gh:267
 	if v1helper.IsOpaqueIntResourceName(v1.ResourceName(value)) {
 		glog.Errorf("DEPRECATION WARNING! Opaque integer resources are deprecated starting with v1.8: %s", value)
 	}

@@ -32,7 +32,7 @@ func Create(c storagebackend.Config) (storage.Interface, DestroyFunc, error) {
 	case storagebackend.StorageTypeETCD2:
 		return newETCD2Storage(c)
 	case storagebackend.StorageTypeUnset, storagebackend.StorageTypeETCD3:
-		// TODO: We have the following features to implement:
+		// TODO: We have the following features to implement: id:3755 gh:3770
 		// - Support secure connection by using key, cert, and CA files.
 		// - Honor "https" scheme to support secure connection in gRPC.
 		// - Support non-quorum read.

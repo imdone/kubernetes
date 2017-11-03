@@ -74,7 +74,7 @@ function detect_client_info() {
       exit 2
   esac
 
-  # TODO: migrate the kube::util::host_platform function out of hack/lib and
+  # TODO: migrate the kube::util::host_platform function out of hack/lib and id:98 gh:100
   # use it here.
   local machine=$(uname -m)
   case "${machine}" in
@@ -137,7 +137,7 @@ function download_tarball() {
   local sha1sum=$(sha1sum_file "${download_path}/${file}")
   echo "sha1sum(${file})=${sha1sum}"
   echo
-  # TODO: add actual verification
+  # TODO: add actual verification id:89 gh:90
 }
 
 function extract_arch_tarball() {
@@ -170,7 +170,7 @@ echo "Server: ${SERVER_PLATFORM}/${SERVER_ARCH}  (to override, set KUBERNETES_SE
 echo "Client: ${CLIENT_PLATFORM}/${CLIENT_ARCH}  (autodetected)"
 echo
 
-# TODO: remove this check and default to true when we stop shipping server
+# TODO: remove this check and default to true when we stop shipping server id:49 gh:50
 # tarballs in kubernetes.tar.gz
 DOWNLOAD_SERVER_TAR=false
 if [[ ! -e "${KUBE_ROOT}/server/${SERVER_TAR}" ]]; then
@@ -178,7 +178,7 @@ if [[ ! -e "${KUBE_ROOT}/server/${SERVER_TAR}" ]]; then
   echo "Will download ${SERVER_TAR} from ${DOWNLOAD_URL_PREFIX}"
 fi
 
-# TODO: remove this check and default to true when we stop shipping kubectl
+# TODO: remove this check and default to true when we stop shipping kubectl id:110 gh:111
 # in kubernetes.tar.gz
 DOWNLOAD_CLIENT_TAR=false
 if [[ ! -x "${KUBE_ROOT}/platforms/${CLIENT_PLATFORM}/${CLIENT_ARCH}/kubectl" ]]; then

@@ -65,7 +65,7 @@ type TokenCleaner struct {
 
 // NewTokenCleaner returns a new *NewTokenCleaner.
 //
-// TODO: Switch to shared informers
+// TODO: Switch to shared informers id:453 gh:454
 func NewTokenCleaner(cl clientset.Interface, options TokenCleanerOptions) *TokenCleaner {
 	e := &TokenCleaner{
 		client:               cl,

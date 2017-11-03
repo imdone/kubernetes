@@ -269,7 +269,7 @@ func TestValidatePersistentVolumes(t *testing.T) {
 			}),
 		},
 		// LocalVolume alpha feature disabled
-		// TODO: remove when no longer alpha
+		// TODO: remove when no longer alpha id:271 gh:272
 		"alpha disabled valid local volume": {
 			isExpectedFailure: true,
 			volume: testVolumeWithNodeAffinity(
@@ -4887,7 +4887,7 @@ func TestValidatePod(t *testing.T) {
 				Namespace: "ns",
 			},
 			Spec: validPodSpec(
-				// TODO: Uncomment and move this block and move inside NodeAffinity once
+				// TODO: Uncomment and move this block and move inside NodeAffinity once id:321 gh:322
 				// RequiredDuringSchedulingRequiredDuringExecution is implemented
 				//		RequiredDuringSchedulingRequiredDuringExecution: &api.NodeSelector{
 				//			NodeSelectorTerms: []api.NodeSelectorTerm{
@@ -4938,7 +4938,7 @@ func TestValidatePod(t *testing.T) {
 			ObjectMeta: metav1.ObjectMeta{
 				Name:      "123",
 				Namespace: "ns",
-				// TODO: Uncomment and move this block into Annotations map once
+				// TODO: Uncomment and move this block into Annotations map once id:295 gh:296
 				// RequiredDuringSchedulingRequiredDuringExecution is implemented
 				//		"requiredDuringSchedulingRequiredDuringExecution": [{
 				//			"labelSelector": {
@@ -4994,7 +4994,7 @@ func TestValidatePod(t *testing.T) {
 			ObjectMeta: metav1.ObjectMeta{
 				Name:      "123",
 				Namespace: "ns",
-				// TODO: Uncomment and move this block into Annotations map once
+				// TODO: Uncomment and move this block into Annotations map once id:347 gh:348
 				// RequiredDuringSchedulingRequiredDuringExecution is implemented
 				//		"requiredDuringSchedulingRequiredDuringExecution": [{
 				//			"labelSelector": {

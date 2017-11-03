@@ -88,7 +88,7 @@ func TestReadPodsFromFileExistAlready(t *testing.T) {
 			case got := <-ch:
 				update := got.(kubetypes.PodUpdate)
 				for _, pod := range update.Pods {
-					// TODO: remove the conversion when validation is performed on versioned objects.
+					// TODO: remove the conversion when validation is performed on versioned objects. id:837 gh:838
 					internalPod := &api.Pod{}
 					if err := k8s_api_v1.Convert_v1_Pod_To_api_Pod(pod, internalPod, nil); err != nil {
 						t.Fatalf("%s: Cannot convert pod %#v, %#v", testCase.desc, pod, err)
@@ -371,7 +371,7 @@ func expectUpdate(t *testing.T, ch chan interface{}, testCase *testCase) {
 		case got := <-ch:
 			update := got.(kubetypes.PodUpdate)
 			for _, pod := range update.Pods {
-				// TODO: remove the conversion when validation is performed on versioned objects.
+				// TODO: remove the conversion when validation is performed on versioned objects. id:833 gh:834
 				internalPod := &api.Pod{}
 				if err := k8s_api_v1.Convert_v1_Pod_To_api_Pod(pod, internalPod, nil); err != nil {
 					t.Fatalf("%s: Cannot convert pod %#v, %#v", testCase.desc, pod, err)

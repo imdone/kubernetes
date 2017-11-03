@@ -55,7 +55,7 @@ function usage() {
   echo "(... Fetching current release versions ...)"
   echo ""
 
-  # NOTE: IF YOU CHANGE THE FOLLOWING LIST, ALSO UPDATE test/e2e/cluster_upgrade.go
+  # NOTE: IF YOU CHANGE THE FOLLOWING LIST, ALSO UPDATE test/e2e/cluster_upgrade.go id:44 gh:45
   local release_stable
   local release_latest
   local ci_latest
@@ -87,7 +87,7 @@ function upgrade-master() {
 
   # Tries to figure out KUBE_USER/KUBE_PASSWORD by first looking under
   # kubeconfig:username, and then under kubeconfig:username-basic-auth.
-  # TODO: KUBE_USER is used in generating ABAC policy which the
+  # TODO: KUBE_USER is used in generating ABAC policy which the id:105 gh:106
   # apiserver may not have enabled. If it's enabled, we must have a user
   # to generate a valid ABAC policy. If the username changes, should
   # the script fail? Should we generate a default username and password
@@ -122,7 +122,7 @@ function upgrade-master-env() {
   fi
 }
 
-# TODO(mikedanese): delete when we don't support < 1.6
+# TODO (mikedanese): delete when we don't support < 1.6 id:80 gh:81
 function backfile-kubeletauth-certs() {
   if [[ ! -z "${KUBEAPISERVER_CERT_BASE64:-}" && ! -z "${KUBEAPISERVER_CERT_BASE64:-}" ]]; then
     return 0
@@ -209,7 +209,7 @@ function prepare-upgrade() {
 #   PROJECT
 #   ZONE
 function get-node-env() {
-  # TODO(zmerlynn): Make this more reliable with retries.
+  # TODO (zmerlynn): Make this more reliable with retries. id:27 gh:28
   gcloud compute --project ${PROJECT} ssh --zone ${ZONE} ${NODE_NAMES[0]} --command \
     "curl --fail --silent -H 'Metadata-Flavor: Google' \
       'http://metadata/computeMetadata/v1/instance/attributes/kube-env'" 2>/dev/null
@@ -290,7 +290,7 @@ function prepare-node-upgrade() {
 
   SANITIZED_VERSION=$(echo ${KUBE_VERSION} | sed 's/[\.\+]/-/g')
 
-  # TODO(zmerlynn): Refactor setting scope flags.
+  # TODO (zmerlynn): Refactor setting scope flags. id:35 gh:36
   local scope_flags=
   if [ -n "${NODE_SCOPES}" ]; then
     scope_flags="--scopes ${NODE_SCOPES}"
@@ -310,11 +310,11 @@ function prepare-node-upgrade() {
 
   upgrade-node-env
 
-  # TODO(zmerlynn): How do we ensure kube-env is written in a ${version}-
+  # TODO (zmerlynn): How do we ensure kube-env is written in a ${version}- id:45 gh:46
   #                 compatible way?
   write-node-env
 
-  # TODO(zmerlynn): Get configure-vm script from ${version}. (Must plumb this
+  # TODO (zmerlynn): Get configure-vm script from ${version}. (Must plumb this id:106 gh:107
   #                 through all create-node-instance-template implementations).
   local template_name=$(get-template-name-from-version ${SANITIZED_VERSION})
   create-node-instance-template "${template_name}"
@@ -434,7 +434,7 @@ function do-single-node-upgrade() {
 function do-node-upgrade() {
   echo "== Upgrading nodes to ${KUBE_VERSION} with max parallelism of ${node_upgrade_parallelism}. ==" >&2
   # Do the actual upgrade.
-  # NOTE(zmerlynn): If you are changing this gcloud command, update
+  # NOTE (zmerlynn): If you are changing this gcloud command, update id:81 gh:82
   #                 test/e2e/cluster_upgrade.go to match this EXACTLY.
   local template_name=$(get-template-name-from-version ${SANITIZED_VERSION})
   local old_templates=()

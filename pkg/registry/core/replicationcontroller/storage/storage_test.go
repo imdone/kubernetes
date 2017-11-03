@@ -251,7 +251,7 @@ func TestWatch(t *testing.T) {
 	)
 }
 
-//TODO TestUpdateStatus
+//TODO TestUpdateStatus id:1355 gh:1361
 
 func TestScaleGet(t *testing.T) {
 	storage, server := newStorage(t)

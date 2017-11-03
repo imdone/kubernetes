@@ -46,7 +46,7 @@ import (
 
 const (
 	// Maximal number of concurrent CreateRoute API calls.
-	// TODO: This should be per-provider.
+	// TODO: This should be per-provider. id:671 gh:672
 	maxConcurrentRouteCreations int = 200
 	// Maximum number of retries of route creations.
 	maxRetries int = 5
@@ -106,7 +106,7 @@ func (rc *RouteController) Run(stopCh <-chan struct{}, syncPeriod time.Duration)
 		rc.broadcaster.StartRecordingToSink(&v1core.EventSinkImpl{Interface: v1core.New(rc.kubeClient.CoreV1().RESTClient()).Events("")})
 	}
 
-	// TODO: If we do just the full Resync every 5 minutes (default value)
+	// TODO: If we do just the full Resync every 5 minutes (default value) id:622 gh:623
 	// that means that we may wait up to 5 minutes before even starting
 	// creating a route for it. This is bad.
 	// We should have a watch on node and if we observe a new node (with CIDR?)

@@ -127,7 +127,7 @@ func Convert_runtime_RawExtension_To_runtime_Object(in *RawExtension, out *Objec
 	}
 	*out = &Unknown{
 		Raw: data,
-		// TODO: Set ContentEncoding and ContentType appropriately.
+		// TODO: Set ContentEncoding and ContentType appropriately. id:3848 gh:3863
 		// Currently we set ContentTypeJSON to make tests passing.
 		ContentType: ContentTypeJSON,
 	}

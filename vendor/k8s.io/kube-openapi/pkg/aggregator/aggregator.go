@@ -331,7 +331,7 @@ func mergeSpecs(dest, source *spec.Swagger, renameModelConflicts, ignorePathConf
 
 // CloneSpec clones OpenAPI spec
 func CloneSpec(source *spec.Swagger) (*spec.Swagger, error) {
-	// TODO(mehdy): Find a faster way to clone an spec
+	// TODO (mehdy): Find a faster way to clone an spec id:3977 gh:3997
 	bytes, err := json.Marshal(source)
 	if err != nil {
 		return nil, err

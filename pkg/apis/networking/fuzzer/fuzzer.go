@@ -27,7 +27,7 @@ var Funcs = func(codecs runtimeserializer.CodecFactory) []interface{} {
 	return []interface{}{
 		func(np *networking.NetworkPolicyPeer, c fuzz.Continue) {
 			c.FuzzNoCustom(np) // fuzz self without calling this function again
-			// TODO: Implement a fuzzer to generate valid keys, values and operators for
+			// TODO: Implement a fuzzer to generate valid keys, values and operators for id:305 gh:307
 			// selector requirements.
 			if np.IPBlock != nil {
 				np.IPBlock = &networking.IPBlock{
@@ -38,7 +38,7 @@ var Funcs = func(codecs runtimeserializer.CodecFactory) []interface{} {
 		},
 		func(np *networking.NetworkPolicy, c fuzz.Continue) {
 			c.FuzzNoCustom(np) // fuzz self without calling this function again
-			// TODO: Implement a fuzzer to generate valid keys, values and operators for
+			// TODO: Implement a fuzzer to generate valid keys, values and operators for id:422 gh:423
 			// selector requirements.
 			if len(np.Spec.PolicyTypes) == 0 {
 				np.Spec.PolicyTypes = []networking.PolicyType{networking.PolicyTypeIngress}

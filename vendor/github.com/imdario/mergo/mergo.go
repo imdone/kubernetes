@@ -86,5 +86,5 @@ func deeper(dst, src reflect.Value, visited map[uintptr]*visit, depth int) (err 
 		// Remember, remember...
 		visited[h] = &visit{addr, typ, seen}
 	}
-	return // TODO refactor
+	return // TODO refactor id:2972 gh:2989
 }

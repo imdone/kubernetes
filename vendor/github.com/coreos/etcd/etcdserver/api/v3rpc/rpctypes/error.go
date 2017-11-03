@@ -156,7 +156,7 @@ type EtcdError struct {
 }
 
 // Code returns grpc/codes.Code.
-// TODO: define clientv3/codes.Code.
+// TODO: define clientv3/codes.Code. id:2509 gh:2524
 func (e EtcdError) Code() codes.Code {
 	return e.code
 }

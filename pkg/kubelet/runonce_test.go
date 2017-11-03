@@ -112,7 +112,7 @@ func TestRunOnce(t *testing.T) {
 		false /* keepTerminatedPodVolumes */)
 
 	kb.networkPlugin, _ = network.InitNetworkPlugin([]network.NetworkPlugin{}, "", nettest.NewFakeHost(nil), kubeletconfig.HairpinNone, "", network.UseDefaultMTU)
-	// TODO: Factor out "StatsProvider" from Kubelet so we don't have a cyclic dependency
+	// TODO: Factor out "StatsProvider" from Kubelet so we don't have a cyclic dependency id:1197 gh:1203
 	volumeStatsAggPeriod := time.Second * 10
 	kb.resourceAnalyzer = stats.NewResourceAnalyzer(kb, volumeStatsAggPeriod)
 	nodeRef := &v1.ObjectReference{
@@ -153,7 +153,7 @@ func TestRunOnce(t *testing.T) {
 	// Now the logic in isPodRunning is changed, to let the test pass, we set the podstatus directly in fake runtime.
 	// This is also a meaningless test, because the isPodRunning will also always return true after setting this. However,
 	// because runonce is never used in kubernetes now, we should deprioritize the cleanup work.
-	// TODO(random-liu) Fix the test, make it meaningful.
+	// TODO (random-liu) Fix the test, make it meaningful. id:1040 gh:1046
 	fakeRuntime.PodStatus = kubecontainer.PodStatus{
 		ContainerStatuses: []*kubecontainer.ContainerStatus{
 			{

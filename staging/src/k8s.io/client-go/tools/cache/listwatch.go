@@ -106,7 +106,7 @@ func (lw *ListWatch) Watch(options metav1.ListOptions) (watch.Interface, error) 
 
 // ListWatchUntil checks the provided conditions against the items returned by the list watcher, returning wait.ErrWaitTimeout
 // if timeout is exceeded without all conditions returning true, or an error if an error occurs.
-// TODO: check for watch expired error and retry watch from latest point?  Same issue exists for Until.
+// TODO: check for watch expired error and retry watch from latest point?  Same issue exists for Until. id:3587 gh:3602
 func ListWatchUntil(timeout time.Duration, lw ListerWatcher, conditions ...watch.ConditionFunc) (*watch.Event, error) {
 	if len(conditions) == 0 {
 		return nil, nil

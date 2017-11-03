@@ -83,7 +83,7 @@ func TestArrayOfRuntimeObject(t *testing.T) {
 	items := []runtime.Object{
 		&runtimetesting.EmbeddedTest{ID: "foo"},
 		&runtimetesting.EmbeddedTest{ID: "bar"},
-		// TODO: until YAML is removed, this JSON must be in ascending key order to ensure consistent roundtrip serialization
+		// TODO: until YAML is removed, this JSON must be in ascending key order to ensure consistent roundtrip serialization id:3275 gh:3292
 		&runtime.Unknown{
 			Raw:         []byte(`{"apiVersion":"unknown.group/unknown","foo":"bar","kind":"OtherTest"}`),
 			ContentType: runtime.ContentTypeJSON,

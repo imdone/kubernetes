@@ -40,7 +40,7 @@ import (
 var _ = SIGDescribe("Initializers [Feature:Initializers]", func() {
 	f := framework.NewDefaultFramework("initializers")
 
-	// TODO: Add failure traps once we have JustAfterEach
+	// TODO: Add failure traps once we have JustAfterEach id:2362 gh:2377
 	// See https://github.com/onsi/ginkgo/issues/303
 
 	It("should be invisible to controllers by default", func() {
@@ -271,7 +271,7 @@ var _ = SIGDescribe("Initializers [Feature:Initializers]", func() {
 		podName := "to-be-patch-initialized-pod"
 		framework.Logf("Creating pod %s", podName)
 
-		// TODO: lower the timeout so that the server responds faster.
+		// TODO: lower the timeout so that the server responds faster. id:2094 gh:2109
 		_, err := c.CoreV1().Pods(ns).Create(newUninitializedPod(podName))
 		if err != nil && !errors.IsTimeout(err) {
 			framework.Failf("expect err to be timeout error, got %v", err)

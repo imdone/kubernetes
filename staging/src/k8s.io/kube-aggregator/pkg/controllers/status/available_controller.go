@@ -353,7 +353,7 @@ func (c *AvailableConditionController) getAPIServicesFor(obj runtime.Object) []*
 	return ret
 }
 
-// TODO, think of a way to avoid checking on every service manipulation
+// TODO , think of a way to avoid checking on every service manipulation id:4036 gh:4056
 
 func (c *AvailableConditionController) addService(obj interface{}) {
 	for _, apiService := range c.getAPIServicesFor(obj.(*v1.Service)) {

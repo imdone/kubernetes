@@ -105,7 +105,7 @@ const (
 	// How long to wait for the pod to be listable
 	PodListTimeout = time.Minute
 	// Initial pod start can be delayed O(minutes) by slow docker pulls
-	// TODO: Make this 30 seconds once #4566 is resolved.
+	// TODO: Make this 30 seconds once #4566 is resolved. id:2462 gh:2477
 	PodStartTimeout = 5 * time.Minute
 
 	// If there are any orphaned namespaces to clean up, this test is running
@@ -131,7 +131,7 @@ const (
 
 	// How long to try single API calls (like 'get' or 'list'). Used to prevent
 	// transient failures from failing tests.
-	// TODO: client should not apply this timeout to Watch calls. Increased from 30s until that is fixed.
+	// TODO: client should not apply this timeout to Watch calls. Increased from 30s until that is fixed. id:2198 gh:2214
 	SingleCallTimeout = 5 * time.Minute
 
 	// How long nodes have to be "ready" when a test begins. They should already
@@ -178,7 +178,7 @@ const (
 	// Minimal number of nodes for the cluster to be considered large.
 	largeClusterThreshold = 100
 
-	// TODO(justinsb): Avoid hardcoding this.
+	// TODO (justinsb): Avoid hardcoding this. id:2380 gh:2395
 	awsMasterIP = "172.20.0.9"
 
 	// ssh port
@@ -239,7 +239,7 @@ func GetPauseImageName(c clientset.Interface) string {
 }
 
 // GetPauseImageNameForHostArch fetches the pause image name for the same architecture the test is running on.
-// TODO: move this function to the test/utils
+// TODO: move this function to the test/utils id:2245 gh:2260
 func GetPauseImageNameForHostArch() string {
 	return currentPodInfraContainerImageName + "-" + goruntime.GOARCH + ":" + currentPodInfraContainerImageVersion
 }
@@ -959,7 +959,7 @@ func CreateTestingNS(baseName string, c clientset.Interface, labels map[string]s
 // CheckTestingNSDeletedExcept checks whether all e2e based existing namespaces are in the Terminating state
 // and waits until they are finally deleted. It ignores namespace skip.
 func CheckTestingNSDeletedExcept(c clientset.Interface, skip string) error {
-	// TODO: Since we don't have support for bulk resource deletion in the API,
+	// TODO: Since we don't have support for bulk resource deletion in the API, id:2234 gh:2249
 	// while deleting a namespace we are deleting all objects from that namespace
 	// one by one (one deletion == one API call). This basically exposes us to
 	// throttling - currently controller-manager has a limit of max 20 QPS.
@@ -1143,7 +1143,7 @@ func isDynamicDiscoveryError(err error) bool {
 // hasRemainingContent checks if there is remaining content in the namespace via API discovery
 func hasRemainingContent(c clientset.Interface, clientPool dynamic.ClientPool, namespace string) (bool, error) {
 	// some tests generate their own framework.Client rather than the default
-	// TODO: ensure every test call has a configured clientPool
+	// TODO: ensure every test call has a configured clientPool id:2463 gh:2478
 	if clientPool == nil {
 		return false, nil
 	}
@@ -1158,7 +1158,7 @@ func hasRemainingContent(c clientset.Interface, clientPool dynamic.ClientPool, n
 		return false, err
 	}
 
-	// TODO: temporary hack for https://github.com/kubernetes/kubernetes/issues/31798
+	// TODO: temporary hack for https://github.com/kubernetes/kubernetes/issues/31798 id:2199 gh:2209
 	ignoredResources := sets.NewString("bindings")
 
 	contentRemaining := false
@@ -1174,7 +1174,7 @@ func hasRemainingContent(c clientset.Interface, clientPool dynamic.ClientPool, n
 		}
 		// get the api resource
 		apiResource := metav1.APIResource{Name: gvr.Resource, Namespaced: true}
-		// TODO: temporary hack for https://github.com/kubernetes/kubernetes/issues/31798
+		// TODO: temporary hack for https://github.com/kubernetes/kubernetes/issues/31798 id:2381 gh:2396
 		if ignoredResources.Has(apiResource.Name) {
 			Logf("namespace: %s, resource: %s, ignored listing per whitelist", namespace, apiResource.Name)
 			continue
@@ -1220,7 +1220,7 @@ func ContainerInitInvariant(older, newer runtime.Object) error {
 	oldInit, _, _ := podInitialized(oldPod)
 	newInit, _, _ := podInitialized(newPod)
 	if oldInit && !newInit {
-		// TODO: we may in the future enable resetting PodInitialized = false if the kubelet needs to restart it
+		// TODO: we may in the future enable resetting PodInitialized = false if the kubelet needs to restart it id:2246 gh:2261
 		// from scratch
 		return fmt.Errorf("pod cannot be initialized and then regress to not being initialized")
 	}
@@ -1712,7 +1712,7 @@ func (r podProxyResponseChecker) CheckAllResponses() (done bool, err error) {
 // ServerVersionGTE returns true if v is greater than or equal to the server
 // version.
 //
-// TODO(18726): This should be incorporated into client.VersionInterface.
+// TODO (18726): This should be incorporated into client.VersionInterface. id:2235 gh:2250
 func ServerVersionGTE(v *utilversion.Version, c discovery.ServerVersionInterface) (bool, error) {
 	serverVersion, err := c.ServerVersion()
 	if err != nil {
@@ -1933,7 +1933,7 @@ func LoadClientset() (*clientset.Clientset, error) {
 }
 
 // randomSuffix provides a random string to append to pods,services,rcs.
-// TODO: Allow service names to have the same form as names
+// TODO: Allow service names to have the same form as names id:2464 gh:2480
 //       for pods and replication controllers so we don't
 //       need to use such a function and can instead
 //       use the UUID utility function.
@@ -2354,7 +2354,7 @@ func DumpNodeDebugInfo(c clientset.Interface, nodeNames []string, logFunc func(f
 			}
 		}
 		HighLatencyKubeletOperations(c, 10*time.Second, n, logFunc)
-		// TODO: Log node resource info
+		// TODO: Log node resource info id:2201 gh:2216
 	}
 }
 
@@ -2867,7 +2867,7 @@ func getReplicasFromRuntimeObject(obj runtime.Object) (int32, error) {
 		}
 		return 0, nil
 	case *batch.Job:
-		// TODO: currently we use pause pods so that's OK. When we'll want to switch to Pods
+		// TODO: currently we use pause pods so that's OK. When we'll want to switch to Pods id:2382 gh:2397
 		// that actually finish we need a better way to do this.
 		if typed.Spec.Parallelism != nil {
 			return *typed.Spec.Parallelism, nil
@@ -3132,7 +3132,7 @@ func NodeAddresses(nodelist *v1.NodeList, addrType v1.NodeAddressType) []string 
 		for _, addr := range n.Status.Addresses {
 			// Use the first external IP address we find on the node, and
 			// use at most one per node.
-			// TODO(roberthbailey): Use the "preferred" address for the node, once
+			// TODO (roberthbailey): Use the "preferred" address for the node, once id:2247 gh:2262
 			// such a thing is defined (#2462).
 			if addr.Type == addrType {
 				hosts = append(hosts, addr.Address)
@@ -3149,7 +3149,7 @@ func NodeAddresses(nodelist *v1.NodeList, addrType v1.NodeAddressType) []string 
 func NodeSSHHosts(c clientset.Interface) ([]string, error) {
 	nodelist := waitListSchedulableNodesOrDie(c)
 
-	// TODO(roberthbailey): Use the "preferred" address for the node, once such a thing is defined (#2462).
+	// TODO (roberthbailey): Use the "preferred" address for the node, once such a thing is defined (#2462). id:2332 gh:2347
 	hosts := NodeAddresses(nodelist, v1.NodeExternalIP)
 
 	// Error if any node didn't have an external IP.
@@ -3544,7 +3544,7 @@ func isNodeConditionSetAsExpected(node *v1.Node, conditionType v1.NodeConditionT
 						return false
 					}
 				} else {
-					// TODO: check if the Node is tainted once we enable NC notReady/unreachable taints by default
+					// TODO: check if the Node is tainted once we enable NC notReady/unreachable taints by default id:2465 gh:2481
 					if cond.Status != v1.ConditionTrue {
 						return true
 					}
@@ -3612,7 +3612,7 @@ func WaitForNodeToBe(c clientset.Interface, name string, conditionType v1.NodeCo
 }
 
 // Checks whether all registered nodes are ready.
-// TODO: we should change the AllNodesReady call in AfterEach to WaitForAllNodesHealthy,
+// TODO: we should change the AllNodesReady call in AfterEach to WaitForAllNodesHealthy, id:2202 gh:2217
 // and figure out how to do it in a configurable way, as we can't expect all setups to run
 // default test add-ons.
 func AllNodesReady(c clientset.Interface, timeout time.Duration) error {
@@ -3727,7 +3727,7 @@ func WaitForAllNodesHealthy(c clientset.Interface, timeout time.Duration) error 
 
 // Filters nodes in NodeList in place, removing nodes that do not
 // satisfy the given condition
-// TODO: consider merging with pkg/client/cache.NodeLister
+// TODO: consider merging with pkg/client/cache.NodeLister id:2383 gh:2398
 func FilterNodes(nodeList *v1.NodeList, fn func(node v1.Node) bool) {
 	var l []v1.Node
 
@@ -3758,7 +3758,7 @@ func ParseKVLines(output, key string) string {
 }
 
 func RestartKubeProxy(host string) error {
-	// TODO: Make it work for all providers.
+	// TODO: Make it work for all providers. id:2248 gh:2263
 	if !ProviderIs("gce", "gke", "aws") {
 		return fmt.Errorf("unsupported provider: %s", TestContext.Provider)
 	}
@@ -3794,7 +3794,7 @@ func RestartKubeProxy(host string) error {
 }
 
 func RestartKubelet(host string) error {
-	// TODO: Make it work for all providers and distros.
+	// TODO: Make it work for all providers and distros. id:2333 gh:2349
 	if !ProviderIs("gce", "aws") {
 		return fmt.Errorf("unsupported provider: %s", TestContext.Provider)
 	}
@@ -3831,7 +3831,7 @@ func WaitForKubeletUp(host string) error {
 }
 
 func RestartApiserver(c discovery.ServerVersionInterface) error {
-	// TODO: Make it work for all providers.
+	// TODO: Make it work for all providers. id:2466 gh:2482
 	if !ProviderIs("gce", "gke", "aws") {
 		return fmt.Errorf("unsupported provider: %s", TestContext.Provider)
 	}
@@ -3879,7 +3879,7 @@ func WaitForApiserverUp(c clientset.Interface) error {
 }
 
 func RestartControllerManager() error {
-	// TODO: Make it work for all providers and distros.
+	// TODO: Make it work for all providers and distros. id:2252 gh:2267
 	if !ProviderIs("gce", "aws") {
 		return fmt.Errorf("unsupported provider: %s", TestContext.Provider)
 	}
@@ -4231,7 +4231,7 @@ func GetNodePortURL(client clientset.Interface, ns, name string, svcPort int) (s
 	return "", fmt.Errorf("Failed to find external address for service %v", name)
 }
 
-// TODO(random-liu): Change this to be a member function of the framework.
+// TODO (random-liu): Change this to be a member function of the framework. id:2384 gh:2399
 func GetPodLogs(c clientset.Interface, namespace, podName, containerName string) (string, error) {
 	return getPodLogsInternal(c, namespace, podName, containerName, false)
 }
@@ -4826,7 +4826,7 @@ func getMaster(c clientset.Interface) Address {
 		Failf("Failed to parse hostname: %v", err)
 	}
 	if net.ParseIP(url.Host) != nil {
-		// TODO: Check that it is external IP (not having a reserved IP address as per RFC1918).
+		// TODO: Check that it is external IP (not having a reserved IP address as per RFC1918). id:2249 gh:2264
 		master.externalIP = url.Host
 	} else {
 		master.hostname = url.Host
@@ -4963,7 +4963,7 @@ func PrintSummaries(summaries []TestDataSummary, testBaseName string) {
 			if TestContext.ReportDir == "" {
 				Logf(summaries[i].PrintHumanReadable())
 			} else {
-				// TODO: learn to extract test name and append it to the kind instead of timestamp.
+				// TODO: learn to extract test name and append it to the kind instead of timestamp. id:2334 gh:2350
 				filePath := path.Join(TestContext.ReportDir, summaries[i].SummaryKind()+"_"+testBaseName+"_"+now.Format(time.RFC3339)+".txt")
 				if err := ioutil.WriteFile(filePath, []byte(summaries[i].PrintHumanReadable()), 0644); err != nil {
 					Logf("Failed to write file %v with test performance data: %v", filePath, err)
@@ -4979,7 +4979,7 @@ func PrintSummaries(summaries []TestDataSummary, testBaseName string) {
 				Logf("%v JSON\n%v", summaries[i].SummaryKind(), summaries[i].PrintJSON())
 				Logf("Finished")
 			} else {
-				// TODO: learn to extract test name and append it to the kind instead of timestamp.
+				// TODO: learn to extract test name and append it to the kind instead of timestamp. id:2467 gh:2483
 				filePath := path.Join(TestContext.ReportDir, summaries[i].SummaryKind()+"_"+testBaseName+"_"+now.Format(time.RFC3339)+".json")
 				Logf("Writing to %s", filePath)
 				if err := ioutil.WriteFile(filePath, []byte(summaries[i].PrintJSON()), 0644); err != nil {

@@ -26,7 +26,7 @@ import (
 )
 
 type versionDiscoveryHandler struct {
-	// TODO, writing is infrequent, optimize this
+	// TODO , writing is infrequent, optimize this id:3750 gh:3765
 	discoveryLock sync.RWMutex
 	discovery     map[schema.GroupVersion]*discovery.APIVersionHandler
 
@@ -72,7 +72,7 @@ func (r *versionDiscoveryHandler) unsetDiscovery(gv schema.GroupVersion) {
 }
 
 type groupDiscoveryHandler struct {
-	// TODO, writing is infrequent, optimize this
+	// TODO , writing is infrequent, optimize this id:3225 gh:3241
 	discoveryLock sync.RWMutex
 	discovery     map[string]*discovery.APIGroupHandler
 

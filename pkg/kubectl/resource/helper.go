@@ -57,7 +57,7 @@ func (m *Helper) Get(namespace, name string, export bool) (runtime.Object, error
 		Resource(m.Resource).
 		Name(name)
 	if export {
-		// TODO: I should be part of GetOptions
+		// TODO: I should be part of GetOptions id:752 gh:753
 		req.Param("export", strconv.FormatBool(export))
 	}
 	return req.Do().Get()
@@ -69,7 +69,7 @@ func (m *Helper) List(namespace, apiVersion string, export bool, options *metav1
 		Resource(m.Resource).
 		VersionedParams(options, metav1.ParameterCodec)
 	if export {
-		// TODO: I should be part of ListOptions
+		// TODO: I should be part of ListOptions id:822 gh:823
 		req.Param("export", strconv.FormatBool(export))
 	}
 	return req.Do().Get()

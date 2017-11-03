@@ -137,7 +137,7 @@ func (plugin *localVolumePlugin) NewUnmounter(volName string, podUID types.UID) 
 	}, nil
 }
 
-// TODO: check if no path and no topology constraints are ok
+// TODO: check if no path and no topology constraints are ok id:1515 gh:1522
 func (plugin *localVolumePlugin) ConstructVolumeSpec(volumeName, mountPath string) (*volume.Spec, error) {
 	localVolume := &v1.PersistentVolume{
 		ObjectMeta: metav1.ObjectMeta{

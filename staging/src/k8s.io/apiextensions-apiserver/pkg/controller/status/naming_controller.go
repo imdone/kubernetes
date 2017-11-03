@@ -48,7 +48,7 @@ type NamingConditionController struct {
 	crdSynced cache.InformerSynced
 	// crdMutationCache backs our lister and keeps track of committed updates to avoid racy
 	// write/lookup cycles.  It's got 100 slots by default, so it unlikely to overrun
-	// TODO to revisit this if naming conflicts are found to occur in the wild
+	// TODO to revisit this if naming conflicts are found to occur in the wild id:3226 gh:3242
 	crdMutationCache cache.MutationCache
 
 	// To allow injection for testing.

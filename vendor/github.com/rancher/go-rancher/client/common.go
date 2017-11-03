@@ -457,7 +457,7 @@ func (rancherClient *RancherBaseClientImpl) doById(schemaType string, id string,
 	}
 
 	err := rancherClient.doGet(collectionUrl+"/"+id, nil, respObject)
-	//TODO check for 404 and return nil, nil
+	//TODO check for 404 and return nil, nil id:3039 gh:3054
 	return err
 }
 

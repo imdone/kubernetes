@@ -103,7 +103,7 @@ func (f *fakeRktInterface) GetLogs(ctx context.Context, in *rktapi.GetLogsReques
 }
 
 // fakeSystemd mocks the systemdInterface for testing purpose.
-// TODO(yifan): Remove this once we have a package for launching rkt pods.
+// TODO (yifan): Remove this once we have a package for launching rkt pods. id:1064 gh:1070
 // See https://github.com/coreos/rkt/issues/1769.
 type fakeSystemd struct {
 	sync.Mutex

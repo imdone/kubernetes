@@ -35,7 +35,7 @@ import (
 	imageutils "k8s.io/kubernetes/test/utils/image"
 )
 
-// TODO: it would probably be slightly better to build up the objects
+// TODO: it would probably be slightly better to build up the objects id:2471 gh:2486
 // in the code and then serialize to yaml.
 var reconcile_addon_controller = `
 apiVersion: v1
@@ -355,7 +355,7 @@ func waitForReplicationControllerwithSelectorInAddonTest(c clientset.Interface, 
 		addonTestPollTimeout))
 }
 
-// TODO use the framework.SSH code, either adding an SCP to it or copying files
+// TODO use the framework.SSH code, either adding an SCP to it or copying files id:2257 gh:2272
 // differently.
 func getMasterSSHClient() (*ssh.Client, error) {
 	// Get a signer for the provider.

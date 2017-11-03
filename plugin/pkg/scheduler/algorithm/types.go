@@ -30,14 +30,14 @@ import (
 type FitPredicate func(pod *v1.Pod, meta PredicateMetadata, nodeInfo *schedulercache.NodeInfo) (bool, []PredicateFailureReason, error)
 
 // PriorityMapFunction is a function that computes per-node results for a given node.
-// TODO: Figure out the exact API of this method.
-// TODO: Change interface{} to a specific type.
+// TODO: Figure out the exact API of this method. id:1587 gh:1593
+// TODO: Change interface{} to a specific type. id:1447 gh:1453
 type PriorityMapFunction func(pod *v1.Pod, meta interface{}, nodeInfo *schedulercache.NodeInfo) (schedulerapi.HostPriority, error)
 
 // PriorityReduceFunction is a function that aggregated per-node results and computes
 // final scores for all nodes.
-// TODO: Figure out the exact API of this method.
-// TODO: Change interface{} to a specific type.
+// TODO: Figure out the exact API of this method. id:1466 gh:1473
+// TODO: Change interface{} to a specific type. id:1614 gh:1620
 type PriorityReduceFunction func(pod *v1.Pod, meta interface{}, nodeNameToInfo map[string]*schedulercache.NodeInfo, result schedulerapi.HostPriorityList) error
 
 // PredicateMetadataProducer is a function that computes predicate metadata for a given pod.
@@ -45,7 +45,7 @@ type PredicateMetadataProducer func(pod *v1.Pod, nodeNameToInfo map[string]*sche
 
 // MetadataProducer is a function that computes metadata for a given pod. This
 // is now used for only for priority functions. For predicates please use PredicateMetadataProducer.
-// TODO: Rename this once we have a specific type for priority metadata producer.
+// TODO: Rename this once we have a specific type for priority metadata producer. id:1544 gh:1550
 type MetadataProducer func(pod *v1.Pod, nodeNameToInfo map[string]*schedulercache.NodeInfo) interface{}
 
 // DEPRECATED
@@ -55,7 +55,7 @@ type PriorityFunction func(pod *v1.Pod, nodeNameToInfo map[string]*schedulercach
 type PriorityConfig struct {
 	Map    PriorityMapFunction
 	Reduce PriorityReduceFunction
-	// TODO: Remove it after migrating all functions to
+	// TODO: Remove it after migrating all functions to id:1588 gh:1594
 	// Map-Reduce pattern.
 	Function PriorityFunction
 	Weight   int

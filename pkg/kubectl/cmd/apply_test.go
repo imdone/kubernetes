@@ -790,7 +790,7 @@ func TestApplyNULLPreservation(t *testing.T) {
 
 				// The real API server would had returned the patched object but Kubectl
 				// is ignoring the actual return object.
-				// TODO: Make this match actual server behavior by returning the patched object.
+				// TODO: Make this match actual server behavior by returning the patched object. id:691 gh:692
 				body := ioutil.NopCloser(bytes.NewReader(deploymentBytes))
 				return &http.Response{StatusCode: 200, Header: defaultHeader(), Body: body}, nil
 			default:

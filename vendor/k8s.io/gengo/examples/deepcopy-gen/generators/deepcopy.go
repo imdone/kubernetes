@@ -95,7 +95,7 @@ func extractTag(comments []string) *tagValue {
 	return tag
 }
 
-// TODO: This is created only to reduce number of changes in a single PR.
+// TODO: This is created only to reduce number of changes in a single PR. id:4012 gh:4032
 // Remove it and use PublicNamer instead.
 func deepCopyNamer() *namer.NameStrategy {
 	return &namer.NameStrategy{
@@ -195,7 +195,7 @@ func Packages(context *generator.Context, arguments *args.GeneratorArgs) generat
 			// generation to output to the proper relative path (under vendor).
 			// Otherwise, the generator will create the file in the wrong location
 			// in the output directory.
-			// TODO: build a more fundamental concept in gengo for dealing with modifications
+			// TODO: build a more fundamental concept in gengo for dealing with modifications id:3826 gh:3841
 			// to vendored packages.
 			if strings.HasPrefix(pkg.SourcePath, arguments.OutputBase) {
 				expandedPath := strings.TrimPrefix(pkg.SourcePath, arguments.OutputBase)
@@ -327,7 +327,7 @@ func copyableType(t *types.Type) bool {
 	if ttag != nil && ttag.value == "false" {
 		return false
 	}
-	// TODO: Consider generating functions for other kinds too.
+	// TODO: Consider generating functions for other kinds too. id:3969 gh:3989
 	if t.Kind != types.Struct {
 		return false
 	}
@@ -676,9 +676,9 @@ func (g *genDeepCopy) doMap(t *types.Type, sw *generator.SnippetWriter) {
 			sw.Do("}\n", nil)
 		}
 	} else {
-		// TODO: Implement it when necessary.
+		// TODO: Implement it when necessary. id:4066 gh:4086
 		sw.Do("for range *in {\n", nil)
-		sw.Do("// FIXME: Copying unassignable keys unsupported $.|raw$\n", t.Key)
+		sw.Do("// FIXME: Copying unassignable keys unsupported $.|raw$\n", t.Key) id:3624 gh:3639
 		sw.Do("}\n", nil)
 	}
 }
@@ -786,7 +786,7 @@ func (g *genDeepCopy) doStruct(t *types.Type, sw *generator.SnippetWriter) {
 }
 
 func (g *genDeepCopy) doInterface(t *types.Type, sw *generator.SnippetWriter) {
-	// TODO: Add support for interfaces.
+	// TODO: Add support for interfaces. id:4013 gh:4033
 	g.doUnknown(t, sw)
 }
 
@@ -815,10 +815,10 @@ func (g *genDeepCopy) doPointer(t *types.Type, sw *generator.SnippetWriter) {
 }
 
 func (g *genDeepCopy) doAlias(t *types.Type, sw *generator.SnippetWriter) {
-	// TODO: Add support for aliases.
+	// TODO: Add support for aliases. id:3827 gh:3842
 	g.doUnknown(t, sw)
 }
 
 func (g *genDeepCopy) doUnknown(t *types.Type, sw *generator.SnippetWriter) {
-	sw.Do("// FIXME: Type $.|raw$ is unsupported.\n", t)
+	sw.Do("// FIXME: Type $.|raw$ is unsupported.\n", t) id:3970 gh:3990
 }

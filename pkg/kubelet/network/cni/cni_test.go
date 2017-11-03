@@ -180,7 +180,7 @@ func TestCNIPlugin(t *testing.T) {
 	}
 
 	mockLoCNI := &mock_cni.MockCNI{}
-	// TODO mock for the test plugin too
+	// TODO mock for the test plugin too id:1100 gh:1106
 
 	tmpDir := utiltesting.MkTmpdirOrDie("cni-test")
 	testNetworkConfigPath := path.Join(tmpDir, "plugins", "net", "cni")

@@ -341,7 +341,7 @@ func (self *version2_0) HandleRequest(requestType string, request []string, m ma
 	case machineApi:
 		glog.V(4).Info("Api - Machine")
 
-		// TODO(rjnagal): Move machineInfo from v1.
+		// TODO (rjnagal): Move machineInfo from v1. id:2649 gh:2664
 		machineInfo, err := m.GetMachineInfo()
 		if err != nil {
 			return err
@@ -449,7 +449,7 @@ func (self *version2_0) HandleRequest(requestType string, request []string, m ma
 	case psApi:
 		// reuse container type from request.
 		// ignore recursive.
-		// TODO(rjnagal): consider count to limit ps output.
+		// TODO (rjnagal): consider count to limit ps output. id:2952 gh:2967
 		name := getContainerName(request)
 		glog.V(4).Infof("Api - Spec for container %q, options %+v", name, opt)
 		ps, err := m.GetProcessList(name, opt)

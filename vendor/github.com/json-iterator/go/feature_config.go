@@ -65,7 +65,7 @@ var ConfigFastest = Config{
 
 // Froze forge API from config
 func (cfg Config) Froze() API {
-	// TODO: cache frozen config
+	// TODO: cache frozen config id:2927 gh:2942
 	frozenConfig := &frozenConfig{
 		sortMapKeys:   cfg.SortMapKeys,
 		indentionStep: cfg.IndentionStep,

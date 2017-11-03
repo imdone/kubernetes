@@ -51,7 +51,7 @@ func (p *restoredProcess) terminate() error {
 }
 
 func (p *restoredProcess) wait() (*os.ProcessState, error) {
-	// TODO: how do we wait on the actual process?
+	// TODO: how do we wait on the actual process? id:3002 gh:3016
 	// maybe use --exec-cmd in criu
 	st, err := p.proc.Wait()
 	if err != nil {

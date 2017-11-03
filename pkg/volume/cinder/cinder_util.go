@@ -141,7 +141,7 @@ func (util *CinderDiskUtil) DeleteVolume(cd *cinderVolumeDeleter) error {
 }
 
 func getZonesFromNodes(kubeClient clientset.Interface) (sets.String, error) {
-	// TODO: caching, currently it is overkill because it calls this function
+	// TODO: caching, currently it is overkill because it calls this function id:1512 gh:1519
 	// only when it creates dynamic PV
 	zones := make(sets.String)
 	nodes, err := kubeClient.CoreV1().Nodes().List(metav1.ListOptions{})
@@ -185,7 +185,7 @@ func (util *CinderDiskUtil) CreateVolume(c *cinderVolumeProvisioner) (volumeID s
 			return "", 0, nil, "", fmt.Errorf("invalid option %q for volume plugin %s", k, c.plugin.GetPluginName())
 		}
 	}
-	// TODO: implement PVC.Selector parsing
+	// TODO: implement PVC.Selector parsing id:1430 gh:1436
 	if c.options.PVC.Spec.Selector != nil {
 		return "", 0, nil, "", fmt.Errorf("claim.Spec.Selector is not supported for dynamic provisioning on Cinder")
 	}

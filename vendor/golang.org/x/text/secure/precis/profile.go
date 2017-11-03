@@ -80,7 +80,7 @@ func (p *Profile) NewTransformer() *Transformer {
 
 	ts = append(ts, &checker{p: p, allowed: p.Allowed()})
 
-	// TODO: Add the disallow empty rule with a dummy transformer?
+	// TODO: Add the disallow empty rule with a dummy transformer? id:3312 gh:3327
 
 	return &Transformer{transform.Chain(ts...)}
 }
@@ -115,7 +115,7 @@ var (
 	lowerCaseT transform.SpanningTransformer = cases.Lower(language.Und, cases.HandleFinalSigma(false))
 )
 
-// TODO: make this a method on profile.
+// TODO: make this a method on profile. id:3304 gh:3320
 
 func (b *buffers) enforce(p *Profile, src []byte, comparing bool) (str []byte, err error) {
 	b.src = src
@@ -164,7 +164,7 @@ func (b *buffers) enforce(p *Profile, src []byte, comparing bool) (str []byte, e
 	// These transforms are applied in the order defined in
 	// https://tools.ietf.org/html/rfc7564#section-7
 
-	// TODO: allow different width transforms options.
+	// TODO: allow different width transforms options. id:3533 gh:3549
 	if p.options.foldWidth || (p.options.ignorecase && comparing) {
 		b.apply(foldWidthT)
 	}
@@ -360,7 +360,7 @@ func (c *checker) span(src []byte, atEOF bool) (n int, err error) {
 	return n, err
 }
 
-// TODO: we may get rid of this transform if transform.Chain understands
+// TODO: we may get rid of this transform if transform.Chain understands id:3013 gh:3029
 // something like a Spanner interface.
 func (c checker) Transform(dst, src []byte, atEOF bool) (nDst, nSrc int, err error) {
 	short := false

@@ -45,7 +45,7 @@ func Resource(resource string) schema.GroupResource {
 
 // Adds the list of known types to the given scheme.
 func addKnownTypes(scheme *runtime.Scheme) error {
-	// TODO this will get cleaned up with the scheme types are fixed
+	// TODO this will get cleaned up with the scheme types are fixed id:324 gh:325
 	scheme.AddKnownTypes(SchemeGroupVersion,
 		&extensions.DaemonSet{},
 		&extensions.DaemonSetList{},

@@ -88,7 +88,7 @@ func NewCloudCIDRAllocator(client clientset.Interface, cloud cloudprovider.Inter
 	}
 
 	for i := 0; i < cidrUpdateWorkers; i++ {
-		// TODO: Take stopChan as an argument to NewCloudCIDRAllocator and pass it to the worker.
+		// TODO: Take stopChan as an argument to NewCloudCIDRAllocator and pass it to the worker. id:582 gh:583
 		go ca.worker(wait.NeverStop)
 	}
 
@@ -169,7 +169,7 @@ func (ca *cloudCIDRAllocator) updateCIDRAllocation(data nodeAndCIDR) error {
 	defer ca.removeNodeFromProcessing(data.nodeName)
 	podCIDR := data.cidr.String()
 	for rep := 0; rep < cidrUpdateRetries; rep++ {
-		// TODO: change it to using PATCH instead of full Node updates.
+		// TODO: change it to using PATCH instead of full Node updates. id:546 gh:544
 		node, err = ca.client.CoreV1().Nodes().Get(data.nodeName, metav1.GetOptions{})
 		if err != nil {
 			glog.Errorf("Failed while getting node %v to retry updating Node.Spec.PodCIDR: %v", data.nodeName, err)

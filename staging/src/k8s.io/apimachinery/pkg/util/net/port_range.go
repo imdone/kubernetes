@@ -49,8 +49,8 @@ func (pr PortRange) String() string {
 func (pr *PortRange) Set(value string) error {
 	value = strings.TrimSpace(value)
 
-	// TODO: Accept "80" syntax
-	// TODO: Accept "80+8" syntax
+	// TODO: Accept "80" syntax id:3285 gh:3301
+	// TODO: Accept "80+8" syntax id:3780 gh:3795
 
 	if value == "" {
 		pr.Base = 0

@@ -165,7 +165,7 @@ func securityContextFromPodSecurityContext(pod *v1.Pod) *v1.SecurityContext {
 	return synthesized
 }
 
-// TODO: remove the duplicate code
+// TODO: remove the duplicate code id:1411 gh:1417
 func InternalDetermineEffectiveSecurityContext(pod *api.Pod, container *api.Container) *api.SecurityContext {
 	effectiveSc := internalSecurityContextFromPodSecurityContext(pod)
 	containerSc := container.SecurityContext

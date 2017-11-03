@@ -75,7 +75,7 @@ type http2Client struct {
 	// shutdownChan is closed when Close is called.
 	// Blocking operations should select on shutdownChan to avoid
 	// blocking forever after Close.
-	// TODO(zhaoq): Maybe have a channel context?
+	// TODO (zhaoq): Maybe have a channel context? id:3397 gh:3412
 	shutdownChan chan struct{}
 	// errorChan is closed to notify the I/O error to the caller.
 	errorChan chan struct{}
@@ -286,7 +286,7 @@ func newHTTP2Client(ctx context.Context, addr TargetInfo, opts ConnectOptions) (
 }
 
 func (t *http2Client) newStream(ctx context.Context, callHdr *CallHdr) *Stream {
-	// TODO(zhaoq): Handle uint32 overflow of Stream.id.
+	// TODO (zhaoq): Handle uint32 overflow of Stream.id. id:3388 gh:3398
 	s := &Stream{
 		id:            t.nextID,
 		done:          make(chan struct{}),
@@ -653,7 +653,7 @@ func (t *http2Client) GracefulClose() error {
 
 // Write formats the data into HTTP2 data frame(s) and sends it out. The caller
 // should proceed only if Write returns nil.
-// TODO(zhaoq): opts.Delay is ignored in this implementation. Support it later
+// TODO (zhaoq): opts.Delay is ignored in this implementation. Support it later id:3697 gh:3712
 // if it improves the performance.
 func (t *http2Client) Write(s *Stream, data []byte, opts *Options) error {
 	r := bytes.NewBuffer(data)
@@ -820,7 +820,7 @@ func (t *http2Client) handleData(f *http2.DataFrame) {
 			}
 		}
 		s.mu.Unlock()
-		// TODO(bradfitz, zhaoq): A copy is required here because there is no
+		// TODO (bradfitz, zhaoq): A copy is required here because there is no id:3111 gh:3126
 		// guarantee f.Data() is consumed before the arrival of next frame.
 		// Can this copy be eliminated?
 		if len(f.Data()) > 0 {
@@ -1034,9 +1034,9 @@ func handleMalformedHTTP2(s *Stream, err error) {
 // reader runs as a separate goroutine in charge of reading data from network
 // connection.
 //
-// TODO(zhaoq): currently one reader per transport. Investigate whether this is
+// TODO (zhaoq): currently one reader per transport. Investigate whether this is id:3574 gh:3589
 // optimal.
-// TODO(zhaoq): Check the validity of the incoming frame sequence.
+// TODO (zhaoq): Check the validity of the incoming frame sequence. id:3398 gh:3413
 func (t *http2Client) reader() {
 	// Check the validity of server preface.
 	frame, err := t.framer.readFrame()
@@ -1100,7 +1100,7 @@ func (t *http2Client) applySettings(ss []http2.Setting) {
 	for _, s := range ss {
 		switch s.ID {
 		case http2.SettingMaxConcurrentStreams:
-			// TODO(zhaoq): This is a hack to avoid significant refactoring of the
+			// TODO (zhaoq): This is a hack to avoid significant refactoring of the id:3389 gh:3404
 			// code to deal with the unrealistic int32 overflow. Probably will try
 			// to find a better way to handle this later.
 			if s.Val > math.MaxInt32 {

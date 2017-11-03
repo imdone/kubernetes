@@ -112,7 +112,7 @@ func mergeAPIResourceConfigs(defaultAPIResourceConfig *serverstorage.ResourceCon
 			continue
 		}
 		groupVersionString := tokens[0] + "/" + tokens[1]
-		// HACK: Hack for "v1" legacy group version.
+		// HACK: Hack for "v1" legacy group version. id:656 gh:657
 		// Remove when we stop supporting the legacy group version.
 		if groupVersionString == "api/v1" {
 			groupVersionString = "v1"
@@ -143,7 +143,7 @@ func mergeAPIResourceConfigs(defaultAPIResourceConfig *serverstorage.ResourceCon
 			continue
 		}
 		groupVersionString := tokens[0] + "/" + tokens[1]
-		// HACK: Hack for "v1" legacy group version.
+		// HACK: Hack for "v1" legacy group version. id:680 gh:681
 		// Remove when we stop supporting the legacy group version.
 		if groupVersionString == "api/v1" {
 			groupVersionString = "v1"

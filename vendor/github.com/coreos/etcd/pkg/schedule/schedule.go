@@ -128,7 +128,7 @@ func (f *fifo) Stop() {
 }
 
 func (f *fifo) run() {
-	// TODO: recover from job panic?
+	// TODO: recover from job panic? id:2882 gh:2900
 	defer func() {
 		close(f.donec)
 		close(f.resume)

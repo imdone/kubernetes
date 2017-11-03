@@ -47,7 +47,7 @@ type SpdyRoundTripper struct {
 	//to the remote server.
 	tlsConfig *tls.Config
 
-	/* TODO according to http://golang.org/pkg/net/http/#RoundTripper, a RoundTripper
+	/* TODO according to http://golang.org/pkg/net/http/#RoundTripper, a RoundTripper id:3600 gh:3615
 	   must be safe for use by multiple concurrent goroutines. If this is absolutely
 	   necessary, we could keep a map from http.Request to net.Conn. In practice,
 	   a client will create an http.Client, set the transport to a new insteace of
@@ -198,7 +198,7 @@ func (s *SpdyRoundTripper) dialWithoutProxy(url *url.URL) (net.Conn, error) {
 		}
 	}
 
-	// TODO validate the TLSClientConfig is set up?
+	// TODO validate the TLSClientConfig is set up? id:3682 gh:3697
 	var conn *tls.Conn
 	var err error
 	if s.Dialer == nil {
@@ -297,7 +297,7 @@ func (s *SpdyRoundTripper) NewConnection(resp *http.Response) (httpstream.Connec
 		if err != nil {
 			responseError = "unable to read error from server response"
 		} else {
-			// TODO: I don't belong here, I should be abstracted from this class
+			// TODO: I don't belong here, I should be abstracted from this class id:3857 gh:3872
 			if obj, _, err := statusCodecs.UniversalDecoder().Decode(responseErrorBytes, nil, &metav1.Status{}); err == nil {
 				if status, ok := obj.(*metav1.Status); ok {
 					return nil, &apierrors.StatusError{ErrStatus: *status}
@@ -313,7 +313,7 @@ func (s *SpdyRoundTripper) NewConnection(resp *http.Response) (httpstream.Connec
 	return NewClientConnection(s.conn)
 }
 
-// statusScheme is private scheme for the decoding here until someone fixes the TODO in NewConnection
+// statusScheme is private scheme for the decoding here until someone fixes the TODO in NewConnection id:3284 gh:3299
 var statusScheme = runtime.NewScheme()
 
 // ParameterCodec knows about query parameters used with the meta v1 API spec.

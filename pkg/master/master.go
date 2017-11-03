@@ -119,7 +119,7 @@ type ExtraConfig struct {
 	// Port for the apiserver service.
 	APIServerServicePort int
 
-	// TODO, we can probably group service related items into a substruct to make it easier to configure
+	// TODO , we can probably group service related items into a substruct to make it easier to configure id:1182 gh:1188
 	// the API server items and `Extra*` fields likely fit nicely together.
 
 	// The range of ports to be assigned to services with type=NodePort or greater
@@ -259,7 +259,7 @@ func (cfg *Config) Complete(informers informers.SharedInformerFactory) Completed
 	c.GenericConfig.DiscoveryAddresses = discoveryAddresses
 
 	if c.ExtraConfig.ServiceNodePortRange.Size == 0 {
-		// TODO: Currently no way to specify an empty range (do we need to allow this?)
+		// TODO: Currently no way to specify an empty range (do we need to allow this?) id:1010 gh:1016
 		// We should probably allow this for clouds that don't require NodePort to do load-balancing (GCE)
 		// but then that breaks the strict nestedness of ServiceType.
 		// Review post-v1
@@ -332,7 +332,7 @@ func (c completedConfig) New(delegationTarget genericapiserver.DelegationTarget)
 	// the order of this list determines which group an unqualified resource name (e.g. "deployments") should prefer.
 	// This priority order is used for local discovery, but it ends up aggregated in `k8s.io/kubernetes/cmd/kube-apiserver/app/aggregator.go
 	// with specific priorities.
-	// TODO: describe the priority all the way down in the RESTStorageProviders and plumb it back through the various discovery
+	// TODO: describe the priority all the way down in the RESTStorageProviders and plumb it back through the various discovery id:1205 gh:1211
 	// handlers that we have.
 	restStorageProviders := []RESTStorageProvider{
 		authenticationrest.RESTStorageProvider{Authenticator: c.GenericConfig.Authenticator},
@@ -458,7 +458,7 @@ func (n nodeAddressProvider) externalAddresses() ([]string, error) {
 
 func DefaultAPIResourceConfigSource() *serverstorage.ResourceConfig {
 	ret := serverstorage.NewResourceConfig()
-	// NOTE: GroupVersions listed here will be enabled by default. Don't put alpha versions in the list.
+	// NOTE: GroupVersions listed here will be enabled by default. Don't put alpha versions in the list. id:1229 gh:1235
 	ret.EnableVersions(
 		apiv1.SchemeGroupVersion,
 		extensionsapiv1beta1.SchemeGroupVersion,

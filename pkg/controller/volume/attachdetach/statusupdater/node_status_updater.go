@@ -60,7 +60,7 @@ type nodeStatusUpdater struct {
 }
 
 func (nsu *nodeStatusUpdater) UpdateNodeStatuses() error {
-	// TODO: investigate right behavior if nodeName is empty
+	// TODO: investigate right behavior if nodeName is empty id:641 gh:642
 	// kubernetes/kubernetes/issues/37777
 	nodesToUpdate := nsu.actualStateOfWorld.GetVolumesToReportAttached()
 	for nodeName, attachedVolumes := range nodesToUpdate {
@@ -101,7 +101,7 @@ func (nsu *nodeStatusUpdater) UpdateNodeStatuses() error {
 func (nsu *nodeStatusUpdater) updateNodeStatus(nodeName types.NodeName, nodeObj *v1.Node, attachedVolumes []v1.AttachedVolume) error {
 	node := nodeObj.DeepCopy()
 
-	// TODO: Change to pkg/util/node.UpdateNodeStatus.
+	// TODO: Change to pkg/util/node.UpdateNodeStatus. id:653 gh:654
 	oldData, err := json.Marshal(node)
 	if err != nil {
 		return fmt.Errorf(

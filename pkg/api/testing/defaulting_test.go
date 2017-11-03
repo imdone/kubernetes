@@ -42,7 +42,7 @@ func (o orderedGroupVersionKinds) Less(i, j int) bool {
 	return o[i].String() < o[j].String()
 }
 
-// TODO: add a reflexive test that verifies that all SetDefaults functions are registered
+// TODO: add a reflexive test that verifies that all SetDefaults functions are registered id:334 gh:336
 func TestDefaulting(t *testing.T) {
 	// these are the known types with defaulters - you must add to this list if you add a top level defaulter
 	typesWithDefaulting := map[schema.GroupVersionKind]struct{}{

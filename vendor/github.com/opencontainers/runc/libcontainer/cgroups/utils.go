@@ -380,7 +380,7 @@ func RemovePaths(paths map[string]string) (err error) {
 		}
 		for s, p := range paths {
 			os.RemoveAll(p)
-			// TODO: here probably should be logging
+			// TODO: here probably should be logging id:2774 gh:2789
 			_, err := os.Stat(p)
 			// We need this strange way of checking cgroups existence because
 			// RemoveAll almost always returns error, even on already removed

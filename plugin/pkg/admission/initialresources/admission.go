@@ -48,7 +48,7 @@ const (
 // WARNING: this feature is experimental and will definitely change.
 func Register(plugins *admission.Plugins) {
 	plugins.Register("InitialResources", func(config io.Reader) (admission.Interface, error) {
-		// TODO: remove the usage of flags in favor of reading versioned configuration
+		// TODO: remove the usage of flags in favor of reading versioned configuration id:1534 gh:1540
 		s, err := newDataSource(*source)
 		if err != nil {
 			return nil, err

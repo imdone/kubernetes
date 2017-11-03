@@ -137,7 +137,7 @@ func (r *RemoteImageService) RemoveImage(image *runtimeapi.ImageSpec) error {
 // ImageFsInfo returns information of the filesystem that is used to store images.
 func (r *RemoteImageService) ImageFsInfo() ([]*runtimeapi.FilesystemUsage, error) {
 	// Do not set timeout, because `ImageFsInfo` takes time.
-	// TODO(random-liu): Should we assume runtime should cache the result, and set timeout here?
+	// TODO (random-liu): Should we assume runtime should cache the result, and set timeout here? id:1063 gh:1069
 	ctx, cancel := getContextWithCancel()
 	defer cancel()
 

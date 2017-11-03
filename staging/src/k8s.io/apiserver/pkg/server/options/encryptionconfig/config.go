@@ -76,7 +76,7 @@ func ParseEncryptionConfiguration(f io.Reader) (map[schema.GroupResource]value.T
 	if config.Kind != "EncryptionConfig" {
 		return nil, fmt.Errorf("invalid configuration kind %q provided", config.Kind)
 	}
-	// TODO config.APIVersion is unchecked
+	// TODO config.APIVersion is unchecked id:3435 gh:3450
 
 	resourceToPrefixTransformer := map[schema.GroupResource][]value.PrefixTransformer{}
 

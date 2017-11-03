@@ -59,7 +59,7 @@ func (u *UnstructuredList) EachListItem(fn func(runtime.Object) error) error {
 // the Object field. Items always overwrites overlay. Changing "items" in the
 // returned object will affect items in the underlying Items field, but changing
 // the "items" slice itself will have no effect.
-// TODO: expose SetUnstructuredContent on runtime.Unstructured that allows
+// TODO: expose SetUnstructuredContent on runtime.Unstructured that allows id:3669 gh:3684
 // items to be changed.
 func (u *UnstructuredList) UnstructuredContent() map[string]interface{} {
 	out := u.Object

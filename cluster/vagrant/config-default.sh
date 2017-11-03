@@ -74,7 +74,7 @@ ENABLE_CLUSTER_MONITORING="${KUBE_ENABLE_CLUSTER_MONITORING:-influxdb}"
 
 # Extra options to set on the Docker command line.  This is useful for setting
 # --insecure-registry for local registries, or globally configuring selinux options
-# TODO Enable selinux when Fedora 21 repositories get an updated docker package
+# TODO Enable selinux when Fedora 21 repositories get an updated docker package id:95 gh:96
 #   see https://bugzilla.redhat.com/show_bug.cgi?id=1216151
 #EXTRA_DOCKER_OPTS="${EXTRA_DOCKER_OPTS:-} -b=cbr0 --selinux-enabled --insecure-registry 10.0.0.0/8"
 EXTRA_DOCKER_OPTS="${EXTRA_DOCKER_OPTS:-} --insecure-registry 10.0.0.0/8 -s overlay"

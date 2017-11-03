@@ -183,7 +183,7 @@ if [[ $(ls . | grep ^kubectl$ | wc -l) -lt 1 ]]; then
   chmod a+x kubectl
   echo ""
 else
-  # TODO: We should detect version of kubectl binary if it too old
+  # TODO: We should detect version of kubectl binary if it too old id:85 gh:86
   # download newer version.
   echo "Detected existing kubectl binary. Skipping download."
 fi

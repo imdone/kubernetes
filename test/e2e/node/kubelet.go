@@ -97,7 +97,7 @@ func waitTillNPodsRunningOnNodes(c clientset.Interface, nodeNames sets.String, p
 // updates labels of nodes given by nodeNames.
 // In case a given label already exists, it overwrites it. If label to remove doesn't exist
 // it silently ignores it.
-// TODO: migrate to use framework.AddOrUpdateLabelOnNode/framework.RemoveLabelOffNode
+// TODO: migrate to use framework.AddOrUpdateLabelOnNode/framework.RemoveLabelOffNode id:2265 gh:2281
 func updateNodeLabels(c clientset.Interface, nodeNames sets.String, toAdd, toRemove map[string]string) {
 	const maxRetries = 5
 	for nodeName := range nodeNames {

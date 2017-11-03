@@ -75,7 +75,7 @@ func (i *DriverInstances) Add(new *DriverInstance) {
 // Remove an instance to the list of instances.
 func (i *DriverInstances) Remove(id string) {
 
-	// TODO: not working
+	// TODO: not working id:3208 gh:3223
 	// for ndx, inst := range *i {
 	// 	if inst.ID == id {
 	// 		// splice out the item to remove

@@ -12,7 +12,7 @@
 // ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 // OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-// NOTE: Due to the following build constraints, this file will only be compiled
+// NOTE: Due to the following build constraints, this file will only be compiled id:2686 gh:2702
 // when the code is running on Google App Engine, compiled by GopherJS, or
 // "-tags safe" is added to the go build command line.  The "disableunsafe"
 // tag is deprecated and thus should not be used.

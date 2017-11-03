@@ -32,7 +32,7 @@ import (
 // IsExtendedResourceName returns true if the resource name is not in the
 // default namespace, or it has the opaque integer resource prefix.
 func IsExtendedResourceName(name v1.ResourceName) bool {
-	// TODO: Remove OIR part following deprecation.
+	// TODO: Remove OIR part following deprecation. id:211 gh:212
 	return !IsDefaultNamespaceResource(name) || IsOpaqueIntResourceName(name)
 }
 
@@ -132,7 +132,7 @@ func AddToNodeAddresses(addresses *[]v1.NodeAddress, addAddresses ...v1.NodeAddr
 	}
 }
 
-// TODO: make method on LoadBalancerStatus?
+// TODO: make method on LoadBalancerStatus? id:340 gh:341
 func LoadBalancerStatusEqual(l, r *v1.LoadBalancerStatus) bool {
 	return ingressSliceEqual(l.Ingress, r.Ingress)
 }
@@ -159,7 +159,7 @@ func ingressEqual(lhs, rhs *v1.LoadBalancerIngress) bool {
 	return true
 }
 
-// TODO: make method on LoadBalancerStatus?
+// TODO: make method on LoadBalancerStatus? id:288 gh:289
 func LoadBalancerStatusDeepCopy(lb *v1.LoadBalancerStatus) *v1.LoadBalancerStatus {
 	c := &v1.LoadBalancerStatus{}
 	c.Ingress = make([]v1.LoadBalancerIngress, len(lb.Ingress))
@@ -449,7 +449,7 @@ func PersistentVolumeClaimHasClass(claim *v1.PersistentVolumeClaim) bool {
 
 // GetStorageNodeAffinityFromAnnotation gets the json serialized data from PersistentVolume.Annotations
 // and converts it to the NodeAffinity type in api.
-// TODO: update when storage node affinity graduates to beta
+// TODO: update when storage node affinity graduates to beta id:265 gh:266
 func GetStorageNodeAffinityFromAnnotation(annotations map[string]string) (*v1.NodeAffinity, error) {
 	if len(annotations) > 0 && annotations[v1.AlphaStorageNodeAffinityAnnotation] != "" {
 		var affinity v1.NodeAffinity
@@ -463,7 +463,7 @@ func GetStorageNodeAffinityFromAnnotation(annotations map[string]string) (*v1.No
 }
 
 // Converts NodeAffinity type to Alpha annotation for use in PersistentVolumes
-// TODO: update when storage node affinity graduates to beta
+// TODO: update when storage node affinity graduates to beta id:315 gh:316
 func StorageNodeAffinityToAlphaAnnotation(annotations map[string]string, affinity *v1.NodeAffinity) error {
 	if affinity == nil {
 		return nil

@@ -102,7 +102,7 @@ func (gc *GarbageCollector) patchObject(item objectReference, patch []byte) (*un
 	return client.Resource(resource, item.Namespace).Patch(item.Name, types.StrategicMergePatchType, patch)
 }
 
-// TODO: Using Patch when strategicmerge supports deleting an entry from a
+// TODO: Using Patch when strategicmerge supports deleting an entry from a id:560 gh:561
 // slice of a base type.
 func (gc *GarbageCollector) removeFinalizer(owner *node, targetFinalizer string) error {
 	err := retry.RetryOnConflict(retry.DefaultBackoff, func() error {

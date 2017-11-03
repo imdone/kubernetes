@@ -103,7 +103,7 @@ func ValidateRoleBinding(roleBinding *rbac.RoleBinding) field.ErrorList {
 	allErrs := field.ErrorList{}
 	allErrs = append(allErrs, validation.ValidateObjectMeta(&roleBinding.ObjectMeta, true, minimalNameRequirements, field.NewPath("metadata"))...)
 
-	// TODO allow multiple API groups.  For now, restrict to one, but I can envision other experimental roles in other groups taking
+	// TODO allow multiple API groups.  For now, restrict to one, but I can envision other experimental roles in other groups taking id:384 gh:385
 	// advantage of the binding infrastructure
 	if roleBinding.RoleRef.APIGroup != rbac.GroupName {
 		allErrs = append(allErrs, field.NotSupported(field.NewPath("roleRef", "apiGroup"), roleBinding.RoleRef.APIGroup, []string{rbac.GroupName}))
@@ -147,7 +147,7 @@ func ValidateClusterRoleBinding(roleBinding *rbac.ClusterRoleBinding) field.Erro
 	allErrs := field.ErrorList{}
 	allErrs = append(allErrs, validation.ValidateObjectMeta(&roleBinding.ObjectMeta, false, minimalNameRequirements, field.NewPath("metadata"))...)
 
-	// TODO allow multiple API groups.  For now, restrict to one, but I can envision other experimental roles in other groups taking
+	// TODO allow multiple API groups.  For now, restrict to one, but I can envision other experimental roles in other groups taking id:306 gh:308
 	// advantage of the binding infrastructure
 	if roleBinding.RoleRef.APIGroup != rbac.GroupName {
 		allErrs = append(allErrs, field.NotSupported(field.NewPath("roleRef", "apiGroup"), roleBinding.RoleRef.APIGroup, []string{rbac.GroupName}))
@@ -209,7 +209,7 @@ func validateRoleBindingSubject(subject rbac.Subject, isNamespaced bool, fldPath
 		}
 
 	case rbac.UserKind:
-		// TODO(ericchiang): What other restrictions on user name are there?
+		// TODO (ericchiang): What other restrictions on user name are there? id:423 gh:424
 		if len(subject.Name) == 0 {
 			allErrs = append(allErrs, field.Invalid(fldPath.Child("name"), subject.Name, "user name cannot be empty"))
 		}
@@ -218,7 +218,7 @@ func validateRoleBindingSubject(subject rbac.Subject, isNamespaced bool, fldPath
 		}
 
 	case rbac.GroupKind:
-		// TODO(ericchiang): What other restrictions on group name are there?
+		// TODO (ericchiang): What other restrictions on group name are there? id:406 gh:407
 		if len(subject.Name) == 0 {
 			allErrs = append(allErrs, field.Invalid(fldPath.Child("name"), subject.Name, "group name cannot be empty"))
 		}

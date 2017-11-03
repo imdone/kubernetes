@@ -16,7 +16,7 @@ limitations under the License.
 
 package rkt
 
-// TODO(yifan): Export this to higher level package.
+// TODO (yifan): Export this to higher level package. id:1028 gh:1034
 const (
 	CAP_CHOWN = iota
 	CAP_DAC_OVERRIDE
@@ -58,7 +58,7 @@ const (
 	CAP_AUDIT_READ
 )
 
-// TODO(yifan): Export this to higher level package.
+// TODO (yifan): Export this to higher level package. id:1125 gh:1131
 var capabilityList = map[int]string{
 	CAP_CHOWN:            "CAP_CHOWN",
 	CAP_DAC_OVERRIDE:     "CAP_DAC_OVERRIDE",

@@ -27,7 +27,7 @@ var (
 
 // SemVer implements the Unmarshaler interface to define a field that must be
 // a semantic version string
-// TODO(jonboulle): extend upstream instead of wrapping?
+// TODO (jonboulle): extend upstream instead of wrapping? id:2724 gh:2739
 type SemVer semver.Version
 
 // NewSemVer generates a new SemVer from a string. If the given string does

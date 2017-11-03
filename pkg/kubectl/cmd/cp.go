@@ -94,7 +94,7 @@ func extractFileSpec(arg string) (fileSpec, error) {
 		return fileSpec{File: arg}, nil
 	}
 	if len(pieces) != 2 {
-		// FIXME Kubernetes can't copy files that contain a ':'
+		// FIXME Kubernetes can't copy files that contain a ':' id:730 gh:731
 		// character.
 		return fileSpec{}, errFileSpecDoesntMatchFormat
 	}
@@ -183,7 +183,7 @@ func copyToPod(f cmdutil.Factory, cmd *cobra.Command, stdout, stderr io.Writer, 
 		cmdutil.CheckErr(err)
 	}()
 
-	// TODO: Improve error messages by first testing if 'tar' is present in the container?
+	// TODO: Improve error messages by first testing if 'tar' is present in the container? id:698 gh:699
 	cmdArr := []string{"tar", "xf", "-"}
 	destDir := path.Dir(dest.File)
 	if len(destDir) > 0 {
@@ -223,7 +223,7 @@ func copyFromPod(f cmdutil.Factory, cmd *cobra.Command, cmderr io.Writer, src, d
 			PodName:   src.PodName,
 		},
 
-		// TODO: Improve error messages by first testing if 'tar' is present in the container?
+		// TODO: Improve error messages by first testing if 'tar' is present in the container? id:708 gh:709
 		Command:  []string{"tar", "cf", "-", src.File},
 		Executor: &DefaultRemoteExecutor{},
 	}
@@ -238,7 +238,7 @@ func copyFromPod(f cmdutil.Factory, cmd *cobra.Command, cmderr io.Writer, src, d
 }
 
 func makeTar(srcPath, destPath string, writer io.Writer) error {
-	// TODO: use compression here?
+	// TODO: use compression here? id:661 gh:662
 	tarWriter := tar.NewWriter(writer)
 	defer tarWriter.Close()
 
@@ -312,7 +312,7 @@ func recursiveTar(srcBase, srcFile, destBase, destFile string, tw *tar.Writer) e
 func untarAll(reader io.Reader, destFile, prefix string) error {
 	entrySeq := -1
 
-	// TODO: use compression here?
+	// TODO: use compression here? id:685 gh:686
 	tarReader := tar.NewReader(reader)
 	for {
 		header, err := tarReader.Next()

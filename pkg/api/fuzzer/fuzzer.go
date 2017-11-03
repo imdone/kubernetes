@@ -105,7 +105,7 @@ var Funcs = func(codecs runtimeserializer.CodecFactory) []interface{} {
 		},
 		func(j *api.List, c fuzz.Continue) {
 			c.FuzzNoCustom(j) // fuzz self without calling this function again
-			// TODO: uncomment when round trip starts from a versioned object
+			// TODO: uncomment when round trip starts from a versioned object id:201 gh:202
 			if false { //j.Items == nil {
 				j.Items = []runtime.Object{}
 			}

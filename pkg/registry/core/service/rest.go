@@ -87,7 +87,7 @@ func (rs *REST) Categories() []string {
 	return []string{"all"}
 }
 
-// TODO: implement includeUninitialized by refactoring this to move to store
+// TODO: implement includeUninitialized by refactoring this to move to store id:1320 gh:1326
 func (rs *REST) Create(ctx genericapirequest.Context, obj runtime.Object, createValidation rest.ValidateObjectFunc, includeUninitialized bool) (runtime.Object, error) {
 	service := obj.(*api.Service)
 
@@ -95,7 +95,7 @@ func (rs *REST) Create(ctx genericapirequest.Context, obj runtime.Object, create
 		return nil, err
 	}
 
-	// TODO: this should probably move to strategy.PrepareForCreate()
+	// TODO: this should probably move to strategy.PrepareForCreate() id:1281 gh:1287
 	releaseServiceIP := false
 	defer func() {
 		if releaseServiceIP {
@@ -162,7 +162,7 @@ func (rs *REST) Delete(ctx genericapirequest.Context, id string) (runtime.Object
 		return nil, err
 	}
 
-	// TODO: can leave dangling endpoints, and potentially return incorrect
+	// TODO: can leave dangling endpoints, and potentially return incorrect id:1327 gh:1333
 	// endpoints if a new service is created with the same name
 	err = rs.endpoints.DeleteEndpoints(ctx, id)
 	if err != nil && !errors.IsNotFound(err) {
@@ -301,12 +301,12 @@ func (rs *REST) Update(ctx genericapirequest.Context, name string, objInfo rest.
 	}
 
 	// Copy over non-user fields
-	// TODO: make this a merge function
+	// TODO: make this a merge function id:1360 gh:1366
 	if errs := validation.ValidateServiceUpdate(service, oldService); len(errs) > 0 {
 		return nil, false, errors.NewInvalid(api.Kind("Service"), service.Name, errs)
 	}
 
-	// TODO: this should probably move to strategy.PrepareForCreate()
+	// TODO: this should probably move to strategy.PrepareForCreate() id:1399 gh:1405
 	releaseServiceIP := false
 	defer func() {
 		if releaseServiceIP {
@@ -499,7 +499,7 @@ func (rs *REST) initClusterIP(service *api.Service) (bool, error) {
 		// Allocate next available.
 		ip, err := rs.serviceIPs.AllocateNext()
 		if err != nil {
-			// TODO: what error should be returned here?  It's not a
+			// TODO: what error should be returned here?  It's not a id:1477 gh:1483
 			// field-level validation failure (the field is valid), and it's
 			// not really an internal error.
 			return false, errors.NewInternalError(fmt.Errorf("failed to allocate a serviceIP: %v", err))
@@ -509,7 +509,7 @@ func (rs *REST) initClusterIP(service *api.Service) (bool, error) {
 	case service.Spec.ClusterIP != api.ClusterIPNone && service.Spec.ClusterIP != "":
 		// Try to respect the requested IP.
 		if err := rs.serviceIPs.Allocate(net.ParseIP(service.Spec.ClusterIP)); err != nil {
-			// TODO: when validation becomes versioned, this gets more complicated.
+			// TODO: when validation becomes versioned, this gets more complicated. id:1282 gh:1288
 			el := field.ErrorList{field.Invalid(field.NewPath("spec", "clusterIP"), service.Spec.ClusterIP, err.Error())}
 			return false, errors.NewInvalid(api.Kind("Service"), service.Name, el)
 		}
@@ -532,7 +532,7 @@ func (rs *REST) initNodePorts(service *api.Service, nodePortOp *portallocator.Po
 			if np != 0 {
 				err := nodePortOp.Allocate(np)
 				if err != nil {
-					// TODO: when validation becomes versioned, this gets more complicated.
+					// TODO: when validation becomes versioned, this gets more complicated. id:1328 gh:1334
 					el := field.ErrorList{field.Invalid(field.NewPath("spec", "ports").Index(i).Child("nodePort"), np, err.Error())}
 					return errors.NewInvalid(api.Kind("Service"), service.Name, el)
 				}
@@ -541,7 +541,7 @@ func (rs *REST) initNodePorts(service *api.Service, nodePortOp *portallocator.Po
 			} else {
 				nodePort, err := nodePortOp.AllocateNext()
 				if err != nil {
-					// TODO: what error should be returned here?  It's not a
+					// TODO: what error should be returned here?  It's not a id:1361 gh:1367
 					// field-level validation failure (the field is valid), and it's
 					// not really an internal error.
 					return errors.NewInternalError(fmt.Errorf("failed to allocate a nodePort: %v", err))
@@ -550,14 +550,14 @@ func (rs *REST) initNodePorts(service *api.Service, nodePortOp *portallocator.Po
 				svcPortToNodePort[int(servicePort.Port)] = nodePort
 			}
 		} else if int(servicePort.NodePort) != allocatedNodePort {
-			// TODO(xiangpengzhao): do we need to allocate a new NodePort in this case?
+			// TODO (xiangpengzhao): do we need to allocate a new NodePort in this case? id:1400 gh:1406
 			// Note: the current implementation is better, because it saves a NodePort.
 			if servicePort.NodePort == 0 {
 				servicePort.NodePort = int32(allocatedNodePort)
 			} else {
 				err := nodePortOp.Allocate(int(servicePort.NodePort))
 				if err != nil {
-					// TODO: when validation becomes versioned, this gets more complicated.
+					// TODO: when validation becomes versioned, this gets more complicated. id:1478 gh:1484
 					el := field.ErrorList{field.Invalid(field.NewPath("spec", "ports").Index(i).Child("nodePort"), servicePort.NodePort, err.Error())}
 					return errors.NewInvalid(api.Kind("Service"), service.Name, el)
 				}
@@ -586,7 +586,7 @@ func (rs *REST) updateNodePorts(oldService, newService *api.Service, nodePortOp 
 		} else {
 			nodePort, err := nodePortOp.AllocateNext()
 			if err != nil {
-				// TODO: what error should be returned here?  It's not a
+				// TODO: what error should be returned here?  It's not a id:1283 gh:1289
 				// field-level validation failure (the field is valid), and it's
 				// not really an internal error.
 				return errors.NewInternalError(fmt.Errorf("failed to allocate a nodePort: %v", err))

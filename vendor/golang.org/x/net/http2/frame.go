@@ -274,13 +274,13 @@ type Framer struct {
 	maxReadSize uint32
 	headerBuf   [frameHeaderLen]byte
 
-	// TODO: let getReadBuf be configurable, and use a less memory-pinning
+	// TODO: let getReadBuf be configurable, and use a less memory-pinning id:3359 gh:3374
 	// allocator in server.go to minimize memory pinned for many idle conns.
 	// Will probably also need to make frame invalidation have a hook too.
 	getReadBuf func(size uint32) []byte
 	readBuf    []byte // cache for default getReadBuf
 
-	maxWriteSize uint32 // zero means unlimited; TODO: implement
+	maxWriteSize uint32 // zero means unlimited; TODO: implement id:2873 gh:2888
 
 	w    io.Writer
 	wbuf []byte
@@ -311,7 +311,7 @@ type Framer struct {
 	// If the limit is hit, MetaHeadersFrame.Truncated is set true.
 	MaxHeaderListSize uint32
 
-	// TODO: track which type of frame & with which flags was sent
+	// TODO: track which type of frame & with which flags was sent id:3266 gh:3281
 	// last. Then return an error (unless AllowIllegalWrites) if
 	// we're in the middle of a header block and a
 	// non-Continuation or Continuation on a different stream is

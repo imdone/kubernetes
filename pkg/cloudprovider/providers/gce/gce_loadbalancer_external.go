@@ -112,7 +112,7 @@ func (gce *GCECloud) ensureExternalLoadBalancer(clusterName, clusterID string, a
 	// an IP, we assume they are managing it themselves.  Otherwise, we will
 	// release the IP in case of early-terminating failure or upon successful
 	// creating of the LB.
-	// TODO(#36535): boil this logic down into a set of component functions
+	// TODO (#36535): boil this logic down into a set of component functions id:515 gh:516
 	// and key the flag values off of errors returned.
 	isUserOwnedIP := false // if this is set, we never release the IP
 	isSafeToReleaseIP := false
@@ -656,7 +656,7 @@ func (gce *GCECloud) forwardingRuleNeedsUpdate(name, region string, loadBalancer
 	}
 	// If the user asks for a specific static ip through the Service spec,
 	// check that we're actually using it.
-	// TODO: we report loadbalancer IP through status, so we want to verify if
+	// TODO: we report loadbalancer IP through status, so we want to verify if id:467 gh:468
 	// that matches the forwarding rule as well.
 	if loadBalancerIP != "" && loadBalancerIP != fwd.IPAddress {
 		glog.Infof("LoadBalancer ip for forwarding rule %v was expected to be %v, but was actually %v", fwd.Name, fwd.IPAddress, loadBalancerIP)
@@ -693,7 +693,7 @@ func (gce *GCECloud) targetPoolNeedsUpdate(name, region string, affinityType v1.
 		// We never want to end up recreating resources because gce api flaked.
 		return true, false, fmt.Errorf("error getting load balancer's target pool: %v", err)
 	}
-	// TODO: If the user modifies their Service's session affinity, it *should*
+	// TODO: If the user modifies their Service's session affinity, it *should* id:439 gh:440
 	// reflect in the associated target pool. However, currently not setting the
 	// session affinity on a target pool defaults it to the empty string while
 	// not setting in on a Service defaults it to None. There is a lack of
@@ -944,7 +944,7 @@ func (gce *GCECloud) firewallObject(name, region, desc string, sourceRanges nets
 		TargetTags:   hostTags,
 		Allowed: []*compute.FirewallAllowed{
 			{
-				// TODO: Make this more generic. Currently this method is only
+				// TODO: Make this more generic. Currently this method is only id:508 gh:509
 				// used to create firewall rules for loadbalancers, which have
 				// exactly one protocol, so we can never end up with a list of
 				// mixed TCP and UDP ports. It should be possible to use a
@@ -1057,7 +1057,7 @@ func deleteAddressWithWrongTier(s CloudAddressService, region, name, logPrefix s
 	// this assumption may not match some of the existing logic in the code.
 	// However, this is okay since network tiering is still Alpha and will be
 	// properly gated.
-	// TODO(#51665): Re-evaluate the "ownership" of the IP address to ensure
+	// TODO (#51665): Re-evaluate the "ownership" of the IP address to ensure id:478 gh:479
 	// we don't release IP unintentionally.
 	tierStr, err := s.getNetworkTierFromAddress(name, region)
 	if isNotFound(err) {

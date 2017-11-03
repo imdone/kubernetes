@@ -84,7 +84,7 @@ func setupProviderConfig() error {
 			Region:             region,
 			Zone:               zone,
 			ManagedZones:       managedZones,
-			NetworkName:        "", // TODO: Change this to use framework.TestContext.CloudConfig.Network?
+			NetworkName:        "", // TODO: Change this to use framework.TestContext.CloudConfig.Network? id:2301 gh:2317
 			SubnetworkName:     "",
 			NodeTags:           nil,
 			NodeInstancePrefix: "",
@@ -180,7 +180,7 @@ var _ = ginkgo.SynchronizedBeforeSuite(func() []byte {
 	// test pods from running, and tests that ensure all pods are running and
 	// ready will fail).
 	podStartupTimeout := framework.TestContext.SystemPodsStartupTimeout
-	// TODO: In large clusters, we often observe a non-starting pods due to
+	// TODO: In large clusters, we often observe a non-starting pods due to id:2183 gh:2198
 	// #41007. To avoid those pods preventing the whole test runs (and just
 	// wasting the whole run), we allow for some not-ready pods (with the
 	// number equal to the number of allowed not-ready nodes).
@@ -362,7 +362,7 @@ func RunE2ETests(t *testing.T) {
 	// Run tests through the Ginkgo runner with output to console + JUnit for Jenkins
 	var r []ginkgo.Reporter
 	if framework.TestContext.ReportDir != "" {
-		// TODO: we should probably only be trying to create this directory once
+		// TODO: we should probably only be trying to create this directory once id:2221 gh:2236
 		// rather than once-per-Ginkgo-node.
 		if err := os.MkdirAll(framework.TestContext.ReportDir, 0755); err != nil {
 			glog.Errorf("Failed creating report directory: %v", err)

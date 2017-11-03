@@ -37,7 +37,7 @@ import (
 )
 
 // upgradeVariables holds variables needed for performing an upgrade or planning to do so
-// TODO - Restructure or rename upgradeVariables
+// TODO - Restructure or rename upgradeVariables id:143 gh:144
 type upgradeVariables struct {
 	client        clientset.Interface
 	cfg           *kubeadmapiext.MasterConfiguration

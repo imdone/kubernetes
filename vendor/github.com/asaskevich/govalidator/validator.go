@@ -38,7 +38,7 @@ func SetFieldsRequiredByDefault(value bool) {
 
 // IsEmail check if the string is an email.
 func IsEmail(str string) bool {
-	// TODO uppercase letters are not supported
+	// TODO uppercase letters are not supported id:2490 gh:2505
 	return rxEmail.MatchString(str)
 }
 

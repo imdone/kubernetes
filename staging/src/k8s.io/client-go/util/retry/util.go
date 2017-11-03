@@ -57,7 +57,7 @@ var DefaultBackoff = wait.Backoff{
 //     }
 //     ...
 //
-// TODO: Make Backoff an interface?
+// TODO: Make Backoff an interface? id:3959 gh:3979
 func RetryOnConflict(backoff wait.Backoff, fn func() error) error {
 	var lastConflictErr error
 	err := wait.ExponentialBackoff(backoff, func() (bool, error) {

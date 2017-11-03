@@ -17,7 +17,7 @@
 // 40 KB when cpu and memory are tracked. We'll start by enabling collection for the
 // node, followed by docker, and then all containers as we understand the usage pattern
 // better
-// TODO(rjnagal): Optimize the size if we start running it for every container.
+// TODO (rjnagal): Optimize the size if we start running it for every container. id:2961 gh:2976
 package summary
 
 import (
@@ -68,7 +68,7 @@ func (s *StatsSummary) AddSample(stat v1.ContainerStats) error {
 	}
 	s.secondSamples = append(s.secondSamples, &sample)
 	s.updateLatestUsage()
-	// TODO(jnagal): Use 'available' to avoid unnecessary computation.
+	// TODO (jnagal): Use 'available' to avoid unnecessary computation. id:2836 gh:2852
 	numSamples := len(s.secondSamples)
 	elapsed := time.Nanosecond
 	if numSamples > 1 {

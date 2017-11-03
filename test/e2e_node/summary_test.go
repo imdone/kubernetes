@@ -209,7 +209,7 @@ var _ = framework.KubeDescribe("Summary API", func() {
 						"PageFaults":      bounded(1000, 1E9),
 						"MajorPageFaults": bounded(0, 100000),
 					}),
-					// TODO(#28407): Handle non-eth0 network interface names.
+					// TODO (#28407): Handle non-eth0 network interface names. id:2427 gh:2442
 					"Network": Or(BeNil(), ptrMatchAllFields(gstruct.Fields{
 						"Time":     recent(maxStatsAge),
 						"RxBytes":  bounded(1*framework.Mb, 100*framework.Gb),
@@ -287,8 +287,8 @@ func getSummaryTestPods(f *framework.Framework, numRestarts int32, names ...stri
 					},
 				},
 				Volumes: []v1.Volume{
-					// TODO(#28393): Test secret volumes
-					// TODO(#28394): Test hostpath volumes
+					// TODO (#28393): Test secret volumes id:2498 gh:2514
+					// TODO (#28394): Test hostpath volumes id:2669 gh:2684
 					{Name: "test-empty-dir", VolumeSource: v1.VolumeSource{EmptyDir: &v1.EmptyDirVolumeSource{}}},
 				},
 			},

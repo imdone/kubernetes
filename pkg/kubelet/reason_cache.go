@@ -33,8 +33,8 @@ import (
 //   2. We use an LRU cache to avoid extra garbage collection work. This
 //      means that some entries may be recycled before a pod has been
 //      deleted.
-// TODO(random-liu): Use more reliable cache which could collect garbage of failed pod.
-// TODO(random-liu): Move reason cache to somewhere better.
+// TODO (random-liu): Use more reliable cache which could collect garbage of failed pod. id:1027 gh:1033
+// TODO (random-liu): Move reason cache to somewhere better. id:1124 gh:1130
 type ReasonCache struct {
 	lock  sync.Mutex
 	cache *lru.Cache

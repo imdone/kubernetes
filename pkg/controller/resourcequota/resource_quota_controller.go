@@ -408,7 +408,7 @@ func (rq *ResourceQuotaController) replenishQuota(groupResource schema.GroupReso
 		}
 		resourceQuotaResources := quota.ResourceNames(internalResourceQuota.Status.Hard)
 		if intersection := evaluator.MatchingResources(resourceQuotaResources); len(intersection) > 0 {
-			// TODO: make this support targeted replenishment to a specific kind, right now it does a full recalc on that quota.
+			// TODO: make this support targeted replenishment to a specific kind, right now it does a full recalc on that quota. id:621 gh:622
 			rq.enqueueResourceQuota(resourceQuota)
 		}
 	}

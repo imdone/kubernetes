@@ -97,7 +97,7 @@ func TryConnectEndpoints(service proxy.ServicePortName, srcAddr net.Addr, protoc
 			return nil, err
 		}
 		glog.V(3).Infof("Mapped service %q to endpoint %s", service, endpoint)
-		// TODO: This could spin up a new goroutine to make the outbound connection,
+		// TODO: This could spin up a new goroutine to make the outbound connection, id:1220 gh:1226
 		// and keep accepting inbound traffic.
 		outConn, err := net.DialTimeout(protocol, endpoint, dialTimeout)
 		if err != nil {
@@ -175,7 +175,7 @@ func copyBytes(direction string, dest, src *net.TCPConn, wg *sync.WaitGroup) {
 
 // udpProxySocket implements ProxySocket.  Close() is implemented by net.UDPConn.  When Close() is called,
 // no new connections are allowed and existing connections are broken.
-// TODO: We could lame-duck this ourselves, if it becomes important.
+// TODO: We could lame-duck this ourselves, if it becomes important. id:1244 gh:1250
 type udpProxySocket struct {
 	*net.UDPConn
 	port int
@@ -208,7 +208,7 @@ func (udp *udpProxySocket) ProxyLoop(service proxy.ServicePortName, myInfo *Serv
 		}
 
 		// Block until data arrives.
-		// TODO: Accumulate a histogram of n or something, to fine tune the buffer size.
+		// TODO: Accumulate a histogram of n or something, to fine tune the buffer size. id:1297 gh:1303
 		n, cliAddr, err := udp.ReadFrom(buffer[0:])
 		if err != nil {
 			if e, ok := err.(net.Error); ok {
@@ -225,13 +225,13 @@ func (udp *udpProxySocket) ProxyLoop(service proxy.ServicePortName, myInfo *Serv
 		if err != nil {
 			continue
 		}
-		// TODO: It would be nice to let the goroutine handle this write, but we don't
+		// TODO: It would be nice to let the goroutine handle this write, but we don't id:1258 gh:1264
 		// really want to copy the buffer.  We could do a pool of buffers or something.
 		_, err = svrConn.Write(buffer[0:n])
 		if err != nil {
 			if !logTimeout(err) {
 				glog.Errorf("Write failed: %v", err)
-				// TODO: Maybe tear down the goroutine for this client/server pair?
+				// TODO: Maybe tear down the goroutine for this client/server pair? id:1164 gh:1170
 			}
 			continue
 		}
@@ -249,7 +249,7 @@ func (udp *udpProxySocket) getBackendConn(activeClients *ClientCache, cliAddr ne
 
 	svrConn, found := activeClients.Clients[cliAddr.String()]
 	if !found {
-		// TODO: This could spin up a new goroutine to make the outbound connection,
+		// TODO: This could spin up a new goroutine to make the outbound connection, id:1221 gh:1227
 		// and keep accepting inbound traffic.
 		glog.V(3).Infof("New UDP connection from %s", cliAddr)
 		var err error
@@ -271,7 +271,7 @@ func (udp *udpProxySocket) getBackendConn(activeClients *ClientCache, cliAddr ne
 }
 
 // This function is expected to be called as a goroutine.
-// TODO: Track and log bytes copied, like TCP
+// TODO: Track and log bytes copied, like TCP id:1245 gh:1251
 func (udp *udpProxySocket) proxyClient(cliAddr net.Addr, svrConn net.Conn, activeClients *ClientCache, timeout time.Duration) {
 	defer svrConn.Close()
 	var buffer [4096]byte

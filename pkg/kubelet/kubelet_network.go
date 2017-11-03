@@ -33,7 +33,7 @@ import (
 
 const (
 	// KubeMarkMasqChain is the mark-for-masquerade chain
-	// TODO: clean up this logic in kube-proxy
+	// TODO: clean up this logic in kube-proxy id:924 gh:930
 	KubeMarkMasqChain utiliptables.Chain = "KUBE-MARK-MASQ"
 
 	// KubeMarkDropChain is the mark-for-drop chain
@@ -78,7 +78,7 @@ func effectiveHairpinMode(hairpinMode kubeletconfig.HairpinMode, containerRuntim
 // providerRequiresNetworkingConfiguration returns whether the cloud provider
 // requires special networking configuration.
 func (kl *Kubelet) providerRequiresNetworkingConfiguration() bool {
-	// TODO: We should have a mechanism to say whether native cloud provider
+	// TODO: We should have a mechanism to say whether native cloud provider id:954 gh:960
 	// is used or whether we are using overlay networking. We should return
 	// true for cloud providers if they implement Routes() interface and
 	// we are not using overlay networking.
@@ -201,7 +201,7 @@ func (kl *Kubelet) checkLimitsForResolvConf() {
 
 // parseResolveConf reads a resolv.conf file from the given reader, and parses
 // it into nameservers and searches, possibly returning an error.
-// TODO: move to utility package
+// TODO: move to utility package id:968 gh:974
 func (kl *Kubelet) parseResolvConf(reader io.Reader) (nameservers []string, searches []string, err error) {
 	file, err := ioutil.ReadAll(reader)
 	if err != nil {
@@ -243,7 +243,7 @@ func (kl *Kubelet) parseResolvConf(reader io.Reader) (nameservers []string, sear
 func (kl *Kubelet) syncNetworkStatus() {
 	// For cri integration, network state will be updated in updateRuntimeUp,
 	// we'll get runtime network status through cri directly.
-	// TODO: Remove this once we completely switch to cri integration.
+	// TODO: Remove this once we completely switch to cri integration. id:866 gh:872
 	if kl.networkPlugin != nil {
 		kl.runtimeState.setNetworkState(kl.networkPlugin.Status())
 	}

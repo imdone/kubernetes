@@ -284,7 +284,7 @@ func (c *httpClusterClient) getLeaderEndpoint(ctx context.Context, eps []url.URL
 		return "", ErrNoLeaderEndpoint
 	}
 
-	return leader.ClientURLs[0], nil // TODO: how to handle multiple client URLs?
+	return leader.ClientURLs[0], nil // TODO: how to handle multiple client URLs? id:2565 gh:2580
 }
 
 func (c *httpClusterClient) parseEndpoints(eps []string) ([]url.URL, error) {
@@ -374,7 +374,7 @@ func (c *httpClusterClient) Do(ctx context.Context, act httpAction) (*http.Respo
 		if resp.StatusCode/100 == 5 {
 			switch resp.StatusCode {
 			case http.StatusInternalServerError, http.StatusServiceUnavailable:
-				// TODO: make sure this is a no leader response
+				// TODO: make sure this is a no leader response id:2843 gh:2859
 				cerr.Errors = append(cerr.Errors, fmt.Errorf("client: etcd member %s has no leader", eps[k].String()))
 			default:
 				cerr.Errors = append(cerr.Errors, fmt.Errorf("client: etcd member %s returns server error [%s]", eps[k].String(), http.StatusText(resp.StatusCode)))

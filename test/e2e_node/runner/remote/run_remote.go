@@ -126,7 +126,7 @@ type TestResult struct {
 //         machine: for benchmark only, the machine type (GCE instance) to run test
 //         tests: for benchmark only, a list of ginkgo focus strings to match tests
 
-// TODO(coufon): replace 'image' with 'node' in configurations
+// TODO (coufon): replace 'image' with 'node' in configurations id:2330 gh:2345
 // and we plan to support testing custom machines other than GCE by specifying host
 type ImageConfig struct {
 	Images map[string]GCEImage `json:"images"`
@@ -178,7 +178,7 @@ func main() {
 	switch *testSuite {
 	case "conformance":
 		suite = remote.InitConformanceRemote()
-	// TODO: Add subcommand for node soaking, node conformance, cri validation.
+	// TODO: Add subcommand for node soaking, node conformance, cri validation. id:2495 gh:2511
 	case "default":
 		// Use node e2e suite by default if no subcommand is specified.
 		suite = remote.InitNodeE2ERemote()
@@ -525,7 +525,7 @@ func testImage(imageConfig *internalGCEImage, junitFilePrefix string) *TestResul
 
 	result := testHost(host, deleteFiles, imageConfig.imageDesc, junitFilePrefix, ginkgoFlagsStr)
 	// This is a temporary solution to collect serial node serial log. Only port 1 contains useful information.
-	// TODO(random-liu): Extract out and unify log collection logic with cluste e2e.
+	// TODO (random-liu): Extract out and unify log collection logic with cluste e2e. id:2666 gh:2681
 	serialPortOutput, err := computeService.Instances.GetSerialPortOutput(*project, *zone, host).Port(1).Do()
 	if err != nil {
 		glog.Errorf("Failed to collect serial output from node %q: %v", host, err)
@@ -618,7 +618,7 @@ func createInstance(imageConfig *internalGCEImage) (string, error) {
 		if len(externalIp) > 0 {
 			remote.AddHostnameIp(name, externalIp)
 		}
-		// TODO(random-liu): Remove the docker version check. Use some other command to check
+		// TODO (random-liu): Remove the docker version check. Use some other command to check id:2405 gh:2421
 		// instance readiness.
 		var output string
 		output, err = remote.SSH(name, "docker", "version")

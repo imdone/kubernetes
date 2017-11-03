@@ -85,7 +85,7 @@ if [[ "${KUBERNETES_PROVIDER}" == "gce" ]]; then
   done
 fi
 
-# TODO(kubernetes/test-infra#3330): Allow NODE_INSTANCE_GROUP to be
+# TODO (kubernetes/test-infra#3330): Allow NODE_INSTANCE_GROUP to be id:189 gh:190
 # set before we get here, which eliminates any cluster/gke use if
 # KUBERNETES_CONFORMANCE_PROVIDER is set to "gke".
 if [[ -z "${NODE_INSTANCE_GROUP:-}" ]] && [[ "${KUBERNETES_PROVIDER}" == "gke" ]]; then

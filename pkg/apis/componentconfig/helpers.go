@@ -28,7 +28,7 @@ import (
 )
 
 // used for validating command line opts
-// TODO(mikedanese): remove these when we remove command line flags
+// TODO (mikedanese): remove these when we remove command line flags id:398 gh:399
 
 type IPVar struct {
 	Val *string

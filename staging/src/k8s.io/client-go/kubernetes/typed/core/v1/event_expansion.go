@@ -146,7 +146,7 @@ func GetInvolvedObjectNameFieldLabel(version string) string {
 	return "involvedObject.name"
 }
 
-// TODO: This is a temporary arrangement and will be removed once all clients are moved to use the clientset.
+// TODO: This is a temporary arrangement and will be removed once all clients are moved to use the clientset. id:4041 gh:4061
 type EventSinkImpl struct {
 	Interface EventInterface
 }

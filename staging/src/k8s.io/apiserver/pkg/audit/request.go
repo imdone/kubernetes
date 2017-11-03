@@ -48,7 +48,7 @@ func NewEventFromRequest(req *http.Request, level auditinternal.Level, attribs a
 	ev.Level = level
 
 	// prefer the id from the headers. If not available, create a new one.
-	// TODO(audit): do we want to forbid the header for non-front-proxy users?
+	// TODO (audit): do we want to forbid the header for non-front-proxy users? id:3866 gh:3881
 	ids := req.Header.Get(auditinternal.HeaderAuditID)
 	if ids != "" {
 		ev.AuditID = types.UID(ids)
@@ -128,7 +128,7 @@ func LogRequestObject(ae *audit.Event, obj runtime.Object, gvr schema.GroupVersi
 			ae.ObjectRef.ResourceVersion = meta.GetResourceVersion()
 		}
 	}
-	// TODO: ObjectRef should include the API group.
+	// TODO: ObjectRef should include the API group. id:3354 gh:3369
 	if len(ae.ObjectRef.APIVersion) == 0 {
 		ae.ObjectRef.APIGroup = gvr.Group
 		ae.ObjectRef.APIVersion = gvr.Version
@@ -144,11 +144,11 @@ func LogRequestObject(ae *audit.Event, obj runtime.Object, gvr schema.GroupVersi
 		return
 	}
 
-	// TODO(audit): hook into the serializer to avoid double conversion
+	// TODO (audit): hook into the serializer to avoid double conversion id:3873 gh:3888
 	var err error
 	ae.RequestObject, err = encodeObject(obj, gvr.GroupVersion(), s)
 	if err != nil {
-		// TODO(audit): add error slice to audit event struct
+		// TODO (audit): add error slice to audit event struct id:3610 gh:3625
 		glog.Warningf("Auditing failed of %v request: %v", reflect.TypeOf(obj).Name(), err)
 		return
 	}
@@ -179,7 +179,7 @@ func LogResponseObject(ae *audit.Event, obj runtime.Object, gv schema.GroupVersi
 	if ae.Level.Less(audit.LevelRequestResponse) {
 		return
 	}
-	// TODO(audit): hook into the serializer to avoid double conversion
+	// TODO (audit): hook into the serializer to avoid double conversion id:3692 gh:3707
 	var err error
 	ae.ResponseObject, err = encodeObject(obj, gv, s)
 	if err != nil {

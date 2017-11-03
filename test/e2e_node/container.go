@@ -28,7 +28,7 @@ import (
 )
 
 // One pod one container
-// TODO: This should be migrated to the e2e framework.
+// TODO: This should be migrated to the e2e framework. id:2575 gh:2590
 type ConformanceContainer struct {
 	Container        v1.Container
 	RestartPolicy    v1.RestartPolicy

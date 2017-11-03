@@ -59,7 +59,7 @@ func (s *SortingPrinter) PrintObj(obj runtime.Object, out io.Writer) error {
 	return s.Delegate.PrintObj(obj, out)
 }
 
-// TODO: implement HandledResources()
+// TODO: implement HandledResources() id:798 gh:799
 func (s *SortingPrinter) HandledResources() []string {
 	return []string{}
 }

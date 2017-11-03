@@ -210,7 +210,7 @@ func Packages(context *generator.Context, arguments *args.GeneratorArgs) generat
 `)...)
 
 	// Accumulate pre-existing default functions.
-	// TODO: This is too ad-hoc.  We need a better way.
+	// TODO: This is too ad-hoc.  We need a better way. id:4067 gh:4087
 	existingDefaulters := defaulterFuncMap{}
 
 	buffer := &bytes.Buffer{}
@@ -360,7 +360,7 @@ func Packages(context *generator.Context, arguments *args.GeneratorArgs) generat
 		// generation to output to the proper relative path (under vendor).
 		// Otherwise, the generator will create the file in the wrong location
 		// in the output directory.
-		// TODO: build a more fundamental concept in gengo for dealing with modifications
+		// TODO: build a more fundamental concept in gengo for dealing with modifications id:3625 gh:3640
 		// to vendored packages.
 		if strings.HasPrefix(pkg.SourcePath, arguments.OutputBase) {
 			expandedPath := strings.TrimPrefix(pkg.SourcePath, arguments.OutputBase)

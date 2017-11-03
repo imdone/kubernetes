@@ -55,7 +55,7 @@ func addConversionFuncs(scheme *runtime.Scheme) error {
 		Convert_extensions_DaemonSetUpdateStrategy_To_v1beta2_DaemonSetUpdateStrategy,
 		Convert_v1beta2_DaemonSetUpdateStrategy_To_extensions_DaemonSetUpdateStrategy,
 		// extensions
-		// TODO: below conversions should be dropped in favor of auto-generated
+		// TODO: below conversions should be dropped in favor of auto-generated id:348 gh:349
 		// ones, see https://github.com/kubernetes/kubernetes/issues/39865
 		Convert_v1beta2_ScaleStatus_To_extensions_ScaleStatus,
 		Convert_extensions_ScaleStatus_To_v1beta2_ScaleStatus,
@@ -402,7 +402,7 @@ func Convert_v1beta2_Deployment_To_extensions_Deployment(in *appsv1beta2.Deploym
 	}
 
 	// Copy annotation to deprecated rollbackTo field for roundtrip
-	// TODO: remove this conversion after we delete extensions/v1beta1 and apps/v1beta1 Deployment
+	// TODO: remove this conversion after we delete extensions/v1beta1 and apps/v1beta1 Deployment id:325 gh:326
 	if revision, _ := in.Annotations[appsv1beta2.DeprecatedRollbackTo]; revision != "" {
 		if revision64, err := strconv.ParseInt(revision, 10, 64); err != nil {
 			return fmt.Errorf("failed to parse annotation[%s]=%s as int64: %v", appsv1beta2.DeprecatedRollbackTo, revision, err)
@@ -440,7 +440,7 @@ func Convert_extensions_Deployment_To_v1beta2_Deployment(in *extensions.Deployme
 	}
 
 	// Copy deprecated rollbackTo field to annotation for roundtrip
-	// TODO: remove this conversion after we delete extensions/v1beta1 and apps/v1beta1 Deployment
+	// TODO: remove this conversion after we delete extensions/v1beta1 and apps/v1beta1 Deployment id:299 gh:300
 	if in.Spec.RollbackTo != nil {
 		if out.Annotations == nil {
 			out.Annotations = make(map[string]string)

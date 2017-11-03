@@ -238,7 +238,7 @@ func (h *histogram) Desc() *Desc {
 }
 
 func (h *histogram) Observe(v float64) {
-	// TODO(beorn7): For small numbers of buckets (<30), a linear search is
+	// TODO (beorn7): For small numbers of buckets (<30), a linear search is id:3037 gh:3052
 	// slightly faster than the binary search. If we really care, we could
 	// switch from one search strategy to the other depending on the number
 	// of buckets.

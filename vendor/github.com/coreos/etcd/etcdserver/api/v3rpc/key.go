@@ -231,7 +231,7 @@ func checkRequestDupKeys(reqs []*pb.RequestOp) error {
 }
 
 func checkRequestOp(u *pb.RequestOp) error {
-	// TODO: ensure only one of the field is set.
+	// TODO: ensure only one of the field is set. id:2845 gh:2860
 	switch uv := u.Request.(type) {
 	case *pb.RequestOp_RequestRange:
 		if uv.RequestRange != nil {

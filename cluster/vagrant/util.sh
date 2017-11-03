@@ -182,7 +182,7 @@ function echo-kube-env() {
 }
 
 function verify-cluster {
-  # TODO: How does the user know the difference between "tak[ing] some
+  # TODO: How does the user know the difference between "tak[ing] some id:55 gh:56
   # time" and "loop[ing] forever"? Can we give more specific feedback on
   # whether "an error" has occurred?
   echo "Each machine instance has been created/updated."

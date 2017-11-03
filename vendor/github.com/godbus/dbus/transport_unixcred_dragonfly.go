@@ -38,7 +38,7 @@ const (
 func cmsgAlignOf(salen int) int {
 	// From http://golang.org/src/pkg/syscall/sockcmsg_unix.go
 	//salign := sizeofPtr
-	// NOTE: It seems like 64-bit Darwin and DragonFly BSD kernels
+	// NOTE: It seems like 64-bit Darwin and DragonFly BSD kernels id:2797 gh:2812
 	// still require 32-bit aligned access to network subsystem.
 	//if darwin64Bit || dragonfly64Bit {
 	//	salign = 4

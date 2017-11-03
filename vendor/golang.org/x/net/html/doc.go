@@ -102,5 +102,5 @@ package html
 // node. Specification compliance is verified by checking expected and actual
 // outputs over a test suite rather than aiming for algorithmic fidelity.
 
-// TODO(nigeltao): Does a DOM API belong in this package or a separate one?
-// TODO(nigeltao): How does parsing interact with a JavaScript engine?
+// TODO (nigeltao): Does a DOM API belong in this package or a separate one? id:2871 gh:2886
+// TODO (nigeltao): How does parsing interact with a JavaScript engine? id:3264 gh:3279

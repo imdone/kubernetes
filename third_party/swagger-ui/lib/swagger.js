@@ -1353,7 +1353,7 @@
 
   /*
    * JQueryHttpClient lets a browser take advantage of JQuery's cross-browser magic.
-   * NOTE: when jQuery is available it will export both '$' and 'jQuery' to the global space.
+   * NOTE: when jQuery is available it will export both '$' and 'jQuery' to the global space. id:2446 gh:2461
    *     Since we are using closures here we need to alias it for internal use.
    */
   var JQueryHttpClient = function (options) {

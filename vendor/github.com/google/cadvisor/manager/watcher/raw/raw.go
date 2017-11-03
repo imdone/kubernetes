@@ -126,7 +126,7 @@ func (self *rawContainerWatcher) watchDirectory(dir string, containerName string
 		}
 	}()
 
-	// TODO(vmarmol): We should re-do this once we're done to ensure directories were not added in the meantime.
+	// TODO (vmarmol): We should re-do this once we're done to ensure directories were not added in the meantime. id:2658 gh:2673
 	// Watch subdirectories as well.
 	entries, err := ioutil.ReadDir(dir)
 	if err != nil {

@@ -238,7 +238,7 @@ func defaultPriorities() sets.String {
 		factory.RegisterPriorityFunction2("BalancedResourceAllocation", priorities.BalancedResourceAllocationMap, nil, 1),
 
 		// Set this weight large enough to override all other priority functions.
-		// TODO: Figure out a better way to do this, maybe at same time as fixing #24720.
+		// TODO: Figure out a better way to do this, maybe at same time as fixing #24720. id:1448 gh:1454
 		factory.RegisterPriorityFunction2("NodePreferAvoidPodsPriority", priorities.CalculateNodePreferAvoidPodsPriorityMap, nil, 10000),
 
 		// Prioritizes nodes that have labels matching NodeAffinity

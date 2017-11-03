@@ -102,7 +102,7 @@ func createWebSocketStreams(req *http.Request, w http.ResponseWriter, opts *Opti
 	}
 
 	// Send an empty message to the lowest writable channel to notify the client the connection is established
-	// TODO: make generic to SPDY and WebSockets and do it outside of this method?
+	// TODO: make generic to SPDY and WebSockets and do it outside of this method? id:1077 gh:1083
 	switch {
 	case opts.Stdout:
 		streams[stdoutChannel].Write([]byte{})

@@ -440,7 +440,7 @@ func TestRollbackDeploymentRSNoRevision(t *testing.T) {
 	if err = tester.waitForDeploymentRollbackCleared(); err != nil {
 		t.Fatalf("failed to roll back deployment %s to last revision: %v", tester.deployment.Name, err)
 	}
-	// TODO: report RollbackRevisionNotFound in deployment status and check it here
+	// TODO: report RollbackRevisionNotFound in deployment status and check it here id:2592 gh:2607
 
 	// The pod template shouldn't change since there's no last revision
 	// Check if the deployment is still revision 1 and still has the old pod template
@@ -486,7 +486,7 @@ func TestRollbackDeploymentRSNoRevision(t *testing.T) {
 	if err = tester.waitForDeploymentRollbackCleared(); err != nil {
 		t.Fatalf("failed to roll back deployment %s to revision %d: %v", tester.deployment.Name, revision, err)
 	}
-	// TODO: report RollbackDone in deployment status and check it here
+	// TODO: report RollbackDone in deployment status and check it here id:2433 gh:2448
 
 	// The pod template should be updated to the one in revision 1
 	// Wait for it to be updated to revision 3

@@ -230,7 +230,7 @@ func TestCRD(t *testing.T) {
 		t.Fatalf("Failed to create InitializerConfiguration: %v", err)
 	}
 
-	// TODO DO NOT MERGE THIS
+	// TODO DO NOT MERGE THIS id:175 gh:176
 	time.Sleep(5 * time.Second)
 
 	t.Logf("Creating Foo instance")

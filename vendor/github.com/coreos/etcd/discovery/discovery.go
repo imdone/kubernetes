@@ -126,7 +126,7 @@ func newDiscovery(durl, dproxyurl string, id types.ID) (*discovery, error) {
 		return nil, err
 	}
 
-	// TODO: add ResponseHeaderTimeout back when watch on discovery service writes header early
+	// TODO: add ResponseHeaderTimeout back when watch on discovery service writes header early id:2508 gh:2523
 	tr, err := transport.NewTransport(transport.TLSInfo{}, 30*time.Second)
 	if err != nil {
 		return nil, err
@@ -159,7 +159,7 @@ func (d *discovery) joinCluster(config string) (string, error) {
 
 	if err := d.createSelf(config); err != nil {
 		// Fails, even on a timeout, if createSelf times out.
-		// TODO(barakmich): Retrying the same node might want to succeed here
+		// TODO (barakmich): Retrying the same node might want to succeed here id:2756 gh:2771
 		// (ie, createSelf should be idempotent for discovery).
 		return "", err
 	}

@@ -33,7 +33,7 @@ import (
 	volumeutil "k8s.io/kubernetes/pkg/volume/util"
 )
 
-// TODO: in the near future, this will be changed to be more restrictive
+// TODO: in the near future, this will be changed to be more restrictive id:1513 gh:1520
 // and the group will be set to allow containers to use emptyDir volumes
 // from the group attribute.
 //

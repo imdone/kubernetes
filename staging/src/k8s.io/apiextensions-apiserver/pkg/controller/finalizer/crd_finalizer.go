@@ -206,7 +206,7 @@ func (c *CRDFinalizer) deleteInstances(crd *apiextensions.CustomResourceDefiniti
 	}
 
 	// now we need to wait until all the resources are deleted.  Start with a simple poll before we do anything fancy.
-	// TODO not all servers are synchronized on caches.  It is possible for a stale one to still be creating things.
+	// TODO not all servers are synchronized on caches.  It is possible for a stale one to still be creating things. id:3751 gh:3766
 	// Once we have a mechanism for servers to indicate their states, we should check that for concurrence.
 	err = wait.PollImmediate(5*time.Second, 1*time.Minute, func() (bool, error) {
 		listObj, err := crClient.List(ctx, nil)

@@ -102,7 +102,7 @@ func (s SftpFs) Remove(name string) error {
 }
 
 func (s SftpFs) RemoveAll(path string) error {
-	// TODO have a look at os.RemoveAll
+	// TODO have a look at os.RemoveAll id:3070 gh:3085
 	// https://github.com/golang/go/blob/master/src/os/path.go#L66
 	return nil
 }

@@ -104,7 +104,7 @@ func NewCIDRRangeAllocator(client clientset.Interface, clusterCIDR *net.IPNet, s
 		}
 	}
 	for i := 0; i < cidrUpdateWorkers; i++ {
-		// TODO: Take stopChan as an argument to NewCIDRRangeAllocator and pass it to the worker.
+		// TODO: Take stopChan as an argument to NewCIDRRangeAllocator and pass it to the worker. id:628 gh:629
 		go ra.worker(wait.NeverStop)
 	}
 
@@ -227,7 +227,7 @@ func (r *rangeAllocator) updateCIDRAllocation(data nodeAndCIDR) error {
 
 	podCIDR := data.cidr.String()
 	for rep := 0; rep < cidrUpdateRetries; rep++ {
-		// TODO: change it to using PATCH instead of full Node updates.
+		// TODO: change it to using PATCH instead of full Node updates. id:564 gh:565
 		node, err = r.client.CoreV1().Nodes().Get(data.nodeName, metav1.GetOptions{})
 		if err != nil {
 			glog.Errorf("Failed while getting node %v to retry updating Node.Spec.PodCIDR: %v", data.nodeName, err)

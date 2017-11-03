@@ -11,7 +11,7 @@ import (
 // Detailed documentation is available in:
 // http://man7.org/linux/man-pages/man5/resolv.conf.5.html
 // `nameserver`, `search`, `options` have been supported.
-// TODO: `domain` is not supported yet.
+// TODO: `domain` is not supported yet. id:2688 gh:2703
 type DNSConfig struct {
 	// Nameservers specifies the IP addresses of the name servers
 	Nameservers []string `json:",omitempty"`

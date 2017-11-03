@@ -239,7 +239,7 @@ var _ = framework.KubeDescribe("Container Manager Misc [Serial]", func() {
 					return nil
 				}, 2*time.Minute, time.Second*4).Should(BeNil())
 
-				// TODO: Test the oom-score-adj logic for burstable more accurately.
+				// TODO: Test the oom-score-adj logic for burstable more accurately. id:2322 gh:2337
 			})
 		})
 	})

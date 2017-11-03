@@ -29,7 +29,7 @@ import (
 	"k8s.io/kubernetes/pkg/quota"
 )
 
-// TODO add a `WantsToRun` which takes a stopCh.  Might make it generic.
+// TODO add a `WantsToRun` which takes a stopCh.  Might make it generic. id:655 gh:656
 
 // WantsInternalKubeClientSet defines a function which sets ClientSet for admission plugins that need it
 type WantsInternalKubeClientSet interface {
@@ -93,7 +93,7 @@ type PluginInitializer struct {
 var _ admission.PluginInitializer = &PluginInitializer{}
 
 // NewPluginInitializer constructs new instance of PluginInitializer
-// TODO: switch these parameters to use the builder pattern or just make them
+// TODO: switch these parameters to use the builder pattern or just make them id:679 gh:680
 // all public, this construction method is pointless boilerplate.
 func NewPluginInitializer(
 	internalClient internalclientset.Interface,

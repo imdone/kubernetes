@@ -184,7 +184,7 @@ func (c *PodClient) mungeSpec(pod *v1.Pod) {
 	}
 }
 
-// TODO(random-liu): Move pod wait function into this file
+// TODO (random-liu): Move pod wait function into this file id:2228 gh:2243
 // WaitForSuccess waits for pod to succeed.
 func (c *PodClient) WaitForSuccess(name string, timeout time.Duration) {
 	f := c.f

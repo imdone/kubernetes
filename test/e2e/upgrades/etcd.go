@@ -187,7 +187,7 @@ func (t *EtcdUpgradeTest) Test(f *framework.Framework, done <-chan struct{}, upg
 	ratio = float64(t.successfulWrites) / float64(writeAttempts)
 	framework.Logf("Successful writes %d/%d=%v", t.successfulWrites, writeAttempts, ratio)
 	framework.Logf("Errors: %v", errors)
-	// TODO(maisem): tweak this value once we have a few test runs.
+	// TODO (maisem): tweak this value once we have a few test runs. id:2353 gh:2368
 	Expect(ratio > 0.75).To(BeTrue())
 }
 

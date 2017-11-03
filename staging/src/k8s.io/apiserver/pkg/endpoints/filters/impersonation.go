@@ -191,7 +191,7 @@ func buildImpersonationRequests(headers http.Header) ([]v1.ObjectReference, erro
 					APIVersion: authenticationv1.SchemeGroupVersion.String(),
 					Name:       value,
 					// ObjectReference doesn't have a subresource field.  FieldPath is close and available, so we'll use that
-					// TODO fight the good fight for ObjectReference to refer to resources and subresources
+					// TODO fight the good fight for ObjectReference to refer to resources and subresources id:3876 gh:3891
 					FieldPath: extraKey,
 				})
 		}

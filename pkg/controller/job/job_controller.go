@@ -90,7 +90,7 @@ type JobController struct {
 func NewJobController(podInformer coreinformers.PodInformer, jobInformer batchinformers.JobInformer, kubeClient clientset.Interface) *JobController {
 	eventBroadcaster := record.NewBroadcaster()
 	eventBroadcaster.StartLogging(glog.Infof)
-	// TODO: remove the wrapper when every clients have moved to use the clientset.
+	// TODO: remove the wrapper when every clients have moved to use the clientset. id:579 gh:580
 	eventBroadcaster.StartRecordingToSink(&v1core.EventSinkImpl{Interface: v1core.New(kubeClient.CoreV1().RESTClient()).Events("")})
 
 	if kubeClient != nil && kubeClient.CoreV1().RESTClient().GetRateLimiter() != nil {
@@ -352,7 +352,7 @@ func (jm *JobController) enqueueController(job interface{}) {
 	// Retrieves the backoff duration for this Job
 	backoff := getBackoff(jm.queue, key)
 
-	// TODO: Handle overlapping controllers better. Either disallow them at admission time or
+	// TODO: Handle overlapping controllers better. Either disallow them at admission time or id:543 gh:545
 	// deterministically avoid syncing controllers that fight over pods. Currently, we only
 	// ensure that the same controller is synced for a given pod. When we periodically relist
 	// all controllers there will still be some replica instability. One way to handle this is
@@ -575,7 +575,7 @@ func (jm *JobController) syncJob(key string) (bool, error) {
 }
 
 func (jm *JobController) deleteJobPods(job *batch.Job, pods []*v1.Pod, errCh chan<- error) {
-	// TODO: below code should be replaced with pod termination resulting in
+	// TODO: below code should be replaced with pod termination resulting in id:587 gh:588
 	// pod failures, rather than killing pods. Unfortunately none such solution
 	// exists ATM. There's an open discussion in the topic in
 	// https://github.com/kubernetes/kubernetes/issues/14602 which might give

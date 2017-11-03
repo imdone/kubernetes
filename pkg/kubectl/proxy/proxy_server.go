@@ -50,7 +50,7 @@ var (
 	// Only matters for long poll connections like the one used to watch. With an
 	// interval of 0 the reverse proxy will buffer content sent on any connection
 	// with transfer-encoding=chunked.
-	// TODO: Flush after each chunk so the client doesn't suffer a 100ms latency per
+	// TODO: Flush after each chunk so the client doesn't suffer a 100ms latency per id:794 gh:795
 	// watch event.
 	ReverseProxyFlushInterval = 100 * time.Millisecond
 )

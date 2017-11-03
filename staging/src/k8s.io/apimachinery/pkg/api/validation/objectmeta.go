@@ -30,7 +30,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/validation/field"
 )
 
-// TODO: delete this global variable when we enable the validation of common
+// TODO: delete this global variable when we enable the validation of common id:3731 gh:3746
 // fields by default.
 var RepairMalformedUpdates bool = true
 
@@ -258,7 +258,7 @@ func ValidateObjectMetaAccessorUpdate(newMeta, oldMeta metav1.Object, fldPath *f
 		allErrs = append(allErrs, field.Invalid(fldPath.Child("uid"), newMeta.GetUID(), "field is immutable"))
 	}
 	// in the event it is left empty, set it, to allow clients more flexibility
-	// TODO: remove the following code that repairs the update request when we retire the clients that modify the immutable fields.
+	// TODO: remove the following code that repairs the update request when we retire the clients that modify the immutable fields. id:3496 gh:3511
 	// Please do not copy this pattern elsewhere; validation functions should not be modifying the objects they are passed!
 	if RepairMalformedUpdates {
 		if len(newMeta.GetUID()) == 0 {
@@ -279,7 +279,7 @@ func ValidateObjectMetaAccessorUpdate(newMeta, oldMeta metav1.Object, fldPath *f
 		}
 	}
 
-	// TODO: needs to check if newMeta==nil && oldMeta !=nil after the repair logic is removed.
+	// TODO: needs to check if newMeta==nil && oldMeta !=nil after the repair logic is removed. id:3655 gh:3670
 	if newMeta.GetDeletionGracePeriodSeconds() != nil && (oldMeta.GetDeletionGracePeriodSeconds() == nil || *newMeta.GetDeletionGracePeriodSeconds() != *oldMeta.GetDeletionGracePeriodSeconds()) {
 		allErrs = append(allErrs, field.Invalid(fldPath.Child("deletionGracePeriodSeconds"), newMeta.GetDeletionGracePeriodSeconds(), "field is immutable; may only be changed via deletion"))
 	}

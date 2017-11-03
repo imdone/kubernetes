@@ -156,7 +156,7 @@ type Server interface {
 	//
 	// The API/raft component can utilize ClusterVersion to determine if
 	// it can accept a client request or a raft RPC.
-	// NOTE: ClusterVersion might be nil when etcd 2.1 works with etcd 2.0 and
+	// NOTE: ClusterVersion might be nil when etcd 2.1 works with etcd 2.0 and id:2618 gh:2633
 	// the leader is etcd 2.0. etcd 2.0 leader will not update clusterVersion since
 	// this feature is introduced post 2.0.
 	ClusterVersion() *semver.Version
@@ -449,7 +449,7 @@ func NewServer(cfg *ServerConfig) (srv *EtcdServer, err error) {
 	srv.kv = mvcc.New(srv.be, srv.lessor, &srv.consistIndex)
 	if beExist {
 		kvindex := srv.kv.ConsistentIndex()
-		// TODO: remove kvindex != 0 checking when we do not expect users to upgrade
+		// TODO: remove kvindex != 0 checking when we do not expect users to upgrade id:2569 gh:2584
 		// etcd from pre-3.0 release.
 		if snapshot != nil && kvindex < snapshot.Metadata.Index {
 			if kvindex != 0 {
@@ -474,7 +474,7 @@ func NewServer(cfg *ServerConfig) (srv *EtcdServer, err error) {
 		return nil, err
 	}
 
-	// TODO: move transport initialization near the definition of remote
+	// TODO: move transport initialization near the definition of remote id:2874 gh:2890
 	tr := &rafthttp.Transport{
 		TLSInfo:     cfg.PeerTLSInfo,
 		DialTimeout: cfg.peerDialTimeout(),
@@ -538,7 +538,7 @@ func (s *EtcdServer) start() {
 	} else {
 		plog.Infof("starting server... [version: %v, cluster version: to_be_decided]", version.Version)
 	}
-	// TODO: if this is an empty log, writes all peer infos
+	// TODO: if this is an empty log, writes all peer infos id:2511 gh:2526
 	// into the first entry
 	go s.run()
 }
@@ -601,7 +601,7 @@ type etcdProgress struct {
 
 // raftReadyHandler contains a set of EtcdServer operations to be called by raftNode,
 // and helps decouple state machine logic from Raft algorithms.
-// TODO: add a state machine interface to apply the commit entries and do snapshot/recover
+// TODO: add a state machine interface to apply the commit entries and do snapshot/recover id:2759 gh:2774
 type raftReadyHandler struct {
 	updateLeadership     func()
 	updateCommittedIndex func(uint64)
@@ -645,7 +645,7 @@ func (s *EtcdServer) run() {
 				}
 			}
 
-			// TODO: remove the nil checking
+			// TODO: remove the nil checking id:2619 gh:2634
 			// current test utility does not provide the stats
 			if s.stats != nil {
 				s.stats.BecomeLeader()
@@ -916,7 +916,7 @@ func (s *EtcdServer) isLeader() bool {
 }
 
 // transferLeadership transfers the leader to the given transferee.
-// TODO: maybe expose to client?
+// TODO: maybe expose to client? id:2570 gh:2585
 func (s *EtcdServer) transferLeadership(ctx context.Context, lead, transferee uint64) error {
 	now := time.Now()
 	interval := time.Duration(s.Cfg.TickMs) * time.Millisecond
@@ -931,7 +931,7 @@ func (s *EtcdServer) transferLeadership(ctx context.Context, lead, transferee ui
 		}
 	}
 
-	// TODO: drain all requests, or drop all messages to the old leader
+	// TODO: drain all requests, or drop all messages to the old leader id:2875 gh:2889
 
 	plog.Infof("%s finished leadership transfer from %s to %s (took %v)", s.ID(), types.ID(lead), types.ID(transferee), time.Since(now))
 	return nil
@@ -1051,7 +1051,7 @@ func (s *EtcdServer) AddMember(ctx context.Context, memb membership.Member) erro
 		}
 	}
 
-	// TODO: move Member to protobuf type
+	// TODO: move Member to protobuf type id:2512 gh:2527
 	b, err := json.Marshal(memb)
 	if err != nil {
 		return err
@@ -1131,7 +1131,7 @@ func (s *EtcdServer) Index() uint64 { return atomic.LoadUint64(&s.r.index) }
 func (s *EtcdServer) Term() uint64 { return atomic.LoadUint64(&s.r.term) }
 
 // Lead is only for testing purposes.
-// TODO: add Raft server interface to expose raft related info:
+// TODO: add Raft server interface to expose raft related info: id:2760 gh:2775
 // Index, Term, Lead, Committed, Applied, LastIndex, etc.
 func (s *EtcdServer) Lead() uint64 { return atomic.LoadUint64(&s.r.lead) }
 
@@ -1398,7 +1398,7 @@ func (s *EtcdServer) applyConfChange(cc raftpb.ConfChange, confState *raftpb.Con
 	return false, nil
 }
 
-// TODO: non-blocking snapshot
+// TODO: non-blocking snapshot id:2620 gh:2635
 func (s *EtcdServer) snapshot(snapi uint64, confState raftpb.ConfState) {
 	clone := s.store.Clone()
 	// commit kv to write metadata (for example: consistent index) to disk.
@@ -1411,7 +1411,7 @@ func (s *EtcdServer) snapshot(snapi uint64, confState raftpb.ConfState) {
 
 	s.goAttach(func() {
 		d, err := clone.SaveNoCopy()
-		// TODO: current store will never fail to do a snapshot
+		// TODO: current store will never fail to do a snapshot id:2571 gh:2586
 		// what should we do if the store might fail?
 		if err != nil {
 			plog.Panicf("store save should never fail: %v", err)
@@ -1572,7 +1572,7 @@ func (s *EtcdServer) parseProposeCtxErr(err error, start time.Time) error {
 		lead := types.ID(atomic.LoadUint64(&s.r.lead))
 		switch lead {
 		case types.ID(raft.None):
-			// TODO: return error to specify it happens because the cluster does not have leader now
+			// TODO: return error to specify it happens because the cluster does not have leader now id:2876 gh:2891
 		case s.ID():
 			if !isConnectedToQuorumSince(s.r.transport, start, s.ID(), s.cluster.Members()) {
 				return ErrTimeoutDueToConnectionLost

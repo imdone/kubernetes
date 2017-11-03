@@ -39,7 +39,7 @@ func golangTrackerLocalName(tracker namer.ImportTracker, t types.Name) string {
 	path := t.Package
 	dirs := strings.Split(path, string(filepath.Separator))
 	for n := len(dirs) - 1; n >= 0; n-- {
-		// TODO: bikeshed about whether it's more readable to have an
+		// TODO: bikeshed about whether it's more readable to have an id:4031 gh:4051
 		// _, something else, or nothing between directory names.
 		name := strings.Join(dirs[n:], "_")
 		// These characters commonly appear in import paths for go

@@ -120,7 +120,7 @@ func NewGenericPLEG(runtime kubecontainer.Runtime, channelCapacity int,
 
 // Returns a channel from which the subscriber can receive PodLifecycleEvent
 // events.
-// TODO: support multiple subscribers.
+// TODO: support multiple subscribers. id:1060 gh:1066
 func (g *GenericPLEG) Watch() chan *PodLifecycleEvent {
 	return g.eventChannel
 }
@@ -233,7 +233,7 @@ func (g *GenericPLEG) relist() {
 			// in the next relist. To achieve this, we do not update the
 			// associated podRecord of the pod, so that the change will be
 			// detect again in the next relist.
-			// TODO: If many pods changed during the same relist period,
+			// TODO: If many pods changed during the same relist period, id:987 gh:993
 			// inspecting the pod and getting the PodStatus to update the cache
 			// serially may take a while. We should be aware of this and
 			// parallelize if needed.
@@ -299,7 +299,7 @@ func getContainersFromPods(pods ...*kubecontainer.Pod) []*kubecontainer.Containe
 			containers = append(containers, c)
 		}
 		// Update sandboxes as containers
-		// TODO: keep track of sandboxes explicitly.
+		// TODO: keep track of sandboxes explicitly. id:1105 gh:1111
 		for _, c := range p.Sandboxes {
 			cid := string(c.ID.ID)
 			if cidSet.Has(cid) {
@@ -373,7 +373,7 @@ func (g *GenericPLEG) updateCache(pod *kubecontainer.Pod, pid types.UID) error {
 		return nil
 	}
 	timestamp := g.clock.Now()
-	// TODO: Consider adding a new runtime method
+	// TODO: Consider adding a new runtime method id:1025 gh:1031
 	// GetPodStatus(pod *kubecontainer.Pod) so that Docker can avoid listing
 	// all containers again.
 	status, err := g.runtime.GetPodStatus(pod.ID, pod.Name, pod.Namespace)

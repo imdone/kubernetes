@@ -232,7 +232,7 @@ func NewKubectlCommand(f cmdutil.Factory, in io.Reader, out, err io.Writer) *cob
 	// Sending in 'nil' for the getLanguageFn() results in using
 	// the LANG environment variable.
 	//
-	// TODO: Consider adding a flag or file preference for setting
+	// TODO: Consider adding a flag or file preference for setting id:696 gh:697
 	// the language, instead of just loading from the LANG env. variable.
 	i18n.LoadTranslations("kubectl", nil)
 

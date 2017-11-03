@@ -18,7 +18,7 @@ import (
 	"golang.org/x/text/transform"
 )
 
-// TODO: I think the Transformers really should return errors on unmatched
+// TODO: I think the Transformers really should return errors on unmatched id:3291 gh:3307
 // surrogate pairs and odd numbers of bytes. This is not required by RFC 2781,
 // which leaves it open, but is suggested by WhatWG. It will allow for all error
 // modes as defined by WhatWG: fatal, HTML and Replacement. This would require
@@ -161,12 +161,12 @@ var mibValue = map[Endianness][numBOMValues]identifier.MIB{
 	BigEndian: [numBOMValues]identifier.MIB{
 		IgnoreBOM: identifier.UTF16BE,
 		UseBOM:    identifier.UTF16, // BigEnding default is preferred by RFC 2781.
-		// TODO: acceptBOM | strictBOM would map to UTF16BE as well.
+		// TODO: acceptBOM | strictBOM would map to UTF16BE as well. id:3520 gh:3535
 	},
 	LittleEndian: [numBOMValues]identifier.MIB{
 		IgnoreBOM: identifier.UTF16LE,
 		UseBOM:    identifier.UTF16, // LittleEndian default is allowed and preferred on Windows.
-		// TODO: acceptBOM | strictBOM would map to UTF16LE as well.
+		// TODO: acceptBOM | strictBOM would map to UTF16LE as well. id:2914 gh:2929
 	},
 	// ExpectBOM is not widely used and has no valid MIB identifier.
 }
@@ -188,10 +188,10 @@ const (
 	requireBOM BOMPolicy = 0x04
 	bomMask    BOMPolicy = 0x07
 
-	// HACK: numBOMValues == 8 triggers a bug in the 1.4 compiler (cannot have a
+	// HACK: numBOMValues == 8 triggers a bug in the 1.4 compiler (cannot have a id:3438 gh:3453
 	// map of an array of length 8 of a type that is also used as a key or value
 	// in another map). See golang.org/issue/11354.
-	// TODO: consider changing this value back to 8 if the use of 1.4.* has
+	// TODO: consider changing this value back to 8 if the use of 1.4.* has id:3249 gh:3264
 	// been minimized.
 	numBOMValues = 8 + 1
 
@@ -210,7 +210,7 @@ const (
 	// Used in Java as Unicode (not to be confused with Java's UTF-16) and
 	// ICU's UTF-16,version=1. Not compliant with RFC 2781.
 
-	// TODO (maybe): strictBOM: BOM must match Endianness. This would allow:
+	// TODO (maybe): strictBOM: BOM must match Endianness. This would allow: id:3292 gh:3308
 	// - UTF-16(B|L)E,version=1: writeBOM | acceptBOM | requireBOM | strictBOM
 	//    (UnicodeBig and UnicodeLittle in Java)
 	// - RFC 2781-compliant, but less common interpretation for UTF-16(B|L)E:

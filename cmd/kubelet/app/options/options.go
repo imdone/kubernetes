@@ -54,7 +54,7 @@ type KubeletFlags struct {
 	// Crash immediately, rather than eating panics.
 	ReallyCrashForTesting bool
 
-	// TODO(mtaufen): It is increasingly looking like nobody actually uses the
+	// TODO (mtaufen): It is increasingly looking like nobody actually uses the id:227 gh:228
 	//                Kubelet's runonce mode anymore, so it may be a candidate
 	//                for deprecation and removal.
 	// If runOnce is true, the Kubelet will check the API server once for pods,
@@ -170,7 +170,7 @@ func NewKubeletFlags() *KubeletFlags {
 	}
 
 	return &KubeletFlags{
-		// TODO(#41161:v1.10.0): Remove the default kubeconfig path and --require-kubeconfig.
+		// TODO (#41161:v1.10.0): Remove the default kubeconfig path and --require-kubeconfig. id:166 gh:167
 		RequireKubeConfig:                   false,
 		KubeConfig:                          flag.NewStringFlag("/var/lib/kubelet/kubeconfig"),
 		ContainerRuntimeOptions:             *NewContainerRuntimeOptions(),
@@ -186,7 +186,7 @@ func NewKubeletFlags() *KubeletFlags {
 		ExperimentalQOSReserved:             make(map[string]string),
 		RemoteRuntimeEndpoint:               remoteRuntimeEndpoint,
 		RotateCertificates:                  false,
-		// TODO(#54161:v1.11.0): Remove --enable-custom-metrics flag, it is deprecated.
+		// TODO (#54161:v1.11.0): Remove --enable-custom-metrics flag, it is deprecated. id:136 gh:137
 		EnableCustomMetrics: false,
 	}
 }
@@ -260,7 +260,7 @@ func (f *KubeletFlags) AddFlags(fs *pflag.FlagSet) {
 	f.ContainerRuntimeOptions.AddFlags(fs)
 
 	fs.Var(&f.KubeConfig, "kubeconfig", "Path to a kubeconfig file, specifying how to connect to the API server.")
-	// TODO(#41161:v1.10.0): Remove the default kubeconfig path and --require-kubeconfig.
+	// TODO (#41161:v1.10.0): Remove the default kubeconfig path and --require-kubeconfig. id:185 gh:187
 	fs.BoolVar(&f.RequireKubeConfig, "require-kubeconfig", f.RequireKubeConfig, "This flag is no longer necessary. It has been deprecated and will be removed in a future version.")
 	fs.MarkDeprecated("require-kubeconfig", "You no longer need to use --require-kubeconfig. This will be removed in a future version. Providing --kubeconfig enables API server mode, omitting --kubeconfig enables standalone mode unless --require-kubeconfig=true is also set. In the latter case, the legacy default kubeconfig path will be used until --require-kubeconfig is removed.")
 
@@ -320,7 +320,7 @@ func (f *KubeletFlags) AddFlags(fs *pflag.FlagSet) {
 	fs.MarkDeprecated("non-masquerade-cidr", "will be removed in a future version")
 	fs.BoolVar(&f.KeepTerminatedPodVolumes, "keep-terminated-pod-volumes", f.KeepTerminatedPodVolumes, "Keep terminated pod volumes mounted to the node after the pod terminates.  Can be useful for debugging volume related issues.")
 	fs.MarkDeprecated("keep-terminated-pod-volumes", "will be removed in a future version")
-	// TODO(#54161:v1.11.0): Remove --enable-custom-metrics flag, it is deprecated.
+	// TODO (#54161:v1.11.0): Remove --enable-custom-metrics flag, it is deprecated. id:148 gh:149
 	fs.BoolVar(&f.EnableCustomMetrics, "enable-custom-metrics", f.EnableCustomMetrics, "Support for gathering custom metrics.")
 	fs.MarkDeprecated("enable-custom-metrics", "will be removed in a future version")
 

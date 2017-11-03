@@ -61,7 +61,7 @@ func TestMerge(t *testing.T) {
 				Spec: apitesting.DeepEqualSafePodSpec(),
 			},
 		},
-		/* TODO: uncomment this test once Merge is updated to use
+		/* TODO: uncomment this test once Merge is updated to use id:705 gh:706
 		strategic-merge-patch. See #8449.
 		{
 			obj: &api.Pod{

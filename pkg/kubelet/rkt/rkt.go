@@ -97,7 +97,7 @@ const (
 
 	k8sRktLimitNoFileAnno = "systemd-unit-option.rkt.kubernetes.io/LimitNOFILE"
 
-	// TODO(euank): This has significant security concerns as a stage1 image is
+	// TODO (euank): This has significant security concerns as a stage1 image is id:1127 gh:1133
 	// effectively root.
 	// Furthermore, this (using an annotation) is a hack to pass an extra
 	// non-portable argument in. It should not be relied on to be stable.
@@ -117,7 +117,7 @@ const (
 	// ndots specifies the minimum number of dots that a domain name must contain for the resolver to consider it as FQDN (fully-qualified)
 	// we want to able to consider SRV lookup names like _dns._udp.kube-dns.default.svc to be considered relative.
 	// hence, setting ndots to be 5.
-	// TODO(yifan): Move this and dockertools.ndotsDNSOption to a common package.
+	// TODO (yifan): Move this and dockertools.ndotsDNSOption to a common package. id:1066 gh:1072
 	defaultDNSOption = "ndots:5"
 
 	// Annotations for the ENTRYPOINT and CMD for an ACI that's converted from Docker image.
@@ -127,11 +127,11 @@ const (
 	appcDockerRegistryURL = "appc.io/docker/registryurl"
 	appcDockerRepository  = "appc.io/docker/repository"
 
-	// TODO(yifan): Reuse this const with Docker runtime.
+	// TODO (yifan): Reuse this const with Docker runtime. id:993 gh:999
 	minimumGracePeriodInSeconds = 2
 
 	// The network name of the network when no-op plugin is being used.
-	// TODO(yifan): This is not ideal since today we cannot make the rkt's 'net.d' dir point to the
+	// TODO (yifan): This is not ideal since today we cannot make the rkt's 'net.d' dir point to the id:1111 gh:1117
 	// CNI directory specified by kubelet. Once that is fixed, we can just use the network config
 	// under the CNI directory directly.
 	// See https://github.com/coreos/rkt/pull/2312#issuecomment-200068370.
@@ -156,7 +156,7 @@ type Runtime struct {
 	apisvcConn *grpc.ClientConn
 	apisvc     rktapi.PublicAPIClient
 	config     *Config
-	// TODO(yifan): Refactor this to be generic keyring.
+	// TODO (yifan): Refactor this to be generic keyring. id:1031 gh:1037
 	dockerKeyring credentialprovider.DockerKeyring
 
 	containerRefManager *kubecontainer.RefManager
@@ -247,13 +247,13 @@ func New(
 		return nil, fmt.Errorf("rkt: cannot create systemd interface: %v", err)
 	}
 
-	// TODO(yifan): Use secure connection.
+	// TODO (yifan): Use secure connection. id:1128 gh:1134
 	apisvcConn, err := grpc.Dial(apiEndpoint, grpc.WithInsecure())
 	if err != nil {
 		return nil, fmt.Errorf("rkt: cannot connect to rkt api service: %v", err)
 	}
 
-	// TODO(yifan): Get the rkt path from API service.
+	// TODO (yifan): Get the rkt path from API service. id:1067 gh:1073
 	if config.Path == "" {
 		// No default rkt path was set, so try to find one in $PATH.
 		var err error
@@ -353,7 +353,7 @@ func (r *Runtime) RunCommand(config *Config, args ...string) ([]string, error) {
 
 // makePodServiceFileName constructs the unit file name for a pod using its rkt pod uuid.
 func makePodServiceFileName(uuid string) string {
-	// TODO(yifan): Add name for readability? We need to consider the
+	// TODO (yifan): Add name for readability? We need to consider the id:994 gh:1000
 	// limit of the length.
 	return fmt.Sprintf("%s%s.service", kubernetesUnitPrefix, uuid)
 }
@@ -459,7 +459,7 @@ func mergeIsolators(app *appctypes.App, isolators []appctypes.Isolator) {
 			if is.Name.Equals(js.Name) {
 				switch is.Name {
 				case appctypes.LinuxCapabilitiesRetainSetName:
-					// TODO(yifan): More fine grain merge for capability set instead of override.
+					// TODO (yifan): More fine grain merge for capability set instead of override. id:1112 gh:1119
 					fallthrough
 				case appctypes.LinuxCapabilitiesRevokeSetName:
 					fallthrough
@@ -612,7 +612,7 @@ func setApp(imgManifest *appcschema.ImageManifest, c *v1.Container,
 
 	// If 'User' or 'Group' are still empty at this point,
 	// then apply the root UID and GID.
-	// TODO(yifan): If only the GID is empty, rkt should be able to determine the GID
+	// TODO (yifan): If only the GID is empty, rkt should be able to determine the GID id:1032 gh:1038
 	// using the /etc/passwd file in the image.
 	// See https://github.com/appc/docker2aci/issues/175.
 	// Maybe we can remove this check in the future.
@@ -692,7 +692,7 @@ func (r *Runtime) makePodManifest(pod *v1.Pod, podIP string, pullSecrets []v1.Se
 		}
 	}
 
-	// TODO(yifan): Set pod-level isolators once it's supported in kubernetes.
+	// TODO (yifan): Set pod-level isolators once it's supported in kubernetes. id:1129 gh:1135
 	return manifest, nil
 }
 
@@ -704,7 +704,7 @@ func copyfile(src, dst string) error {
 	return ioutil.WriteFile(dst, data, 0644)
 }
 
-// TODO(yifan): Can make rkt handle this when '--net=host'. See https://github.com/coreos/rkt/issues/2430.
+// TODO (yifan): Can make rkt handle this when '--net=host'. See https://github.com/coreos/rkt/issues/2430. id:1068 gh:1074
 func makeHostNetworkMount(opts *kubecontainer.RunContainerOptions) (*kubecontainer.Mount, *kubecontainer.Mount, error) {
 	mountHosts, mountResolvConf := true, true
 	for _, mnt := range opts.Mounts {
@@ -755,7 +755,7 @@ func podFinishedMarkerPath(podDir string, rktUID string) string {
 }
 
 func podFinishedMarkCommand(touchPath, podDir, rktUID string) string {
-	// TODO, if the path has a `'` character in it, this breaks.
+	// TODO , if the path has a `'` character in it, this breaks. id:995 gh:1001
 	return touchPath + " " + podFinishedMarkerPath(podDir, rktUID)
 }
 
@@ -841,7 +841,7 @@ func (r *Runtime) newAppcRuntimeApp(pod *v1.Pod, podIP string, c v1.Container, r
 		return err
 	}
 
-	// TODO: determine how this should be handled for rkt
+	// TODO: determine how this should be handled for rkt id:1113 gh:1120
 	opts, _, err := r.runtimeHelper.GenerateRunContainerOptions(pod, &c, podIP)
 	if err != nil {
 		return err
@@ -1003,7 +1003,7 @@ func (r *Runtime) generateRunCommand(pod *v1.Pod, uuid, networkNamespaceID strin
 
 	// Use "all-run" insecure option (https://github.com/coreos/rkt/pull/2983) to take care
 	// of privileged pod.
-	// TODO(yifan): Have more granular app-level control of the insecure options.
+	// TODO (yifan): Have more granular app-level control of the insecure options. id:1033 gh:1039
 	// See: https://github.com/coreos/rkt/issues/2996.
 	if privileged {
 		config.InsecureOptions = fmt.Sprintf("%s,%s", config.InsecureOptions, "all-run")
@@ -1034,7 +1034,7 @@ func (r *Runtime) generateRunCommand(pod *v1.Pod, uuid, networkNamespaceID strin
 	}
 
 	if kubecontainer.IsHostNetworkPod(pod) {
-		// TODO(yifan): Let runtimeHelper.GeneratePodHostNameAndDomain() to handle this.
+		// TODO (yifan): Let runtimeHelper.GeneratePodHostNameAndDomain() to handle this. id:1130 gh:1136
 		hostname, err = r.os.Hostname()
 		if err != nil {
 			return "", err
@@ -1055,7 +1055,7 @@ func (r *Runtime) generateRunCommand(pod *v1.Pod, uuid, networkNamespaceID strin
 			runPrepared = append(runPrepared, fmt.Sprintf("--dns-opt=%s", defaultDNSOption))
 		}
 
-		// TODO(yifan): host domain is not being used.
+		// TODO (yifan): host domain is not being used. id:1069 gh:1075
 		hostname, _, err = r.runtimeHelper.GeneratePodHostNameAndDomain(pod)
 		if err != nil {
 			return "", err
@@ -1068,7 +1068,7 @@ func (r *Runtime) generateRunCommand(pod *v1.Pod, uuid, networkNamespaceID strin
 	if r.shouldCreateNetns(pod) {
 		// Drop the `rkt run-prepared` into the network namespace we
 		// created.
-		// TODO: switch to 'ip netns exec' once we can depend on a new
+		// TODO: switch to 'ip netns exec' once we can depend on a new id:996 gh:1002
 		// enough version that doesn't have bugs like
 		// https://bugzilla.redhat.com/show_bug.cgi?id=882047
 		nsenterExec := []string{r.nsenterPath, "--net=" + netnsPathFromName(networkNamespaceID), "--"}
@@ -1228,10 +1228,10 @@ func (r *Runtime) preparePod(pod *v1.Pod, podIP string, pullSecrets []v1.Secret,
 		return "", nil, fmt.Errorf("failed to generate 'rkt run-prepared' command: %v", err)
 	}
 
-	// TODO handle pod.Spec.HostPID
-	// TODO handle pod.Spec.HostIPC
+	// TODO handle pod.Spec.HostPID id:1191 gh:1197
+	// TODO handle pod.Spec.HostIPC id:1034 gh:1040
 
-	// TODO per container finishedAt, not just per pod
+	// TODO per container finishedAt, not just per pod id:1131 gh:1137
 	markPodFinished := podFinishedMarkCommand(r.touchPath, r.runtimeHelper.GetPodDir(pod.UID), uuid)
 
 	hostNetwork := kubecontainer.IsHostNetworkPod(pod)
@@ -1504,7 +1504,7 @@ func (r *Runtime) runPostStartHook(containerID kubecontainer.ContainerID, pod *v
 		return false, fmt.Errorf("failed to find container %q in rkt pod %q", cid.appName, cid.uuid)
 	}
 
-	// TODO(yifan): Polling the pod's state for now.
+	// TODO (yifan): Polling the pod's state for now. id:1070 gh:1076
 	timeout := time.Second * 5
 	pollInterval := time.Millisecond * 500
 	if err := utilwait.Poll(pollInterval, timeout, isContainerRunning); err != nil {
@@ -1616,7 +1616,7 @@ func (r *Runtime) convertRktPod(rktpod *rktapi.Pod) (*kubecontainer.Pod, error) 
 
 	for i, app := range rktpod.Apps {
 		// The order of the apps is determined by the rkt pod manifest.
-		// TODO(yifan): Let the server to unmarshal the annotations? https://github.com/coreos/rkt/issues/1872
+		// TODO (yifan): Let the server to unmarshal the annotations? https://github.com/coreos/rkt/issues/1872 id:997 gh:1003
 		hashStr, ok := manifest.Apps[i].Annotations.Get(k8sRktContainerHashAnno)
 		if !ok {
 			return nil, fmt.Errorf("app %q is missing annotation %s", app.Name, k8sRktContainerHashAnno)
@@ -1732,7 +1732,7 @@ func (r *Runtime) waitPreStopHooks(pod *v1.Pod, runningPod *kubecontainer.Pod) {
 }
 
 // KillPod invokes 'systemctl kill' to kill the unit that runs the pod.
-// TODO: add support for gracePeriodOverride which is used in eviction scenarios
+// TODO: add support for gracePeriodOverride which is used in eviction scenarios id:1192 gh:1198
 func (r *Runtime) KillPod(pod *v1.Pod, runningPod kubecontainer.Pod, gracePeriodOverride *int64) error {
 	glog.V(4).Infof("Rkt is killing pod: name %q.", runningPod.Name)
 
@@ -1811,7 +1811,7 @@ func (r *Runtime) SyncPod(pod *v1.Pod, _ v1.PodStatus, podStatus *kubecontainer.
 			result.Fail(err)
 		}
 	}()
-	// TODO: (random-liu) Stop using running pod in SyncPod()
+	// TODO: (random-liu) Stop using running pod in SyncPod() id:1035 gh:1041
 	runningPod := kubecontainer.ConvertPodStatusToRunningPod(r.Type(), podStatus)
 	// Add references to all containers.
 	unidentifiedContainers := make(map[kubecontainer.ContainerID]*kubecontainer.Container)
@@ -1827,7 +1827,7 @@ func (r *Runtime) SyncPod(pod *v1.Pod, _ v1.PodStatus, podStatus *kubecontainer.
 		if c == nil {
 			if kubecontainer.ShouldContainerBeRestarted(&container, pod, podStatus) {
 				glog.V(3).Infof("Container %+v is dead, but RestartPolicy says that we should restart it.", container)
-				// TODO(yifan): Containers in one pod are fate-sharing at this moment, see:
+				// TODO (yifan): Containers in one pod are fate-sharing at this moment, see: id:1132 gh:1138
 				// https://github.com/appc/spec/issues/276.
 				restartPod = true
 				break
@@ -1835,9 +1835,9 @@ func (r *Runtime) SyncPod(pod *v1.Pod, _ v1.PodStatus, podStatus *kubecontainer.
 			continue
 		}
 
-		// TODO: check for non-root image directives.  See ../docker/manager.go#SyncPod
+		// TODO: check for non-root image directives.  See ../docker/manager.go#SyncPod id:1071 gh:1077
 
-		// TODO(yifan): Take care of host network change.
+		// TODO (yifan): Take care of host network change. id:998 gh:1004
 		containerChanged := c.Hash != 0 && c.Hash != expectedHash
 		if containerChanged {
 			glog.Infof("Pod %q container %q hash changed (%d vs %d), it will be killed and re-created.", format.Pod(pod), container.Name, c.Hash, expectedHash)
@@ -2183,7 +2183,7 @@ func (r *Runtime) AttachContainer(containerID kubecontainer.ContainerID, stdin i
 
 // Note: In rkt, the container ID is in the form of "UUID:appName", where UUID is
 // the rkt UUID, and appName is the container name.
-// TODO(yifan): If the rkt is using lkvm as the stage1 image, then this function will fail.
+// TODO (yifan): If the rkt is using lkvm as the stage1 image, then this function will fail. id:1193 gh:1199
 func (r *Runtime) ExecInContainer(containerID kubecontainer.ContainerID, cmd []string, stdin io.Reader, stdout, stderr io.WriteCloser, tty bool, resize <-chan remotecommand.TerminalSize, timeout time.Duration) error {
 	glog.V(4).Infof("Rkt execing in container.")
 
@@ -2243,12 +2243,12 @@ func (r *Runtime) ExecInContainer(containerID kubecontainer.ContainerID, cmd []s
 // data between stream (representing the user's local connection on their
 // computer) and the specified port in the container.
 //
-// TODO:
+// TODO: id:1036 gh:1042
 //  - match cgroups of container
 //  - should we support nsenter + socat on the host? (current impl)
 //  - should we support nsenter + socat in a container, running with elevated privs and --pid=host?
 //
-// TODO(yifan): Merge with the same function in dockertools.
+// TODO (yifan): Merge with the same function in dockertools. id:1133 gh:1140
 func (r *Runtime) PortForward(pod *kubecontainer.Pod, port int32, stream io.ReadWriteCloser) error {
 	glog.V(4).Infof("Rkt port forwarding in container.")
 
@@ -2346,7 +2346,7 @@ func appStateToContainerState(state rktapi.AppState) kubecontainer.ContainerStat
 
 // getPodInfo returns the pod manifest, creation time and restart count of the pod.
 func getPodInfo(pod *rktapi.Pod) (podManifest *appcschema.PodManifest, restartCount int, err error) {
-	// TODO(yifan): The manifest is only used for getting the annotations.
+	// TODO (yifan): The manifest is only used for getting the annotations. id:1072 gh:1078
 	// Consider to let the server to unmarshal the annotations.
 	var manifest appcschema.PodManifest
 	if err = json.Unmarshal(pod.Manifest, &manifest); err != nil {
@@ -2406,9 +2406,9 @@ func populateContainerStatus(pod rktapi.Pod, app rktapi.App, runtimeApp appcsche
 		ExitCode:   int(app.ExitCode),
 		// By default, the version returned by rkt API service will be "latest" if not specified.
 		Image:   fmt.Sprintf("%s:%s", app.Image.Name, app.Image.Version),
-		ImageID: "rkt://" + app.Image.Id, // TODO(yifan): Add the prefix only in v1.PodStatus.
+		ImageID: "rkt://" + app.Image.Id, // TODO (yifan): Add the prefix only in v1.PodStatus. id:999 gh:1005
 		Hash:    hashNum,
-		// TODO(yifan): Note that now all apps share the same restart count, this might
+		// TODO (yifan): Note that now all apps share the same restart count, this might id:1194 gh:1200
 		// change once apps don't share the same lifecycle.
 		// See https://github.com/appc/spec/pull/547.
 		RestartCount: restartCount,

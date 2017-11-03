@@ -25,7 +25,7 @@ type rc2Cipher struct {
 
 // New returns a new rc2 cipher with the given key and effective key length t1
 func New(key []byte, t1 int) (cipher.Block, error) {
-	// TODO(dgryski): error checking for key length
+	// TODO (dgryski): error checking for key length id:3086 gh:3101
 	return &rc2Cipher{
 		k: expandKey(key, t1),
 	}, nil

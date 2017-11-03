@@ -48,7 +48,7 @@ var _ = SIGDescribe("Multi-AZ Clusters", func() {
 		By(fmt.Sprintf("Checking for multi-zone cluster.  Zone count = %d", zoneCount))
 		msg := fmt.Sprintf("Zone count is %d, only run for multi-zone clusters, skipping test", zoneCount)
 		framework.SkipUnlessAtLeast(zoneCount, 2, msg)
-		// TODO: SkipUnlessDefaultScheduler() // Non-default schedulers might not spread
+		// TODO: SkipUnlessDefaultScheduler() // Non-default schedulers might not spread id:2472 gh:2488
 	})
 	It("should spread the pods of a service across zones", func() {
 		SpreadServiceOrFail(f, (2*zoneCount)+1, image)
@@ -255,8 +255,8 @@ type StaticPVTestConfig struct {
 
 // Check that the pods using statically created PVs get scheduled to the same zone that the PV is in.
 func PodsUseStaticPVsOrFail(f *framework.Framework, podCount int, image string) {
-	// TODO: add GKE after enabling admission plugin in GKE
-	// TODO: add AWS
+	// TODO: add GKE after enabling admission plugin in GKE id:2258 gh:2273
+	// TODO: add AWS id:2390 gh:2405
 	framework.SkipUnlessProviderIs("gce")
 
 	var err error

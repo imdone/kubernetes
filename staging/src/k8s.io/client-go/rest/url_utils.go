@@ -80,7 +80,7 @@ func DefaultVersionedAPIPath(apiPath string, groupVersion schema.GroupVersion) s
 // defaultServerUrlFor is shared between IsConfigTransportTLS and RESTClientFor. It
 // requires Host and Version to be set prior to being called.
 func defaultServerUrlFor(config *Config) (*url.URL, string, error) {
-	// TODO: move the default to secure when the apiserver supports TLS by default
+	// TODO: move the default to secure when the apiserver supports TLS by default id:3915 gh:3935
 	// config.Insecure is taken to mean "I want HTTPS but don't bother checking the certs against a CA."
 	hasCA := len(config.CAFile) != 0 || len(config.CAData) != 0
 	hasCert := len(config.CertFile) != 0 || len(config.CertData) != 0

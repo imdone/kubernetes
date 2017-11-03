@@ -42,14 +42,14 @@ func IsEtcdTestFailed(err error) bool {
 
 // IsEtcdWatchExpired returns true if and only if err indicates the watch has expired.
 func IsEtcdWatchExpired(err error) bool {
-	// NOTE: This seems weird why it wouldn't be etcd.ErrorCodeWatcherCleared
+	// NOTE: This seems weird why it wouldn't be etcd.ErrorCodeWatcherCleared id:3901 gh:3921
 	//       I'm using the previous matching value
 	return isEtcdErrorNum(err, etcd.ErrorCodeEventIndexCleared)
 }
 
 // IsEtcdUnreachable returns true if and only if err indicates the server could not be reached.
 func IsEtcdUnreachable(err error) bool {
-	// NOTE: The logic has changed previous error code no longer applies
+	// NOTE: The logic has changed previous error code no longer applies id:4023 gh:4043
 	return err == etcd.ErrClusterUnavailable
 }
 
@@ -59,7 +59,7 @@ func isEtcdErrorNum(err error, errorCode int) bool {
 		if etcdError, ok := err.(etcd.Error); ok {
 			return etcdError.Code == errorCode
 		}
-		// NOTE: There are other error types returned
+		// NOTE: There are other error types returned id:3455 gh:3470
 	}
 	return false
 }

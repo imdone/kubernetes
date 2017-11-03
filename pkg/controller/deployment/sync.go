@@ -181,7 +181,7 @@ func (dc *DeploymentController) addHashKeyToRSAndPods(rs *extensions.ReplicaSet,
 	}
 	// Make sure rs pod template is updated so that it won't create pods without the new label (orphaned pods).
 	if updatedRS.Generation > updatedRS.Status.ObservedGeneration {
-		// TODO: Revisit if we really need to wait here as opposed to returning and
+		// TODO: Revisit if we really need to wait here as opposed to returning and id:536 gh:537
 		// potentially unblocking this worker (can wait up to 1min before timing out).
 		if err = deploymentutil.WaitForReplicaSetUpdated(dc.rsLister, updatedRS.Generation, updatedRS.Namespace, updatedRS.Name); err != nil {
 			return nil, fmt.Errorf("error waiting for replica set %s/%s to be observed by controller: %v", updatedRS.Namespace, updatedRS.Name, err)
@@ -199,7 +199,7 @@ func (dc *DeploymentController) addHashKeyToRSAndPods(rs *extensions.ReplicaSet,
 	// WaitForReplicaSetUpdated, the replicaset controller should have dropped
 	// FullyLabeledReplicas to 0 already, we only need to wait it to increase
 	// back to the number of replicas in the spec.
-	// TODO: Revisit if we really need to wait here as opposed to returning and
+	// TODO: Revisit if we really need to wait here as opposed to returning and id:527 gh:529
 	// potentially unblocking this worker (can wait up to 1min before timing out).
 	if err := deploymentutil.WaitForPodsHashPopulated(dc.rsLister, updatedRS.Generation, updatedRS.Namespace, updatedRS.Name); err != nil {
 		return nil, fmt.Errorf("Replica set %s/%s: error waiting for replicaset controller to observe pods being labeled with template hash: %v", updatedRS.Namespace, updatedRS.Name, err)
@@ -222,7 +222,7 @@ func (dc *DeploymentController) addHashKeyToRSAndPods(rs *extensions.ReplicaSet,
 		return nil, fmt.Errorf("error updating ReplicaSet %s/%s label and selector with template hash: %v", updatedRS.Namespace, updatedRS.Name, err)
 	}
 
-	// TODO: look for orphaned pods and label them in the background somewhere else periodically
+	// TODO: look for orphaned pods and label them in the background somewhere else periodically id:612 gh:613
 	return updatedRS, nil
 }
 
@@ -353,7 +353,7 @@ func (dc *DeploymentController) getNewReplicaSet(d *extensions.Deployment, rsLis
 			cond := deploymentutil.NewDeploymentCondition(extensions.DeploymentProgressing, v1.ConditionFalse, deploymentutil.FailedRSCreateReason, msg)
 			deploymentutil.SetDeploymentCondition(&d.Status, *cond)
 			// We don't really care about this error at this point, since we have a bigger issue to report.
-			// TODO: Identify which errors are permanent and switch DeploymentIsFailed to take into account
+			// TODO: Identify which errors are permanent and switch DeploymentIsFailed to take into account id:554 gh:555
 			// these reasons as well. Related issue: https://github.com/kubernetes/kubernetes/issues/18568
 			_, _ = dc.client.Extensions().Deployments(d.Namespace).UpdateStatus(d)
 		}
@@ -470,7 +470,7 @@ func (dc *DeploymentController) scale(deployment *extensions.Deployment, newRS *
 				}
 			}
 
-			// TODO: Use transactions when we have them.
+			// TODO: Use transactions when we have them. id:573 gh:574
 			if _, _, err := dc.scaleReplicaSet(rs, nameToSize[rs.Name], deployment, scalingOperation); err != nil {
 				// Return as soon as we fail, the deployment is requeued
 				return err
@@ -499,7 +499,7 @@ func (dc *DeploymentController) scaleReplicaSet(rs *extensions.ReplicaSet, newSc
 	rsCopy := rs.DeepCopy()
 
 	sizeNeedsUpdate := *(rsCopy.Spec.Replicas) != newScale
-	// TODO: Do not mutate the replica set here, instead simply compare the annotation and if they mismatch
+	// TODO: Do not mutate the replica set here, instead simply compare the annotation and if they mismatch id:537 gh:538
 	// call SetReplicasAnnotations inside the following if clause. Then we can also move the deep-copy from
 	// above inside the if too.
 	annotationsNeedUpdate := deploymentutil.SetReplicasAnnotations(rsCopy, *(deployment.Spec.Replicas), *(deployment.Spec.Replicas)+deploymentutil.MaxSurge(*deployment))
@@ -582,7 +582,7 @@ func calculateStatus(allRSs []*extensions.ReplicaSet, newRS *extensions.ReplicaS
 	}
 
 	status := extensions.DeploymentStatus{
-		// TODO: Ensure that if we start retrying status updates, we won't pick up a new Generation value.
+		// TODO: Ensure that if we start retrying status updates, we won't pick up a new Generation value. id:528 gh:530
 		ObservedGeneration:  deployment.Generation,
 		Replicas:            deploymentutil.GetActualReplicaCountForReplicaSets(allRSs),
 		UpdatedReplicas:     deploymentutil.GetActualReplicaCountForReplicaSets([]*extensions.ReplicaSet{newRS}),

@@ -135,7 +135,7 @@ const (
 	housekeepingPeriod = time.Second * 2
 
 	// Period for performing eviction monitoring.
-	// TODO ensure this is in sync with internal cadvisor housekeeping.
+	// TODO ensure this is in sync with internal cadvisor housekeeping. id:861 gh:867
 	evictionMonitoringPeriod = time.Second * 10
 
 	// The path in containers' filesystems where the hosts file is mounted.
@@ -225,7 +225,7 @@ type Builder func(kubeCfg *kubeletconfiginternal.KubeletConfiguration,
 // at runtime that are necessary for running the Kubelet. This is a temporary solution for grouping
 // these objects while we figure out a more comprehensive dependency injection story for the Kubelet.
 type Dependencies struct {
-	// TODO(mtaufen): KubeletBuilder:
+	// TODO (mtaufen): KubeletBuilder: id:892 gh:898
 	//                Mesos currently uses this as a hook to let them make their own call to
 	//                let them wrap the KubeletBootstrap that CreateAndInitKubelet returns with
 	//                their own KubeletBootstrap. It's a useful hook. I need to think about what
@@ -234,7 +234,7 @@ type Dependencies struct {
 	//                to the Kubelet for your solution. Maybe we should centralize these sorts of things?
 	Builder Builder
 
-	// TODO(mtaufen): ContainerRuntimeOptions and Options:
+	// TODO (mtaufen): ContainerRuntimeOptions and Options: id:920 gh:926
 	//                Arrays of functions that can do arbitrary things to the Kubelet and the Runtime
 	//                seem like a difficult path to trace when it's time to debug something.
 	//                I'm leaving these fields here for now, but there is likely an easier-to-follow
@@ -458,9 +458,9 @@ func NewMainKubelet(kubeCfg *kubeletconfiginternal.KubeletConfiguration,
 	}
 	nodeInfo := &predicates.CachedNodeInfo{NodeLister: corelisters.NewNodeLister(nodeIndexer)}
 
-	// TODO: get the real node object of ourself,
+	// TODO: get the real node object of ourself, id:950 gh:956
 	// and use the real node name and UID.
-	// TODO: what is namespace for node?
+	// TODO: what is namespace for node? id:964 gh:970
 	nodeRef := &v1.ObjectReference{
 		Kind:      "Node",
 		Name:      string(nodeName),
@@ -578,7 +578,7 @@ func NewMainKubelet(kubeCfg *kubeletconfiginternal.KubeletConfiguration,
 		}
 	}
 
-	// TODO: These need to become arguments to a standalone docker shim.
+	// TODO: These need to become arguments to a standalone docker shim. id:862 gh:868
 	binDir := crOptions.CNIBinDir
 	pluginSettings := dockershim.NetworkPluginSettings{
 		HairpinMode:       hairpinMode,
@@ -705,7 +705,7 @@ func NewMainKubelet(kubeCfg *kubeletconfiginternal.KubeletConfiguration,
 		}
 	} else {
 		// rkt uses the legacy, non-CRI, integration. Configure it the old way.
-		// TODO: Include hairpin mode settings in rkt?
+		// TODO: Include hairpin mode settings in rkt? id:893 gh:899
 		conf := &rkt.Config{
 			Path:            crOptions.RktPath,
 			Stage1Image:     crOptions.RktStage1Image,
@@ -1040,7 +1040,7 @@ type Kubelet struct {
 	containerRuntime kubecontainer.Runtime
 
 	// Container runtime service (needed by container runtime Start()).
-	// TODO(CD): try to make this available without holding a reference in this
+	// TODO (CD): try to make this available without holding a reference in this id:921 gh:927
 	//           struct. For example, by adding a getter to generic runtime.
 	runtimeService internalapi.RuntimeService
 
@@ -1130,7 +1130,7 @@ type Kubelet struct {
 	// handlers called during the tryUpdateNodeStatus cycle
 	setNodeStatusFuncs []func(*v1.Node) error
 
-	// TODO: think about moving this to be centralized in PodWorkers in follow-on.
+	// TODO: think about moving this to be centralized in PodWorkers in follow-on. id:951 gh:957
 	// the list of handlers to call during pod admission.
 	admitHandlers lifecycle.PodAdmitHandlers
 
@@ -1339,7 +1339,7 @@ func (kl *Kubelet) initializeModules() error {
 func (kl *Kubelet) initializeRuntimeDependentModules() {
 	if err := kl.cadvisor.Start(); err != nil {
 		// Fail kubelet and rely on the babysitter to retry starting kubelet.
-		// TODO(random-liu): Add backoff logic in the babysitter
+		// TODO (random-liu): Add backoff logic in the babysitter id:965 gh:971
 		glog.Fatalf("Failed to start cAdvisor %v", err)
 	}
 	// eviction manager must start after cadvisor because it needs to know if the container runtime has a dedicated imagefs
@@ -1395,7 +1395,7 @@ func (kl *Kubelet) Run(updates <-chan kubetypes.PodUpdate) {
 }
 
 // GetKubeClient returns the Kubernetes client.
-// TODO: This is currently only required by network plugins. Replace
+// TODO: This is currently only required by network plugins. Replace id:863 gh:869
 // with more specific methods.
 func (kl *Kubelet) GetKubeClient() clientset.Interface {
 	return kl.kubeClient
@@ -1519,7 +1519,7 @@ func (kl *Kubelet) syncPod(o syncPodOptions) error {
 	}
 
 	// Record pod worker start latency if being created
-	// TODO: make pod workers record their own latencies
+	// TODO: make pod workers record their own latencies id:894 gh:900
 	if updateType == kubetypes.SyncPodCreate {
 		if !firstSeenTime.IsZero() {
 			// This is the first time we are syncing the pod. Record the latency
@@ -1533,7 +1533,7 @@ func (kl *Kubelet) syncPod(o syncPodOptions) error {
 	// Generate final API pod status with pod and status manager status
 	apiPodStatus := kl.generateAPIPodStatus(pod, podStatus)
 	// The pod IP may be changed in generateAPIPodStatus if the pod is using host network. (See #24576)
-	// TODO(random-liu): After writing pod spec into container labels, check whether pod is using host network, and
+	// TODO (random-liu): After writing pod spec into container labels, check whether pod is using host network, and id:922 gh:928
 	// set pod IP to hostIP directly in runtime.GetPodStatus
 	podStatus.IP = apiPodStatus.PodIP
 
@@ -1753,7 +1753,7 @@ func (kl *Kubelet) deletePod(pod *v1.Pod) error {
 	podPair := kubecontainer.PodPair{APIPod: pod, RunningPod: &runningPod}
 
 	kl.podKillingCh <- &podPair
-	// TODO: delete the mirror pod here?
+	// TODO: delete the mirror pod here? id:952 gh:958
 
 	// We leave the volume/directory cleanup to the periodic cleanup routine.
 	return nil
@@ -1777,8 +1777,8 @@ func (kl *Kubelet) rejectPod(pod *v1.Pod, reason, message string) {
 func (kl *Kubelet) canAdmitPod(pods []*v1.Pod, pod *v1.Pod) (bool, string, string) {
 	// the kubelet will invoke each pod admit handler in sequence
 	// if any handler rejects, the pod is rejected.
-	// TODO: move out of disk check into a pod admitter
-	// TODO: out of resource eviction should have a pod admitter call-out
+	// TODO: move out of disk check into a pod admitter id:966 gh:972
+	// TODO: out of resource eviction should have a pod admitter call-out id:864 gh:870
 	attrs := &lifecycle.PodAdmitAttributes{Pod: pod, OtherPods: pods}
 	for _, podAdmitHandler := range kl.admitHandlers {
 		if result := podAdmitHandler.Admit(attrs); !result.Admit {
@@ -1800,7 +1800,7 @@ func (kl *Kubelet) canRunPod(pod *v1.Pod) lifecycle.PodAdmitResult {
 		}
 	}
 
-	// TODO: Refactor as a soft admit handler.
+	// TODO: Refactor as a soft admit handler. id:895 gh:901
 	if err := canRunPod(pod); err != nil {
 		return lifecycle.PodAdmitResult{
 			Admit:   false,
@@ -1907,7 +1907,7 @@ func (kl *Kubelet) syncLoopIteration(configCh <-chan kubetypes.PodUpdate, handle
 			// DELETE is treated as a UPDATE because of graceful deletion.
 			handler.HandlePodUpdates(u.Pods)
 		case kubetypes.SET:
-			// TODO: Do we want to support this?
+			// TODO: Do we want to support this? id:923 gh:929
 			glog.Errorf("Kubelet does not support snapshot update")
 		}
 
@@ -2002,7 +2002,7 @@ func (kl *Kubelet) dispatchWork(pod *v1.Pod, syncType kubetypes.SyncPodType, mir
 	}
 }
 
-// TODO: handle mirror pods in a separate component (issue #17251)
+// TODO: handle mirror pods in a separate component (issue #17251) id:953 gh:959
 func (kl *Kubelet) handleMirrorPod(mirrorPod *v1.Pod, start time.Time) {
 	// Mirror pod ADD/UPDATE/DELETE operations are considered an UPDATE to the
 	// corresponding static pod. Send update to the pod worker if the static
@@ -2060,7 +2060,7 @@ func (kl *Kubelet) HandlePodUpdates(pods []*v1.Pod) {
 			kl.handleMirrorPod(pod, start)
 			continue
 		}
-		// TODO: Evaluate if we need to validate and reject updates.
+		// TODO: Evaluate if we need to validate and reject updates. id:967 gh:973
 
 		mirrorPod, _ := kl.podManager.GetMirrorPodByPod(pod)
 		kl.dispatchWork(pod, kubetypes.SyncPodUpdate, mirrorPod, start)
@@ -2140,7 +2140,7 @@ func (kl *Kubelet) updateRuntimeUp() {
 			return
 		}
 		// Periodically log the whole runtime status for debugging.
-		// TODO(random-liu): Consider to send node event when optional
+		// TODO (random-liu): Consider to send node event when optional id:865 gh:871
 		// condition is unmet.
 		glog.V(4).Infof("Container runtime status: %v", s)
 		networkReady := s.GetRuntimeCondition(kubecontainer.NetworkReady)
@@ -2151,7 +2151,7 @@ func (kl *Kubelet) updateRuntimeUp() {
 			// Set nil if the container runtime network is ready.
 			kl.runtimeState.setNetworkState(nil)
 		}
-		// TODO(random-liu): Add runtime error in runtimeState, and update it
+		// TODO (random-liu): Add runtime error in runtimeState, and update it id:896 gh:902
 		// when runtime is not ready, so that the information in RuntimeReady
 		// condition will be propagated to NodeReady condition.
 		runtimeReady := s.GetRuntimeCondition(kubecontainer.RuntimeReady)

@@ -28,7 +28,7 @@ import (
 
 var logFlushFreq = pflag.Duration("log-flush-frequency", 5*time.Second, "Maximum number of seconds between log flushes")
 
-// TODO(thockin): This is temporary until we agree on log dirs and put those into each cmd.
+// TODO (thockin): This is temporary until we agree on log dirs and put those into each cmd. id:4027 gh:4047
 func init() {
 	flag.Set("logtostderr", "true")
 }

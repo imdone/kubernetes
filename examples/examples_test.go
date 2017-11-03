@@ -357,7 +357,7 @@ func TestExampleObjectSchemas(t *testing.T) {
 					t.Errorf("%s did not decode correctly: %v\n%s", path, err, string(data))
 					return
 				}
-				//TODO: Add validate method for &schedulerapi.Policy
+				//TODO: Add validate method for &schedulerapi.Policy id:230 gh:231
 			} else {
 				codec, err := testapi.GetCodecForObject(expectedType)
 				if err != nil {

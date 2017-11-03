@@ -51,7 +51,7 @@ func MakeRUnbindable(mountPoint string) error {
 }
 
 func ensureMountedAs(mountPoint, options string) error {
-	// TODO: Solaris does not support bind mounts.
+	// TODO: Solaris does not support bind mounts. id:2689 gh:2704
 	// Evaluate lofs and also look at the relevant
 	// mount flags to be supported.
 	return nil

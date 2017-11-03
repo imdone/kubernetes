@@ -65,7 +65,7 @@ const (
 
 	// Internal docker labels used to identify whether a container is a sandbox
 	// or a regular container.
-	// TODO: This is not backward compatible with older containers. We will
+	// TODO: This is not backward compatible with older containers. We will id:941 gh:947
 	// need to add filtering based on names.
 	containerTypeLabelKey       = "io.kubernetes.docker.type"
 	containerTypeLabelSandbox   = "podsandbox"
@@ -78,7 +78,7 @@ const (
 
 	defaultCgroupDriver = "cgroupfs"
 
-	// TODO: https://github.com/kubernetes/kubernetes/pull/31169 provides experimental
+	// TODO: https://github.com/kubernetes/kubernetes/pull/31169 provides experimental id:937 gh:943
 	// defaulting of host user namespace that may be enabled when the docker daemon
 	// is using remapped UIDs.
 	// Dockershim should provide detection support for a remapping environment .
@@ -111,7 +111,7 @@ type NetworkPluginSettings struct {
 
 	// RuntimeHost is an interface that serves as a trap-door from plugin back
 	// into the kubelet.
-	// TODO: This shouldn't be required, remove once we move host ports into CNI
+	// TODO: This shouldn't be required, remove once we move host ports into CNI id:853 gh:854
 	// and figure out bandwidth shaping. See corresponding comments above
 	// network.Host interface.
 	LegacyRuntimeHost network.LegacyHost
@@ -148,7 +148,7 @@ type dockerNetworkHost struct {
 
 var internalLabelKeys []string = []string{containerTypeLabelKey, containerLogPathLabelKey, sandboxIDLabelKey}
 
-// NOTE: Anything passed to DockerService should be eventually handled in another way when we switch to running the shim as a different process.
+// NOTE: Anything passed to DockerService should be eventually handled in another way when we switch to running the shim as a different process. id:884 gh:891
 func NewDockerService(client libdocker.Interface, podSandboxImage string, streamingConfig *streaming.Config,
 	pluginSettings *NetworkPluginSettings, cgroupsName string, kubeCgroupDriver string, dockershimRootDir string, disableSharedPID bool) (DockerService, error) {
 	c := libdocker.NewInstrumentedInterface(client)
@@ -199,7 +199,7 @@ func NewDockerService(client libdocker.Interface, podSandboxImage string, stream
 	ds.network = network.NewPluginManager(plug)
 	glog.Infof("Docker cri networking managed by %v", plug.Name())
 
-	// NOTE: cgroup driver is only detectable in docker 1.11+
+	// NOTE: cgroup driver is only detectable in docker 1.11+ id:912 gh:918
 	cgroupDriver := defaultCgroupDriver
 	dockerInfo, err := ds.client.Info()
 	if err != nil {
@@ -263,7 +263,7 @@ type dockerService struct {
 	// This option provides an escape hatch to override the new default behavior for Docker under
 	// the CRI to use a shared PID namespace for all pods. It is temporary and will be removed.
 	// See proposals/pod-pid-namespace.md for details.
-	// TODO: Remove once the escape hatch is no longer used (https://issues.k8s.io/41938)
+	// TODO: Remove once the escape hatch is no longer used (https://issues.k8s.io/41938) id:942 gh:948
 	disableSharedPID bool
 }
 
@@ -320,7 +320,7 @@ func (ds *dockerService) GetNetNS(podSandboxID string) (string, error) {
 
 // GetPodPortMappings returns the port mappings of the given podSandbox ID.
 func (ds *dockerService) GetPodPortMappings(podSandboxID string) ([]*hostport.PortMapping, error) {
-	// TODO: get portmappings from docker labels for backward compatibility
+	// TODO: get portmappings from docker labels for backward compatibility id:938 gh:944
 	checkpoint, err := ds.checkpointHandler.GetCheckpoint(podSandboxID)
 	// Return empty portMappings if checkpoint is not found
 	if err != nil {
@@ -350,7 +350,7 @@ func (ds *dockerService) Start() error {
 }
 
 // Status returns the status of the runtime.
-// TODO(random-liu): Set network condition accordingly here.
+// TODO (random-liu): Set network condition accordingly here. id:854 gh:857
 func (ds *dockerService) Status() (*runtimeapi.RuntimeStatus, error) {
 	runtimeReady := &runtimeapi.RuntimeCondition{
 		Type:   runtimeapi.RuntimeReady,

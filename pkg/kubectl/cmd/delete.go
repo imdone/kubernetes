@@ -339,7 +339,7 @@ var objectDeletionWaitInterval = time.Second
 func waitForObjectDeletion(info *resource.Info, timeout time.Duration) error {
 	copied := *info
 	info = &copied
-	// TODO: refactor Reaper so that we can pass the "wait" option into it, and then check for UID change.
+	// TODO: refactor Reaper so that we can pass the "wait" option into it, and then check for UID change. id:699 gh:700
 	return wait.PollImmediate(objectDeletionWaitInterval, timeout, func() (bool, error) {
 		switch err := info.Get(); {
 		case err == nil:

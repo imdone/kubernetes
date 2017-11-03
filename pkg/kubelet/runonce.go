@@ -91,7 +91,7 @@ func (kl *Kubelet) runOnce(pods []*v1.Pod, retryDelay time.Duration) (results []
 		res := <-ch
 		results = append(results, res)
 		if res.Err != nil {
-			// TODO(proppy): report which containers failed the pod.
+			// TODO (proppy): report which containers failed the pod. id:1075 gh:1081
 			glog.Infof("failed to start pod %q: %v", format.Pod(res.Pod), res.Err)
 			failedPods = append(failedPods, format.Pod(res.Pod))
 		} else {
@@ -137,7 +137,7 @@ func (kl *Kubelet) runPod(pod *v1.Pod, retryDelay time.Duration) error {
 		if retry >= runOnceMaxRetries {
 			return fmt.Errorf("timeout error: pod %q containers not running after %d retries", format.Pod(pod), runOnceMaxRetries)
 		}
-		// TODO(proppy): health checking would be better than waiting + checking the state at the next iteration.
+		// TODO (proppy): health checking would be better than waiting + checking the state at the next iteration. id:1002 gh:1008
 		glog.Infof("pod %q containers synced, waiting for %v", format.Pod(pod), delay)
 		time.Sleep(delay)
 		retry++

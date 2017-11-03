@@ -23,7 +23,7 @@ source "${KUBE_ROOT}/hack/lib/init.sh"
 kube::util::ensure-gnu-sed
 
 # Remove generated files prior to running kazel.
-# TODO(spxtr): Remove this line once Bazel is the only way to build.
+# TODO (spxtr): Remove this line once Bazel is the only way to build. id:236 gh:237
 rm -f "${KUBE_ROOT}/pkg/generated/openapi/zz_generated.openapi.go"
 
 # The git commit sha1s here should match the values in $KUBE_ROOT/WORKSPACE.

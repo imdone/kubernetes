@@ -223,7 +223,7 @@ func (hm *hostportManager) syncIPTables(lines []byte) error {
 }
 
 // closeHostports tries to close all the listed host ports
-// TODO: move closeHostports and openHostports into a common struct
+// TODO: move closeHostports and openHostports into a common struct id:1056 gh:1062
 func (hm *hostportManager) closeHostports(hostportMappings []*PortMapping) error {
 	errList := []error{}
 	for _, pm := range hostportMappings {

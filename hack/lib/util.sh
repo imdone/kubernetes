@@ -263,7 +263,7 @@ kube::util::group-version-to-pkg-path() {
   fi
 
   # Special cases first.
-  # TODO(lavalamp): Simplify this by moving pkg/api/v1 and splitting pkg/api,
+  # TODO (lavalamp): Simplify this by moving pkg/api/v1 and splitting pkg/api, id:233 gh:234
   # moving the results to pkg/apis/api.
   case "${group_version}" in
     # both group and version are "", this occurs when we generate deep copies for internal objects of the legacy v1 API.

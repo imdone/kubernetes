@@ -72,7 +72,7 @@ func (es *e2eServices) start() error {
 // stop stops the embedded e2e services.
 func (es *e2eServices) stop() {
 	glog.Info("Stopping e2e services...")
-	// TODO(random-liu): Use a loop to stop all services after introducing
+	// TODO (random-liu): Use a loop to stop all services after introducing id:2406 gh:2422
 	// service interface.
 	glog.Info("Stopping namespace controller")
 	if es.nsController != nil {

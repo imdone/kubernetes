@@ -124,7 +124,7 @@ func CreateDescriptors(service *gcm.Service, projectId string) error {
 }
 
 // CleanupDescriptors deletes descriptors for metrics: CustomMetricName and UnusedMetricName.
-// TODO: Cleanup time series as well
+// TODO: Cleanup time series as well id:2386 gh:2401
 func CleanupDescriptors(service *gcm.Service, projectId string) {
 	_, err := service.Projects.MetricDescriptors.Delete(fmt.Sprintf("projects/%s/metricDescriptors/custom.googleapis.com/%s", projectId, CustomMetricName)).Do()
 	if err != nil {

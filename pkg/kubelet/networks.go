@@ -25,7 +25,7 @@ import (
 
 // This just exports required functions from kubelet proper, for use by network
 // plugins.
-// TODO(#35457): get rid of this backchannel to the kubelet. The scope of
+// TODO (#35457): get rid of this backchannel to the kubelet. The scope of id:1024 gh:1030
 // the back channel is restricted to host-ports/testing, and restricted
 // to kubenet. No other network plugin wrapper needs it. Other plugins
 // only require a way to access namespace information, which they can do

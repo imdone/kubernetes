@@ -272,7 +272,7 @@ func (as *authStore) Authenticate(ctx context.Context, username, password string
 		return nil, ErrAuthNotEnabled
 	}
 
-	// TODO(mitake): after adding jwt support, branching based on values of ctx is required
+	// TODO (mitake): after adding jwt support, branching based on values of ctx is required id:2613 gh:2629
 	index := ctx.Value("index").(uint64)
 	simpleToken := ctx.Value("simpleToken").(string)
 
@@ -388,7 +388,7 @@ func (as *authStore) UserDelete(r *pb.AuthUserDeleteRequest) (*pb.AuthUserDelete
 }
 
 func (as *authStore) UserChangePassword(r *pb.AuthUserChangePasswordRequest) (*pb.AuthUserChangePasswordResponse, error) {
-	// TODO(mitake): measure the cost of bcrypt.GenerateFromPassword()
+	// TODO (mitake): measure the cost of bcrypt.GenerateFromPassword() id:2564 gh:2579
 	// If the cost is too high, we should move the encryption to outside of the raft
 	hashed, err := bcrypt.GenerateFromPassword([]byte(r.Password), BcryptCost)
 	if err != nil {
@@ -582,7 +582,7 @@ func (as *authStore) RoleRevokePermission(r *pb.AuthRoleRevokePermissionRequest)
 
 	putRole(tx, updatedRole)
 
-	// TODO(mitake): currently single role update invalidates every cache
+	// TODO (mitake): currently single role update invalidates every cache id:2842 gh:2858
 	// It should be optimized.
 	as.clearCachedPerm()
 
@@ -593,7 +593,7 @@ func (as *authStore) RoleRevokePermission(r *pb.AuthRoleRevokePermissionRequest)
 }
 
 func (as *authStore) RoleDelete(r *pb.AuthRoleDeleteRequest) (*pb.AuthRoleDeleteResponse, error) {
-	// TODO(mitake): current scheme of role deletion allows existing users to have the deleted roles
+	// TODO (mitake): current scheme of role deletion allows existing users to have the deleted roles id:2493 gh:2507
 	//
 	// Assume a case like below:
 	// create a role r1
@@ -701,7 +701,7 @@ func (as *authStore) RoleGrantPermission(r *pb.AuthRoleGrantPermissionRequest) (
 
 	putRole(tx, role)
 
-	// TODO(mitake): currently single role update invalidates every cache
+	// TODO (mitake): currently single role update invalidates every cache id:2754 gh:2769
 	// It should be optimized.
 	as.clearCachedPerm()
 
@@ -713,7 +713,7 @@ func (as *authStore) RoleGrantPermission(r *pb.AuthRoleGrantPermissionRequest) (
 }
 
 func (as *authStore) isOpPermitted(userName string, revision uint64, key, rangeEnd []byte, permTyp authpb.Permission_Type) error {
-	// TODO(mitake): this function would be costly so we need a caching mechanism
+	// TODO (mitake): this function would be costly so we need a caching mechanism id:2614 gh:2630
 	if !as.isAuthEnabled() {
 		return nil
 	}

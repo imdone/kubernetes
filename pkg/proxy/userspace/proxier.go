@@ -222,7 +222,7 @@ func createProxier(loadBalancer LoadBalancer, listenIP net.IP, iptables iptables
 // CleanupLeftovers removes all iptables rules and chains created by the Proxier
 // It returns true if an error was encountered. Errors are logged.
 func CleanupLeftovers(ipt iptables.Interface) (encounteredError bool) {
-	// NOTE: Warning, this needs to be kept in sync with the userspace Proxier,
+	// NOTE: Warning, this needs to be kept in sync with the userspace Proxier, id:1293 gh:1299
 	// we want to ensure we remove all of the iptables rules it creates.
 	// Currently they are all in iptablesInit()
 	// Delete Rules first, then Flush and Delete Chains
@@ -414,7 +414,7 @@ func (proxier *Proxier) mergeService(service *api.Service) sets.String {
 		serviceName := proxy.ServicePortName{NamespacedName: svcName, Port: servicePort.Name}
 		existingPorts.Insert(servicePort.Name)
 		info, exists := proxier.getServiceInfo(serviceName)
-		// TODO: check health of the socket? What if ProxyLoop exited?
+		// TODO: check health of the socket? What if ProxyLoop exited? id:1254 gh:1260
 		if exists && sameConfig(info, service, servicePort) {
 			// Nothing changed.
 			continue
@@ -647,14 +647,14 @@ func (proxier *Proxier) claimNodePort(ip net.IP, port int, protocol api.Protocol
 	proxier.portMapMutex.Lock()
 	defer proxier.portMapMutex.Unlock()
 
-	// TODO: We could pre-populate some reserved ports into portMap and/or blacklist some well-known ports
+	// TODO: We could pre-populate some reserved ports into portMap and/or blacklist some well-known ports id:1160 gh:1166
 
 	key := portMapKey{ip: ip.String(), port: port, protocol: protocol}
 	existing, found := proxier.portMap[key]
 	if !found {
 		// Hold the actual port open, even though we use iptables to redirect
 		// it.  This ensures that a) it's safe to take and b) that stays true.
-		// NOTE: We should not need to have a real listen()ing socket - bind()
+		// NOTE: We should not need to have a real listen()ing socket - bind() id:1217 gh:1223
 		// should be enough, but I can't figure out a way to e2e test without
 		// it.  Tools like 'ss' and 'netstat' do not show sockets that are
 		// bind()ed but not listen()ed, and at least the default debian netcat
@@ -696,8 +696,8 @@ func (proxier *Proxier) releaseNodePort(ip net.IP, port int, protocol api.Protoc
 }
 
 func (proxier *Proxier) openNodePort(nodePort int, protocol api.Protocol, proxyIP net.IP, proxyPort int, name proxy.ServicePortName) error {
-	// TODO: Do we want to allow containers to access public services?  Probably yes.
-	// TODO: We could refactor this to be the same code as portal, but with IP == nil
+	// TODO: Do we want to allow containers to access public services?  Probably yes. id:1241 gh:1247
+	// TODO: We could refactor this to be the same code as portal, but with IP == nil id:1294 gh:1300
 
 	err := proxier.claimNodePort(nil, nodePort, protocol, name)
 	if err != nil {
@@ -847,7 +847,7 @@ var iptablesNonLocalNodePortChain iptables.Chain = "KUBE-NODEPORT-NON-LOCAL"
 
 // Ensure that the iptables infrastructure we use is set up.  This can safely be called periodically.
 func iptablesInit(ipt iptables.Interface) error {
-	// TODO: There is almost certainly room for optimization here.  E.g. If
+	// TODO: There is almost certainly room for optimization here.  E.g. If id:1255 gh:1261
 	// we knew the service-cluster-ip-range CIDR we could fast-track outbound packets not
 	// destined for a service. There's probably more, help wanted.
 
@@ -910,7 +910,7 @@ func iptablesInit(ipt iptables.Interface) error {
 		return err
 	}
 
-	// TODO: Verify order of rules.
+	// TODO: Verify order of rules. id:1161 gh:1168
 	return nil
 }
 
@@ -1016,10 +1016,10 @@ func (proxier *Proxier) iptablesContainerPortalArgs(destIP net.IP, addPhysicalIn
 	// If the proxy is bound to localhost only, all of this is broken.  Not
 	// allowed.
 	if proxyIP.Equal(zeroIPv4) || proxyIP.Equal(zeroIPv6) {
-		// TODO: Can we REDIRECT with IPv6?
+		// TODO: Can we REDIRECT with IPv6? id:1218 gh:1224
 		args = append(args, "-j", "REDIRECT", "--to-ports", fmt.Sprintf("%d", proxyPort))
 	} else {
-		// TODO: Can we DNAT with IPv6?
+		// TODO: Can we DNAT with IPv6? id:1242 gh:1248
 		args = append(args, "-j", "DNAT", "--to-destination", net.JoinHostPort(proxyIP.String(), strconv.Itoa(proxyPort)))
 	}
 	return args
@@ -1053,22 +1053,22 @@ func (proxier *Proxier) iptablesHostPortalArgs(destIP net.IP, addDstLocalMatch b
 	if proxyIP.Equal(zeroIPv4) || proxyIP.Equal(zeroIPv6) {
 		proxyIP = proxier.hostIP
 	}
-	// TODO: Can we DNAT with IPv6?
+	// TODO: Can we DNAT with IPv6? id:1295 gh:1301
 	args = append(args, "-j", "DNAT", "--to-destination", net.JoinHostPort(proxyIP.String(), strconv.Itoa(proxyPort)))
 	return args
 }
 
 // Build a slice of iptables args for a from-container public-port rule.
 // See iptablesContainerPortalArgs
-// TODO: Should we just reuse iptablesContainerPortalArgs?
+// TODO: Should we just reuse iptablesContainerPortalArgs? id:1256 gh:1262
 func (proxier *Proxier) iptablesContainerNodePortArgs(nodePort int, protocol api.Protocol, proxyIP net.IP, proxyPort int, service proxy.ServicePortName) []string {
 	args := iptablesCommonPortalArgs(nil, false, false, nodePort, protocol, service)
 
 	if proxyIP.Equal(zeroIPv4) || proxyIP.Equal(zeroIPv6) {
-		// TODO: Can we REDIRECT with IPv6?
+		// TODO: Can we REDIRECT with IPv6? id:1162 gh:1167
 		args = append(args, "-j", "REDIRECT", "--to-ports", fmt.Sprintf("%d", proxyPort))
 	} else {
-		// TODO: Can we DNAT with IPv6?
+		// TODO: Can we DNAT with IPv6? id:1219 gh:1225
 		args = append(args, "-j", "DNAT", "--to-destination", net.JoinHostPort(proxyIP.String(), strconv.Itoa(proxyPort)))
 	}
 
@@ -1077,14 +1077,14 @@ func (proxier *Proxier) iptablesContainerNodePortArgs(nodePort int, protocol api
 
 // Build a slice of iptables args for a from-host public-port rule.
 // See iptablesHostPortalArgs
-// TODO: Should we just reuse iptablesHostPortalArgs?
+// TODO: Should we just reuse iptablesHostPortalArgs? id:1243 gh:1249
 func (proxier *Proxier) iptablesHostNodePortArgs(nodePort int, protocol api.Protocol, proxyIP net.IP, proxyPort int, service proxy.ServicePortName) []string {
 	args := iptablesCommonPortalArgs(nil, false, false, nodePort, protocol, service)
 
 	if proxyIP.Equal(zeroIPv4) || proxyIP.Equal(zeroIPv6) {
 		proxyIP = proxier.hostIP
 	}
-	// TODO: Can we DNAT with IPv6?
+	// TODO: Can we DNAT with IPv6? id:1296 gh:1302
 	args = append(args, "-j", "DNAT", "--to-destination", net.JoinHostPort(proxyIP.String(), strconv.Itoa(proxyPort)))
 	return args
 }
@@ -1103,6 +1103,6 @@ func isTooManyFDsError(err error) bool {
 func isClosedError(err error) bool {
 	// A brief discussion about handling closed error here:
 	// https://code.google.com/p/go/issues/detail?id=4373#c14
-	// TODO: maybe create a stoppable TCP listener that returns a StoppedError
+	// TODO: maybe create a stoppable TCP listener that returns a StoppedError id:1257 gh:1263
 	return strings.HasSuffix(err.Error(), "use of closed network connection")
 }

@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-//TODO: this file is going to be moved to k8s.io/api
+//TODO: this file is going to be moved to k8s.io/api id:3411 gh:3426
 
 package v1
 

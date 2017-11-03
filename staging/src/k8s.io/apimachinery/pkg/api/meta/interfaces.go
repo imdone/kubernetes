@@ -124,7 +124,7 @@ type RESTMapping struct {
 // to API groups. In other words, kinds and resources should not be assumed to be
 // unique across groups.
 //
-// TODO: split into sub-interfaces
+// TODO: split into sub-interfaces id:3652 gh:3667
 type RESTMapper interface {
 	// KindFor takes a partial resource and returns the single match.  Returns an error if there are multiple matches
 	KindFor(resource schema.GroupVersionResource) (schema.GroupVersionKind, error)

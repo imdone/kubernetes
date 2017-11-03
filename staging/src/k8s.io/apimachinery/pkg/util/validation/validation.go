@@ -214,7 +214,7 @@ func IsInRange(value int, min int, max int) []string {
 }
 
 // Now in libcontainer UID/GID limits is 0 ~ 1<<31 - 1
-// TODO: once we have a type for UID/GID we should make these that type.
+// TODO: once we have a type for UID/GID we should make these that type. id:3686 gh:3701
 const (
 	minUserID  = 0
 	maxUserID  = math.MaxInt32

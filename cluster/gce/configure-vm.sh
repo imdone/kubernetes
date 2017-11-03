@@ -67,7 +67,7 @@ function create-node-pki {
     echo "${KUBELET_KEY}" | base64 --decode > "${KUBELET_KEY_PATH}"
   fi
 
-  # TODO(mikedanese): remove this when we don't support downgrading to versions
+  # TODO (mikedanese): remove this when we don't support downgrading to versions id:37 gh:38
   # < 1.6.
   ln -sf "${CA_CERT_BUNDLE_PATH}" /etc/kubernetes/ca.crt
 }
@@ -563,7 +563,7 @@ EOF
 kubeproxy_test_log_level: '$(echo "$KUBEPROXY_TEST_LOG_LEVEL" | sed -e "s/'/''/g")'
 EOF
     fi
-    # TODO: Replace this  with a persistent volume (and create it).
+    # TODO: Replace this  with a persistent volume (and create it). id:70 gh:71
     if [[ "${ENABLE_CLUSTER_REGISTRY}" == true && -n "${CLUSTER_REGISTRY_DISK}" ]]; then
       cat <<EOF >>/srv/salt-overlay/pillar/cluster-params.sls
 cluster_registry_disk_type: gce
@@ -705,7 +705,7 @@ function split-commas() {
 }
 
 function try-download-release() {
-  # TODO(zmerlynn): Now we REALLy have no excuse not to do the reboot
+  # TODO (zmerlynn): Now we REALLy have no excuse not to do the reboot id:63 gh:64
   # optimization.
 
   local -r server_binary_tar_urls=( $(split-commas "${SERVER_BINARY_TAR_URL}") )

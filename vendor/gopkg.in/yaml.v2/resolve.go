@@ -58,7 +58,7 @@ func init() {
 const longTagPrefix = "tag:yaml.org,2002:"
 
 func shortTag(tag string) string {
-	// TODO This can easily be made faster and produce less garbage.
+	// TODO This can easily be made faster and produce less garbage. id:3143 gh:3159
 	if strings.HasPrefix(tag, longTagPrefix) {
 		return "!!" + tag[len(longTagPrefix):]
 	}
@@ -162,7 +162,7 @@ func resolve(tag string, in string) (rtag string, out interface{}) {
 					}
 				}
 			}
-			// XXX Handle timestamps here.
+			// XXX Handle timestamps here. id:3579 gh:3594
 
 		default:
 			panic("resolveTable item not yet handled: " + string(rune(hint)) + " (with " + in + ")")

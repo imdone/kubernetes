@@ -116,7 +116,7 @@ type Config struct {
 	AuditPolicyChecker auditpolicy.Checker
 	// SupportsBasicAuth indicates that's at least one Authenticator supports basic auth
 	// If this is true, a basic auth challenge is returned on authentication failure
-	// TODO(roberthbailey): Remove once the server no longer supports http basic auth.
+	// TODO (roberthbailey): Remove once the server no longer supports http basic auth. id:3891 gh:3911
 	SupportsBasicAuth bool
 	// ExternalAddress is the host name to use for external (public internet) facing URLs (e.g. Swagger)
 	// Will default to a value based on secure serving info and available ipv4 IPs.
@@ -137,7 +137,7 @@ type Config struct {
 	// to InstallLegacyAPIGroup. New API servers don't generally have legacy groups at all.
 	LegacyAPIGroupPrefixes sets.String
 	// RequestContextMapper maps requests to contexts. Exported so downstream consumers can provider their own mappers
-	// TODO confirm that anyone downstream actually uses this and doesn't just need an accessor
+	// TODO confirm that anyone downstream actually uses this and doesn't just need an accessor id:3715 gh:3727
 	RequestContextMapper apirequest.RequestContextMapper
 	// RequestInfoResolver is used to assign attributes (used by admission and authorization) based on a request URL.
 	// Use-cases that are like kubelets may need to customize this.

@@ -47,14 +47,14 @@ type Metric interface {
 	// LabelPairSorter useful for that.) Callers of Write should still make
 	// sure of sorting if they depend on it.
 	Write(*dto.Metric) error
-	// TODO(beorn7): The original rationale of passing in a pre-allocated
+	// TODO (beorn7): The original rationale of passing in a pre-allocated id:3202 gh:3217
 	// dto.Metric protobuf to save allocations has disappeared. The
 	// signature of this method should be changed to "Write() (*dto.Metric,
 	// error)".
 }
 
 // Opts bundles the options for creating most Metric types. Each metric
-// implementation XXX has its own XXXOpts type, but in most cases, it is just be
+// implementation XXX has its own XXXOpts type, but in most cases, it is just be id:2780 gh:2795
 // an alias of this type (which might change when the requirement arises.)
 //
 // It is mandatory to set Name and Help to a non-empty string. All other fields

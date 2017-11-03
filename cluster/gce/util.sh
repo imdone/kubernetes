@@ -419,7 +419,7 @@ function detect-master() {
 #   PROJECT
 #   ZONE
 function get-master-env() {
-  # TODO(zmerlynn): Make this more reliable with retries.
+  # TODO (zmerlynn): Make this more reliable with retries. id:72 gh:73
   gcloud compute --project ${PROJECT} ssh --zone ${ZONE} ${KUBE_MASTER} --command \
     "curl --fail --silent -H 'Metadata-Flavor: Google' \
       'http://metadata/computeMetadata/v1/instance/attributes/kube-env'" 2>/dev/null
@@ -556,7 +556,7 @@ function create-node-template() {
   local template_name="$1"
 
   # First, ensure the template doesn't exist.
-  # TODO(zmerlynn): To make this really robust, we need to parse the output and
+  # TODO (zmerlynn): To make this really robust, we need to parse the output and id:36 gh:37
   #                 add retries. Just relying on a non-zero exit code doesn't
   #                 distinguish an ephemeral failed call from a "not-exists".
   if gcloud compute instance-templates describe "$template_name" --project "${PROJECT}" &>/dev/null; then
@@ -773,7 +773,7 @@ function check-existing() {
   fi
 }
 
-# TODO(#54017): Remove below logics for handling deprecated network mode field.
+# TODO (#54017): Remove below logics for handling deprecated network mode field. id:46 gh:47
 # `x_gcloud_mode` was replaced by `x_gcloud_subnet_mode` in gcloud 175.0.0 and
 # the content changed as well. Keeping such logic to make the transition eaiser.
 function check-network-mode() {
@@ -1123,7 +1123,7 @@ function add-replica-to-etcd() {
 # Assumed vars:
 #   PROJECT
 #
-# NOTE: Must be in sync with get-replica-name-regexp
+# NOTE: Must be in sync with get-replica-name-regexp id:107 gh:108
 function set-existing-master() {
   local existing_master=$(gcloud compute instances list \
     --project "${PROJECT}" \
@@ -1224,11 +1224,11 @@ function create-loadbalancer() {
 
   # Step 2: Create target pool.
   gcloud compute target-pools create "${MASTER_NAME}" --project "${PROJECT}" --region "${REGION}"
-  # TODO: We should also add master instances with suffixes
+  # TODO: We should also add master instances with suffixes id:82 gh:83
   gcloud compute target-pools add-instances "${MASTER_NAME}" --instances "${EXISTING_MASTER_NAME}" --project "${PROJECT}" --zone "${EXISTING_MASTER_ZONE}"
 
   # Step 3: Create forwarding rule.
-  # TODO: This step can take up to 20 min. We need to speed this up...
+  # TODO: This step can take up to 20 min. We need to speed this up... id:73 gh:74
   gcloud compute forwarding-rules create ${MASTER_NAME} \
     --project "${PROJECT}" --region ${REGION} \
     --target-pool ${MASTER_NAME} --address=${KUBE_MASTER_IP} --ports=443
@@ -1315,11 +1315,11 @@ function create-nodes() {
 
   local instances_left=${nodes}
 
-  #TODO: parallelize this loop to speed up the process
+  #TODO: parallelize this loop to speed up the process id:87 gh:88
   for ((i=1; i<=${NUM_MIGS}; i++)); do
     local group_name="${NODE_INSTANCE_PREFIX}-group-$i"
     if [[ $i == ${NUM_MIGS} ]]; then
-      # TODO: We don't add a suffix for the last group to keep backward compatibility when there's only one MIG.
+      # TODO: We don't add a suffix for the last group to keep backward compatibility when there's only one MIG. id:47 gh:48
       # We should change it at some point, but note #18545 when changing this.
       group_name="${NODE_INSTANCE_PREFIX}-group"
     fi
@@ -1430,7 +1430,7 @@ function create-cluster-autoscaler-mig-config() {
   for ((i=1; i<=${NUM_MIGS}; i++)); do
     local group_name="${NODE_INSTANCE_PREFIX}-group-$i"
     if [[ $i == ${NUM_MIGS} ]]; then
-      # TODO: We don't add a suffix for the last group to keep backward compatibility when there's only one MIG.
+      # TODO: We don't add a suffix for the last group to keep backward compatibility when there's only one MIG. id:108 gh:109
       # We should change it at some point, but note #18545 when changing this.
       group_name="${NODE_INSTANCE_PREFIX}-group"
     fi
@@ -1634,7 +1634,7 @@ function kube-down() {
   fi
 
   # Delete the master replica pd (possibly leaked by kube-up if master create failed).
-  # TODO(jszczepkowski): remove also possibly leaked replicas' pds
+  # TODO (jszczepkowski): remove also possibly leaked replicas' pds id:83 gh:84
   local -r replica_pd="${REPLICA_NAME:-${MASTER_NAME}}-pd"
   if gcloud compute disks describe "${replica_pd}" --zone "${ZONE}" --project "${PROJECT}" &>/dev/null; then
     gcloud compute disks delete \
@@ -1791,7 +1791,7 @@ function kube-down() {
 #   ZONE
 #   MASTER_NAME
 #
-# NOTE: Must be in sync with get-replica-name-regexp and set-replica-name.
+# NOTE: Must be in sync with get-replica-name-regexp and set-replica-name. id:74 gh:75
 function get-replica-name() {
   echo $(gcloud compute instances list \
     --project "${PROJECT}" \
@@ -1805,7 +1805,7 @@ function get-replica-name() {
 #   PROJECT
 #   MASTER_NAME
 #
-# NOTE: Must be in sync with get-replica-name-regexp and set-replica-name.
+# NOTE: Must be in sync with get-replica-name-regexp and set-replica-name. id:88 gh:89
 function get-all-replica-names() {
   echo $(gcloud compute instances list \
     --project "${PROJECT}" \
@@ -2058,7 +2058,7 @@ function kube-push() {
     echo -e "${color_red}Some commands failed.${color_norm}" >&2
   }
 
-  # TODO(zmerlynn): Re-create instance-template with the new
+  # TODO (zmerlynn): Re-create instance-template with the new id:48 gh:49
   # node-kube-env. This isn't important until the node-ip-range issue
   # is solved (because that's blocking automatic dynamic nodes from
   # working). The node-kube-env has to be composed with the KUBELET_TOKEN
@@ -2106,7 +2106,7 @@ function test-setup() {
   fi
 
   # Open up port 80 & 8080 so common containers on minions can be reached
-  # TODO(roberthbailey): Remove this once we are no longer relying on hostPorts.
+  # TODO (roberthbailey): Remove this once we are no longer relying on hostPorts. id:109 gh:110
   local start=`date +%s`
   gcloud compute firewall-rules create \
     --project "${NETWORK_PROJECT}" \
@@ -2125,7 +2125,7 @@ function test-setup() {
   done
 
   # Open up the NodePort range
-  # TODO(justinsb): Move to main setup, if we decide whether we want to do this by default.
+  # TODO (justinsb): Move to main setup, if we decide whether we want to do this by default. id:84 gh:85
   start=`date +%s`
   gcloud compute firewall-rules create \
     --project "${NETWORK_PROJECT}" \

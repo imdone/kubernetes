@@ -67,7 +67,7 @@ func (ms MetricSet) Add(mk MetricKind) {
 	ms[mk] = struct{}{}
 }
 
-// TODO(vmarmol): Consider not making this global.
+// TODO (vmarmol): Consider not making this global. id:2654 gh:2669
 // Global list of factories.
 var (
 	factories     = map[watcher.ContainerWatchSource][]ContainerHandlerFactory{}

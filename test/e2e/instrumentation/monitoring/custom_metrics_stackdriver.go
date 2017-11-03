@@ -112,7 +112,7 @@ func testAdapter(f *framework.Framework, kubeClient clientset.Interface, customM
 	defer cleanupSDExporterPod(f, kubeClient)
 
 	// Wait a short amount of time to create a pod and export some metrics
-	// TODO: add some events to wait for instead of fixed amount of time
+	// TODO: add some events to wait for instead of fixed amount of time id:2251 gh:2266
 	//       i.e. pod creation, first time series exported
 	time.Sleep(60 * time.Second)
 

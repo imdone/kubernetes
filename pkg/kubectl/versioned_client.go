@@ -22,7 +22,7 @@ import (
 	internalclientset "k8s.io/kubernetes/pkg/client/clientset_generated/internalclientset"
 )
 
-// TODO: get rid of this and plumb the caller correctly
+// TODO: get rid of this and plumb the caller correctly id:826 gh:827
 func versionedExtensionsClientV1beta1(internalClient internalclientset.Interface) clientextensionsv1beta1.ExtensionsV1beta1Interface {
 	if internalClient == nil {
 		return &clientextensionsv1beta1.ExtensionsV1beta1Client{}
@@ -30,7 +30,7 @@ func versionedExtensionsClientV1beta1(internalClient internalclientset.Interface
 	return clientextensionsv1beta1.New(internalClient.Extensions().RESTClient())
 }
 
-// TODO: get rid of this and plumb the caller correctly
+// TODO: get rid of this and plumb the caller correctly id:770 gh:771
 func versionedAppsClientV1beta1(internalClient internalclientset.Interface) clientappsv1beta1.AppsV1beta1Interface {
 	if internalClient == nil {
 		return &clientappsv1beta1.AppsV1beta1Client{}

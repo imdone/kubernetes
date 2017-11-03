@@ -124,14 +124,14 @@ func (a *AdmissionOptions) Validate() []error {
 // enabledPluginNames makes use of RecommendedPluginOrder and DefaultOffPlugins fields
 // to prepare a list of plugin names that are enabled.
 //
-// TODO(p0lyn0mial): In the end we will introduce two new flags:
+// TODO (p0lyn0mial): In the end we will introduce two new flags: id:3894 gh:3912
 // --disable-admission-plugin this would be a list of admission plugins that a cluster-admin wants to explicitly disable.
 // --enable-admission-plugin  this would be a list of admission plugins that a cluster-admin wants to explicitly enable.
 // both flags are going to be handled by this method
 func (a *AdmissionOptions) enabledPluginNames() []string {
-	//TODO(p0lyn0mial): first subtract plugins that a user wants to explicitly enable from allOffPlugins (DefaultOffPlugins)
-	//TODO(p0lyn0miial): then add/append plugins that a user wants to explicitly disable to allOffPlugins
-	//TODO(p0lyn0mial): so that --off=three --on=one,three default-off=one,two results in  "one" being enabled.
+	//TODO (p0lyn0mial): first subtract plugins that a user wants to explicitly enable from allOffPlugins (DefaultOffPlugins) id:3718 gh:3733
+	//TODO (p0lyn0miial): then add/append plugins that a user wants to explicitly disable to allOffPlugins id:3870 gh:3885
+	//TODO (p0lyn0mial): so that --off=three --on=one,three default-off=one,two results in  "one" being enabled. id:4016 gh:4036
 	allOffPlugins := a.DefaultOffPlugins
 	onlyEnabledPluginNames := []string{}
 	for _, pluginName := range a.RecommendedPluginOrder {

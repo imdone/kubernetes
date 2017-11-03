@@ -225,7 +225,7 @@ func (o *LabelOptions) RunLabel(f cmdutil.Factory, cmd *cobra.Command) error {
 		return fmt.Errorf("--resource-version may only be used with a single resource")
 	}
 
-	// TODO: support bulk generic output a la Get
+	// TODO: support bulk generic output a la Get id:733 gh:734
 	return r.Visit(func(info *resource.Info, err error) error {
 		if err != nil {
 			return err

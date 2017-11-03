@@ -61,5 +61,5 @@ func TestCreatePodSandbox(t *testing.T) {
 	sandboxes, err := fakeRuntime.ListPodSandbox(&runtimeapi.PodSandboxFilter{Id: id})
 	assert.NoError(t, err)
 	assert.Equal(t, len(sandboxes), 1)
-	// TODO Check pod sandbox configuration
+	// TODO Check pod sandbox configuration id:981 gh:987
 }

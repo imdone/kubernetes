@@ -185,7 +185,7 @@ func SplitHostname(named Named) (string, string) {
 
 // Parse parses s and returns a syntactically valid Reference.
 // If an error was encountered it is returned, along with a nil Reference.
-// NOTE: Parse will not handle short digests.
+// NOTE: Parse will not handle short digests. id:2702 gh:2717
 func Parse(s string) (Reference, error) {
 	matches := ReferenceRegexp.FindStringSubmatch(s)
 	if matches == nil {
@@ -237,7 +237,7 @@ func Parse(s string) (Reference, error) {
 // the Named interface. The reference must have a name and be in the canonical
 // form, otherwise an error is returned.
 // If an error was encountered it is returned, along with a nil Reference.
-// NOTE: ParseNamed will not handle short digests.
+// NOTE: ParseNamed will not handle short digests. id:2687 gh:2698
 func ParseNamed(s string) (Named, error) {
 	named, err := ParseNormalizedNamed(s)
 	if err != nil {

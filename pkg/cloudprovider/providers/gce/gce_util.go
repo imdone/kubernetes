@@ -200,7 +200,7 @@ func makeGoogleAPIError(code int, message string) error {
 	return &googleapi.Error{Code: code, Message: message}
 }
 
-// TODO(#51665): Remove this once Network Tiers becomes Beta in GCP.
+// TODO (#51665): Remove this once Network Tiers becomes Beta in GCP. id:479 gh:480
 func handleAlphaNetworkTierGetError(err error) (string, error) {
 	if isForbidden(err) {
 		// Network tier is still an Alpha feature in GCP, and not every project

@@ -29,7 +29,7 @@ import (
 	"k8s.io/kubernetes/pkg/apis/batch"
 )
 
-// TODO: generalize for other controller objects that will follow the same pattern, such as ReplicaSet and DaemonSet, and
+// TODO: generalize for other controller objects that will follow the same pattern, such as ReplicaSet and DaemonSet, and id:300 gh:301
 // move to new location.  Replace batch.Job with an interface.
 //
 // ValidateGeneratedSelector validates that the generated selector on a controller object match the controller object

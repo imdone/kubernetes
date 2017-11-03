@@ -597,7 +597,7 @@ func (og *operationGenerator) GenerateUnmountDeviceFunc(
 		var deviceOpenedErr error
 		if !isDevicePath && devicePathErr == nil {
 			// not a device path or path doesn't exist
-			//TODO: refer to #36092
+			//TODO: refer to #36092 id:1518 gh:1524
 			glog.V(3).Infof("Not checking device path %s", deviceToDetach.DevicePath)
 			deviceOpened = false
 		} else {

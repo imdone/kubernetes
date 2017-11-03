@@ -33,7 +33,7 @@ const (
 // LeaderElectionRecord is the record that is stored in the leader election annotation.
 // This information should be used for observational purposes only and could be replaced
 // with a random string (e.g. UUID) with only slight modification of this code.
-// TODO(mikedanese): this should potentially be versioned
+// TODO (mikedanese): this should potentially be versioned id:3923 gh:3944
 type LeaderElectionRecord struct {
 	HolderIdentity       string      `json:"holderIdentity"`
 	LeaseDurationSeconds int         `json:"leaseDurationSeconds"`

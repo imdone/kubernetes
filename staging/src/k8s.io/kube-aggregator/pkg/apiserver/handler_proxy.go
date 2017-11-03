@@ -175,7 +175,7 @@ type responder struct {
 	w http.ResponseWriter
 }
 
-// TODO this should properly handle content type negotiation
+// TODO this should properly handle content type negotiation id:4035 gh:4055
 // if the caller asked for protobuf and you write JSON bad things happen.
 func (r *responder) Object(statusCode int, obj runtime.Object) {
 	responsewriters.WriteRawJSON(statusCode, obj, r.w)

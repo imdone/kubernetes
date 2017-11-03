@@ -21,7 +21,7 @@ type schedulerPerfConfig struct {
 	NodeCount    int // The number of nodes which will be seeded with metadata to match predicates and have non-trivial priority rankings.
 	PodCount     int // The number of pods which will be seeded with metadata to match predicates and have non-trivial priority rankings.
 	NodeAffinity *nodeAffinity
-	// TODO: Other predicates and priorities to be added here.
+	// TODO: Other predicates and priorities to be added here. id:2548 gh:2563
 }
 
 // nodeAffinity priority configuration details.

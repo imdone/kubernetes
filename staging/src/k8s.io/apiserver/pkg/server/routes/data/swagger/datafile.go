@@ -7113,7 +7113,7 @@ exports.dirname = function(path) {
 
 exports.basename = function(path, ext) {
   var f = splitPathRe.exec(path)[2] || '';
-  // TODO: make this comparison case-insensitive on windows?
+  // TODO: make this comparison case-insensitive on windows? id:3929 gh:3949
   if (ext && f.substr(-1 * ext.length) === ext) {
     f = f.substr(0, f.length - ext.length);
   }
@@ -10732,7 +10732,7 @@ Operation.prototype.encodeQueryParam = function(arg) {
 };
 
 /**
- * TODO revisit, might not want to leave '/'
+ * TODO revisit, might not want to leave '/' id:3719 gh:3734
  **/
 Operation.prototype.encodePathParam = function(pathParam) {
   var encParts, part, parts, i, len;
@@ -12282,7 +12282,7 @@ SwaggerHttp.prototype.isIE8 = function() {
 
 /*
  * JQueryHttpClient lets a browser take advantage of JQuery's cross-browser magic.
- * NOTE: when jQuery is available it will export both '$' and 'jQuery' to the global space.
+ * NOTE: when jQuery is available it will export both '$' and 'jQuery' to the global space. id:3895 gh:3916
  *       Since we are using closures here we need to alias it for internal use.
  */
 var JQueryHttpClient = function(options) {
@@ -14160,7 +14160,7 @@ var _third_partySwaggerUiLibSwaggerJs = []byte(`// swagger.js
 
   /*
    * JQueryHttpClient lets a browser take advantage of JQuery's cross-browser magic.
-   * NOTE: when jQuery is available it will export both '$' and 'jQuery' to the global space.
+   * NOTE: when jQuery is available it will export both '$' and 'jQuery' to the global space. id:4017 gh:4037
    *     Since we are using closures here we need to alias it for internal use.
    */
   var JQueryHttpClient = function (options) {

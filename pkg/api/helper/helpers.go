@@ -72,7 +72,7 @@ func NonConvertibleFields(annotations map[string]string) map[string]string {
 var Semantic = conversion.EqualitiesOrDie(
 	func(a, b resource.Quantity) bool {
 		// Ignore formatting, only care that numeric value stayed the same.
-		// TODO: if we decide it's important, it should be safe to start comparing the format.
+		// TODO: if we decide it's important, it should be safe to start comparing the format. id:330 gh:331
 		//
 		// Uninitialized quantities are equivalent to 0 quantities.
 		return a.Cmp(b) == 0
@@ -143,7 +143,7 @@ func IsStandardContainerResourceName(str string) bool {
 // IsExtendedResourceName returns true if the resource name is not in the
 // default namespace, or it has the opaque integer resource prefix.
 func IsExtendedResourceName(name api.ResourceName) bool {
-	// TODO: Remove OIR part following deprecation.
+	// TODO: Remove OIR part following deprecation. id:278 gh:279
 	return !IsDefaultNamespaceResource(name) || IsOpaqueIntResourceName(name)
 }
 
@@ -326,7 +326,7 @@ func AddToNodeAddresses(addresses *[]api.NodeAddress, addAddresses ...api.NodeAd
 	}
 }
 
-// TODO: make method on LoadBalancerStatus?
+// TODO: make method on LoadBalancerStatus? id:255 gh:256
 func LoadBalancerStatusEqual(l, r *api.LoadBalancerStatus) bool {
 	return ingressSliceEqual(l.Ingress, r.Ingress)
 }
@@ -353,7 +353,7 @@ func ingressEqual(lhs, rhs *api.LoadBalancerIngress) bool {
 	return true
 }
 
-// TODO: make method on LoadBalancerStatus?
+// TODO: make method on LoadBalancerStatus? id:249 gh:250
 func LoadBalancerStatusDeepCopy(lb *api.LoadBalancerStatus) *api.LoadBalancerStatus {
 	c := &api.LoadBalancerStatus{}
 	c.Ingress = make([]api.LoadBalancerIngress, len(lb.Ingress))
@@ -502,7 +502,7 @@ func TolerationToleratesTaint(toleration *api.Toleration, taint *api.Taint) bool
 	if toleration.Key != taint.Key {
 		return false
 	}
-	// TODO: Use proper defaulting when Toleration becomes a field of PodSpec
+	// TODO: Use proper defaulting when Toleration becomes a field of PodSpec id:202 gh:203
 	if (len(toleration.Operator) == 0 || toleration.Operator == api.TolerationOpEqual) && toleration.Value == taint.Value {
 		return true
 	}
@@ -626,7 +626,7 @@ func PersistentVolumeClaimHasClass(claim *api.PersistentVolumeClaim) bool {
 
 // GetStorageNodeAffinityFromAnnotation gets the json serialized data from PersistentVolume.Annotations
 // and converts it to the NodeAffinity type in api.
-// TODO: update when storage node affinity graduates to beta
+// TODO: update when storage node affinity graduates to beta id:331 gh:332
 func GetStorageNodeAffinityFromAnnotation(annotations map[string]string) (*api.NodeAffinity, error) {
 	if len(annotations) > 0 && annotations[api.AlphaStorageNodeAffinityAnnotation] != "" {
 		var affinity api.NodeAffinity
@@ -640,7 +640,7 @@ func GetStorageNodeAffinityFromAnnotation(annotations map[string]string) (*api.N
 }
 
 // Converts NodeAffinity type to Alpha annotation for use in PersistentVolumes
-// TODO: update when storage node affinity graduates to beta
+// TODO: update when storage node affinity graduates to beta id:279 gh:280
 func StorageNodeAffinityToAlphaAnnotation(annotations map[string]string, affinity *api.NodeAffinity) error {
 	if affinity == nil {
 		return nil

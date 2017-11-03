@@ -160,7 +160,7 @@ func (p *protobufPackage) ExtractGeneratedType(t *ast.TypeSpec) bool {
 			}
 			if len(f.Names) > 1 {
 				log.Printf("WARNING: struct %s field %d %s: defined multiple names but single protobuf tag", t.Name.Name, i, f.Names[0].Name)
-				// TODO hard error?
+				// TODO hard error? id:3968 gh:3988
 			}
 			if p.StructTags == nil {
 				p.StructTags = make(map[string]map[string]string)

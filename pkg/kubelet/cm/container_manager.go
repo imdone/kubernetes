@@ -20,7 +20,7 @@ import (
 	"time"
 
 	"k8s.io/apimachinery/pkg/util/sets"
-	// TODO: Migrate kubelet to either use its own internal objects or client library.
+	// TODO: Migrate kubelet to either use its own internal objects or client library. id:829 gh:830
 	"k8s.io/api/core/v1"
 	internalapi "k8s.io/kubernetes/pkg/kubelet/apis/cri"
 	"k8s.io/kubernetes/pkg/kubelet/apis/kubeletconfig"

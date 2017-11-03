@@ -70,7 +70,7 @@ func (c *Call) MaxTimes(n int) *Call {
 // Do declares the action to run when the call is matched.
 // It takes an interface{} argument to support n-arity functions.
 func (c *Call) Do(f interface{}) *Call {
-	// TODO: Check arity and types here, rather than dying badly elsewhere.
+	// TODO: Check arity and types here, rather than dying badly elsewhere. id:2805 gh:2820
 	c.doFunc = reflect.ValueOf(f)
 	return c
 }
@@ -121,7 +121,7 @@ func (c *Call) SetArg(n int, value interface{}) *Call {
 		c.setArgs = make(map[int]reflect.Value)
 	}
 	mt := c.methodType()
-	// TODO: This will break on variadic methods.
+	// TODO: This will break on variadic methods. id:3044 gh:3059
 	// We will need to check those at invocation time.
 	if n < 0 || n >= mt.NumIn() {
 		c.t.Fatalf("SetArg(%d, ...) called for a method with %d args", n, mt.NumIn())

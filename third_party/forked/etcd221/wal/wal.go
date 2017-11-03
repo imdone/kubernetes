@@ -224,8 +224,8 @@ func openAtIndex(dirpath string, snap walpb.Snapshot, write bool) (*WAL, error) 
 // If it cannot read out the expected snap, it will return ErrSnapshotNotFound.
 // If loaded snap doesn't match with the expected one, it will return
 // all the records and error ErrSnapshotMismatch.
-// TODO: detect not-last-snap error.
-// TODO: maybe loose the checking of match.
+// TODO: detect not-last-snap error. id:2553 gh:2568
+// TODO: maybe loose the checking of match. id:2739 gh:2754
 // After ReadAll, the WAL will be ready for appending new records.
 func (w *WAL) ReadAll() (metadata []byte, state raftpb.HardState, ents []raftpb.Entry, err error) {
 	w.mu.Lock()
@@ -475,7 +475,7 @@ func (w *WAL) Close() error {
 }
 
 func (w *WAL) saveEntry(e *raftpb.Entry) error {
-	// TODO: add MustMarshalTo to reduce one allocation.
+	// TODO: add MustMarshalTo to reduce one allocation. id:2424 gh:2439
 	b := pbutil.MustMarshal(e)
 	rec := &walpb.Record{Type: entryType, Data: b}
 	if err := w.encoder.encode(rec); err != nil {
@@ -505,7 +505,7 @@ func (w *WAL) Save(st raftpb.HardState, ents []raftpb.Entry) error {
 		return nil
 	}
 
-	// TODO(xiangli): no more reference operator
+	// TODO (xiangli): no more reference operator id:2603 gh:2619
 	for i := range ents {
 		if err := w.saveEntry(&ents[i]); err != nil {
 			return err
@@ -522,7 +522,7 @@ func (w *WAL) Save(st raftpb.HardState, ents []raftpb.Entry) error {
 	if fstat.Size() < segmentSizeBytes {
 		return w.sync()
 	}
-	// TODO: add a test for this code path when refactoring the tests
+	// TODO: add a test for this code path when refactoring the tests id:2444 gh:2459
 	return w.cut()
 }
 

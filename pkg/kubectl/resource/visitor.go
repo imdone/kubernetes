@@ -364,7 +364,7 @@ func (v ContinueOnErrorVisitor) Visit(fn VisitorFunc) error {
 // that interface - into multiple Infos. An error on any sub item (for instance, if a List
 // contains an object that does not have a registered client or resource) will terminate
 // the visit.
-// TODO: allow errors to be aggregated?
+// TODO: allow errors to be aggregated? id:766 gh:767
 type FlattenListVisitor struct {
 	Visitor
 	*Mapper
@@ -494,7 +494,7 @@ func (v *FileVisitor) Visit(fn VisitorFunc) error {
 		defer f.Close()
 	}
 
-	// TODO: Consider adding a flag to force to UTF16, apparently some
+	// TODO: Consider adding a flag to force to UTF16, apparently some id:795 gh:796
 	// Windows tools don't write the BOM
 	utf16bom := unicode.BOMOverride(unicode.UTF8.NewDecoder())
 	v.StreamVisitor.Reader = transform.NewReader(f, utf16bom)
@@ -504,7 +504,7 @@ func (v *FileVisitor) Visit(fn VisitorFunc) error {
 
 // StreamVisitor reads objects from an io.Reader and walks them. A stream visitor can only be
 // visited once.
-// TODO: depends on objects being in JSON format before being passed to decode - need to implement
+// TODO: depends on objects being in JSON format before being passed to decode - need to implement id:808 gh:809
 // a stream decoder method on runtime.Codec to properly handle this.
 type StreamVisitor struct {
 	io.Reader
@@ -535,7 +535,7 @@ func (v *StreamVisitor) Visit(fn VisitorFunc) error {
 			}
 			return err
 		}
-		// TODO: This needs to be able to handle object in other encodings and schemas.
+		// TODO: This needs to be able to handle object in other encodings and schemas. id:753 gh:754
 		ext.Raw = bytes.TrimSpace(ext.Raw)
 		if len(ext.Raw) == 0 || bytes.Equal(ext.Raw, []byte("null")) {
 			continue

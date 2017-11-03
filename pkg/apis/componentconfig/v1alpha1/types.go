@@ -96,7 +96,7 @@ type KubeProxyConfiguration struct {
 	// featureGates is a comma-separated list of key=value pairs that control
 	// which alpha/beta features are enabled.
 	//
-	// TODO this really should be a map but that requires refactoring all
+	// TODO this really should be a map but that requires refactoring all id:301 gh:302
 	// components to use config files because local-up-cluster.sh only supports
 	// the --feature-gates flag right now, which is comma-separated key=value
 	// pairs.

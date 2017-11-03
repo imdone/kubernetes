@@ -29,7 +29,7 @@ import (
 	"k8s.io/kubernetes/pkg/api/legacyscheme"
 )
 
-// TODO:
+// TODO: id:237 gh:238
 // Add a -o flag that writes to the specified destination file.
 var (
 	kubeconfig = flag.String("kubeconfig", "", "path to kubeconfig file.")

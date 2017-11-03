@@ -143,7 +143,7 @@ func (w *Watcher) Remove(name string) error {
 	// by another thread and we have not received IN_IGNORE event.
 	success, errno := unix.InotifyRmWatch(w.fd, watch.wd)
 	if success == -1 {
-		// TODO: Perhaps it's not helpful to return an error here in every case.
+		// TODO: Perhaps it's not helpful to return an error here in every case. id:2537 gh:2552
 		// the only two possible errors are:
 		// EBADF, which happens when w.fd is not a valid file descriptor of any kind.
 		// EINVAL, which is when fd is not an inotify descriptor or wd is not a valid watch descriptor.

@@ -154,7 +154,7 @@ func (runner *runner) GetRealServers(vs *VirtualServer) ([]*RealServer, error) {
 	realServers := make([]*RealServer, 0)
 	for _, dest := range bDestinations {
 		dst, err := toRealServer(dest)
-		// TODO: aggregate errors?
+		// TODO: aggregate errors? id:1491 gh:1497
 		if err != nil {
 			return nil, err
 		}

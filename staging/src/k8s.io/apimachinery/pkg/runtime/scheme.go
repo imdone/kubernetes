@@ -54,7 +54,7 @@ type Scheme struct {
 
 	// unversionedKinds are the names of kinds that can be created in the context of any group
 	// or version
-	// TODO: resolve the status of unversioned types.
+	// TODO: resolve the status of unversioned types. id:3508 gh:3523
 	unversionedKinds map[string]reflect.Type
 
 	// Map from version and resource to the corresponding func to convert
@@ -143,7 +143,7 @@ func (s *Scheme) Converter() *conversion.Converter {
 // converted. Thus unversioned objects are expected to remain backwards compatible forever, as if they were in an
 // API group and version that would never be updated.
 //
-// TODO: there is discussion about removing unversioned and replacing it with objects that are manifest into
+// TODO: there is discussion about removing unversioned and replacing it with objects that are manifest into id:3676 gh:3691
 //   every version with particular schemas. Resolve this method at that point.
 func (s *Scheme) AddUnversionedTypes(version schema.GroupVersion, types ...Object) {
 	s.AddKnownTypes(version, types...)
@@ -425,7 +425,7 @@ func (s *Scheme) Default(src Object) {
 // possible. You can call this with types that haven't been registered (for example,
 // a to test conversion of types that are nested within registered types). The
 // context interface is passed to the convertor.
-// TODO: identify whether context should be hidden, or behind a formal context/scope
+// TODO: identify whether context should be hidden, or behind a formal context/scope id:3851 gh:3866
 //   interface
 func (s *Scheme) Convert(in, out interface{}, context interface{}) error {
 	flags, meta := s.generateConvertMeta(in)
@@ -484,7 +484,7 @@ func (s *Scheme) convertToVersion(copy bool, in Object, target GroupVersioner) (
 	gvk, ok := target.KindForGroupVersionKinds(kinds)
 	if !ok {
 		// try to see if this type is listed as unversioned (for legacy support)
-		// TODO: when we move to server API versions, we should completely remove the unversioned concept
+		// TODO: when we move to server API versions, we should completely remove the unversioned concept id:3278 gh:3290
 		if unversionedKind, ok := s.unversionedTypes[t]; ok {
 			if gvk, ok := target.KindForGroupVersionKinds([]schema.GroupVersionKind{unversionedKind}); ok {
 				return copyAndSetTargetKind(copy, in, gvk)
@@ -547,7 +547,7 @@ func copyAndSetTargetKind(copy bool, obj Object, kind schema.GroupVersionKind) (
 func setTargetKind(obj Object, kind schema.GroupVersionKind) {
 	if kind.Version == APIVersionInternal {
 		// internal is a special case
-		// TODO: look at removing the need to special case this
+		// TODO: look at removing the need to special case this id:3773 gh:3788
 		obj.GetObjectKind().SetGroupVersionKind(schema.GroupVersionKind{})
 		return
 	}

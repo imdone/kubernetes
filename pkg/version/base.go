@@ -34,7 +34,7 @@ package version
 // == Minor version) is created to point to the commit that updates
 // pkg/version/base.go
 var (
-	// TODO: Deprecate gitMajor and gitMinor, use only gitVersion
+	// TODO: Deprecate gitMajor and gitMinor, use only gitVersion id:1495 gh:1501
 	// instead. First step in deprecation, keep the fields but make
 	// them irrelevant. (Next we'll take it out, which may muck with
 	// scripts consuming the kubectl version output - but most of
@@ -46,7 +46,7 @@ var (
 	// https://github.com/kubernetes/community/blob/master/contributors/design-proposals/release/versioning.md
 	// for a detailed discussion of this field)
 	//
-	// TODO: This field is still called "gitVersion" for legacy
+	// TODO: This field is still called "gitVersion" for legacy id:1524 gh:1530
 	// reasons. For prerelease versions, the build metadata on the
 	// semantic version is a git hash, but the version itself is no
 	// longer the direct output of "git describe", but a slight

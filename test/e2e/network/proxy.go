@@ -242,7 +242,7 @@ var _ = SIGDescribe("Proxy", func() {
 				subresourcePodProxyURL("https", "460") + "/": "tls baz",
 				subresourcePodProxyURL("https", "462") + "/": "tls qux",
 
-				// TODO: below entries don't work, but I believe we should make them work.
+				// TODO: below entries don't work, but I believe we should make them work. id:2476 gh:2492
 				// podPrefix + ":dest1": "foo",
 				// podPrefix + ":dest2": "bar",
 			}
@@ -334,7 +334,7 @@ func truncate(b []byte, maxLen int) []byte {
 }
 
 func pickNode(cs clientset.Interface) (string, error) {
-	// TODO: investigate why it doesn't work on master Node.
+	// TODO: investigate why it doesn't work on master Node. id:2262 gh:2279
 	nodes := framework.GetReadySchedulableNodesOrDie(cs)
 	if len(nodes.Items) == 0 {
 		return "", fmt.Errorf("no nodes exist, can't test node proxy")
@@ -345,7 +345,7 @@ func pickNode(cs clientset.Interface) (string, error) {
 func nodeProxyTest(f *framework.Framework, prefix, nodeDest string) {
 	node, err := pickNode(f.ClientSet)
 	Expect(err).NotTo(HaveOccurred())
-	// TODO: Change it to test whether all requests succeeded when requests
+	// TODO: Change it to test whether all requests succeeded when requests id:2394 gh:2409
 	// not reaching Kubelet issue is debugged.
 	serviceUnavailableErrors := 0
 	for i := 0; i < proxyAttempts; i++ {

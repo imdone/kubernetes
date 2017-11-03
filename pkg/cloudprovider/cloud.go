@@ -57,7 +57,7 @@ type Clusters interface {
 	Master(clusterName string) (string, error)
 }
 
-// TODO(#6812): Use a shorter name that's less likely to be longer than cloud
+// TODO (#6812): Use a shorter name that's less likely to be longer than cloud id:429 gh:430
 // providers' name length limits.
 func GetLoadBalancerName(service *v1.Service) string {
 	//GCE requires that the name of a load balancer starts with a lower case letter.
@@ -85,7 +85,7 @@ func GetInstanceProviderID(cloud Interface, nodeName types.NodeName) (string, er
 
 // LoadBalancer is an abstract, pluggable interface for load balancers.
 type LoadBalancer interface {
-	// TODO: Break this up into different interfaces (LB, etc) when we have more than one type of service
+	// TODO: Break this up into different interfaces (LB, etc) when we have more than one type of service id:412 gh:413
 	// GetLoadBalancer returns whether the specified load balancer exists, and
 	// if so, what its status is.
 	// Implementations must treat the *v1.Service parameter as read-only and not modify it.
@@ -115,7 +115,7 @@ type LoadBalancer interface {
 // Instances is an abstract, pluggable interface for sets of instances.
 type Instances interface {
 	// NodeAddresses returns the addresses of the specified instance.
-	// TODO(roberthbailey): This currently is only used in such a way that it
+	// TODO (roberthbailey): This currently is only used in such a way that it id:403 gh:404
 	// returns the address of the calling instance. We should do a rename to
 	// make this clearer.
 	NodeAddresses(name types.NodeName) ([]v1.NodeAddress, error)

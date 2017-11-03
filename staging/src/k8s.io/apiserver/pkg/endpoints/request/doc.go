@@ -16,5 +16,5 @@ limitations under the License.
 
 // Package request contains everything around extracting info from
 // a http request object.
-// TODO: this package is temporary. Handlers must move into pkg/apiserver/handlers to avoid dependency cycle
+// TODO: this package is temporary. Handlers must move into pkg/apiserver/handlers to avoid dependency cycle id:3993 gh:4013
 package request // import "k8s.io/apiserver/pkg/endpoints/request"

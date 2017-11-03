@@ -88,7 +88,7 @@ func GetModifiedConfiguration(info *resource.Info, annotate bool, codec runtime.
 		original := annots[api.LastAppliedConfigAnnotation]
 		delete(annots, api.LastAppliedConfigAnnotation)
 		accessor.SetAnnotations(annots)
-		// TODO: this needs to be abstracted - there should be no assumption that versioned object
+		// TODO: this needs to be abstracted - there should be no assumption that versioned object id:690 gh:691
 		// can be marshalled to JSON.
 		modified, err = runtime.Encode(codec, info.VersionedObject)
 		if err != nil {
@@ -98,7 +98,7 @@ func GetModifiedConfiguration(info *resource.Info, annotate bool, codec runtime.
 		if annotate {
 			annots[api.LastAppliedConfigAnnotation] = string(modified)
 			accessor.SetAnnotations(annots)
-			// TODO: this needs to be abstracted - there should be no assumption that versioned object
+			// TODO: this needs to be abstracted - there should be no assumption that versioned object id:694 gh:695
 			// can be marshalled to JSON.
 			modified, err = runtime.Encode(codec, info.VersionedObject)
 			if err != nil {

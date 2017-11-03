@@ -162,7 +162,7 @@ func (gb *GraphBuilder) controllerFor(resource schema.GroupVersionResource, kind
 			gb.graphChanges.Add(event)
 		},
 		UpdateFunc: func(oldObj, newObj interface{}) {
-			// TODO: check if there are differences in the ownerRefs,
+			// TODO: check if there are differences in the ownerRefs, id:559 gh:560
 			// finalizers, and DeletionTimestamp; if not, ignore the update.
 			event := &event{
 				eventType: updateEvent,
@@ -195,7 +195,7 @@ func (gb *GraphBuilder) controllerFor(resource schema.GroupVersionResource, kind
 		glog.V(4).Infof("unable to use a shared informer for resource %q, kind %q: %v", resource.String(), kind.String(), err)
 	}
 
-	// TODO: consider store in one storage.
+	// TODO: consider store in one storage. id:578 gh:579
 	glog.V(5).Infof("create storage for resource %s", resource)
 	client, err := gb.metaOnlyClientPool.ClientForGroupVersionKind(kind)
 	if err != nil {
@@ -428,7 +428,7 @@ type ownerRefPair struct {
 	newRef metav1.OwnerReference
 }
 
-// TODO: profile this function to see if a naive N^2 algorithm performs better
+// TODO: profile this function to see if a naive N^2 algorithm performs better id:542 gh:543
 // when the number of references is small.
 func referencesDiffs(old []metav1.OwnerReference, new []metav1.OwnerReference) (added []metav1.OwnerReference, removed []metav1.OwnerReference, changed []ownerRefPair) {
 	oldUIDToRef := make(map[string]metav1.OwnerReference)

@@ -47,7 +47,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-// TODO(random-liu): Get this automatically from kubelet flag.
+// TODO (random-liu): Get this automatically from kubelet flag. id:2588 gh:2603
 var kubeletAddress = flag.String("kubelet-address", "http://127.0.0.1:10255", "Host and port of the kubelet")
 
 var startServices = flag.Bool("start-services", true, "If true, start local node services")

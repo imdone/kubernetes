@@ -104,7 +104,7 @@ type checkpointEntry struct {
 
 // checkpointData struct is used to store pod to device allocation information
 // in a checkpoint file.
-// TODO: add version control when we need to change checkpoint format.
+// TODO: add version control when we need to change checkpoint format. id:775 gh:776
 type checkpointData struct {
 	Entries []checkpointEntry
 }
@@ -219,7 +219,7 @@ func (pdev podDevices) deviceRunContainerOptions(podUID, contName string) *Devic
 				ContainerPath: mount.ContainerPath,
 				HostPath:      mount.HostPath,
 				ReadOnly:      mount.ReadOnly,
-				// TODO: This may need to be part of Device plugin API.
+				// TODO: This may need to be part of Device plugin API. id:873 gh:877
 				SELinuxRelabel: false,
 			})
 		}

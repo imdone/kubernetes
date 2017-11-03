@@ -41,7 +41,7 @@ var (
 	groupVersion = fmt.Sprintf("%s/%s", metricsGv.Group, metricsGv.Version)
 	metricsRoot  = fmt.Sprintf("%s/%s", prefix, groupVersion)
 
-	// TODO: get this from metrics api once it's finished
+	// TODO: get this from metrics api once it's finished id:765 gh:766
 	metricsGv = schema.GroupVersion{Group: "metrics", Version: "v1alpha1"}
 )
 

@@ -34,7 +34,7 @@ import (
 func overrideMetaFuncs(codecs runtimeserializer.CodecFactory) []interface{} {
 	return []interface{}{
 		func(j *runtime.Object, c fuzz.Continue) {
-			// TODO: uncomment when round trip starts from a versioned object
+			// TODO: uncomment when round trip starts from a versioned object id:3872 gh:3887
 			if true { //c.RandBool() {
 				*j = &runtime.Unknown{
 					// We do not set TypeMeta here because it is not carried through a round trip

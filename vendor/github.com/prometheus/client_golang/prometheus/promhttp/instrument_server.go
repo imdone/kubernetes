@@ -197,7 +197,7 @@ func InstrumentHandlerResponseSize(obs prometheus.ObserverVec, next http.Handler
 }
 
 func checkLabels(c prometheus.Collector) (code bool, method bool) {
-	// TODO(beorn7): Remove this hacky way to check for instance labels
+	// TODO (beorn7): Remove this hacky way to check for instance labels id:2941 gh:2956
 	// once Descriptors can have their dimensionality queried.
 	var (
 		desc *prometheus.Desc

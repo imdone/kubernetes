@@ -17,7 +17,7 @@
 # This script is for configuring kubernetes master and node instances. It is
 # uploaded in the manifests tar ball.
 
-# TODO: this script duplicates templating logic from cluster/saltbase/salt
+# TODO: this script duplicates templating logic from cluster/saltbase/salt id:20 gh:21
 # using sed. It should use an actual template parser on the manifest
 # files, or the manifest files should not be templated salt
 
@@ -104,7 +104,7 @@ function mount-master-pd {
   safe-format-and-mount "${pd_path}" "${mount_point}"
   echo "Mounted master-pd '${pd_path}' at '${mount_point}'"
 
-  # NOTE: These locations on the PD store persistent data, so to maintain
+  # NOTE: These locations on the PD store persistent data, so to maintain id:28 gh:29
   # upgradeability, these locations should not change.  If they do, take care
   # to maintain a migration path from these locations to whatever new
   # locations.
@@ -705,7 +705,7 @@ function prepare-kube-proxy-manifest-variables {
   if [[ "${CONTAINER_RUNTIME:-}" == "rkt" ]]; then
     # Work arounds for https://github.com/coreos/rkt/issues/3245 and https://github.com/coreos/rkt/issues/3264
     # This is an incredibly hacky workaround. It's fragile too. If the kube-proxy command changes too much, this breaks
-    # TODO, this could be done much better in many other places, such as an
+    # TODO , this could be done much better in many other places, such as an id:38 gh:39
     # init script within the container, or even within kube-proxy's code.
     local extra_workaround_cmd="ln -sf /proc/self/mounts /etc/mtab; \
       mount -o remount,rw /proc; \
@@ -909,7 +909,7 @@ function start-kube-apiserver {
       params+=" --max-requests-inflight=1500 --max-mutating-requests-inflight=500"
     fi
     # Set amount of memory available for apiserver based on number of nodes.
-    # TODO: Once we start setting proper requests and limits for apiserver
+    # TODO: Once we start setting proper requests and limits for apiserver id:71 gh:72
     # we should reuse the same logic here instead of current heuristic.
     params+=" --target-ram-mb=$((${NUM_NODES} * 60))"
   fi
@@ -1392,14 +1392,14 @@ function start-rescheduler {
 }
 
 # Install and setup rkt
-# TODO(euank): There should be a toggle to use the distro-provided rkt binary
+# TODO (euank): There should be a toggle to use the distro-provided rkt binary id:64 gh:65
 # Sets the following variables:
 #   RKT_BIN: the path to the rkt binary
 function setup-rkt {
     local rkt_bin="${KUBE_HOME}/bin/rkt"
     if [[ -x "${rkt_bin}" ]]; then
       # idempotency, skip downloading this time
-      # TODO(euank): this might get in the way of updates, but 'file busy'
+      # TODO (euank): this might get in the way of updates, but 'file busy' id:21 gh:22
       # because of rkt-api would too
       RKT_BIN="${rkt_bin}"
       return

@@ -166,7 +166,7 @@ func NewRollingUpdater(namespace string, rcClient coreclient.ReplicationControll
 // A scaling event (either up or down) is considered progress; if no progress
 // is made within the config.Timeout, an error is returned.
 //
-// TODO: make this handle performing a rollback of a partially completed
+// TODO: make this handle performing a rollback of a partially completed id:767 gh:768
 // rollout.
 func (r *RollingUpdater) Update(config *RollingUpdaterConfig) error {
 	out := config.Out
@@ -706,7 +706,7 @@ func AddDeploymentKeyToReplicationController(oldRc *api.ReplicationController, r
 	}
 
 	// Update all pods managed by the rc to have the new hash label, so they are correctly adopted
-	// TODO: extract the code from the label command and re-use it here.
+	// TODO: extract the code from the label command and re-use it here. id:796 gh:797
 	selector := labels.SelectorFromSet(oldRc.Spec.Selector)
 	options := metav1.ListOptions{LabelSelector: selector.String()}
 	podList, err := podClient.Pods(namespace).List(options)

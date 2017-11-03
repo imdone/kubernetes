@@ -280,7 +280,7 @@ func chooseIPFromHostInterfaces(nw networkInterfacer) (net.IP, error) {
 					glog.V(4).Infof("Skipping: no address family match for %q on interface %q.", ip, intf.Name)
 					continue
 				}
-				// TODO: Decide if should open up to allow IPv6 LLAs in future.
+				// TODO: Decide if should open up to allow IPv6 LLAs in future. id:3858 gh:3873
 				if !ip.IsGlobalUnicast() {
 					glog.V(4).Infof("Skipping: non-global address %q on interface %q.", ip, intf.Name)
 					continue

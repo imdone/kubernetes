@@ -29,7 +29,7 @@ import (
 )
 
 const (
-	// TODO: change those label names to follow kubernetes's format
+	// TODO: change those label names to follow kubernetes's format id:1099 gh:1105
 	podDeletionGracePeriodLabel    = "io.kubernetes.pod.deletionGracePeriod"
 	podTerminationGracePeriodLabel = "io.kubernetes.pod.terminationGracePeriod"
 

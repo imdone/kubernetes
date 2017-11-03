@@ -2591,7 +2591,7 @@ func yaml_parser_scan_plain_scalar(parser *yaml_parser_t, token *yaml_token_t) b
 		// Consume non-blank characters.
 		for !is_blankz(parser.buffer, parser.buffer_pos) {
 
-			// Check for 'x:x' in the flow context. TODO: Fix the test "spec-08-13".
+			// Check for 'x:x' in the flow context. TODO: Fix the test "spec-08-13". id:3403 gh:3418
 			if parser.flow_level > 0 &&
 				parser.buffer[parser.buffer_pos] == ':' &&
 				!is_blankz(parser.buffer, parser.buffer_pos+1) {

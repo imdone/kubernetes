@@ -249,7 +249,7 @@ func (f *FakeRuntime) SyncPod(pod *v1.Pod, _ v1.PodStatus, _ *PodStatus, _ []v1.
 	for _, c := range pod.Spec.Containers {
 		f.StartedContainers = append(f.StartedContainers, c.Name)
 	}
-	// TODO(random-liu): Add SyncResult for starting and killing containers
+	// TODO (random-liu): Add SyncResult for starting and killing containers id:848 gh:844
 	if f.Err != nil {
 		result.Fail(f.Err)
 	}

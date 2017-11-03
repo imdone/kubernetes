@@ -41,9 +41,9 @@ var (
 )
 
 // Etcd exposes a service.Allocator
-// TODO: allow multiple allocations to be tried at once
-// TODO: subdivide the keyspace to reduce conflicts
-// TODO: investigate issuing a CAS without reading first
+// TODO: allow multiple allocations to be tried at once id:1278 gh:1284
+// TODO: subdivide the keyspace to reduce conflicts id:1324 gh:1330
+// TODO: investigate issuing a CAS without reading first id:1357 gh:1363
 type Etcd struct {
 	lock sync.Mutex
 
@@ -64,7 +64,7 @@ var _ rangeallocation.RangeRegistry = &Etcd{}
 func NewEtcd(alloc allocator.Snapshottable, baseKey string, resource schema.GroupResource, config *storagebackend.Config) *Etcd {
 	storage, d := generic.NewRawStorage(config)
 
-	// TODO : Remove RegisterStorageCleanup below when PR
+	// TODO : Remove RegisterStorageCleanup below when PR id:1396 gh:1402
 	// https://github.com/kubernetes/kubernetes/pull/50690
 	// merges as that shuts down storage properly
 	registry.RegisterStorageCleanup(d)

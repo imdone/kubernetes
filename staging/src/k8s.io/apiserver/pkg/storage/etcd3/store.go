@@ -408,7 +408,7 @@ func (s *store) GetToList(ctx context.Context, key string, resourceVersion strin
 }
 
 // continueToken is a simple structured object for encoding the state of a continue token.
-// TODO: if we change the version of the encoded from, we can't start encoding the new version
+// TODO: if we change the version of the encoded from, we can't start encoding the new version id:3726 gh:3741
 // until all other servers are upgraded (i.e. we need to support rolling schema)
 // This is a public API struct and cannot change.
 type continueToken struct {
@@ -418,7 +418,7 @@ type continueToken struct {
 }
 
 // parseFrom transforms an encoded predicate from into a versioned struct.
-// TODO: return a typed error that instructs clients that they must relist
+// TODO: return a typed error that instructs clients that they must relist id:3902 gh:3922
 func decodeContinue(continueValue, keyPrefix string) (fromKey string, rv int64, err error) {
 	data, err := base64.RawURLEncoding.DecodeString(continueValue)
 	if err != nil {
@@ -746,7 +746,7 @@ func (s *store) ttlOpts(ctx context.Context, ttl int64) ([]clientv3.OpOption, er
 	if ttl == 0 {
 		return nil, nil
 	}
-	// TODO: one lease per ttl key is expensive. Based on current use case, we can have a long window to
+	// TODO: one lease per ttl key is expensive. Based on current use case, we can have a long window to id:4024 gh:4044
 	// put keys within into same lease. We shall benchmark this and optimize the performance.
 	lcr, err := s.client.Lease.Grant(ctx, ttl)
 	if err != nil {

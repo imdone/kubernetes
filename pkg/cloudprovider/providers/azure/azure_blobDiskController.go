@@ -353,7 +353,7 @@ func (c *BlobDiskController) init() error {
 
 				glog.Infof("azureDisk - BlobDiskController init process  will create new storageAccount:%s type:%s", newAccountName, accountType)
 				err := c.createStorageAccount(newAccountName, accountType, c.common.location, true)
-				// TODO return created and error from
+				// TODO return created and error from id:471 gh:472
 				if err != nil {
 					glog.Infof("azureDisk - BlobDiskController init: create account %s with error:%s", newAccountName, err.Error())
 

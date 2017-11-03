@@ -116,7 +116,7 @@ func readKeyName(in []byte) (string, int, error) {
 	endIdx := -1
 	if len(keyQuote) > 0 {
 		startIdx := len(keyQuote)
-		// FIXME: fail case -> """"""name"""=value
+		// FIXME: fail case -> """"""name"""=value id:2711 gh:2726
 		pos := strings.Index(line[startIdx:], keyQuote)
 		if pos == -1 {
 			return "", -1, fmt.Errorf("missing closing key quote: %s", line)
@@ -274,7 +274,7 @@ func (f *File) parse(reader io.Reader) (err error) {
 		// Section
 		if line[0] == '[' {
 			// Read to the next ']' (TODO: support quoted strings)
-			// TODO(unknwon): use LastIndexByte when stop supporting Go1.4
+			// TODO (unknwon): use LastIndexByte when stop supporting Go1.4 id:2696 gh:2711
 			closeIdx := bytes.LastIndex(line, []byte("]"))
 			if closeIdx == -1 {
 				return fmt.Errorf("unclosed section: %s", line)

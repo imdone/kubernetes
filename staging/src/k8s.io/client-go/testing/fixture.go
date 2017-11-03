@@ -91,7 +91,7 @@ func ObjectReaction(tracker ObjectTracker) ReactionFunc {
 			if action.GetSubresource() == "" {
 				err = tracker.Create(gvr, action.GetObject(), ns)
 			} else {
-				// TODO: Currently we're handling subresource creation as an update
+				// TODO: Currently we're handling subresource creation as an update id:4047 gh:4067
 				// on the enclosing resource. This works for some subresources but
 				// might not be generic enough.
 				err = tracker.Update(gvr, action.GetObject(), ns)
@@ -236,7 +236,7 @@ func (t *tracker) Add(obj runtime.Object) error {
 		return fmt.Errorf("no registered kinds for %v", obj)
 	}
 	for _, gvk := range gvks {
-		// NOTE: UnsafeGuessKindToResource is a heuristic and default match. The
+		// NOTE: UnsafeGuessKindToResource is a heuristic and default match. The id:3584 gh:3599
 		// actual registration in apiserver can specify arbitrary route for a
 		// gvk. If a test uses such objects, it cannot preset the tracker with
 		// objects via Add(). Instead, it should trigger the Create() function

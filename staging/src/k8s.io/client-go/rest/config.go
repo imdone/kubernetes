@@ -68,7 +68,7 @@ type Config struct {
 
 	// Server requires Bearer authentication. This client will not attempt to use
 	// refresh tokens for an OAuth2 flow.
-	// TODO: demonstrate an OAuth2 compatible client.
+	// TODO: demonstrate an OAuth2 compatible client. id:3913 gh:3933
 	BearerToken string
 
 	// CacheDir is the directory where we'll store HTTP cached responses.
@@ -333,7 +333,7 @@ func InClusterConfig() (*Config, error) {
 	}
 
 	return &Config{
-		// TODO: switch to using cluster DNS.
+		// TODO: switch to using cluster DNS. id:4044 gh:4064
 		Host:            "https://" + net.JoinHostPort(host, port),
 		BearerToken:     string(token),
 		TLSClientConfig: tlsClientConfig,

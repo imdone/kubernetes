@@ -180,9 +180,9 @@ func (c *Controller) RunKubernetesService(ch chan struct{}) {
 // UpdateKubernetesService attempts to update the default Kube service.
 func (c *Controller) UpdateKubernetesService(reconcile bool) error {
 	// Update service & endpoint records.
-	// TODO: when it becomes possible to change this stuff,
+	// TODO: when it becomes possible to change this stuff, id:1228 gh:1234
 	// stop polling and start watching.
-	// TODO: add endpoints of all replicas, not just the elected master.
+	// TODO: add endpoints of all replicas, not just the elected master. id:1144 gh:1150
 	if err := c.CreateNamespaceIfNeeded(metav1.NamespaceDefault); err != nil {
 		return err
 	}

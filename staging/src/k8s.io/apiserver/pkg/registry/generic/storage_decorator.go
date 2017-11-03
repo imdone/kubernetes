@@ -50,7 +50,7 @@ func UndecoratedStorage(
 
 // NewRawStorage creates the low level kv storage. This is a work-around for current
 // two layer of same storage interface.
-// TODO: Once cacher is enabled on all registries (event registry is special), we will remove this method.
+// TODO: Once cacher is enabled on all registries (event registry is special), we will remove this method. id:3997 gh:4017
 func NewRawStorage(config *storagebackend.Config) (storage.Interface, factory.DestroyFunc) {
 	s, d, err := factory.Create(*config)
 	if err != nil {

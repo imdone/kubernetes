@@ -30,8 +30,8 @@ import (
 	kubeletapis "k8s.io/kubernetes/pkg/kubelet/apis"
 )
 
-// TODO TODO write a test for GetDiskByNameUnknownZone and make sure casting logic works
-// TODO TODO verify that RegionDisks.Get does not return non-replica disks
+// TODO TODO write a test for GetDiskByNameUnknownZone and make sure casting logic works id:463 gh:464
+// TODO TODO verify that RegionDisks.Get does not return non-replica disks id:380 gh:381
 
 func TestCreateDisk_Basic(t *testing.T) {
 	/* Arrange */

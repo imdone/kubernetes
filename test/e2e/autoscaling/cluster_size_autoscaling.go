@@ -456,7 +456,7 @@ var _ = SIGDescribe("Cluster size autoscaling [Slow]", func() {
 				}
 			}
 
-			// TODO: possibly remove broken node from newNodesSet to prevent removeLabel from crashing.
+			// TODO: possibly remove broken node from newNodesSet to prevent removeLabel from crashing. id:2096 gh:2111
 			// However at this moment we DO WANT it to crash so that we don't check all test runs for the
 			// rare behavior, but only the broken ones.
 		}
@@ -499,7 +499,7 @@ var _ = SIGDescribe("Cluster size autoscaling [Slow]", func() {
 		// Apparently GKE master is restarted couple minutes after the node pool is added
 		// reseting all the timers in scale down code. Adding 5 extra minutes to workaround
 		// this issue.
-		// TODO: Remove the extra time when GKE restart is fixed.
+		// TODO: Remove the extra time when GKE restart is fixed. id:2298 gh:2314
 		framework.ExpectNoError(framework.WaitForReadyNodes(c, nodeCount+2, scaleUpTimeout+5*time.Minute))
 	})
 
@@ -548,7 +548,7 @@ var _ = SIGDescribe("Cluster size autoscaling [Slow]", func() {
 		// Apparently GKE master is restarted couple minutes after the node pool is added
 		// reseting all the timers in scale down code. Adding 10 extra minutes to workaround
 		// this issue.
-		// TODO: Remove the extra time when GKE restart is fixed.
+		// TODO: Remove the extra time when GKE restart is fixed. id:2137 gh:2152
 		framework.ExpectNoError(WaitForClusterSizeFunc(f.ClientSet,
 			func(size int) bool { return size < increasedSize+3 }, scaleDownTimeout+10*time.Minute))
 	})
@@ -1705,7 +1705,7 @@ func waitForScaleUpStatus(c clientset.Interface, cond func(s *scaleUpStatus) boo
 }
 
 // This is a temporary fix to allow CA to migrate some kube-system pods
-// TODO: Remove this when the PDB is added for some of those components
+// TODO: Remove this when the PDB is added for some of those components id:2218 gh:2233
 func addKubeSystemPdbs(f *framework.Framework) (func(), error) {
 	By("Create PodDisruptionBudgets for kube-system components, so they can be migrated if required")
 

@@ -44,7 +44,7 @@ var (
 
 // Adds the list of known types to the given scheme.
 func addKnownTypes(scheme *runtime.Scheme) error {
-	// TODO this gets cleaned up when the types are fixed
+	// TODO this gets cleaned up when the types are fixed id:405 gh:406
 	scheme.AddKnownTypes(SchemeGroupVersion,
 		&PodDisruptionBudget{},
 		&PodDisruptionBudgetList{},

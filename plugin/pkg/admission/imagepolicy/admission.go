@@ -219,7 +219,7 @@ func (a *Plugin) admitPod(pod *api.Pod, attributes admission.Attributes, review 
 // For additional HTTP configuration, refer to the kubeconfig documentation
 // http://kubernetes.io/v1.1/docs/user-guide/kubeconfig-file.html.
 func NewImagePolicyWebhook(configFile io.Reader) (*Plugin, error) {
-	// TODO: move this to a versioned configuration file format
+	// TODO: move this to a versioned configuration file format id:1505 gh:1511
 	var config AdmissionConfig
 	d := yaml.NewYAMLOrJSONDecoder(configFile, 4096)
 	err := d.Decode(&config)

@@ -309,7 +309,7 @@ func (t *Transport) removePeer(id types.ID) {
 func (t *Transport) UpdatePeer(id types.ID, us []string) {
 	t.mu.Lock()
 	defer t.mu.Unlock()
-	// TODO: return error or just panic?
+	// TODO: return error or just panic? id:2820 gh:2835
 	if _, ok := t.peers[id]; !ok {
 		return
 	}

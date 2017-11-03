@@ -45,7 +45,7 @@ func init() {
 	utilfeature.DefaultFeatureGate.Set(string(features.ExternalTrafficLocalOnly) + "=true")
 }
 
-// TODO(wojtek-t): Cleanup this file.
+// TODO (wojtek-t): Cleanup this file. id:1329 gh:1335
 // It is now testing mostly the same things as other resources but
 // in a completely different way. We should unify it.
 

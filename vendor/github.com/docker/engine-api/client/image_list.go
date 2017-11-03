@@ -22,7 +22,7 @@ func (cli *Client) ImageList(ctx context.Context, options types.ImageListOptions
 		query.Set("filters", filterJSON)
 	}
 	if options.MatchName != "" {
-		// FIXME rename this parameter, to not be confused with the filters flag
+		// FIXME rename this parameter, to not be confused with the filters flag id:2705 gh:2720
 		query.Set("filter", options.MatchName)
 	}
 	if options.All {

@@ -74,7 +74,7 @@ func processLines(lines []string, logOptions *v1.PodLogOptions, stdout, stderr i
 // stream the log. Set |follow| to false and specify the number of lines (e.g.
 // "100" or "all") to tail the log.
 //
-// TODO(yifan): This doesn't work with lkvm stage1 yet.
+// TODO (yifan): This doesn't work with lkvm stage1 yet. id:1030 gh:1036
 func (r *Runtime) GetContainerLogs(pod *v1.Pod, containerID kubecontainer.ContainerID, logOptions *v1.PodLogOptions, stdout, stderr io.Writer) error {
 	id, err := parseContainerID(containerID)
 	if err != nil {

@@ -284,7 +284,7 @@ func (e *bincEncDriver) EncodeStringBytes(c charEncoding, v []byte) {
 }
 
 func (e *bincEncDriver) encBytesLen(c charEncoding, length uint64) {
-	//TODO: support bincUnicodeOther (for now, just use string or bytearray)
+	//TODO: support bincUnicodeOther (for now, just use string or bytearray) id:3030 gh:3045
 	if c == c_RAW {
 		e.encLen(bincVdByteArray<<4, length)
 	} else {

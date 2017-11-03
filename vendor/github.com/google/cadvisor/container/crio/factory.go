@@ -38,7 +38,7 @@ var crioCgroupRegexp = regexp.MustCompile(`([a-z0-9]{64})`)
 type storageDriver string
 
 const (
-	// TODO add full set of supported drivers in future..
+	// TODO add full set of supported drivers in future.. id:3051 gh:3066
 	overlayStorageDriver  storageDriver = "overlay"
 	overlay2StorageDriver storageDriver = "overlay2"
 )
@@ -69,7 +69,7 @@ func (self *crioFactory) NewContainerHandler(name string, inHostNamespace bool) 
 	if err != nil {
 		return
 	}
-	// TODO are there any env vars we need to white list, if so, do it here...
+	// TODO are there any env vars we need to white list, if so, do it here... id:2651 gh:2666
 	metadataEnvs := []string{}
 	handler, err = newCrioContainerHandler(
 		client,
@@ -110,7 +110,7 @@ func isContainerName(name string) bool {
 // crio handles all containers under /crio
 func (self *crioFactory) CanHandleAndAccept(name string) (bool, bool, error) {
 	if strings.HasPrefix(path.Base(name), "crio-conmon") {
-		// TODO(runcom): should we include crio-conmon cgroups?
+		// TODO (runcom): should we include crio-conmon cgroups? id:2954 gh:2969
 		return false, false, nil
 	}
 	if !strings.HasPrefix(path.Base(name), CrioNamespace) {
@@ -128,7 +128,7 @@ func (self *crioFactory) DebugInfo() map[string][]string {
 }
 
 var (
-	// TODO(runcom): handle versioning in CRI-O
+	// TODO (runcom): handle versioning in CRI-O id:2829 gh:2844
 	version_regexp_string    = `(\d+)\.(\d+)\.(\d+)`
 	version_re               = regexp.MustCompile(version_regexp_string)
 	apiversion_regexp_string = `(\d+)\.(\d+)`
@@ -147,7 +147,7 @@ func Register(factory info.MachineInfoFactory, fsInfo fs.FsInfo, ignoreMetrics c
 		return err
 	}
 
-	// TODO determine crio version so we can work differently w/ future versions if needed
+	// TODO determine crio version so we can work differently w/ future versions if needed id:2813 gh:2828
 
 	cgroupSubsystems, err := libcontainer.GetCgroupSubsystems()
 	if err != nil {

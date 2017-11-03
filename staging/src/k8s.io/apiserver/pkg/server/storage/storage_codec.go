@@ -79,7 +79,7 @@ func NewStorageCodec(opts StorageCodecConfig) (runtime.Codec, error) {
 		// base64-wrapped universal deserializer as a last resort.
 		// this allows reading base64-encoded protobuf, which should only exist if etcd2+protobuf was used at some point.
 		// data written that way could exist in etcd2, or could have been migrated to etcd3.
-		// TODO: flag this type of data if we encounter it, require migration (read to decode, write to persist using a supported encoder), and remove in 1.8
+		// TODO: flag this type of data if we encounter it, require migration (read to decode, write to persist using a supported encoder), and remove in 1.8 id:3930 gh:3950
 		runtime.NewBase64Serializer(nil, opts.StorageSerializer.UniversalDeserializer()),
 	}
 	if opts.DecoderDecoratorFn != nil {

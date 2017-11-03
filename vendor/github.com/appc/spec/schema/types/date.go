@@ -22,7 +22,7 @@ import (
 
 // Date wraps time.Time to marshal/unmarshal to/from JSON strings in strict
 // accordance with RFC3339
-// TODO(jonboulle): golang's implementation seems slightly buggy here;
+// TODO (jonboulle): golang's implementation seems slightly buggy here; id:2448 gh:2463
 // according to http://tools.ietf.org/html/rfc3339#section-5.6 , applications
 // may choose to separate the date and time with a space instead of a T
 // character (for example, `date --rfc-3339` on GNU coreutils) - but this is

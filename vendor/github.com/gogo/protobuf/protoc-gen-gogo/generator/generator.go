@@ -1460,7 +1460,7 @@ func (g *Generator) generateImports() {
 		g.PrintImport(s1, s)
 	}
 	g.P()
-	// TODO: may need to worry about uniqueness across plugins
+	// TODO: may need to worry about uniqueness across plugins id:2802 gh:2817
 	for _, p := range plugins {
 		p.GenerateImports(g.file)
 		g.P()
@@ -1603,7 +1603,7 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 
 	var indexes []string
 	for m := enum.parent; m != nil; m = m.parent {
-		// XXX: skip groups?
+		// XXX: skip groups? id:3041 gh:3056
 		indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
 	}
 	indexes = append(indexes, strconv.Itoa(enum.index))
@@ -1706,7 +1706,7 @@ func (g *Generator) goTag(message *Descriptor, field *descriptor.FieldDescriptor
 		}
 	}
 	if json := field.GetJsonName(); json != "" && json != name {
-		// TODO: escaping might be needed, in which case
+		// TODO: escaping might be needed, in which case id:2641 gh:2656
 		// perhaps this should be in its own "json" tag.
 		name += ",json=" + json
 	}
@@ -1827,7 +1827,7 @@ func (g *Generator) TypeNameWithPackage(obj Object) string {
 
 // GoType returns a string representing the type name, and the wire type
 func (g *Generator) GoType(message *Descriptor, field *descriptor.FieldDescriptorProto) (typ string, wire string) {
-	// TODO: Options.
+	// TODO: Options. id:2944 gh:2959
 	switch *field.Type {
 	case descriptor.FieldDescriptorProto_TYPE_DOUBLE:
 		typ, wire = "float64", "fixed64"
@@ -2087,7 +2087,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 	for _, field := range message.Field {
 		// Allocate the getter and the field at the same time so name
 		// collisions create field/method consistent names.
-		// TODO: This allocation occurs based on the order of the fields
+		// TODO: This allocation occurs based on the order of the fields id:2720 gh:2735
 		// in the proto file, meaning that a change in the field
 		// ordering can change generated Method/Field names.
 		base := CamelCase(*field.Name)
@@ -2241,7 +2241,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		indexes = append([]string{strconv.Itoa(m.index)}, indexes...)
 	}
 	g.P("func (*", ccTypeName, ") Descriptor() ([]byte, []int) { return ", g.file.VarName(), ", []int{", strings.Join(indexes, ", "), "} }")
-	// TODO: Revisit the decision to use a XXX_WellKnownType method
+	// TODO: Revisit the decision to use a XXX_WellKnownType method id:2803 gh:2818
 	// if we change proto.MessageName to work with multiple equivalents.
 	if message.file.GetPackage() == "google.protobuf" && wellKnownTypes[message.GetName()] {
 		g.P("func (*", ccTypeName, `) XXX_WellKnownType() string { return "`, message.GetName(), `" }`)
@@ -2394,7 +2394,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		// Generate unexported named types for the discriminant interfaces.
 		// We shouldn't have to do this, but there was (~19 Aug 2015) a compiler/linker bug
 		// that was triggered by using anonymous interfaces here.
-		// TODO: Revisit this and consider reverting back to anonymous interfaces.
+		// TODO: Revisit this and consider reverting back to anonymous interfaces. id:3042 gh:3057
 		for oi := range message.OneofDecl {
 			dname := oneofDisc[int32(oi)]
 			g.P("type ", dname, " interface {")
@@ -3138,7 +3138,7 @@ func (g *Generator) generateInitFunction() {
 
 func (g *Generator) generateFileDescriptor(file *FileDescriptor) {
 	// Make a copy and trim source_code_info data.
-	// TODO: Trim this more when we know exactly what we need.
+	// TODO: Trim this more when we know exactly what we need. id:2642 gh:2657
 	pb := proto.Clone(file.FileDescriptorProto).(*descriptor.FileDescriptorProto)
 	pb.SourceCodeInfo = nil
 

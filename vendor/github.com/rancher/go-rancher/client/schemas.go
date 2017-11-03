@@ -70,10 +70,10 @@ func typeToFields(t reflect.Type) map[string]Field {
 		case fieldString == "string":
 			schemaField.Type = "string"
 		case fieldString == "map":
-			// HACK
+			// HACK id:3024 gh:3039
 			schemaField.Type = "map[string]"
 		case fieldString == "slice":
-			// HACK
+			// HACK id:3204 gh:3219
 			schemaField.Type = "array[string]"
 		}
 

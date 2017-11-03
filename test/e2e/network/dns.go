@@ -57,7 +57,7 @@ func createDNSPod(namespace, wheezyProbeCmd, jessieProbeCmd string) *v1.Pod {
 				},
 			},
 			Containers: []v1.Container{
-				// TODO: Consider scraping logs instead of running a webserver.
+				// TODO: Consider scraping logs instead of running a webserver. id:2307 gh:2322
 				{
 					Name:  "webserver",
 					Image: imageutils.GetE2EImage(imageutils.TestWebserver),
@@ -227,7 +227,7 @@ func validateDNSResults(f *framework.Framework, pod *v1.Pod, fileNames []string)
 	By("looking for the results for each expected name from probers")
 	assertFilesExist(fileNames, "results", pod, f.ClientSet)
 
-	// TODO: probe from the host, too.
+	// TODO: probe from the host, too. id:2340 gh:2355
 
 	framework.Logf("DNS probes using %s succeeded\n", pod.Name)
 }
@@ -271,7 +271,7 @@ var _ = SIGDescribe("DNS", func() {
 
 	framework.ConformanceIt("should provide DNS for the cluster ", func() {
 		// All the names we need to be able to resolve.
-		// TODO: Spin up a separate test service and test that dns works for that service.
+		// TODO: Spin up a separate test service and test that dns works for that service. id:2473 gh:2490
 		namesToResolve := []string{
 			"kubernetes.default",
 			"kubernetes.default.svc",
@@ -320,7 +320,7 @@ var _ = SIGDescribe("DNS", func() {
 		}()
 
 		// All the names we need to be able to resolve.
-		// TODO: Create more endpoints and ensure that multiple A records are returned
+		// TODO: Create more endpoints and ensure that multiple A records are returned id:2259 gh:2274
 		// for headless service.
 		namesToResolve := []string{
 			fmt.Sprintf("%s", headlessService.Name),

@@ -17,7 +17,7 @@ limitations under the License.
 package iptables
 
 //
-// NOTE: this needs to be tested in e2e since it uses iptables for everything.
+// NOTE: this needs to be tested in e2e since it uses iptables for everything. id:1288 gh:1294
 //
 
 import (
@@ -158,7 +158,7 @@ type serviceInfo struct {
 
 // internal struct for endpoints information
 type endpointsInfo struct {
-	endpoint string // TODO: should be an endpointString type
+	endpoint string // TODO: should be an endpointString type id:1189 gh:1195
 	isLocal  bool
 	// The following fields we lazily compute and store here for performance
 	// reasons. If the protocol is the same as you expect it to be, then the
@@ -689,7 +689,7 @@ func updateServiceMap(
 		changes.items = make(map[types.NamespacedName]*serviceChange)
 	}()
 
-	// TODO: If this will appear to be computationally expensive, consider
+	// TODO: If this will appear to be computationally expensive, consider id:1155 gh:1161
 	// computing this incrementally similarly to serviceMap.
 	result.hcServices = make(map[types.NamespacedName]uint16)
 	for svcPortName, info := range serviceMap {
@@ -756,7 +756,7 @@ func updateEndpointsMap(
 		return
 	}
 
-	// TODO: If this will appear to be computationally expensive, consider
+	// TODO: If this will appear to be computationally expensive, consider id:1212 gh:1218
 	// computing this incrementally similarly to endpointsMap.
 	result.hcEndpoints = make(map[types.NamespacedName]int)
 	localIPs := getLocalIPs(endpointsMap)
@@ -816,7 +816,7 @@ func getLocalIPs(endpointsMap proxyEndpointsMap) map[types.NamespacedName]sets.S
 // Translates single Endpoints object to proxyEndpointsMap.
 // This function is used for incremental updated of endpointsMap.
 //
-// NOTE: endpoints object should NOT be modified.
+// NOTE: endpoints object should NOT be modified. id:1236 gh:1242
 func endpointsToEndpointsMap(endpoints *api.Endpoints, hostname string) proxyEndpointsMap {
 	if endpoints == nil {
 		return nil
@@ -863,7 +863,7 @@ func endpointsToEndpointsMap(endpoints *api.Endpoints, hostname string) proxyEnd
 
 // Translates single Service object to proxyServiceMap.
 //
-// NOTE: service object should NOT be modified.
+// NOTE: service object should NOT be modified. id:1289 gh:1295
 func serviceToServiceMap(service *api.Service) proxyServiceMap {
 	if service == nil {
 		return nil
@@ -1339,7 +1339,7 @@ func (proxier *Proxier) syncProxyRules() {
 					continue
 				}
 				if lp.Protocol == "udp" {
-					// TODO: We might have multiple services using the same port, and this will clear conntrack for all of them.
+					// TODO: We might have multiple services using the same port, and this will clear conntrack for all of them. id:1190 gh:1196
 					// This is very low impact. The NodePort range is intentionally obscure, and unlikely to actually collide with real Services.
 					// This only affects UDP connections, which are not common.
 					// See issue: https://github.com/kubernetes/kubernetes/issues/49881
@@ -1364,7 +1364,7 @@ func (proxier *Proxier) syncProxyRules() {
 				// Jump to the service chain.
 				writeLine(proxier.natRules, append(args, "-j", string(svcChain))...)
 			} else {
-				// TODO: Make all nodePorts jump to the firewall chain.
+				// TODO: Make all nodePorts jump to the firewall chain. id:1156 gh:1162
 				// Currently we only create it for loadbalancers (#33586).
 				writeLine(proxier.natRules, append(args, "-j", string(svcXlbChain))...)
 			}
@@ -1480,7 +1480,7 @@ func (proxier *Proxier) syncProxyRules() {
 		}
 
 		// Now write ingress loadbalancing & DNAT rules only for services that request OnlyLocal traffic.
-		// TODO - This logic may be combinable with the block above that creates the svc balancer chain
+		// TODO - This logic may be combinable with the block above that creates the svc balancer chain id:1213 gh:1219
 		localEndpoints := make([]*endpointsInfo, 0)
 		localEndpointChains := make([]utiliptables.Chain, 0)
 		for i := range endpointChains {
@@ -1567,7 +1567,7 @@ func (proxier *Proxier) syncProxyRules() {
 	writeLine(proxier.natRules, "COMMIT")
 
 	// Sync rules.
-	// NOTE: NoFlushTables is used so we don't flush non-kubernetes chains in the table
+	// NOTE: NoFlushTables is used so we don't flush non-kubernetes chains in the table id:1237 gh:1243
 	proxier.iptablesData.Reset()
 	proxier.iptablesData.Write(proxier.filterChains.Bytes())
 	proxier.iptablesData.Write(proxier.filterRules.Bytes())
@@ -1608,7 +1608,7 @@ func (proxier *Proxier) syncProxyRules() {
 	}
 
 	// Finish housekeeping.
-	// TODO: these could be made more consistent.
+	// TODO: these could be made more consistent. id:1290 gh:1296
 	for _, svcIP := range staleServices.List() {
 		if err := utilproxy.ClearUDPConntrackForIP(proxier.exec, svcIP); err != nil {
 			glog.Errorf("Failed to delete stale service IP %s connections, error: %v", svcIP, err)
@@ -1638,7 +1638,7 @@ func openLocalPort(lp *utilproxy.LocalPort) (utilproxy.Closeable, error) {
 	// is using a port and we give that same port out to a Service.  That would
 	// be bad because iptables would silently claim the traffic but the process
 	// would never know.
-	// NOTE: We should not need to have a real listen()ing socket - bind()
+	// NOTE: We should not need to have a real listen()ing socket - bind() id:1251 gh:1257
 	// should be enough, but I can't figure out a way to e2e test without
 	// it.  Tools like 'ss' and 'netstat' do not show sockets that are
 	// bind()ed but not listen()ed, and at least the default debian netcat

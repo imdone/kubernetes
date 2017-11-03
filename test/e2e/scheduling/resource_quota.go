@@ -269,7 +269,7 @@ var _ = SIGDescribe("ResourceQuota", func() {
 		By("Ensuring ResourceQuota status doesn't change")
 		usedResources = v1.ResourceList{}
 		usedResources[v1.ResourceQuotas] = resource.MustParse("1")
-		// TODO: This is a bug. We need 51247 to fix it.
+		// TODO: This is a bug. We need 51247 to fix it. id:2544 gh:2559
 		usedResources[v1.ResourcePods] = resource.MustParse("1")
 		err = waitForResourceQuota(f.ClientSet, f.Namespace.Name, quotaName, usedResources)
 		Expect(err).NotTo(HaveOccurred())

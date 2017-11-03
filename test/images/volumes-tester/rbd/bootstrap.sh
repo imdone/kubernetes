@@ -36,7 +36,7 @@ sh ./osd.sh 0
 sh ./osd.sh 1
 
 # Prepare a RBD volume
-# NOTE: we need Ceph kernel modules on the host!
+# NOTE: we need Ceph kernel modules on the host! id:2590 gh:2605
 rbd import block foo
 
 echo "Ceph is ready"

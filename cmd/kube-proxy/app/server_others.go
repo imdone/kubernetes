@@ -131,7 +131,7 @@ func NewProxyServer(config *componentconfig.KubeProxyConfiguration, cleanupAndEx
 			return nil, fmt.Errorf("unable to read IPTables MasqueradeBit from config")
 		}
 
-		// TODO this has side effects that should only happen when Run() is invoked.
+		// TODO this has side effects that should only happen when Run() is invoked. id:159 gh:160
 		proxierIPTables, err := iptables.NewProxier(
 			iptInterface,
 			utilsysctl.New(),
@@ -155,7 +155,7 @@ func NewProxyServer(config *componentconfig.KubeProxyConfiguration, cleanupAndEx
 		endpointsEventHandler = proxierIPTables
 		// No turning back. Remove artifacts that might still exist from the userspace Proxier.
 		glog.V(0).Info("Tearing down inactive rules.")
-		// TODO this has side effects that should only happen when Run() is invoked.
+		// TODO this has side effects that should only happen when Run() is invoked. id:129 gh:130
 		userspace.CleanupLeftovers(iptInterface)
 		// IPVS Proxier will generate some iptables rules,
 		// need to clean them before switching to other proxy mode.
@@ -186,7 +186,7 @@ func NewProxyServer(config *componentconfig.KubeProxyConfiguration, cleanupAndEx
 		serviceEventHandler = proxierIPVS
 		endpointsEventHandler = proxierIPVS
 		glog.V(0).Info("Tearing down inactive rules.")
-		// TODO this has side effects that should only happen when Run() is invoked.
+		// TODO this has side effects that should only happen when Run() is invoked. id:178 gh:179
 		userspace.CleanupLeftovers(iptInterface)
 		iptables.CleanupLeftovers(iptInterface)
 	} else {
@@ -197,7 +197,7 @@ func NewProxyServer(config *componentconfig.KubeProxyConfiguration, cleanupAndEx
 		// set EndpointsConfigHandler to our loadBalancer
 		endpointsEventHandler = loadBalancer
 
-		// TODO this has side effects that should only happen when Run() is invoked.
+		// TODO this has side effects that should only happen when Run() is invoked. id:141 gh:142
 		proxierUserspace, err := userspace.NewProxier(
 			loadBalancer,
 			net.ParseIP(config.BindAddress),
@@ -216,7 +216,7 @@ func NewProxyServer(config *componentconfig.KubeProxyConfiguration, cleanupAndEx
 
 		// Remove artifacts from the iptables and ipvs Proxier, if not on Windows.
 		glog.V(0).Info("Tearing down inactive rules.")
-		// TODO this has side effects that should only happen when Run() is invoked.
+		// TODO this has side effects that should only happen when Run() is invoked. id:221 gh:222
 		iptables.CleanupLeftovers(iptInterface)
 		// IPVS Proxier will generate some iptables rules,
 		// need to clean them before switching to other proxy mode.
@@ -282,7 +282,7 @@ func tryIPVSProxy(iptver iptables.IPTablesVersioner, kcompat iptables.KernelComp
 		return proxyModeIPVS
 	}
 
-	// TODO: Check ipvs version
+	// TODO: Check ipvs version id:160 gh:161
 
 	// Try to fallback to iptables before falling back to userspace
 	glog.V(1).Infof("Can't use ipvs proxier, trying iptables proxier")

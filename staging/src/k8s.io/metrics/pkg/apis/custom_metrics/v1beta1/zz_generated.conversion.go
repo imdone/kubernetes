@@ -43,7 +43,7 @@ func RegisterConversions(scheme *runtime.Scheme) error {
 }
 
 func autoConvert_v1beta1_MetricValue_To_custom_metrics_MetricValue(in *MetricValue, out *custom_metrics.MetricValue, s conversion.Scope) error {
-	// TODO: Inefficient conversion - can we improve it?
+	// TODO: Inefficient conversion - can we improve it? id:3693 gh:3708
 	if err := s.Convert(&in.DescribedObject, &out.DescribedObject, 0); err != nil {
 		return err
 	}
@@ -60,7 +60,7 @@ func Convert_v1beta1_MetricValue_To_custom_metrics_MetricValue(in *MetricValue, 
 }
 
 func autoConvert_custom_metrics_MetricValue_To_v1beta1_MetricValue(in *custom_metrics.MetricValue, out *MetricValue, s conversion.Scope) error {
-	// TODO: Inefficient conversion - can we improve it?
+	// TODO: Inefficient conversion - can we improve it? id:4038 gh:4058
 	if err := s.Convert(&in.DescribedObject, &out.DescribedObject, 0); err != nil {
 		return err
 	}

@@ -145,7 +145,7 @@ type ThirdPartyResourceList struct {
 }
 
 // An APIVersion represents a single concrete version of an object model.
-// TODO: we should consider merge this struct with GroupVersion in metav1.go
+// TODO: we should consider merge this struct with GroupVersion in metav1.go id:366 gh:367
 type APIVersion struct {
 	// Name of this version (e.g. 'v1').
 	Name string
@@ -270,7 +270,7 @@ type DeploymentStrategy struct {
 	// Rolling update config params. Present only if DeploymentStrategyType =
 	// RollingUpdate.
 	//---
-	// TODO: Update this to follow our convention for oneOf, whatever we decide it
+	// TODO: Update this to follow our convention for oneOf, whatever we decide it id:351 gh:352
 	// to be.
 	// +optional
 	RollingUpdate *RollingUpdateDeployment
@@ -404,7 +404,7 @@ type DaemonSetUpdateStrategy struct {
 
 	// Rolling update config params. Present only if type = "RollingUpdate".
 	//---
-	// TODO: Update this to follow our convention for oneOf, whatever we decide it
+	// TODO: Update this to follow our convention for oneOf, whatever we decide it id:328 gh:329
 	// to be. Same as Deployment `strategy.rollingUpdate`.
 	// See https://github.com/kubernetes/kubernetes/issues/35345
 	// +optional
@@ -645,7 +645,7 @@ type IngressSpec struct {
 	// no rule matches, all traffic is sent to the default backend.
 	// +optional
 	Rules []IngressRule
-	// TODO: Add the ability to specify load-balancer IP through claims
+	// TODO: Add the ability to specify load-balancer IP through claims id:302 gh:304
 }
 
 // IngressTLS describes the transport layer security associated with an Ingress.
@@ -663,7 +663,7 @@ type IngressTLS struct {
 	// Host header is used for routing.
 	// +optional
 	SecretName string
-	// TODO: Consider specifying different modes of termination, protocols etc.
+	// TODO: Consider specifying different modes of termination, protocols etc. id:419 gh:420
 }
 
 // IngressStatus describe the current state of the Ingress.
@@ -705,7 +705,7 @@ type IngressRule struct {
 // mixing different types of rules in a single Ingress is disallowed, so exactly
 // one of the following must be set.
 type IngressRuleValue struct {
-	//TODO:
+	//TODO: id:367 gh:368
 	// 1. Consider renaming this resource and the associated rules so they
 	// aren't tied to Ingress. They can be used to route intra-cluster traffic.
 	// 2. Consider adding fields for ingress-type specific global options
@@ -723,7 +723,7 @@ type IngressRuleValue struct {
 type HTTPIngressRuleValue struct {
 	// A collection of paths that map requests to backends.
 	Paths []HTTPIngressPath
-	// TODO: Consider adding fields for ingress-type specific global
+	// TODO: Consider adding fields for ingress-type specific global id:352 gh:353
 	// options usable by a loadbalancer, like http keep-alive.
 }
 

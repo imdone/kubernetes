@@ -34,7 +34,7 @@ import (
 )
 
 var (
-	// TODO(a-robinson): Add unit tests for the handling of these metrics once
+	// TODO (a-robinson): Add unit tests for the handling of these metrics once id:3425 gh:3442
 	// the upstream library supports it.
 	requestCounter = prometheus.NewCounterVec(
 		prometheus.CounterOpts{
@@ -64,7 +64,7 @@ var (
 			Name: "apiserver_request_latencies_summary",
 			Help: "Response latency summary in microseconds for each verb, resource and subresource.",
 			// Make the sliding window of 5h.
-			// TODO: The value for this should be based on our SLI definition (medium term).
+			// TODO: The value for this should be based on our SLI definition (medium term). id:3885 gh:3903
 			MaxAge: 5 * time.Hour,
 		},
 		[]string{"verb", "resource", "subresource", "scope"},

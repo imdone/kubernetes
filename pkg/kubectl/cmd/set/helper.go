@@ -74,7 +74,7 @@ func handlePodUpdateError(out io.Writer, err error, resource string) {
 
 // selectString returns true if the provided string matches spec, where spec is a string with
 // a non-greedy '*' wildcard operator.
-// TODO: turn into a regex and handle greedy matches and backtracking.
+// TODO: turn into a regex and handle greedy matches and backtracking. id:729 gh:730
 func selectString(s, spec string) bool {
 	if spec == "*" {
 		return true
@@ -139,7 +139,7 @@ func CalculatePatch(patch *Patch, encoder runtime.Encoder, mutateFn patchFn) boo
 		return false
 	}
 
-	// TODO: should be via New
+	// TODO: should be via New id:714 gh:715
 	versioned, err := patch.Info.Mapping.ConvertToVersion(patch.Info.Object, patch.Info.Mapping.GroupVersionKind.GroupVersion())
 	if err != nil {
 		patch.Err = err

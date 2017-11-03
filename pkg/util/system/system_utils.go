@@ -20,7 +20,7 @@ import (
 	"strings"
 )
 
-// TODO: find a better way of figuring out if given node is a registered master.
+// TODO: find a better way of figuring out if given node is a registered master. id:1427 gh:1433
 func IsMasterNode(nodeName string) bool {
 	// We are trying to capture "master(-...)?$" regexp.
 	// However, using regexp.MatchString() results even in more than 35%

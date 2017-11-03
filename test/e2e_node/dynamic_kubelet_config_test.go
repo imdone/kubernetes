@@ -133,7 +133,7 @@ var _ = framework.KubeDescribe("DynamicKubeletConfiguration [Feature:DynamicKube
 
 					// Node.Spec.ConfigSource.ConfigMapRef is partial
 					{desc: "Node.Spec.ConfigSource.ConfigMapRef is partial",
-						// TODO(mtaufen): check the other 7 partials in a unit test
+						// TODO (mtaufen): check the other 7 partials in a unit test id:2357 gh:2372
 						configSource: &apiv1.NodeConfigSource{ConfigMapRef: &apiv1.ObjectReference{
 							UID:  "foo",
 							Name: "bar"}}, // missing Namespace

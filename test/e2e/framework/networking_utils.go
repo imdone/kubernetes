@@ -212,7 +212,7 @@ func (config *NetworkingTestConfig) DialFromContainer(protocol, containerIP, tar
 		if (eps.Equal(expectedEps) || eps.Len() == 0 && expectedEps.Len() == 0) && i+1 >= minTries {
 			return
 		}
-		// TODO: get rid of this delay #36281
+		// TODO: get rid of this delay #36281 id:2454 gh:2469
 		time.Sleep(hitEndpointRetryDelay)
 	}
 
@@ -261,7 +261,7 @@ func (config *NetworkingTestConfig) GetEndpointsFromContainer(protocol, containe
 					eps.Insert(trimmed)
 				}
 			}
-			// TODO: get rid of this delay #36281
+			// TODO: get rid of this delay #36281 id:2104 gh:2119
 			time.Sleep(hitEndpointRetryDelay)
 		}
 	}
@@ -281,14 +281,14 @@ func (config *NetworkingTestConfig) GetEndpointsFromContainer(protocol, containe
 func (config *NetworkingTestConfig) DialFromNode(protocol, targetIP string, targetPort, maxTries, minTries int, expectedEps sets.String) {
 	var cmd string
 	if protocol == "udp" {
-		// TODO: It would be enough to pass 1s+epsilon to timeout, but unfortunately
+		// TODO: It would be enough to pass 1s+epsilon to timeout, but unfortunately id:2372 gh:2387
 		// busybox timeout doesn't support non-integer values.
 		cmd = fmt.Sprintf("echo 'hostName' | timeout -t 2 nc -w 1 -u %s %d", targetIP, targetPort)
 	} else {
 		cmd = fmt.Sprintf("timeout -t 15 curl -q -s --connect-timeout 1 http://%s:%d/hostName", targetIP, targetPort)
 	}
 
-	// TODO: This simply tells us that we can reach the endpoints. Check that
+	// TODO: This simply tells us that we can reach the endpoints. Check that id:2188 gh:2203
 	// the probability of hitting a specific endpoint is roughly the same as
 	// hitting any other.
 	eps := sets.NewString()
@@ -316,7 +316,7 @@ func (config *NetworkingTestConfig) DialFromNode(protocol, targetIP string, targ
 
 		Logf("Waiting for %+v endpoints (expected=%+v, actual=%+v)", expectedEps.Difference(eps).List(), expectedEps.List(), eps.List())
 
-		// TODO: get rid of this delay #36281
+		// TODO: get rid of this delay #36281 id:2226 gh:2241
 		time.Sleep(hitEndpointRetryDelay)
 	}
 

@@ -146,7 +146,7 @@ func (b *Backoff) ComputeDelayForRequest(now time.Time) time.Duration {
 
 	// Delay by the max delay multiplied by the recent error rate
 	// (i.e. we apply a linear delay function)
-	// TODO: This is pretty arbitrary
+	// TODO: This is pretty arbitrary id:434 gh:433
 	delay := time.Nanosecond * time.Duration(float32(b.maxDelay.Nanoseconds())*errorFraction)
 	// Round down to the nearest second for sanity
 	return time.Second * time.Duration(int(delay.Seconds()))

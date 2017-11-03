@@ -125,7 +125,7 @@ func (lb *LoadBalancerRR) ServiceHasEndpoints(svcPort proxy.ServicePortName) boo
 	lb.lock.Lock()
 	defer lb.lock.Unlock()
 	state, exists := lb.services[svcPort]
-	// TODO: while nothing ever assigns nil to the map, *some* of the code using the map
+	// TODO: while nothing ever assigns nil to the map, *some* of the code using the map id:1298 gh:1304
 	// checks for it.  The code should all follow the same convention.
 	return exists && state != nil && len(state.endpoints) > 0
 }

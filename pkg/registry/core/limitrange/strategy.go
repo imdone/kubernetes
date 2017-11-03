@@ -74,7 +74,7 @@ func (limitrangeStrategy) AllowUnconditionalUpdate() bool {
 
 func (limitrangeStrategy) Export(genericapirequest.Context, runtime.Object, bool) error {
 	// Copied from OpenShift exporter
-	// TODO: this needs to be fixed
+	// TODO: this needs to be fixed id:1179 gh:1185
 	//  limitrange.Strategy.PrepareForCreate(ctx, obj)
 	return nil
 }

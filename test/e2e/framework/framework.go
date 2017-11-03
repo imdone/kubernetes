@@ -50,7 +50,7 @@ import (
 
 const (
 	maxKubectlExecRetries = 5
-	// TODO(mikedanese): reset this to 5 minutes once #47135 is resolved.
+	// TODO (mikedanese): reset this to 5 minutes once #47135 is resolved. id:2222 gh:2237
 	// ref https://github.com/kubernetes/kubernetes/issues/47135
 	DefaultNamespaceDeletionTimeout = 10 * time.Minute
 )
@@ -635,7 +635,7 @@ func kubectlExec(namespace string, podName, containerName string, args ...string
 }
 
 // Wrapper function for ginkgo describe.  Adds namespacing.
-// TODO: Support type safe tagging as well https://github.com/kubernetes/kubernetes/pull/22401.
+// TODO: Support type safe tagging as well https://github.com/kubernetes/kubernetes/pull/22401. id:2369 gh:2384
 func KubeDescribe(text string, body func()) bool {
 	return Describe("[k8s.io] "+text, body)
 }

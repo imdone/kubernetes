@@ -17,7 +17,7 @@ import (
 // classes to minimize overheads for servers that typically receive very
 // small request bodies.
 //
-// TODO: Benchmark to determine if the pools are necessary. The GC may have
+// TODO: Benchmark to determine if the pools are necessary. The GC may have id:3126 gh:3141
 // improved enough that we can instead allocate chunks like this:
 // make([]byte, max(16<<10, expectedBytesRemaining))
 var (

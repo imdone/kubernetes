@@ -226,7 +226,7 @@ type VolumeSource struct {
 	// agents or other privileged things that are allowed to see the host
 	// machine. Most containers will NOT need this.
 	// ---
-	// TODO(jonesdl) We need to restrict who can use host directory mounts and who can/can not
+	// TODO (jonesdl) We need to restrict who can use host directory mounts and who can/can not id:335 gh:337
 	// mount host directories as read/write.
 	// +optional
 	HostPath *HostPathVolumeSource
@@ -659,7 +659,7 @@ type HostPathVolumeSource struct {
 // Represents an empty directory for a pod.
 // Empty directory volumes support ownership management and SELinux relabeling.
 type EmptyDirVolumeSource struct {
-	// TODO: Longer term we want to represent the selection of underlying
+	// TODO: Longer term we want to represent the selection of underlying id:283 gh:284
 	// media more like a scheduling problem - user says what traits they
 	// need, we give them a backing store that satisfies that.  For now
 	// this will cover the most common needs.
@@ -708,7 +708,7 @@ type GCEPersistentDiskVolumeSource struct {
 	// Filesystem type to mount.
 	// Must be a filesystem type supported by the host operating system.
 	// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:260 gh:261
 	// +optional
 	FSType string
 	// Optional: Partition on the disk to mount.
@@ -742,7 +742,7 @@ type ISCSIVolumeSource struct {
 	// Filesystem type to mount.
 	// Must be a filesystem type supported by the host operating system.
 	// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:254 gh:255
 	// +optional
 	FSType string
 	// Optional: Defaults to false (read/write). ReadOnly here will force
@@ -783,7 +783,7 @@ type FCVolumeSource struct {
 	// Filesystem type to mount.
 	// Must be a filesystem type supported by the host operating system.
 	// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:207 gh:208
 	// +optional
 	FSType string
 	// Optional: Defaults to false (read/write). ReadOnly here will force
@@ -834,7 +834,7 @@ type AWSElasticBlockStoreVolumeSource struct {
 	// Filesystem type to mount.
 	// Must be a filesystem type supported by the host operating system.
 	// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:336 gh:338
 	// +optional
 	FSType string
 	// Optional: Partition on the disk to mount.
@@ -863,7 +863,7 @@ type GitRepoVolumeSource struct {
 	// the subdirectory with the given name.
 	// +optional
 	Directory string
-	// TODO: Consider credentials here.
+	// TODO: Consider credentials here. id:284 gh:285
 }
 
 // Adapts a Secret into a volume.
@@ -985,7 +985,7 @@ type RBDVolumeSource struct {
 	// Filesystem type to mount.
 	// Must be a filesystem type supported by the host operating system.
 	// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:261 gh:262
 	// +optional
 	FSType string
 	// Optional: RadosPool is the rados pool name,default is rbd
@@ -1016,7 +1016,7 @@ type RBDPersistentVolumeSource struct {
 	// Filesystem type to mount.
 	// Must be a filesystem type supported by the host operating system.
 	// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:311 gh:313
 	// +optional
 	FSType string
 	// Optional: RadosPool is the rados pool name,default is rbd
@@ -1886,7 +1886,7 @@ type Container struct {
 }
 
 // Handler defines a specific action that should be taken
-// TODO: pass structured data to these actions, and document that data here.
+// TODO: pass structured data to these actions, and document that data here. id:208 gh:209
 type Handler struct {
 	// One and only one of the following should be specified.
 	// Exec specifies the action to take.
@@ -1896,7 +1896,7 @@ type Handler struct {
 	// +optional
 	HTTPGet *HTTPGetAction
 	// TCPSocket specifies an action involving a TCP port.
-	// TODO: implement a realistic TCP lifecycle hook
+	// TODO: implement a realistic TCP lifecycle hook id:337 gh:339
 	// +optional
 	TCPSocket *TCPSocketAction
 }
@@ -2567,7 +2567,7 @@ type PodStatus struct {
 	// The list has one entry per container in the manifest. Each entry is
 	// currently the output of `docker inspect`. This output format is *not*
 	// final and should not be relied upon.
-	// TODO: Make real decisions about what our info should look like. Re-enable fuzz test
+	// TODO: Make real decisions about what our info should look like. Re-enable fuzz test id:285 gh:286
 	// when we have done this.
 	// +optional
 	ContainerStatuses []ContainerStatus
@@ -3105,7 +3105,7 @@ type EndpointAddress struct {
 	// The IP of this endpoint.
 	// IPv6 is also accepted but not fully supported on all platforms. Also, certain
 	// kubernetes components, like kube-proxy, are not IPv6 ready.
-	// TODO: This should allow hostname or IP, see #4447.
+	// TODO: This should allow hostname or IP, see #4447. id:262 gh:263
 	IP string
 	// Optional: Hostname of this endpoint
 	// Meant to be used by DNS servers etc.
@@ -3649,7 +3649,7 @@ type PodLogOptions struct {
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // PodAttachOptions is the query options to a Pod's remote attach call
-// TODO: merge w/ PodExecOptions below for stdin, stdout, etc
+// TODO: merge w/ PodExecOptions below for stdin, stdout, etc id:312 gh:312
 type PodAttachOptions struct {
 	metav1.TypeMeta
 
@@ -3767,14 +3767,14 @@ type ObjectReference struct {
 	// the event) or if no container name is specified "spec.containers[2]" (container with
 	// index 2 in this pod). This syntax is chosen only to have some well-defined way of
 	// referencing a part of an object.
-	// TODO: this design is not final and this field is subject to change in the future.
+	// TODO: this design is not final and this field is subject to change in the future. id:209 gh:210
 	// +optional
 	FieldPath string
 }
 
 // LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
 type LocalObjectReference struct {
-	//TODO: Add other useful fields.  apiVersion, kind, uid?
+	//TODO: Add other useful fields.  apiVersion, kind, uid? id:338 gh:340
 	Name string
 }
 
@@ -3807,7 +3807,7 @@ const (
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Event is a report of an event somewhere in the cluster.
-// TODO: Decide whether to store these separately or with the object they apply to.
+// TODO: Decide whether to store these separately or with the object they apply to. id:286 gh:287
 type Event struct {
 	metav1.TypeMeta
 	// +optional
@@ -3820,12 +3820,12 @@ type Event struct {
 	// Optional; this should be a short, machine understandable string that gives the reason
 	// for this event being generated. For example, if the event is reporting that a container
 	// can't start, the Reason might be "ImageNotFound".
-	// TODO: provide exact specification for format.
+	// TODO: provide exact specification for format. id:263 gh:264
 	// +optional
 	Reason string
 
 	// Optional. A human-readable description of the status of this operation.
-	// TODO: decide on maximum length.
+	// TODO: decide on maximum length. id:313 gh:314
 	// +optional
 	Message string
 
@@ -4130,7 +4130,7 @@ const (
 	// Required fields:
 	// - Secret.Data["tls.key"] - TLS private key.
 	//   Secret.Data["tls.crt"] - TLS certificate.
-	// TODO: Consider supporting different formats, specifying CA/destinationCA.
+	// TODO: Consider supporting different formats, specifying CA/destinationCA. id:210 gh:211
 	SecretTypeTLS SecretType = "kubernetes.io/tls"
 
 	// TLSCertKey is the key for tls certificates in a TLS secret.

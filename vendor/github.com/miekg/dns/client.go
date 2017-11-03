@@ -109,7 +109,7 @@ func (c *Client) Exchange(m *Msg, a string) (r *Msg, rtt time.Duration, err erro
 	if !c.SingleInflight {
 		return c.exchange(m, a)
 	}
-	// This adds a bunch of garbage, TODO(miek).
+	// This adds a bunch of garbage, TODO (miek). id:2928 gh:2943
 	t := "nop"
 	if t1, ok := TypeToString[m.Question[0].Qtype]; ok {
 		t = t1

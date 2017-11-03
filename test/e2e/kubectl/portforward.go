@@ -49,7 +49,7 @@ const (
 	podName = "pfpod"
 )
 
-// TODO support other ports besides 80
+// TODO support other ports besides 80 id:2338 gh:2353
 var (
 	portForwardRegexp        = regexp.MustCompile("Forwarding from 127.0.0.1:([0-9]+) -> 80")
 	portForwardPortToStdOutV = utilversion.MustParseSemantic("v1.3.0-alpha.4")

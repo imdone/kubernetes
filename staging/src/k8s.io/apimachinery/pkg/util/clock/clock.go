@@ -229,19 +229,19 @@ func (i *IntervalClock) Since(ts time.Time) time.Duration {
 }
 
 // Unimplemented, will panic.
-// TODO: make interval clock use FakeClock so this can be implemented.
+// TODO: make interval clock use FakeClock so this can be implemented. id:3599 gh:3614
 func (*IntervalClock) After(d time.Duration) <-chan time.Time {
 	panic("IntervalClock doesn't implement After")
 }
 
 // Unimplemented, will panic.
-// TODO: make interval clock use FakeClock so this can be implemented.
+// TODO: make interval clock use FakeClock so this can be implemented. id:3681 gh:3696
 func (*IntervalClock) NewTimer(d time.Duration) Timer {
 	panic("IntervalClock doesn't implement NewTimer")
 }
 
 // Unimplemented, will panic.
-// TODO: make interval clock use FakeClock so this can be implemented.
+// TODO: make interval clock use FakeClock so this can be implemented. id:3856 gh:3871
 func (*IntervalClock) Tick(d time.Duration) <-chan time.Time {
 	panic("IntervalClock doesn't implement Tick")
 }

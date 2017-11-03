@@ -81,7 +81,7 @@ func MachineStatsFromV1(cont *v1.ContainerInfo) []MachineStats {
 		}
 		if cont.Spec.HasNetwork {
 			stat.Network = &NetworkStats{
-				// FIXME: Use reflection instead.
+				// FIXME: Use reflection instead. id:2833 gh:2848
 				Tcp:        TcpStat(val.Network.Tcp),
 				Tcp6:       TcpStat(val.Network.Tcp6),
 				Interfaces: val.Network.Interfaces,
@@ -90,7 +90,7 @@ func MachineStatsFromV1(cont *v1.ContainerInfo) []MachineStats {
 		if cont.Spec.HasFilesystem {
 			stat.Filesystem = machineFsStatsFromV1(val.Filesystem)
 		}
-		// TODO(rjnagal): Handle load stats.
+		// TODO (rjnagal): Handle load stats. id:2917 gh:2932
 		stats = append(stats, stat)
 	}
 	return stats
@@ -117,7 +117,7 @@ func ContainerStatsFromV1(containerName string, spec *v1.ContainerSpec, stats []
 			stat.Memory = &val.Memory
 		}
 		if spec.HasNetwork {
-			// TODO: Handle TcpStats
+			// TODO: Handle TcpStats id:3056 gh:3071
 			stat.Network = &NetworkStats{
 				Tcp:        TcpStat(val.Network.Tcp),
 				Tcp6:       TcpStat(val.Network.Tcp6),
@@ -142,7 +142,7 @@ func ContainerStatsFromV1(containerName string, spec *v1.ContainerSpec, stats []
 		if spec.HasCustomMetrics {
 			stat.CustomMetrics = val.CustomMetrics
 		}
-		// TODO(rjnagal): Handle load stats.
+		// TODO (rjnagal): Handle load stats. id:2656 gh:2671
 		newStats = append(newStats, stat)
 	}
 	return newStats
@@ -186,7 +186,7 @@ func DeprecatedStatsFromV1(cont *v1.ContainerInfo) []DeprecatedContainerStats {
 		if stat.HasCustomMetrics {
 			stat.CustomMetrics = val.CustomMetrics
 		}
-		// TODO(rjnagal): Handle load stats.
+		// TODO (rjnagal): Handle load stats. id:2959 gh:2974
 		stats = append(stats, stat)
 	}
 	return stats

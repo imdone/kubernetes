@@ -76,7 +76,7 @@ func (self *TimedStore) Add(timestamp time.Time, item interface{}) {
 	}
 
 	// Remove any elements before eviction time.
-	// TODO(rjnagal): This is assuming that the added entry has timestamp close to now.
+	// TODO (rjnagal): This is assuming that the added entry has timestamp close to now. id:3060 gh:3075
 	evictTime := timestamp.Add(-self.age)
 	index := sort.Search(len(self.buffer), func(index int) bool {
 		return self.buffer[index].timestamp.After(evictTime)

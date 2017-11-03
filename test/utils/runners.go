@@ -1109,7 +1109,7 @@ func (config *SecretConfig) Stop() error {
 	return nil
 }
 
-// TODO: attach secrets using different possibilities: env vars, image pull secrets.
+// TODO: attach secrets using different possibilities: env vars, image pull secrets. id:2602 gh:2618
 func attachSecrets(template *v1.PodTemplateSpec, secretNames []string) {
 	volumes := make([]v1.Volume, 0, len(secretNames))
 	mounts := make([]v1.VolumeMount, 0, len(secretNames))
@@ -1168,7 +1168,7 @@ func (config *ConfigMapConfig) Stop() error {
 	return nil
 }
 
-// TODO: attach configmaps using different possibilities: env vars.
+// TODO: attach configmaps using different possibilities: env vars. id:2443 gh:2458
 func attachConfigMaps(template *v1.PodTemplateSpec, configMapNames []string) {
 	volumes := make([]v1.Volume, 0, len(configMapNames))
 	mounts := make([]v1.VolumeMount, 0, len(configMapNames))

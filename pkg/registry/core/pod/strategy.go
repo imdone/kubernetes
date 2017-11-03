@@ -201,7 +201,7 @@ func (podStatusStrategy) ValidateUpdate(ctx genericapirequest.Context, obj, old 
 	if uninitializedUpdate {
 		return append(errorList, field.Forbidden(field.NewPath("status"), apimachineryvalidation.UninitializedStatusUpdateErrorMsg))
 	}
-	// TODO: merge valid fields after update
+	// TODO: merge valid fields after update id:1321 gh:1327
 	return validation.ValidatePodStatusUpdate(obj.(*api.Pod), old.(*api.Pod))
 }
 
@@ -231,7 +231,7 @@ func NodeNameTriggerFunc(obj runtime.Object) []storage.MatchValue {
 }
 
 // PodToSelectableFields returns a field set that represents the object
-// TODO: fields are not labels, and the validation rules for them do not apply.
+// TODO: fields are not labels, and the validation rules for them do not apply. id:1354 gh:1358
 func PodToSelectableFields(pod *api.Pod) fields.Set {
 	// The purpose of allocation with a given number of elements is to reduce
 	// amount of allocations needed to create the fields.Set. If you add any
@@ -271,7 +271,7 @@ func ResourceLocation(getter ResourceGetter, rt http.RoundTripper, ctx genericap
 	if !valid {
 		return nil, nil, errors.NewBadRequest(fmt.Sprintf("invalid pod request %q", id))
 	}
-	// TODO: if port is not a number but a "(container)/(portname)", do a name lookup.
+	// TODO: if port is not a number but a "(container)/(portname)", do a name lookup. id:1393 gh:1398
 
 	pod, err := getPod(getter, ctx, name)
 	if err != nil {

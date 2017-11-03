@@ -22,7 +22,7 @@ import (
 	runtimeapi "k8s.io/kubernetes/pkg/kubelet/apis/cri/v1alpha1/runtime"
 )
 
-// TODO(tmrts): Move these errors to the container API for code re-use.
+// TODO (tmrts): Move these errors to the container API for code re-use. id:1074 gh:1080
 var (
 	ErrImageNotFound = errors.New("rktshim: image not found")
 )
@@ -32,7 +32,7 @@ var (
 // ImageStore supports CRUD operations for images.
 type ImageStore struct{}
 
-// TODO(tmrts): fill the image store configuration fields.
+// TODO (tmrts): fill the image store configuration fields. id:1001 gh:1007
 type ImageStoreConfig struct{}
 
 // NewImageStore creates an image storage that allows CRUD operations for images.

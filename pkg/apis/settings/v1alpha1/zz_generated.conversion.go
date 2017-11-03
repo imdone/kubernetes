@@ -123,7 +123,7 @@ func autoConvert_v1alpha1_PodPresetSpec_To_settings_PodPresetSpec(in *v1alpha1.P
 		in, out := &in.Volumes, &out.Volumes
 		*out = make([]api.Volume, len(*in))
 		for i := range *in {
-			// TODO: Inefficient conversion - can we improve it?
+			// TODO: Inefficient conversion - can we improve it? id:356 gh:357
 			if err := s.Convert(&(*in)[i], &(*out)[i], 0); err != nil {
 				return err
 			}
@@ -148,7 +148,7 @@ func autoConvert_settings_PodPresetSpec_To_v1alpha1_PodPresetSpec(in *settings.P
 		in, out := &in.Volumes, &out.Volumes
 		*out = make([]v1.Volume, len(*in))
 		for i := range *in {
-			// TODO: Inefficient conversion - can we improve it?
+			// TODO: Inefficient conversion - can we improve it? id:385 gh:386
 			if err := s.Convert(&(*in)[i], &(*out)[i], 0); err != nil {
 				return err
 			}

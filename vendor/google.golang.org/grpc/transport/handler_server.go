@@ -202,7 +202,7 @@ func (ht *serverHandlerTransport) WriteStatus(s *Stream, st *status.Status) erro
 			h.Set("Grpc-Message", encodeGrpcMessage(m))
 		}
 
-		// TODO: Support Grpc-Status-Details-Bin
+		// TODO: Support Grpc-Status-Details-Bin id:3387 gh:3403
 
 		if md := s.Trailer(); len(md) > 0 {
 			for k, vv := range md {
@@ -231,7 +231,7 @@ func (ht *serverHandlerTransport) writeCommonHeaders(s *Stream) {
 	ht.didCommonHeaders = true
 
 	h := ht.rw.Header()
-	h["Date"] = nil // suppress Date to make tests happy; TODO: restore
+	h["Date"] = nil // suppress Date to make tests happy; TODO: restore id:3696 gh:3711
 	h.Set("Content-Type", "application/grpc")
 
 	// Predeclare trailers we'll set later in WriteStatus (after the body).
@@ -241,7 +241,7 @@ func (ht *serverHandlerTransport) writeCommonHeaders(s *Stream) {
 	// and https://golang.org/pkg/net/http/#example_ResponseWriter_trailers
 	h.Add("Trailer", "Grpc-Status")
 	h.Add("Trailer", "Grpc-Message")
-	// TODO: Support Grpc-Status-Details-Bin
+	// TODO: Support Grpc-Status-Details-Bin id:3110 gh:3125
 
 	if s.sendCompress != "" {
 		h.Set("Grpc-Encoding", s.sendCompress)
@@ -333,7 +333,7 @@ func (ht *serverHandlerTransport) HandleStreams(startStream func(*Stream), trace
 	go func() {
 		defer close(readerDone)
 
-		// TODO: minimize garbage, optimize recvBuffer code/ownership
+		// TODO: minimize garbage, optimize recvBuffer code/ownership id:3573 gh:3588
 		const readSize = 8196
 		for buf := make([]byte, readSize); ; {
 			n, err := req.Body.Read(buf)

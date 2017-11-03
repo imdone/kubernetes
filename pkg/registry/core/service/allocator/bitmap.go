@@ -32,7 +32,7 @@ import (
 // r.count is always equal to the number of set bits and can be recalculated at any time
 // by counting the set bits in r.allocated.
 //
-// TODO: use RLE and compact the allocator to minimize space.
+// TODO: use RLE and compact the allocator to minimize space. id:1317 gh:1323
 type AllocationBitmap struct {
 	// strategy carries the details of how to choose the next available item out of the range
 	strategy bitAllocator

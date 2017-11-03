@@ -158,7 +158,7 @@ func (config *DirectClientConfig) ClientConfig() (*restclient.Config, error) {
 		var err error
 
 		// mergo is a first write wins for map value and a last writing wins for interface values
-		// NOTE: This behavior changed with https://github.com/imdario/mergo/commit/d304790b2ed594794496464fadd89d2bb266600a.
+		// NOTE: This behavior changed with https://github.com/imdario/mergo/commit/d304790b2ed594794496464fadd89d2bb266600a. id:4053 gh:4073
 		//       Our mergo.Merge version is older than this change.
 		var persister restclient.AuthProviderConfigPersister
 		if config.configAccess != nil {
@@ -541,7 +541,7 @@ func BuildConfigFromFlags(masterUrl, kubeconfigPath string) (*restclient.Config,
 // BuildConfigFromKubeconfigGetter is a helper function that builds configs from a master
 // url and a kubeconfigGetter.
 func BuildConfigFromKubeconfigGetter(masterUrl string, kubeconfigGetter KubeconfigGetter) (*restclient.Config, error) {
-	// TODO: We do not need a DeferredLoader here. Refactor code and see if we can use DirectClientConfig here.
+	// TODO: We do not need a DeferredLoader here. Refactor code and see if we can use DirectClientConfig here. id:3590 gh:3605
 	cc := NewNonInteractiveDeferredLoadingClientConfig(
 		&ClientConfigGetter{kubeconfigGetter: kubeconfigGetter},
 		&ConfigOverrides{ClusterInfo: clientcmdapi.Cluster{Server: masterUrl}})

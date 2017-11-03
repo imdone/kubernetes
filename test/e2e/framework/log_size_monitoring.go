@@ -85,7 +85,7 @@ type LogSizeDataTimeseries map[string]map[string][]TimestampedSize
 // node -> file -> data
 type LogsSizeDataSummary map[string]map[string]SingleLogSummary
 
-// TODO: make sure that we don't need locking here
+// TODO: make sure that we don't need locking here id:2187 gh:2202
 func (s *LogsSizeDataSummary) PrintHumanReadable() string {
 	buf := &bytes.Buffer{}
 	w := tabwriter.NewWriter(buf, 1, 0, 1, ' ', 0)

@@ -32,7 +32,7 @@ import (
 )
 
 // When zone information is present, give 2/3 of the weighting to zone spreading, 1/3 to node spreading
-// TODO: Any way to justify this weighting?
+// TODO: Any way to justify this weighting? id:1446 gh:1452
 const zoneWeighting float64 = 2.0 / 3.0
 
 type SelectorSpread struct {
@@ -225,7 +225,7 @@ func (s *ServiceAntiAffinity) CalculateAntiAffinityPriority(pod *v1.Pod, nodeNam
 	var nsServicePods []*v1.Pod
 	if services, err := s.serviceLister.GetPodServices(pod); err == nil && len(services) > 0 {
 		// just use the first service and get the other pods within the service
-		// TODO: a separate predicate can be created that tries to handle all services for the pod
+		// TODO: a separate predicate can be created that tries to handle all services for the pod id:1465 gh:1472
 		selector := labels.SelectorFromSet(services[0].Spec.Selector)
 		pods, err := s.podLister.List(selector)
 		if err != nil {

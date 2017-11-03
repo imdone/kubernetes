@@ -207,7 +207,7 @@ func (s *simpleProvider) ValidatePodSecurityContext(pod *api.Pod, fldPath *field
 
 	allErrs = append(allErrs, s.strategies.SysctlsStrategy.Validate(pod)...)
 
-	// TODO(tallclair): ValidatePodSecurityContext should be renamed to ValidatePod since its scope
+	// TODO (tallclair): ValidatePodSecurityContext should be renamed to ValidatePod since its scope id:1455 gh:1461
 	// is not limited to the PodSecurityContext.
 	if len(pod.Spec.Volumes) > 0 {
 		allowsAllVolumeTypes := psputil.PSPAllowsAllVolumes(s.psp)

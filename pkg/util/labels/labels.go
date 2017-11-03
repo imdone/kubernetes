@@ -76,7 +76,7 @@ func CloneSelectorAndAddLabel(selector *metav1.LabelSelector, labelKey, labelVal
 	// Clone.
 	newSelector := new(metav1.LabelSelector)
 
-	// TODO(madhusudancs): Check if you can use deepCopy_extensions_LabelSelector here.
+	// TODO (madhusudancs): Check if you can use deepCopy_extensions_LabelSelector here. id:1425 gh:1431
 	newSelector.MatchLabels = make(map[string]string)
 	if selector.MatchLabels != nil {
 		for key, val := range selector.MatchLabels {

@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 // To run tests in this suite
-// NOTE: This test suite requires password-less sudo capabilities to run the kubelet and kube-apiserver.
+// NOTE: This test suite requires password-less sudo capabilities to run the kubelet and kube-apiserver. id:2633 gh:2648
 package e2e_node
 
 import (
@@ -53,7 +53,7 @@ import (
 
 var e2es *services.E2EServices
 
-// TODO(random-liu): Change the following modes to sub-command.
+// TODO (random-liu): Change the following modes to sub-command. id:2276 gh:2291
 var runServicesMode = flag.Bool("run-services-mode", false, "If true, only run services (etcd, apiserver) in current process, and not run test.")
 var runKubeletMode = flag.Bool("run-kubelet-mode", false, "If true, only start kubelet, and not run test.")
 var systemValidateMode = flag.Bool("system-validate-mode", false, "If true, only run system validation in current process, and not run test.")
@@ -67,7 +67,7 @@ func init() {
 	pflag.CommandLine.MarkHidden("run-services-mode")
 	// It's weird that if I directly use pflag in TestContext, it will report error.
 	// It seems that someone is using flag.Parse() after init() and TestMain().
-	// TODO(random-liu): Find who is using flag.Parse() and cause errors and move the following logic
+	// TODO (random-liu): Find who is using flag.Parse() and cause errors and move the following logic id:2578 gh:2593
 	// into TestContext.
 }
 
@@ -105,7 +105,7 @@ func TestE2eNode(t *testing.T) {
 		if framework.TestContext.NodeConformance {
 			// Chroot to /rootfs to make system validation can check system
 			// as in the root filesystem.
-			// TODO(random-liu): Consider to chroot the whole test process to make writing
+			// TODO (random-liu): Consider to chroot the whole test process to make writing id:2325 gh:2340
 			// test easier.
 			if err := syscall.Chroot(rootfs); err != nil {
 				glog.Exitf("chroot %q failed: %v", rootfs, err)
@@ -148,7 +148,7 @@ var _ = SynchronizedBeforeSuite(func() []byte {
 		Expect(err).ShouldNot(HaveOccurred())
 	}
 
-	// TODO(yifan): Temporary workaround to disable coreos from auto restart
+	// TODO (yifan): Temporary workaround to disable coreos from auto restart id:2480 gh:2495
 	// by masking the locksmithd.
 	// We should mask locksmithd when provisioning the machine.
 	maskLocksmithdOnCoreos()
@@ -239,7 +239,7 @@ func waitForNodeReady() {
 }
 
 // updateTestContext updates the test context with the node name.
-// TODO(random-liu): Using dynamic kubelet configuration feature to
+// TODO (random-liu): Using dynamic kubelet configuration feature to id:2634 gh:2649
 // update test context with node configuration.
 func updateTestContext() error {
 	client, err := getAPIServerClient()

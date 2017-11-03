@@ -476,7 +476,7 @@ func (l *lessor) sendKeepAliveLoop(stream pb.Lease_LeaseKeepAliveClient) {
 		for _, id := range tosend {
 			r := &pb.LeaseKeepAliveRequest{ID: int64(id)}
 			if err := stream.Send(r); err != nil {
-				// TODO do something with this error?
+				// TODO do something with this error? id:2615 gh:2631
 				return
 			}
 		}

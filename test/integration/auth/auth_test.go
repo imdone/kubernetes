@@ -381,8 +381,8 @@ func getTestRequests(namespace string) []struct {
 		// Special verbs on nodes
 		{"GET", pathWithPrefix("proxy", "nodes", namespace, "a"), "", integration.Code404},
 		{"GET", pathWithPrefix("redirect", "nodes", namespace, "a"), "", integration.Code404},
-		// TODO: test .../watch/..., which doesn't end before the test timeout.
-		// TODO: figure out how to create a node so that it can successfully proxy/redirect.
+		// TODO: test .../watch/..., which doesn't end before the test timeout. id:2673 gh:2688
+		// TODO: figure out how to create a node so that it can successfully proxy/redirect. id:2412 gh:2427
 
 		// Non-object endpoints
 		{"GET", "/", "", integration.Code200},
@@ -399,7 +399,7 @@ func getTestRequests(namespace string) []struct {
 // detailed verification of behaviour beyond authorization.  They are not
 // fuzz tests.
 //
-// TODO(etune): write a fuzz test of the REST API.
+// TODO (etune): write a fuzz test of the REST API. id:2591 gh:2606
 func TestAuthModeAlwaysAllow(t *testing.T) {
 	// Set up a master
 	masterConfig := framework.NewIntegrationTestMasterConfig()
@@ -532,7 +532,7 @@ func TestAuthModeAlwaysDeny(t *testing.T) {
 }
 
 // Inject into master an authorizer that uses user info.
-// TODO(etune): remove this test once a more comprehensive built-in authorizer is implemented.
+// TODO (etune): remove this test once a more comprehensive built-in authorizer is implemented. id:2432 gh:2447
 type allowAliceAuthorizer struct{}
 
 func (allowAliceAuthorizer) Authorize(a authorizer.Attributes) (bool, string, error) {
@@ -984,7 +984,7 @@ func TestNamespaceAuthorization(t *testing.T) {
 					sub += fmt.Sprintf(",\r\n\"resourceVersion\": \"%v\"", resVersion)
 				}
 				namespace := r.namespace
-				// FIXME: Is that correct?
+				// FIXME: Is that correct? id:2503 gh:2519
 				if len(namespace) == 0 {
 					namespace = "default"
 				}

@@ -193,7 +193,7 @@ func (spc *realStatefulPodControl) createPersistentVolumeClaims(set *apps.Statef
 			errs = append(errs, fmt.Errorf("Failed to retrieve PVC %s: %s", claim.Name, err))
 			spc.recordClaimEvent("create", set, pod, &claim, err)
 		}
-		// TODO: Check resource requirements and accessmodes, update if necessary
+		// TODO: Check resource requirements and accessmodes, update if necessary id:625 gh:626
 	}
 	return errorutils.NewAggregate(errs)
 }

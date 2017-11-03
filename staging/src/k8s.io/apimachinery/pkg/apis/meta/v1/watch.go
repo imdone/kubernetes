@@ -43,7 +43,7 @@ func Convert_watch_Event_to_versioned_Event(in *watch.Event, out *WatchEvent, s 
 	out.Type = string(in.Type)
 	switch t := in.Object.(type) {
 	case *runtime.Unknown:
-		// TODO: handle other fields on Unknown and detect type
+		// TODO: handle other fields on Unknown and detect type id:3844 gh:3859
 		out.Object.Raw = t.Raw
 	case nil:
 	default:
@@ -61,7 +61,7 @@ func Convert_versioned_Event_to_watch_Event(in *WatchEvent, out *watch.Event, s 
 	if in.Object.Object != nil {
 		out.Object = in.Object.Object
 	} else if in.Object.Raw != nil {
-		// TODO: handle other fields on Unknown and detect type
+		// TODO: handle other fields on Unknown and detect type id:3271 gh:3286
 		out.Object = &runtime.Unknown{
 			Raw:         in.Object.Raw,
 			ContentType: runtime.ContentTypeJSON,

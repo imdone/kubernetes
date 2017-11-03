@@ -24,7 +24,7 @@ type Any interface {
 	ToString() string
 	ToVal(val interface{})
 	Get(path ...interface{}) Any
-	// TODO: add Set
+	// TODO: add Set id:2973 gh:2990
 	Size() int
 	Keys() []string
 	GetInterface() interface{}

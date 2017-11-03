@@ -73,7 +73,7 @@ type jobControlInterface interface {
 	// PatchJob patches a Job.
 	PatchJob(namespace string, name string, pt types.PatchType, data []byte, subresources ...string) (*batchv1.Job, error)
 	// DeleteJob deletes the Job identified by name.
-	// TODO: delete by UID?
+	// TODO: delete by UID? id:458 gh:459
 	DeleteJob(namespace string, name string) error
 }
 
@@ -203,7 +203,7 @@ type podControlInterface interface {
 	// ListPods list pods
 	ListPods(namespace string, opts metav1.ListOptions) (*v1.PodList, error)
 	// DeleteJob deletes the pod identified by name.
-	// TODO: delete by UID?
+	// TODO: delete by UID? id:608 gh:609
 	DeletePod(namespace string, name string) error
 }
 

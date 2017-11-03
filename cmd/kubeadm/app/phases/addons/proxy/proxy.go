@@ -37,7 +37,7 @@ import (
 
 const (
 	// KubeProxyClusterRoleName sets the name for the kube-proxy ClusterRole
-	// TODO: This k8s-generic, well-known constant should be fetchable from another source, not be in this package
+	// TODO: This k8s-generic, well-known constant should be fetchable from another source, not be in this package id:181 gh:182
 	KubeProxyClusterRoleName = "system:node-proxier"
 
 	// KubeProxyServiceAccountName describes the name of the ServiceAccount for the kube-proxy addon

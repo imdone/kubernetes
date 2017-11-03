@@ -19,7 +19,7 @@ func (c info) cccType() info {
 	return ccc
 }
 
-// TODO: Implement full Unicode breaking algorithm:
+// TODO: Implement full Unicode breaking algorithm: id:3346 gh:3361
 // 1) Implement breaking in separate package.
 // 2) Use the breaker here.
 // 3) Compare table size and performance of using the more generic breaker.
@@ -60,7 +60,7 @@ func (c info) cccType() info {
 //
 // Note 2: the rule for Mid is very approximate, but works in most cases. To
 // improve, we could store the categories in the trie value and use a FA to
-// manage breaks. See TODO comment above.
+// manage breaks. See TODO comment above. id:3246 gh:3261
 //
 // Note 3: according to the spec, it is possible for the Extend category to
 // introduce breaks between other categories grouped in Letter. However, this

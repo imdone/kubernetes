@@ -5,7 +5,7 @@ import (
 )
 
 // support function to set positions for tomlValues
-// NOTE: this is done to allow ctx.lastPosition to indicate the start of any
+// NOTE: this is done to allow ctx.lastPosition to indicate the start of any id:3142 gh:3157
 // values returned by the query engines
 func tomlValueCheck(node interface{}, ctx *queryContext) interface{} {
 	switch castNode := node.(type) {

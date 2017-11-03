@@ -732,8 +732,8 @@ func preservedFile(err error, path string, out io.Writer) error {
 // characters, or the first non-whitespace character is a '#' indicating a comment. Returns
 // any errors encountered reading the stream.
 func hasLines(r io.Reader) (bool, error) {
-	// TODO: if any files we read have > 64KB lines, we'll need to switch to bytes.ReadLine
-	// TODO: probably going to be secrets
+	// TODO: if any files we read have > 64KB lines, we'll need to switch to bytes.ReadLine id:738 gh:739
+	// TODO: probably going to be secrets id:743 gh:744
 	s := bufio.NewScanner(r)
 	for s.Scan() {
 		if line := strings.TrimSpace(s.Text()); len(line) > 0 && line[0] != '#' {

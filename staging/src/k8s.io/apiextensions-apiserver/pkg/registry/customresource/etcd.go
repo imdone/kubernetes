@@ -48,7 +48,7 @@ func NewREST(resource schema.GroupResource, listKind schema.GroupVersionKind, st
 	}
 	options := &generic.StoreOptions{RESTOptions: optsGetter, AttrFunc: strategy.GetAttrs}
 	if err := store.CompleteWithOptions(options); err != nil {
-		panic(err) // TODO: Propagate error up
+		panic(err) // TODO: Propagate error up id:3650 gh:3665
 	}
 	return &REST{store}
 }

@@ -92,7 +92,7 @@ func (daemonSetStrategy) PrepareForUpdate(ctx genericapirequest.Context, obj, ol
 	// read-update-write loop, so the contents of spec may not actually be the spec that
 	// the manager has *seen*.
 	//
-	// TODO: Any changes to a part of the object that represents desired state (labels,
+	// TODO: Any changes to a part of the object that represents desired state (labels, id:1402 gh:1408
 	// annotations etc) should also increment the generation.
 	if !apiequality.Semantic.DeepEqual(oldDaemonSet.Spec.Template, newDaemonSet.Spec.Template) {
 		newDaemonSet.Spec.TemplateGeneration = oldDaemonSet.Spec.TemplateGeneration + 1
@@ -130,7 +130,7 @@ func (daemonSetStrategy) ValidateUpdate(ctx genericapirequest.Context, obj, old 
 	// Update is not allowed to set Spec.Selector for apps/v1 and apps/v1beta2 (allowed for extensions/v1beta1).
 	// If RequestInfo is nil, it is better to revert to old behavior (i.e. allow update to set Spec.Selector)
 	// to prevent unintentionally breaking users who may rely on the old behavior.
-	// TODO(#50791): after extensions/v1beta1 is removed, move selector immutability check inside ValidateDaemonSetUpdate().
+	// TODO (#50791): after extensions/v1beta1 is removed, move selector immutability check inside ValidateDaemonSetUpdate(). id:1480 gh:1486
 	if requestInfo, found := genericapirequest.RequestInfoFrom(ctx); found {
 		groupVersion := schema.GroupVersion{Group: requestInfo.APIGroup, Version: requestInfo.APIVersion}
 		switch groupVersion {

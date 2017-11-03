@@ -325,7 +325,7 @@ func extensionsMapSize(m map[int32]Extension) (n int) {
 
 // HasExtension returns whether the given extension is present in pb.
 func HasExtension(pb Message, extension *ExtensionDesc) bool {
-	// TODO: Check types, field numbers, etc.?
+	// TODO: Check types, field numbers, etc.? id:2808 gh:2823
 	epb, ok := extendable(pb)
 	if !ok {
 		return false
@@ -346,7 +346,7 @@ func ClearExtension(pb Message, extension *ExtensionDesc) {
 	if !ok {
 		return
 	}
-	// TODO: Check types, field numbers, etc.?
+	// TODO: Check types, field numbers, etc.? id:3047 gh:3062
 	extmap := epb.extensionsWrite()
 	delete(extmap, extension.Field)
 }

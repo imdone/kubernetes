@@ -66,7 +66,7 @@ var _ = framework.KubeDescribe("NodeProblemDetector", func() {
 	framework.KubeDescribe("SystemLogMonitor", func() {
 		const (
 			// Use test condition to avoid changing the real node condition in use.
-			// TODO(random-liu): Now node condition could be arbitrary string, consider wether we need to
+			// TODO (random-liu): Now node condition could be arbitrary string, consider wether we need to id:2279 gh:2294
 			// add TestCondition when switching to predefined condition list.
 			condition = v1.NodeConditionType("TestCondition")
 
@@ -231,7 +231,7 @@ var _ = framework.KubeDescribe("NodeProblemDetector", func() {
 			})
 			pod, err := f.PodClient().Get(name, metav1.GetOptions{})
 			Expect(err).NotTo(HaveOccurred())
-			// TODO: remove hardcoded kubelet volume directory path
+			// TODO: remove hardcoded kubelet volume directory path id:2581 gh:2596
 			// framework.TestContext.KubeVolumeDir is currently not populated for node e2e
 			hostLogFile = "/var/lib/kubelet/pods/" + string(pod.UID) + "/volumes/kubernetes.io~empty-dir" + logFile
 		})
@@ -397,7 +397,7 @@ func getNodeTime() (time.Time, time.Time, error) {
 	if err := syscall.Sysinfo(&info); err != nil {
 		return time.Time{}, time.Time{}, err
 	}
-	// Get node boot time. NOTE that because we get node current time before uptime, the boot time
+	// Get node boot time. NOTE that because we get node current time before uptime, the boot time id:2328 gh:2343
 	// calculated will be a little earlier than the real boot time. This won't affect the correctness
 	// of the test result.
 	bootTime := nodeTime.Add(-time.Duration(info.Uptime) * time.Second)

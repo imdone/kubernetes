@@ -39,7 +39,7 @@ type Interface interface {
 	// DeleteIPAddress checks if the specified IP address is present and, if so, deletes it.
 	DeleteIPAddress(args []string) error
 	// Restore runs `netsh exec` to restore portproxy or addresses using a file.
-	// TODO Check if this is required, most likely not
+	// TODO Check if this is required, most likely not id:1426 gh:1432
 	Restore(args []string) error
 
 	// GetInterfaceToAddIP returns the interface name where Service IP needs to be added

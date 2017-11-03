@@ -78,7 +78,7 @@ function compute-etcd-variables {
 	ETCD_IMAGE="${ETCD_IMAGE:-}"
 	ETCD_QUOTA_BYTES=""
 	if [ "${ETCD_VERSION:0:2}" == "3." ]; then
-		# TODO: Set larger quota to see if that helps with
+		# TODO: Set larger quota to see if that helps with id:2422 gh:2437
 		# 'mvcc: database space exceeded' errors. If so, pipe
 		# though our setup scripts.
 		ETCD_QUOTA_BYTES=" --quota-backend-bytes=4294967296 "
@@ -132,7 +132,7 @@ function mount-pd() {
 	safe-format-and-mount "${pd_path}" "${mount_point}"
 	echo "Mounted PD '${pd_path}' at '${mount_point}'"
 
-	# NOTE: These locations on the PD store persistent data, so to maintain
+	# NOTE: These locations on the PD store persistent data, so to maintain id:2601 gh:2616
 	# upgradeability, these locations should not change.  If they do, take care
 	# to maintain a migration path from these locations to whatever new
 	# locations.
@@ -191,7 +191,7 @@ function assemble-docker-flags {
 	echo "Assemble docker command line flags"
 	local docker_opts="-p /var/run/docker.pid --iptables=false --ip-masq=false"
 	docker_opts+=" --log-level=debug"  # Since it's a test cluster
-	# TODO(shyamjvs): Incorporate network plugin options, etc later.
+	# TODO (shyamjvs): Incorporate network plugin options, etc later. id:2442 gh:2457
 	echo "DOCKER_OPTS=\"${docker_opts}\"" > /etc/default/docker
 	echo "DOCKER_NOFILE=65536" >> /etc/default/docker  # For setting ulimit -n
 	systemctl restart docker
@@ -315,7 +315,7 @@ function setup-addon-manifests {
 
 # Write the config for the audit policy.
 # Note: This duplicates the function in cluster/gce/gci/configure-helper.sh.
-# TODO: Get rid of this function when #53321 is fixed.
+# TODO: Get rid of this function when #53321 is fixed. id:2552 gh:2567
 function create-master-audit-policy {
   local -r path="${1}"
   local -r policy="${2:-}"
@@ -359,7 +359,7 @@ rules:
         resources: ["endpoints", "services", "services/status"]
   - level: None
     # Ingress controller reads 'configmaps/ingress-uid' through the unsecured port.
-    # TODO(#46983): Change this to the ingress controller service account.
+    # TODO (#46983): Change this to the ingress controller service account. id:2738 gh:2753
     users: ["system:unsecured"]
     namespaces: ["kube-system"]
     verbs: ["get"]
@@ -537,7 +537,7 @@ function compute-kube-apiserver-params {
 		create-master-audit-policy "${audit_policy_file}" "${ADVANCED_AUDIT_POLICY:-}"
 
 		# The config below matches the one in cluster/gce/gci/configure-helper.sh.
-		# TODO: Currently supporting just log backend. Support webhook if needed.
+		# TODO: Currently supporting just log backend. Support webhook if needed. id:2423 gh:2438
 		params+=" --audit-policy-file=${audit_policy_file}"
 		params+=" --audit-log-path=/var/log/kube-apiserver-audit.log"
 		params+=" --audit-log-maxage=0"

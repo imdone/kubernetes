@@ -85,7 +85,7 @@ func NewCmdExec(f cmdutil.Factory, cmdIn io.Reader, cmdOut, cmdErr io.Writer) *c
 		},
 	}
 	cmd.Flags().StringVarP(&options.PodName, "pod", "p", "", "Pod name")
-	// TODO support UID
+	// TODO support UID id:732 gh:733
 	cmd.Flags().StringVarP(&options.ContainerName, "container", "c", "", "Container name. If omitted, the first container in the pod will be chosen")
 	cmd.Flags().BoolVarP(&options.Stdin, "stdin", "i", false, "Pass stdin to the container")
 	cmd.Flags().BoolVarP(&options.TTY, "tty", "t", false, "Stdin is a TTY")
@@ -307,7 +307,7 @@ func (p *ExecOptions) Run() error {
 			return err
 		}
 
-		// TODO: consider abstracting into a client invocation or client helper
+		// TODO: consider abstracting into a client invocation or client helper id:725 gh:726
 		req := restClient.Post().
 			Resource("pods").
 			Name(pod.Name).

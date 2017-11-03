@@ -160,7 +160,7 @@ func RunCreate(f cmdutil.Factory, cmd *cobra.Command, out, errOut io.Writer, opt
 				return err
 			}
 		}
-		// TODO post content with stream.  Right now it ignores body content
+		// TODO post content with stream.  Right now it ignores body content id:731 gh:732
 		bytes, err := restClient.Post().RequestURI(options.Raw).Body(data).DoRaw()
 		if err != nil {
 			return err

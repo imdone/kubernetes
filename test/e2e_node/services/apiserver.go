@@ -42,7 +42,7 @@ func NewAPIServer() *APIServer {
 func (a *APIServer) Start() error {
 	config := options.NewServerRunOptions()
 	config.Etcd.StorageConfig.ServerList = []string{getEtcdClientURL()}
-	// TODO: Current setup of etcd in e2e-node tests doesn't support etcd v3
+	// TODO: Current setup of etcd in e2e-node tests doesn't support etcd v3 id:2584 gh:2599
 	// protocol. We should migrate it to use the same infrastructure as all
 	// other tests (pkg/storage/etcd/testing).
 	config.Etcd.StorageConfig.Type = "etcd2"

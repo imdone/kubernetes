@@ -300,7 +300,7 @@ func (fake *fakeHealthChecker) SyncEndpoints(newEndpoints map[types.NamespacedNa
 const testHostname = "test-hostname"
 
 func NewFakeProxier(ipt utiliptables.Interface) *Proxier {
-	// TODO: Call NewProxier after refactoring out the goroutine
+	// TODO: Call NewProxier after refactoring out the goroutine id:1157 gh:1163
 	// invocation into a Run() method.
 	p := &Proxier{
 		exec:                     &fakeexec.FakeExec{},
@@ -2383,4 +2383,4 @@ func Test_updateEndpointsMap(t *testing.T) {
 	}
 }
 
-// TODO(thockin): add *more* tests for syncProxyRules() or break it down further and test the pieces.
+// TODO (thockin): add *more* tests for syncProxyRules() or break it down further and test the pieces. id:1214 gh:1220

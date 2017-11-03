@@ -45,7 +45,7 @@ func StorageWithCacher(capacity int) generic.StorageDecorator {
 		}
 		glog.V(5).Infof("Storage caching is enabled for %T with capacity %v", objectType, capacity)
 
-		// TODO: we would change this later to make storage always have cacher and hide low level KV layer inside.
+		// TODO: we would change this later to make storage always have cacher and hide low level KV layer inside. id:3711 gh:3726
 		// Currently it has two layers of same storage interface -- cacher and low level kv.
 		cacherConfig := storage.CacherConfig{
 			CacheCapacity:        capacity,
@@ -65,7 +65,7 @@ func StorageWithCacher(capacity int) generic.StorageDecorator {
 			d()
 		}
 
-		// TODO : Remove RegisterStorageCleanup below when PR
+		// TODO : Remove RegisterStorageCleanup below when PR id:3799 gh:3814
 		// https://github.com/kubernetes/kubernetes/pull/50690
 		// merges as that shuts down storage properly
 		RegisterStorageCleanup(destroyFunc)
@@ -74,10 +74,10 @@ func StorageWithCacher(capacity int) generic.StorageDecorator {
 	}
 }
 
-// TODO : Remove all the code below when PR
+// TODO : Remove all the code below when PR id:3995 gh:4015
 // https://github.com/kubernetes/kubernetes/pull/50690
 // merges as that shuts down storage properly
-// HACK ALERT : Track the destroy methods to call them
+// HACK ALERT : Track the destroy methods to call them id:3428 gh:3444
 // from the test harness. TrackStorageCleanup will be called
 // only from the test harness, so Register/Cleanup will be
 // no-op at runtime.

@@ -23,15 +23,15 @@ source "${KUBE_ROOT}/hack/lib/init.sh"
 # Lists of API Versions of each groups that should be tested, groups are
 # separated by comma, lists are separated by semicolon. e.g.,
 # "v1,compute/v1alpha1,experimental/v1alpha2;v1,compute/v2,experimental/v1alpha3"
-# TODO: It's going to be:
+# TODO: It's going to be: id:235 gh:236
 # KUBE_TEST_API_VERSIONS=${KUBE_TEST_API_VERSIONS:-"v1,extensions/v1beta1"}
-# FIXME: due to current implementation of a test client (see: pkg/api/testapi/testapi.go)
+# FIXME: due to current implementation of a test client (see: pkg/api/testapi/testapi.go) id:275 gh:276
 # ONLY the last version is tested in each group.
 ALL_VERSIONS_CSV=$(IFS=',';echo "${KUBE_AVAILABLE_GROUP_VERSIONS[*]// /,}";IFS=$)
 KUBE_TEST_API_VERSIONS="${KUBE_TEST_API_VERSIONS:-${ALL_VERSIONS_CSV}}"
 
 # Give integration tests longer to run
-# TODO: allow a larger value to be passed in
+# TODO: allow a larger value to be passed in id:242 gh:243
 #KUBE_TIMEOUT=${KUBE_TIMEOUT:--timeout 240s}
 KUBE_TIMEOUT="-timeout 600s"
 KUBE_INTEGRATION_TEST_MAX_CONCURRENCY=${KUBE_INTEGRATION_TEST_MAX_CONCURRENCY:-"-1"}

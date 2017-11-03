@@ -56,7 +56,7 @@ const (
 	IPAMFromCloudAllocatorType = "IPAMFromCloud"
 )
 
-// TODO: figure out the good setting for those constants.
+// TODO: figure out the good setting for those constants. id:562 gh:563
 const (
 	// The amount of time the nodecontroller polls on the list nodes endpoint.
 	apiserverStartupGracePeriod = 10 * time.Minute

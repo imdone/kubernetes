@@ -27,7 +27,7 @@ const userAgent = "gcloud-golang/0.1"
 // Transport is an http.RoundTripper that appends Google Cloud client's
 // user-agent to the original request's user-agent header.
 type Transport struct {
-	// TODO(bradfitz): delete internal.Transport. It's too wrappy for what it does.
+	// TODO (bradfitz): delete internal.Transport. It's too wrappy for what it does. id:2556 gh:2571
 	// Do User-Agent some other way.
 
 	// Base is the actual http.RoundTripper

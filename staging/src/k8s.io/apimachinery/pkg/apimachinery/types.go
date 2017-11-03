@@ -33,8 +33,8 @@ type GroupMeta struct {
 	GroupVersions []schema.GroupVersion
 
 	// SelfLinker can set or get the SelfLink field of all API types.
-	// TODO: when versioning changes, make this part of each API definition.
-	// TODO(lavalamp): Combine SelfLinker & ResourceVersioner interfaces, force all uses
+	// TODO: when versioning changes, make this part of each API definition. id:3732 gh:3748
+	// TODO (lavalamp): Combine SelfLinker & ResourceVersioner interfaces, force all uses id:3497 gh:3512
 	// to go through the InterfacesFor method below.
 	SelfLinker runtime.SelfLinker
 
@@ -44,7 +44,7 @@ type GroupMeta struct {
 
 	// InterfacesFor returns the default Codec and ResourceVersioner for a given version
 	// string, or an error if the version is not known.
-	// TODO: make this stop being a func pointer and always use the default
+	// TODO: make this stop being a func pointer and always use the default id:3665 gh:3680
 	// function provided below once every place that populates this field has been changed.
 	InterfacesFor func(version schema.GroupVersion) (*meta.VersionInterfaces, error)
 
@@ -54,7 +54,7 @@ type GroupMeta struct {
 
 // DefaultInterfacesFor returns the default Codec and ResourceVersioner for a given version
 // string, or an error if the version is not known.
-// TODO: Remove the "Default" prefix.
+// TODO: Remove the "Default" prefix. id:3840 gh:3855
 func (gm *GroupMeta) DefaultInterfacesFor(version schema.GroupVersion) (*meta.VersionInterfaces, error) {
 	if v, ok := gm.InterfacesByVersion[version]; ok {
 		return v, nil
@@ -65,7 +65,7 @@ func (gm *GroupMeta) DefaultInterfacesFor(version schema.GroupVersion) (*meta.Ve
 // AddVersionInterfaces adds the given version to the group. Only call during
 // init, after that GroupMeta objects should be immutable. Not thread safe.
 // (If you use this, be sure to set .InterfacesFor = .DefaultInterfacesFor)
-// TODO: remove the "Interfaces" suffix and make this also maintain the
+// TODO: remove the "Interfaces" suffix and make this also maintain the id:3236 gh:3251
 // .GroupVersions member.
 func (gm *GroupMeta) AddVersionInterfaces(version schema.GroupVersion, interfaces *meta.VersionInterfaces) error {
 	if e, a := gm.GroupVersion.Group, version.Group; a != e {
@@ -76,7 +76,7 @@ func (gm *GroupMeta) AddVersionInterfaces(version schema.GroupVersion, interface
 	}
 	gm.InterfacesByVersion[version] = interfaces
 
-	// TODO: refactor to make the below error not possible, this function
+	// TODO: refactor to make the below error not possible, this function id:3733 gh:3749
 	// should *set* GroupVersions rather than depend on it.
 	for _, v := range gm.GroupVersions {
 		if v == version {

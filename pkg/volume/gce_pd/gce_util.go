@@ -121,7 +121,7 @@ func (gceutil *GCEDiskUtil) CreateVolume(c *gcePersistentDiskProvisioner) (strin
 		return "", 0, nil, "", fmt.Errorf("a combination of zone, zones, and replica-zones StorageClass parameters must not be used at the same time")
 	}
 
-	// TODO: implement PVC.Selector parsing
+	// TODO: implement PVC.Selector parsing id:1432 gh:1438
 	if c.options.PVC.Spec.Selector != nil {
 		return "", 0, nil, "", fmt.Errorf("claim.Spec.Selector is not supported for dynamic provisioning on GCE")
 	}

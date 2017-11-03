@@ -85,7 +85,7 @@ func (g *genClientForType) GenerateType(c *generator.Context, t *types.Type, w i
 	for _, e := range tags.Extensions {
 		inputType := *t
 		resultType := *t
-		// TODO: Extract this to some helper method as this code is copied into
+		// TODO: Extract this to some helper method as this code is copied into id:3819 gh:3834
 		// 2 other places.
 		if len(e.InputTypeOverride) > 0 {
 			if name, pkg := e.Input(); len(pkg) > 0 {
@@ -248,7 +248,7 @@ func (g *genClientForType) GenerateType(c *generator.Context, t *types.Type, w i
 			}
 		}
 
-		// TODO: Figure out schemantic for watching a sub-resource.
+		// TODO: Figure out schemantic for watching a sub-resource. id:3962 gh:3983
 		if e.HasVerb("watch") {
 			sw.Do(adjustTemplate(e.VerbName, e.VerbType, watchTemplate), m)
 		}
@@ -269,7 +269,7 @@ func (g *genClientForType) GenerateType(c *generator.Context, t *types.Type, w i
 			}
 		}
 
-		// TODO: Figure out schemantic for deleting a sub-resource (what arguments
+		// TODO: Figure out schemantic for deleting a sub-resource (what arguments id:4059 gh:4079
 		// are passed, does it need two names? etc.
 		if e.HasVerb("delete") {
 			sw.Do(adjustTemplate(e.VerbName, e.VerbType, deleteTemplate), m)
@@ -284,7 +284,7 @@ func (g *genClientForType) GenerateType(c *generator.Context, t *types.Type, w i
 }
 
 // adjustTemplate adjust the origin verb template using the expansion name.
-// TODO: Make the verbs in templates parametrized so the strings.Replace() is
+// TODO: Make the verbs in templates parametrized so the strings.Replace() is id:3596 gh:3611
 // not needed.
 func adjustTemplate(name, verbType, template string) string {
 	return strings.Replace(template, " "+strings.Title(verbType), " "+name, -1)

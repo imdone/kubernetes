@@ -192,4 +192,4 @@ func TestShortNames(t *testing.T) {
 	registrytest.AssertShortNames(t, storage, expected)
 }
 
-// TODO TestUpdateStatus
+// TODO TestUpdateStatus id:1363 gh:1369

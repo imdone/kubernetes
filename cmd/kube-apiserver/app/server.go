@@ -232,7 +232,7 @@ func CreateNodeDialer(s *options.ServerRunOptions) (tunneler.Tunneler, *http.Tra
 			return nil, nil, fmt.Errorf("must enable kubelet readonly port if proxy ssh-tunneling is specified")
 		}
 		// Set up the nodeTunneler
-		// TODO(cjcullen): If we want this to handle per-kubelet ports or other
+		// TODO (cjcullen): If we want this to handle per-kubelet ports or other id:155 gh:156
 		// kubelet listen-addresses, we need to plumb through options.
 		healthCheckPath := &url.URL{
 			Scheme: "http",
@@ -285,7 +285,7 @@ func CreateKubeAPIServerConfig(s *options.ServerRunOptions, nodeTunneler tunnele
 
 	capabilities.Initialize(capabilities.Capabilities{
 		AllowPrivileged: s.AllowPrivileged,
-		// TODO(vmarmol): Implement support for HostNetworkSources.
+		// TODO (vmarmol): Implement support for HostNetworkSources. id:125 gh:126
 		PrivilegedSources: capabilities.PrivilegedSources{
 			HostNetworkSources: []string{},
 			HostPIDSources:     []string{},
@@ -416,7 +416,7 @@ func BuildGenericConfig(s *options.ServerRunOptions, proxyTransport *http.Transp
 		// KUBE_API_VERSIONS is used in test-update-storage-objects.sh, disabling a number of API
 		// groups. This leads to a nil client above and undefined behaviour further down.
 		//
-		// TODO: get rid of KUBE_API_VERSIONS or define sane behaviour if set
+		// TODO: get rid of KUBE_API_VERSIONS or define sane behaviour if set id:174 gh:175
 		glog.Errorf("Failed to create clientset with KUBE_API_VERSIONS=%q. KUBE_API_VERSIONS is only for testing. Things will break.", kubeAPIVersions)
 	}
 
@@ -503,7 +503,7 @@ func BuildAdmissionPluginInitializer(s *options.ServerRunOptions, client interna
 		}
 	}
 
-	// TODO: use a dynamic restmapper. See https://github.com/kubernetes/kubernetes/pull/42615.
+	// TODO: use a dynamic restmapper. See https://github.com/kubernetes/kubernetes/pull/42615. id:58 gh:59
 	restMapper := legacyscheme.Registry.RESTMapper()
 
 	quotaConfiguration := quotainstall.NewQuotaConfigurationForAdmission()
@@ -535,7 +535,7 @@ func BuildAuthenticator(s *options.ServerRunOptions, storageFactory serverstorag
 		)
 	}
 	if client == nil || reflect.ValueOf(client).IsNil() {
-		// TODO: Remove check once client can never be nil.
+		// TODO: Remove check once client can never be nil. id:217 gh:216
 		glog.Errorf("Failed to setup bootstrap token authenticator because the loopback clientset was not setup properly.")
 	} else {
 		authenticatorConfig.BootstrapTokenAuthenticator = bootstrap.NewTokenAuthenticator(
@@ -561,7 +561,7 @@ func BuildStorageFactory(s *options.ServerRunOptions) (*serverstorage.DefaultSto
 	storageFactory, err := kubeapiserver.NewStorageFactory(
 		s.Etcd.StorageConfig, s.Etcd.DefaultStorageMediaType, legacyscheme.Codecs,
 		serverstorage.NewDefaultResourceEncodingConfig(legacyscheme.Registry), storageGroupsToEncodingVersion,
-		// FIXME (soltysh): this GroupVersionResource override should be configurable
+		// FIXME (soltysh): this GroupVersionResource override should be configurable id:156 gh:157
 		[]schema.GroupVersionResource{batch.Resource("cronjobs").WithVersion("v1beta1")},
 		master.DefaultAPIResourceConfigSource(), s.APIEnablement.RuntimeConfig)
 	if err != nil {
@@ -648,7 +648,7 @@ func defaultOptions(s *options.ServerRunOptions) error {
 		// From our documentation, we officially recommend 120GB machines for
 		// 2000 nodes, and we scale from that point. Thus we assume ~60MB of
 		// capacity per node.
-		// TODO: We may consider deciding that some percentage of memory will
+		// TODO: We may consider deciding that some percentage of memory will id:126 gh:127
 		// be used for the deserialization cache and divide it by the max object
 		// size to compute its size. We may even go further and measure
 		// collective sizes of the objects in the cache.

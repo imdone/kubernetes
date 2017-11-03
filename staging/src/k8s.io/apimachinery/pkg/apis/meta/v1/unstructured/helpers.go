@@ -292,7 +292,7 @@ var converter = unstructured.NewConverter(false)
 
 // UnstructuredJSONScheme is capable of converting JSON data into the Unstructured
 // type, which can be used for generic access to objects without a predefined scheme.
-// TODO: move into serializer/json.
+// TODO: move into serializer/json. id:3843 gh:3858
 var UnstructuredJSONScheme runtime.Codec = unstructuredJSONScheme{}
 
 type unstructuredJSONScheme struct{}
@@ -333,7 +333,7 @@ func (unstructuredJSONScheme) Encode(obj runtime.Object, w io.Writer) error {
 		listObj["items"] = items
 		return json.NewEncoder(w).Encode(listObj)
 	case *runtime.Unknown:
-		// TODO: Unstructured needs to deal with ContentType.
+		// TODO: Unstructured needs to deal with ContentType. id:3270 gh:3285
 		_, err := w.Write(t.Raw)
 		return err
 	default:
@@ -457,7 +457,7 @@ func (UnstructuredObjectConverter) ConvertToVersion(in runtime.Object, target ru
 	if kind := in.GetObjectKind().GroupVersionKind(); !kind.Empty() {
 		gvk, ok := target.KindForGroupVersionKinds([]schema.GroupVersionKind{kind})
 		if !ok {
-			// TODO: should this be a typed error?
+			// TODO: should this be a typed error? id:3765 gh:3780
 			return nil, fmt.Errorf("%v is unstructured and is not suitable for converting to %q", kind, target)
 		}
 		in.GetObjectKind().SetGroupVersionKind(gvk)

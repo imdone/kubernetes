@@ -401,7 +401,7 @@ func TestEtcdStorage(t *testing.T) {
 				Metadata: Metadata{
 					Name:      "foo",
 					Namespace: "the-cruel-default",
-					SelfLink:  "", // TODO double check: empty?
+					SelfLink:  "", // TODO double check: empty? id:3752 gh:3767
 				},
 			},
 		},
@@ -427,7 +427,7 @@ func TestEtcdStorage(t *testing.T) {
 				Metadata: Metadata{
 					Name:      "bar",
 					Namespace: "",
-					SelfLink:  "", // TODO double check: empty?
+					SelfLink:  "", // TODO double check: empty? id:3227 gh:3239
 				},
 			},
 		},
@@ -465,7 +465,7 @@ func getPrefixFromConfig(t *testing.T, config *extensionsapiserver.Config) strin
 }
 
 func getFromEtcd(keys clientv3.KV, prefix, localPath string) (*metaObject, error) {
-	internalPath := path.Join("/", prefix, localPath) // TODO: Double check, should we concatenate two prefixes?
+	internalPath := path.Join("/", prefix, localPath) // TODO: Double check, should we concatenate two prefixes? id:3651 gh:3666
 	response, err := keys.Get(context.Background(), internalPath)
 	if err != nil {
 		return nil, err

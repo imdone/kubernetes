@@ -34,7 +34,7 @@ func valueFuzz(obj reflect.Value) {
 		}
 	case reflect.Slice:
 		if obj.IsNil() {
-			// TODO: set non-nil value
+			// TODO: set non-nil value id:3494 gh:3509
 		} else {
 			for i := 0; i < obj.Len(); i++ {
 				valueFuzz(obj.Index(i))
@@ -42,7 +42,7 @@ func valueFuzz(obj reflect.Value) {
 		}
 	case reflect.Interface, reflect.Ptr:
 		if obj.IsNil() {
-			// TODO: set non-nil value
+			// TODO: set non-nil value id:3567 gh:3582
 		} else {
 			valueFuzz(obj.Elem())
 		}
@@ -52,7 +52,7 @@ func valueFuzz(obj reflect.Value) {
 		}
 	case reflect.Map:
 		if obj.IsNil() {
-			// TODO: set non-nil value
+			// TODO: set non-nil value id:3837 gh:3852
 		} else {
 			for _, k := range obj.MapKeys() {
 				// map values are not addressable. We need a copy.
@@ -62,7 +62,7 @@ func valueFuzz(obj reflect.Value) {
 				valueFuzz(copy.Elem())
 				obj.SetMapIndex(k, copy.Elem())
 			}
-			// TODO: set some new value
+			// TODO: set some new value id:3233 gh:3248
 		}
 	case reflect.Func: // ignore, we don't have function types in our API
 	default:

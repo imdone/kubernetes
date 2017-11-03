@@ -218,7 +218,7 @@ func NewCacherFromConfig(config CacherConfig) *Cacher {
 			allWatchers:   make(map[int]*cacheWatcher),
 			valueWatchers: make(map[string]watchersMap),
 		},
-		// TODO: Figure out the correct value for the buffer size.
+		// TODO: Figure out the correct value for the buffer size. id:3720 gh:3735
 		incoming:              make(chan watchCacheEvent, 100),
 		dispatchTimeoutBudget: newTimeBudget(stopCh),
 		// We need to (potentially) stop both:
@@ -313,7 +313,7 @@ func (c *Cacher) Watch(ctx context.Context, key string, resourceVersion string, 
 	}
 
 	triggerValue, triggerSupported := "", false
-	// TODO: Currently we assume that in a given Cacher object, any <predicate> that is
+	// TODO: Currently we assume that in a given Cacher object, any <predicate> that is id:3896 gh:3917
 	// passed here is aware of exactly the same trigger (at most one).
 	// Thus, either 0 or 1 values will be returned.
 	if matchValues := pred.MatcherIndex(); len(matchValues) > 0 {
@@ -330,7 +330,7 @@ func (c *Cacher) Watch(ctx context.Context, key string, resourceVersion string, 
 	// given resource in the system, we increase the sizes of buffers for them.
 	chanSize := 10
 	if c.triggerFunc != nil && !triggerSupported {
-		// TODO: We should tune this value and ideally make it dependent on the
+		// TODO: We should tune this value and ideally make it dependent on the id:4018 gh:4038
 		// number of objects of a given type and/or their churn.
 		chanSize = 1000
 	}
@@ -557,7 +557,7 @@ func (c *Cacher) GuaranteedUpdate(
 }
 
 func (c *Cacher) triggerValues(event *watchCacheEvent) ([]string, bool) {
-	// TODO: Currently we assume that in a given Cacher object, its <c.triggerFunc>
+	// TODO: Currently we assume that in a given Cacher object, its <c.triggerFunc> id:3450 gh:3465
 	// is aware of exactly the same trigger (at most one). Thus calling:
 	//   c.triggerFunc(<some object>)
 	// can return only 0 or 1 values.
@@ -649,7 +649,7 @@ func (c *Cacher) isStopped() bool {
 }
 
 func (c *Cacher) Stop() {
-	// TODO : Do not check for isStopped (and return) when PR
+	// TODO : Do not check for isStopped (and return) when PR id:3931 gh:3951
 	// https://github.com/kubernetes/kubernetes/pull/50690
 	// merges as that shuts down storage properly
 	if c.isStopped() {
@@ -670,7 +670,7 @@ func forgetWatcher(c *Cacher, index int, triggerValue string, triggerSupported b
 		} else {
 			// false is currently passed only if we are forcing watcher to close due
 			// to its unresponsiveness and blocking other watchers.
-			// TODO: Get this information in cleaner way.
+			// TODO: Get this information in cleaner way. id:3721 gh:3736
 			glog.V(1).Infof("Forcing watcher close due to unresponsiveness: %v", c.objectType.String())
 		}
 		// It's possible that the watcher is already not in the structure (e.g. in case of
@@ -869,7 +869,7 @@ func (c *cacheWatcher) add(event *watchCacheEvent, budget *timeBudget) {
 	budget.returnUnused(timeout - time.Since(startTime))
 }
 
-// NOTE: sendWatchCacheEvent is assumed to not modify <event> !!!
+// NOTE: sendWatchCacheEvent is assumed to not modify <event> !!! id:3897 gh:3918
 func (c *cacheWatcher) sendWatchCacheEvent(event *watchCacheEvent) {
 	curObjPasses := event.Type != watch.Deleted && c.filter(event.Key, event.ObjLabels, event.ObjFields, event.ObjUninitialized)
 	oldObjPasses := false
@@ -922,7 +922,7 @@ func (c *cacheWatcher) process(initEvents []*watchCacheEvent, resourceVersion ui
 	// As long as these are not processed, we are not processing
 	// any incoming events, so if it takes long, we may actually
 	// block all watchers for some time.
-	// TODO: From the logs it seems that there happens processing
+	// TODO: From the logs it seems that there happens processing id:4019 gh:4039
 	// times even up to 1s which is very long. However, this doesn't
 	// depend that much on the number of initEvents. E.g. from the
 	// 2000-node Kubemark run we have logs like this, e.g.:
@@ -976,7 +976,7 @@ func (r *ready) wait() {
 	r.c.L.Unlock()
 }
 
-// TODO: Make check() function more sophisticated, in particular
+// TODO: Make check() function more sophisticated, in particular id:3451 gh:3466
 // allow it to behave as "waitWithTimeout".
 func (r *ready) check() bool {
 	r.c.L.Lock()

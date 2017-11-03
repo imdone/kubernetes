@@ -90,7 +90,7 @@ func DefaultHealthyHandler(w http.ResponseWriter, r *http.Request) {
 		Status: "ok",
 	})
 	if err != nil {
-		// TODO(bobbyrullo): replace with logging from new logging pkg,
+		// TODO (bobbyrullo): replace with logging from new logging pkg, id:2685 gh:2701
 		// once it lands.
 		log.Printf("Failed to write JSON response: %v", err)
 	}
@@ -105,7 +105,7 @@ func DefaultUnhealthyHandler(w http.ResponseWriter, r *http.Request, err error) 
 		},
 	})
 	if writeErr != nil {
-		// TODO(bobbyrullo): replace with logging from new logging pkg,
+		// TODO (bobbyrullo): replace with logging from new logging pkg, id:2890 gh:2905
 		// once it lands.
 		log.Printf("Failed to write JSON response: %v", err)
 	}

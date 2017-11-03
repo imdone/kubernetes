@@ -74,7 +74,7 @@ func ReadJSON(data []byte, value interface{}) error {
 
 // DynamicJSONToStruct converts an untyped json structure into a struct
 func DynamicJSONToStruct(data interface{}, target interface{}) error {
-	// TODO: convert straight to a json typed map  (mergo + iterate?)
+	// TODO: convert straight to a json typed map  (mergo + iterate?) id:2860 gh:2875
 	b, err := WriteJSON(data)
 	if err != nil {
 		return err
@@ -151,7 +151,7 @@ func ConcatJSON(blobs ...[]byte) []byte {
 
 // ToDynamicJSON turns an object into a properly JSON typed structure
 func ToDynamicJSON(data interface{}) interface{} {
-	// TODO: convert straight to a json typed map (mergo + iterate?)
+	// TODO: convert straight to a json typed map (mergo + iterate?) id:2713 gh:2728
 	b, err := json.Marshal(data)
 	if err != nil {
 		log.Println(err)

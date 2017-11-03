@@ -17,7 +17,7 @@
 # This script is for configuring kubernetes master and node instances. It is
 # uploaded in the manifests tar ball.
 
-# TODO: this script duplicates templating logic from cluster/saltbase/salt
+# TODO: this script duplicates templating logic from cluster/saltbase/salt id:78 gh:79
 # using sed. It should use an actual template parser on the manifest
 # files.
 
@@ -178,7 +178,7 @@ function mount-master-pd {
   safe-format-and-mount "${pd_path}" "${mount_point}"
   echo "Mounted master-pd '${pd_path}' at '${mount_point}'"
 
-  # NOTE: These locations on the PD store persistent data, so to maintain
+  # NOTE: These locations on the PD store persistent data, so to maintain id:25 gh:25
   # upgradeability, these locations should not change.  If they do, take care
   # to maintain a migration path from these locations to whatever new
   # locations.
@@ -245,7 +245,7 @@ function create-node-pki {
     write-pki-data "${KUBELET_KEY}" "${KUBELET_KEY_PATH}"
   fi
 
-  # TODO(mikedanese): remove this when we don't support downgrading to versions
+  # TODO (mikedanese): remove this when we don't support downgrading to versions id:33 gh:34
   # < 1.6.
   ln -sf "${CA_CERT_BUNDLE_PATH}" /etc/srv/kubernetes/ca.crt
 }
@@ -298,7 +298,7 @@ function create-master-pki {
   SERVICEACCOUNT_KEY_PATH="${pki_dir}/serviceaccount.key"
   write-pki-data "${SERVICEACCOUNT_KEY}" "${SERVICEACCOUNT_KEY_PATH}"
 
-  # TODO(mikedanese): remove this when we don't support downgrading to versions
+  # TODO (mikedanese): remove this when we don't support downgrading to versions id:43 gh:44
   # < 1.6.
   ln -sf "${APISERVER_SERVER_KEY_PATH}" /etc/srv/kubernetes/server.key
   ln -sf "${APISERVER_SERVER_CERT_PATH}" /etc/srv/kubernetes/server.cert
@@ -546,7 +546,7 @@ rules:
         resources: ["endpoints", "services", "services/status"]
   - level: None
     # Ingress controller reads 'configmaps/ingress-uid' through the unsecured port.
-    # TODO(#46983): Change this to the ingress controller service account.
+    # TODO (#46983): Change this to the ingress controller service account. id:104 gh:105
     users: ["system:unsecured"]
     namespaces: ["kube-system"]
     verbs: ["get"]
@@ -1042,7 +1042,7 @@ function start-node-problem-detector {
   echo "Start node problem detector"
   local -r npd_bin="${KUBE_HOME}/bin/node-problem-detector"
   local -r km_config="${KUBE_HOME}/node-problem-detector/config/kernel-monitor.json"
-  # TODO(random-liu): Handle this for alternative container runtime.
+  # TODO (random-liu): Handle this for alternative container runtime. id:79 gh:80
   local -r dm_config="${KUBE_HOME}/node-problem-detector/config/docker-monitor.json"
   echo "Using node problem detector binary at ${npd_bin}"
   local flags="${NPD_TEST_LOG_LEVEL:-"--v=2"} ${NPD_TEST_ARGS:-}"
@@ -1354,7 +1354,7 @@ function start-kube-apiserver {
       params+=" --max-requests-inflight=1500 --max-mutating-requests-inflight=500"
     fi
     # Set amount of memory available for apiserver based on number of nodes.
-    # TODO: Once we start setting proper requests and limits for apiserver
+    # TODO: Once we start setting proper requests and limits for apiserver id:26 gh:27
     # we should reuse the same logic here instead of current heuristic.
     params+=" --target-ram-mb=$((${NUM_NODES} * 60))"
   fi
@@ -2077,3 +2077,4 @@ reset-motd
 prepare-mounter-rootfs
 modprobe configs
 echo "Done for the configuration for kubernetes"
+"

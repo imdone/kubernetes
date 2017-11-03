@@ -100,7 +100,7 @@ func NewRESTMapper(groupResources []*APIGroupResources, versionInterfaces meta.V
 				// this is for legacy resources and servers which don't list singular forms.  For those we must still guess.
 				if len(resource.SingularName) == 0 {
 					versionMapper.Add(gv.WithKind(resource.Kind), scope)
-					// TODO this is producing unsafe guesses that don't actually work, but it matches previous behavior
+					// TODO this is producing unsafe guesses that don't actually work, but it matches previous behavior id:3909 gh:3929
 					versionMapper.Add(gv.WithKind(resource.Kind+"List"), scope)
 					continue
 				}
@@ -108,10 +108,10 @@ func NewRESTMapper(groupResources []*APIGroupResources, versionInterfaces meta.V
 				plural := gv.WithResource(resource.Name)
 				singular := gv.WithResource(resource.SingularName)
 				versionMapper.AddSpecific(gv.WithKind(resource.Kind), plural, singular, scope)
-				// TODO this is producing unsafe guesses that don't actually work, but it matches previous behavior
+				// TODO this is producing unsafe guesses that don't actually work, but it matches previous behavior id:4040 gh:4060
 				versionMapper.Add(gv.WithKind(resource.Kind+"List"), scope)
 			}
-			// TODO why is this type not in discovery (at least for "v1")
+			// TODO why is this type not in discovery (at least for "v1") id:3463 gh:3478
 			versionMapper.Add(gv.WithKind("List"), meta.RESTScopeRoot)
 			unionMapper = append(unionMapper, versionMapper)
 		}
@@ -154,7 +154,7 @@ func GetAPIGroupResources(cl DiscoveryInterface) ([]*APIGroupResources, error) {
 			resources, err := cl.ServerResourcesForGroupVersion(version.GroupVersion)
 			if err != nil {
 				// continue as best we can
-				// TODO track the errors and update callers to handle partial errors.
+				// TODO track the errors and update callers to handle partial errors. id:3944 gh:3964
 				continue
 			}
 			groupResources.VersionedResources[version.Version] = resources.APIResources

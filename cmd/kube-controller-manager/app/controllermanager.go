@@ -362,7 +362,7 @@ func NewControllerInitializers() map[string]InitFunc {
 	return controllers
 }
 
-// TODO: In general, any controller checking this needs to be dynamic so
+// TODO: In general, any controller checking this needs to be dynamic so id:157 gh:158
 //  users don't have to restart their controller manager if they change the apiserver.
 // Until we get there, the structure here needs to be exposed for the construction of a proper ControllerContext.
 func GetAvailableResources(clientBuilder controller.ControllerClientBuilder) (map[schema.GroupVersionResource]bool, error) {

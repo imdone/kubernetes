@@ -46,8 +46,8 @@ import (
 // Is level driven and idempotent - all valid ClusterIPs will be updated into the ipallocator
 // map at the end of a single execution loop if no race is encountered.
 //
-// TODO: allocate new IPs if necessary
-// TODO: perform repair?
+// TODO: allocate new IPs if necessary id:1318 gh:1324
+// TODO: perform repair? id:1279 gh:1285
 type Repair struct {
 	interval      time.Duration
 	serviceClient coreclient.ServicesGetter
@@ -88,7 +88,7 @@ func (c *Repair) RunOnce() error {
 
 // runOnce verifies the state of the cluster IP allocations and returns an error if an unrecoverable problem occurs.
 func (c *Repair) runOnce() error {
-	// TODO: (per smarterclayton) if Get() or ListServices() is a weak consistency read,
+	// TODO: (per smarterclayton) if Get() or ListServices() is a weak consistency read, id:1325 gh:1331
 	// or if they are executed against different leaders,
 	// the ordering guarantee required to ensure no IP is allocated twice is violated.
 	// ListServices must return a ResourceVersion higher than the etcd index Get triggers,
@@ -151,15 +151,15 @@ func (c *Repair) runOnce() error {
 			}
 			delete(c.leaks, ip.String()) // it is used, so it can't be leaked
 		case ipallocator.ErrAllocated:
-			// TODO: send event
+			// TODO: send event id:1358 gh:1364
 			// cluster IP is duplicate
 			runtime.HandleError(fmt.Errorf("the cluster IP %s for service %s/%s was assigned to multiple services; please recreate", ip, svc.Name, svc.Namespace))
 		case err.(*ipallocator.ErrNotInRange):
-			// TODO: send event
+			// TODO: send event id:1397 gh:1403
 			// cluster IP is out of range
 			runtime.HandleError(fmt.Errorf("the cluster IP %s for service %s/%s is not within the service CIDR %s; please recreate", ip, svc.Name, svc.Namespace, c.network))
 		case ipallocator.ErrFull:
-			// TODO: send event
+			// TODO: send event id:1319 gh:1325
 			// somehow we are out of IPs
 			return fmt.Errorf("the service CIDR %v is full; you must widen the CIDR in order to create new services", rebuilt)
 		default:

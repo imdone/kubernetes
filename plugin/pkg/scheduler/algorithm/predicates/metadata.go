@@ -40,7 +40,7 @@ type matchingPodAntiAffinityTerm struct {
 	node *v1.Node
 }
 
-// NOTE: When new fields are added/removed or logic is changed, please make sure that
+// NOTE: When new fields are added/removed or logic is changed, please make sure that id:1462 gh:1468
 // RemovePod, AddPod, and ShallowCopy functions are updated to work with the new changes.
 type predicateMetadata struct {
 	pod           *v1.Pod

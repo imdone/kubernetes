@@ -85,7 +85,7 @@ func (r ResourceBase) AssertValid() error {
 	return nil
 }
 
-// TODO(lucab): both need to be clarified in spec,
+// TODO (lucab): both need to be clarified in spec, id:2487 gh:2502
 // see https://github.com/appc/spec/issues/625
 func (l ResourceBase) multipleAllowed() bool {
 	return true

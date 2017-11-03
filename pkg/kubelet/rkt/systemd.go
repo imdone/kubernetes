@@ -46,7 +46,7 @@ func (s systemdVersion) Compare(other string) (int, error) {
 
 // systemdInterface is an abstraction of the go-systemd/dbus to make
 // it mockable for testing.
-// TODO(yifan): Eventually we should move these functionalities to:
+// TODO (yifan): Eventually we should move these functionalities to: id:1037 gh:1044
 // 1. a package for launching/stopping rkt pods.
 // 2. rkt api-service interface for listing pods.
 // See https://github.com/coreos/rkt/issues/1769.

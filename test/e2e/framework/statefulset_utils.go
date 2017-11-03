@@ -192,7 +192,7 @@ func (s *StatefulSetTester) VerifyPodAtIndex(index int, ss *apps.StatefulSet, ve
 }
 
 func getStatefulSetPodNameAtIndex(index int, ss *apps.StatefulSet) string {
-	// TODO: we won't use "-index" as the name strategy forever,
+	// TODO: we won't use "-index" as the name strategy forever, id:2460 gh:2475
 	// pull the name out from an identity mapper.
 	return fmt.Sprintf("%v-%v", ss.Name, index)
 }
@@ -699,7 +699,7 @@ func DeleteAllStatefulSets(c clientset.Interface, ns string) {
 
 	// pvs are global, so we need to wait for the exact ones bound to the statefulset pvcs.
 	pvNames := sets.NewString()
-	// TODO: Don't assume all pvcs in the ns belong to a statefulset
+	// TODO: Don't assume all pvcs in the ns belong to a statefulset id:2110 gh:2125
 	pvcPollErr := wait.PollImmediate(StatefulSetPoll, StatefulSetTimeout, func() (bool, error) {
 		pvcList, err := c.CoreV1().PersistentVolumeClaims(ns).List(metav1.ListOptions{LabelSelector: labels.Everything().String()})
 		if err != nil {
@@ -708,7 +708,7 @@ func DeleteAllStatefulSets(c clientset.Interface, ns string) {
 		}
 		for _, pvc := range pvcList.Items {
 			pvNames.Insert(pvc.Spec.VolumeName)
-			// TODO: Double check that there are no pods referencing the pvc
+			// TODO: Double check that there are no pods referencing the pvc id:2378 gh:2393
 			Logf("Deleting pvc: %v with volume %v", pvc.Name, pvc.Spec.VolumeName)
 			if err := c.CoreV1().PersistentVolumeClaims(ns).Delete(pvc.Name, nil); err != nil {
 				return false, nil
@@ -827,7 +827,7 @@ func NewStatefulSet(name, ns, governingSvcName string, replicas int32, statefulP
 // NewStatefulSetScale creates a new StatefulSet scale subresource and returns it
 func NewStatefulSetScale(ss *apps.StatefulSet) *appsV1beta2.Scale {
 	return &appsV1beta2.Scale{
-		// TODO: Create a variant of ObjectMeta type that only contains the fields below.
+		// TODO: Create a variant of ObjectMeta type that only contains the fields below. id:2243 gh:2258
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      ss.Name,
 			Namespace: ss.Namespace,

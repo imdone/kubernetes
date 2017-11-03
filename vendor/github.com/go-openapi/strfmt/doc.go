@@ -14,5 +14,5 @@
 
 // Package strfmt contains custom string formats
 //
-// TODO: add info on how to define and register a custom format
+// TODO: add info on how to define and register a custom format id:2697 gh:2712
 package strfmt

@@ -14,7 +14,7 @@ import (
 	"time"
 )
 
-// TODO Instrumentation? To get statistics?
+// TODO Instrumentation? To get statistics? id:2925 gh:2940
 
 // More detailed error
 type HawkularClientError struct {
@@ -85,7 +85,7 @@ func Data(data interface{}) Modifier {
 }
 
 func (self *Client) Url(method string, e ...Endpoint) Modifier {
-	// TODO Create composite URLs? Add().Add().. etc? Easier to modify on the fly..
+	// TODO Create composite URLs? Add().Add().. etc? Easier to modify on the fly.. id:3064 gh:3079
 	return func(r *http.Request) error {
 		u := self.createUrl(e...)
 		r.URL = u
@@ -430,7 +430,7 @@ func (self *Client) ReadMetric(t MetricType, id string, o ...Modifier) ([]*Datap
 	return nil, nil
 }
 
-// TODO ReadMetrics should be equal also, to read new tagsFilter aggregation..
+// TODO ReadMetrics should be equal also, to read new tagsFilter aggregation.. id:2747 gh:2762
 func (self *Client) ReadBuckets(t MetricType, o ...Modifier) ([]*Bucketpoint, error) {
 	o = prepend(o, self.Url("GET", TypeEndpoint(t), DataEndpoint()))
 

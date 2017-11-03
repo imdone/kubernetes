@@ -48,7 +48,7 @@ var volNameToDeviceName = make(map[string]string)
 type PhotonDiskUtil struct{}
 
 func removeFromScsiSubsystem(volName string) {
-	// TODO: if using pvscsi controller, this won't be needed
+	// TODO: if using pvscsi controller, this won't be needed id:1530 gh:1536
 	deviceName := volNameToDeviceName[volName]
 	fileName := "/sys/block/" + deviceName + "/device/delete"
 	data := []byte("1")
@@ -56,7 +56,7 @@ func removeFromScsiSubsystem(volName string) {
 }
 
 func scsiHostScan() {
-	// TODO: if using pvscsi controller, this won't be needed
+	// TODO: if using pvscsi controller, this won't be needed id:1516 gh:1518
 	scsi_path := "/sys/class/scsi_host/"
 	if dirs, err := ioutil.ReadDir(scsi_path); err == nil {
 		for _, f := range dirs {

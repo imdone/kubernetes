@@ -144,7 +144,7 @@ func (t *testPrinter) PrintObj(obj runtime.Object, out io.Writer) error {
 	return t.Err
 }
 
-// TODO: implement HandledResources()
+// TODO: implement HandledResources() id:706 gh:707
 func (t *testPrinter) HandledResources() []string {
 	return []string{}
 }
@@ -186,7 +186,7 @@ func stringBody(body string) io.ReadCloser {
 	return ioutil.NopCloser(bytes.NewReader([]byte(body)))
 }
 
-// TODO(jlowdermilk): refactor the Factory so we can test client versions properly,
+// TODO (jlowdermilk): refactor the Factory so we can test client versions properly, id:659 gh:660
 // with different client/server version skew scenarios.
 // Verify that resource.RESTClients constructed from a factory respect mapping.APIVersion
 //func TestClientVersions(t *testing.T) {

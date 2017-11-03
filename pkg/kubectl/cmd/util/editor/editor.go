@@ -34,7 +34,7 @@ import (
 
 const (
 	// sorry, blame Git
-	// TODO: on Windows rely on 'start' to launch the editor associated
+	// TODO: on Windows rely on 'start' to launch the editor associated id:716 gh:717
 	// with the given file type. If we can't because of the need of
 	// blocking, use a script with 'ftype' and 'assoc' to detect it.
 	defaultEditor = "vi"

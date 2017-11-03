@@ -30,7 +30,7 @@ func addDefaultingFuncs(scheme *runtime.Scheme) error {
 
 func SetDefaults_ResourceList(obj *v1.ResourceList) {
 	for key, val := range *obj {
-		// TODO(#18538): We round up resource values to milli scale to maintain API compatibility.
+		// TODO (#18538): We round up resource values to milli scale to maintain API compatibility. id:264 gh:265
 		// In the future, we should instead reject values that need rounding.
 		const milliScale = -3
 		val.RoundUp(milliScale)
@@ -52,7 +52,7 @@ func SetDefaults_ReplicationController(obj *v1.ReplicationController) {
 	if obj.Spec.Template != nil {
 		labels = obj.Spec.Template.Labels
 	}
-	// TODO: support templates defined elsewhere when we support them in the API
+	// TODO: support templates defined elsewhere when we support them in the API id:314 gh:315
 	if labels != nil {
 		if len(obj.Spec.Selector) == 0 {
 			obj.Spec.Selector = labels

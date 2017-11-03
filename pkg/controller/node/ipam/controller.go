@@ -115,7 +115,7 @@ func (c *Controller) Start(nodeInformer informers.NodeInformer) error {
 			c.lock.Lock()
 			defer c.lock.Unlock()
 
-			// XXX/bowei -- stagger the start of each sync cycle.
+			// XXX /bowei -- stagger the start of each sync cycle. id:590 gh:591
 			syncer := c.newSyncer(node.Name)
 			c.syncers[node.Name] = syncer
 			go syncer.Loop(nil)

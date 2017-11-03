@@ -97,7 +97,7 @@ var _ = SIGDescribe("Deployment", func() {
 	It("test Deployment ReplicaSet orphaning and adoption regarding controllerRef", func() {
 		testDeploymentsControllerRef(f)
 	})
-	// TODO: add tests that cover deployment.Spec.MinReadySeconds once we solved clock-skew issues
+	// TODO: add tests that cover deployment.Spec.MinReadySeconds once we solved clock-skew issues id:2216 gh:2231
 	// See https://github.com/kubernetes/kubernetes/issues/29229
 })
 
@@ -550,7 +550,7 @@ func testRollbackDeployment(f *framework.Framework) {
 	// Wait for the deployment to start rolling back
 	err = framework.WaitForDeploymentRollbackCleared(c, ns, deploymentName)
 	Expect(err).NotTo(HaveOccurred())
-	// TODO: report RollbackDone in deployment status and check it here
+	// TODO: report RollbackDone in deployment status and check it here id:2363 gh:2378
 
 	// Wait for it to be updated to revision 3
 	err = framework.WaitForDeploymentRevisionAndImage(c, ns, deploymentName, "3", deploymentImage)
@@ -595,7 +595,7 @@ func testRollbackDeployment(f *framework.Framework) {
 	// Wait for the deployment to start rolling back
 	err = framework.WaitForDeploymentRollbackCleared(c, ns, deploymentName)
 	Expect(err).NotTo(HaveOccurred())
-	// TODO: report RollbackRevisionNotFound in deployment status and check it here
+	// TODO: report RollbackRevisionNotFound in deployment status and check it here id:2095 gh:2110
 
 	// The pod template shouldn't change since there's no revision 10
 	// Check if it's still revision 4 and still has the old pod template
@@ -613,7 +613,7 @@ func testRollbackDeployment(f *framework.Framework) {
 	// Wait for the deployment to start rolling back
 	err = framework.WaitForDeploymentRollbackCleared(c, ns, deploymentName)
 	Expect(err).NotTo(HaveOccurred())
-	// TODO: report RollbackTemplateUnchanged in deployment status and check it here
+	// TODO: report RollbackTemplateUnchanged in deployment status and check it here id:2297 gh:2313
 
 	// The pod template shouldn't change since it's already revision 4
 	// Check if it's still revision 4 and still has the old pod template

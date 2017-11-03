@@ -87,7 +87,7 @@ func toYAML(v interface{}) (string, error) {
 // same Type have congruent keys, this is valid for multiple patch types. This method
 // supports JSON merge patch semantics.
 //
-// NOTE: Numbers with different types (e.g. int(0) vs int64(0)) will be detected as conflicts.
+// NOTE: Numbers with different types (e.g. int(0) vs int64(0)) will be detected as conflicts. id:3683 gh:3698
 //       Make sure the unmarshaling of left and right are consistent (e.g. use the same library).
 func HasConflicts(left, right interface{}) (bool, error) {
 	switch typedLeft := left.(type) {

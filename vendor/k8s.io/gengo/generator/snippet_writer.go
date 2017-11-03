@@ -94,7 +94,7 @@ func NewSnippetWriter(w io.Writer, c *Context, left, right string) *SnippetWrite
 // but you should consider doing the logic in go and stitching them together
 // for the sake of your readers.
 //
-// TODO: Change Do() to optionally take a list of pairs of parameters (key, value)
+// TODO: Change Do() to optionally take a list of pairs of parameters (key, value) id:3829 gh:3844
 // and have it construct a combined map with that and args.
 func (s *SnippetWriter) Do(format string, args interface{}) *SnippetWriter {
 	if s.err != nil {

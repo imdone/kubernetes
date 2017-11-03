@@ -269,7 +269,7 @@ type DeploymentStrategy struct {
 	// Rolling update config params. Present only if DeploymentStrategyType =
 	// RollingUpdate.
 	//---
-	// TODO: Update this to follow our convention for oneOf, whatever we decide it
+	// TODO: Update this to follow our convention for oneOf, whatever we decide it id:3416 gh:3432
 	// to be.
 	// +optional
 	RollingUpdate *RollingUpdateDeployment `json:"rollingUpdate,omitempty" protobuf:"bytes,2,opt,name=rollingUpdate"`
@@ -409,7 +409,7 @@ type DaemonSetUpdateStrategy struct {
 
 	// Rolling update config params. Present only if type = "RollingUpdate".
 	//---
-	// TODO: Update this to follow our convention for oneOf, whatever we decide it
+	// TODO: Update this to follow our convention for oneOf, whatever we decide it id:3553 gh:3568
 	// to be. Same as Deployment `strategy.rollingUpdate`.
 	// See https://github.com/kubernetes/kubernetes/issues/35345
 	// +optional
@@ -662,7 +662,7 @@ type IngressSpec struct {
 	// no rule matches, all traffic is sent to the default backend.
 	// +optional
 	Rules []IngressRule `json:"rules,omitempty" protobuf:"bytes,3,rep,name=rules"`
-	// TODO: Add the ability to specify load-balancer IP through claims
+	// TODO: Add the ability to specify load-balancer IP through claims id:3744 gh:3760
 }
 
 // IngressTLS describes the transport layer security associated with an Ingress.
@@ -680,7 +680,7 @@ type IngressTLS struct {
 	// Host header is used for routing.
 	// +optional
 	SecretName string `json:"secretName,omitempty" protobuf:"bytes,2,opt,name=secretName"`
-	// TODO: Consider specifying different modes of termination, protocols etc.
+	// TODO: Consider specifying different modes of termination, protocols etc. id:3157 gh:3172
 }
 
 // IngressStatus describe the current state of the Ingress.
@@ -722,7 +722,7 @@ type IngressRule struct {
 // mixing different types of rules in a single Ingress is disallowed, so exactly
 // one of the following must be set.
 type IngressRuleValue struct {
-	//TODO:
+	//TODO: id:3643 gh:3658
 	// 1. Consider renaming this resource and the associated rules so they
 	// aren't tied to Ingress. They can be used to route intra-cluster traffic.
 	// 2. Consider adding fields for ingress-type specific global options
@@ -740,7 +740,7 @@ type IngressRuleValue struct {
 type HTTPIngressRuleValue struct {
 	// A collection of paths that map requests to backends.
 	Paths []HTTPIngressPath `json:"paths" protobuf:"bytes,1,rep,name=paths"`
-	// TODO: Consider adding fields for ingress-type specific global
+	// TODO: Consider adding fields for ingress-type specific global id:3417 gh:3433
 	// options usable by a loadbalancer, like http keep-alive.
 }
 

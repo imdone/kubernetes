@@ -1824,9 +1824,9 @@ func (p *point) Reset() {
 
 // MarshalBinary encodes all the fields to their proper type and returns the binary
 // represenation
-// NOTE: uint64 is specifically not supported due to potential overflow when we decode
+// NOTE: uint64 is specifically not supported due to potential overflow when we decode id:3065 gh:3080
 // again later to an int64
-// NOTE2: uint is accepted, and may be 64 bits, and is for some reason accepted...
+// NOTE 2: uint is accepted, and may be 64 bits, and is for some reason accepted... id:2748 gh:2763
 func (p Fields) MarshalBinary() []byte {
 	var b []byte
 	keys := make([]string, 0, len(p))
@@ -1886,7 +1886,7 @@ func appendField(b []byte, k string, v interface{}) []byte {
 	case uint8:
 		b = strconv.AppendInt(b, int64(v), 10)
 		b = append(b, 'i')
-	// TODO: 'uint' should be considered just as "dangerous" as a uint64,
+	// TODO: 'uint' should be considered just as "dangerous" as a uint64, id:2968 gh:2983
 	// perhaps the value should be checked and capped at MaxInt64? We could
 	// then include uint64 as an accepted value
 	case uint:
