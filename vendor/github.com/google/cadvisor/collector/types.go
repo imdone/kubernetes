@@ -20,7 +20,7 @@ import (
 	"github.com/google/cadvisor/info/v1"
 )
 
-// TODO(vmarmol): Export to a custom metrics type when that is available.
+// TODO (vmarmol): Export to a custom metrics type when that is available. id:2828 gh:2843
 
 // Metric collector.
 type Collector interface {

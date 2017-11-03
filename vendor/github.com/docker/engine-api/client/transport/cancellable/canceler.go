@@ -13,7 +13,7 @@ import (
 )
 
 func canceler(client transport.Sender, req *http.Request) func() {
-	// TODO(djd): Respect any existing value of req.Cancel.
+	// TODO (djd): Respect any existing value of req.Cancel. id:2981 gh:2996
 	ch := make(chan struct{})
 	req.Cancel = ch
 

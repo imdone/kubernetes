@@ -61,7 +61,7 @@ var controllerKind = v1.SchemeGroupVersion.WithKind("ReplicationController")
 
 // ReplicationManager is responsible for synchronizing ReplicationController objects stored
 // in the system with actual running pods.
-// NOTE: using this name to distinguish this type from API object "ReplicationController"; will
+// NOTE: using this name to distinguish this type from API object "ReplicationController"; will id:633 gh:634
 //       not fix it right now. Refer to #41459 for more detail.
 type ReplicationManager struct {
 	kubeClient clientset.Interface
@@ -138,7 +138,7 @@ func NewReplicationManager(podInformer coreinformers.PodInformer, rcInformer cor
 // SetEventRecorder replaces the event recorder used by the replication manager
 // with the given recorder. Only used for testing.
 func (rm *ReplicationManager) SetEventRecorder(recorder record.EventRecorder) {
-	// TODO: Hack. We can't cleanly shutdown the event recorder, so benchmarks
+	// TODO: Hack. We can't cleanly shutdown the event recorder, so benchmarks id:569 gh:570
 	// need to pass in a fake.
 	rm.podControl = controller.RealPodControl{KubeClient: rm.kubeClient, Recorder: recorder}
 }
@@ -306,7 +306,7 @@ func (rm *ReplicationManager) updatePod(old, cur interface{}) {
 		}
 		glog.V(4).Infof("Pod %s updated, objectMeta %+v -> %+v.", curPod.Name, oldPod.ObjectMeta, curPod.ObjectMeta)
 		rm.enqueueController(rc)
-		// TODO: MinReadySeconds in the Pod will generate an Available condition to be added in
+		// TODO: MinReadySeconds in the Pod will generate an Available condition to be added in id:669 gh:670
 		// the Pod status which in turn will trigger a requeue of the owning ReplicationController thus
 		// having its status updated with the newly available replica. For now, we can fake the
 		// update by resyncing the controller MinReadySeconds after the it is requeued because
@@ -439,7 +439,7 @@ func (rm *ReplicationManager) manageReplicas(filteredPods []*v1.Pod, rc *v1.Repl
 		if diff > rm.burstReplicas {
 			diff = rm.burstReplicas
 		}
-		// TODO: Track UIDs of creates just like deletes. The problem currently
+		// TODO: Track UIDs of creates just like deletes. The problem currently id:552 gh:553
 		// is we'd need to wait on the result of a create to record the pod's
 		// UID, which would require locking *across* the create, which will turn
 		// into a performance bottleneck. We should generate a UID for the pod
@@ -608,7 +608,7 @@ func (rm *ReplicationManager) syncReplicationController(key string) error {
 
 	// list all pods to include the pods that don't match the rc's selector
 	// anymore but has the stale controller ref.
-	// TODO: Do the List and Filter in a single pass, or use an index.
+	// TODO: Do the List and Filter in a single pass, or use an index. id:596 gh:597
 	allPods, err := rm.podLister.Pods(rc.Namespace).List(labels.Everything())
 	if err != nil {
 		return err
@@ -633,7 +633,7 @@ func (rm *ReplicationManager) syncReplicationController(key string) error {
 		return fresh, nil
 	})
 	cm := controller.NewPodControllerRefManager(rm.podControl, rc, labels.Set(rc.Spec.Selector).AsSelectorPreValidated(), controllerKind, canAdoptFunc)
-	// NOTE: filteredPods are pointing to objects from cache - if you need to
+	// NOTE: filteredPods are pointing to objects from cache - if you need to id:634 gh:635
 	// modify them, you need to copy it first.
 	filteredPods, err = cm.ClaimPods(filteredPods)
 	if err != nil {

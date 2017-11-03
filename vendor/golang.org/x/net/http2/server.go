@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// TODO: turn off the serve goroutine when idle, so
+// TODO: turn off the serve goroutine when idle, so id:3267 gh:3282
 // an idle conn only has the readFrames goroutine active. (which could
 // also be optimized probably to pin less memory in crypto/tls). This
 // would involve tracking when the serve goroutine is active (atomic
@@ -14,7 +14,7 @@
 // Handlers running) and not be woken up again until the PING packet
 // returns.
 
-// TODO (maybe): add a mechanism for Handlers to going into
+// TODO (maybe): add a mechanism for Handlers to going into id:3092 gh:3107
 // half-closed-local mode (rw.(io.Closer) test?) but not exit their
 // handler, and continue to be able to read from the
 // Request.Body. This would be a somewhat semantic change from HTTP/1
@@ -53,7 +53,7 @@ const (
 	prefaceTimeout        = 10 * time.Second
 	firstSettingsTimeout  = 2 * time.Second // should be in-flight with preface anyway
 	handlerChunkWriteSize = 4 << 10
-	defaultMaxStreams     = 250 // TODO: make this 100 as the GFE seems to?
+	defaultMaxStreams     = 250 // TODO: make this 100 as the GFE seems to? id:3128 gh:3143
 )
 
 var (
@@ -84,7 +84,7 @@ type Server struct {
 	// MaxHandlers limits the number of http.Handler ServeHTTP goroutines
 	// which may run at a time over all connections.
 	// Negative or zero no limit.
-	// TODO: implement
+	// TODO: implement id:3361 gh:3376
 	MaxHandlers int
 
 	// MaxConcurrentStreams optionally specifies the number of
@@ -402,7 +402,7 @@ func (s *Server) ServeConn(c net.Conn, opts *ServeConnOpts) {
 			// since it was causing problems when connecting to bare IP
 			// addresses during development.
 			//
-			// TODO: optionally enforce? Or enforce at the time we receive
+			// TODO: optionally enforce? Or enforce at the time we receive id:2892 gh:2907
 			// a new request, and verify the the ServerName matches the :authority?
 			// But that precludes proxy situations, perhaps.
 			//
@@ -603,7 +603,7 @@ func (sc *serverConn) logf(format string, args ...interface{}) {
 
 // errno returns v's underlying uintptr, else 0.
 //
-// TODO: remove this helper function once http2 can use build
+// TODO: remove this helper function once http2 can use build id:3268 gh:3283
 // tags. See comment in isClosedConnError.
 func errno(v error) uintptr {
 	if rv := reflect.ValueOf(v); rv.Kind() == reflect.Uintptr {
@@ -619,7 +619,7 @@ func isClosedConnError(err error) bool {
 		return false
 	}
 
-	// TODO: remove this string search and be more like the Windows
+	// TODO: remove this string search and be more like the Windows id:3093 gh:3108
 	// case below. That might involve modifying the standard library
 	// to return better error types.
 	str := err.Error()
@@ -627,7 +627,7 @@ func isClosedConnError(err error) bool {
 		return true
 	}
 
-	// TODO(bradfitz): x/tools/cmd/bundle doesn't really support
+	// TODO (bradfitz): x/tools/cmd/bundle doesn't really support id:3129 gh:3144
 	// build tags, so I can't make an http2_windows.go file with
 	// Windows-specific stuff. Fix that and move this, once we
 	// have a way to bundle this into std's net/http somehow.
@@ -904,7 +904,7 @@ func (sc *serverConn) readPreface() error {
 			errc <- nil
 		}
 	}()
-	timer := time.NewTimer(prefaceTimeout) // TODO: configurable on *Server?
+	timer := time.NewTimer(prefaceTimeout) // TODO: configurable on *Server? id:3362 gh:3378
 	defer timer.Stop()
 	select {
 	case <-timer.C:
@@ -1123,7 +1123,7 @@ func (sc *serverConn) wroteFrame(res frameWriteResult) {
 			// theory, but since our handler is done and
 			// the net/http package provides no mechanism
 			// for closing a ResponseWriter while still
-			// reading data (see possible TODO at top of
+			// reading data (see possible TODO at top of id:2893 gh:2908
 			// this file), we go into closed state here
 			// anyway, after telling the peer we're
 			// hanging up on them. We'll transition to
@@ -1228,7 +1228,7 @@ func (sc *serverConn) goAway(code ErrCode) {
 	if code != ErrCodeNo {
 		forceCloseIn = 250 * time.Millisecond
 	} else {
-		// TODO: configurable
+		// TODO: configurable id:3328 gh:3343
 		forceCloseIn = 1 * time.Second
 	}
 	sc.goAwayIn(code, forceCloseIn)
@@ -1274,12 +1274,12 @@ func (sc *serverConn) processFrameFromReader(res readFrameResult) bool {
 		}
 		clientGone := err == io.EOF || err == io.ErrUnexpectedEOF || isClosedConnError(err)
 		if clientGone {
-			// TODO: could we also get into this state if
+			// TODO: could we also get into this state if id:3094 gh:3109
 			// the peer does a half close
 			// (e.g. CloseWrite) because they're done
 			// sending frames but they're still wanting
 			// our open replies?  Investigate.
-			// TODO: add CloseWrite to crypto/tls.Conn first
+			// TODO: add CloseWrite to crypto/tls.Conn first id:3130 gh:3145
 			// so we have a way to test this? I suppose
 			// just for testing we could have a non-TLS mode.
 			return false
@@ -1806,7 +1806,7 @@ func (st *stream) processTrailerHeaders(f *MetaHeadersFrame) error {
 		for _, hf := range f.RegularFields() {
 			key := sc.canonicalHeader(hf.Name)
 			if !ValidTrailerHeader(key) {
-				// TODO: send more details to the peer somehow. But http2 has
+				// TODO: send more details to the peer somehow. But http2 has id:3363 gh:3379
 				// no way to send debug data at a stream level. Discuss with
 				// HTTP folk.
 				return streamError(st.id, ErrCodeProtocol)
@@ -2241,7 +2241,7 @@ type responseWriterState struct {
 	body   *requestBody // to close at end of request, if DATA frames didn't
 	conn   *serverConn
 
-	// TODO: adjust buffer writing sizes based on server config, frame size updates from peer, etc
+	// TODO: adjust buffer writing sizes based on server config, frame size updates from peer, etc id:2894 gh:2909
 	bw *bufio.Writer // writing to a chunkWriter{this *responseWriterState}
 
 	// mutated by http.Handler goroutine:
@@ -2315,7 +2315,7 @@ func (rws *responseWriterState) writeChunk(p []byte) (n int, err error) {
 		}
 		var date string
 		if _, ok := rws.snapHeader["Date"]; !ok {
-			// TODO(bradfitz): be faster here, like net/http? measure.
+			// TODO (bradfitz): be faster here, like net/http? measure. id:3329 gh:3344
 			date = time.Now().UTC().Format(http.TimeFormat)
 		}
 
@@ -2536,7 +2536,7 @@ func (w *responseWriter) write(lenData int, dataB []byte, dataS string) (n int, 
 	}
 	rws.wroteBytes += int64(len(dataB)) + int64(len(dataS)) // only one can be set
 	if rws.sentContentLen != 0 && rws.wroteBytes > rws.sentContentLen {
-		// TODO: send a RST_STREAM
+		// TODO: send a RST_STREAM id:3095 gh:3110
 		return 0, errors.New("http2: handler wrote more than declared Content-Length")
 	}
 

@@ -59,7 +59,7 @@ type Handler interface {
 
 // HandlerImpl implements the actual functionality to manage device plugin resources.
 type HandlerImpl struct {
-	// TODO: consider to change this to RWMutex.
+	// TODO: consider to change this to RWMutex. id:872 gh:880
 	sync.Mutex
 	devicePluginManager Manager
 	// activePods is a method for listing active pods on the node
@@ -220,7 +220,7 @@ func (h *HandlerImpl) allocateContainerResources(pod *v1.Pod, container *v1.Cont
 		// we have X resource A and Y resource B in total, and two containers, container1
 		// and container2 both require X resource A and Y resource B. Both allocation
 		// requests may fail if we serve them in mixed order.
-		// TODO: may revisit this part later if we see inefficient resource allocation
+		// TODO: may revisit this part later if we see inefficient resource allocation id:816 gh:817
 		// in real use as the result of this. Should also consider to parallize device
 		// plugin Allocate grpc calls if it becomes common that a container may require
 		// resources from multiple device plugins.
@@ -248,7 +248,7 @@ func (h *HandlerImpl) allocateContainerResources(pod *v1.Pod, container *v1.Cont
 // and update Allocatable resources in nodeInfo if necessary
 func (h *HandlerImpl) Allocate(node *schedulercache.NodeInfo, attrs *lifecycle.PodAdmitAttributes) error {
 	pod := attrs.Pod
-	// TODO: Reuse devices between init containers and regular containers.
+	// TODO: Reuse devices between init containers and regular containers. id:761 gh:762
 	for _, container := range pod.Spec.InitContainers {
 		if err := h.allocateContainerResources(pod, &container); err != nil {
 			return err

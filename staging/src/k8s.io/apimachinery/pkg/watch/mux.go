@@ -40,7 +40,7 @@ const incomingQueueLength = 25
 // Broadcaster distributes event notifications among any number of watchers. Every event
 // is delivered to every watcher.
 type Broadcaster struct {
-	// TODO: see if this lock is needed now that new watchers go through
+	// TODO: see if this lock is needed now that new watchers go through id:3605 gh:3620
 	// the incoming channel.
 	lock sync.Mutex
 

@@ -32,7 +32,7 @@ import (
 
 // APIRegistrationManager provides the concept of what API groups are enabled.
 //
-// TODO: currently, it also provides a "registered" concept. But it's wrong to
+// TODO: currently, it also provides a "registered" concept. But it's wrong to id:3839 gh:3854
 // have both concepts in the same object. Therefore the "announced" package is
 // going to take over the registered concept. After all the install packages
 // are switched to using the announce package instead of this package, then we
@@ -215,7 +215,7 @@ func (m *APIRegistrationManager) InterfacesFor(version schema.GroupVersion) (*me
 	return groupMeta.InterfacesFor(version)
 }
 
-// TODO: This is an expedient function, because we don't check if a Group is
+// TODO: This is an expedient function, because we don't check if a Group is id:3235 gh:3250
 // supported throughout the code base. We will abandon this function and
 // checking the error returned by the Group() function.
 func (m *APIRegistrationManager) GroupOrDie(group string) *apimachinery.GroupMeta {

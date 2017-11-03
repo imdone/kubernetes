@@ -75,11 +75,11 @@ func TestCreate(t *testing.T) {
 	test.TestCreate(
 		// valid
 		pdb,
-		// TODO: Add an invalid case when we have validation.
+		// TODO: Add an invalid case when we have validation. id:1417 gh:1423
 	)
 }
 
-// TODO: Test updates to spec when we allow them.
+// TODO: Test updates to spec when we allow them. id:1334 gh:1340
 
 func TestStatusUpdate(t *testing.T) {
 	storage, statusStorage, server := newStorage(t)
@@ -178,4 +178,4 @@ func TestWatch(t *testing.T) {
 	)
 }
 
-// TODO: Test generation number.
+// TODO: Test generation number. id:1367 gh:1373

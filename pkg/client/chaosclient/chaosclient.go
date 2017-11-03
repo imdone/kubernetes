@@ -131,9 +131,9 @@ func (c pIntercept) String() string {
 
 // ErrSimulatedConnectionResetByPeer emulates the golang net error when a connection
 // is reset by a peer.
-// TODO: make this more accurate
-// TODO: add other error types
-// TODO: add a helper for returning multiple errors randomly.
+// TODO: make this more accurate id:388 gh:389
+// TODO: add other error types id:310 gh:311
+// TODO: add a helper for returning multiple errors randomly. id:427 gh:429
 var ErrSimulatedConnectionResetByPeer = Error{errors.New("connection reset by peer")}
 
 // Error returns the nested error when C() is invoked.

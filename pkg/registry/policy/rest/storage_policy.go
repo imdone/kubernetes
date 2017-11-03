@@ -32,7 +32,7 @@ type RESTStorageProvider struct{}
 func (p RESTStorageProvider) NewRESTStorage(apiResourceConfigSource serverstorage.APIResourceConfigSource, restOptionsGetter generic.RESTOptionsGetter) (genericapiserver.APIGroupInfo, bool) {
 	apiGroupInfo := genericapiserver.NewDefaultAPIGroupInfo(policy.GroupName, legacyscheme.Registry, legacyscheme.Scheme, legacyscheme.ParameterCodec, legacyscheme.Codecs)
 	// If you add a version here, be sure to add an entry in `k8s.io/kubernetes/cmd/kube-apiserver/app/aggregator.go with specific priorities.
-	// TODO refactor the plumbing to provide the information in the APIGroupInfo
+	// TODO refactor the plumbing to provide the information in the APIGroupInfo id:1484 gh:1490
 
 	if apiResourceConfigSource.AnyResourcesForVersionEnabled(policyapiv1beta1.SchemeGroupVersion) {
 		apiGroupInfo.VersionedResourcesStorageMap[policyapiv1beta1.SchemeGroupVersion.Version] = p.v1beta1Storage(apiResourceConfigSource, restOptionsGetter)

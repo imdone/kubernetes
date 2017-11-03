@@ -325,7 +325,7 @@ func ValidateDeploymentStatus(status *extensions.DeploymentStatus, fldPath *fiel
 	if status.AvailableReplicas > status.Replicas {
 		allErrs = append(allErrs, field.Invalid(fldPath.Child("availableReplicas"), status.AvailableReplicas, msg))
 	}
-	// TODO: ReadyReplicas is introduced in 1.6 and this check breaks the Deployment controller when pre-1.6 clusters get upgraded.
+	// TODO: ReadyReplicas is introduced in 1.6 and this check breaks the Deployment controller when pre-1.6 clusters get upgraded. id:353 gh:354
 	// 		 Remove the comparison to zero once we stop supporting upgrades from 1.5.
 	if status.ReadyReplicas > 0 && status.AvailableReplicas > status.ReadyReplicas {
 		allErrs = append(allErrs, field.Invalid(fldPath.Child("availableReplicas"), status.AvailableReplicas, "cannot be greater than readyReplicas"))
@@ -353,7 +353,7 @@ func ValidateDeploymentStatusUpdate(update, old *extensions.Deployment) field.Er
 	return allErrs
 }
 
-// TODO: Move in "k8s.io/kubernetes/pkg/api/validation"
+// TODO: Move in "k8s.io/kubernetes/pkg/api/validation" id:382 gh:383
 func isDecremented(update, old *int32) bool {
 	if update == nil && old != nil {
 		return true
@@ -391,7 +391,7 @@ var ValidateIngressName = apivalidation.NameIsDNSSubdomain
 
 func validateIngressTLS(spec *extensions.IngressSpec, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
-	// TODO: Perform a more thorough validation of spec.TLS.Hosts that takes
+	// TODO: Perform a more thorough validation of spec.TLS.Hosts that takes id:304 gh:306
 	// the wildcard spec from RFC 6125 into account.
 	for _, itls := range spec.TLS {
 		for i, host := range itls.Hosts {
@@ -413,7 +413,7 @@ func validateIngressTLS(spec *extensions.IngressSpec, fldPath *field.Path) field
 // ValidateIngressSpec tests if required fields in the IngressSpec are set.
 func ValidateIngressSpec(spec *extensions.IngressSpec, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
-	// TODO: Is a default backend mandatory?
+	// TODO: Is a default backend mandatory? id:421 gh:422
 	if spec.Backend != nil {
 		allErrs = append(allErrs, validateIngressBackend(spec.Backend, fldPath.Child("backend"))...)
 	} else if len(spec.Rules) == 0 {
@@ -452,7 +452,7 @@ func validateIngressRules(ingressRules []extensions.IngressRule, fldPath *field.
 			if isIP := (net.ParseIP(ih.Host) != nil); isIP {
 				allErrs = append(allErrs, field.Invalid(fldPath.Index(i).Child("host"), ih.Host, "must be a DNS name, not an IP address"))
 			}
-			// TODO: Ports and ips are allowed in the host part of a url
+			// TODO: Ports and ips are allowed in the host part of a url id:404 gh:405
 			// according to RFC 3986, consider allowing them.
 			if strings.Contains(ih.Host, "*") {
 				for _, msg := range validation.IsWildcardDNS1123Subdomain(ih.Host) {
@@ -487,7 +487,7 @@ func validateHTTPIngressRuleValue(httpIngressRuleValue *extensions.HTTPIngressRu
 			if !strings.HasPrefix(rule.Path, "/") {
 				allErrs = append(allErrs, field.Invalid(fldPath.Child("paths").Index(i).Child("path"), rule.Path, "must be an absolute path"))
 			}
-			// TODO: More draconian path regex validation.
+			// TODO: More draconian path regex validation. id:354 gh:355
 			// Path must be a valid regex. This is the basic requirement.
 			// In addition to this any characters not allowed in a path per
 			// RFC 3986 section-3.3 cannot appear as a literal in the regex.

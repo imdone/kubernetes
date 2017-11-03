@@ -76,7 +76,7 @@ func TestGetPodNetworkStatus(t *testing.T) {
 			true,
 			"",
 		},
-		//TODO: add test cases for retrieving ip inside container network namespace
+		//TODO: add test cases for retrieving ip inside container network namespace id:1023 gh:1029
 	}
 
 	fakeCmds := make([]fakeexec.FakeCommandAction, 0)
@@ -259,4 +259,4 @@ func TestTearDownWithoutRuntime(t *testing.T) {
 	}
 }
 
-//TODO: add unit test for each implementation of network plugin interface
+//TODO: add unit test for each implementation of network plugin interface id:1120 gh:1126

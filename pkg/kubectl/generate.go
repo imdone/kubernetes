@@ -29,7 +29,7 @@ import (
 )
 
 // GeneratorParam is a parameter for a generator
-// TODO: facilitate structured json generator input schemes
+// TODO: facilitate structured json generator input schemes id:805 gh:806
 type GeneratorParam struct {
 	Name     string
 	Required bool

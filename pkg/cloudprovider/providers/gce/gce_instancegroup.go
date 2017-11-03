@@ -50,7 +50,7 @@ func (gce *GCECloud) DeleteInstanceGroup(name string, zone string) error {
 // zone.
 func (gce *GCECloud) ListInstanceGroups(zone string) (*compute.InstanceGroupList, error) {
 	mc := newInstanceGroupMetricContext("list", zone)
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:452 gh:453
 	v, err := gce.service.InstanceGroups.List(gce.projectID, zone).Do()
 	return v, mc.Observe(err)
 }
@@ -59,7 +59,7 @@ func (gce *GCECloud) ListInstanceGroups(zone string) (*compute.InstanceGroupList
 // instance group and state.
 func (gce *GCECloud) ListInstancesInInstanceGroup(name string, zone string, state string) (*compute.InstanceGroupsListInstances, error) {
 	mc := newInstanceGroupMetricContext("list_instances", zone)
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:465 gh:466
 	v, err := gce.service.InstanceGroups.ListInstances(
 		gce.projectID, zone, name,
 		&compute.InstanceGroupsListInstancesRequest{InstanceState: state}).Do()

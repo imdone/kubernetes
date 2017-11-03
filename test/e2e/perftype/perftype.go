@@ -16,7 +16,7 @@ limitations under the License.
 
 package perftype
 
-// TODO(random-liu): Replace this with prometheus' data model.
+// TODO (random-liu): Replace this with prometheus' data model. id:2348 gh:2359
 
 // The following performance data structures are generalized and well-formatted.
 // They can be pretty printed in json format and be analyzed by other performance

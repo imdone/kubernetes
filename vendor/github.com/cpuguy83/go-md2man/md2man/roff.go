@@ -111,7 +111,7 @@ func (r *roffRenderer) Paragraph(out *bytes.Buffer, text func() bool) {
 	}
 }
 
-// TODO: This might now work
+// TODO: This might now work id:2527 gh:2542
 func (r *roffRenderer) Table(out *bytes.Buffer, header []byte, body []byte, columnData []int) {
 	out.WriteString(".TS\nallbox;\n")
 
@@ -136,7 +136,7 @@ func (r *roffRenderer) TableHeaderCell(out *bytes.Buffer, text []byte, align int
 	out.WriteString(" ")
 }
 
-// TODO: This is probably broken
+// TODO: This is probably broken id:2848 gh:2863
 func (r *roffRenderer) TableCell(out *bytes.Buffer, text []byte, align int) {
 	if out.Len() > 0 {
 		out.WriteString("\t")

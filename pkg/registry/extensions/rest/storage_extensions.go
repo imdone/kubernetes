@@ -39,7 +39,7 @@ type RESTStorageProvider struct {
 func (p RESTStorageProvider) NewRESTStorage(apiResourceConfigSource serverstorage.APIResourceConfigSource, restOptionsGetter generic.RESTOptionsGetter) (genericapiserver.APIGroupInfo, bool) {
 	apiGroupInfo := genericapiserver.NewDefaultAPIGroupInfo(extensions.GroupName, legacyscheme.Registry, legacyscheme.Scheme, legacyscheme.ParameterCodec, legacyscheme.Codecs)
 	// If you add a version here, be sure to add an entry in `k8s.io/kubernetes/cmd/kube-apiserver/app/aggregator.go with specific priorities.
-	// TODO refactor the plumbing to provide the information in the APIGroupInfo
+	// TODO refactor the plumbing to provide the information in the APIGroupInfo id:1416 gh:1422
 
 	if apiResourceConfigSource.AnyResourcesForVersionEnabled(extensionsapiv1beta1.SchemeGroupVersion) {
 		apiGroupInfo.VersionedResourcesStorageMap[extensionsapiv1beta1.SchemeGroupVersion.Version] = p.v1beta1Storage(apiResourceConfigSource, restOptionsGetter)
@@ -55,7 +55,7 @@ func (p RESTStorageProvider) v1beta1Storage(apiResourceConfigSource serverstorag
 	storage := map[string]rest.Storage{}
 
 	// This is a dummy replication controller for scale subresource purposes.
-	// TODO: figure out how to enable this only if needed as a part of scale subresource GA.
+	// TODO: figure out how to enable this only if needed as a part of scale subresource GA. id:1333 gh:1339
 	controllerStorage := expcontrollerstore.NewStorage(restOptionsGetter)
 	storage["replicationcontrollers"] = controllerStorage.ReplicationController
 	storage["replicationcontrollers/scale"] = controllerStorage.Scale

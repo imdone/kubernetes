@@ -49,7 +49,7 @@ func ExtractCommentTags(marker string, lines []string) map[string][]string {
 		if !strings.HasPrefix(line, marker) {
 			continue
 		}
-		// TODO: we could support multiple values per key if we split on spaces
+		// TODO: we could support multiple values per key if we split on spaces id:3974 gh:3994
 		kv := strings.SplitN(line[len(marker):], "=", 2)
 		if len(kv) == 2 {
 			out[kv[0]] = append(out[kv[0]], kv[1])

@@ -951,7 +951,7 @@ func addObjectParams(ws *restful.WebService, route *restful.RouteBuilder, obj in
 			switch sf.Type.Kind() {
 			case reflect.Interface, reflect.Struct:
 			case reflect.Ptr:
-				// TODO: This is a hack to let metav1.Time through. This needs to be fixed in a more generic way eventually. bug #36191
+				// TODO: This is a hack to let metav1.Time through. This needs to be fixed in a more generic way eventually. bug #36191 id:3884 gh:3901
 				if (sf.Type.Elem().Kind() == reflect.Interface || sf.Type.Elem().Kind() == reflect.Struct) && strings.TrimPrefix(sf.Type.String(), "*") != "metav1.Time" {
 					continue
 				}
@@ -977,7 +977,7 @@ func addObjectParams(ws *restful.WebService, route *restful.RouteBuilder, obj in
 	return nil
 }
 
-// TODO: this is incomplete, expand as needed.
+// TODO: this is incomplete, expand as needed. id:3708 gh:3723
 // Convert the name of a golang type to the name of a JSON type
 func typeToJSON(typeName string) string {
 	switch typeName {
@@ -994,7 +994,7 @@ func typeToJSON(typeName string) string {
 	case "v1.DeletionPropagation", "*v1.DeletionPropagation":
 		return "string"
 
-	// TODO: Fix these when go-restful supports a way to specify an array query param:
+	// TODO: Fix these when go-restful supports a way to specify an array query param: id:3796 gh:3808
 	// https://github.com/emicklei/go-restful/issues/225
 	case "[]string", "[]*string":
 		return "string"
@@ -1030,7 +1030,7 @@ func splitSubresource(path string) (string, string, error) {
 	case 1:
 		resource = parts[0]
 	default:
-		// TODO: support deeper paths
+		// TODO: support deeper paths id:3992 gh:4012
 		return "", "", fmt.Errorf("api_installer allows only one or two segment paths (resource or resource/subresource)")
 	}
 	return resource, subresource, nil

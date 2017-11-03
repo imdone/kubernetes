@@ -16,7 +16,7 @@ import (
 // and it tries one more time.
 // It's up to the caller to handle the io.ReadCloser and close it properly.
 //
-// FIXME(vdemeester): there is currently used in a few way in docker/docker
+// FIXME (vdemeester): there is currently used in a few way in docker/docker id:2851 gh:2866
 // - if not in trusted content, ref is used to pass the whole reference, and tag is empty
 // - if in trusted content, ref is used to pass the reference name, and tag for the digest
 func (cli *Client) ImagePull(ctx context.Context, refStr string, options types.ImagePullOptions) (io.ReadCloser, error) {

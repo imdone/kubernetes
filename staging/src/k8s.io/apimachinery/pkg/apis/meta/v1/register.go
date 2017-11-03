@@ -28,7 +28,7 @@ const GroupName = "meta.k8s.io"
 var SchemeGroupVersion = schema.GroupVersion{Group: GroupName, Version: "v1"}
 
 // Unversioned is group version for unversioned API objects
-// TODO: this should be v1 probably
+// TODO: this should be v1 probably id:3842 gh:3857
 var Unversioned = schema.GroupVersion{Group: "", Version: "v1"}
 
 // WatchEventKind is name reserved for serializing watch events.

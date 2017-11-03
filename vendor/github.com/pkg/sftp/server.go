@@ -250,7 +250,7 @@ func handlePacket(s *Server, p interface{}) error {
 			info: info,
 		})
 	case *sshFxpMkdirPacket:
-		// TODO FIXME: ignore flags field
+		// TODO FIXME: ignore flags field id:2779 gh:2794
 		err := os.Mkdir(p.Path, 0755)
 		return s.sendError(p, err)
 	case *sshFxpRmdirPacket:

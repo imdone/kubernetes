@@ -12,7 +12,7 @@ import (
 )
 
 type nickAdditionalMapping struct {
-	// TODO: This transformer needs to be stateless somehow…
+	// TODO: This transformer needs to be stateless somehow… id:3532 gh:3548
 	notStart  bool
 	prevSpace bool
 }

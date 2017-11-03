@@ -60,7 +60,7 @@ func (m *kubeGenericRuntimeManager) createPodSandbox(pod *v1.Pod, attempt uint32
 
 // generatePodSandboxConfig generates pod sandbox config from v1.Pod.
 func (m *kubeGenericRuntimeManager) generatePodSandboxConfig(pod *v1.Pod, attempt uint32) (*runtimeapi.PodSandboxConfig, error) {
-	// TODO: deprecating podsandbox resource requirements in favor of the pod level cgroup
+	// TODO: deprecating podsandbox resource requirements in favor of the pod level cgroup id:1115 gh:1121
 	// Refer https://github.com/kubernetes/kubernetes/issues/29871
 	podUID := string(pod.UID)
 	podSandboxConfig := &runtimeapi.PodSandboxConfig{
@@ -87,7 +87,7 @@ func (m *kubeGenericRuntimeManager) generatePodSandboxConfig(pod *v1.Pod, attemp
 	}
 
 	if !kubecontainer.IsHostNetworkPod(pod) {
-		// TODO: Add domain support in new runtime interface
+		// TODO: Add domain support in new runtime interface id:1054 gh:1060
 		hostname, _, err := m.runtimeHelper.GeneratePodHostNameAndDomain(pod)
 		if err != nil {
 			return nil, err

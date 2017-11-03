@@ -244,7 +244,7 @@ func (t *tcShaper) ReconcileCIDR(cidr string, upload, download *resource.Quantit
 	if !found {
 		return t.Limit(cidr, upload, download)
 	}
-	// TODO: actually check bandwidth limits here
+	// TODO: actually check bandwidth limits here id:1490 gh:1496
 	return nil
 }
 

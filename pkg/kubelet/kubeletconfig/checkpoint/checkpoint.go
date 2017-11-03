@@ -48,7 +48,7 @@ func DecodeCheckpoint(data []byte) (Checkpoint, error) {
 		return nil, fmt.Errorf("failed to decode, error: %v", err)
 	}
 
-	// TODO(mtaufen): for now we assume we are trying to load a ConfigMap checkpoint, may need to extend this if we allow other checkpoint types
+	// TODO (mtaufen): for now we assume we are trying to load a ConfigMap checkpoint, may need to extend this if we allow other checkpoint types id:1049 gh:1055
 
 	// convert it to the external ConfigMap type, so we're consistently working with the external type outside of the on-disk representation
 	cm := &apiv1.ConfigMap{}

@@ -72,7 +72,7 @@ func startHPAControllerWithMetricsClient(ctx ControllerContext, metricsClient me
 	hpaClient := ctx.ClientBuilder.ClientOrDie("horizontal-pod-autoscaler")
 	hpaClientConfig := ctx.ClientBuilder.ConfigOrDie("horizontal-pod-autoscaler")
 
-	// TODO: we need something like deferred discovery REST mapper that calls invalidate
+	// TODO: we need something like deferred discovery REST mapper that calls invalidate id:218 gh:219
 	// on cache misses.
 	cachedDiscovery := discocache.NewMemCacheClient(hpaClientGoClient.Discovery())
 	restMapper := discovery.NewDeferredDiscoveryRESTMapper(cachedDiscovery, apimeta.InterfacesForUnstructured)

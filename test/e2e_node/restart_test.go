@@ -94,7 +94,7 @@ var _ = framework.KubeDescribe("Restart [Serial] [Slow] [Disruptive]", func() {
 				for i := 0; i < restartCount; i += 1 {
 					By(fmt.Sprintf("Restarting Docker Daemon iteration %d", i))
 
-					// TODO: Find a uniform way to deal with systemctl/initctl/service operations. #34494
+					// TODO: Find a uniform way to deal with systemctl/initctl/service operations. #34494 id:2583 gh:2598
 					if stdout, err := exec.Command("sudo", "systemctl", "restart", "docker").CombinedOutput(); err != nil {
 						framework.Logf("Failed to trigger docker restart with systemd/systemctl: %v, stdout: %q", err, string(stdout))
 						if stdout, err = exec.Command("sudo", "service", "docker", "restart").CombinedOutput(); err != nil {

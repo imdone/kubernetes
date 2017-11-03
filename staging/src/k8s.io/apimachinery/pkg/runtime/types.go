@@ -92,7 +92,7 @@ const (
 type RawExtension struct {
 	// Raw is the underlying serialization of this object.
 	//
-	// TODO: Determine how to detect ContentType and ContentEncoding of 'Raw' data.
+	// TODO: Determine how to detect ContentType and ContentEncoding of 'Raw' data. id:3598 gh:3613
 	Raw []byte `protobuf:"bytes,1,opt,name=raw"`
 	// Object can hold a representation of this extension - useful for working with versioned
 	// structs.
@@ -102,7 +102,7 @@ type RawExtension struct {
 // Unknown allows api objects with unknown types to be passed-through. This can be used
 // to deal with the API objects from a plug-in. Unknown objects still have functioning
 // TypeMeta features-- kind, version, etc.
-// TODO: Make this object have easy access to field based accessors and settors for
+// TODO: Make this object have easy access to field based accessors and settors for id:3680 gh:3695
 // metadata and field mutatation.
 //
 // +k8s:deepcopy-gen=true

@@ -73,7 +73,7 @@ type RESTClient struct {
 	// creates BackoffManager that is passed to requests.
 	createBackoffMgr func() BackoffManager
 
-	// TODO extract this into a wrapper interface via the RESTClient interface in kubectl.
+	// TODO extract this into a wrapper interface via the RESTClient interface in kubectl. id:3466 gh:3481
 	Throttle flowcontrol.RateLimiter
 
 	// Set specific behavior of the client.  If not set http.DefaultClient will be used.
@@ -137,7 +137,7 @@ func (c *RESTClient) GetRateLimiter() flowcontrol.RateLimiter {
 
 // readExpBackoffConfig handles the internal logic of determining what the
 // backoff policy is.  By default if no information is available, NoBackoff.
-// TODO Generalize this see #17727 .
+// TODO Generalize this see #17727 . id:3947 gh:3967
 func readExpBackoffConfig() BackoffManager {
 	backoffBase := os.Getenv(envBackoffBase)
 	backoffDuration := os.Getenv(envBackoffDuration)
@@ -154,7 +154,7 @@ func readExpBackoffConfig() BackoffManager {
 }
 
 // createSerializers creates all necessary serializers for given contentType.
-// TODO: the negotiated serializer passed to this method should probably return
+// TODO: the negotiated serializer passed to this method should probably return id:3804 gh:3820
 //   serializers that control decoding and versioning without this package
 //   being aware of the types. Depends on whether RESTClient must deal with
 //   generic infrastructure.

@@ -110,7 +110,7 @@ func (handler *PersistentCheckpointHandler) GetCheckpoint(podSandboxID string) (
 		return nil, err
 	}
 	var checkpoint PodSandboxCheckpoint
-	//TODO: unmarhsal into a struct with just Version, check version, unmarshal into versioned type.
+	//TODO: unmarhsal into a struct with just Version, check version, unmarshal into versioned type. id:842 gh:843
 	err = json.Unmarshal(blob, &checkpoint)
 	if err != nil {
 		glog.Errorf("Failed to unmarshal checkpoint %q. Checkpoint content: %q. ErrMsg: %v", podSandboxID, string(blob), err)

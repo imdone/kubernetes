@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// TODO: move everything in this file to pkg/api/rest
+// TODO: move everything in this file to pkg/api/rest id:3491 gh:3506
 package meta
 
 import (
@@ -67,7 +67,7 @@ var RESTScopeRoot = &restScope{
 // When converting from resource to Kind, the singular version of the
 // resource name is also accepted for convenience.
 //
-// TODO: Only accept plural for some operations for increased control?
+// TODO: Only accept plural for some operations for increased control? id:3564 gh:3579
 // (`get pod bar` vs `get pods bar`)
 type DefaultRESTMapper struct {
 	defaultGroupVersions []schema.GroupVersion
@@ -102,7 +102,7 @@ func NewDefaultRESTMapper(defaultGroupVersions []schema.GroupVersion, f VersionI
 	kindToScope := make(map[schema.GroupVersionKind]RESTScope)
 	singularToPlural := make(map[schema.GroupVersionResource]schema.GroupVersionResource)
 	pluralToSingular := make(map[schema.GroupVersionResource]schema.GroupVersionResource)
-	// TODO: verify name mappings work correctly when versions differ
+	// TODO: verify name mappings work correctly when versions differ id:3834 gh:3849
 
 	return &DefaultRESTMapper{
 		resourceToKind:       resourceToKind,
@@ -133,7 +133,7 @@ func (m *DefaultRESTMapper) AddSpecific(kind schema.GroupVersionKind, plural, si
 
 // unpluralizedSuffixes is a list of resource suffixes that are the same plural and singular
 // This is only is only necessary because some bits of code are lazy and don't actually use the RESTMapper like they should.
-// TODO eliminate this so that different callers can correctly map to resources.  This probably means updating all
+// TODO eliminate this so that different callers can correctly map to resources.  This probably means updating all id:3230 gh:3245
 // callers to use the RESTMapper they mean.
 var unpluralizedSuffixes = []string{
 	"endpoints",

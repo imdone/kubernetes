@@ -70,7 +70,7 @@ type localTestVolume struct {
 }
 
 const (
-	// TODO: This may not be available/writable on all images.
+	// TODO: This may not be available/writable on all images. id:2401 gh:2416
 	hostBase      = "/tmp"
 	containerBase = "/myvol"
 	// 'hostBase + discoveryDir' is the path for volume discovery.
@@ -537,7 +537,7 @@ func makeLocalPVCConfig(config *localTestConfig) framework.PersistentVolumeClaim
 }
 
 func makeLocalPVConfig(config *localTestConfig, volume *localTestVolume) framework.PersistentVolumeConfig {
-	// TODO: hostname may not be the best option
+	// TODO: hostname may not be the best option id:2318 gh:2333
 	nodeKey := "kubernetes.io/hostname"
 	if volume.node.Labels == nil {
 		framework.Failf("Node does not have labels")

@@ -62,7 +62,7 @@ func CreateTestArchive(suite TestSuite, systemSpecName string) (string, error) {
 }
 
 // Returns the command output, whether the exit was ok, and any errors
-// TODO(random-liu): junitFilePrefix is not prefix actually, the file name is junit-junitFilePrefix.xml. Change the variable name.
+// TODO (random-liu): junitFilePrefix is not prefix actually, the file name is junit-junitFilePrefix.xml. Change the variable name. id:2329 gh:2344
 func RunRemote(suite TestSuite, archive string, host string, cleanup bool, imageDesc, junitFilePrefix string, testArgs string, ginkgoArgs string, systemSpecName string) (string, bool, error) {
 	// Create the temp staging directory
 	glog.V(2).Infof("Staging test binaries on %q", host)
@@ -164,7 +164,7 @@ func collectSystemLog(host string) {
 	// Encountered an unexpected error. The remote test harness may not
 	// have finished retrieved and stored all the logs in this case. Try
 	// to get some logs for debugging purposes.
-	// TODO: This is a best-effort, temporary hack that only works for
+	// TODO: This is a best-effort, temporary hack that only works for id:2494 gh:2510
 	// journald nodes. We should have a more robust way to collect logs.
 	var (
 		logName  = "system.log"
@@ -187,7 +187,7 @@ func collectSystemLog(host string) {
 
 // WriteLog is a temporary function to make it possible to write log
 // in the runner. This is used to collect serial console log.
-// TODO(random-liu): Use the log-dump script in cluster e2e.
+// TODO (random-liu): Use the log-dump script in cluster e2e. id:2665 gh:2680
 func WriteLog(host, filename, content string) error {
 	logPath := filepath.Join(*resultsDir, host)
 	if err := os.MkdirAll(logPath, 0755); err != nil {

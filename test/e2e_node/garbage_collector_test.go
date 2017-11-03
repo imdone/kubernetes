@@ -32,7 +32,7 @@ import (
 )
 
 const (
-	//TODO (dashpole): Once dynamic config is possible, test different values for maxPerPodContainer and maxContainers
+	//TODO (dashpole): Once dynamic config is possible, test different values for maxPerPodContainer and maxContainers id:2579 gh:2594
 	// Currently using default values for maxPerPodContainer and maxTotalContainers
 	maxPerPodContainer = 1
 	maxTotalContainers = -1
@@ -130,7 +130,7 @@ var _ = framework.KubeDescribe("GarbageCollect [Serial]", func() {
 		},
 	}
 	for _, test := range tests {
-		// TODO (dashpole): Once the Container Runtime Interface (CRI) is complete, generalize run on other runtimes (other than docker)
+		// TODO (dashpole): Once the Container Runtime Interface (CRI) is complete, generalize run on other runtimes (other than docker) id:2326 gh:2341
 		dockerContainerGCTest(f, test)
 	}
 })

@@ -19,7 +19,7 @@ limitations under the License.
 // it can cache objects (e.g. secrets or config maps) before refetching
 // from apiserver again.
 //
-// TODO: This is a temporary workaround for the Kubelet not being able to
+// TODO: This is a temporary workaround for the Kubelet not being able to id:602 gh:603
 // send "watch secrets attached to pods from my node" request. Once
 // sending such request will be possible, we will modify Kubelet to
 // use it and get rid of this controller completely.

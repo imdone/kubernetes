@@ -138,7 +138,7 @@ func (cfg *Config) Complete() CompletedConfig {
 	}
 
 	// the kube aggregator wires its own discovery mechanism
-	// TODO eventually collapse this by extracting all of the discovery out
+	// TODO eventually collapse this by extracting all of the discovery out id:3975 gh:3995
 	c.GenericConfig.EnableDiscovery = false
 	version := version.Get()
 	c.GenericConfig.Version = &version
@@ -326,6 +326,6 @@ func (s *APIAggregator) RemoveAPIService(apiServiceName string) {
 	}
 	delete(s.proxyHandlers, apiServiceName)
 
-	// TODO unregister group level discovery when there are no more versions for the group
+	// TODO unregister group level discovery when there are no more versions for the group id:4072 gh:4092
 	// We don't need this right away because the handler properly delegates when no versions are present
 }

@@ -371,7 +371,7 @@ func TestInvalidHardPodAffinitySymmetricWeight(t *testing.T) {
 		T:            t,
 	}
 	server := httptest.NewServer(&handler)
-	// TODO: Uncomment when fix #19254
+	// TODO: Uncomment when fix #19254 id:1452 gh:1458
 	// defer server.Close()
 	client := clientset.NewForConfigOrDie(&restclient.Config{Host: server.URL, ContentConfig: restclient.ContentConfig{GroupVersion: &legacyscheme.Registry.GroupOrDie(v1.GroupName).GroupVersion}})
 	// factory of "default-scheduler"

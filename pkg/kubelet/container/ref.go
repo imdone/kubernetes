@@ -35,7 +35,7 @@ var ImplicitContainerPrefix string = "implicitly required container "
 func GenerateContainerRef(pod *v1.Pod, container *v1.Container) (*v1.ObjectReference, error) {
 	fieldPath, err := fieldPath(pod, container)
 	if err != nil {
-		// TODO: figure out intelligent way to refer to containers that we implicitly
+		// TODO: figure out intelligent way to refer to containers that we implicitly id:835 gh:836
 		// start (like the pod infra container). This is not a good way, ugh.
 		fieldPath = ImplicitContainerPrefix + container.Name
 	}

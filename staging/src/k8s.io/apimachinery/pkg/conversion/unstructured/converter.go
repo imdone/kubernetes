@@ -311,7 +311,7 @@ func sliceFromUnstructured(sv, dv reflect.Value) error {
 			if err != nil {
 				return fmt.Errorf("error encoding %s to json: %v", st, err)
 			}
-			// TODO: Is this Unmarshal needed?
+			// TODO: Is this Unmarshal needed? id:3671 gh:3686
 			var data []byte
 			err = json.Unmarshal(marshalled, &data)
 			if err != nil {
@@ -386,7 +386,7 @@ func structFromUnstructured(sv, dv reflect.Value) error {
 }
 
 func interfaceFromUnstructured(sv, dv reflect.Value) error {
-	// TODO: Is this conversion safe?
+	// TODO: Is this conversion safe? id:3846 gh:3861
 	dv.Set(sv)
 	return nil
 }
@@ -604,7 +604,7 @@ func mapToUnstructured(sv, dv reflect.Value) error {
 	if dt.Kind() == reflect.Interface && dv.NumMethod() == 0 {
 		if st.Key().Kind() == reflect.String {
 			switch st.Elem().Kind() {
-			// TODO It should be possible to reuse the slice for primitive types.
+			// TODO It should be possible to reuse the slice for primitive types. id:3273 gh:3288
 			// However, it is panicing in the following form.
 			// case reflect.String, reflect.Bool,
 			// 	reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64,
@@ -662,7 +662,7 @@ func sliceToUnstructured(sv, dv reflect.Value) error {
 	}
 	if dt.Kind() == reflect.Interface && dv.NumMethod() == 0 {
 		switch st.Elem().Kind() {
-		// TODO It should be possible to reuse the slice for primitive types.
+		// TODO It should be possible to reuse the slice for primitive types. id:3768 gh:3783
 		// However, it is panicing in the following form.
 		// case reflect.String, reflect.Bool,
 		// 	reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64,
@@ -708,7 +708,7 @@ func isZero(v reflect.Value) bool {
 	case reflect.Float32, reflect.Float64:
 		return v.Float() == 0
 	case reflect.Map, reflect.Slice:
-		// TODO: It seems that 0-len maps are ignored in it.
+		// TODO: It seems that 0-len maps are ignored in it. id:3504 gh:3519
 		return v.IsNil() || v.Len() == 0
 	case reflect.Ptr, reflect.Interface:
 		return v.IsNil()

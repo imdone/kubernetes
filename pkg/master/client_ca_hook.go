@@ -52,7 +52,7 @@ func (h ClientCARegistrationHook) PostStartHook(hookContext genericapiserver.Pos
 	err := wait.Poll(1*time.Second, 30*time.Second, func() (done bool, err error) {
 		// retry building the config since sometimes the server can be in an inbetween state which caused
 		// some kind of auto detection failure as I recall from other post start hooks.
-		// TODO see if this is still true and fix the RBAC one too if it isn't.
+		// TODO see if this is still true and fix the RBAC one too if it isn't. id:1204 gh:1210
 		client, err := coreclient.NewForConfig(hookContext.LoopbackClientConfig)
 		if err != nil {
 			utilruntime.HandleError(err)

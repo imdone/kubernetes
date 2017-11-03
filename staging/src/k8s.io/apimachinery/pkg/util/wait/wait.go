@@ -137,7 +137,7 @@ func JitterUntil(f func(), period time.Duration, jitterFactor float64, sliding b
 			t = resetOrReuseTimer(t, jitteredPeriod, sawTimeout)
 		}
 
-		// NOTE: b/c there is no priority selection in golang
+		// NOTE: b/c there is no priority selection in golang id:3861 gh:3876
 		// it is possible for this to race, meaning we could
 		// trigger t.C and stopCh, and t.C select falls through.
 		// In order to mitigate we re-check stopCh at the beginning

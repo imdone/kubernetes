@@ -563,7 +563,7 @@ func PackRR(rr RR, msg []byte, off int, compression map[string]int, compress boo
 	if err != nil {
 		return len(msg), err
 	}
-	// TODO(miek): Not sure if this is needed? If removed we can remove rawmsg.go as well.
+	// TODO (miek): Not sure if this is needed? If removed we can remove rawmsg.go as well. id:2751 gh:2767
 	if rawSetRdlength(msg, off, off1) {
 		return off1, nil
 	}
@@ -831,7 +831,7 @@ func (dns *Msg) Unpack(msg []byte) (err error) {
 	dh.Arcount = uint16(len(dns.Extra))
 
 	if off != len(msg) {
-		// TODO(miek) make this an error?
+		// TODO (miek) make this an error? id:3133 gh:3148
 		// use PackOpt to let people tell how detailed the error reporting should be?
 		// println("dns: extra bytes in dns packet", off, "<", len(msg))
 	} else if dns.Truncated {
@@ -991,7 +991,7 @@ func compressionLenSearch(c map[string]int, s string) (int, bool) {
 	return 0, false
 }
 
-// TODO(miek): should add all types, because the all can be *used* for compression. Autogenerate from msg_generate and put in zmsg.go
+// TODO (miek): should add all types, because the all can be *used* for compression. Autogenerate from msg_generate and put in zmsg.go id:2976 gh:2992
 func compressionLenHelperType(c map[string]int, r RR) {
 	switch x := r.(type) {
 	case *NS:
@@ -1098,7 +1098,7 @@ func (dns *Msg) CopyTo(r1 *Msg) *Msg {
 
 	if len(dns.Question) > 0 {
 		r1.Question = make([]Question, len(dns.Question))
-		copy(r1.Question, dns.Question) // TODO(miek): Question is an immutable value, ok to do a shallow-copy
+		copy(r1.Question, dns.Question) // TODO (miek): Question is an immutable value, ok to do a shallow-copy id:2930 gh:2945
 	}
 
 	rrArr := make([]RR, len(dns.Answer)+len(dns.Ns)+len(dns.Extra))

@@ -653,7 +653,7 @@ type FieldDescriptorProto struct {
 	// For booleans, "true" or "false".
 	// For strings, contains the default text contents (not escaped in any way).
 	// For bytes, contains the C escaped value.  All bytes >= 128 are escaped.
-	// TODO(kenton):  Base-64 encode?
+	// TODO (kenton):  Base-64 encode? id:2943 gh:2958
 	DefaultValue *string `protobuf:"bytes,7,opt,name=default_value,json=defaultValue" json:"default_value,omitempty"`
 	// If set, gives the index of a oneof in the containing type's oneof_decl
 	// list.  This field is a member of that oneof.
@@ -1190,7 +1190,7 @@ type MessageOptions struct {
 	// The reflection APIs in such implementions still need to work as
 	// if the field is a repeated message field.
 	//
-	// NOTE: Do not set the option in .proto files. Always use the maps syntax
+	// NOTE: Do not set the option in .proto files. Always use the maps syntax id:2719 gh:2734
 	// instead. The option should only be implicitly set by the proto compiler
 	// parser.
 	MapEntry *bool `protobuf:"varint,7,opt,name=map_entry,json=mapEntry" json:"map_entry,omitempty"`

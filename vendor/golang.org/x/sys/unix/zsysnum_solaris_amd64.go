@@ -6,7 +6,7 @@
 
 package unix
 
-// TODO(aram): remove these before Go 1.3.
+// TODO (aram): remove these before Go 1.3. id:3513 gh:3528
 const (
 	SYS_EXECVE = 59
 	SYS_FCNTL  = 62

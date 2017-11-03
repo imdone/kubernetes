@@ -11,7 +11,7 @@ import (
 	"github.com/opencontainers/runc/libcontainer/configs/validate"
 )
 
-// TODO: This is copied from libcontainer/cgroups/fs, which duplicates this code
+// TODO: This is copied from libcontainer/cgroups/fs, which duplicates this code id:3137 gh:3152
 //       needlessly. We should probably export this list.
 
 var subsystems = []subsystem{
@@ -56,7 +56,7 @@ func (m *Manager) Apply(pid int) error {
 	}
 
 	// We can't set paths.
-	// TODO(cyphar): Implement the case where the runner of a rootless container
+	// TODO (cyphar): Implement the case where the runner of a rootless container id:2998 gh:3013
 	//               owns their own cgroup, which would allow us to set up a
 	//               cgroup for each path.
 	if m.Cgroups.Paths != nil {
@@ -108,7 +108,7 @@ func (m *Manager) GetAllPids() ([]int, error) {
 }
 
 func (m *Manager) GetStats() (*cgroups.Stats, error) {
-	// TODO(cyphar): We can make this work if we figure out a way to allow usage
+	// TODO (cyphar): We can make this work if we figure out a way to allow usage id:2934 gh:2949
 	//               of cgroups with a rootless container. While this doesn't
 	//               actually require write access to a cgroup directory, the
 	//               statistics are not useful if they can be affected by
@@ -117,7 +117,7 @@ func (m *Manager) GetStats() (*cgroups.Stats, error) {
 }
 
 func (m *Manager) Freeze(state configs.FreezerState) error {
-	// TODO(cyphar): We can make this work if we figure out a way to allow usage
+	// TODO (cyphar): We can make this work if we figure out a way to allow usage id:3196 gh:3211
 	//               of cgroups with a rootless container.
 	return fmt.Errorf("cannot use freezer cgroup in rootless container")
 }

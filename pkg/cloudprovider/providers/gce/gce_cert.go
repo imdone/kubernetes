@@ -68,7 +68,7 @@ func (gce *GCECloud) DeleteSslCertificate(name string) error {
 // ListSslCertificates lists all SslCertificates in the project.
 func (gce *GCECloud) ListSslCertificates() (*compute.SslCertificateList, error) {
 	mc := newCertMetricContext("list")
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:503 gh:504
 	v, err := gce.service.SslCertificates.List(gce.projectID).Do()
 	return v, mc.Observe(err)
 }

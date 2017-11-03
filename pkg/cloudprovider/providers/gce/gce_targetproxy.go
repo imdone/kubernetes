@@ -70,7 +70,7 @@ func (gce *GCECloud) DeleteTargetHttpProxy(name string) error {
 // ListTargetHttpProxies lists all TargetHttpProxies in the project.
 func (gce *GCECloud) ListTargetHttpProxies() (*compute.TargetHttpProxyList, error) {
 	mc := newTargetProxyMetricContext("list")
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:468 gh:469
 	v, err := gce.service.TargetHttpProxies.List(gce.projectID).Do()
 	return v, mc.Observe(err)
 }
@@ -132,7 +132,7 @@ func (gce *GCECloud) DeleteTargetHttpsProxy(name string) error {
 // ListTargetHttpsProxies lists all TargetHttpsProxies in the project.
 func (gce *GCECloud) ListTargetHttpsProxies() (*compute.TargetHttpsProxyList, error) {
 	mc := newTargetProxyMetricContext("list")
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:440 gh:441
 	v, err := gce.service.TargetHttpsProxies.List(gce.projectID).Do()
 	return v, mc.Observe(err)
 }

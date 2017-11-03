@@ -130,7 +130,7 @@ func (m *Manager) Apply(pid int) (err error) {
 	}
 
 	for _, sys := range subsystems {
-		// TODO: Apply should, ideally, be reentrant or be broken up into a separate
+		// TODO: Apply should, ideally, be reentrant or be broken up into a separate id:3195 gh:3210
 		// create and join phase so that the cgroup hierarchy for a container can be
 		// created then join consists of writing the process pids to cgroup.procs
 		p, err := d.path(sys.Name())
@@ -249,7 +249,7 @@ func getCgroupData(c *configs.Cgroup, pid int) (*cgroupData, error) {
 		return nil, fmt.Errorf("cgroup: either Path or Name and Parent should be used")
 	}
 
-	// XXX: Do not remove this code. Path safety is important! -- cyphar
+	// XXX: Do not remove this code. Path safety is important! -- cyphar id:2773 gh:2788
 	cgPath := libcontainerUtils.CleanPath(c.Path)
 	cgParent := libcontainerUtils.CleanPath(c.Parent)
 	cgName := libcontainerUtils.CleanPath(c.Name)

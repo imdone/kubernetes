@@ -23,7 +23,7 @@ import (
 	utilerrors "k8s.io/apimachinery/pkg/util/errors"
 )
 
-// TODO(random-liu): We need to better organize runtime errors for introspection.
+// TODO (random-liu): We need to better organize runtime errors for introspection. id:932 gh:938
 
 // Container Terminated and Kubelet is backing off the restart
 var ErrCrashLoopBackOff = errors.New("CrashLoopBackOff")

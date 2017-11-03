@@ -30,7 +30,7 @@ import (
 	labelsutil "k8s.io/kubernetes/pkg/util/labels"
 )
 
-// TODO: use client library instead when it starts to support update retries
+// TODO: use client library instead when it starts to support update retries id:539 gh:540
 //       see https://github.com/kubernetes/kubernetes/issues/21479
 type updateRSFunc func(rs *extensions.ReplicaSet) error
 

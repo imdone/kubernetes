@@ -403,7 +403,7 @@ var _ = framework.KubeDescribe("Pods", func() {
 		podClient.CreateSync(serverPod)
 
 		// This service exposes port 8080 of the test pod as a service on port 8765
-		// TODO(filbranden): We would like to use a unique service name such as:
+		// TODO (filbranden): We would like to use a unique service name such as: id:2367 gh:2382
 		//   svcName := "svc-envvars-" + randomSuffix()
 		// However, that affects the name of the environment variables which are the capitalized
 		// service name, so that breaks this test.  One possibility is to tweak the variable names

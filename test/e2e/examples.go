@@ -165,7 +165,7 @@ var _ = framework.KubeDescribe("[Feature:Example]", func() {
 				return filepath.Join(framework.TestContext.RepoRoot, "examples/spark", file)
 			}
 
-			// TODO: Add Zepplin and Web UI to this example.
+			// TODO: Add Zepplin and Web UI to this example. id:2368 gh:2383
 			serviceYaml := mkpath("spark-master-service.yaml")
 			masterYaml := mkpath("spark-master-controller.yaml")
 			workerControllerYaml := mkpath("spark-worker-controller.yaml")
@@ -246,7 +246,7 @@ var _ = framework.KubeDescribe("[Feature:Example]", func() {
 			Expect(err).NotTo(HaveOccurred())
 			forEachPod("app", "cassandra", func(pod v1.Pod) {
 				framework.Logf("Verifying pod %v ", pod.Name)
-				// TODO how do we do this better?  Ready Probe?
+				// TODO how do we do this better?  Ready Probe? id:2100 gh:2115
 				_, err = framework.LookForStringInLog(ns, pod.Name, "cassandra", "Starting listening for CQL clients", serverStartTimeout)
 				Expect(err).NotTo(HaveOccurred())
 			})
@@ -293,7 +293,7 @@ var _ = framework.KubeDescribe("[Feature:Example]", func() {
 
 			statefulsetPoll := 30 * time.Second
 			statefulsetTimeout := 10 * time.Minute
-			// TODO - parse this number out of the yaml
+			// TODO - parse this number out of the yaml id:2302 gh:2318
 			numPets := 3
 			label := labels.SelectorFromSet(labels.Set(map[string]string{"app": "cassandra"}))
 			err = wait.PollImmediate(statefulsetPoll, statefulsetTimeout,
@@ -377,7 +377,7 @@ var _ = framework.KubeDescribe("[Feature:Example]", func() {
 			forEachPod("name", "storm-worker", func(pod v1.Pod) {
 				//do nothing, just wait for the pod to be running
 			})
-			// TODO: Add logging configuration to nimbus & workers images and then
+			// TODO: Add logging configuration to nimbus & workers images and then id:2184 gh:2199
 			// look for a string instead of sleeping.
 			time.Sleep(20 * time.Second)
 

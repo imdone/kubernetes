@@ -289,8 +289,8 @@ func getUserFromImageUser(imageUser string) (*int64, string) {
 // the old container FOO.
 // See #40443. Sometimes even removal may fail with "no such container" error.
 // In that case we have to create the container with a randomized name.
-// TODO(random-liu): Remove this work around after docker 1.11 is deprecated.
-// TODO(#33189): Monitor the tests to see if the fix is sufficient.
+// TODO (random-liu): Remove this work around after docker 1.11 is deprecated. id:943 gh:949
+// TODO (#33189): Monitor the tests to see if the fix is sufficient. id:939 gh:945
 func recoverFromCreationConflictIfNeeded(client libdocker.Interface, createConfig dockertypes.ContainerCreateConfig, err error) (*dockercontainer.ContainerCreateCreatedBody, error) {
 	matches := conflictRE.FindStringSubmatch(err.Error())
 	if len(matches) != 2 {
@@ -331,7 +331,7 @@ func transformStartContainerError(err error) error {
 
 // getSecurityOptSeparator returns the security option separator based on the
 // docker API version.
-// TODO: Remove this function along with the relevant code when we no longer
+// TODO: Remove this function along with the relevant code when we no longer id:855 gh:859
 // need to support docker 1.10.
 func getSecurityOptSeparator(v *semver.Version) rune {
 	switch v.Compare(optsSeparatorChangeVersion) {

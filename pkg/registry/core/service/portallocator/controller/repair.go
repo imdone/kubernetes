@@ -74,7 +74,7 @@ func (c *Repair) RunOnce() error {
 
 // runOnce verifies the state of the port allocations and returns an error if an unrecoverable problem occurs.
 func (c *Repair) runOnce() error {
-	// TODO: (per smarterclayton) if Get() or ListServices() is a weak consistency read,
+	// TODO: (per smarterclayton) if Get() or ListServices() is a weak consistency read, id:1280 gh:1286
 	// or if they are executed against different leaders,
 	// the ordering guarantee required to ensure no port is allocated twice is violated.
 	// ListServices must return a ResourceVersion higher than the etcd index Get triggers,
@@ -134,15 +134,15 @@ func (c *Repair) runOnce() error {
 				}
 				delete(c.leaks, port) // it is used, so it can't be leaked
 			case portallocator.ErrAllocated:
-				// TODO: send event
+				// TODO: send event id:1326 gh:1332
 				// port is duplicate, reallocate
 				runtime.HandleError(fmt.Errorf("the node port %d for service %s/%s was assigned to multiple services; please recreate", port, svc.Name, svc.Namespace))
 			case err.(*portallocator.ErrNotInRange):
-				// TODO: send event
+				// TODO: send event id:1359 gh:1365
 				// port is out of range, reallocate
 				runtime.HandleError(fmt.Errorf("the port %d for service %s/%s is not within the port range %v; please recreate", port, svc.Name, svc.Namespace, c.portRange))
 			case portallocator.ErrFull:
-				// TODO: send event
+				// TODO: send event id:1398 gh:1404
 				// somehow we are out of ports
 				return fmt.Errorf("the port range %v is full; you must widen the port range in order to create new services", c.portRange)
 			default:

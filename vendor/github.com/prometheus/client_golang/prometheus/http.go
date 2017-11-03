@@ -29,7 +29,7 @@ import (
 	"github.com/prometheus/common/expfmt"
 )
 
-// TODO(beorn7): Remove this whole file. It is a partial mirror of
+// TODO (beorn7): Remove this whole file. It is a partial mirror of id:2940 gh:2955
 // promhttp/http.go (to avoid circular import chains) where everything HTTP
 // related should live. The functions here are just for avoiding
 // breakage. Everything is deprecated.

@@ -35,7 +35,7 @@ import (
 	_ "k8s.io/kubernetes/pkg/api/install"
 )
 
-// TODO:
+// TODO: id:169 gh:170
 // Add a -o flag that writes to the specified destination file.
 // Teach the script to create crt and key if -crt and -key aren't specified.
 var (

@@ -141,7 +141,7 @@ func (o TopPodOptions) RunTopPod() error {
 		}
 	}
 	metrics, err := o.Client.GetPodMetrics(o.Namespace, o.ResourceName, o.AllNamespaces, selector)
-	// TODO: Refactor this once Heapster becomes the API server.
+	// TODO: Refactor this once Heapster becomes the API server. id:715 gh:716
 	// First we check why no metrics have been received.
 	if len(metrics) == 0 {
 		// If the API server query is successful but all the pods are newly created,

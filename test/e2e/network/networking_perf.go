@@ -42,8 +42,8 @@ func networkingIPerfTest(isIPv6 bool) {
 	f := framework.NewDefaultFramework("network-perf")
 
 	// A few simple bandwidth tests which are capped by nodes.
-	// TODO replace the 1 with the scale option implementation
-	// TODO: Make this a function parameter, once we distribute iperf endpoints, possibly via session affinity.
+	// TODO replace the 1 with the scale option implementation id:2261 gh:2278
+	// TODO: Make this a function parameter, once we distribute iperf endpoints, possibly via session affinity. id:2393 gh:2408
 	numClient := 1
 	numServer := 1
 	maxBandwidthBits := gceBandwidthBitsEstimate
@@ -160,13 +160,13 @@ func networkingIPerfTest(isIPv6 bool) {
 }
 
 // Declared as Flakey since it has not been proven to run in parallel on small nodes or slow networks in CI
-// TODO jayunit100 : Retag this test according to semantics from #22401
+// TODO jayunit100 : Retag this test according to semantics from #22401 id:2310 gh:2325
 var _ = SIGDescribe("Networking IPerf IPv4 [Experimental] [Feature:Networking-IPv4] [Slow] [Feature:Networking-Performance]", func() {
 	networkingIPerfTest(false)
 })
 
 // Declared as Flakey since it has not been proven to run in parallel on small nodes or slow networks in CI
-// TODO jayunit100 : Retag this test according to semantics from #22401
+// TODO jayunit100 : Retag this test according to semantics from #22401 id:2343 gh:2358
 var _ = SIGDescribe("Networking IPerf IPv6 [Experimental] [Feature:Networking-IPv6] [Slow] [Feature:Networking-Performance]", func() {
 	networkingIPerfTest(true)
 })

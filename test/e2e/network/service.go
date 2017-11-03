@@ -63,7 +63,7 @@ var _ = SIGDescribe("Services", func() {
 		serviceLBNames = []string{}
 	})
 
-	// TODO: We get coverage of TCP/UDP and multi-port services through the DNS test. We should have a simpler test for multi-port TCP here.
+	// TODO: We get coverage of TCP/UDP and multi-port services through the DNS test. We should have a simpler test for multi-port TCP here. id:2311 gh:2326
 
 	/*
 	   Testname: service-kubernetes-exists
@@ -80,7 +80,7 @@ var _ = SIGDescribe("Services", func() {
 			valid/accessible endpoints (same port number for service and pods).
 	*/
 	framework.ConformanceIt("should serve a basic endpoint from pods ", func() {
-		// TODO: use the ServiceTestJig here
+		// TODO: use the ServiceTestJig here id:2344 gh:2360
 		serviceName := "endpoint-test2"
 		ns := f.Namespace.Name
 		labels := map[string]string{
@@ -145,7 +145,7 @@ var _ = SIGDescribe("Services", func() {
 			valid/accessible endpoints (different port number for pods).
 	*/
 	framework.ConformanceIt("should serve multiport endpoints from pods ", func() {
-		// TODO: use the ServiceTestJig here
+		// TODO: use the ServiceTestJig here id:2477 gh:2493
 		// repacking functionality is intentionally not tested here - it's better to test it in an integration test.
 		serviceName := "multi-endpoint-test"
 		ns := f.Namespace.Name
@@ -290,7 +290,7 @@ var _ = SIGDescribe("Services", func() {
 	})
 
 	It("should be able to up and down services", func() {
-		// TODO: use the ServiceTestJig here
+		// TODO: use the ServiceTestJig here id:2263 gh:2276
 		// this test uses framework.NodeSSHHosts that does not work if a Node only reports LegacyHostIP
 		framework.SkipUnlessProviderIs(framework.ProvidersWithSSH...)
 		// this test does not work if the Node does not support SSH Key
@@ -345,7 +345,7 @@ var _ = SIGDescribe("Services", func() {
 	})
 
 	It("should work after restarting kube-proxy [Disruptive]", func() {
-		// TODO: use the ServiceTestJig here
+		// TODO: use the ServiceTestJig here id:2395 gh:2410
 		framework.SkipUnlessProviderIs("gce", "gke")
 
 		ns := f.Namespace.Name
@@ -401,7 +401,7 @@ var _ = SIGDescribe("Services", func() {
 	})
 
 	It("should work after restarting apiserver [Disruptive]", func() {
-		// TODO: use the ServiceTestJig here
+		// TODO: use the ServiceTestJig here id:2312 gh:2327
 		framework.SkipUnlessProviderIs("gce", "gke")
 
 		ns := f.Namespace.Name
@@ -447,7 +447,7 @@ var _ = SIGDescribe("Services", func() {
 		framework.ExpectNoError(framework.VerifyServeHostnameServiceUp(cs, ns, host, podNames2, svc2IP, servicePort))
 	})
 
-	// TODO: Run this test against the userspace proxy and nodes
+	// TODO: Run this test against the userspace proxy and nodes id:2345 gh:2361
 	// configured with a default deny firewall to validate that the
 	// proxy whitelists NodePort traffic.
 	It("should be able to create a functioning NodePort service", func() {
@@ -946,7 +946,7 @@ var _ = SIGDescribe("Services", func() {
 	})
 
 	It("should prevent NodePort collisions", func() {
-		// TODO: use the ServiceTestJig here
+		// TODO: use the ServiceTestJig here id:2478 gh:2494
 		baseName := "nodeport-collision-"
 		serviceName1 := baseName + "1"
 		serviceName2 := baseName + "2"
@@ -1000,7 +1000,7 @@ var _ = SIGDescribe("Services", func() {
 	})
 
 	It("should check NodePort out-of-range", func() {
-		// TODO: use the ServiceTestJig here
+		// TODO: use the ServiceTestJig here id:2264 gh:2280
 		serviceName := "nodeport-range-test"
 		ns := f.Namespace.Name
 
@@ -1068,7 +1068,7 @@ var _ = SIGDescribe("Services", func() {
 	})
 
 	It("should release NodePorts on delete", func() {
-		// TODO: use the ServiceTestJig here
+		// TODO: use the ServiceTestJig here id:2396 gh:2411
 		serviceName := "nodeport-reuse"
 		ns := f.Namespace.Name
 
@@ -1716,7 +1716,7 @@ var _ = SIGDescribe("ESIPP [Slow]", func() {
 			framework.Failf("Source IP WAS preserved even after ESIPP turned off. Got %v, expected a ten-dot cluster ip.", clientIP)
 		}
 
-		// TODO: We need to attempt to create another service with the previously
+		// TODO: We need to attempt to create another service with the previously id:2313 gh:2328
 		// allocated healthcheck nodePort. If the health check nodePort has been
 		// freed, the new service creation will succeed, upon which we cleanup.
 		// If the health check nodePort has NOT been freed, the new service

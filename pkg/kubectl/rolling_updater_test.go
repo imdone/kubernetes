@@ -1144,7 +1144,7 @@ func TestRollingUpdater_cleanupWithClients(t *testing.T) {
 		// This cases is separated to a standalone
 		// TestRollingUpdater_cleanupWithClients_Rename. We have to do this
 		// because the unversioned fake client is unable to delete objects.
-		// TODO: uncomment this case when the unversioned fake client uses
+		// TODO: uncomment this case when the unversioned fake client uses id:809 gh:810
 		// pkg/client/testing/core.
 		//	{
 		//		name:      "rename",
@@ -1199,7 +1199,7 @@ func TestRollingUpdater_cleanupWithClients(t *testing.T) {
 // TestRollingUpdater_cleanupWithClients_Rename tests the rename cleanup policy. It's separated to
 // a standalone test because the unversioned fake client is unable to delete
 // objects.
-// TODO: move this test back to TestRollingUpdater_cleanupWithClients
+// TODO: move this test back to TestRollingUpdater_cleanupWithClients id:754 gh:755
 // when the fake client uses pkg/client/testing/core in the future.
 func TestRollingUpdater_cleanupWithClients_Rename(t *testing.T) {
 	rc := oldRc(2, 2)

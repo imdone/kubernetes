@@ -131,7 +131,7 @@ type downwardAPIVolume struct {
 	volName string
 	items   []v1.DownwardAPIVolumeFile
 	pod     *v1.Pod
-	podUID  types.UID // TODO: remove this redundancy as soon NewUnmounter func will have *v1.POD and not only types.UID
+	podUID  types.UID // TODO: remove this redundancy as soon NewUnmounter func will have *v1.POD and not only types.UID id:1378 gh:1384
 	plugin  *downwardAPIPlugin
 	volume.MetricsNil
 }
@@ -166,7 +166,7 @@ func (b *downwardAPIVolumeMounter) CanMount() error {
 // SetUp puts in place the volume plugin.
 // This function is not idempotent by design. We want the data to be refreshed periodically.
 // The internal sync interval of kubelet will drive the refresh of data.
-// TODO: Add volume specific ticker and refresh loop
+// TODO: Add volume specific ticker and refresh loop id:1498 gh:1504
 func (b *downwardAPIVolumeMounter) SetUp(fsGroup *int64) error {
 	return b.SetUpAt(b.GetPath(), fsGroup)
 }
@@ -233,7 +233,7 @@ func CollectData(items []v1.DownwardAPIVolumeFile, pod *v1.Pod, host volume.Volu
 			fileProjection.Mode = *defaultMode
 		}
 		if fileInfo.FieldRef != nil {
-			// TODO: unify with Kubelet.podFieldSelectorRuntimeValue
+			// TODO: unify with Kubelet.podFieldSelectorRuntimeValue id:1527 gh:1533
 			if values, err := fieldpath.ExtractFieldPathAsString(pod, fileInfo.FieldRef.FieldPath); err != nil {
 				glog.Errorf("Unable to extract field %s: %s", fileInfo.FieldRef.FieldPath, err.Error())
 				errlist = append(errlist, err)

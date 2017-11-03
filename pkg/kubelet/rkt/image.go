@@ -40,14 +40,14 @@ import (
 )
 
 // PullImage invokes 'rkt fetch' to download an aci.
-// TODO(yifan): Now we only support docker images, this should be changed
+// TODO (yifan): Now we only support docker images, this should be changed id:991 gh:997
 // once the format of image is landed, see:
 //
 // http://issue.k8s.io/7203
 //
 func (r *Runtime) PullImage(image kubecontainer.ImageSpec, pullSecrets []v1.Secret) (string, error) {
 	img := image.Image
-	// TODO(yifan): The credential operation is a copy from dockertools package,
+	// TODO (yifan): The credential operation is a copy from dockertools package, id:1109 gh:1115
 	// Need to resolve the code duplication.
 	repoToPull, _, _, err := parsers.ParseImageName(img)
 	if err != nil {
@@ -146,7 +146,7 @@ func buildImageName(img *rktapi.Image) string {
 		}
 	}
 	if registry != "" && repository != "" {
-		// TODO(euank): This could do the special casing for dockerhub and library images
+		// TODO (euank): This could do the special casing for dockerhub and library images id:1029 gh:1035
 		return fmt.Sprintf("%s/%s:%s", registry, repository, img.Version)
 	}
 
@@ -187,7 +187,7 @@ func (r *Runtime) listImages(image string, detail bool) ([]*rktapi.Image, error)
 
 	imageFilters := []*rktapi.ImageFilter{
 		{
-			// TODO(yifan): Add a field in the ImageFilter to match the whole name,
+			// TODO (yifan): Add a field in the ImageFilter to match the whole name, id:1126 gh:1132
 			// not just keywords.
 			// https://github.com/coreos/rkt/issues/1872#issuecomment-166456938
 			Keywords: []string{repoToPull},
@@ -218,7 +218,7 @@ func (r *Runtime) listImages(image string, detail bool) ([]*rktapi.Image, error)
 		return nil, fmt.Errorf("couldn't list images: %v", err)
 	}
 
-	// TODO(yifan): Let the API service to sort the result:
+	// TODO (yifan): Let the API service to sort the result: id:1065 gh:1071
 	// See https://github.com/coreos/rkt/issues/1911.
 	sort.Sort(sort.Reverse(sortByImportTime(listResp.Images)))
 	return listResp.Images, nil
@@ -239,7 +239,7 @@ func (r *Runtime) getImageManifest(image string) (*appcschema.ImageManifest, err
 	return &manifest, json.Unmarshal(images[0].Manifest, &manifest)
 }
 
-// TODO(yifan): This is very racy, inefficient, and unsafe, we need to provide
+// TODO (yifan): This is very racy, inefficient, and unsafe, we need to provide id:992 gh:998
 // different namespaces. See: https://github.com/coreos/rkt/issues/836.
 func (r *Runtime) writeDockerAuthConfig(image string, credsSlice []credentialprovider.LazyAuthConfiguration, userConfigDir string) error {
 	if len(credsSlice) == 0 {
@@ -247,7 +247,7 @@ func (r *Runtime) writeDockerAuthConfig(image string, credsSlice []credentialpro
 	}
 
 	creds := dockertypes.AuthConfig{}
-	// TODO handle multiple creds
+	// TODO handle multiple creds id:1110 gh:1116
 	if len(credsSlice) >= 1 {
 		creds = credentialprovider.LazyProvide(credsSlice[0])
 	}

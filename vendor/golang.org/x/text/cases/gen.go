@@ -57,7 +57,7 @@ type runeInfo struct {
 	FoldSpecial rune
 	FoldFull    []rune
 
-	// TODO: FC_NFKC, or equivalent data.
+	// TODO: FC_NFKC, or equivalent data. id:2910 gh:2925
 
 	// Properties
 	SoftDotted     bool
@@ -154,14 +154,14 @@ func parseUCD() []runeInfo {
 		}
 	})
 
-	// TODO: Use text breaking according to UAX #29.
+	// TODO: Use text breaking according to UAX #29. id:3345 gh:3360
 	// <code>; <word break type>
 	parse("auxiliary/WordBreakProperty.txt", func(p *ucd.Parser) {
 		ri := get(p.Rune(0))
 		ri.BreakType = p.String(1)
 
 		// We collapse the word breaking properties onto the categories we need.
-		switch p.String(1) { // TODO: officially we need to canonicalize.
+		switch p.String(1) { // TODO: officially we need to canonicalize. id:3245 gh:3260
 		case "MidLetter", "MidNumLet", "Single_Quote":
 			ri.BreakCat = breakMid
 			if !ri.CaseIgnorable {
@@ -211,7 +211,7 @@ func genTables() {
 
 	gen.WriteUnicodeVersion(w)
 
-	// TODO: write CLDR version after adding a mechanism to detect that the
+	// TODO: write CLDR version after adding a mechanism to detect that the id:3288 gh:3304
 	// tables on which the manually created locale-sensitive casing code is
 	// based hasn't changed.
 
@@ -236,7 +236,7 @@ func makeEntry(ri *runeInfo) {
 		ri.entry = ri.CaseMode
 	}
 
-	// TODO: handle soft-dotted.
+	// TODO: handle soft-dotted. id:3517 gh:3533
 
 	ccc := cccOther
 	switch ri.CCC {

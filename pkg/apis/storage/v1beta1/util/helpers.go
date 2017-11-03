@@ -20,13 +20,13 @@ import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 // IsDefaultStorageClassAnnotation represents a StorageClass annotation that
 // marks a class as the default StorageClass
-//TODO: remove Beta when no longer used
+//TODO: remove Beta when no longer used id:408 gh:409
 const IsDefaultStorageClassAnnotation = "storageclass.kubernetes.io/is-default-class"
 const BetaIsDefaultStorageClassAnnotation = "storageclass.beta.kubernetes.io/is-default-class"
 
 // IsDefaultAnnotationText returns a pretty Yes/No String if
 // the annotation is set
-// TODO: remove Beta when no longer needed
+// TODO: remove Beta when no longer needed id:399 gh:400
 func IsDefaultAnnotationText(obj metav1.ObjectMeta) string {
 	if obj.Annotations[IsDefaultStorageClassAnnotation] == "true" {
 		return "Yes"
@@ -40,7 +40,7 @@ func IsDefaultAnnotationText(obj metav1.ObjectMeta) string {
 
 // IsDefaultAnnotation returns a boolean if
 // the annotation is set
-// TODO: remove Beta when no longer needed
+// TODO: remove Beta when no longer needed id:387 gh:388
 func IsDefaultAnnotation(obj metav1.ObjectMeta) bool {
 	if obj.Annotations[IsDefaultStorageClassAnnotation] == "true" {
 		return true

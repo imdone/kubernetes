@@ -524,7 +524,7 @@ func (cc *ClientConn) scWatcher() {
 				return
 			}
 			cc.mu.Lock()
-			// TODO: load balance policy runtime change is ignored.
+			// TODO: load balance policy runtime change is ignored. id:3659 gh:3674
 			// We may revist this decision in the future.
 			cc.sc = sc
 			cc.mu.Unlock()
@@ -623,7 +623,7 @@ func (cc *ClientConn) resetAddrConn(addr Address, block bool, tearDownErr error)
 	return nil
 }
 
-// TODO: Avoid the locking here.
+// TODO: Avoid the locking here. id:3023 gh:3038
 func (cc *ClientConn) getMethodConfig(method string) (m MethodConfig, ok bool) {
 	cc.mu.RLock()
 	defer cc.mu.RUnlock()
@@ -989,7 +989,7 @@ func (ac *addrConn) wait(ctx context.Context, hasBalancer, failfast bool) (trans
 }
 
 // tearDown starts to tear down the addrConn.
-// TODO(zhaoq): Make this synchronous to avoid unbounded memory consumption in
+// TODO (zhaoq): Make this synchronous to avoid unbounded memory consumption in id:3480 gh:3495
 // some edge cases (e.g., the caller opens and closes many addrConn's in a
 // tight loop.
 // tearDown doesn't remove ac from ac.cc.conns.

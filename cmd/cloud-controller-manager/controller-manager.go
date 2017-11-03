@@ -29,7 +29,7 @@ import (
 	"k8s.io/kubernetes/cmd/cloud-controller-manager/app/options"
 	_ "k8s.io/kubernetes/pkg/client/metrics/prometheus" // for client metric registration
 	"k8s.io/kubernetes/pkg/cloudprovider"
-	// NOTE: Importing all in-tree cloud-providers is not required when
+	// NOTE: Importing all in-tree cloud-providers is not required when id:153 gh:154
 	// implementing an out-of-tree cloud-provider.
 	_ "k8s.io/kubernetes/pkg/cloudprovider/providers"
 	_ "k8s.io/kubernetes/pkg/version/prometheus" // for version metric registration

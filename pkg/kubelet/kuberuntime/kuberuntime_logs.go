@@ -42,7 +42,7 @@ import (
 // * If log rotation happens when following the log:
 //   * If the rotation is using create mode, we'll still follow the old file.
 //   * If the rotation is using copytruncate, we'll be reading at the original position and get nothing.
-// TODO(random-liu): Support log rotation.
+// TODO (random-liu): Support log rotation. id:1097 gh:1103
 
 // streamType is the type of the stream.
 type streamType string
@@ -288,7 +288,7 @@ func parseDockerJSONLog(log []byte, msg *logMessage) error {
 	var l = &jsonlog.JSONLog{}
 	l.Reset()
 
-	// TODO: JSON decoding is fairly expensive, we should evaluate this.
+	// TODO: JSON decoding is fairly expensive, we should evaluate this. id:1017 gh:1023
 	if err := json.Unmarshal(log, l); err != nil {
 		return fmt.Errorf("failed with %v to unmarshal log %q", err, l)
 	}

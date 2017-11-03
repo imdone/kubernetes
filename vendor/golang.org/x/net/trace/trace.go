@@ -110,7 +110,7 @@ var AuthRequest = func(req *http.Request) (any, sensitive bool) {
 }
 
 func init() {
-	// TODO(jbd): Serve Traces from /debug/traces in the future?
+	// TODO (jbd): Serve Traces from /debug/traces in the future? id:3337 gh:3352
 	// There is no requirement for a request to be present to have traces.
 	http.HandleFunc("/debug/requests", Traces)
 	http.HandleFunc("/debug/events", Events)
@@ -592,7 +592,7 @@ func (b *traceBucket) Add(tr *trace) {
 // If tracedOnly is true, only the traces with trace information will be returned.
 // The logs will be ref'd before returning; the caller should call
 // the Free method when it is done with them.
-// TODO(dsymonds): keep track of traced requests in separate buckets.
+// TODO (dsymonds): keep track of traced requests in separate buckets. id:3103 gh:3118
 func (b *traceBucket) Copy(tracedOnly bool) traceList {
 	b.mu.RLock()
 	defer b.mu.RUnlock()
@@ -858,7 +858,7 @@ func (tr *trace) Events() []event {
 	return tr.events
 }
 
-var traceFreeList = make(chan *trace, 1000) // TODO(dsymonds): Use sync.Pool?
+var traceFreeList = make(chan *trace, 1000) // TODO (dsymonds): Use sync.Pool? id:3185 gh:3201
 
 // newTrace returns a trace ready to use.
 func newTrace() *trace {
@@ -1056,7 +1056,7 @@ const pageHTML = `
 		<td class="when">{{$tr.When}}</td>
 		<td class="elapsed">{{$tr.ElapsedTime}}</td>
 		<td>{{$tr.Title}}</td>
-		{{/* TODO: include traceID/spanID */}}
+		{{/* TODO: include traceID/spanID  id:3372 gh:3386*/}}
 	</tr>
 	{{if $.Expanded}}
 	{{range $tr.Events}}

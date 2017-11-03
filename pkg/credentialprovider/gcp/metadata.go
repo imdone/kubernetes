@@ -165,7 +165,7 @@ func (g *dockerConfigUrlKeyProvider) Provide() credentialprovider.DockerConfig {
 				return cfg
 			}
 		} else {
-			// TODO(mattmoor): support reading alternate scheme URLs (e.g. gs:// or s3://)
+			// TODO (mattmoor): support reading alternate scheme URLs (e.g. gs:// or s3://) id:688 gh:689
 			glog.Errorf("Unsupported URL scheme: %s", string(url))
 		}
 	}

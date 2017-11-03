@@ -50,7 +50,7 @@ type SourcesReadyProvider interface {
 	AllReady() bool
 }
 
-// TODO(vmarmol): Preferentially remove pod infra containers.
+// TODO (vmarmol): Preferentially remove pod infra containers. id:819 gh:820
 type realContainerGC struct {
 	// Container runtime
 	runtime Runtime

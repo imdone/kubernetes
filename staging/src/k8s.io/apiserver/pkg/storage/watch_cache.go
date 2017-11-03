@@ -118,7 +118,7 @@ type watchCache struct {
 	// store will effectively support LIST operation from the "end of cache
 	// history" i.e. from the moment just after the newest cached watched event.
 	// It is necessary to effectively allow clients to start watching at now.
-	// NOTE: We assume that <store> is thread-safe.
+	// NOTE: We assume that <store> is thread-safe. id:3458 gh:3473
 	store cache.Store
 
 	// ResourceVersion up to which the watchCache is propagated.
@@ -221,7 +221,7 @@ func (w *watchCache) processEvent(event watch.Event, resourceVersion uint64, upd
 	}
 	elem := &storeElement{Key: key, Object: event.Object}
 
-	// TODO: We should consider moving this lock below after the watchCacheEvent
+	// TODO: We should consider moving this lock below after the watchCacheEvent id:3939 gh:3959
 	// is created. In such situation, the only problematic scenario is Replace(
 	// happening after getting object from store and before acquiring a lock.
 	// Maybe introduce another lock for this purpose.
@@ -284,7 +284,7 @@ func (w *watchCache) List() []interface{} {
 }
 
 // waitUntilFreshAndBlock waits until cache is at least as fresh as given <resourceVersion>.
-// NOTE: This function acquired lock and doesn't release it.
+// NOTE: This function acquired lock and doesn't release it. id:3756 gh:3771
 // You HAVE TO explicitly call w.RUnlock() after this function.
 func (w *watchCache) waitUntilFreshAndBlock(resourceVersion uint64, trace *utiltrace.Trace) error {
 	startTime := w.clock.Now()
@@ -424,7 +424,7 @@ func (w *watchCache) GetAllEventsSinceThreadUnsafe(resourceVersion uint64) ([]*w
 		// However, to keep backward compatibility, we additionally need to return the
 		// current state and only then start watching from that point.
 		//
-		// TODO: In v2 api, we should stop returning the current state - #13969.
+		// TODO: In v2 api, we should stop returning the current state - #13969. id:3905 gh:3925
 		allItems := w.store.List()
 		result := make([]*watchCacheEvent, len(allItems))
 		for i, item := range allItems {

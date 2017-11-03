@@ -40,7 +40,7 @@ type CidrSet struct {
 
 const (
 	// The subnet mask size cannot be greater than 16 more than the cluster mask size
-	// TODO: https://github.com/kubernetes/kubernetes/issues/44918
+	// TODO: https://github.com/kubernetes/kubernetes/issues/44918 id:581 gh:582
 	// clusterSubnetMaxDiff limited to 16 due to the uncompressed bitmap
 	clusterSubnetMaxDiff = 16
 	// halfIPv6Len is the half of the IPv6 length
@@ -74,7 +74,7 @@ func NewCIDRSet(clusterCIDR *net.IPNet, subNetMaskSize int) *CidrSet {
 	}
 }
 
-// TODO: Remove this function when upgrading to go 1.9
+// TODO: Remove this function when upgrading to go 1.9 id:545 gh:547
 var len8tab = [256]uint8{
 	0x00, 0x01, 0x02, 0x02, 0x03, 0x03, 0x03, 0x03, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04, 0x04,
 	0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05, 0x05,
@@ -94,7 +94,7 @@ var len8tab = [256]uint8{
 	0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08,
 }
 
-// TODO: Remove this function when upgrading to go 1.9
+// TODO: Remove this function when upgrading to go 1.9 id:589 gh:590
 // len64 returns the minimum number of bits required to represent x; the result is 0 for x == 0.
 func len64(x uint64) (n int) {
 	if x >= 1<<32 {
@@ -112,7 +112,7 @@ func len64(x uint64) (n int) {
 	return n + int(len8tab[x])
 }
 
-// TODO: Remove this function when upgrading to go 1.9
+// TODO: Remove this function when upgrading to go 1.9 id:627 gh:628
 // leadingZeros64 returns the number of leading zero bits in x; the result is 64 for x == 0.
 func leadingZeros64(x uint64) int { return 64 - len64(x) }
 
@@ -147,7 +147,7 @@ func (s *CidrSet) indexToCIDRBlock(index int) *net.IPNet {
 				if s.clusterMaskSize < halfV6NBits {
 					// see how many bits are needed to reach the left side
 					btl := uint(s.subNetMaskSize - halfV6NBits)
-					// TODO: Replace this with math/bits.LeadingZeros64 when upgrading to go 1.9
+					// TODO: Replace this with math/bits.LeadingZeros64 when upgrading to go 1.9 id:563 gh:564
 					indexMaxBit := uint(64 - leadingZeros64(uint64(index)))
 					if indexMaxBit > btl {
 						leftClusterIP |= uint64(index) >> btl

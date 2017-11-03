@@ -41,7 +41,7 @@ const (
 	maxDockerValidatedVersion = "17.03"
 )
 
-// TODO(random-liu): Add more validating items.
+// TODO (random-liu): Add more validating items. id:2408 gh:2418
 func (d *DockerValidator) Validate(spec SysSpec) (error, error) {
 	if spec.RuntimeSpec.DockerSpec == nil {
 		// If DockerSpec is not specified, assume current runtime is not

@@ -92,7 +92,7 @@ func benchmarkScheduling(numNodes, numScheduledPods int, b *testing.B) {
 	podCreator.CreatePods()
 	for {
 		// This can potentially affect performance of scheduler, since List() is done under mutex.
-		// TODO: Setup watch on apiserver and wait until all pods scheduled.
+		// TODO: Setup watch on apiserver and wait until all pods scheduled. id:2438 gh:2453
 		scheduled, err := schedulerConfigFactory.GetScheduledPodLister().List(labels.Everything())
 		if err != nil {
 			glog.Fatalf("%v", err)

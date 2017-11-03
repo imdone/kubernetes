@@ -65,7 +65,7 @@ type encDriver interface {
 	EncodeString(c charEncoding, v string)
 	EncodeSymbol(v string)
 	EncodeStringBytes(c charEncoding, v []byte)
-	//TODO
+	//TODO id:3075 gh:3090
 	//encBignum(f *big.Int)
 	//encStringRunes(c charEncoding, v []rune)
 
@@ -464,7 +464,7 @@ func (f *encFnInfo) kSlice(rv reflect.Value) {
 					bs = make([]byte, l)
 				}
 				reflect.Copy(reflect.ValueOf(bs), rv)
-				// TODO: Test that reflect.Copy works instead of manual one-by-one
+				// TODO: Test that reflect.Copy works instead of manual one-by-one id:3031 gh:3046
 				// for i := 0; i < l; i++ {
 				// 	bs[i] = byte(rv.Index(i).Uint())
 				// }
@@ -510,7 +510,7 @@ func (f *encFnInfo) kSlice(rv reflect.Value) {
 			rtelemid := reflect.ValueOf(rtelem).Pointer()
 			fn = e.getEncFn(rtelemid, rtelem, true, true)
 		}
-		// TODO: Consider perf implication of encoding odd index values as symbols if type is string
+		// TODO: Consider perf implication of encoding odd index values as symbols if type is string id:3211 gh:3227
 		for j := 0; j < l; j++ {
 			if cr != nil {
 				if ti.mbs {
@@ -920,7 +920,7 @@ type encRtidFn struct {
 type Encoder struct {
 	// hopefully, reduce derefencing cost by laying the encWriter inside the Encoder
 	e encDriver
-	// NOTE: Encoder shouldn't call it's write methods,
+	// NOTE: Encoder shouldn't call it's write methods, id:2789 gh:2804
 	// as the handler MAY need to do some coordination.
 	w  encWriter
 	s  []encRtidFn
@@ -1039,7 +1039,7 @@ func (e *Encoder) ResetBytes(out *[]byte) {
 //
 // Examples:
 //
-//      // NOTE: 'json:' can be used as struct tag key, in place 'codec:' below.
+//      // NOTE: 'json:' can be used as struct tag key, in place 'codec:' below. id:3172 gh:3188
 //      type MyStruct struct {
 //          _struct bool    `codec:",omitempty"`   //set omitempty for every field
 //          Field1 string   `codec:"-"`            //skip this field
@@ -1179,7 +1179,7 @@ TOP:
 		}
 		rv = rv.Elem()
 		if e.h.CheckCircularRef && rv.Kind() == reflect.Struct {
-			// TODO: Movable pointers will be an issue here. Future problem.
+			// TODO: Movable pointers will be an issue here. Future problem. id:3076 gh:3091
 			sptr = rv.UnsafeAddr()
 			break TOP
 		}

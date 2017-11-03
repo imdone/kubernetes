@@ -139,7 +139,7 @@ func (d director) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			if path == "/apis" || path == "/apis/" {
 				glog.V(5).Infof("%v: %v %q satisfied by gorestful with webservice %v", d.name, req.Method, path, ws.RootPath())
 				// don't use servemux here because gorestful servemuxes get messed up when removing webservices
-				// TODO fix gorestful, remove TPRs, or stop using gorestful
+				// TODO fix gorestful, remove TPRs, or stop using gorestful id:3717 gh:3732
 				d.goRestfulContainer.Dispatch(w, req)
 				return
 			}
@@ -149,7 +149,7 @@ func (d director) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 			if len(path) == len(ws.RootPath()) || path[len(ws.RootPath())] == '/' {
 				glog.V(5).Infof("%v: %v %q satisfied by gorestful with webservice %v", d.name, req.Method, path, ws.RootPath())
 				// don't use servemux here because gorestful servemuxes get messed up when removing webservices
-				// TODO fix gorestful, remove TPRs, or stop using gorestful
+				// TODO fix gorestful, remove TPRs, or stop using gorestful id:3869 gh:3884
 				d.goRestfulContainer.Dispatch(w, req)
 				return
 			}
@@ -161,7 +161,7 @@ func (d director) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	d.nonGoRestfulMux.ServeHTTP(w, req)
 }
 
-//TODO: Unify with RecoverPanics?
+//TODO: Unify with RecoverPanics? id:4015 gh:4035
 func logStackOnRecover(s runtime.NegotiatedSerializer, panicReason interface{}, w http.ResponseWriter) {
 	var buffer bytes.Buffer
 	buffer.WriteString(fmt.Sprintf("recover from panic situation: - %v\r\n", panicReason))

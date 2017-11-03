@@ -30,7 +30,7 @@ import (
 // This context matches the context.Context interface
 // (https://blog.golang.org/context), for the purposes
 // of passing the api.Context through to the storage tier.
-// TODO: Determine the extent that this abstraction+interface
+// TODO: Determine the extent that this abstraction+interface id:3709 gh:3724
 // is used by the api, and whether we can remove.
 type Context interface {
 	// Value returns the value associated with key or nil if none.
@@ -67,7 +67,7 @@ const (
 	// auditKey is the context key for the audit event.
 	auditKey
 
-	namespaceDefault = "default" // TODO(sttts): solve import cycle when using metav1.NamespaceDefault
+	namespaceDefault = "default" // TODO (sttts): solve import cycle when using metav1.NamespaceDefault id:3797 gh:3812
 )
 
 // NewContext instantiates a base context object for request flows.

@@ -61,7 +61,7 @@ func (identityTransformer) TransformStringToStorage(s string) (string, error) { 
 var IdentityTransformer ValueTransformer = identityTransformer{}
 
 // Creates a new storage interface from the client
-// TODO: deprecate in favor of storage.Config abstraction over time
+// TODO: deprecate in favor of storage.Config abstraction over time id:3933 gh:3954
 func NewEtcdStorage(client etcd.Client, codec runtime.Codec, prefix string, quorum bool, cacheSize int, transformer ValueTransformer) storage.Interface {
 	return &etcdHelper{
 		etcdMembersAPI: etcd.NewMembersAPI(client),
@@ -97,7 +97,7 @@ type etcdHelper struct {
 	// have to revisited if we decide to do things like multiple etcd clusters, or etcd will
 	// support multi-object transaction that will result in many objects with the same index.
 	// Number of entries stored in the cache is controlled by maxEtcdCacheEntries constant.
-	// TODO: Measure how much this cache helps after the conversion code is optimized.
+	// TODO: Measure how much this cache helps after the conversion code is optimized. id:3723 gh:3738
 	cache utilcache.Cache
 }
 
@@ -524,7 +524,7 @@ func (h *etcdHelper) GuaranteedUpdate(
 
 		if newTTL != nil {
 			if ttl != 0 && *newTTL == 0 {
-				// TODO: remove this after we have verified this is no longer an issue
+				// TODO: remove this after we have verified this is no longer an issue id:3899 gh:3919
 				glog.V(4).Infof("GuaranteedUpdate is clearing TTL for %q, may not be intentional", key)
 			}
 			ttl = *newTTL

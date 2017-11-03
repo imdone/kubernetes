@@ -164,7 +164,7 @@ func (sws SwaggerService) getDeclarations(req *restful.Request, resp *restful.Re
 	// unless WebServicesUrl is given
 	if len(sws.config.WebServicesUrl) == 0 {
 		// update base path from the actual request
-		// TODO how to detect https? assume http for now
+		// TODO how to detect https? assume http for now id:2709 gh:2724
 		var host string
 		// X-Forwarded-Host or Host or Request.Host
 		hostvalues, ok := req.Request.Header["X-Forwarded-Host"] // apache specific?
@@ -395,7 +395,7 @@ func asFormat(dataType string, dataFormat string) string {
 	if dataFormat != "" {
 		return dataFormat
 	}
-	return "" // TODO
+	return "" // TODO id:2694 gh:2709
 }
 
 func asParamType(kind int) string {
@@ -424,7 +424,7 @@ func asDataType(any interface{}, config *Config) (*string, *Item) {
 		return &modelName, nil
 	}
 
-	// XXX: This is not very elegant
+	// XXX: This is not very elegant id:2985 gh:3000
 	// We create an Item object referring to the given model
 	models := ModelList{}
 	mb := modelBuilder{Models: &models, Config: config}

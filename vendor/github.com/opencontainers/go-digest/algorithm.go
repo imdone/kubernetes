@@ -25,7 +25,7 @@ const (
 )
 
 var (
-	// TODO(stevvooe): Follow the pattern of the standard crypto package for
+	// TODO (stevvooe): Follow the pattern of the standard crypto package for id:2997 gh:3012
 	// registration of digests. Effectively, we are a registerable set and
 	// common symbol access.
 
@@ -98,7 +98,7 @@ func (a Algorithm) Hash() hash.Hash {
 			panic(fmt.Sprintf("empty digest algorithm, validate before calling Algorithm.Hash()"))
 		}
 
-		// NOTE(stevvooe): A missing hash is usually a programming error that
+		// NOTE (stevvooe): A missing hash is usually a programming error that id:2933 gh:2948
 		// must be resolved at compile time. We don't import in the digest
 		// package to allow users to choose their hash implementation (such as
 		// when using stevvooe/resumable or a hardware accelerated package).

@@ -40,7 +40,7 @@ var PanicHandlers = []func(interface{}){logPanic}
 // called in case of panic.  HandleCrash actually crashes, after calling the
 // handlers and logging the panic message.
 //
-// TODO: remove this function. We are switching to a world where it's safe for
+// TODO: remove this function. We are switching to a world where it's safe for id:3286 gh:3302
 // apiserver to panic, since it will be restarted by kubelet. At the beginning
 // of the Kubernetes project, nothing was going to restart apiserver and so
 // catching panics was important. But it's actually much simpler for montoring
@@ -81,7 +81,7 @@ func getCallers(r interface{}) string {
 
 // ErrorHandlers is a list of functions which will be invoked when an unreturnable
 // error occurs.
-// TODO(lavalamp): for testability, this and the below HandleError function
+// TODO (lavalamp): for testability, this and the below HandleError function id:3781 gh:3796
 // should be packaged up into a testable and reusable object.
 var ErrorHandlers = []func(error){
 	logError,
@@ -116,7 +116,7 @@ func logError(err error) {
 
 type rudimentaryErrorBackoff struct {
 	minPeriod time.Duration // immutable
-	// TODO(lavalamp): use the clock for testability. Need to move that
+	// TODO (lavalamp): use the clock for testability. Need to move that id:3603 gh:3618
 	// package for that to be accessible here.
 	lastErrorTimeLock sync.Mutex
 	lastErrorTime     time.Time
@@ -130,7 +130,7 @@ func (r *rudimentaryErrorBackoff) OnError(error) {
 	d := time.Since(r.lastErrorTime)
 	if d < r.minPeriod && d >= 0 {
 		// If the time moves backwards for any reason, do nothing
-		// TODO: remove check "d >= 0" after go 1.8 is no longer supported
+		// TODO: remove check "d >= 0" after go 1.8 is no longer supported id:3685 gh:3700
 		time.Sleep(r.minPeriod - d)
 	}
 	r.lastErrorTime = time.Now()

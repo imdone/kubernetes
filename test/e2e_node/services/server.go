@@ -97,7 +97,7 @@ func (s *server) String() string {
 // readinessCheck checks whether services are ready via the supplied health
 // check URLs. Once there is an error in errCh, the function will stop waiting
 // and return the error.
-// TODO(random-liu): Move this to util
+// TODO (random-liu): Move this to util id:2586 gh:2601
 func readinessCheck(name string, urls []string, errCh <-chan error) error {
 	glog.Infof("Running readiness check for service %q", name)
 	endTime := time.Now().Add(*serverStartTimeout)

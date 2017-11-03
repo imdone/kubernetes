@@ -268,7 +268,7 @@ func (plugin *cniNetworkPlugin) TearDownPod(namespace string, name string, id ku
 	return plugin.deleteFromNetwork(plugin.getDefaultNetwork(), name, namespace, id, netnsPath)
 }
 
-// TODO: Use the addToNetwork function to obtain the IP of the Pod. That will assume idempotent ADD call to the plugin.
+// TODO: Use the addToNetwork function to obtain the IP of the Pod. That will assume idempotent ADD call to the plugin. id:982 gh:989
 // Also fix the runtime's call to Status function to be done only in the case that the IP is lost, no need to do periodic calls
 func (plugin *cniNetworkPlugin) GetPodNetworkStatus(namespace string, name string, id kubecontainer.ContainerID) (*network.PodNetworkStatus, error) {
 	netnsPath, err := plugin.host.GetNetNS(id.ID)

@@ -521,7 +521,7 @@ func TestAccessorMethods(t *testing.T) {
 		{accessor: "ResourceVersion", val: "1"},
 		{accessor: "Generation", val: int64(5)},
 		{accessor: "SelfLink", val: "/foo"},
-		// TODO: Handle timestamps, which are being marshalled as UTC and
+		// TODO: Handle timestamps, which are being marshalled as UTC and id:3855 gh:3870
 		// unmarshalled as Local.
 		// https://github.com/kubernetes/kubernetes/issues/21402
 		// {accessor: "CreationTimestamp", val: someTime},

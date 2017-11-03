@@ -161,7 +161,7 @@ func Pause() (err error) {
 	return
 }
 
-// TODO(dfc): constants that should be in zsysnum_linux_arm64.go, remove
+// TODO (dfc): constants that should be in zsysnum_linux_arm64.go, remove id:3512 gh:3527
 // these when the deprecated syscalls that the syscall package relies on
 // are removed.
 const (

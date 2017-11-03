@@ -31,7 +31,7 @@ const (
 	probeTimeOut = 20 * time.Second
 )
 
-// TODO: this basic interface is duplicated in N places.  consolidate?
+// TODO: this basic interface is duplicated in N places.  consolidate? id:1311 gh:1317
 type httpGet interface {
 	Get(url string) (*http.Response, error)
 }

@@ -153,7 +153,7 @@ func getGPUsAvailable(f *framework.Framework) int64 {
 
 func testNvidiaGPUsOnCOS(f *framework.Framework) {
 	// Skip the test if the base image is not COS.
-	// TODO: Add support for other base images.
+	// TODO: Add support for other base images. id:2400 gh:2415
 	// CUDA apps require host mounts which is not portable across base images (yet).
 	framework.Logf("Checking base image")
 	if !isClusterRunningCOS(f) {

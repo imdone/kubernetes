@@ -135,7 +135,7 @@ func (util *VsphereDiskUtil) CreateVolume(v *vsphereVolumeProvisioner) (volSpec 
 		volumeOptions.VSANStorageProfileData = "(" + volumeOptions.VSANStorageProfileData + ")"
 	}
 	glog.V(4).Infof("VSANStorageProfileData in vsphere volume %q", volumeOptions.VSANStorageProfileData)
-	// TODO: implement PVC.Selector parsing
+	// TODO: implement PVC.Selector parsing id:1384 gh:1390
 	if v.options.PVC.Spec.Selector != nil {
 		return nil, fmt.Errorf("claim.Spec.Selector is not supported for dynamic provisioning on vSphere")
 	}

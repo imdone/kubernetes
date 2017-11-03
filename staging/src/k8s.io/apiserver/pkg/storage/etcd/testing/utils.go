@@ -48,7 +48,7 @@ import (
 // EtcdTestServer encapsulates the datastructures needed to start local instance for testing
 type EtcdTestServer struct {
 	// The following are lumped etcd2 test server params
-	// TODO: Deprecate in a post 1.5 release
+	// TODO: Deprecate in a post 1.5 release id:3935 gh:3956
 	etcdserver.ServerConfig
 	PeerListeners, ClientListeners []net.Listener
 	Client                         etcd.Client
@@ -235,7 +235,7 @@ func (m *EtcdTestServer) Terminate(t *testing.T) {
 	} else {
 		m.Client = nil
 		m.s.Stop()
-		// TODO: This is a pretty ugly hack to workaround races during closing
+		// TODO: This is a pretty ugly hack to workaround races during closing id:3725 gh:3740
 		// in-memory etcd server in unit tests - see #18928 for more details.
 		// We should get rid of it as soon as we have a proper fix - etcd clients
 		// have overwritten transport counting opened connections (probably by

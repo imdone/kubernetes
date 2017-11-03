@@ -40,7 +40,7 @@ import (
 	"unsafe"
 )
 
-// NOTE: These type_Foo functions would more idiomatically be methods,
+// NOTE: These type_Foo functions would more idiomatically be methods, id:2809 gh:2824
 // but Go does not allow methods on pointer types, and we must preserve
 // some pointer type for the garbage collector. We use these
 // funcs with clunky names as our poor approximation to methods.

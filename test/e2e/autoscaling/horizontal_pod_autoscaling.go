@@ -112,7 +112,7 @@ type HPAScaleTest struct {
 // The initial state is defined by the initPods parameter.
 // The first state change is due to the CPU being consumed initially, which HPA responds to by changing pod counts.
 // The second state change (optional) is due to the CPU burst parameter, which HPA again responds to.
-// TODO The use of 3 states is arbitrary, we could eventually make this test handle "n" states once this test stabilizes.
+// TODO The use of 3 states is arbitrary, we could eventually make this test handle "n" states once this test stabilizes. id:2365 gh:2380
 func (scaleTest *HPAScaleTest) run(name, kind string, rc *common.ResourceConsumer, f *framework.Framework) {
 	const timeToWait = 15 * time.Minute
 	rc = common.NewDynamicResourceConsumer(name, f.Namespace.Name, kind, int(scaleTest.initPods), int(scaleTest.totalInitialCPUUsage), 0, 0, scaleTest.perPodCPURequest, 200, f.ClientSet, f.InternalClientset)

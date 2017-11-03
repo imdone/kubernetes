@@ -40,7 +40,7 @@ type ContainerRuntimeOptions struct {
 	// This flag, if set, disables use of a shared PID namespace for pods running in the docker CRI runtime.
 	// A shared PID namespace is the only option in non-docker runtimes and is required by the CRI. The ability to
 	// disable it for docker will be removed unless a compelling use case is discovered with widespread use.
-	// TODO: Remove once we no longer support disabling shared PID namespace (https://issues.k8s.io/41938)
+	// TODO: Remove once we no longer support disabling shared PID namespace (https://issues.k8s.io/41938) id:777 gh:778
 	DockerDisableSharedPID bool
 	// PodSandboxImage is the image whose network/ipc namespaces
 	// containers in each pod will use.

@@ -46,7 +46,7 @@ func TestGetStaticPodSpecs(t *testing.T) {
 
 	// Executes GetStaticPodSpecs
 
-	// TODO: Move the "pkg/util/version".Version object into the internal API instead of always parsing the string
+	// TODO: Move the "pkg/util/version".Version object into the internal API instead of always parsing the string id:164 gh:165
 	k8sVersion, _ := version.ParseSemantic(cfg.KubernetesVersion)
 
 	specs := GetStaticPodSpecs(cfg, k8sVersion)

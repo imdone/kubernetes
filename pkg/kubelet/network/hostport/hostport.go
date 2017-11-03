@@ -96,7 +96,7 @@ func openLocalPort(hp *hostport) (closeable, error) {
 	// is using a port and we give that same port out to a Service.  That would
 	// be bad because iptables would silently claim the traffic but the process
 	// would never know.
-	// NOTE: We should not need to have a real listen()ing socket - bind()
+	// NOTE: We should not need to have a real listen()ing socket - bind() id:1020 gh:1026
 	// should be enough, but I can't figure out a way to e2e test without
 	// it.  Tools like 'ss' and 'netstat' do not show sockets that are
 	// bind()ed but not listen()ed, and at least the default debian netcat
@@ -129,7 +129,7 @@ func openLocalPort(hp *hostport) (closeable, error) {
 // openHostports opens all given hostports using the given hostportOpener
 // If encounter any error, clean up and return the error
 // If all ports are opened successfully, return the hostport and socket mapping
-// TODO: move openHostports and closeHostports into a common struct
+// TODO: move openHostports and closeHostports into a common struct id:1117 gh:1123
 func openHostports(portOpener hostportOpener, podPortMapping *PodPortMapping) (map[hostport]closeable, error) {
 	var retErr error
 	ports := make(map[hostport]closeable)

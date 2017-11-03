@@ -83,7 +83,7 @@ func (p *TemplatePrinter) PrintObj(obj runtime.Object, w io.Writer) error {
 	return nil
 }
 
-// TODO: implement HandledResources()
+// TODO: implement HandledResources() id:1154 gh:1160
 func (p *TemplatePrinter) HandledResources() []string {
 	return []string{}
 }

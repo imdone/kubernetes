@@ -1039,7 +1039,7 @@ func (p *parser) inBodyEndTagFormatting(tagAtom a.Atom) {
 	// This is the "adoption agency" algorithm, described at
 	// https://html.spec.whatwg.org/multipage/syntax.html#adoptionAgency
 
-	// TODO: this is a fairly literal line-by-line translation of that algorithm.
+	// TODO: this is a fairly literal line-by-line translation of that algorithm. id:3125 gh:3140
 	// Once the code successfully parses the comprehensive test suite, we should
 	// refactor this code to be more idiomatic.
 

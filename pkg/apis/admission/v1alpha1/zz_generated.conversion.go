@@ -89,7 +89,7 @@ func autoConvert_v1alpha1_AdmissionReviewSpec_To_admission_AdmissionReviewSpec(i
 	out.Namespace = in.Namespace
 	out.Resource = in.Resource
 	out.SubResource = in.SubResource
-	// TODO: Inefficient conversion - can we improve it?
+	// TODO: Inefficient conversion - can we improve it? id:362 gh:363
 	if err := s.Convert(&in.UserInfo, &out.UserInfo, 0); err != nil {
 		return err
 	}
@@ -114,7 +114,7 @@ func autoConvert_admission_AdmissionReviewSpec_To_v1alpha1_AdmissionReviewSpec(i
 	out.Operation = v1alpha1.Operation(in.Operation)
 	out.Resource = in.Resource
 	out.SubResource = in.SubResource
-	// TODO: Inefficient conversion - can we improve it?
+	// TODO: Inefficient conversion - can we improve it? id:274 gh:275
 	if err := s.Convert(&in.UserInfo, &out.UserInfo, 0); err != nil {
 		return err
 	}

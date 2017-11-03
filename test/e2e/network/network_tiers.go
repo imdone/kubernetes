@@ -219,8 +219,8 @@ func clearNetworkTier(svc *v1.Service) {
 	delete(svc.ObjectMeta.Annotations, key)
 }
 
-// TODO: add retries if this turns out to be flaky.
-// TODO(#51665): remove this helper function once Network Tiers becomes beta.
+// TODO: add retries if this turns out to be flaky. id:2260 gh:2275
+// TODO (#51665): remove this helper function once Network Tiers becomes beta. id:2392 gh:2407
 func reserveAlphaRegionalAddress(name string, netTier gcecloud.NetworkTier) (string, error) {
 	cloud, err := framework.GetGCECloud()
 	alphaAddr := &computealpha.Address{

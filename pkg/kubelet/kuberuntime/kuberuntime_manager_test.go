@@ -909,7 +909,7 @@ func TestComputePodActions(t *testing.T) {
 				ContainersToKill:  getKillMap(basePod, baseStatus, []int{1}),
 				ContainersToStart: []int{1},
 			},
-			// TODO: Add a test case for containers which failed the liveness
+			// TODO: Add a test case for containers which failed the liveness id:1018 gh:1024
 			// check. Will need to fake the livessness check result.
 		},
 	} {

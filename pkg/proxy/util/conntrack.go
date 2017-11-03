@@ -51,7 +51,7 @@ func ClearUDPConntrackForIP(execer exec.Interface, ip string) error {
 	parameters := parametersWithFamily(IsIPv6String(ip), "-D", "--orig-dst", ip, "-p", "udp")
 	err := ExecConntrackTool(execer, parameters...)
 	if err != nil && !strings.Contains(err.Error(), noConnectionToDelete) {
-		// TODO: Better handling for deletion failure. When failure occur, stale udp connection may not get flushed.
+		// TODO: Better handling for deletion failure. When failure occur, stale udp connection may not get flushed. id:1259 gh:1265
 		// These stale udp connection will keep black hole traffic. Making this a best effort operation for now, since it
 		// is expensive to baby-sit all udp connections to kubernetes services.
 		return fmt.Errorf("error deleting connection tracking state for UDP service IP: %s, error: %v", ip, err)
@@ -96,7 +96,7 @@ func ClearUDPConntrackForPeers(execer exec.Interface, origin, dest string) error
 	parameters := parametersWithFamily(IsIPv6String(origin), "-D", "--orig-dst", origin, "--dst-nat", dest, "-p", "udp")
 	err := ExecConntrackTool(execer, parameters...)
 	if err != nil && !strings.Contains(err.Error(), noConnectionToDelete) {
-		// TODO: Better handling for deletion failure. When failure occur, stale udp connection may not get flushed.
+		// TODO: Better handling for deletion failure. When failure occur, stale udp connection may not get flushed. id:1165 gh:1171
 		// These stale udp connection will keep black hole traffic. Making this a best effort operation for now, since it
 		// is expensive to baby sit all udp connections to kubernetes services.
 		return fmt.Errorf("error deleting conntrack entries for UDP peer {%s, %s}, error: %v", origin, dest, err)

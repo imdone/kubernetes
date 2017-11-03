@@ -158,7 +158,7 @@ type ActualStateOfWorldAttacherUpdater interface {
 	// volume name is supplied, that volume name will be used.  If not, the
 	// volume name is computed using the result from querying the plugin.
 	//
-	// TODO: in the future, we should be able to remove the volumeName
+	// TODO: in the future, we should be able to remove the volumeName id:1435 gh:1441
 	// argument to this method -- since it is used only for attachable
 	// volumes.  See issue 29695.
 	MarkVolumeAsAttached(volumeName v1.UniqueVolumeName, volumeSpec *volume.Spec, nodeName types.NodeName, devicePath string) error
@@ -675,14 +675,14 @@ func (oe *operationExecutor) MountVolume(
 	}
 
 	podName := nestedpendingoperations.EmptyUniquePodName
-	// TODO: remove this -- not necessary
+	// TODO: remove this -- not necessary id:1383 gh:1389
 	if !volumeToMount.PluginIsAttachable {
 		// Non-attachable volume plugins can execute mount for multiple pods
 		// referencing the same volume in parallel
 		podName = volumehelper.GetUniquePodName(volumeToMount.Pod)
 	}
 
-	// TODO mount_device
+	// TODO mount_device id:1503 gh:1509
 	opCompleteFunc := util.OperationCompleteHook(plugin, "volume_mount")
 	return oe.pendingOperations.Run(
 		volumeToMount.VolumeName, podName, mountFunc, opCompleteFunc)
@@ -748,7 +748,7 @@ func (oe *operationExecutor) VerifyControllerAttachedVolume(
 		volumeToMount.VolumeName, "" /* podName */, verifyControllerAttachedVolumeFunc, opCompleteFunc)
 }
 
-// TODO: this is a workaround for the unmount device issue caused by gci mounter.
+// TODO: this is a workaround for the unmount device issue caused by gci mounter. id:1532 gh:1538
 // In GCI cluster, if gci mounter is used for mounting, the container started by mounter
 // script will cause additional mounts created in the container. Since these mounts are
 // irrelavant to the original mounts, they should be not considered when checking the

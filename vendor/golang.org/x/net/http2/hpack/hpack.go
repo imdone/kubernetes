@@ -140,7 +140,7 @@ func (d *Decoder) SetEmitEnabled(v bool) { d.emitEnabled = v }
 // are currently enabled. The default is true.
 func (d *Decoder) EmitEnabled() bool { return d.emitEnabled }
 
-// TODO: add method *Decoder.Reset(maxSize, emitFunc) to let callers re-use Decoders and their
+// TODO: add method *Decoder.Reset(maxSize, emitFunc) to let callers re-use Decoders and their id:3091 gh:3106
 // underlying buffers for garbage reasons.
 
 func (d *Decoder) SetMaxDynamicTableSize(v uint32) {
@@ -210,7 +210,7 @@ func (d *Decoder) at(i uint64) (hf HeaderField, ok bool) {
 
 // Decode decodes an entire block.
 //
-// TODO: remove this method and make it incremental later? This is
+// TODO: remove this method and make it incremental later? This is id:3127 gh:3142
 // easier for debugging now.
 func (d *Decoder) DecodeFull(p []byte) ([]HeaderField, error) {
 	var hf []HeaderField
@@ -438,7 +438,7 @@ func readVarInt(n byte, p []byte) (i uint64, remain []byte, err error) {
 			return i, p, nil
 		}
 		m += 7
-		if m >= 63 { // TODO: proper overflow check. making this up.
+		if m >= 63 { // TODO: proper overflow check. making this up. id:3360 gh:3375
 			return 0, origP, errVarintOverflow
 		}
 	}

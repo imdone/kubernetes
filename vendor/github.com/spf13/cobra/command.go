@@ -378,7 +378,7 @@ func stripFlags(args []string, c *Command) []string {
 			case strings.Contains(y, "=\""):
 				inQuote = true
 			case strings.HasPrefix(y, "--") && !strings.Contains(y, "="):
-				// TODO: this isn't quite right, we should really check ahead for 'true' or 'false'
+				// TODO: this isn't quite right, we should really check ahead for 'true' or 'false' id:3027 gh:3042
 				inFlag = !isBooleanFlag(y[2:], c.Flags())
 			case strings.HasPrefix(y, "-") && !strings.Contains(y, "=") && len(y) == 2 && !isBooleanShortFlag(y[1:], c.Flags()):
 				inFlag = true

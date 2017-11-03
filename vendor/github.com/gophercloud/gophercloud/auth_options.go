@@ -70,7 +70,7 @@ type AuthOptions struct {
 	// false, it will not cache these settings, but re-authentication will not be
 	// possible.  This setting defaults to false.
 	//
-	// NOTE: The reauth function will try to re-authenticate endlessly if left
+	// NOTE: The reauth function will try to re-authenticate endlessly if left id:2661 gh:2676
 	// unchecked. The way to limit the number of attempts is to provide a custom
 	// HTTP client to the provider client and provide a transport that implements
 	// the RoundTripper interface and stores the number of failed retries. For an

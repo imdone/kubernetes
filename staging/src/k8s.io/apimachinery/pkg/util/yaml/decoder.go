@@ -101,7 +101,7 @@ func NewDocumentDecoder(r io.ReadCloser) io.ReadCloser {
 
 // Read reads the previous slice into the buffer, or attempts to read
 // the next chunk.
-// TODO: switch to readline approach.
+// TODO: switch to readline approach. id:3349 gh:3364
 func (d *YAMLDecoder) Read(data []byte) (n int, err error) {
 	left := len(d.remaining)
 	if left == 0 {

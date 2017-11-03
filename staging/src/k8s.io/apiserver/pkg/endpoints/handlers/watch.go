@@ -61,7 +61,7 @@ func (w *realTimeoutFactory) TimeoutCh() (<-chan time.Time, func() bool) {
 }
 
 // serveWatch handles serving requests to the server
-// TODO: the functionality in this method and in WatchServer.Serve is not cleanly decoupled.
+// TODO: the functionality in this method and in WatchServer.Serve is not cleanly decoupled. id:3991 gh:4011
 func serveWatch(watcher watch.Interface, scope RequestScope, req *http.Request, w http.ResponseWriter, timeout time.Duration) {
 	// negotiate for the stream serializer
 	serializer, err := negotiation.NegotiateOutputStreamSerializer(req, scope.Serializer)
@@ -83,7 +83,7 @@ func serveWatch(watcher watch.Interface, scope RequestScope, req *http.Request, 
 	// find the embedded serializer matching the media type
 	embeddedEncoder := scope.Serializer.EncoderForVersion(embedded, scope.Kind.GroupVersion())
 
-	// TODO: next step, get back mediaTypeOptions from negotiate and return the exact value here
+	// TODO: next step, get back mediaTypeOptions from negotiate and return the exact value here id:3424 gh:3439
 	mediaType := serializer.MediaType
 	if mediaType != runtime.ContentTypeJSON {
 		mediaType += ";stream=watch"

@@ -285,7 +285,7 @@ func TestSysctlsFromPodAnnotation(t *testing.T) {
 	}
 }
 
-// TODO: remove when alpha support for topology constraints is removed
+// TODO: remove when alpha support for topology constraints is removed id:256 gh:257
 func TestGetNodeAffinityFromAnnotations(t *testing.T) {
 	testCases := []struct {
 		annotations map[string]string

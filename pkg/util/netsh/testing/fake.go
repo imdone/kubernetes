@@ -52,7 +52,7 @@ func (*FakeNetsh) DeleteIPAddress(args []string) error {
 }
 
 // Restore runs `netsh exec` to restore portproxy or addresses using a file.
-// TODO Check if this is required, most likely not
+// TODO Check if this is required, most likely not id:1374 gh:1380
 func (*FakeNetsh) Restore(args []string) error {
 	// Do Nothing
 	return nil

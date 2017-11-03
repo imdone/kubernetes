@@ -69,7 +69,7 @@ func Until(timeout time.Duration, watcher Interface, conditions ...ConditionFunc
 				}
 				lastEvent = &event
 
-				// TODO: check for watch expired error and retry watch from latest point?
+				// TODO: check for watch expired error and retry watch from latest point? id:3687 gh:3702
 				done, err := condition(event)
 				if err != nil {
 					return lastEvent, err

@@ -30,7 +30,7 @@ var vcsBzr = &VCS{
 	vcs: vcs.ByCmd("bzr"),
 
 	IdentifyCmd: "version-info --custom --template {revision_id}",
-	DescribeCmd: "revno", // TODO(kr): find tag names if possible
+	DescribeCmd: "revno", // TODO (kr): find tag names if possible id:2787 gh:2802
 	DiffCmd:     "diff -r {rev}",
 	ListCmd:     "ls --from-root -R",
 	RootCmd:     "root",
@@ -137,7 +137,7 @@ func (vf vcsFiles) Contains(path string) bool {
 			return true
 		}
 		// git's root command (maybe other vcs as well) resolve symlinks, so try that too
-		// FIXME: rev-parse --show-cdup + extra logic will fix this for git but also need to validate the other vcs commands. This is maybe temporary.
+		// FIXME: rev-parse --show-cdup + extra logic will fix this for git but also need to validate the other vcs commands. This is maybe temporary. id:3170 gh:3185
 		p, err := filepath.EvalSymlinks(path)
 		if err != nil {
 			return false

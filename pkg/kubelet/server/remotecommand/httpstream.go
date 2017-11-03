@@ -53,7 +53,7 @@ func NewOptions(req *http.Request) (*Options, error) {
 	stdout := req.FormValue(api.ExecStdoutParam) == "1"
 	stderr := req.FormValue(api.ExecStderrParam) == "1"
 	if tty && stderr {
-		// TODO: make this an error before we reach this method
+		// TODO: make this an error before we reach this method id:1076 gh:1082
 		glog.V(4).Infof("Access to exec with tty and stderr is not supported, bypassing stderr")
 		stderr = false
 	}
@@ -241,7 +241,7 @@ WaitForStreams:
 				break WaitForStreams
 			}
 		case <-expired:
-			// TODO find a way to return the error to the user. Maybe use a separate
+			// TODO find a way to return the error to the user. Maybe use a separate id:1003 gh:1009
 			// stream to report errors?
 			return nil, errors.New("timed out waiting for client to create streams")
 		}
@@ -292,7 +292,7 @@ WaitForStreams:
 				break WaitForStreams
 			}
 		case <-expired:
-			// TODO find a way to return the error to the user. Maybe use a separate
+			// TODO find a way to return the error to the user. Maybe use a separate id:1198 gh:1204
 			// stream to report errors?
 			return nil, errors.New("timed out waiting for client to create streams")
 		}
@@ -340,7 +340,7 @@ WaitForStreams:
 				break WaitForStreams
 			}
 		case <-expired:
-			// TODO find a way to return the error to the user. Maybe use a separate
+			// TODO find a way to return the error to the user. Maybe use a separate id:1041 gh:1047
 			// stream to report errors?
 			return nil, errors.New("timed out waiting for client to create streams")
 		}
@@ -394,7 +394,7 @@ WaitForStreams:
 				break WaitForStreams
 			}
 		case <-expired:
-			// TODO find a way to return the error to the user. Maybe use a separate
+			// TODO find a way to return the error to the user. Maybe use a separate id:1138 gh:1144
 			// stream to report errors?
 			return nil, errors.New("timed out waiting for client to create streams")
 		}

@@ -333,7 +333,7 @@ func (dsc *DaemonSetsController) snapshot(ds *extensions.DaemonSet, revision int
 
 	history, err = dsc.kubeClient.AppsV1beta1().ControllerRevisions(ds.Namespace).Create(history)
 	if errors.IsAlreadyExists(err) {
-		// TODO: Is it okay to get from historyLister?
+		// TODO: Is it okay to get from historyLister? id:488 gh:489
 		existedHistory, getErr := dsc.kubeClient.AppsV1beta1().ControllerRevisions(ds.Namespace).Get(name, metav1.GetOptions{})
 		if getErr != nil {
 			return nil, getErr
@@ -348,7 +348,7 @@ func (dsc *DaemonSetsController) snapshot(ds *extensions.DaemonSet, revision int
 		}
 
 		// Handle name collisions between different history
-		// TODO: Is it okay to get from dsLister?
+		// TODO: Is it okay to get from dsLister? id:526 gh:528
 		currDS, getErr := dsc.kubeClient.ExtensionsV1beta1().DaemonSets(ds.Namespace).Get(ds.Name, metav1.GetOptions{})
 		if getErr != nil {
 			return nil, getErr
@@ -385,7 +385,7 @@ func (dsc *DaemonSetsController) getAllDaemonSetPods(ds *extensions.DaemonSet, n
 
 func (dsc *DaemonSetsController) getUnavailableNumbers(ds *extensions.DaemonSet, nodeToDaemonPods map[string][]*v1.Pod) (int, int, error) {
 	glog.V(4).Infof("Getting unavailable numbers")
-	// TODO: get nodeList once in syncDaemonSet and pass it to other functions
+	// TODO: get nodeList once in syncDaemonSet and pass it to other functions id:535 gh:536
 	nodeList, err := dsc.nodeLister.List(labels.Everything())
 	if err != nil {
 		return -1, -1, fmt.Errorf("couldn't get list of nodes during rolling update of daemon set %#v: %v", ds, err)

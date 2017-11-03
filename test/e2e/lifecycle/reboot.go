@@ -80,7 +80,7 @@ var _ = SIGDescribe("Reboot [Disruptive] [Feature:Reboot]", func() {
 		// that tries to get logs, for example, we may get unlucky and try to use a closed tunnel to a node that
 		// was recently rebooted. There's no good way to framework.Poll for proxies being closed, so we sleep.
 		//
-		// TODO(cjcullen) reduce this sleep (#19314)
+		// TODO (cjcullen) reduce this sleep (#19314) id:2389 gh:2404
 		if framework.ProviderIs("gke") {
 			By("waiting 5 minutes for all dead tunnels to be dropped")
 			time.Sleep(5 * time.Minute)

@@ -52,7 +52,7 @@ var (
 		"center",
 	}
 
-	// TODO: improve this regexp to catch all possible entities:
+	// TODO: improve this regexp to catch all possible entities: id:2782 gh:2797
 	htmlEntity = regexp.MustCompile(`&[a-z]{2,5};`)
 )
 

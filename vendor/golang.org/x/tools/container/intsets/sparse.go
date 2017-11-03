@@ -13,19 +13,19 @@
 //
 package intsets
 
-// TODO(adonovan):
+// TODO (adonovan): id:3019 gh:3034
 // - Add InsertAll(...int), RemoveAll(...int)
 // - Add 'bool changed' results for {Intersection,Difference}With too.
 //
-// TODO(adonovan): implement Dense, a dense bit vector with a similar API.
+// TODO (adonovan): implement Dense, a dense bit vector with a similar API. id:3476 gh:3491
 // The space usage would be proportional to Max(), not Len(), and the
 // implementation would be based upon big.Int.
 //
-// TODO(adonovan): experiment with making the root block indirect (nil
+// TODO (adonovan): experiment with making the root block indirect (nil id:3319 gh:3334
 // iff IsEmpty).  This would reduce the memory usage when empty and
 // might simplify the aliasing invariants.
 //
-// TODO(adonovan): opt: make UnionWith and Difference faster.
+// TODO (adonovan): opt: make UnionWith and Difference faster. id:3377 gh:3392
 // These are the hot-spots for go/pointer.
 
 import (

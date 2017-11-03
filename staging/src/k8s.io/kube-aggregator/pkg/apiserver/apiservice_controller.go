@@ -204,7 +204,7 @@ func (c *APIServiceRegistrationController) getAPIServicesFor(service *v1.Service
 	return ret
 }
 
-// TODO, think of a way to avoid checking on every service manipulation
+// TODO , think of a way to avoid checking on every service manipulation id:3630 gh:3645
 
 func (c *APIServiceRegistrationController) addService(obj interface{}) {
 	for _, apiService := range c.getAPIServicesFor(obj.(*v1.Service)) {

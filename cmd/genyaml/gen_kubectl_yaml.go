@@ -65,7 +65,7 @@ func main() {
 	// Set environment variables used by kubectl so the output is consistent,
 	// regardless of where we run.
 	os.Setenv("HOME", "/home/username")
-	// TODO os.Stdin should really be something like ioutil.Discard, but a Reader
+	// TODO os.Stdin should really be something like ioutil.Discard, but a Reader id:56 gh:57
 	kubectl := cmd.NewKubectlCommand(cmdutil.NewFactory(nil), os.Stdin, ioutil.Discard, ioutil.Discard)
 	genYaml(kubectl, "", outDir)
 	for _, c := range kubectl.Commands() {

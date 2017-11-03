@@ -124,7 +124,7 @@ func (s SecretForTLSGeneratorV1) ParamNames() []GeneratorParam {
 
 // validate validates required fields are set to support structured generation
 func (s SecretForTLSGeneratorV1) validate() error {
-	// TODO: This is not strictly necessary. We can generate a self signed cert
+	// TODO: This is not strictly necessary. We can generate a self signed cert id:810 gh:811
 	// if no key/cert is given. The only requiredment is that we either get both
 	// or none. See test/e2e/ingress_utils for self signed cert generation.
 	if len(s.Key) == 0 {
@@ -136,7 +136,7 @@ func (s SecretForTLSGeneratorV1) validate() error {
 	if _, err := tls.LoadX509KeyPair(s.Cert, s.Key); err != nil {
 		return fmt.Errorf("failed to load key pair %v", err)
 	}
-	// TODO: Add more validation.
+	// TODO: Add more validation. id:755 gh:756
 	// 1. If the certificate contains intermediates, it is a valid chain.
 	// 2. Format etc.
 	return nil

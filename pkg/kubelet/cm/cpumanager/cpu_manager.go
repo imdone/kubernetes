@@ -235,7 +235,7 @@ func (m *manager) reconcileState() (success []reconciledContainer, failure []rec
 
 			cset := m.state.GetCPUSetOrDefault(containerID)
 			if cset.IsEmpty() {
-				// NOTE: This should not happen outside of tests.
+				// NOTE: This should not happen outside of tests. id:830 gh:831
 				glog.Infof("[cpumanager] reconcileState: skipping container; assigned cpuset is empty (pod: %s, container: %s)", pod.Name, container.Name)
 				failure = append(failure, reconciledContainer{pod.Name, container.Name, containerID})
 				continue
@@ -269,7 +269,7 @@ func findContainerIDByName(status *v1.PodStatus, name string) (string, error) {
 }
 
 func (m *manager) updateContainerCPUSet(containerID string, cpus cpuset.CPUSet) error {
-	// TODO: Consider adding a `ResourceConfigForContainer` helper in
+	// TODO: Consider adding a `ResourceConfigForContainer` helper in id:774 gh:775
 	// helpers_linux.go similar to what exists for pods.
 	// It would be better to pass the full container resources here instead of
 	// this patch-like partial resources.

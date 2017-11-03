@@ -225,7 +225,7 @@ type podAndContainerCollector struct {
 	containerCache kubecontainer.RuntimeCache
 }
 
-// TODO(vmarmol): Split by source?
+// TODO (vmarmol): Split by source? id:1055 gh:1061
 var (
 	runningPodCountDesc = prometheus.NewDesc(
 		prometheus.BuildFQName("", KubeletSubsystem, "running_pod_count"),

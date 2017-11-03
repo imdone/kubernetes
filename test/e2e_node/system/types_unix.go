@@ -31,8 +31,8 @@ var DefaultSysSpec = SysSpec{
 	OS: "Linux",
 	KernelSpec: KernelSpec{
 		Versions: []string{`3\.[1-9][0-9].*`, `4\..*`}, // Requires 3.10+ or 4+
-		// TODO(random-liu): Add more config
-		// TODO(random-liu): Add description for each kernel configuration:
+		// TODO (random-liu): Add more config id:2670 gh:2685
+		// TODO (random-liu): Add description for each kernel configuration: id:2409 gh:2424
 		Required: []KernelConfig{
 			{Name: "NAMESPACES"},
 			{Name: "NET_NS"},

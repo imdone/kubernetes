@@ -182,7 +182,7 @@ func (util *ISCSIUtil) persistISCSI(conf iscsiDisk, mnt string) error {
 }
 
 func (util *ISCSIUtil) loadISCSI(conf *iscsiDisk, mnt string) error {
-	// NOTE: The iscsi config json is not deleted after logging out from target portals.
+	// NOTE: The iscsi config json is not deleted after logging out from target portals. id:1529 gh:1535
 	file := path.Join(mnt, "iscsi.json")
 	fp, err := os.Open(file)
 	if err != nil {

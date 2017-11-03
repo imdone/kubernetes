@@ -28,7 +28,7 @@ import (
 	"k8s.io/kubernetes/pkg/controller"
 )
 
-// TODO flesh this out to cover things like not being able to find the csr in the cache, not
+// TODO flesh this out to cover things like not being able to find the csr in the cache, not id:511 gh:512
 // auto-approving, etc.
 func TestCertificateController(t *testing.T) {
 

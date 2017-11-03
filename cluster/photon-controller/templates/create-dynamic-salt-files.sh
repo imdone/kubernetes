@@ -59,7 +59,7 @@ EOF
   mkdir -p /srv/salt-overlay/salt/kube-proxy
   kube_proxy_kubeconfig_file="/srv/salt-overlay/salt/kube-proxy/kubeconfig"
   # Make a kubeconfig file with the token.
-  # TODO(etune): put apiserver certs into secret too, and reference from authfile,
+  # TODO (etune): put apiserver certs into secret too, and reference from authfile, id:92 gh:93
   # so that "Insecure" is not needed.
   (umask 077;
   cat > "${kube_proxy_kubeconfig_file}" << EOF

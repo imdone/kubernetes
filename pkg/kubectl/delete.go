@@ -208,7 +208,7 @@ func (reaper *ReplicationControllerReaper) Stop(namespace, name string, timeout 
 	return rc.Delete(name, deleteOptions)
 }
 
-// TODO(madhusudancs): Implement it when controllerRef is implemented - https://github.com/kubernetes/kubernetes/issues/2210
+// TODO (madhusudancs): Implement it when controllerRef is implemented - https://github.com/kubernetes/kubernetes/issues/2210 id:791 gh:792
 // getOverlappingReplicaSets finds ReplicaSets that this ReplicaSet overlaps, as well as ReplicaSets overlapping this ReplicaSet.
 func getOverlappingReplicaSets(c extensionsclient.ReplicaSetInterface, rs *extensions.ReplicaSet) ([]extensions.ReplicaSet, []extensions.ReplicaSet, error) {
 	var overlappingRSs, exactMatchRSs []extensions.ReplicaSet
@@ -249,7 +249,7 @@ func (reaper *ReplicaSetReaper) Stop(namespace, name string, timeout time.Durati
 	// tries to account for this logic only in the common case, where we end up
 	// with multiple ReplicaSets that have an exact match on selectors.
 
-	// TODO(madhusudancs): Re-evaluate again when controllerRef is implemented -
+	// TODO (madhusudancs): Re-evaluate again when controllerRef is implemented - id:804 gh:805
 	// https://github.com/kubernetes/kubernetes/issues/2210
 	overlappingRSs, exactMatchRSs, err := getOverlappingReplicaSets(rsc, rs)
 	if err != nil {
@@ -337,7 +337,7 @@ func (reaper *StatefulSetReaper) Stop(namespace, name string, timeout time.Durat
 		return err
 	}
 
-	// TODO: Cleanup volumes? We don't want to accidentally delete volumes from
+	// TODO: Cleanup volumes? We don't want to accidentally delete volumes from id:749 gh:750
 	// stop, so just leave this up to the statefulset.
 	falseVar := false
 	deleteOptions := &metav1.DeleteOptions{OrphanDependents: &falseVar}
@@ -358,7 +358,7 @@ func (reaper *JobReaper) Stop(namespace, name string, timeout time.Duration, gra
 		timeout = Timeout + time.Duration(10*parallelism)*time.Second
 	}
 
-	// TODO: handle overlapping jobs
+	// TODO: handle overlapping jobs id:722 gh:723
 	retry := NewRetryParams(reaper.pollInterval, reaper.timeout)
 	waitForJobs := NewRetryParams(reaper.pollInterval, timeout)
 	if err = scaler.Scale(namespace, name, 0, nil, retry, waitForJobs); err != nil {
@@ -395,7 +395,7 @@ func (reaper *DeploymentReaper) Stop(namespace, name string, timeout time.Durati
 
 	deployment, err := reaper.updateDeploymentWithRetries(namespace, name, func(d *extensions.Deployment) {
 		// set deployment's history and scale to 0
-		// TODO replace with patch when available: https://github.com/kubernetes/kubernetes/issues/20527
+		// TODO replace with patch when available: https://github.com/kubernetes/kubernetes/issues/20527 id:763 gh:764
 		rhl := int32(0)
 		d.Spec.RevisionHistoryLimit = &rhl
 		d.Spec.Replicas = 0

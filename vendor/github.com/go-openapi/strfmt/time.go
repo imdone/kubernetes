@@ -112,7 +112,7 @@ func (t *DateTime) UnmarshalText(text []byte) error {
 
 // Scan scans a DateTime value from database driver type.
 func (t *DateTime) Scan(raw interface{}) error {
-	// TODO: case int64: and case float64: ?
+	// TODO: case int64: and case float64: ? id:2539 gh:2554
 	switch v := raw.(type) {
 	case []byte:
 		return t.UnmarshalText(v)

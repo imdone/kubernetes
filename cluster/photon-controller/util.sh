@@ -644,7 +644,7 @@ function install-kubernetes-on-nodes {
   gen-node-salt
 
   # Run in parallel to bring up the cluster faster
-  # TODO: Batch this so that we run up to N in parallel, so
+  # TODO: Batch this so that we run up to N in parallel, so id:52 gh:53
   # we don't overload this machine or the salt master
   local node
   for (( node=0; node<${#NODE_NAMES[@]}; node++)); do
@@ -931,7 +931,7 @@ function verify-ssh-prereqs {
 # Verify that Photon Controller has been configured in the way we expect. Specifically
 # - Have the flavors been created?
 # - Has the image been uploaded?
-# TODO: Check the tenant and project as well.
+# TODO: Check the tenant and project as well. id:113 gh:114
 function verify-photon-config {
   kube::log::status "Validating Photon configuration..."
 

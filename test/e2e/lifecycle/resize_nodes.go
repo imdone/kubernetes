@@ -90,7 +90,7 @@ var _ = SIGDescribe("Nodes [Disruptive]", func() {
 			// closed tunnel to a node that was recently rebooted. There's no good way to framework.Poll for proxies
 			// being closed, so we sleep.
 			//
-			// TODO(cjcullen) reduce this sleep (#19314)
+			// TODO (cjcullen) reduce this sleep (#19314) id:2306 gh:2316
 			if framework.ProviderIs("gke") {
 				By("waiting 5 minutes for all dead tunnels to be dropped")
 				time.Sleep(5 * time.Minute)
@@ -136,7 +136,7 @@ var _ = SIGDescribe("Nodes [Disruptive]", func() {
 			Expect(err).NotTo(HaveOccurred())
 		})
 
-		// TODO: Bug here - testName is not correct
+		// TODO: Bug here - testName is not correct id:2339 gh:2354
 		It("should be able to add nodes", func() {
 			// Create a replication controller for a service that serves its hostname.
 			// The source for the Docker container kubernetes/serve_hostname is in contrib/for-demos/serve_hostname

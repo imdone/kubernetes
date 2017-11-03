@@ -273,7 +273,7 @@ func (s *SpecValidator) validateItems() *Result {
 	// validate parameter, items, schema and response objects for presence of item if type is array
 	res := new(Result)
 
-	// TODO: implement support for lookups of refs
+	// TODO: implement support for lookups of refs id:2989 gh:3004
 	for method, pi := range s.analyzer.Operations() {
 		for path, op := range pi {
 			for _, param := range s.analyzer.ParamsFor(method, path) {
@@ -638,7 +638,7 @@ func (s *SpecValidator) validateResponseExample(path string, r *spec.Response) *
 				res.Merge(NewSchemaValidator(r.Schema, s.spec.Spec(), path, s.KnownFormats).Validate(example))
 			}
 
-			// TODO: validate other media types too
+			// TODO: validate other media types too id:2540 gh:2555
 		}
 	}
 	return res

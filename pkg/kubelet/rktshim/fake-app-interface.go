@@ -103,7 +103,7 @@ func (c *fakeContainer) Stop() {
 }
 
 func (c *fakeContainer) Exec(cmd []string, in io.Reader, out, err io.WriteCloser) error {
-	// TODO(tmrts): incomplete command execution logic
+	// TODO (tmrts): incomplete command execution logic id:1073 gh:1079
 	// c.StreamCompare(c.Streams.In, s.InputStream)
 	// c.StreamFlush(c.Streams.Out, s.OutputStream)
 	// c.StreamFlush(c.Streams.Err, s.ErrorStream)
@@ -114,7 +114,7 @@ func (c *fakeContainer) Exec(cmd []string, in io.Reader, out, err io.WriteCloser
 type containerRegistry map[string]*fakeContainer
 
 func (r *FakeRuntime) CreateContainer(pid string, cfg *runtimeapi.ContainerConfig, sandboxCfg *runtimeapi.PodSandboxConfig) (string, error) {
-	// TODO(tmrts): allow customization
+	// TODO (tmrts): allow customization id:1000 gh:1006
 	containerIDLength := 8
 
 	cid := randString(containerIDLength)
@@ -138,7 +138,7 @@ func (r *FakeRuntime) StartContainer(id string) error {
 	case runtimeapi.ContainerState_CONTAINER_CREATED:
 		c.Start()
 	case runtimeapi.ContainerState_CONTAINER_UNKNOWN:
-		// TODO(tmrts): add timeout to Start API or generalize timeout somehow
+		// TODO (tmrts): add timeout to Start API or generalize timeout somehow id:1195 gh:1201
 		//<-time.After(time.Duration(timeout) * time.Second)
 		fallthrough
 	default:
@@ -182,7 +182,7 @@ func (r *FakeRuntime) RemoveContainer(id string) error {
 func (r *FakeRuntime) ListContainers(*runtimeapi.ContainerFilter) ([]*runtimeapi.Container, error) {
 	list := []*runtimeapi.Container{}
 
-	// TODO(tmrts): apply the filter
+	// TODO (tmrts): apply the filter id:1038 gh:1045
 	for _, c := range r.Containers {
 		list = append(list, &runtimeapi.Container{
 			Id:       c.Status.Id,
@@ -215,7 +215,7 @@ func (r *FakeRuntime) ExecSync(containerID string, cmd []string, timeout time.Du
 		return nil, nil, ErrContainerNotFound
 	}
 
-	// TODO(tmrts): Validate the assumption that container has to be running for exec to work.
+	// TODO (tmrts): Validate the assumption that container has to be running for exec to work. id:1135 gh:1141
 	if c.State != runtimeapi.ContainerState_CONTAINER_RUNNING {
 		return nil, nil, ErrInvalidContainerStateTransition
 	}

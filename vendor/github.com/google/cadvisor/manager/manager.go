@@ -767,7 +767,7 @@ func (m *manager) GetMachineInfo() (*info.MachineInfo, error) {
 }
 
 func (m *manager) GetVersionInfo() (*info.VersionInfo, error) {
-	// TODO: Consider caching this and periodically updating.  The VersionInfo may change if
+	// TODO: Consider caching this and periodically updating.  The VersionInfo may change if id:2919 gh:2934
 	// the docker daemon is started after the cAdvisor client is created.  Caching the value
 	// would be helpful so we would be able to return the last known docker version if
 	// docker was down at the time of a query.
@@ -799,7 +799,7 @@ func (m *manager) GetProcessList(containerName string, options v2.RequestOptions
 	if len(conts) != 1 {
 		return nil, fmt.Errorf("Expected the request to match only one container")
 	}
-	// TODO(rjnagal): handle count? Only if we can do count by type (eg. top 5 cpu users)
+	// TODO (rjnagal): handle count? Only if we can do count by type (eg. top 5 cpu users) id:3058 gh:3073
 	ps := []v2.ProcessInfo{}
 	for _, cont := range conts {
 		ps, err = cont.GetProcessList(m.cadvisorContainer, m.inHostNamespace)

@@ -141,7 +141,7 @@ func (m *kubeGenericRuntimeManager) startContainer(podSandboxID string, podSandb
 
 	// Symlink container logs to the legacy container log location for cluster logging
 	// support.
-	// TODO(random-liu): Remove this after cluster logging supports CRI container log path.
+	// TODO (random-liu): Remove this after cluster logging supports CRI container log path. id:1015 gh:1021
 	containerMeta := containerConfig.GetMetadata()
 	sandboxMeta := podSandboxConfig.GetMetadata()
 	legacySymlink := legacyLogSymlink(containerID, containerMeta.Name, sandboxMeta.Name,
@@ -412,7 +412,7 @@ func (m *kubeGenericRuntimeManager) getPodContainerStatuses(uid kubetypes.UID, n
 	}
 
 	statuses := make([]*kubecontainer.ContainerStatus, len(containers))
-	// TODO: optimization: set maximum number of containers per container name to examine.
+	// TODO: optimization: set maximum number of containers per container name to examine. id:1091 gh:1097
 	for i, c := range containers {
 		status, err := m.runtimeService.ContainerStatus(c.Id)
 		if err != nil {
@@ -511,8 +511,8 @@ func (m *kubeGenericRuntimeManager) executePreStopHook(pod *v1.Pod, containerID 
 // kubelet restart.
 // To solve this problem, we've already written necessary information into container labels. Here we
 // just need to retrieve them from container labels and restore the specs.
-// TODO(random-liu): Add a node e2e test to test this behaviour.
-// TODO(random-liu): Change the lifecycle handler to just accept information needed, so that we can
+// TODO (random-liu): Add a node e2e test to test this behaviour. id:1051 gh:1057
+// TODO (random-liu): Change the lifecycle handler to just accept information needed, so that we can id:978 gh:984
 // just pass the needed function not create the fake object.
 func (m *kubeGenericRuntimeManager) restoreSpecsFromContainerLabels(containerID kubecontainer.ContainerID) (*v1.Pod, *v1.Container, error) {
 	var pod *v1.Pod
@@ -806,7 +806,7 @@ func (m *kubeGenericRuntimeManager) GetAttach(id kubecontainer.ContainerID, stdi
 // RunInContainer synchronously executes the command in the container, and returns the output.
 func (m *kubeGenericRuntimeManager) RunInContainer(id kubecontainer.ContainerID, cmd []string, timeout time.Duration) ([]byte, error) {
 	stdout, stderr, err := m.runtimeService.ExecSync(id.ID, cmd, timeout)
-	// NOTE(tallclair): This does not correctly interleave stdout & stderr, but should be sufficient
+	// NOTE (tallclair): This does not correctly interleave stdout & stderr, but should be sufficient id:1096 gh:1102
 	// for logging purposes. A combined output option will need to be added to the ExecSyncRequest
 	// if more precise output ordering is ever required.
 	return append(stdout, stderr...), err
@@ -826,7 +826,7 @@ func (m *kubeGenericRuntimeManager) removeContainer(containerID string) error {
 	}
 
 	// Remove the container log.
-	// TODO: Separate log and container lifecycle management.
+	// TODO: Separate log and container lifecycle management. id:1016 gh:1022
 	if err := m.removeContainerLog(containerID); err != nil {
 		return err
 	}
@@ -849,7 +849,7 @@ func (m *kubeGenericRuntimeManager) removeContainerLog(containerID string) error
 	}
 
 	// Remove the legacy container log symlink.
-	// TODO(random-liu): Remove this after cluster logging supports CRI container log path.
+	// TODO (random-liu): Remove this after cluster logging supports CRI container log path. id:1092 gh:1098
 	legacySymlink := legacyLogSymlink(containerID, labeledInfo.ContainerName, labeledInfo.PodName,
 		labeledInfo.PodNamespace)
 	if err := m.osInterface.Remove(legacySymlink); err != nil && !os.IsNotExist(err) {

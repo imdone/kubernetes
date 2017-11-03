@@ -171,7 +171,7 @@ func getRecentUnmetScheduleTimes(sj batchv1beta1.CronJob, now time.Time) ([]time
 
 // getJobFromTemplate makes a Job from a CronJob
 func getJobFromTemplate(sj *batchv1beta1.CronJob, scheduledTime time.Time) (*batchv1.Job, error) {
-	// TODO: consider adding the following labels:
+	// TODO: consider adding the following labels: id:486 gh:487
 	// nominal-start-time=$RFC_3339_DATE_OF_INTENDED_START -- for user convenience
 	// scheduled-job-name=$SJ_NAME -- for user convenience
 	labels := copyLabels(&sj.Spec.JobTemplate)
@@ -205,7 +205,7 @@ func makeCreatedByRefJson(object runtime.Object) (string, error) {
 		return "", fmt.Errorf("unable to get controller reference: %v", err)
 	}
 
-	// TODO: this code was not safe previously - as soon as new code came along that switched to v2, old clients
+	// TODO: this code was not safe previously - as soon as new code came along that switched to v2, old clients id:524 gh:525
 	//   would be broken upon reading it. This is explicitly hardcoded to v1 to guarantee predictable deployment.
 	//   We need to consistently handle this case of annotation versioning.
 	codec := legacyscheme.Codecs.LegacyCodec(schema.GroupVersion{Group: v1.GroupName, Version: "v1"})

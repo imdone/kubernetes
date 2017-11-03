@@ -50,7 +50,7 @@ type cadvisorClient struct {
 
 var _ Interface = new(cadvisorClient)
 
-// TODO(vmarmol): Make configurable.
+// TODO (vmarmol): Make configurable. id:828 gh:829
 // The amount of time for which to keep stats in memory.
 const statsCacheDuration = 2 * time.Minute
 const maxHousekeepingInterval = 15 * time.Second
@@ -159,7 +159,7 @@ func (cc *cadvisorClient) exportHTTP(address string, port uint) error {
 			Handler: mux,
 		}
 
-		// TODO(vmarmol): Remove this when the cAdvisor port is once again free.
+		// TODO (vmarmol): Remove this when the cAdvisor port is once again free. id:772 gh:773
 		// If export failed, retry in the background until we are able to bind.
 		// This allows an existing cAdvisor to be killed before this one registers.
 		go func() {
@@ -226,7 +226,7 @@ func (cc *cadvisorClient) getFsInfo(label string) (cadvisorapiv2.FsInfo, error) 
 	if len(res) == 0 {
 		return cadvisorapiv2.FsInfo{}, fmt.Errorf("failed to find information for the filesystem labeled %q", label)
 	}
-	// TODO(vmarmol): Handle this better when a label has more than one image filesystem.
+	// TODO (vmarmol): Handle this better when a label has more than one image filesystem. id:801 gh:802
 	if len(res) > 1 {
 		glog.Warningf("More than one filesystem labeled %q: %#v. Only using the first one", label, res)
 	}

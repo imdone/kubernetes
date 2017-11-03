@@ -49,7 +49,7 @@ func NewREST(optsGetter generic.RESTOptionsGetter) *REST {
 	}
 	options := &generic.StoreOptions{RESTOptions: optsGetter}
 	if err := store.CompleteWithOptions(options); err != nil {
-		panic(err) // TODO: Propagate error up
+		panic(err) // TODO: Propagate error up id:1315 gh:1321
 	}
 	return &REST{store}
 }

@@ -71,14 +71,14 @@ type MatchValue struct {
 type TriggerPublisherFunc func(obj runtime.Object) []MatchValue
 
 // FilterFunc takes an API object and returns true if the object satisfies some requirements.
-// TODO: We will remove this type and use SelectionPredicate everywhere.
+// TODO: We will remove this type and use SelectionPredicate everywhere. id:3456 gh:3471
 type FilterFunc func(obj runtime.Object) bool
 
 // Everything accepts all objects.
 var Everything = SelectionPredicate{
 	Label: labels.Everything(),
 	Field: fields.Everything(),
-	// TODO: split this into a new top level constant?
+	// TODO: split this into a new top level constant? id:3937 gh:3957
 	IncludeUninitialized: true,
 }
 

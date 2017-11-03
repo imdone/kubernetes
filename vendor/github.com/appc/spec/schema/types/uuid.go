@@ -28,8 +28,8 @@ var (
 )
 
 // UUID encodes an RFC4122-compliant UUID, marshaled to/from a string
-// TODO(jonboulle): vendor a package for this?
-// TODO(jonboulle): consider more flexibility in input string formats.
+// TODO (jonboulle): vendor a package for this? id:2451 gh:2466
+// TODO (jonboulle): consider more flexibility in input string formats. id:2561 gh:2576
 // Right now, we only accept:
 //   "6733C088-A507-4694-AABF-EDBE4FC5266F"
 //   "6733C088A5074694AABFEDBE4FC5266F"

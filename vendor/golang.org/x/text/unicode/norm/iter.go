@@ -245,7 +245,7 @@ func nextDecomposed(i *Iter) (next []byte) {
 			p := outp + len(d)
 			if outp > 0 {
 				i.rb.src.copySlice(i.buf[outCopyStart:], inCopyStart, i.p)
-				// TODO: this condition should not be possible, but we leave it
+				// TODO: this condition should not be possible, but we leave it id:3017 gh:3032
 				// in for defensive purposes.
 				if p > len(i.buf) {
 					return i.buf[:outp]

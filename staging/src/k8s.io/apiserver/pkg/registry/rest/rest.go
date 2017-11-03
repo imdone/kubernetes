@@ -30,7 +30,7 @@ import (
 	genericapirequest "k8s.io/apiserver/pkg/endpoints/request"
 )
 
-//TODO:
+//TODO: id:3714 gh:3730
 // Storage interfaces need to be separated into two groups; those that operate
 // on collections and those that operate on individually named items.
 // Collection interfaces:
@@ -80,7 +80,7 @@ type CategoriesProvider interface {
 // GroupVersionKindProvider is used to specify a particular GroupVersionKind to discovery.  This is used for polymorphic endpoints
 // which generally point to foreign versions.  Scale refers to Scale.v1beta1.extensions for instance.
 // This trumps KindProvider since it is capable of providing the information required.
-// TODO KindProvider (only used by federation) should be removed and replaced with this, but that presents greater risk late in 1.8.
+// TODO KindProvider (only used by federation) should be removed and replaced with this, but that presents greater risk late in 1.8. id:3802 gh:3817
 type GroupVersionKindProvider interface {
 	GroupVersionKind(containingGV schema.GroupVersion) schema.GroupVersionKind
 }
@@ -121,7 +121,7 @@ type GetterWithOptions interface {
 	// returned error value err when the specified resource is not found.
 	// The options object passed to it is of the same type returned by the NewGetOptions
 	// method.
-	// TODO: Pass metav1.GetOptions.
+	// TODO: Pass metav1.GetOptions. id:3998 gh:4018
 	Get(ctx genericapirequest.Context, name string, options runtime.Object) (runtime.Object, error)
 
 	// NewGetOptions returns an empty options object that will be used to pass

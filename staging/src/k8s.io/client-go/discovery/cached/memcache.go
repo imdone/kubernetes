@@ -33,7 +33,7 @@ import (
 // memCacheClient can Invalidate() to stay up-to-date with discovery
 // information.
 //
-// TODO: Switch to a watch interface. Right now it will poll anytime
+// TODO: Switch to a watch interface. Right now it will poll anytime id:3461 gh:3476
 // Invalidate() is called.
 type memCacheClient struct {
 	delegate discovery.DiscoveryInterface
@@ -96,14 +96,14 @@ func (d *memCacheClient) RESTClient() restclient.Interface {
 	return d.delegate.RESTClient()
 }
 
-// TODO: Should this also be cached? The results seem more likely to be
+// TODO: Should this also be cached? The results seem more likely to be id:3942 gh:3961
 // inconsistent with ServerGroups and ServerResources given the requirement to
 // actively Invalidate.
 func (d *memCacheClient) ServerPreferredResources() ([]*metav1.APIResourceList, error) {
 	return d.delegate.ServerPreferredResources()
 }
 
-// TODO: Should this also be cached? The results seem more likely to be
+// TODO: Should this also be cached? The results seem more likely to be id:3759 gh:3774
 // inconsistent with ServerGroups and ServerResources given the requirement to
 // actively Invalidate.
 func (d *memCacheClient) ServerPreferredNamespacedResources() ([]*metav1.APIResourceList, error) {
@@ -136,7 +136,7 @@ func (d *memCacheClient) Invalidate() {
 	d.lock.Lock()
 	defer d.lock.Unlock()
 
-	// TODO: Could this multiplicative set of calls be replaced by a single call
+	// TODO: Could this multiplicative set of calls be replaced by a single call id:3908 gh:3928
 	// to ServerResources? If it's possible for more than one resulting
 	// APIResourceList to have the same GroupVersion, the lists would need merged.
 	gl, err := d.delegate.ServerGroups()
@@ -170,7 +170,7 @@ func (d *memCacheClient) Invalidate() {
 // discovery information in memory and will stay up-to-date if Invalidate is
 // called with regularity.
 //
-// NOTE: The client will NOT resort to live lookups on cache misses.
+// NOTE: The client will NOT resort to live lookups on cache misses. id:4030 gh:4050
 func NewMemCacheClient(delegate discovery.DiscoveryInterface) discovery.CachedDiscoveryInterface {
 	return &memCacheClient{
 		delegate:               delegate,

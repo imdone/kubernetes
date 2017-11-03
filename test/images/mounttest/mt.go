@@ -68,7 +68,7 @@ func main() {
 	// Clear the umask so we can set any mode bits we want.
 	syscall.Umask(0000)
 
-	// NOTE: the ordering of execution of the various command line
+	// NOTE: the ordering of execution of the various command line id:2500 gh:2515
 	// flags is intentional and allows a single command to:
 	//
 	// 1.  Check the fstype of a path

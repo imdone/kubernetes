@@ -50,7 +50,7 @@ func (t *PersistentVolumeUpgradeTest) deleteGCEVolume(pvSource *v1.PersistentVol
 func (t *PersistentVolumeUpgradeTest) Setup(f *framework.Framework) {
 
 	var err error
-	// TODO: generalize this to other providers
+	// TODO: generalize this to other providers id:2272 gh:2287
 	framework.SkipUnlessProviderIs("gce", "gke")
 
 	ns := f.Namespace.Name

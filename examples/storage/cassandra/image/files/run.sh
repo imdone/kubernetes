@@ -105,7 +105,7 @@ for rackdc in dc rack; do
   fi
 done
 
-# TODO what else needs to be modified
+# TODO what else needs to be modified id:188 gh:189
 for yaml in \
   broadcast_address \
   broadcast_rpc_address \

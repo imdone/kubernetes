@@ -57,7 +57,7 @@ func (l LinuxNoNewPrivileges) AssertValid() error {
 	return nil
 }
 
-// TODO(lucab): both need to be clarified in spec,
+// TODO (lucab): both need to be clarified in spec, id:2558 gh:2573
 // see https://github.com/appc/spec/issues/625
 func (l LinuxNoNewPrivileges) multipleAllowed() bool {
 	return true
@@ -104,7 +104,7 @@ func (l linuxCapabilitiesSetBase) AssertValid() error {
 	return nil
 }
 
-// TODO(lucab): both need to be clarified in spec,
+// TODO (lucab): both need to be clarified in spec, id:2744 gh:2759
 // see https://github.com/appc/spec/issues/625
 func (l linuxCapabilitiesSetBase) multipleAllowed() bool {
 	return true

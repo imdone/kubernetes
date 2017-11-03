@@ -62,7 +62,7 @@ Example:
 */
 package auth
 
-// TODO: need a way to rotate Tokens.  Therefore, need a way for client object to be reset when the authcfg is updated.
+// TODO: need a way to rotate Tokens.  Therefore, need a way for client object to be reset when the authcfg is updated. id:3808 gh:3823
 import (
 	"encoding/json"
 	"io/ioutil"

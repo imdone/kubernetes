@@ -38,7 +38,7 @@ const (
 type NodeE2ERemote struct{}
 
 func InitNodeE2ERemote() TestSuite {
-	// TODO: Register flags.
+	// TODO: Register flags. id:2280 gh:2295
 	return &NodeE2ERemote{}
 }
 
@@ -185,7 +185,7 @@ func updateOSSpecificKubeletFlags(args, host, workspace string) (string, error) 
 // RunTest runs test on the node.
 func (n *NodeE2ERemote) RunTest(host, workspace, results, imageDesc, junitFilePrefix, testArgs, ginkgoArgs, systemSpecName string, timeout time.Duration) (string, error) {
 	// Install the cni plugins and add a basic CNI configuration.
-	// TODO(random-liu): Do this in cloud init after we remove containervm test.
+	// TODO (random-liu): Do this in cloud init after we remove containervm test. id:2582 gh:2597
 	if err := setupCNI(host, workspace); err != nil {
 		return "", err
 	}

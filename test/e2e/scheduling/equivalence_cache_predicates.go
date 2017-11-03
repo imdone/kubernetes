@@ -143,7 +143,7 @@ var _ = framework.KubeDescribe("EquivalenceCache [Serial]", func() {
 		defer framework.DeleteRCAndPods(f.ClientSet, f.InternalClientset, ns, affinityRCName)
 
 		// RC should be running successfully
-		// TODO: WaitForSchedulerAfterAction() can on be used to wait for failure event,
+		// TODO: WaitForSchedulerAfterAction() can on be used to wait for failure event, id:2268 gh:2283
 		// not for successful RC, since no specific pod name can be provided.
 		_, err := cs.CoreV1().ReplicationControllers(ns).Create(rc)
 		framework.ExpectNoError(err)

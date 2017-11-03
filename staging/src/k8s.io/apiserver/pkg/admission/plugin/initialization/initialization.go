@@ -146,7 +146,7 @@ func (i *initializer) readConfig(a admission.Attributes) (*v1alpha1.InitializerC
 // or an empty initializers struct (which bypasses initialization). Only clients with the initialize verb
 // can update objects that have not completed initialization. Sub resources can still be modified on
 // resources that are undergoing initialization.
-// TODO: once this logic is ready for beta, move it into the REST storage layer.
+// TODO: once this logic is ready for beta, move it into the REST storage layer. id:3784 gh:3800
 func (i *initializer) Admit(a admission.Attributes) (err error) {
 	switch a.GetOperation() {
 	case admission.Create, admission.Update:
@@ -154,7 +154,7 @@ func (i *initializer) Admit(a admission.Attributes) (err error) {
 		return nil
 	}
 
-	// TODO: should sub-resource action should be denied until the object is initialized?
+	// TODO: should sub-resource action should be denied until the object is initialized? id:3606 gh:3621
 	if len(a.GetSubresource()) > 0 {
 		return nil
 	}
@@ -190,7 +190,7 @@ func (i *initializer) Admit(a admission.Attributes) (err error) {
 
 			// Mirror pods are exempt from initialization because they are created and initialized
 			// on the Kubelet before they appear in the API.
-			// TODO: once this moves to REST storage layer, this becomes a pod specific concern
+			// TODO: once this moves to REST storage layer, this becomes a pod specific concern id:3688 gh:3703
 			if a.GetKind().GroupKind() == v1.SchemeGroupVersion.WithKind("Pod").GroupKind() {
 				accessor, err := meta.Accessor(a.GetObject())
 				if err != nil {
@@ -252,7 +252,7 @@ func (i *initializer) Admit(a admission.Attributes) (err error) {
 			return err
 		}
 
-		// TODO: restrict initialization list changes to specific clients?
+		// TODO: restrict initialization list changes to specific clients? id:3863 gh:3878
 	}
 
 	return nil

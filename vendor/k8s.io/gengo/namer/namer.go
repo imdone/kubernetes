@@ -252,15 +252,15 @@ func (ns *NameStrategy) Name(t *types.Type) string {
 			ns.removePrefixAndSuffix(ns.Name(t.Elem)),
 		}, ns.Suffix)
 	case types.Interface:
-		// TODO: add to name test
+		// TODO: add to name test id:4069 gh:4089
 		names := []string{"Interface"}
 		for _, m := range t.Methods {
-			// TODO: include function signature
+			// TODO: include function signature id:3627 gh:3642
 			names = append(names, m.Name.Name)
 		}
 		name = ns.Join(ns.Prefix, names, ns.Suffix)
 	case types.Func:
-		// TODO: add to name test
+		// TODO: add to name test id:4032 gh:4052
 		parts := []string{"Func"}
 		for _, pt := range t.Signature.Parameters {
 			parts = append(parts, ns.removePrefixAndSuffix(ns.Name(pt)))
@@ -338,18 +338,18 @@ func (r *rawNamer) Name(t *types.Type) string {
 		}
 		name = "struct{" + strings.Join(elems, "; ") + "}"
 	case types.Chan:
-		// TODO: include directionality
+		// TODO: include directionality id:3830 gh:3845
 		name = "chan " + r.Name(t.Elem)
 	case types.Interface:
-		// TODO: add to name test
+		// TODO: add to name test id:3973 gh:3993
 		elems := []string{}
 		for _, m := range t.Methods {
-			// TODO: include function signature
+			// TODO: include function signature id:4070 gh:4090
 			elems = append(elems, m.Name.Name)
 		}
 		name = "interface{" + strings.Join(elems, "; ") + "}"
 	case types.Func:
-		// TODO: add to name test
+		// TODO: add to name test id:3628 gh:3643
 		params := []string{}
 		for _, pt := range t.Signature.Parameters {
 			params = append(params, r.Name(pt))

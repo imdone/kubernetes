@@ -43,7 +43,7 @@ func (s *deploymentLister) GetDeploymentsForReplicaSet(rs *extensions.ReplicaSet
 		return nil, fmt.Errorf("no deployments found for ReplicaSet %v because it has no labels", rs.Name)
 	}
 
-	// TODO: MODIFY THIS METHOD so that it checks for the podTemplateSpecHash label
+	// TODO: MODIFY THIS METHOD so that it checks for the podTemplateSpecHash label id:4042 gh:4062
 	dList, err := s.Deployments(rs.Namespace).List(labels.Everything())
 	if err != nil {
 		return nil, err

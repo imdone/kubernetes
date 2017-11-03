@@ -156,7 +156,7 @@ func (i *idleAwareFramer) ReadFrame() (spdy.Frame, error) {
 	// resetChan should never be closed since it is only closed
 	// when the connection has closed its closeChan. This closure
 	// only occurs after all Reads have finished
-	// TODO (dmcgowan): refactor relationship into connection
+	// TODO (dmcgowan): refactor relationship into connection id:2854 gh:2869
 	i.resetChan <- struct{}{}
 
 	return frame, nil
@@ -506,7 +506,7 @@ func (s *Connection) handleReplyFrame(frame *spdy.SynReplyFrame) error {
 	}
 	stream.replied = true
 
-	// TODO Check for error
+	// TODO Check for error id:2707 gh:2722
 	if (frame.CFHeader.Flags & spdy.ControlFlagFin) != 0x00 {
 		s.remoteStreamFinish(stream)
 	}
@@ -549,7 +549,7 @@ func (s *Connection) handleHeaderFrame(frame *spdy.HeadersFrame) error {
 		return nil
 	}
 
-	// TODO limit headers while not blocking (use buffered chan or goroutine?)
+	// TODO limit headers while not blocking (use buffered chan or goroutine?) id:2692 gh:2707
 	select {
 	case <-stream.closeChan:
 		return nil
@@ -675,7 +675,7 @@ func (s *Connection) CreateStream(headers http.Header, parent *Stream, fin bool)
 }
 
 func (s *Connection) shutdown(closeTimeout time.Duration) {
-	// TODO Ensure this isn't called multiple times
+	// TODO Ensure this isn't called multiple times id:2983 gh:2998
 	s.shutdownLock.Lock()
 	if s.hasShutdown {
 		s.shutdownLock.Unlock()

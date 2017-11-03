@@ -22,7 +22,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 )
 
-// TODO: Table does not generate to protobuf because of the interface{} - fix protobuf
+// TODO: Table does not generate to protobuf because of the interface{} - fix protobuf id:3766 gh:3781
 //   generation to support a meta type that can accept any valid JSON.
 
 // Table is a tabular representation of a set of API resources. The server transforms the

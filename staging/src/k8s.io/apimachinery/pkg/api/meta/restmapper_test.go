@@ -506,7 +506,7 @@ func TestRESTMapperResourceSingularizer(t *testing.T) {
 		{Kind: "Status", Plural: "statuses", Singular: "status"},
 
 		{Kind: "lowercase", Plural: "lowercases", Singular: "lowercase"},
-		// TODO this test is broken.  This updates to reflect actual behavior.  Kinds are expected to be singular
+		// TODO this test is broken.  This updates to reflect actual behavior.  Kinds are expected to be singular id:3727 gh:3742
 		// old (incorrect), coment: Don't add extra s if the original object is already plural
 		{Kind: "lowercases", Plural: "lowercaseses", Singular: "lowercases"},
 	}
@@ -553,7 +553,7 @@ func TestRESTMapperRESTMapping(t *testing.T) {
 
 		{DefaultVersions: []schema.GroupVersion{testGroupVersion}, Kind: "InternalObject", APIGroupVersions: []schema.GroupVersion{{Group: testGroup, Version: "test"}}, Resource: "internalobjects"},
 
-		// TODO: add test for a resource that exists in one version but not another
+		// TODO: add test for a resource that exists in one version but not another id:3492 gh:3507
 	}
 	for i, testCase := range testCases {
 		mapper := NewDefaultRESTMapper(testCase.DefaultVersions, fakeInterfaces)

@@ -100,7 +100,7 @@ type DeploymentController struct {
 func NewDeploymentController(dInformer extensionsinformers.DeploymentInformer, rsInformer extensionsinformers.ReplicaSetInformer, podInformer coreinformers.PodInformer, client clientset.Interface) *DeploymentController {
 	eventBroadcaster := record.NewBroadcaster()
 	eventBroadcaster.StartLogging(glog.Infof)
-	// TODO: remove the wrapper when every clients have moved to use the clientset.
+	// TODO: remove the wrapper when every clients have moved to use the clientset. id:553 gh:554
 	eventBroadcaster.StartRecordingToSink(&v1core.EventSinkImpl{Interface: v1core.New(client.CoreV1().RESTClient()).Events("")})
 
 	if client != nil && client.CoreV1().RESTClient().GetRateLimiter() != nil {
@@ -577,7 +577,7 @@ func (dc *DeploymentController) syncDeployment(key string) error {
 	}
 
 	// Deep-copy otherwise we are mutating our cache.
-	// TODO: Deep-copy only when needed.
+	// TODO: Deep-copy only when needed. id:572 gh:573
 	d := deployment.DeepCopy()
 
 	everything := metav1.LabelSelector{}

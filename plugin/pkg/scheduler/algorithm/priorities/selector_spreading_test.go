@@ -32,7 +32,7 @@ import (
 )
 
 func controllerRef(kind, name, uid string) []metav1.OwnerReference {
-	// TODO: When ControllerRef will be implemented uncomment code below.
+	// TODO: When ControllerRef will be implemented uncomment code below. id:1613 gh:1619
 	return nil
 	//trueVar := true
 	//return []metav1.OwnerReference{

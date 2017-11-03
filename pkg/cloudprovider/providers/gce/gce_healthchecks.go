@@ -94,7 +94,7 @@ func (gce *GCECloud) CreateHttpHealthCheck(hc *compute.HttpHealthCheck) error {
 // ListHttpHealthChecks lists all HttpHealthChecks in the project.
 func (gce *GCECloud) ListHttpHealthChecks() (*compute.HttpHealthCheckList, error) {
 	mc := newHealthcheckMetricContext("list_legacy")
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:436 gh:437
 	v, err := gce.service.HttpHealthChecks.List(gce.projectID).Do()
 	return v, mc.Observe(err)
 }
@@ -146,7 +146,7 @@ func (gce *GCECloud) CreateHttpsHealthCheck(hc *compute.HttpsHealthCheck) error 
 // ListHttpsHealthChecks lists all HttpsHealthChecks in the project.
 func (gce *GCECloud) ListHttpsHealthChecks() (*compute.HttpsHealthCheckList, error) {
 	mc := newHealthcheckMetricContext("list_legacy")
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:505 gh:506
 	v, err := gce.service.HttpsHealthChecks.List(gce.projectID).Do()
 	return v, mc.Observe(err)
 }
@@ -225,7 +225,7 @@ func (gce *GCECloud) CreateAlphaHealthCheck(hc *computealpha.HealthCheck) error 
 // ListHealthChecks lists all HealthCheck in the project.
 func (gce *GCECloud) ListHealthChecks() (*compute.HealthCheckList, error) {
 	mc := newHealthcheckMetricContext("list")
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:475 gh:474
 	v, err := gce.service.HealthChecks.List(gce.projectID).Do()
 	return v, mc.Observe(err)
 }

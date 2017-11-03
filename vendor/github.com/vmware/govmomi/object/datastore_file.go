@@ -165,7 +165,7 @@ func statusError(res *http.Response) error {
 
 // Stat returns the os.FileInfo interface describing file.
 func (f *DatastoreFile) Stat() (os.FileInfo, error) {
-	// TODO: consider using Datastore.Stat() instead
+	// TODO: consider using Datastore.Stat() instead id:3120 gh:3135
 	u, p, err := f.d.downloadTicket(f.ctx, f.name, &soap.Download{Method: "HEAD"})
 	if err != nil {
 		return nil, err

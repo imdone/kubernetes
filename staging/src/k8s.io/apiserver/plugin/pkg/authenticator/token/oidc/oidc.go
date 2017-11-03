@@ -275,7 +275,7 @@ func (a *OIDCAuthenticator) parseTokenClaims(claims jose.Claims) (user.Info, boo
 		username = a.usernamePrefix + username
 	}
 
-	// TODO(yifan): Add UID, also populate the issuer to upper layer.
+	// TODO (yifan): Add UID, also populate the issuer to upper layer. id:3941 gh:3962
 	info := &user.DefaultInfo{Name: username}
 
 	if a.groupsClaim != "" {

@@ -189,7 +189,7 @@ func startMemoryThresholdNotifier(thresholds []evictionapi.Threshold, observatio
 		if err != nil {
 			return err
 		}
-		// TODO add support for eviction from --cgroup-root
+		// TODO add support for eviction from --cgroup-root id:947 gh:953
 		cgpath, found := cgroups.MountPoints["memory"]
 		if !found || len(cgpath) == 0 {
 			return fmt.Errorf("memory cgroup mount point not found")
@@ -220,7 +220,7 @@ func (m *managerImpl) synchronize(diskInfoProvider DiskInfoProvider, podFunc Act
 
 	glog.V(3).Infof("eviction manager: synchronize housekeeping")
 	// build the ranking functions (if not yet known)
-	// TODO: have a function in cadvisor that lets us know if global housekeeping has completed
+	// TODO: have a function in cadvisor that lets us know if global housekeeping has completed id:961 gh:967
 	if m.dedicatedImageFs == nil {
 		hasImageFs, ok := diskInfoProvider.HasDedicatedImageFs()
 		if ok != nil {
@@ -247,7 +247,7 @@ func (m *managerImpl) synchronize(diskInfoProvider DiskInfoProvider, podFunc Act
 		// start soft memory notification
 		err = startMemoryThresholdNotifier(m.config.Thresholds, observations, false, func(desc string) {
 			glog.Infof("soft memory eviction threshold crossed at %s", desc)
-			// TODO wait grace period for soft memory limit
+			// TODO wait grace period for soft memory limit id:859 gh:855
 			m.synchronize(diskInfoProvider, podFunc, capacityProvider)
 		})
 		if err != nil {

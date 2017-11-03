@@ -299,7 +299,7 @@ func (b *awsElasticBlockStoreMounter) SetUp(fsGroup *int64) error {
 
 // SetUpAt attaches the disk and bind mounts to the volume path.
 func (b *awsElasticBlockStoreMounter) SetUpAt(dir string, fsGroup *int64) error {
-	// TODO: handle failed mounts here.
+	// TODO: handle failed mounts here. id:1428 gh:1434
 	notMnt, err := b.mounter.IsLikelyNotMountPoint(dir)
 	glog.V(4).Infof("PersistentDisk set up: %s %v %v", dir, !notMnt, err)
 	if err != nil && !os.IsNotExist(err) {

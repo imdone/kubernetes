@@ -24,7 +24,7 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 )
 
-// TODO: Reconcile custom types in kubelet/types and this subpackage
+// TODO: Reconcile custom types in kubelet/types and this subpackage id:1181 gh:1187
 
 type HttpGetter interface {
 	Get(url string) (*http.Response, error)

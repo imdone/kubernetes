@@ -55,7 +55,7 @@ func TestStorageCodec(codecs runtimeserializer.CodecFactory, gvs ...schema.Group
 		}
 
 		// etcd2 only supports string data - we must wrap any result before returning
-		// TODO: remove for etcd3 / make parameterizable
+		// TODO: remove for etcd3 / make parameterizable id:3729 gh:3744
 		serializer := serializerInfo.Serializer
 		if !serializerInfo.EncodesAsText {
 			serializer = runtime.NewBase64Serializer(serializer, serializer)

@@ -24,7 +24,7 @@ import (
 const (
 	// contentTypeProtobuf is the protobuf type exposed for Kubernetes. It is private to prevent others from
 	// depending on it unintentionally.
-	// TODO: potentially move to pkg/api (since it's part of the Kube public API) and pass it in to the
+	// TODO: potentially move to pkg/api (since it's part of the Kube public API) and pass it in to the id:3679 gh:3694
 	//   CodecFactory on initialization.
 	contentTypeProtobuf = "application/vnd.kubernetes.protobuf"
 )

@@ -225,7 +225,7 @@ func (b *backend) Defrag() error {
 }
 
 func (b *backend) defrag() error {
-	// TODO: make this non-blocking?
+	// TODO: make this non-blocking? id:2517 gh:2532
 	// lock batchTx to ensure nobody is using previous tx, and then
 	// close previous ongoing tx.
 	b.batchTx.Lock()

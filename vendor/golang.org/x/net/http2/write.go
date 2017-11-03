@@ -32,7 +32,7 @@ type writeFramer interface {
 //
 // This interface is implemented by *serverConn.
 //
-// TODO: decide whether to a) use this in the client code (which didn't
+// TODO: decide whether to a) use this in the client code (which didn't id:3333 gh:3349
 // end up using this yet, because it has a simpler design, not
 // currently implementing priorities), or b) delete this and
 // make the server code a bit more concrete.
@@ -201,7 +201,7 @@ func encKV(enc *hpack.Encoder, k, v string) {
 }
 
 func (w *writeResHeaders) staysWithinBuffer(max int) bool {
-	// TODO: this is a common one. It'd be nice to return true
+	// TODO: this is a common one. It'd be nice to return true id:3099 gh:3114
 	// here and get into the fast path if we could be clever and
 	// calculate the size fast enough, or at least a conservative
 	// uppper bound that usually fires. (Maybe if w.h and
@@ -266,7 +266,7 @@ type writePushPromise struct {
 }
 
 func (w *writePushPromise) staysWithinBuffer(max int) bool {
-	// TODO: see writeResHeaders.staysWithinBuffer
+	// TODO: see writeResHeaders.staysWithinBuffer id:3181 gh:3196
 	return false
 }
 
@@ -356,11 +356,11 @@ func encodeHeaders(enc *hpack.Encoder, h http.Header, keys []string) {
 		isTE := k == "transfer-encoding"
 		for _, v := range vv {
 			if !httplex.ValidHeaderFieldValue(v) {
-				// TODO: return an error? golang.org/issue/14048
+				// TODO: return an error? golang.org/issue/14048 id:3368 gh:3383
 				// For now just omit it.
 				continue
 			}
-			// TODO: more of "8.1.2.2 Connection-Specific Header Fields"
+			// TODO: more of "8.1.2.2 Connection-Specific Header Fields" id:2899 gh:2914
 			if isTE && v != "trailers" {
 				continue
 			}

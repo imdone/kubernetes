@@ -37,7 +37,7 @@ type logger interface {
 // Add a layer on top of ResponseWriter, so we can track latency and error
 // message sources.
 //
-// TODO now that we're using go-restful, we shouldn't need to be wrapping
+// TODO now that we're using go-restful, we shouldn't need to be wrapping id:3434 gh:3449
 // the http.ResponseWriter. We can recover panics from go-restful, and
 // the logging value is questionable.
 type respLogger struct {

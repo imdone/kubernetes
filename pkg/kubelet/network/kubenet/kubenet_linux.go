@@ -170,7 +170,7 @@ func (plugin *kubenetNetworkPlugin) Init(host network.Host, hairpinMode kubeletc
 	return nil
 }
 
-// TODO: move thic logic into cni bridge plugin and remove this from kubenet
+// TODO: move thic logic into cni bridge plugin and remove this from kubenet id:983 gh:990
 func (plugin *kubenetNetworkPlugin) ensureMasqRule() error {
 	if plugin.nonMasqueradeCIDR != "0.0.0.0/0" {
 		if _, err := plugin.iptables.EnsureRule(utiliptables.Append, utiliptables.TableNAT, utiliptables.ChainPostrouting,
@@ -301,7 +301,7 @@ func (plugin *kubenetNetworkPlugin) Capabilities() utilsets.Int {
 }
 
 // setup sets up networking through CNI using the given ns/name and sandbox ID.
-// TODO: Don't pass the pod to this method, it only needs it for bandwidth
+// TODO: Don't pass the pod to this method, it only needs it for bandwidth id:1101 gh:1107
 // shaping and hostport management.
 func (plugin *kubenetNetworkPlugin) setup(namespace string, name string, id kubecontainer.ContainerID, pod *v1.Pod, annotations map[string]string) error {
 	// Bring up container loopback interface
@@ -328,8 +328,8 @@ func (plugin *kubenetNetworkPlugin) setup(namespace string, name string, id kube
 	}
 
 	// Put the container bridge into promiscuous mode to force it to accept hairpin packets.
-	// TODO: Remove this once the kernel bug (#20096) is fixed.
-	// TODO: check and set promiscuous mode with netlink once vishvananda/netlink supports it
+	// TODO: Remove this once the kernel bug (#20096) is fixed. id:1021 gh:1027
+	// TODO: check and set promiscuous mode with netlink once vishvananda/netlink supports it id:1118 gh:1124
 	if plugin.hairpinMode == kubeletconfig.PromiscuousBridge {
 		output, err := plugin.execer.Command("ip", "link", "show", "dev", BridgeName).CombinedOutput()
 		if err != nil || strings.Index(string(output), "PROMISC") < 0 {
@@ -351,7 +351,7 @@ func (plugin *kubenetNetworkPlugin) setup(namespace string, name string, id kube
 	plugin.podIPs[id] = ip4.String()
 
 	// The first SetUpPod call creates the bridge; get a shaper for the sake of initialization
-	// TODO: replace with CNI traffic shaper plugin
+	// TODO: replace with CNI traffic shaper plugin id:1057 gh:1063
 	shaper := plugin.shaper()
 	ingress, egress, err := bandwidth.ExtractPodBandwidthResources(annotations)
 	if err != nil {
@@ -377,7 +377,7 @@ func (plugin *kubenetNetworkPlugin) setup(namespace string, name string, id kube
 			return err
 		}
 	} else {
-		// TODO: replace with CNI port-forwarding plugin
+		// TODO: replace with CNI port-forwarding plugin id:984 gh:991
 		portMappings, err := plugin.host.GetPodPortMappings(id.ID)
 		if err != nil {
 			return err
@@ -406,7 +406,7 @@ func (plugin *kubenetNetworkPlugin) SetUpPod(namespace string, name string, id k
 		glog.V(4).Infof("SetUpPod took %v for %s/%s", time.Since(start), namespace, name)
 	}()
 
-	// TODO: Entire pod object only required for bw shaping and hostport.
+	// TODO: Entire pod object only required for bw shaping and hostport. id:1102 gh:1108
 	pod, ok := plugin.host.GetPodByName(namespace, name)
 	if !ok {
 		return fmt.Errorf("pod %q cannot be found", name)
@@ -424,12 +424,12 @@ func (plugin *kubenetNetworkPlugin) SetUpPod(namespace string, name string, id k
 			glog.V(4).Infof("Failed to clean up %s/%s after SetUpPod failure: %v", namespace, name, err)
 		}
 
-		// TODO(#34278): Figure out if we need IP GC through the cri.
+		// TODO (#34278): Figure out if we need IP GC through the cri. id:1022 gh:1028
 		// The cri should always send us teardown events for stale sandboxes,
 		// this obviates the need for GC in the common case, for kubenet.
 		if plugin.host.SupportsLegacyFeatures() {
 
-			// TODO: Remove this hack once we've figured out how to retrieve the netns
+			// TODO: Remove this hack once we've figured out how to retrieve the netns id:1119 gh:1125
 			// of an exited container. Currently, restarting docker will leak a bunch of
 			// ips. This will exhaust available ip space unless we cleanup old ips. At the
 			// same time we don't want to try GC'ing them periodically as that could lead
@@ -529,7 +529,7 @@ func (plugin *kubenetNetworkPlugin) TearDownPod(namespace string, name string, i
 	return nil
 }
 
-// TODO: Use the addToNetwork function to obtain the IP of the Pod. That will assume idempotent ADD call to the plugin.
+// TODO: Use the addToNetwork function to obtain the IP of the Pod. That will assume idempotent ADD call to the plugin. id:1058 gh:1064
 // Also fix the runtime's call to Status function to be done only in the case that the IP is lost, no need to do periodic calls
 func (plugin *kubenetNetworkPlugin) GetPodNetworkStatus(namespace string, name string, id kubecontainer.ContainerID) (*network.PodNetworkStatus, error) {
 	plugin.mu.Lock()
@@ -696,7 +696,7 @@ func (plugin *kubenetNetworkPlugin) ipamGarbageCollection() {
 		rt := &libcni.RuntimeConf{
 			ContainerID: containerID,
 			IfName:      network.DefaultInterfaceName,
-			// TODO: How do we find the NetNs of an exited container? docker inspect
+			// TODO: How do we find the NetNs of an exited container? docker inspect id:985 gh:992
 			// doesn't show us the pid, so we probably need to checkpoint
 			NetNS: "",
 		}
@@ -779,7 +779,7 @@ func (plugin *kubenetNetworkPlugin) shaper() bandwidth.BandwidthShaper {
 	return plugin.bandwidthShaper
 }
 
-//TODO: make this into a goroutine and rectify the dedup rules periodically
+//TODO: make this into a goroutine and rectify the dedup rules periodically id:1103 gh:1109
 func (plugin *kubenetNetworkPlugin) syncEbtablesDedupRules(macAddr net.HardwareAddr) {
 	if plugin.ebtables == nil {
 		plugin.ebtables = utilebtables.New(plugin.execer)

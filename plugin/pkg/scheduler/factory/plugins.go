@@ -47,7 +47,7 @@ type PluginFactoryArgs struct {
 }
 
 // MetadataProducerFactory produces MetadataProducer from the given args.
-// TODO: Rename this to PriorityMetadataProducerFactory.
+// TODO: Rename this to PriorityMetadataProducerFactory. id:1471 gh:1477
 type MetadataProducerFactory func(PluginFactoryArgs) algorithm.MetadataProducer
 
 // PredicateMetadataProducerFactory produces PredicateMetadataProducer from the given args.
@@ -63,7 +63,7 @@ type PriorityFunctionFactory func(PluginFactoryArgs) algorithm.PriorityFunction
 
 // A PriorityFunctionFactory produces map & reduce priority functions
 // from a given args.
-// FIXME: Rename to PriorityFunctionFactory.
+// FIXME: Rename to PriorityFunctionFactory. id:1642 gh:1648
 type PriorityFunctionFactory2 func(PluginFactoryArgs) (algorithm.PriorityMapFunction, algorithm.PriorityReduceFunction)
 
 // A PriorityConfigFactory produces a PriorityConfig from the given function and weight
@@ -266,7 +266,7 @@ func RegisterPriorityFunction(name string, function algorithm.PriorityFunction, 
 
 // RegisterPriorityFunction2 registers a priority function with the algorithm registry. Returns the name,
 // with which the function was registered.
-// FIXME: Rename to PriorityFunctionFactory.
+// FIXME: Rename to PriorityFunctionFactory. id:1619 gh:1625
 func RegisterPriorityFunction2(
 	name string,
 	mapFunction algorithm.PriorityMapFunction,

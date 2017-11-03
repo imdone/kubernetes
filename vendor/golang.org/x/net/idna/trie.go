@@ -16,7 +16,7 @@ func (c info) appendMapping(b []byte, s string) []byte {
 	}
 	b = append(b, s...)
 	if c&inlineXOR == inlineXOR {
-		// TODO: support and handle two-byte inline masks
+		// TODO: support and handle two-byte inline masks id:2901 gh:2916
 		b[len(b)-1] ^= byte(index)
 	} else {
 		for p := len(b) - int(xorData[index]); p < len(b); p++ {

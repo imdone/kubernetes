@@ -26,7 +26,7 @@ import (
 	"k8s.io/client-go/util/retry"
 )
 
-// TODO: use client library instead when it starts to support update retries
+// TODO: use client library instead when it starts to support update retries id:575 gh:576
 //       see https://github.com/kubernetes/kubernetes/issues/21479
 type updatePodFunc func(pod *v1.Pod) error
 

@@ -337,7 +337,7 @@ func TestSync(t *testing.T) {
 		{
 			// syncClaim with claim bound to a volume that is bound to different
 			// claim. Check that the claim is marked as lost.
-			// TODO: test that an event is emitted
+			// TODO: test that an event is emitted id:677 gh:678
 			"3-6 - bound claim with bound volume",
 			newVolumeArray("volume3-6", "10Gi", "uid3-6-x", "claim3-6-x", v1.VolumePending, v1.PersistentVolumeReclaimRetain, classEmpty),
 			newVolumeArray("volume3-6", "10Gi", "uid3-6-x", "claim3-6-x", v1.VolumePending, v1.PersistentVolumeReclaimRetain, classEmpty),

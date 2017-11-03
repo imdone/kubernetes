@@ -32,7 +32,7 @@ func (s *SubscriptionSet) filter(unit string) bool {
 // Subscribe starts listening for dbus events for all of the units in the set.
 // Returns channels identical to conn.SubscribeUnits.
 func (s *SubscriptionSet) Subscribe() (<-chan map[string]*UnitStatus, <-chan error) {
-	// TODO: Make fully evented by using systemd 209 with properties changed values
+	// TODO: Make fully evented by using systemd 209 with properties changed values id:2700 gh:2715
 	return s.conn.SubscribeUnitsCustom(time.Second, 0,
 		mismatchUnitStatus,
 		func(unit string) bool { return s.filter(unit) },

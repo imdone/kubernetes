@@ -145,7 +145,7 @@ func isOptionalAlias(t *types.Type) bool {
 
 func (g *genProtoIDL) Imports(c *generator.Context) (imports []string) {
 	lines := []string{}
-	// TODO: this could be expressed more cleanly
+	// TODO: this could be expressed more cleanly id:3824 gh:3837
 	for _, line := range g.imports.ImportLines() {
 		if g.omitGogo && line == "github.com/gogo/protobuf/gogoproto/gogo.proto" {
 			continue
@@ -204,7 +204,7 @@ type protobufLocator struct {
 }
 
 // CastTypeName returns the cast type name of a Go type
-// TODO: delegate to a new localgo namer?
+// TODO: delegate to a new localgo namer? id:3967 gh:3987
 func (p protobufLocator) CastTypeName(name types.Name) string {
 	if name.Package == p.localGoPackage {
 		return name.Name
@@ -433,7 +433,7 @@ var (
 )
 
 func isFundamentalProtoType(t *types.Type) (*types.Type, bool) {
-	// TODO: when we enable proto3, also include other fundamental types in the google.protobuf package
+	// TODO: when we enable proto3, also include other fundamental types in the google.protobuf package id:4064 gh:4084
 	// switch {
 	// case t.Kind == types.Struct && t.Name == types.Name{Package: "time", Name: "Time"}:
 	// 	return &types.Type{
@@ -461,7 +461,7 @@ func isFundamentalProtoType(t *types.Type) (*types.Type, bool) {
 		case "uintptr":
 			return &types.Type{Name: types.Name{Name: "uint64"}, Kind: types.Protobuf}, true
 		}
-		// TODO: complex?
+		// TODO: complex? id:3622 gh:3637
 	}
 	return t, false
 }
@@ -723,7 +723,7 @@ func genComment(out io.Writer, lines []string, indent string) {
 }
 
 func formatProtoFile(source []byte) ([]byte, error) {
-	// TODO; Is there any protobuf formatter?
+	// TODO ; Is there any protobuf formatter? id:4011 gh:4031
 	return source, nil
 }
 

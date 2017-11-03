@@ -55,7 +55,7 @@ import (
 	"k8s.io/kubernetes/test/integration/framework"
 
 	// install all APIs
-	_ "k8s.io/kubernetes/pkg/master" // TODO what else is needed
+	_ "k8s.io/kubernetes/pkg/master" // TODO what else is needed id:2504 gh:2520
 
 	"github.com/coreos/etcd/clientv3"
 	"github.com/coreos/etcd/pkg/transport"
@@ -513,7 +513,7 @@ func TestEtcdStoragePath(t *testing.T) {
 	cohabitatingResources := map[string]map[schema.GroupVersionKind]empty{}
 
 	for gvk, apiType := range legacyscheme.Scheme.AllKnownTypes() {
-		// we do not care about internal objects or lists // TODO make sure this is always true
+		// we do not care about internal objects or lists // TODO make sure this is always true id:2729 gh:2744
 		if gvk.Version == runtime.APIVersionInternal || strings.HasSuffix(apiType.Name(), "List") {
 			continue
 		}
@@ -548,7 +548,7 @@ func TestEtcdStoragePath(t *testing.T) {
 			continue
 		}
 
-		if isEphemeral { // TODO it would be nice if we could remove this and infer if an object is not stored in etcd
+		if isEphemeral { // TODO it would be nice if we could remove this and infer if an object is not stored in etcd id:2414 gh:2429
 			// t.Logf("Skipping test for %s from %s", kind, pkgPath)
 			ephemeralSeen[gvResource] = empty{}
 			delete(etcdSeen, gvResource)
@@ -675,7 +675,7 @@ func startRealMasterOrDie(t *testing.T, certDir string) (*allClient, clientv3.KV
 			kubeAPIServerOptions.SecureServing.BindAddress = net.ParseIP("127.0.0.1")
 			kubeAPIServerOptions.SecureServing.ServerCert.CertDirectory = certDir
 			kubeAPIServerOptions.Etcd.StorageConfig.ServerList = []string{framework.GetEtcdURL()}
-			kubeAPIServerOptions.Etcd.DefaultStorageMediaType = runtime.ContentTypeJSON // TODO use protobuf?
+			kubeAPIServerOptions.Etcd.DefaultStorageMediaType = runtime.ContentTypeJSON // TODO use protobuf? id:2593 gh:2608
 			kubeAPIServerOptions.ServiceClusterIPRange = *defaultServiceClusterIPRange
 			kubeAPIServerOptions.Authorization.Mode = "RBAC"
 

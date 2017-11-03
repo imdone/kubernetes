@@ -101,7 +101,7 @@ func (t *cond) isNot(r rune) bool {
 
 // This implementation of Span doesn't help all too much, but it needs to be
 // there to satisfy this package's Transformer interface.
-// TODO: there are certainly room for improvements, though. For example, if
+// TODO: there are certainly room for improvements, though. For example, if id:3448 gh:3463
 // t.t == transform.Nop (which will a common occurrence) it will save a bundle
 // to special-case that loop.
 func (t *cond) Span(src []byte, atEOF bool) (n int, err error) {

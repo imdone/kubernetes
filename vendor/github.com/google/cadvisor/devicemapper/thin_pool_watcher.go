@@ -124,7 +124,7 @@ func (w *ThinPoolWatcher) Refresh() error {
 	}
 
 	glog.V(5).Infof("reserving metadata snapshot for thin-pool %v", w.poolName)
-	// NOTE: "0" in the call below is for the 'sector' argument to 'dmsetup
+	// NOTE: "0" in the call below is for the 'sector' argument to 'dmsetup id:2957 gh:2972
 	// message'.  It's not needed for thin pools.
 	if output, err := w.dmsetup.Message(w.poolName, 0, reserveMetadataMessage); err != nil {
 		err = fmt.Errorf("error reserving metadata for thin-pool %v: %v output: %v", w.poolName, err, string(output))

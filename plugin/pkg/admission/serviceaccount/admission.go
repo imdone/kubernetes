@@ -92,7 +92,7 @@ var _ = kubeapiserveradmission.WantsInternalKubeInformerFactory(&serviceAccount{
 func NewServiceAccount() *serviceAccount {
 	return &serviceAccount{
 		Handler: admission.NewHandler(admission.Create, admission.Update),
-		// TODO: enable this once we've swept secret usage to account for adding secret references to service accounts
+		// TODO: enable this once we've swept secret usage to account for adding secret references to service accounts id:1537 gh:1543
 		LimitSecretReferences: false,
 		// Auto mount service account API token secrets
 		MountServiceAccountToken: true,
@@ -182,7 +182,7 @@ func (s *serviceAccount) Admit(a admission.Attributes) (err error) {
 		return admission.NewForbidden(a, fmt.Errorf("error looking up service account %s/%s: %v", a.GetNamespace(), pod.Spec.ServiceAccountName, err))
 	}
 	if serviceAccount == nil {
-		// TODO: convert to a ServerTimeout error (or other error that sends a Retry-After header)
+		// TODO: convert to a ServerTimeout error (or other error that sends a Retry-After header) id:1523 gh:1529
 		return admission.NewForbidden(a, fmt.Errorf("service account %s/%s was not found, retry after the service account is created", a.GetNamespace(), pod.Spec.ServiceAccountName))
 	}
 

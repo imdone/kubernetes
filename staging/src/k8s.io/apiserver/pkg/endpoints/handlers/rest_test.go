@@ -236,7 +236,7 @@ type patchTestCase struct {
 
 	// admission chain to use, nil is fine
 	admissionMutation   mutateObjectUpdateFunc
-	admissionValidation rest.ValidateObjectUpdateFunc // TODO: add test for this
+	admissionValidation rest.ValidateObjectUpdateFunc // TODO: add test for this id:3883 gh:3898
 
 	// startingPod is used as the starting point for the first Update
 	startingPod *example.Pod
@@ -291,7 +291,7 @@ func (tc *patchTestCase) Run(t *testing.T) {
 			updatePod:   tc.updatePod,
 		}
 
-		// TODO SUPPORT THIS!
+		// TODO SUPPORT THIS! id:3707 gh:3722
 		if patchType == types.JSONPatchType {
 			continue
 		}

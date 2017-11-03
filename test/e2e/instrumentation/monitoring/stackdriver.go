@@ -123,7 +123,7 @@ func checkForMetrics(projectId string, gcmService *gcm.Service, start time.Time,
 			metricsMap[metric] = false
 		}
 		for _, metric := range stackdriverMetrics {
-			// TODO: check only for metrics from this cluster
+			// TODO: check only for metrics from this cluster id:2336 gh:2348
 			ts, err := fetchTimeSeries(projectId, gcmService, metric, start, time.Now())
 			framework.ExpectNoError(err)
 			if len(ts) > 0 {

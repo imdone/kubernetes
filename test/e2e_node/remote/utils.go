@@ -80,7 +80,7 @@ func setupCNI(host, workspace string) error {
 // configureFirewall configures iptable firewall rules.
 func configureFirewall(host string) error {
 	glog.V(2).Infof("Configure iptables firewall rules on %q", host)
-	// TODO: consider calling bootstrap script to configure host based on OS
+	// TODO: consider calling bootstrap script to configure host based on OS id:2404 gh:2420
 	output, err := SSH(host, "iptables", "-L", "INPUT")
 	if err != nil {
 		return fmt.Errorf("failed to get iptables INPUT on %q: %v output: %q", host, err, output)

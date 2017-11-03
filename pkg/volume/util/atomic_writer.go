@@ -238,7 +238,7 @@ func validatePayload(payload map[string]FileProjection) (map[string]FileProjecti
 // 4. contain filenames larger than 255 characters
 // 5. be longer than 4096 characters
 func validatePath(targetPath string) error {
-	// TODO: somehow unify this with the similar api validation,
+	// TODO: somehow unify this with the similar api validation, id:1517 gh:1523
 	// validateVolumeSourcePath; the error semantics are just different enough
 	// from this that it was time-prohibitive trying to find the right
 	// refactoring to re-use.

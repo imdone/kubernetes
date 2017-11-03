@@ -88,7 +88,7 @@ type LoadBalancerOpts struct {
 	MonitorTimeout       MyDuration `gcfg:"monitor-timeout"`
 	MonitorMaxRetries    uint       `gcfg:"monitor-max-retries"`
 	ManageSecurityGroups bool       `gcfg:"manage-security-groups"`
-	NodeSecurityGroupIDs []string   // Do not specify, get it automatically when enable manage-security-groups. TODO(FengyunPan): move it into cache
+	NodeSecurityGroupIDs []string   // Do not specify, get it automatically when enable manage-security-groups. TODO (FengyunPan): move it into cache id:517 gh:518
 }
 
 type BlockStorageOpts struct {
@@ -657,7 +657,7 @@ func (os *OpenStack) volumeService(forceVersion string) (volumeService, error) {
 		// Currently kubernetes just support Cinder v1 and Cinder v2.
 		// Choose Cinder v2 firstly, if kubernetes can't initialize cinder v2 client, try to initialize cinder v1 client.
 		// Return appropriate message when kubernetes can't initialize them.
-		// TODO(FengyunPan): revisit 'auto' after supporting Cinder v3.
+		// TODO (FengyunPan): revisit 'auto' after supporting Cinder v3. id:469 gh:470
 		sClient, err := os.NewBlockStorageV2()
 		if err != nil {
 			sClient, err = os.NewBlockStorageV1()

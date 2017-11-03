@@ -876,7 +876,7 @@ def _apply_node_label(label, delete=False, overwrite=False):
     ''' Invoke kubectl to apply node label changes '''
 
     hostname = gethostname()
-    # TODO: Make this part of the kubectl calls instead of a special string
+    # TODO: Make this part of the kubectl calls instead of a special string id:112 gh:113
     cmd_base = 'kubectl --kubeconfig={0} label node {1} {2}'
 
     if delete is True:

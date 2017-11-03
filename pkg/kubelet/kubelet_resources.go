@@ -30,7 +30,7 @@ import (
 // and a copy of the input container (if specified) with default limits
 // applied. if a container has no limit specified, it will default the limit to
 // the node allocatable.
-// TODO: if/when we have pod level resources, we need to update this function
+// TODO: if/when we have pod level resources, we need to update this function id:1048 gh:1054
 // to use those limits instead of node allocatable.
 func (kl *Kubelet) defaultPodLimitsForDownwardAPI(pod *v1.Pod, container *v1.Container) (*v1.Pod, *v1.Container, error) {
 	if pod == nil {

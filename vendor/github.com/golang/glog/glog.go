@@ -259,7 +259,7 @@ func (m *modulePat) match(file string) bool {
 }
 
 func (m *moduleSpec) String() string {
-	// Lock because the type is not atomic. TODO: clean this up.
+	// Lock because the type is not atomic. TODO: clean this up. id:2804 gh:2819
 	logging.mu.Lock()
 	defer logging.mu.Unlock()
 	var b bytes.Buffer
@@ -303,7 +303,7 @@ func (m *moduleSpec) Set(value string) error {
 		if v == 0 {
 			continue // Ignore. It's harmless but no point in paying the overhead.
 		}
-		// TODO: check syntax of filter?
+		// TODO: check syntax of filter? id:3043 gh:3058
 		filter = append(filter, modulePat{pattern, isLiteral(pattern), Level(v)})
 	}
 	logging.mu.Lock()
@@ -344,7 +344,7 @@ func (t *traceLocation) match(file string, line int) bool {
 }
 
 func (t *traceLocation) String() string {
-	// Lock because the type is not atomic. TODO: clean this up.
+	// Lock because the type is not atomic. TODO: clean this up. id:2643 gh:2658
 	logging.mu.Lock()
 	defer logging.mu.Unlock()
 	return fmt.Sprintf("%s:%d", t.file, t.line)
@@ -419,7 +419,7 @@ func Flush() {
 type loggingT struct {
 	// Boolean flags. Not handled atomically because the flag.Value interface
 	// does not let us avoid the =true, and that shorthand is necessary for
-	// compatibility. TODO: does this matter enough to fix? Seems unlikely.
+	// compatibility. TODO: does this matter enough to fix? Seems unlikely. id:2946 gh:2961
 	toStderr     bool // The -logtostderr flag.
 	alsoToStderr bool // The -alsologtostderr flag.
 
@@ -574,7 +574,7 @@ func (l *loggingT) formatHeader(s severity, file string, line int) *buffer {
 	buf.tmp[14] = '.'
 	buf.nDigits(6, 15, now.Nanosecond()/1000, '0')
 	buf.tmp[21] = ' '
-	buf.nDigits(7, 22, pid, ' ') // TODO: should be TID
+	buf.nDigits(7, 22, pid, ' ') // TODO: should be TID id:2722 gh:2737
 	buf.tmp[29] = ' '
 	buf.Write(buf.tmp[:30])
 	buf.WriteString(file)

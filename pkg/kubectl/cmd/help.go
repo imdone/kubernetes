@@ -44,7 +44,7 @@ func NewCmdHelp() *cobra.Command {
 func RunHelp(cmd *cobra.Command, args []string) {
 	foundCmd, _, err := cmd.Root().Find(args)
 
-	// NOTE(andreykurilin): actually, I did not find any cases when foundCmd can be nil,
+	// NOTE (andreykurilin): actually, I did not find any cases when foundCmd can be nil, id:780 gh:781
 	//   but let's make this check since it is included in original code of initHelpCmd
 	//   from github.com/spf13/cobra
 	if foundCmd == nil {

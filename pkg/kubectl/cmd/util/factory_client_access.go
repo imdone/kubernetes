@@ -227,7 +227,7 @@ func (f *ring0Factory) JSONEncoder() runtime.Encoder {
 }
 
 func (f *ring0Factory) UpdatePodSpecForObject(obj runtime.Object, fn func(*api.PodSpec) error) (bool, error) {
-	// TODO: replace with a swagger schema based approach (identify pod template via schema introspection)
+	// TODO: replace with a swagger schema based approach (identify pod template via schema introspection) id:745 gh:746
 	switch t := obj.(type) {
 	case *api.Pod:
 		return true, fn(&t.Spec)
@@ -252,7 +252,7 @@ func (f *ring0Factory) UpdatePodSpecForObject(obj runtime.Object, fn func(*api.P
 }
 
 func (f *ring0Factory) MapBasedSelectorForObject(object runtime.Object) (string, error) {
-	// TODO: replace with a swagger schema based approach (identify pod selector via schema introspection)
+	// TODO: replace with a swagger schema based approach (identify pod selector via schema introspection) id:718 gh:719
 	switch t := object.(type) {
 	case *api.ReplicationController:
 		return kubectl.MakeLabels(t.Spec.Selector), nil
@@ -267,14 +267,14 @@ func (f *ring0Factory) MapBasedSelectorForObject(object runtime.Object) (string,
 		}
 		return kubectl.MakeLabels(t.Spec.Selector), nil
 	case *extensions.Deployment:
-		// TODO(madhusudancs): Make this smarter by admitting MatchExpressions with Equals
+		// TODO (madhusudancs): Make this smarter by admitting MatchExpressions with Equals id:703 gh:704
 		// operator, DoubleEquals operator and In operator with only one element in the set.
 		if len(t.Spec.Selector.MatchExpressions) > 0 {
 			return "", fmt.Errorf("couldn't convert expressions - \"%+v\" to map-based selector format", t.Spec.Selector.MatchExpressions)
 		}
 		return kubectl.MakeLabels(t.Spec.Selector.MatchLabels), nil
 	case *extensions.ReplicaSet:
-		// TODO(madhusudancs): Make this smarter by admitting MatchExpressions with Equals
+		// TODO (madhusudancs): Make this smarter by admitting MatchExpressions with Equals id:788 gh:789
 		// operator, DoubleEquals operator and In operator with only one element in the set.
 		if len(t.Spec.Selector.MatchExpressions) > 0 {
 			return "", fmt.Errorf("couldn't convert expressions - \"%+v\" to map-based selector format", t.Spec.Selector.MatchExpressions)
@@ -290,7 +290,7 @@ func (f *ring0Factory) MapBasedSelectorForObject(object runtime.Object) (string,
 }
 
 func (f *ring0Factory) PortsForObject(object runtime.Object) ([]string, error) {
-	// TODO: replace with a swagger schema based approach (identify pod selector via schema introspection)
+	// TODO: replace with a swagger schema based approach (identify pod selector via schema introspection) id:741 gh:742
 	switch t := object.(type) {
 	case *api.ReplicationController:
 		return getPorts(t.Spec.Template.Spec), nil
@@ -312,7 +312,7 @@ func (f *ring0Factory) PortsForObject(object runtime.Object) ([]string, error) {
 }
 
 func (f *ring0Factory) ProtocolsForObject(object runtime.Object) (map[string]string, error) {
-	// TODO: replace with a swagger schema based approach (identify pod selector via schema introspection)
+	// TODO: replace with a swagger schema based approach (identify pod selector via schema introspection) id:746 gh:747
 	switch t := object.(type) {
 	case *api.ReplicationController:
 		return getProtocols(t.Spec.Template.Spec), nil
@@ -377,8 +377,8 @@ func (f *ring0Factory) BindFlags(flags *pflag.FlagSet) {
 	flags.AddFlagSet(f.flags)
 
 	// Globally persistent flags across all subcommands.
-	// TODO Change flag names to consts to allow safer lookup from subcommands.
-	// TODO Add a verbose flag that turns on glog logging. Probably need a way
+	// TODO Change flag names to consts to allow safer lookup from subcommands. id:719 gh:720
+	// TODO Add a verbose flag that turns on glog logging. Probably need a way id:704 gh:705
 	// to do that automatically for every subcommand.
 	flags.BoolVar(&f.clientCache.matchVersion, FlagMatchBinaryVersion, false, "Require server version to match client version")
 
@@ -467,7 +467,7 @@ func (f *ring0Factory) DefaultNamespace() (string, bool, error) {
 }
 
 const (
-	// TODO(sig-cli): Enforce consistent naming for generators here.
+	// TODO (sig-cli): Enforce consistent naming for generators here. id:789 gh:790
 	// See discussion in https://github.com/kubernetes/kubernetes/issues/46237
 	// before you add any more.
 	RunV1GeneratorName                      = "run/v1"

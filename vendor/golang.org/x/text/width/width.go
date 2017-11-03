@@ -21,7 +21,7 @@ import (
 	"golang.org/x/text/transform"
 )
 
-// TODO
+// TODO id:3475 gh:3490
 // 1) Reduce table size by compressing blocks.
 // 2) API proposition for computing display length
 //    (approximation, fixed pitch only).
@@ -64,7 +64,7 @@ const (
 	// classified as Ambiguous, rather than wide (e.g. U+2190).
 )
 
-// TODO: the generated tries need to return size 1 for invalid runes for the
+// TODO: the generated tries need to return size 1 for invalid runes for the id:3318 gh:3333
 // width to be computed correctly (each byte should render width 1)
 
 var trie = newWidthTrie(0)
@@ -146,7 +146,7 @@ func (p Properties) Wide() rune {
 	return 0
 }
 
-// TODO for Properties:
+// TODO for Properties: id:3376 gh:3391
 // - Add Fullwidth/Halfwidth or Inverted methods for computing variants
 // mapping.
 // - Add width information (including information on non-spacing runes).
@@ -197,7 +197,7 @@ var (
 	Narrow Transformer = Transformer{narrowTransform{}}
 )
 
-// TODO: Consider the following options:
+// TODO: Consider the following options: id:3539 gh:3554
 // - Treat Ambiguous runes that have a halfwidth counterpart as wide, or some
 //   generalized variant of this.
 // - Consider a wide Won character to be the default width (or some generalized

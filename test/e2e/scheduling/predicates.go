@@ -696,7 +696,7 @@ func WaitForSchedulerAfterAction(f *framework.Framework, action common.Action, p
 	Expect(success).To(Equal(true))
 }
 
-// TODO: upgrade calls in PodAffinity tests when we're able to run them
+// TODO: upgrade calls in PodAffinity tests when we're able to run them id:2350 gh:2365
 func verifyResult(c clientset.Interface, expectedScheduled int, expectedNotScheduled int, ns string) {
 	allPods, err := c.CoreV1().Pods(ns).List(metav1.ListOptions{})
 	framework.ExpectNoError(err)

@@ -39,7 +39,7 @@ import (
 	"k8s.io/kubernetes/pkg/util/node"
 )
 
-// TODO: Break out the cloudprovider functionality out of core and only support the new flow
+// TODO: Break out the cloudprovider functionality out of core and only support the new flow id:222 gh:223
 // described in https://github.com/kubernetes/community/pull/128
 var cloudproviders = []string{
 	"aws",
@@ -146,13 +146,13 @@ func ValidateArgSelection(cfg *kubeadm.NodeConfiguration, fldPath *field.Path) f
 		allErrs = append(allErrs, field.Invalid(fldPath, "", "DiscoveryTokenCACertHashes cannot be used with DiscoveryFile"))
 	}
 
-	// TODO: convert this warning to an error after v1.8
+	// TODO: convert this warning to an error after v1.8 id:161 gh:162
 	if len(cfg.DiscoveryFile) == 0 && len(cfg.DiscoveryTokenCACertHashes) == 0 && !cfg.DiscoveryTokenUnsafeSkipCAVerification {
 		fmt.Println("[validation] WARNING: using token-based discovery without DiscoveryTokenCACertHashes can be unsafe (see https://kubernetes.io/docs/admin/kubeadm/#kubeadm-join).")
 		fmt.Println("[validation] WARNING: Pass --discovery-token-unsafe-skip-ca-verification to disable this warning. This warning will become an error in Kubernetes 1.9.")
 	}
 
-	// TODO remove once we support multiple api servers
+	// TODO remove once we support multiple api servers id:131 gh:132
 	if len(cfg.DiscoveryTokenAPIServers) > 1 {
 		fmt.Println("[validation] WARNING: kubeadm doesn't fully support multiple API Servers yet")
 	}

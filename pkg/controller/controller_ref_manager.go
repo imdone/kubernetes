@@ -133,7 +133,7 @@ type PodControllerRefManager struct {
 // It will only be called (at most once) if an adoption is actually attempted.
 // If CanAdopt() returns a non-nil error, all adoptions will fail.
 //
-// NOTE: Once CanAdopt() is called, it will not be called again by the same
+// NOTE: Once CanAdopt() is called, it will not be called again by the same id:519 gh:520
 //       PodControllerRefManager instance. Create a new instance if it makes
 //       sense to check CanAdopt() again (e.g. in a different sync pass).
 func NewPodControllerRefManager(
@@ -239,7 +239,7 @@ func (m *PodControllerRefManager) ReleasePod(pod *v1.Pod) error {
 			// match, which means the pod is deleted and then recreated.
 			// In both cases, the error can be ignored.
 
-			// TODO: If the pod has owner references, but none of them
+			// TODO: If the pod has owner references, but none of them id:493 gh:494
 			// has the owner.UID, server will silently ignore the patch.
 			// Investigate why.
 			return nil
@@ -267,7 +267,7 @@ type ReplicaSetControllerRefManager struct {
 // It will only be called (at most once) if an adoption is actually attempted.
 // If CanAdopt() returns a non-nil error, all adoptions will fail.
 //
-// NOTE: Once CanAdopt() is called, it will not be called again by the same
+// NOTE: Once CanAdopt() is called, it will not be called again by the same id:454 gh:455
 //       ReplicaSetControllerRefManager instance. Create a new instance if it
 //       makes sense to check CanAdopt() again (e.g. in a different sync pass).
 func NewReplicaSetControllerRefManager(
@@ -402,7 +402,7 @@ type ControllerRevisionControllerRefManager struct {
 // It will only be called (at most once) if an adoption is actually attempted.
 // If canAdopt() returns a non-nil error, all adoptions will fail.
 //
-// NOTE: Once canAdopt() is called, it will not be called again by the same
+// NOTE: Once canAdopt() is called, it will not be called again by the same id:512 gh:514
 //       ControllerRevisionControllerRefManager instance. Create a new instance if it
 //       makes sense to check canAdopt() again (e.g. in a different sync pass).
 func NewControllerRevisionControllerRefManager(

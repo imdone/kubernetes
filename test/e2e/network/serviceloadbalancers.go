@@ -94,7 +94,7 @@ func (h *haproxyControllerTester) start(namespace string) (err error) {
 	rc.Spec.Template.Labels["name"] = rc.Name
 
 	// Add the --namespace arg.
-	// TODO: Remove this when we have proper namespace support.
+	// TODO: Remove this when we have proper namespace support. id:2346 gh:2362
 	for i, c := range rc.Spec.Template.Spec.Containers {
 		rc.Spec.Template.Spec.Containers[i].Args = append(
 			c.Args, fmt.Sprintf("--namespace=%v", namespace))
@@ -192,7 +192,7 @@ func (s *ingManager) start(namespace string) (err error) {
 		if err != nil {
 			return
 		}
-		// TODO: This is short term till we have an Ingress.
+		// TODO: This is short term till we have an Ingress. id:2479 gh:2489
 		s.svcNames = append(s.svcNames, svc.Name)
 	}
 	s.name = s.svcNames[0]

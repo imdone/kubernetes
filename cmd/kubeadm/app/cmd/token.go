@@ -221,7 +221,7 @@ func RunCreateToken(out io.Writer, client clientset.Interface, token string, tok
 		}
 	}
 
-	// TODO: Validate usages here so we don't allow something unsupported
+	// TODO: Validate usages here so we don't allow something unsupported id:180 gh:181
 	err := tokenphase.CreateNewToken(client, token, tokenDuration, usages, extraGroups, description)
 	if err != nil {
 		return err

@@ -32,7 +32,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/runtime"
 )
 
-// TODO move to API machinery and re-unify with kubelet/server/portfoward
+// TODO move to API machinery and re-unify with kubelet/server/portfoward id:3591 gh:3606
 // The subprotocol "portforward.k8s.io" is used for port forwarding.
 const PortForwardProtocolV1Name = "portforward.k8s.io"
 
@@ -232,7 +232,7 @@ func (pf *PortForwarder) waitForConnection(listener net.Listener, port Forwarded
 	for {
 		conn, err := listener.Accept()
 		if err != nil {
-			// TODO consider using something like https://github.com/hydrogen18/stoppableListener?
+			// TODO consider using something like https://github.com/hydrogen18/stoppableListener? id:4001 gh:4021
 			if !strings.Contains(strings.ToLower(err.Error()), "use of closed network connection") {
 				runtime.HandleError(fmt.Errorf("Error accepting connection on port %d: %v", port.Local, err))
 			}

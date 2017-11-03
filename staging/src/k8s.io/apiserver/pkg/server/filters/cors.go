@@ -24,7 +24,7 @@ import (
 	"github.com/golang/glog"
 )
 
-// TODO: use restful.CrossOriginResourceSharing
+// TODO: use restful.CrossOriginResourceSharing id:3867 gh:3882
 // See github.com/emicklei/go-restful/blob/master/examples/restful-CORS-filter.go, and
 // github.com/emicklei/go-restful/blob/master/examples/restful-basic-authentication.go
 // Or, for a more detailed implementation use https://github.com/martini-contrib/cors

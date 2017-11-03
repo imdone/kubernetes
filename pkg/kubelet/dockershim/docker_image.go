@@ -49,7 +49,7 @@ func (ds *dockerService) ListImages(filter *runtimeapi.ImageFilter) ([]*runtimea
 	for _, i := range images {
 		apiImage, err := imageToRuntimeAPIImage(&i)
 		if err != nil {
-			// TODO: log an error message?
+			// TODO: log an error message? id:908 gh:911
 			continue
 		}
 		result = append(result, apiImage)
@@ -93,7 +93,7 @@ func (ds *dockerService) PullImage(image *runtimeapi.ImageSpec, auth *runtimeapi
 // RemoveImage removes the image.
 func (ds *dockerService) RemoveImage(image *runtimeapi.ImageSpec) error {
 	// If the image has multiple tags, we need to remove all the tags
-	// TODO: We assume image.Image is image ID here, which is true in the current implementation
+	// TODO: We assume image.Image is image ID here, which is true in the current implementation id:843 gh:845
 	// of kubelet, but we should still clarify this in CRI.
 	imageInspect, err := ds.client.InspectImageByID(image.Image)
 	if err == nil && imageInspect != nil && len(imageInspect.RepoTags) > 1 {

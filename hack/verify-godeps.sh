@@ -21,7 +21,7 @@ set -o pipefail
 # As of go 1.6, the vendor experiment is enabled by default.
 export GO15VENDOREXPERIMENT=1
 
-#### HACK ####
+#### HACK #### id:244 gh:245
 # Sometimes godep just can't handle things. This lets use manually put
 # some deps in place first, so godep won't fall over.
 preload-dep() {

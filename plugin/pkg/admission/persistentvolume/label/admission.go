@@ -130,7 +130,7 @@ func (l *persistentVolumeLabel) findAWSEBSLabels(volume *api.PersistentVolume) (
 		return nil, fmt.Errorf("unable to build AWS cloud provider for EBS")
 	}
 
-	// TODO: GetVolumeLabels is actually a method on the Volumes interface
+	// TODO: GetVolumeLabels is actually a method on the Volumes interface id:1535 gh:1541
 	// If that gets standardized we can refactor to reduce code duplication
 	spec := aws.KubernetesVolumeID(volume.Spec.AWSElasticBlockStore.VolumeID)
 	labels, err := ebsVolumes.GetVolumeLabels(spec)

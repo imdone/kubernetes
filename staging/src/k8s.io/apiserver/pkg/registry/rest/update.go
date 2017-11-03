@@ -63,7 +63,7 @@ type RESTUpdateStrategy interface {
 	AllowUnconditionalUpdate() bool
 }
 
-// TODO: add other common fields that require global validation.
+// TODO: add other common fields that require global validation. id:3431 gh:3446
 func validateCommonFields(obj, old runtime.Object, strategy RESTUpdateStrategy) (field.ErrorList, error) {
 	allErrs := field.ErrorList{}
 	objectMeta, err := meta.Accessor(obj)

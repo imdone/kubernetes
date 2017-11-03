@@ -197,9 +197,9 @@ func (r *ControllerExpectations) SatisfiedExpectations(controllerKey string) boo
 	return true
 }
 
-// TODO: Extend ExpirationCache to support explicit expiration.
-// TODO: Make this possible to disable in tests.
-// TODO: Support injection of clock.
+// TODO: Extend ExpirationCache to support explicit expiration. id:482 gh:483
+// TODO: Make this possible to disable in tests. id:520 gh:521
+// TODO: Support injection of clock. id:495 gh:497
 func (exp *ControlleeExpectations) isExpired() bool {
 	return clock.RealClock{}.Since(exp.timestamp) > ExpectationsTimeout
 }
@@ -270,7 +270,7 @@ func (e *ControlleeExpectations) Add(add, del int64) {
 
 // Fulfilled returns true if this expectation has been fulfilled.
 func (e *ControlleeExpectations) Fulfilled() bool {
-	// TODO: think about why this line being atomic doesn't matter
+	// TODO: think about why this line being atomic doesn't matter id:455 gh:456
 	return atomic.LoadInt64(&e.add) <= 0 && atomic.LoadInt64(&e.del) <= 0
 }
 
@@ -305,10 +305,10 @@ type UIDSet struct {
 // deletion. The desired behavior is to treat an update that sets the
 // DeletionTimestamp on an object as a delete. To do so consistently, one needs
 // to remember the expected deletes so they aren't double counted.
-// TODO: Track creates as well (#22599)
+// TODO: Track creates as well (#22599) id:513 gh:513
 type UIDTrackingControllerExpectations struct {
 	ControllerExpectationsInterface
-	// TODO: There is a much nicer way to do this that involves a single store,
+	// TODO: There is a much nicer way to do this that involves a single store, id:483 gh:484
 	// a lock per entry, and a ControlleeExpectationsInterface type.
 	uidStoreLock sync.Mutex
 	// Store used for the UIDs associated with any expectation tracked via the
@@ -414,7 +414,7 @@ func (r RealRSControl) PatchReplicaSet(namespace, name string, data []byte) erro
 	return err
 }
 
-// TODO: merge the controller revision interface in controller_history.go with this one
+// TODO: merge the controller revision interface in controller_history.go with this one id:521 gh:522
 // ControllerRevisionControlInterface is an interface that knows how to patch
 // ControllerRevisions, as well as increment or decrement them. It is used
 // by the daemonset controller to ease testing of actions that it takes.
@@ -705,7 +705,7 @@ func (s ByLogging) Less(i, j int) bool {
 	if podutil.IsPodReady(s[i]) != podutil.IsPodReady(s[j]) {
 		return podutil.IsPodReady(s[i])
 	}
-	// TODO: take availability into account when we push minReadySeconds information from deployment into pods,
+	// TODO: take availability into account when we push minReadySeconds information from deployment into pods, id:496 gh:498
 	//       see https://github.com/kubernetes/kubernetes/issues/22065
 	// 4. Been ready for more time < less time < empty time
 	if podutil.IsPodReady(s[i]) && podutil.IsPodReady(s[j]) && !podReadyTime(s[i]).Equal(podReadyTime(s[j])) {
@@ -744,7 +744,7 @@ func (s ActivePods) Less(i, j int) bool {
 	if podutil.IsPodReady(s[i]) != podutil.IsPodReady(s[j]) {
 		return !podutil.IsPodReady(s[i])
 	}
-	// TODO: take availability into account when we push minReadySeconds information from deployment into pods,
+	// TODO: take availability into account when we push minReadySeconds information from deployment into pods, id:456 gh:457
 	//       see https://github.com/kubernetes/kubernetes/issues/22065
 	// 4. Been ready for empty time < less time < more time
 	// If both pods are ready, the latest ready one is smaller

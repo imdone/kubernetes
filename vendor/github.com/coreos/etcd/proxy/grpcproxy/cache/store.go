@@ -44,7 +44,7 @@ type Cache interface {
 
 // keyFunc returns the key of an request, which is used to look up in the cache for it's caching response.
 func keyFunc(req *pb.RangeRequest) string {
-	// TODO: use marshalTo to reduce allocation
+	// TODO: use marshalTo to reduce allocation id:2767 gh:2782
 	b, err := req.Marshal()
 	if err != nil {
 		panic(err)

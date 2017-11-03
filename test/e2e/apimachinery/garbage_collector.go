@@ -335,7 +335,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 		rcClient := clientSet.CoreV1().ReplicationControllers(f.Namespace.Name)
 		podClient := clientSet.CoreV1().Pods(f.Namespace.Name)
 		rcName := "simpletest.rc"
-		// TODO: find better way to keep this label unique in the test
+		// TODO: find better way to keep this label unique in the test id:2179 gh:2194
 		uniqLabels := map[string]string{"gctest": "delete_pods"}
 		rc := newOwnerRC(f, rcName, 2, uniqLabels)
 		By("create the rc")
@@ -388,7 +388,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 		rcClient := clientSet.CoreV1().ReplicationControllers(f.Namespace.Name)
 		podClient := clientSet.CoreV1().Pods(f.Namespace.Name)
 		rcName := "simpletest.rc"
-		// TODO: find better way to keep this label unique in the test
+		// TODO: find better way to keep this label unique in the test id:2132 gh:2147
 		uniqLabels := map[string]string{"gctest": "orphan_pods"}
 		rc := newOwnerRC(f, rcName, estimateMaximumPods(clientSet, 10, 100), uniqLabels)
 		By("create the rc")
@@ -457,7 +457,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 		rcClient := clientSet.CoreV1().ReplicationControllers(f.Namespace.Name)
 		podClient := clientSet.CoreV1().Pods(f.Namespace.Name)
 		rcName := "simpletest.rc"
-		// TODO: find better way to keep this label unique in the test
+		// TODO: find better way to keep this label unique in the test id:2213 gh:2228
 		uniqLabels := map[string]string{"gctest": "orphan_pods_nil_option"}
 		rc := newOwnerRC(f, rcName, 2, uniqLabels)
 		By("create the rc")
@@ -506,7 +506,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 		deployClient := clientSet.Extensions().Deployments(f.Namespace.Name)
 		rsClient := clientSet.Extensions().ReplicaSets(f.Namespace.Name)
 		deploymentName := "simpletest.deployment"
-		// TODO: find better way to keep this label unique in the test
+		// TODO: find better way to keep this label unique in the test id:2360 gh:2375
 		uniqLabels := map[string]string{"gctest": "delete_rs"}
 		deployment := newOwnerDeployment(f, deploymentName, uniqLabels)
 		By("create the deployment")
@@ -557,7 +557,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 		deployClient := clientSet.Extensions().Deployments(f.Namespace.Name)
 		rsClient := clientSet.Extensions().ReplicaSets(f.Namespace.Name)
 		deploymentName := "simpletest.deployment"
-		// TODO: find better way to keep this label unique in the test
+		// TODO: find better way to keep this label unique in the test id:2092 gh:2107
 		uniqLabels := map[string]string{"gctest": "orphan_rs"}
 		deployment := newOwnerDeployment(f, deploymentName, uniqLabels)
 		By("create the deployment")
@@ -622,7 +622,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 		rcClient := clientSet.CoreV1().ReplicationControllers(f.Namespace.Name)
 		podClient := clientSet.CoreV1().Pods(f.Namespace.Name)
 		rcName := "simpletest.rc"
-		// TODO: find better way to keep this label unique in the test
+		// TODO: find better way to keep this label unique in the test id:2180 gh:2195
 		uniqLabels := map[string]string{"gctest": "delete_pods_foreground"}
 		rc := newOwnerRC(f, rcName, estimateMaximumPods(clientSet, 10, 100), uniqLabels)
 		By("create the rc")
@@ -652,7 +652,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 		}
 		By("wait for the rc to be deleted")
 		// default client QPS is 20, deleting each pod requires 2 requests, so 30s should be enough
-		// TODO: 30s is enough assuming immediate processing of dependents following
+		// TODO: 30s is enough assuming immediate processing of dependents following id:2133 gh:2148
 		// owner deletion, but in practice there can be a long delay between owner
 		// deletion and dependent deletion processing. For now, increase the timeout
 		// and investigate the processing delay.
@@ -700,7 +700,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 		gatherMetrics(f)
 	})
 
-	// TODO: this should be an integration test
+	// TODO: this should be an integration test id:2214 gh:2229
 	It("should not delete dependents that have both valid owner and owner that's waiting for dependents to be deleted", func() {
 		clientSet := f.ClientSet
 		rcClient := clientSet.CoreV1().ReplicationControllers(f.Namespace.Name)
@@ -708,7 +708,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 		rc1Name := "simpletest-rc-to-be-deleted"
 		replicas := int32(estimateMaximumPods(clientSet, 10, 100))
 		halfReplicas := int(replicas / 2)
-		// TODO: find better way to keep this label unique in the test
+		// TODO: find better way to keep this label unique in the test id:2361 gh:2376
 		uniqLabels := map[string]string{"gctest": "valid_and_pending_owners"}
 		rc1 := newOwnerRC(f, rc1Name, replicas, uniqLabels)
 		By("create the rc1")
@@ -717,7 +717,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 			framework.Failf("Failed to create replication controller: %v", err)
 		}
 		rc2Name := "simpletest-rc-to-stay"
-		// TODO: find better way to keep this label unique in the test
+		// TODO: find better way to keep this label unique in the test id:2093 gh:2108
 		uniqLabels = map[string]string{"another.key": "another.value"}
 		rc2 := newOwnerRC(f, rc2Name, 0, uniqLabels)
 		By("create the rc2")
@@ -756,7 +756,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 			framework.Failf("failed to delete the rc: %v", err)
 		}
 		By("wait for the rc to be deleted")
-		// TODO: shorten the timeout when we make GC's periodic API rediscovery more efficient.
+		// TODO: shorten the timeout when we make GC's periodic API rediscovery more efficient. id:2181 gh:2196
 		// Tracked at https://github.com/kubernetes/kubernetes/issues/50046.
 		if err := wait.Poll(5*time.Second, 90*time.Second, func() (bool, error) {
 			_, err := rcClient.Get(rc1.Name, metav1.GetOptions{})
@@ -811,7 +811,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 		gatherMetrics(f)
 	})
 
-	// TODO: should be an integration test
+	// TODO: should be an integration test id:2134 gh:2149
 	It("should not be blocked by dependency circle", func() {
 		clientSet := f.ClientSet
 		podClient := clientSet.CoreV1().Pods(f.Namespace.Name)
@@ -844,7 +844,7 @@ var _ = SIGDescribe("Garbage collector", func() {
 		Expect(err).NotTo(HaveOccurred())
 		var pods *v1.PodList
 		var err2 error
-		// TODO: shorten the timeout when we make GC's periodic API rediscovery more efficient.
+		// TODO: shorten the timeout when we make GC's periodic API rediscovery more efficient. id:2215 gh:2230
 		// Tracked at https://github.com/kubernetes/kubernetes/issues/50046.
 		if err := wait.Poll(5*time.Second, 90*time.Second, func() (bool, error) {
 			pods, err2 = podClient.List(metav1.ListOptions{})

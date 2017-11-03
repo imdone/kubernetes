@@ -45,7 +45,7 @@ if [ ${#PEERS[@]} -eq 1 ]; then
     # Note that this may not always coincide with the hostname id.
     echo 1 > "${MY_ID_FILE}"
     echo "server.1=${PEERS[0]}:2888:3888;2181" > "${CFG}"
-    # TODO: zkServer-initialize is the safe way to handle changes to datadir
+    # TODO: zkServer-initialize is the safe way to handle changes to datadir id:2501 gh:2516
     # because simply starting will create a new datadir, BUT if the user changed
     # pod template they might end up with 2 datadirs and brief split brain.
     exit
@@ -80,12 +80,12 @@ fi
 # reconfigure needs to happen through the "reconfig" command.
 cp ${CFG_BAK} ${CFG}
 
-# TODO: zkServer-initialize is the safe way to handle changes to datadir
+# TODO: zkServer-initialize is the safe way to handle changes to datadir id:2672 gh:2687
 # because simply starting will create a new datadir, BUT if the user changed
 # pod template they might end up with 2 datadirs and brief split brain.
 /opt/zookeeper/bin/zkServer.sh start
 
-# TODO: We shouldn't need to specify the address of the master as long as
+# TODO: We shouldn't need to specify the address of the master as long as id:2411 gh:2426
 # there's quorum. According to the docs the new server is just not allowed to
 # vote, it's still allowed to propose config changes, and it knows the
 # existing members of the ensemble from *its* config.

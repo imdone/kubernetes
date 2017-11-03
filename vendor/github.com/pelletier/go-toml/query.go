@@ -11,7 +11,7 @@ import (
 // at this stage of the TOML path.  Returning true will include the node, and
 // returning false will exclude it.
 //
-// NOTE: Care should be taken to write script callbacks such that they are safe
+// NOTE: Care should be taken to write script callbacks such that they are safe id:3036 gh:3051
 // to use from multiple goroutines.
 type NodeFilterFn func(node interface{}) bool
 

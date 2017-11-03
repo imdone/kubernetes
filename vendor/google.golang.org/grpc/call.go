@@ -50,8 +50,8 @@ import (
 // recvResponse receives and parses an RPC response.
 // On error, it returns the error and indicates whether the call should be retried.
 //
-// TODO(zhaoq): Check whether the received message sequence is valid.
-// TODO ctx is used for stats collection and processing. It is the context passed from the application.
+// TODO (zhaoq): Check whether the received message sequence is valid. id:3379 gh:3394
+// TODO ctx is used for stats collection and processing. It is the context passed from the application. id:3658 gh:3673
 func recvResponse(ctx context.Context, dopts dialOptions, t transport.ClientTransport, c *callInfo, stream *transport.Stream, reply interface{}) (err error) {
 	// Try to acquire header metadata from the server if there is any.
 	defer func() {
@@ -81,7 +81,7 @@ func recvResponse(ctx context.Context, dopts dialOptions, t transport.ClientTran
 		}
 	}
 	if inPayload != nil && err == io.EOF && stream.Status().Code() == codes.OK {
-		// TODO in the current implementation, inTrailer may be handled before inPayload in some cases.
+		// TODO in the current implementation, inTrailer may be handled before inPayload in some cases. id:3022 gh:3037
 		// Fix the order if necessary.
 		dopts.copts.StatsHandler.HandleRPC(ctx, inPayload)
 	}
@@ -171,7 +171,7 @@ func invoke(ctx context.Context, method string, args, reply interface{}, cc *Cli
 			c.traceInfo.firstLine.deadline = deadline.Sub(time.Now())
 		}
 		c.traceInfo.tr.LazyLog(&c.traceInfo.firstLine, false)
-		// TODO(dsymonds): Arrange for c.traceInfo.firstLine.remoteAddr to be set.
+		// TODO (dsymonds): Arrange for c.traceInfo.firstLine.remoteAddr to be set. id:3479 gh:3494
 		defer func() {
 			if e != nil {
 				c.traceInfo.tr.LazyLog(&fmtStringer{"%v", []interface{}{e}}, true)
@@ -213,7 +213,7 @@ func invoke(ctx context.Context, method string, args, reply interface{}, cc *Cli
 			// RPC has completed or failed.
 			put func()
 		)
-		// TODO(zhaoq): Need a formal spec of fail-fast.
+		// TODO (zhaoq): Need a formal spec of fail-fast. id:3322 gh:3337
 		callHdr := &transport.CallHdr{
 			Host:   cc.authority,
 			Method: method,
@@ -227,7 +227,7 @@ func invoke(ctx context.Context, method string, args, reply interface{}, cc *Cli
 		}
 		t, put, err = cc.getTransport(ctx, gopts)
 		if err != nil {
-			// TODO(zhaoq): Probably revisit the error handling.
+			// TODO (zhaoq): Probably revisit the error handling. id:3380 gh:3395
 			if _, ok := status.FromError(err); ok {
 				return err
 			}

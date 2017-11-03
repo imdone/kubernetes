@@ -31,7 +31,7 @@
 # Note: for magicfile support to work correctly, the "file" utility must be
 # installed.
 
-# TODO(rmmh): rewrite this script in Python so we can actually test it!
+# TODO (rmmh): rewrite this script in Python so we can actually test it! id:195 gh:196
 
 set -o errexit
 set -o nounset
@@ -131,7 +131,7 @@ function find_version() {
 function print_started() {
   local metadata_keys=$(compgen -e | grep ^BUILD_METADATA_)
   echo "{"
-  echo "    \"version\": \"${version}\","  # TODO(fejta): retire
+  echo "    \"version\": \"${version}\","  # TODO (fejta): retire id:232 gh:233
   echo "    \"job-version\": \"${version}\","
   echo "    \"timestamp\": ${timestamp},"
   if [[ -n "${metadata_keys}" ]]; then
@@ -189,7 +189,7 @@ function update_job_result_cache() {
   local -r version=$(find_version)
   local -r job_results=${gcs_job_path}/jobResultsCache.json
   local -r tmp_results="${WORKSPACE}/_tmp/jobResultsCache.tmp"
-  # TODO: This constraint is insufficient.  The boundary for secondary
+  # TODO: This constraint is insufficient.  The boundary for secondary id:171 gh:172
   #       job cache should be date based on the last primary build.
   #       The issue is we are trying to find a matched green set of results
   #       at a given hash, but all of the jobs run at wildly different lengths.

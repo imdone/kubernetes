@@ -71,7 +71,7 @@ type AuthenticatorConfig struct {
 
 	RequestHeaderConfig *authenticatorfactory.RequestHeaderConfig
 
-	// TODO, this is the only non-serializable part of the entire config.  Factor it out into a clientconfig
+	// TODO , this is the only non-serializable part of the entire config.  Factor it out into a clientconfig id:689 gh:690
 	ServiceAccountTokenGetter   serviceaccount.ServiceAccountTokenGetter
 	BootstrapTokenAuthenticator authenticator.Token
 }
@@ -143,11 +143,11 @@ func (config AuthenticatorConfig) New() (authenticator.Request, *spec.SecurityDe
 	}
 	if config.BootstrapToken {
 		if config.BootstrapTokenAuthenticator != nil {
-			// TODO: This can sometimes be nil because of
+			// TODO: This can sometimes be nil because of id:606 gh:607
 			tokenAuthenticators = append(tokenAuthenticators, config.BootstrapTokenAuthenticator)
 		}
 	}
-	// NOTE(ericchiang): Keep the OpenID Connect after Service Accounts.
+	// NOTE (ericchiang): Keep the OpenID Connect after Service Accounts. id:644 gh:645
 	//
 	// Because both plugins verify JWTs whichever comes first in the union experiences
 	// cache misses for all requests using the other. While the service account plugin

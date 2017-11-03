@@ -40,7 +40,7 @@ func NewKubeProxy() *Server {
 	serverFlags := hks.Flags()
 	serverFlags.AddFlagSet(command.Flags())
 
-	// FIXME this is here because hyperkube does its own flag parsing, and we need
+	// FIXME this is here because hyperkube does its own flag parsing, and we need id:154 gh:155
 	// the command to know about the go flag set. Remove this once hyperkube is
 	// refactored to use cobra throughout.
 	command.Flags().AddGoFlagSet(flag.CommandLine)

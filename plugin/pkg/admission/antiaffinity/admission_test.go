@@ -27,7 +27,7 @@ import (
 )
 
 // ensures the hard PodAntiAffinity is denied if it defines TopologyKey other than kubernetes.io/hostname.
-// TODO: Add test case "invalid topologyKey in requiredDuringSchedulingRequiredDuringExecution then admission fails"
+// TODO: Add test case "invalid topologyKey in requiredDuringSchedulingRequiredDuringExecution then admission fails" id:1519 gh:1525
 // after RequiredDuringSchedulingRequiredDuringExecution is implemented.
 func TestInterPodAffinityAdmission(t *testing.T) {
 	handler := NewInterPodAntiAffinity()

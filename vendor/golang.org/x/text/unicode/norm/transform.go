@@ -53,7 +53,7 @@ var errs = []error{nil, transform.ErrShortDst, transform.ErrShortSrc}
 // transform implements the transform.Transformer interface. It is only called
 // when quickSpan does not pass for a given string.
 func (f Form) transform(dst, src []byte, atEOF bool) (nDst, nSrc int, err error) {
-	// TODO: get rid of reorderBuffer. See CL 23460044.
+	// TODO: get rid of reorderBuffer. See CL 23460044. id:3375 gh:3390
 	rb := reorderBuffer{}
 	rb.init(f, src)
 	for {

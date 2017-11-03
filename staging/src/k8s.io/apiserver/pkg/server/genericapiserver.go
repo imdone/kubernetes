@@ -55,7 +55,7 @@ type APIGroupInfo struct {
 	// schema like api.Status, api.DeleteOptions, and metav1.ListOptions. Other implementors may
 	// define a version "v1beta1" but want to use the Kubernetes "v1" internal objects.
 	// If nil, defaults to groupMeta.GroupVersion.
-	// TODO: Remove this when https://github.com/kubernetes/kubernetes/issues/19018 is fixed.
+	// TODO: Remove this when https://github.com/kubernetes/kubernetes/issues/19018 is fixed. id:3892 gh:3913
 	OptionsExternalVersion *schema.GroupVersion
 	// MetaGroupVersion defaults to "meta.k8s.io/v1" and is the scheme group version used to decode
 	// common API implementations like ListOptions. Future changes will allow this to vary by group
@@ -64,7 +64,7 @@ type APIGroupInfo struct {
 
 	// Scheme includes all of the types used by this group and how to convert between them (or
 	// to convert objects from outside of this group that are accepted in this API).
-	// TODO: replace with interfaces
+	// TODO: replace with interfaces id:3716 gh:3731
 	Scheme *runtime.Scheme
 	// NegotiatedSerializer controls how this group encodes and decodes data
 	NegotiatedSerializer runtime.NegotiatedSerializer
@@ -226,13 +226,13 @@ func (s emptyDelegate) NextDelegate() DelegationTarget {
 }
 
 // RequestContextMapper is exposed so that third party resource storage can be build in a different location.
-// TODO refactor third party resource storage
+// TODO refactor third party resource storage id:3868 gh:3883
 func (s *GenericAPIServer) RequestContextMapper() apirequest.RequestContextMapper {
 	return s.requestContextMapper
 }
 
 // MinRequestTimeout is exposed so that third party resource storage can be build in a different location.
-// TODO refactor third party resource storage
+// TODO refactor third party resource storage id:4000 gh:4020
 func (s *GenericAPIServer) MinRequestTimeout() time.Duration {
 	return s.minRequestTimeout
 }
@@ -447,7 +447,7 @@ func NewDefaultAPIGroupInfo(group string, registry *registered.APIRegistrationMa
 	return APIGroupInfo{
 		GroupMeta:                    *groupMeta,
 		VersionedResourcesStorageMap: map[string]map[string]rest.Storage{},
-		// TODO unhardcode this.  It was hardcoded before, but we need to re-evaluate
+		// TODO unhardcode this.  It was hardcoded before, but we need to re-evaluate id:3433 gh:3448
 		OptionsExternalVersion: &schema.GroupVersion{Version: "v1"},
 		Scheme:                 scheme,
 		ParameterCodec:         parameterCodec,

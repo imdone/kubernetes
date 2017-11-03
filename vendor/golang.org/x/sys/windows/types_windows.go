@@ -762,7 +762,7 @@ const (
 
 const SIO_GET_INTERFACE_LIST = 0x4004747F
 
-// TODO(mattn): SockaddrGen is union of sockaddr/sockaddr_in/sockaddr_in6_old.
+// TODO (mattn): SockaddrGen is union of sockaddr/sockaddr_in/sockaddr_in6_old. id:3343 gh:3358
 // will be fixed to change variable type as suitable.
 
 type SockaddrGen [24]byte

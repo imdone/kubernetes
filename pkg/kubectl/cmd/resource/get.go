@@ -124,7 +124,7 @@ func NewCmdGet(f cmdutil.Factory, out io.Writer, errOut io.Writer) *cobra.Comman
 		ErrOut: errOut,
 	}
 
-	// TODO: this needs to be abstracted behind the factory like ValidResourceTypeList
+	// TODO: this needs to be abstracted behind the factory like ValidResourceTypeList id:664 gh:665
 	//   and use discovery
 	// retrieve a list of handled resources from printer as valid args
 	validArgs, argAliases := []string{}, []string{}
@@ -215,7 +215,7 @@ func (options *GetOptions) Validate() error {
 }
 
 // Run performs the get operation.
-// TODO: remove the need to pass these arguments, like other commands.
+// TODO: remove the need to pass these arguments, like other commands. id:781 gh:782
 func (options *GetOptions) Run(f cmdutil.Factory, cmd *cobra.Command, args []string) error {
 	if len(options.Raw) > 0 {
 		return options.raw(f)
@@ -236,7 +236,7 @@ func (options *GetOptions) Run(f cmdutil.Factory, cmd *cobra.Command, args []str
 		SelectorParam(options.LabelSelector).
 		ExportParam(options.Export).
 		RequestChunksOf(options.ChunkSize).
-		IncludeUninitialized(cmdutil.ShouldIncludeUninitialized(cmd, false)). // TODO: this needs to be better factored
+		IncludeUninitialized(cmdutil.ShouldIncludeUninitialized(cmd, false)). // TODO: this needs to be better factored id:734 gh:735
 		ResourceTypeOrNameArgs(true, args...).
 		ContinueOnError().
 		Latest().
@@ -283,7 +283,7 @@ func (options *GetOptions) Run(f cmdutil.Factory, cmd *cobra.Command, args []str
 	}
 	var sorter *kubectl.RuntimeSort
 	if len(sorting) > 0 && len(objs) > 1 {
-		// TODO: questionable
+		// TODO: questionable id:727 gh:728
 		if sorter, err = kubectl.SortObjects(f.Decoder(true), objs, sorting); err != nil {
 			return err
 		}
@@ -297,7 +297,7 @@ func (options *GetOptions) Run(f cmdutil.Factory, cmd *cobra.Command, args []str
 	useOpenAPIPrintColumns := cmdutil.GetFlagBool(cmd, useOpenAPIPrintColumnFlagLabel)
 
 	showKind := options.ShowKind
-	// TODO: abstract more cleanly
+	// TODO: abstract more cleanly id:712 gh:713
 	if resource.MultipleTypesRequested(args) || cmdutil.MustPrintWithKinds(objs, infos, sorter) {
 		showKind = true
 	}
@@ -340,7 +340,7 @@ func (options *GetOptions) Run(f cmdutil.Factory, cmd *cobra.Command, args []str
 				continue
 			}
 
-			// TODO: this doesn't belong here
+			// TODO: this doesn't belong here id:665 gh:666
 			// add linebreak between resource groups (if there is more than one)
 			// skip linebreak above first resource group
 			noHeaders := cmdutil.GetFlagBool(cmd, "no-headers")
@@ -434,14 +434,14 @@ func (options *GetOptions) raw(f cmdutil.Factory) error {
 }
 
 // watch starts a client-side watch of one or more resources.
-// TODO: remove the need for arguments here.
+// TODO: remove the need for arguments here. id:782 gh:783
 func (options *GetOptions) watch(f cmdutil.Factory, cmd *cobra.Command, args []string) error {
 	mapper, typer, err := f.UnstructuredObject()
 	if err != nil {
 		return err
 	}
 
-	// TODO: this could be better factored
+	// TODO: this could be better factored id:735 gh:736
 	// include uninitialized objects when watching on a single object
 	// unless explicitly set --include-uninitialized=false
 	includeUninitialized := cmdutil.ShouldIncludeUninitialized(cmd, len(args) == 2)

@@ -163,7 +163,7 @@ func newInternal(exec utilexec.Interface, dbus utildbus.Interface, protocol Prot
 		restoreWaitFlag: getIPTablesRestoreWaitFlag(exec, protocol),
 		lockfilePath:    lockfilePath,
 	}
-	// TODO this needs to be moved to a separate Start() or Run() function so that New() has zero side
+	// TODO this needs to be moved to a separate Start() or Run() function so that New() has zero side id:1372 gh:1378
 	// effects.
 	runner.connectToFirewallD()
 	return runner
@@ -254,7 +254,7 @@ func (runner *runner) DeleteChain(table Table, chain Chain) error {
 	runner.mu.Lock()
 	defer runner.mu.Unlock()
 
-	// TODO: we could call iptables -S first, ignore the output and check for non-zero return (more like DeleteRule)
+	// TODO: we could call iptables -S first, ignore the output and check for non-zero return (more like DeleteRule) id:1457 gh:1463
 	out, err := runner.run(opDeleteChain, fullArgs)
 	if err != nil {
 		return fmt.Errorf("error deleting chain %q: %v: %s", chain, err, out)
@@ -475,7 +475,7 @@ func (runner *runner) checkRuleWithoutCheck(table Table, chain Chain, args ...st
 			fields[i] = trimhex(fields[i])
 		}
 
-		// TODO: This misses reorderings e.g. "-x foo ! -y bar" will match "! -x foo -y bar"
+		// TODO: This misses reorderings e.g. "-x foo ! -y bar" will match "! -x foo -y bar" id:1413 gh:1419
 		if sets.NewString(fields...).IsSuperset(argset) {
 			return true, nil
 		}

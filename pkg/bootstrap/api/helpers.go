@@ -25,7 +25,7 @@ var bootstrapGroupRegexp = regexp.MustCompile(`\A` + BootstrapGroupPattern + `\z
 
 // ValidateBootstrapGroupName checks if the provided group name is a valid
 // bootstrap group name. Returns nil if valid or a validation error if invalid.
-// TODO(mattmoyer): this validation should migrate out to client-go (see https://github.com/kubernetes/client-go/issues/114)
+// TODO (mattmoyer): this validation should migrate out to client-go (see https://github.com/kubernetes/client-go/issues/114) id:400 gh:401
 func ValidateBootstrapGroupName(name string) error {
 	if bootstrapGroupRegexp.Match([]byte(name)) {
 		return nil

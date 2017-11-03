@@ -419,7 +419,7 @@ func WriteToFile(config clientcmdapi.Config, filename string) error {
 }
 
 func lockFile(filename string) error {
-	// TODO: find a way to do this with actual file locks. Will
+	// TODO: find a way to do this with actual file locks. Will id:3957 gh:3977
 	// probably need seperate solution for windows and linux.
 
 	// Make sure the dir exists before we try to create a lock file.

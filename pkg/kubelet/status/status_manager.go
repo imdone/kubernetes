@@ -383,7 +383,7 @@ func (m *manager) deletePodStatus(uid types.UID) {
 	delete(m.podStatuses, uid)
 }
 
-// TODO(filipg): It'd be cleaner if we can do this without signal from user.
+// TODO (filipg): It'd be cleaner if we can do this without signal from user. id:1202 gh:1208
 func (m *manager) RemoveOrphanedStatuses(podUIDs map[types.UID]bool) {
 	m.podStatusesLock.Lock()
 	defer m.podStatusesLock.Unlock()
@@ -447,7 +447,7 @@ func (m *manager) syncPod(uid types.UID, status versionedPodStatus) {
 		return
 	}
 
-	// TODO: make me easier to express from client code
+	// TODO: make me easier to express from client code id:1045 gh:1051
 	pod, err := m.kubeClient.CoreV1().Pods(status.podNamespace).Get(status.podName, metav1.GetOptions{})
 	if errors.IsNotFound(err) {
 		glog.V(3).Infof("Pod %q (%s) does not exist on the server", status.podName, uid)
@@ -468,7 +468,7 @@ func (m *manager) syncPod(uid types.UID, status versionedPodStatus) {
 		return
 	}
 	pod.Status = status.status
-	// TODO: handle conflict as a retry, make that easier too.
+	// TODO: handle conflict as a retry, make that easier too. id:1142 gh:1148
 	newPod, err := m.kubeClient.CoreV1().Pods(pod.Namespace).UpdateStatus(pod)
 	if err != nil {
 		glog.Warningf("Failed to update status for pod %q: %v", format.Pod(pod), err)
@@ -520,10 +520,10 @@ func (m *manager) canBeDeleted(pod *v1.Pod, status v1.PodStatus) bool {
 // the apiserver. Now when pod status is inconsistent between apiserver and kubelet,
 // kubelet should forcibly send an update to reconcile the inconsistence, because kubelet
 // should be the source of truth of pod status.
-// NOTE(random-liu): It's simpler to pass in mirror pod uid and get mirror pod by uid, but
+// NOTE (random-liu): It's simpler to pass in mirror pod uid and get mirror pod by uid, but id:1081 gh:1087
 // now the pod manager only supports getting mirror pod by static pod, so we have to pass
 // static pod uid here.
-// TODO(random-liu): Simplify the logic when mirror pod manager is added.
+// TODO (random-liu): Simplify the logic when mirror pod manager is added. id:1008 gh:1014
 func (m *manager) needsReconcile(uid types.UID, status v1.PodStatus) bool {
 	// The pod could be a static pod, so we should translate first.
 	pod, ok := m.podManager.GetPodByUID(uid)
@@ -561,7 +561,7 @@ func (m *manager) needsReconcile(uid types.UID, status v1.PodStatus) bool {
 // There is related issue #15262 and PR #15263 about this.
 // In fact, the best way to solve this is to do it on api side. However, for now, we normalize the status locally in
 // kubelet temporarily.
-// TODO(random-liu): Remove timestamp related logic after apiserver supports nanosecond or makes it consistent.
+// TODO (random-liu): Remove timestamp related logic after apiserver supports nanosecond or makes it consistent. id:1203 gh:1209
 func normalizeStatus(pod *v1.Pod, status *v1.PodStatus) *v1.PodStatus {
 	bytesPerStatus := kubecontainer.MaxPodTerminationMessageLogLength
 	if containers := len(pod.Spec.Containers) + len(pod.Spec.InitContainers); containers > 0 {

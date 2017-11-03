@@ -30,7 +30,7 @@ import (
 )
 
 // Constant for the retry-after interval on rate limiting.
-// TODO: maybe make this dynamic? or user-adjustable?
+// TODO: maybe make this dynamic? or user-adjustable? id:3999 gh:4019
 const retryAfter = "1"
 
 var nonMutatingRequestVerbs = sets.NewString("get", "list", "watch")

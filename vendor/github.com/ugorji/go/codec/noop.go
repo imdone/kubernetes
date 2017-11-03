@@ -148,7 +148,7 @@ func (h *noopDrv) ContainerType() (vt valueType) {
 	// 	return h.ct
 	// }
 	// return valueTypeUnset
-	// TODO: may need to tweak this so it works.
+	// TODO: may need to tweak this so it works. id:3175 gh:3190
 	// if h.ct == valueTypeMap && vt == valueTypeArray || h.ct == valueTypeArray && vt == valueTypeMap {
 	// 	h.cb = !h.cb
 	// 	h.ct = vt

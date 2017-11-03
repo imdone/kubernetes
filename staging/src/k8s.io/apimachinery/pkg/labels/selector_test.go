@@ -156,7 +156,7 @@ func TestSetMatches(t *testing.T) {
 	expectMatchDirect(t, Set{"baz": "blah"}, labelset)
 	expectMatchDirect(t, Set{"foo": "bar", "baz": "blah"}, labelset)
 
-	//TODO: bad values not handled for the moment in SelectorFromSet
+	//TODO: bad values not handled for the moment in SelectorFromSet id:3769 gh:3784
 	//expectNoMatchDirect(t, Set{"foo": "=blah"}, labelset)
 	//expectNoMatchDirect(t, Set{"baz": "=bar"}, labelset)
 	//expectNoMatchDirect(t, Set{"foo": "=bar", "foobar": "bar", "baz": "blah"}, labelset)

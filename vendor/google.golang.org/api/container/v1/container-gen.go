@@ -610,7 +610,7 @@ type ClusterUpdate struct {
 	DesiredAddonsConfig *AddonsConfig `json:"desiredAddonsConfig,omitempty"`
 
 	// DesiredImageType: The desired image type for the node pool.
-	// NOTE: Set the "desired_node_pool" field as well.
+	// NOTE: Set the "desired_node_pool" field as well. id:3320 gh:3335
 	DesiredImageType string `json:"desiredImageType,omitempty"`
 
 	// DesiredLocations: The desired list of Google Compute

@@ -61,7 +61,7 @@ func (s *storage) CreateRole(ctx genericapirequest.Context, role *rbac.Role, cre
 }
 
 func (s *storage) UpdateRole(ctx genericapirequest.Context, role *rbac.Role, createValidation rest.ValidateObjectFunc, updateValidation rest.ValidateObjectUpdateFunc) error {
-	// TODO: any admission?
+	// TODO: any admission? id:1407 gh:1413
 	_, _, err := s.Update(ctx, role.Name, rest.DefaultUpdatedObjectInfo(role), createValidation, updateValidation)
 	return err
 }

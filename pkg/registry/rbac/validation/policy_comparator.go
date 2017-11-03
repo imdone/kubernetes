@@ -28,7 +28,7 @@ func Covers(ownerRules, servantRules []rbac.PolicyRule) (bool, []rbac.PolicyRule
 	// 1.  Break every servantRule into individual rule tuples: group, verb, resource, resourceName
 	// 2.  Compare the mini-rules against each owner rule.  Because the breakdown is down to the most atomic level, we're guaranteed that each mini-servant rule will be either fully covered or not covered by a single owner rule
 	// 3.  Any left over mini-rules means that we are not covered and we have a nice list of them.
-	// TODO: it might be nice to collapse the list down into something more human readable
+	// TODO: it might be nice to collapse the list down into something more human readable id:1369 gh:1375
 
 	subrules := []rbac.PolicyRule{}
 	for _, servantRule := range servantRules {

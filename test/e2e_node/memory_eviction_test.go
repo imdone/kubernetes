@@ -108,7 +108,7 @@ var _ = framework.KubeDescribe("MemoryEviction [Slow] [Serial] [Disruptive]", fu
 						return fmt.Errorf("current available memory is: %d bytes. Expected at least %d bytes available.", avail, halflimit)
 					}, 5*time.Minute, 15*time.Second).Should(BeNil())
 
-					// TODO(mtaufen): 5 minute wait to stop flaky test bleeding while we figure out what is actually going on.
+					// TODO (mtaufen): 5 minute wait to stop flaky test bleeding while we figure out what is actually going on. id:2580 gh:2595
 					//                If related to pressure transition period in eviction manager, probably only need to wait
 					//                just over 30s becasue that is the transition period set for node e2e tests. But since we
 					//                know 5 min works and we don't know if transition period is the problem, wait 5 min for now.
@@ -183,7 +183,7 @@ var _ = framework.KubeDescribe("MemoryEviction [Slow] [Serial] [Disruptive]", fu
 
 						glog.Infof("pod phase: guaranteed: %v, burstable: %v, besteffort: %v", gteedPh, burstPh, bestPh)
 
-						// NOTE/TODO(mtaufen): This should help us debug why burstable appears to fail before besteffort in some
+						// NOTE /TODO(mtaufen): This should help us debug why burstable appears to fail before besteffort in some id:2327 gh:2342
 						//                     scenarios. We have seen some evidence that the eviction manager has in fact done the
 						//                     right thing and evicted the besteffort first, and attempted to change the besteffort phase
 						//                     to "Failed" when it evicts it, but that for some reason the test isn't seeing the updated
@@ -204,7 +204,7 @@ var _ = framework.KubeDescribe("MemoryEviction [Slow] [Serial] [Disruptive]", fu
 						_, pressure := nodeutil.GetNodeCondition(&node.Status, v1.NodeMemoryPressure)
 						glog.Infof("node pressure condition: %s", pressure)
 
-						// NOTE/TODO(mtaufen): Also log (at least temporarily) the actual memory consumption on the node.
+						// NOTE /TODO(mtaufen): Also log (at least temporarily) the actual memory consumption on the node. id:2482 gh:2497
 						//                     I used this to plot memory usage from a successful test run and it looks the
 						//                     way I would expect. I want to see what the plot from a flake looks like.
 						summary, err := getNodeSummary()

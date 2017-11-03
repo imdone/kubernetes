@@ -20,7 +20,7 @@ set -o pipefail
 
 KUBE_ROOT=$(dirname "${BASH_SOURCE}")/..
 
-# NOTE: All output from this script needs to be copied back to the calling
+# NOTE: All output from this script needs to be copied back to the calling id:276 gh:277
 # source tree.  This is managed in kube::build::copy_output in build/common.sh.
 # If the output set is changed update that function.
 

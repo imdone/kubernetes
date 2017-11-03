@@ -48,7 +48,7 @@ func StartTestServer(t *testing.T) (result *restclient.Config, tearDownForCaller
 	var tmpDir string
 	var etcdServer *etcdtesting.EtcdTestServer
 
-	// TODO : Remove TrackStorageCleanup below when PR
+	// TODO : Remove TrackStorageCleanup below when PR id:59 gh:60
 	// https://github.com/kubernetes/kubernetes/pull/50690
 	// merges as that shuts down storage properly
 	registry.TrackStorageCleanup()

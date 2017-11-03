@@ -81,7 +81,7 @@ func (t Transformer) String(s string) string {
 	return s
 }
 
-// TODO:
+// TODO: id:3310 gh:3325
 // - Copy: copying strings and bytes in whole-rune units.
 // - Validation (maybe)
 // - Well-formed-ness (maybe)
@@ -94,13 +94,13 @@ func Remove(s Set) Transformer {
 	if f, ok := s.(setFunc); ok {
 		// This little trick cuts the running time of BenchmarkRemove for sets
 		// created by Predicate roughly in half.
-		// TODO: special-case RangeTables as well.
+		// TODO: special-case RangeTables as well. id:3302 gh:3317
 		return Transformer{remove(f)}
 	}
 	return Transformer{remove(s.Contains)}
 }
 
-// TODO: remove transform.RemoveFunc.
+// TODO: remove transform.RemoveFunc. id:3531 gh:3547
 
 type remove func(r rune) bool
 

@@ -372,7 +372,7 @@ func revisionNotFoundErr(r int64) error {
 	return fmt.Errorf("unable to find specified revision %v in history", r)
 }
 
-// TODO: copied from daemon controller, should extract to a library
+// TODO: copied from daemon controller, should extract to a library id:823 gh:824
 type historiesByRevision []*appsv1beta1.ControllerRevision
 
 func (h historiesByRevision) Len() int      { return len(h) }

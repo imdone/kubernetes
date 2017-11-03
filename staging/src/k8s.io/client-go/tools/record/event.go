@@ -110,7 +110,7 @@ type eventBroadcasterImpl struct {
 
 // StartRecordingToSink starts sending events received from the specified eventBroadcaster to the given sink.
 // The return value can be ignored or used to stop recording, if desired.
-// TODO: make me an object with parameterizable queue length and retry interval
+// TODO: make me an object with parameterizable queue length and retry interval id:3815 gh:3830
 func (eventBroadcaster *eventBroadcasterImpl) StartRecordingToSink(sink EventSink) watch.Interface {
 	// The default math/rand package functions aren't thread safe, so create a
 	// new Rand object for each StartRecording call.
@@ -270,7 +270,7 @@ func (recorder *recorderImpl) generateEvent(object runtime.Object, timestamp met
 	event.Source = recorder.source
 
 	go func() {
-		// NOTE: events should be a non-blocking operation
+		// NOTE: events should be a non-blocking operation id:3958 gh:3978
 		defer utilruntime.HandleCrash()
 		recorder.Action(watch.Added, event)
 	}()

@@ -183,7 +183,7 @@ func (m *ManagerImpl) Register(ctx context.Context, r *pluginapi.RegisterRequest
 		return &pluginapi.Empty{}, fmt.Errorf(errorString)
 	}
 
-	// TODO: for now, always accepts newest device plugin. Later may consider to
+	// TODO: for now, always accepts newest device plugin. Later may consider to id:831 gh:832
 	// add some policies here, e.g., verify whether an old device plugin with the
 	// same resource name is still alive to determine whether we want to accept
 	// the new registration.

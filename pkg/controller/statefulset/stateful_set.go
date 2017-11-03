@@ -134,7 +134,7 @@ func NewStatefulSetController(
 	ssc.setLister = setInformer.Lister()
 	ssc.setListerSynced = setInformer.Informer().HasSynced
 
-	// TODO: Watch volumes
+	// TODO: Watch volumes id:601 gh:602
 	return ssc
 }
 
@@ -275,7 +275,7 @@ func (ssc *StatefulSetController) deletePod(obj interface{}) {
 // getPodsForStatefulSet returns the Pods that a given StatefulSet should manage.
 // It also reconciles ControllerRef by adopting/orphaning.
 //
-// NOTE: Returned Pods are pointers to objects from the cache.
+// NOTE: Returned Pods are pointers to objects from the cache. id:639 gh:640
 //       If you need to modify one, you need to copy it first.
 func (ssc *StatefulSetController) getPodsForStatefulSet(set *apps.StatefulSet, selector labels.Selector) ([]*v1.Pod, error) {
 	// List all pods to include the pods that don't match the selector anymore but
@@ -449,7 +449,7 @@ func (ssc *StatefulSetController) sync(key string) error {
 // syncStatefulSet syncs a tuple of (statefulset, []*v1.Pod).
 func (ssc *StatefulSetController) syncStatefulSet(set *apps.StatefulSet, pods []*v1.Pod) error {
 	glog.V(4).Infof("Syncing StatefulSet %v/%v with %d pods", set.Namespace, set.Name, len(pods))
-	// TODO: investigate where we mutate the set during the update as it is not obvious.
+	// TODO: investigate where we mutate the set during the update as it is not obvious. id:651 gh:652
 	if err := ssc.control.UpdateStatefulSet(set.DeepCopy(), pods); err != nil {
 		return err
 	}

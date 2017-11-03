@@ -35,7 +35,7 @@ const (
 )
 
 // Interval implements a Comparable interval [begin, end)
-// TODO: support different sorts of intervals: (a,b), [a,b], (a, b]
+// TODO: support different sorts of intervals: (a,b), [a,b], (a, b] id:2626 gh:2641
 type Interval struct {
 	Begin Comparable
 	End   Comparable

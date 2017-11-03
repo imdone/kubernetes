@@ -30,7 +30,7 @@ import (
 // exists returns true if it would be possible to call the index function
 // with these arguments.
 //
-// TODO: how to document this for users?
+// TODO: how to document this for users? id:1234 gh:1240
 //
 // index returns the result of indexing its first argument by the following
 // arguments.  Thus "index x 1 2 3" is, in Go syntax, x[1][2][3]. Each
@@ -151,7 +151,7 @@ func (j *JSONPathPrinter) PrintObj(obj runtime.Object, w io.Writer) error {
 	return nil
 }
 
-// TODO: implement HandledResources()
+// TODO: implement HandledResources() id:1287 gh:1293
 func (p *JSONPathPrinter) HandledResources() []string {
 	return []string{}
 }

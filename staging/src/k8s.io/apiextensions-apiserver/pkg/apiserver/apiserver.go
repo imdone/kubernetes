@@ -155,7 +155,7 @@ func (c completedConfig) New(delegationTarget genericapiserver.DelegationTarget)
 		// KUBE_API_VERSIONS is used in test-update-storage-objects.sh, disabling a number of API
 		// groups. This leads to a nil client above and undefined behaviour further down.
 		//
-		// TODO: get rid of KUBE_API_VERSIONS or define sane behaviour if set
+		// TODO: get rid of KUBE_API_VERSIONS or define sane behaviour if set id:3559 gh:3574
 		glog.Errorf("Failed to create clientset with KUBE_API_VERSIONS=%q. KUBE_API_VERSIONS is only for testing. Things will break.", kubeAPIVersions)
 	}
 	s.Informers = internalinformers.NewSharedInformerFactory(crdClient, 5*time.Minute)

@@ -64,15 +64,15 @@ func etcdUpgradeGCE(target_storage, target_version string) error {
 	return err
 }
 
-// TODO(mrhohn): Remove this function when kube-proxy is run as a DaemonSet by default.
+// TODO (mrhohn): Remove this function when kube-proxy is run as a DaemonSet by default. id:2455 gh:2470
 func MasterUpgradeGCEWithKubeProxyDaemonSet(v string, enableKubeProxyDaemonSet bool) error {
 	return masterUpgradeGCE(v, enableKubeProxyDaemonSet)
 }
 
-// TODO(mrhohn): Remove 'enableKubeProxyDaemonSet' when kube-proxy is run as a DaemonSet by default.
+// TODO (mrhohn): Remove 'enableKubeProxyDaemonSet' when kube-proxy is run as a DaemonSet by default. id:2105 gh:2120
 func masterUpgradeGCE(rawV string, enableKubeProxyDaemonSet bool) error {
 	env := append(os.Environ(), fmt.Sprintf("KUBE_PROXY_DAEMONSET=%v", enableKubeProxyDaemonSet))
-	// TODO: Remove these variables when they're no longer needed for downgrades.
+	// TODO: Remove these variables when they're no longer needed for downgrades. id:2373 gh:2388
 	if TestContext.EtcdUpgradeVersion != "" && TestContext.EtcdUpgradeStorage != "" {
 		env = append(env,
 			"TEST_ETCD_VERSION="+TestContext.EtcdUpgradeVersion,
@@ -159,7 +159,7 @@ func NodeUpgrade(f *Framework, v string, img string) error {
 
 	// Wait for it to complete and validate nodes are healthy.
 	//
-	// TODO(ihmccreery) We shouldn't have to wait for nodes to be ready in
+	// TODO (ihmccreery) We shouldn't have to wait for nodes to be ready in id:2189 gh:2204
 	// GKE; the operation shouldn't return until they all are.
 	Logf("Waiting up to %v for all nodes to be ready after the upgrade", RestartNodeReadyAgainTimeout)
 	if _, err := CheckNodesReady(f.ClientSet, RestartNodeReadyAgainTimeout, TestContext.CloudConfig.NumNodes); err != nil {
@@ -168,7 +168,7 @@ func NodeUpgrade(f *Framework, v string, img string) error {
 	return nil
 }
 
-// TODO(mrhohn): Remove this function when kube-proxy is run as a DaemonSet by default.
+// TODO (mrhohn): Remove this function when kube-proxy is run as a DaemonSet by default. id:2227 gh:2242
 func NodeUpgradeGCEWithKubeProxyDaemonSet(f *Framework, v string, img string, enableKubeProxyDaemonSet bool) error {
 	// Perform the upgrade.
 	if err := nodeUpgradeGCE(v, img, enableKubeProxyDaemonSet); err != nil {
@@ -182,7 +182,7 @@ func NodeUpgradeGCEWithKubeProxyDaemonSet(f *Framework, v string, img string, en
 	return nil
 }
 
-// TODO(mrhohn): Remove 'enableKubeProxyDaemonSet' when kube-proxy is run as a DaemonSet by default.
+// TODO (mrhohn): Remove 'enableKubeProxyDaemonSet' when kube-proxy is run as a DaemonSet by default. id:2456 gh:2471
 func nodeUpgradeGCE(rawV, img string, enableKubeProxyDaemonSet bool) error {
 	v := "v" + rawV
 	env := append(os.Environ(), fmt.Sprintf("KUBE_PROXY_DAEMONSET=%v", enableKubeProxyDaemonSet))
@@ -265,7 +265,7 @@ func CheckNodesReady(c clientset.Interface, nt time.Duration, expect int) ([]str
 		go func() { result <- WaitForNodeToBeReady(c, n, timeout) }()
 	}
 	failed := false
-	// TODO(mbforbes): Change to `for range` syntax once we support only Go
+	// TODO (mbforbes): Change to `for range` syntax once we support only Go id:2106 gh:2121
 	// >= 1.4.
 	for i := range nodeList.Items {
 		_ = i
@@ -286,7 +286,7 @@ func MigTemplate() (string, error) {
 	var templ string
 	key := "instanceTemplate"
 	if wait.Poll(Poll, SingleCallTimeout, func() (bool, error) {
-		// TODO(mikedanese): make this hit the compute API directly instead of
+		// TODO (mikedanese): make this hit the compute API directly instead of id:2374 gh:2389
 		// shelling out to gcloud.
 		// An `instance-groups managed describe` call outputs what we want to stdout.
 		output, _, err := retryCmd("gcloud", "compute", "instance-groups", "managed",

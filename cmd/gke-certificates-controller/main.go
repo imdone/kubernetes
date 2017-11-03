@@ -31,7 +31,7 @@ import (
 	"github.com/spf13/pflag"
 )
 
-// TODO(pipejakob): Move this entire cmd directory into its own repo
+// TODO (pipejakob): Move this entire cmd directory into its own repo id:117 gh:118
 func main() {
 	s := app.NewGKECertificatesController()
 	s.AddFlags(pflag.CommandLine)

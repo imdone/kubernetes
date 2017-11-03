@@ -29,7 +29,7 @@ import (
 var Semantic = conversion.EqualitiesOrDie(
 	func(a, b resource.Quantity) bool {
 		// Ignore formatting, only care that numeric value stayed the same.
-		// TODO: if we decide it's important, it should be safe to start comparing the format.
+		// TODO: if we decide it's important, it should be safe to start comparing the format. id:3489 gh:3504
 		//
 		// Uninitialized quantities are equivalent to 0 quantities.
 		return a.Cmp(b) == 0

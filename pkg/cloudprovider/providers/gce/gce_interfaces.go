@@ -30,7 +30,7 @@ type CloudAddressService interface {
 	GetRegionAddress(name string, region string) (*compute.Address, error)
 	GetRegionAddressByIP(region, ipAddress string) (*compute.Address, error)
 	DeleteRegionAddress(name, region string) error
-	// TODO: Mock Global endpoints
+	// TODO: Mock Global endpoints id:438 gh:439
 
 	// Alpha API.
 	GetAlphaRegionAddress(name, region string) (*computealpha.Address, error)
@@ -41,12 +41,12 @@ type CloudAddressService interface {
 	GetBetaRegionAddress(name string, region string) (*computebeta.Address, error)
 	GetBetaRegionAddressByIP(region, ipAddress string) (*computebeta.Address, error)
 
-	// TODO(#51665): Remove this once the Network Tiers becomes Alpha in GCP.
+	// TODO (#51665): Remove this once the Network Tiers becomes Alpha in GCP. id:507 gh:508
 	getNetworkTierFromAddress(name, region string) (string, error)
 }
 
 // CloudForwardingRuleService is an interface for managing forwarding rules.
-// TODO: Expand the interface to include more methods.
+// TODO: Expand the interface to include more methods. id:477 gh:478
 type CloudForwardingRuleService interface {
 	GetRegionForwardingRule(name, region string) (*compute.ForwardingRule, error)
 	CreateRegionForwardingRule(rule *compute.ForwardingRule, region string) error

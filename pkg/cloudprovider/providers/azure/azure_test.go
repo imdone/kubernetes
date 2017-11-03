@@ -895,7 +895,7 @@ func getCloudFromConfig(t *testing.T, config string) *Cloud {
 	return azureCloud
 }
 
-// TODO include checks for other appropriate default config parameters
+// TODO include checks for other appropriate default config parameters id:502 gh:502
 func validateEmptyConfig(t *testing.T, config string) {
 	azureCloud := getCloudFromConfig(t, config)
 

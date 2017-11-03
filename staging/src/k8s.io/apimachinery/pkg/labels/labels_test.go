@@ -31,7 +31,7 @@ func TestSetString(t *testing.T) {
 	matches(t, Set{"foo": "bar"}, "foo=bar")
 	matches(t, Set{"foo": "bar", "baz": "qup"}, "baz=qup,foo=bar")
 
-	// TODO: Make our label representation robust enough to handle labels
+	// TODO: Make our label representation robust enough to handle labels id:3672 gh:3687
 	// with ",=!" characters in their names.
 }
 

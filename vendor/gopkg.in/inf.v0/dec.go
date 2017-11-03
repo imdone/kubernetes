@@ -22,7 +22,7 @@
 //
 package inf
 
-// TODO:
+// TODO: id:3578 gh:3593
 //  - avoid excessive deep copying (quo and rounders)
 
 import (

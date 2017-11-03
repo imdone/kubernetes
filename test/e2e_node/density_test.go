@@ -67,7 +67,7 @@ var _ = framework.KubeDescribe("Density [Serial] [Slow]", func() {
 	})
 
 	Context("create a batch of pods", func() {
-		// TODO(coufon): the values are generous, set more precise limits with benchmark data
+		// TODO (coufon): the values are generous, set more precise limits with benchmark data id:2274 gh:2289
 		// and add more tests
 		dTests := []densityTest{
 			{
@@ -301,7 +301,7 @@ type densityTest struct {
 
 func (dt *densityTest) getTestName() string {
 	// The current default API QPS limit is 5
-	// TODO(coufon): is there any way to not hard code this?
+	// TODO (coufon): is there any way to not hard code this? id:2576 gh:2591
 	APIQPSLimit := 5
 	if dt.APIQPSLimit > 0 {
 		APIQPSLimit = dt.APIQPSLimit
@@ -331,7 +331,7 @@ func runDensityBatchTest(f *framework.Framework, rc *ResourceCollector, testArg 
 	go controller.Run(stopCh)
 	defer close(stopCh)
 
-	// TODO(coufon): in the test we found kubelet starts while it is busy on something, as a result 'syncLoop'
+	// TODO (coufon): in the test we found kubelet starts while it is busy on something, as a result 'syncLoop' id:2323 gh:2338
 	// does not response to pod creation immediately. Creating the first pod has a delay around 5s.
 	// The node status has already been 'ready' so `wait and check node being ready does not help here.
 	// Now wait here for a grace period to let 'syncLoop' be ready
@@ -544,7 +544,7 @@ func logAndVerifyLatency(batchLag time.Duration, e2eLags []framework.PodLatencyD
 	podBatchStartupLimit time.Duration, testInfo map[string]string, isVerify bool) {
 	framework.PrintLatencies(e2eLags, "worst client e2e total latencies")
 
-	// TODO(coufon): do not trust 'kubelet' metrics since they are not reset!
+	// TODO (coufon): do not trust 'kubelet' metrics since they are not reset! id:2356 gh:2371
 	latencyMetrics, _ := getPodStartLatency(kubeletAddr)
 	framework.Logf("Kubelet Prometheus metrics (not reset):\n%s", framework.PrettyPrintJSON(latencyMetrics))
 
@@ -581,7 +581,7 @@ func setKubeletAPIQPSLimit(f *framework.Framework, newAPIQPS int32) {
 
 	// Set new API QPS limit
 	kubeCfg.KubeAPIQPS = newAPIQPS
-	// TODO(coufon): createConfigMap should firstly check whether configmap already exists, if so, use updateConfigMap.
+	// TODO (coufon): createConfigMap should firstly check whether configmap already exists, if so, use updateConfigMap. id:2632 gh:2647
 	// Calling createConfigMap twice will result in error. It is fine for benchmark test because we only run one test on a new node.
 	_, err = createConfigMap(f, kubeCfg)
 	framework.ExpectNoError(err)
@@ -595,7 +595,7 @@ func setKubeletAPIQPSLimit(f *framework.Framework, newAPIQPS int32) {
 	framework.ExpectNoError(err)
 	framework.Logf("New QPS limit is: %d\n", kubeCfg.KubeAPIQPS)
 
-	// TODO(coufon): check test result to see if we need to retry here
+	// TODO (coufon): check test result to see if we need to retry here id:2275 gh:2290
 	if kubeCfg.KubeAPIQPS != newAPIQPS {
 		framework.Failf("Fail to set new kubelet API QPS limit.")
 	}

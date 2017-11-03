@@ -259,7 +259,7 @@ func RunPatch(f cmdutil.Factory, out io.Writer, cmd *cobra.Command, args []strin
 			return err
 		}
 
-		// TODO: if we ever want to go generic, this allows a clean -o yaml without trying to print columns or anything
+		// TODO: if we ever want to go generic, this allows a clean -o yaml without trying to print columns or anything id:726 gh:727
 		// rawExtension := &runtime.Unknown{
 		//	Raw: originalPatchedObjJS,
 		// }

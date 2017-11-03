@@ -226,7 +226,7 @@ type ActionFunc func(TimedValue) (bool, time.Duration)
 // used to identify the minimum time to execute the next item in the
 // queue. The same value is processed only once unless Remove is
 // explicitly called on it (it's done by the cancelPodEviction
-// function in NodeController when Node becomes Ready again) TODO:
+// function in NodeController when Node becomes Ready again) TODO: id:548 gh:549
 // figure out a good way to do garbage collection for all Nodes that
 // were removed from the cluster.
 func (q *RateLimitedTimedQueue) Try(fn ActionFunc) {
@@ -295,7 +295,7 @@ func (q *RateLimitedTimedQueue) SwapLimiter(newQPS float32) {
 		newLimiter = flowcontrol.NewTokenBucketRateLimiter(newQPS, EvictionRateLimiterBurst)
 	}
 	// If we're currently waiting on limiter, we drain the new one - this is a good approach when Burst value is 1
-	// TODO: figure out if we need to support higher Burst values and decide on the drain logic, should we keep:
+	// TODO: figure out if we need to support higher Burst values and decide on the drain logic, should we keep: id:592 gh:593
 	// - saturation (percentage of used tokens)
 	// - number of used tokens
 	// - number of available tokens

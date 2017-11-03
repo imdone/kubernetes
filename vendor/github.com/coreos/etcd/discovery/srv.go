@@ -30,7 +30,7 @@ var (
 )
 
 // SRVGetCluster gets the cluster information via DNS discovery.
-// TODO(barakmich): Currently ignores priority and weight (as they don't make as much sense for a bootstrap)
+// TODO (barakmich): Currently ignores priority and weight (as they don't make as much sense for a bootstrap) id:2616 gh:2627
 // Also doesn't do any lookups for the token (though it could)
 // Also sees each entry as a separate instance.
 func SRVGetCluster(name, dns string, defaultToken string, apurls types.URLs) (string, string, error) {

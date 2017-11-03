@@ -28,7 +28,7 @@ import (
 // Encoder serializes watch.Events into io.Writer. The internal objects
 // are encoded using embedded encoder, and the outer Event is serialized
 // using encoder.
-// TODO: this type is only used by tests
+// TODO: this type is only used by tests id:3583 gh:3598
 type Encoder struct {
 	encoder         streaming.Encoder
 	embeddedEncoder runtime.Encoder
@@ -48,7 +48,7 @@ func (e *Encoder) Encode(event *watch.Event) error {
 	if err != nil {
 		return err
 	}
-	// FIXME: get rid of json.RawMessage.
+	// FIXME: get rid of json.RawMessage. id:3950 gh:3970
 	return e.encoder.Encode(&metav1.WatchEvent{
 		Type:   string(event.Type),
 		Object: runtime.RawExtension{Raw: json.RawMessage(data)},

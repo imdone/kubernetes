@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// TODO(gri) consider making this a separate package outside the go directory.
+// TODO (gri) consider making this a separate package outside the go directory. id:3392 gh:3407
 
 package token
 
@@ -232,7 +232,7 @@ func (f *File) Offset(p Pos) int {
 // p must be a Pos value in that file or NoPos.
 //
 func (f *File) Line(p Pos) int {
-	// TODO(gri) this can be implemented much more efficiently
+	// TODO (gri) this can be implemented much more efficiently id:3701 gh:3716
 	return f.Position(p).Line
 }
 
@@ -420,7 +420,7 @@ func searchInts(a []int, x int) int {
 	// future, but at the moment this change improves the go/printer
 	// benchmark performance by ~30%. This has a direct impact on the
 	// speed of gofmt and thus seems worthwhile (2011-04-29).
-	// TODO(gri): Remove this when compilers have caught up.
+	// TODO (gri): Remove this when compilers have caught up. id:3115 gh:3130
 	i, j := 0, len(a)
 	for i < j {
 		h := i + (j-i)/2 // avoid overflow when computing h

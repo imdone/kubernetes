@@ -87,7 +87,7 @@ func NewCmdPortForward(f cmdutil.Factory, cmdOut, cmdErr io.Writer) *cobra.Comma
 		},
 	}
 	cmd.Flags().StringP("pod", "p", "", "Pod name")
-	// TODO support UID
+	// TODO support UID id:711 gh:712
 	return cmd
 }
 

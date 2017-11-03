@@ -27,7 +27,7 @@ import (
 // generate Swagger API documentation for its models. Please read this PR for more
 // information on the implementation: https://github.com/emicklei/go-restful/pull/215
 //
-// TODOs are ignored from the parser (e.g. TODO(andronat):... || TODO:...) if and only if
+// TODO s are ignored from the parser (e.g. TODO(andronat):... || TODO:...) if and only if id:3152 gh:3167
 // they are on one line! For multiple line or blocks that you want to ignore use ---.
 // Any context after a --- is ignored and not exported to the SwaggerAPI.
 //
@@ -254,7 +254,7 @@ type VolumeSource struct {
 	// to see the host machine. Most containers will NOT need this.
 	// More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
 	// ---
-	// TODO(jonesdl) We need to restrict who can use host directory mounts and who can/can not
+	// TODO (jonesdl) We need to restrict who can use host directory mounts and who can/can not id:3638 gh:3653
 	// mount host directories as read/write.
 	// +optional
 	HostPath *HostPathVolumeSource `json:"hostPath,omitempty" protobuf:"bytes,1,opt,name=hostPath"`
@@ -807,7 +807,7 @@ type RBDVolumeSource struct {
 	// Tip: Ensure that the filesystem type is supported by the host operating system.
 	// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
 	// More info: https://kubernetes.io/docs/concepts/storage/volumes#rbd
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:3412 gh:3427
 	// +optional
 	FSType string `json:"fsType,omitempty" protobuf:"bytes,3,opt,name=fsType"`
 	// The rados pool name.
@@ -851,7 +851,7 @@ type RBDPersistentVolumeSource struct {
 	// Tip: Ensure that the filesystem type is supported by the host operating system.
 	// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
 	// More info: https://kubernetes.io/docs/concepts/storage/volumes#rbd
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:3549 gh:3564
 	// +optional
 	FSType string `json:"fsType,omitempty" protobuf:"bytes,3,opt,name=fsType"`
 	// The rados pool name.
@@ -1016,7 +1016,7 @@ type GCEPersistentDiskVolumeSource struct {
 	// Tip: Ensure that the filesystem type is supported by the host operating system.
 	// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
 	// More info: https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:3740 gh:3755
 	// +optional
 	FSType string `json:"fsType,omitempty" protobuf:"bytes,2,opt,name=fsType"`
 	// The partition in the volume that you want to mount.
@@ -1100,7 +1100,7 @@ type AWSElasticBlockStoreVolumeSource struct {
 	// Tip: Ensure that the filesystem type is supported by the host operating system.
 	// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
 	// More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:3153 gh:3168
 	// +optional
 	FSType string `json:"fsType,omitempty" protobuf:"bytes,2,opt,name=fsType"`
 	// The partition in the volume that you want to mount.
@@ -1227,7 +1227,7 @@ type ISCSIVolumeSource struct {
 	// Tip: Ensure that the filesystem type is supported by the host operating system.
 	// Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
 	// More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:3639 gh:3654
 	// +optional
 	FSType string `json:"fsType,omitempty" protobuf:"bytes,5,opt,name=fsType"`
 	// ReadOnly here will force the ReadOnly setting in VolumeMounts.
@@ -1267,7 +1267,7 @@ type FCVolumeSource struct {
 	// Filesystem type to mount.
 	// Must be a filesystem type supported by the host operating system.
 	// Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
-	// TODO: how do we prevent errors in the filesystem from compromising the machine
+	// TODO: how do we prevent errors in the filesystem from compromising the machine id:3413 gh:3428
 	// +optional
 	FSType string `json:"fsType,omitempty" protobuf:"bytes,3,opt,name=fsType"`
 	// Optional: Defaults to false (read/write). ReadOnly here will force
@@ -2103,7 +2103,7 @@ type Container struct {
 }
 
 // Handler defines a specific action that should be taken
-// TODO: pass structured data to these actions, and document that data here.
+// TODO: pass structured data to these actions, and document that data here. id:3550 gh:3565
 type Handler struct {
 	// One and only one of the following should be specified.
 	// Exec specifies the action to take.
@@ -2114,7 +2114,7 @@ type Handler struct {
 	HTTPGet *HTTPGetAction `json:"httpGet,omitempty" protobuf:"bytes,2,opt,name=httpGet"`
 	// TCPSocket specifies an action involving a TCP port.
 	// TCP hooks not yet supported
-	// TODO: implement a realistic TCP lifecycle hook
+	// TODO: implement a realistic TCP lifecycle hook id:3741 gh:3756
 	// +optional
 	TCPSocket *TCPSocketAction `json:"tcpSocket,omitempty" protobuf:"bytes,3,opt,name=tcpSocket"`
 }
@@ -2227,7 +2227,7 @@ type ContainerStatus struct {
 	RestartCount int32 `json:"restartCount" protobuf:"varint,5,opt,name=restartCount"`
 	// The image the container is running.
 	// More info: https://kubernetes.io/docs/concepts/containers/images
-	// TODO(dchen1107): Which image the container is running with?
+	// TODO (dchen1107): Which image the container is running with? id:3154 gh:3169
 	Image string `json:"image" protobuf:"bytes,6,opt,name=image"`
 	// ImageID of the container's image.
 	ImageID string `json:"imageID" protobuf:"bytes,7,opt,name=imageID"`
@@ -3521,7 +3521,7 @@ type EndpointAddress struct {
 	// or link-local multicast ((224.0.0.0/24).
 	// IPv6 is also accepted but not fully supported on all platforms. Also, certain
 	// kubernetes components, like kube-proxy, are not IPv6 ready.
-	// TODO: This should allow hostname or IP, See #4447.
+	// TODO: This should allow hostname or IP, See #4447. id:3640 gh:3655
 	IP string `json:"ip" protobuf:"bytes,1,opt,name=ip"`
 	// The Hostname of this endpoint
 	// +optional
@@ -4124,7 +4124,7 @@ type PodLogOptions struct {
 
 // PodAttachOptions is the query options to a Pod's remote attach call.
 // ---
-// TODO: merge w/ PodExecOptions below for stdin, stdout, etc
+// TODO: merge w/ PodExecOptions below for stdin, stdout, etc id:3414 gh:3430
 // and also when we cut V2, we should export a "StreamOptions" or somesuch that contains Stdin, Stdout, Stder and TTY
 type PodAttachOptions struct {
 	metav1.TypeMeta `json:",inline"`
@@ -4161,7 +4161,7 @@ type PodAttachOptions struct {
 
 // PodExecOptions is the query options to a Pod's remote exec call.
 // ---
-// TODO: This is largely identical to PodAttachOptions above, make sure they stay in sync and see about merging
+// TODO: This is largely identical to PodAttachOptions above, make sure they stay in sync and see about merging id:3551 gh:3566
 // and also when we cut V2, we should export a "StreamOptions" or somesuch that contains Stdin, Stdout, Stder and TTY
 type PodExecOptions struct {
 	metav1.TypeMeta `json:",inline"`
@@ -4283,7 +4283,7 @@ type ObjectReference struct {
 	// the event) or if no container name is specified "spec.containers[2]" (container with
 	// index 2 in this pod). This syntax is chosen only to have some well-defined way of
 	// referencing a part of an object.
-	// TODO: this design is not final and this field is subject to change in the future.
+	// TODO: this design is not final and this field is subject to change in the future. id:3742 gh:3757
 	// +optional
 	FieldPath string `json:"fieldPath,omitempty" protobuf:"bytes,7,opt,name=fieldPath"`
 }
@@ -4293,7 +4293,7 @@ type ObjectReference struct {
 type LocalObjectReference struct {
 	// Name of the referent.
 	// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-	// TODO: Add other useful fields. apiVersion, kind, uid?
+	// TODO: Add other useful fields. apiVersion, kind, uid? id:3155 gh:3170
 	// +optional
 	Name string `json:"name,omitempty" protobuf:"bytes,1,opt,name=name"`
 }
@@ -4330,7 +4330,7 @@ const (
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 // Event is a report of an event somewhere in the cluster.
-// TODO: Decide whether to store these separately or with the object they apply to.
+// TODO: Decide whether to store these separately or with the object they apply to. id:3641 gh:3656
 type Event struct {
 	metav1.TypeMeta `json:",inline"`
 	// Standard object's metadata.
@@ -4342,12 +4342,12 @@ type Event struct {
 
 	// This should be a short, machine understandable string that gives the reason
 	// for the transition into the object's current status.
-	// TODO: provide exact specification for format.
+	// TODO: provide exact specification for format. id:3415 gh:3431
 	// +optional
 	Reason string `json:"reason,omitempty" protobuf:"bytes,3,opt,name=reason"`
 
 	// A human-readable description of the status of this operation.
-	// TODO: decide on maximum length.
+	// TODO: decide on maximum length. id:3552 gh:3567
 	// +optional
 	Message string `json:"message,omitempty" protobuf:"bytes,4,opt,name=message"`
 
@@ -4679,7 +4679,7 @@ const (
 	// Required fields:
 	// - Secret.Data["tls.key"] - TLS private key.
 	//   Secret.Data["tls.crt"] - TLS certificate.
-	// TODO: Consider supporting different formats, specifying CA/destinationCA.
+	// TODO: Consider supporting different formats, specifying CA/destinationCA. id:3743 gh:3759
 	SecretTypeTLS SecretType = "kubernetes.io/tls"
 
 	// TLSCertKey is the key for tls certificates in a TLS secert.

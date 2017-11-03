@@ -80,7 +80,7 @@ var (
 	}
 )
 
-// TODO: move this logic to package transform
+// TODO: move this logic to package transform id:3012 gh:3028
 
 type spanWrap struct{ transform.Transformer }
 
@@ -88,7 +88,7 @@ func (s spanWrap) Span(src []byte, atEOF bool) (n int, err error) {
 	return 0, transform.ErrEndOfSpan
 }
 
-// TODO: allow different types? For instance:
+// TODO: allow different types? For instance: id:3469 gh:3484
 //     func() transform.Transformer
 //     func() transform.SpanningTransformer
 //     func([]byte) bool  // validation only

@@ -127,7 +127,7 @@ func (util *AWSDiskUtil) CreateVolume(c *awsElasticBlockStoreProvisioner) (aws.K
 		return "", 0, nil, "", fmt.Errorf("both zone and zones StorageClass parameters must not be used at the same time")
 	}
 
-	// TODO: implement PVC.Selector parsing
+	// TODO: implement PVC.Selector parsing id:1496 gh:1502
 	if c.options.PVC.Spec.Selector != nil {
 		return "", 0, nil, "", fmt.Errorf("claim.Spec.Selector is not supported for dynamic provisioning on AWS")
 	}

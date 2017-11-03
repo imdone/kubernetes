@@ -33,7 +33,7 @@ mkdir -p "$cert_dir"
 
 use_cn=false
 
-# TODO: Add support for discovery on other providers?
+# TODO: Add support for discovery on other providers? id:94 gh:95
 if [ "$cert_ip" == "_use_gce_external_ip_" ]; then
   cert_ip=$(curl -s -H Metadata-Flavor:Google http://metadata.google.internal./computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip)
 fi
@@ -65,7 +65,7 @@ tmpdir=$(mktemp -d -t kubernetes_cacert.XXXXXX)
 trap 'rm -rf "${tmpdir}"' EXIT
 cd "${tmpdir}"
 
-# TODO: For now, this is a patched tool that makes subject-alt-name work, when
+# TODO: For now, this is a patched tool that makes subject-alt-name work, when id:54 gh:55
 # the fix is upstream  move back to the upstream easyrsa.  This is cached in GCS
 # but is originally taken from:
 #   https://github.com/brendandburns/easy-rsa/archive/master.tar.gz

@@ -20,7 +20,7 @@ import (
 	"golang.org/x/text/transform"
 )
 
-// TODO:
+// TODO: id:3290 gh:3305
 // - There seems to be some inconsistency in when decoders return errors
 //   and when not. Also documentation seems to suggest they shouldn't return
 //   errors at all (except for UTF-16).
@@ -240,7 +240,7 @@ type errorHandler struct {
 	handler func(dst []byte, r rune, err repertoireError) (n int, ok bool)
 }
 
-// TODO: consider making this error public in some form.
+// TODO: consider making this error public in some form. id:3519 gh:3532
 type repertoireError interface {
 	Replacement() byte
 }

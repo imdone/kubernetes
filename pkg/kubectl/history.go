@@ -70,7 +70,7 @@ type DeploymentHistoryViewer struct {
 }
 
 // ViewHistory returns a revision-to-replicaset map as the revision history of a deployment
-// TODO: this should be a describer
+// TODO: this should be a describer id:750 gh:751
 func (h *DeploymentHistoryViewer) ViewHistory(namespace, name string, revision int64) (string, error) {
 	versionedExtensionsClient := versionedExtensionsClientV1beta1(h.c)
 	deployment, err := versionedExtensionsClient.Deployments(namespace).Get(name, metav1.GetOptions{})
@@ -152,7 +152,7 @@ type DaemonSetHistoryViewer struct {
 }
 
 // ViewHistory returns a revision-to-history map as the revision history of a deployment
-// TODO: this should be a describer
+// TODO: this should be a describer id:723 gh:724
 func (h *DaemonSetHistoryViewer) ViewHistory(namespace, name string, revision int64) (string, error) {
 	versionedAppsClient := versionedAppsClientV1beta1(h.c)
 	versionedExtensionsClient := versionedExtensionsClientV1beta1(h.c)
@@ -162,7 +162,7 @@ func (h *DaemonSetHistoryViewer) ViewHistory(namespace, name string, revision in
 	}
 	historyInfo := make(map[int64]*appsv1beta1.ControllerRevision)
 	for _, history := range allHistory {
-		// TODO: for now we assume revisions don't overlap, we may need to handle it
+		// TODO: for now we assume revisions don't overlap, we may need to handle it id:764 gh:765
 		historyInfo[history.Revision] = history
 	}
 
@@ -227,8 +227,8 @@ func getOwner(revision apps.ControllerRevision) *metav1.OwnerReference {
 }
 
 // ViewHistory returns a list of the revision history of a statefulset
-// TODO: this should be a describer
-// TODO: needs to implement detailed revision view
+// TODO: this should be a describer id:793 gh:794
+// TODO: needs to implement detailed revision view id:806 gh:807
 func (h *StatefulSetHistoryViewer) ViewHistory(namespace, name string, revision int64) (string, error) {
 
 	sts, err := h.c.Apps().StatefulSets(namespace).Get(name, metav1.GetOptions{})
@@ -332,7 +332,7 @@ func applyHistory(ds *extensionsv1beta1.DaemonSet, history *appsv1beta1.Controll
 	return clone, nil
 }
 
-// TODO: copied here until this becomes a describer
+// TODO: copied here until this becomes a describer id:751 gh:752
 func tabbedString(f func(io.Writer) error) (string, error) {
 	out := new(tabwriter.Writer)
 	buf := &bytes.Buffer{}

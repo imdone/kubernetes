@@ -455,18 +455,18 @@ func (s *Server) getContainerLogs(request *restful.Request, response *restful.Re
 	containerName := request.PathParameter("containerName")
 
 	if len(podID) == 0 {
-		// TODO: Why return JSON when the rest return plaintext errors?
-		// TODO: Why return plaintext errors?
+		// TODO: Why return JSON when the rest return plaintext errors? id:1004 gh:1010
+		// TODO: Why return plaintext errors? id:1199 gh:1205
 		response.WriteError(http.StatusBadRequest, fmt.Errorf(`{"message": "Missing podID."}`))
 		return
 	}
 	if len(containerName) == 0 {
-		// TODO: Why return JSON when the rest return plaintext errors?
+		// TODO: Why return JSON when the rest return plaintext errors? id:1042 gh:1048
 		response.WriteError(http.StatusBadRequest, fmt.Errorf(`{"message": "Missing container name."}`))
 		return
 	}
 	if len(podNamespace) == 0 {
-		// TODO: Why return JSON when the rest return plaintext errors?
+		// TODO: Why return JSON when the rest return plaintext errors? id:1139 gh:1145
 		response.WriteError(http.StatusBadRequest, fmt.Errorf(`{"message": "Missing podNamespace."}`))
 		return
 	}
@@ -525,7 +525,7 @@ func (s *Server) getContainerLogs(request *restful.Request, response *restful.Re
 	fw := flushwriter.Wrap(response.ResponseWriter)
 	// Byte limit logic is already implemented in kuberuntime. However, we still need this for
 	// old runtime integration.
-	// TODO(random-liu): Remove this once we switch to CRI integration.
+	// TODO (random-liu): Remove this once we switch to CRI integration. id:1078 gh:1084
 	if logOptions.LimitBytes != nil {
 		fw = limitwriter.New(fw, *logOptions.LimitBytes)
 	}
@@ -545,9 +545,9 @@ func encodePods(pods []*v1.Pod) (data []byte, err error) {
 	for _, pod := range pods {
 		podList.Items = append(podList.Items, *pod)
 	}
-	// TODO: this needs to be parameterized to the kubelet, not hardcoded. Depends on Kubelet
+	// TODO: this needs to be parameterized to the kubelet, not hardcoded. Depends on Kubelet id:1005 gh:1011
 	//   as API server refactor.
-	// TODO: Locked to v1, needs to be made generic
+	// TODO: Locked to v1, needs to be made generic id:1200 gh:1206
 	codec := legacyscheme.Codecs.LegacyCodec(schema.GroupVersion{Group: v1.GroupName, Version: "v1"})
 	return runtime.Encode(codec, podList)
 }

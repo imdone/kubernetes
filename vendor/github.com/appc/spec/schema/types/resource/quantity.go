@@ -71,9 +71,9 @@ import (
 //   1.5 will be serialized as "1500m"
 //   1.5Gi will be serialized as "1536Mi"
 //
-// NOTE: We reserve the right to amend this canonical format, perhaps to
+// NOTE: We reserve the right to amend this canonical format, perhaps to id:2745 gh:2760
 //   allow 1.5 to be canonical.
-// TODO: Remove above disclaimer after all bikeshedding about format is over,
+// TODO: Remove above disclaimer after all bikeshedding about format is over, id:2488 gh:2503
 //   or after March 2015.
 //
 // Note that the quantity will NEVER be internally represented by a
@@ -225,7 +225,7 @@ Num:
 				break Denom
 			}
 		}
-		// TODO: we currently allow 1.G, but we may not want to in the future.
+		// TODO: we currently allow 1.G, but we may not want to in the future. id:2723 gh:2738
 		// if len(denom) == 0 {
 		// 	err = ErrFormatWrong
 		// 	return
@@ -370,7 +370,7 @@ func ParseQuantity(str string) (Quantity, error) {
 	}
 
 	// The max is just a simple cap.
-	// TODO: this prevents accumulating quantities greater than int64, for instance quota across a cluster
+	// TODO: this prevents accumulating quantities greater than int64, for instance quota across a cluster id:2450 gh:2465
 	if format == BinarySI && amount.Cmp(maxAllowed.Dec) > 0 {
 		amount.Set(maxAllowed.Dec)
 	}
@@ -417,7 +417,7 @@ func (q *Quantity) CanonicalizeBytes(out []byte) (result, suffix []byte) {
 		format = DecimalExponent
 	}
 
-	// TODO: If BinarySI formatting is requested but would cause rounding, upgrade to
+	// TODO: If BinarySI formatting is requested but would cause rounding, upgrade to id:2560 gh:2575
 	// one of the other formats.
 	switch format {
 	case DecimalExponent, DecimalSI:
@@ -619,7 +619,7 @@ func (q Quantity) MarshalJSON() ([]byte, error) {
 }
 
 // UnmarshalJSON implements the json.Unmarshaller interface.
-// TODO: Remove support for leading/trailing whitespace
+// TODO: Remove support for leading/trailing whitespace id:2817 gh:2832
 func (q *Quantity) UnmarshalJSON(value []byte) error {
 	l := len(value)
 	if l == 4 && bytes.Equal(value, []byte("null")) {

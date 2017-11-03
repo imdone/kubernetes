@@ -27,7 +27,7 @@ import (
 // IsListType returns true if the provided Object has a slice called Items
 func IsListType(obj runtime.Object) bool {
 	// if we're a runtime.Unstructured, check whether this is a list.
-	// TODO: refactor GetItemsPtr to use an interface that returns []runtime.Object
+	// TODO: refactor GetItemsPtr to use an interface that returns []runtime.Object id:3562 gh:3577
 	if unstructured, ok := obj.(runtime.Unstructured); ok {
 		return unstructured.IsList()
 	}
@@ -70,7 +70,7 @@ func EachListItem(obj runtime.Object, fn func(runtime.Object) error) error {
 	if unstructured, ok := obj.(runtime.Unstructured); ok {
 		return unstructured.EachListItem(fn)
 	}
-	// TODO: Change to an interface call?
+	// TODO: Change to an interface call? id:3753 gh:3768
 	itemsPtr, err := GetItemsPtr(obj)
 	if err != nil {
 		return err
@@ -138,7 +138,7 @@ func ExtractList(obj runtime.Object) ([]runtime.Object, error) {
 			case item.Object != nil:
 				list[i] = item.Object
 			case item.Raw != nil:
-				// TODO: Set ContentEncoding and ContentType correctly.
+				// TODO: Set ContentEncoding and ContentType correctly. id:3228 gh:3243
 				list[i] = &runtime.Unknown{Raw: item.Raw}
 			default:
 				list[i] = nil

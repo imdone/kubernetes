@@ -17,7 +17,7 @@
 # Call this to dump all master and node logs into the folder specified in $1
 # (defaults to _artifacts). Only works if the provider supports SSH.
 
-# TODO(shyamjvs): This script should be moved to test/e2e which is where it ideally belongs.
+# TODO (shyamjvs): This script should be moved to test/e2e which is where it ideally belongs. id:149 gh:150
 set -o errexit
 set -o nounset
 set -o pipefail
@@ -56,7 +56,7 @@ readonly systemd_services="kubelet docker"
 # file descriptors for large clusters.
 readonly max_scp_processes=25
 
-# TODO: Get rid of all the sourcing of bash dependencies eventually.
+# TODO: Get rid of all the sourcing of bash dependencies eventually. id:119 gh:120
 function setup() {
   KUBE_ROOT=$(dirname "${BASH_SOURCE}")/../..
   if [[ -z "${use_custom_instance_list}" ]]; then

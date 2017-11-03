@@ -36,7 +36,7 @@ func (re *RawExtension) UnmarshalJSON(in []byte) error {
 // http://stackoverflow.com/questions/21390979/custom-marshaljson-never-gets-called-in-go
 func (re RawExtension) MarshalJSON() ([]byte, error) {
 	if re.Raw == nil {
-		// TODO: this is to support legacy behavior of JSONPrinter and YAMLPrinter, which
+		// TODO: this is to support legacy behavior of JSONPrinter and YAMLPrinter, which id:3770 gh:3785
 		// expect to call json.Marshal on arbitrary versioned objects (even those not in
 		// the scheme). pkg/kubectl/resource#AsVersionedObjects and its interaction with
 		// kubectl get on objects not in the scheme needs to be updated to ensure that the
@@ -46,6 +46,6 @@ func (re RawExtension) MarshalJSON() ([]byte, error) {
 		}
 		return []byte("null"), nil
 	}
-	// TODO: Check whether ContentType is actually JSON before returning it.
+	// TODO: Check whether ContentType is actually JSON before returning it. id:3506 gh:3521
 	return re.Raw, nil
 }

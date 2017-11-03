@@ -186,7 +186,7 @@ func (c *SSHTunneler) installSSHKeySyncLoop(user, publicKeyfile string) {
 // nodesSyncLoop lists nodes every 15 seconds, calling Update() on the TunnelList
 // each time (Update() is a noop if no changes are necessary).
 func (c *SSHTunneler) nodesSyncLoop() {
-	// TODO (cjcullen) make this watch.
+	// TODO (cjcullen) make this watch. id:1230 gh:1236
 	go wait.Until(func() {
 		addrs, err := c.getAddresses()
 		glog.V(4).Infof("Calling update w/ addrs: %v", addrs)

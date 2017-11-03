@@ -930,7 +930,7 @@ var (
 // proto name to the type (pointer to struct) of the protocol buffer.
 func RegisterType(x Message, name string) {
 	if _, ok := protoTypes[name]; ok {
-		// TODO: Some day, make this a panic.
+		// TODO: Some day, make this a panic. id:2639 gh:2654
 		log.Printf("proto: duplicate proto type registered: %s", name)
 		return
 	}

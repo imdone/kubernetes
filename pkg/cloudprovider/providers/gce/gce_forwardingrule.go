@@ -72,7 +72,7 @@ func (gce *GCECloud) GetGlobalForwardingRule(name string) (*compute.ForwardingRu
 // ListGlobalForwardingRules lists all GlobalForwardingRules in the project.
 func (gce *GCECloud) ListGlobalForwardingRules() (*compute.ForwardingRuleList, error) {
 	mc := newForwardingRuleMetricContext("list", "")
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:504 gh:505
 	v, err := gce.service.GlobalForwardingRules.List(gce.projectID).Do()
 	return v, mc.Observe(err)
 }
@@ -94,7 +94,7 @@ func (gce *GCECloud) GetAlphaRegionForwardingRule(name, region string) (*compute
 // ListRegionForwardingRules lists all RegionalForwardingRules in the project & region.
 func (gce *GCECloud) ListRegionForwardingRules(region string) (*compute.ForwardingRuleList, error) {
 	mc := newForwardingRuleMetricContext("list", region)
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:474 gh:476
 	v, err := gce.service.ForwardingRules.List(gce.projectID, region).Do()
 	return v, mc.Observe(err)
 }
@@ -102,7 +102,7 @@ func (gce *GCECloud) ListRegionForwardingRules(region string) (*compute.Forwardi
 // ListRegionForwardingRules lists all RegionalForwardingRules in the project & region.
 func (gce *GCECloud) ListAlphaRegionForwardingRules(region string) (*computealpha.ForwardingRuleList, error) {
 	mc := newForwardingRuleMetricContextWithVersion("list", region, computeAlphaVersion)
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:451 gh:452
 	v, err := gce.serviceAlpha.ForwardingRules.List(gce.projectID, region).Do()
 	return v, mc.Observe(err)
 }
@@ -142,7 +142,7 @@ func (gce *GCECloud) DeleteRegionForwardingRule(name, region string) error {
 	return gce.waitForRegionOp(op, region, mc)
 }
 
-// TODO(#51665): retire this function once Network Tiers becomes Beta in GCP.
+// TODO (#51665): retire this function once Network Tiers becomes Beta in GCP. id:464 gh:465
 func (gce *GCECloud) getNetworkTierFromForwardingRule(name, region string) (string, error) {
 	if !gce.AlphaFeatureGate.Enabled(AlphaFeatureNetworkTiers) {
 		return NetworkTierDefault.ToGCEValue(), nil

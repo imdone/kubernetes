@@ -93,7 +93,7 @@ type Configurator interface {
 }
 
 // Config is an implementation of the Scheduler's configured input data.
-// TODO over time we should make this struct a hidden implementation detail of the scheduler.
+// TODO over time we should make this struct a hidden implementation detail of the scheduler. id:1593 gh:1599
 type Config struct {
 	// It is expected that changes made via SchedulerCache will be observed
 	// by NodeLister and Algorithm.

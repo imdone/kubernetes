@@ -71,7 +71,7 @@ func CreatePodTemplate(template v1.PodTemplateSpec, generation int64, hash strin
 		Effect:   v1.TaintEffectNoSchedule,
 	})
 
-	// TODO(#48843) OutOfDisk taints will be removed in 1.10
+	// TODO (#48843) OutOfDisk taints will be removed in 1.10 id:461 gh:462
 	if utilfeature.DefaultFeatureGate.Enabled(features.ExperimentalCriticalPodAnnotation) &&
 		kubelettypes.IsCritical(newTemplate.Namespace, newTemplate.Annotations) {
 		v1helper.AddOrUpdateTolerationInPodSpec(&newTemplate.Spec, &v1.Toleration{
@@ -87,7 +87,7 @@ func CreatePodTemplate(template v1.PodTemplateSpec, generation int64, hash strin
 		extensions.DaemonSetTemplateGenerationKey,
 		templateGenerationStr,
 	)
-	// TODO: do we need to validate if the DaemonSet is RollingUpdate or not?
+	// TODO: do we need to validate if the DaemonSet is RollingUpdate or not? id:611 gh:612
 	if len(hash) > 0 {
 		newTemplate.ObjectMeta.Labels[extensions.DefaultDaemonSetUniqueLabelKey] = hash
 	}

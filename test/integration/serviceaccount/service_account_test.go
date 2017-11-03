@@ -348,7 +348,7 @@ func startServiceAccountTestServer(t *testing.T) (*clientset.Clientset, restclie
 	// Anonymous client config
 	clientConfig := restclient.Config{Host: apiServer.URL, ContentConfig: restclient.ContentConfig{GroupVersion: testapi.Groups[v1.GroupName].GroupVersion()}}
 	// Root client
-	// TODO: remove rootClient after we refactor pkg/admission to use the clientset.
+	// TODO: remove rootClient after we refactor pkg/admission to use the clientset. id:2420 gh:2435
 	rootClientset := clientset.NewForConfigOrDie(&restclient.Config{Host: apiServer.URL, ContentConfig: restclient.ContentConfig{GroupVersion: testapi.Groups[v1.GroupName].GroupVersion()}, BearerToken: rootToken})
 	internalRootClientset := internalclientset.NewForConfigOrDie(&restclient.Config{Host: apiServer.URL, ContentConfig: restclient.ContentConfig{GroupVersion: testapi.Groups[v1.GroupName].GroupVersion()}, BearerToken: rootToken})
 	// Set up two authenticators:

@@ -32,7 +32,7 @@ import (
 	"k8s.io/kubernetes/pkg/registry/registrytest"
 )
 
-// TODO: allow for global factory override
+// TODO: allow for global factory override id:1387 gh:1393
 func newStorage(t *testing.T) (*REST, *StatusREST, *etcdtesting.EtcdTestServer) {
 	etcdStorage, server := registrytest.NewEtcdStorage(t, batch.GroupName)
 	restOptions := generic.RESTOptions{StorageConfig: etcdStorage, Decorator: generic.UndecoratedStorage, DeleteCollectionWorkers: 1}
@@ -182,4 +182,4 @@ func TestWatch(t *testing.T) {
 	)
 }
 
-// TODO: test update /status
+// TODO: test update /status id:1309 gh:1315

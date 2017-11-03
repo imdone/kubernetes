@@ -414,7 +414,7 @@ func (c *configFactory) onServiceAdd(obj interface{}) {
 
 func (c *configFactory) onServiceUpdate(oldObj interface{}, newObj interface{}) {
 	if c.enableEquivalenceClassCache {
-		// TODO(resouer) We may need to invalidate this for specified group of pods only
+		// TODO (resouer) We may need to invalidate this for specified group of pods only id:1451 gh:1457
 		oldService := oldObj.(*v1.Service)
 		newService := newObj.(*v1.Service)
 		if !reflect.DeepEqual(oldService.Spec.Selector, newService.Spec.Selector) {
@@ -462,7 +462,7 @@ func (c *configFactory) addPodToCache(obj interface{}) {
 	if err := c.schedulerCache.AddPod(pod); err != nil {
 		glog.Errorf("scheduler cache AddPod failed: %v", err)
 	}
-	// NOTE: Updating equivalence cache of addPodToCache has been
+	// NOTE: Updating equivalence cache of addPodToCache has been id:1470 gh:1476
 	// handled optimistically in InvalidateCachedPredicateItemForPodAdd.
 }
 
@@ -535,7 +535,7 @@ func (c *configFactory) invalidateCachedPredicatesOnDeletePod(pod *v1.Pod) {
 		c.equivalencePodCache.InvalidateCachedPredicateItemForPodAdd(pod, pod.Spec.NodeName)
 		// MatchInterPodAffinity need to be reconsidered for this node,
 		// as well as all nodes in its same failure domain.
-		// TODO(resouer) can we just do this for nodes in the same failure domain
+		// TODO (resouer) can we just do this for nodes in the same failure domain id:1618 gh:1624
 		c.equivalencePodCache.InvalidateCachedPredicateItemOfAllNodes(
 			matchInterPodAffinitySet)
 
@@ -561,7 +561,7 @@ func (c *configFactory) addNodeToCache(obj interface{}) {
 		glog.Errorf("scheduler cache AddNode failed: %v", err)
 	}
 
-	// NOTE: add a new node does not affect existing predicates in equivalence cache
+	// NOTE: add a new node does not affect existing predicates in equivalence cache id:1607 gh:1613
 }
 
 func (c *configFactory) updateNodeInCache(oldObj, newObj interface{}) {
@@ -586,7 +586,7 @@ func (c *configFactory) updateNodeInCache(oldObj, newObj interface{}) {
 func (c *configFactory) invalidateCachedPredicatesOnNodeUpdate(newNode *v1.Node, oldNode *v1.Node) {
 	if c.enableEquivalenceClassCache {
 		// Begin to update equivalence cache based on node update
-		// TODO(resouer): think about lazily initialize this set
+		// TODO (resouer): think about lazily initialize this set id:1592 gh:1598
 		invalidPredicates := sets.NewString()
 
 		if !reflect.DeepEqual(oldNode.Status.Allocatable, newNode.Status.Allocatable) {

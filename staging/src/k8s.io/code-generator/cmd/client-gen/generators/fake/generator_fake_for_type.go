@@ -240,7 +240,7 @@ func (g *genFakeForType) GenerateType(c *generator.Context, t *types.Type, w io.
 			}
 		}
 
-		// TODO: Figure out schemantic for watching a sub-resource.
+		// TODO: Figure out schemantic for watching a sub-resource. id:3961 gh:3981
 		if e.HasVerb("watch") {
 			sw.Do(adjustTemplate(e.VerbName, e.VerbType, watchTemplate), m)
 		}
@@ -261,7 +261,7 @@ func (g *genFakeForType) GenerateType(c *generator.Context, t *types.Type, w io.
 			}
 		}
 
-		// TODO: Figure out schemantic for deleting a sub-resource (what arguments
+		// TODO: Figure out schemantic for deleting a sub-resource (what arguments id:4058 gh:4078
 		// are passed, does it need two names? etc.
 		if e.HasVerb("delete") {
 			sw.Do(adjustTemplate(e.VerbName, e.VerbType, deleteTemplate), m)
@@ -276,7 +276,7 @@ func (g *genFakeForType) GenerateType(c *generator.Context, t *types.Type, w io.
 }
 
 // adjustTemplate adjust the origin verb template using the expansion name.
-// TODO: Make the verbs in templates parametrized so the strings.Replace() is
+// TODO: Make the verbs in templates parametrized so the strings.Replace() is id:3595 gh:3610
 // not needed.
 func adjustTemplate(name, verbType, template string) string {
 	return strings.Replace(template, " "+strings.Title(verbType), " "+name, -1)

@@ -29,7 +29,7 @@ func (v *ConfigValidator) rootless(config *configs.Config) error {
 		return err
 	}
 
-	// XXX: We currently can't verify the user config at all, because
+	// XXX: We currently can't verify the user config at all, because id:3197 gh:3212
 	//      configs.Config doesn't store the user-related configs. So this
 	//      has to be verified by setupUser() in init_linux.go.
 
@@ -96,7 +96,7 @@ func rootlessCgroup(config *configs.Config) error {
 // the rights to do. In addition, it makes sure that no mount has a `uid=` or
 // `gid=` option that doesn't resolve to root.
 func rootlessMount(config *configs.Config) error {
-	// XXX: We could whitelist allowed devices at this point, but I'm not
+	// XXX: We could whitelist allowed devices at this point, but I'm not id:2775 gh:2790
 	//      convinced that's a good idea. The kernel is the best arbiter of
 	//      access control.
 

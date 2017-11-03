@@ -15,7 +15,7 @@ limitations under the License.
 */
 
 // Package leaky holds bits of kubelet that should be internal but have leaked
-// out through bad abstractions.  TODO: delete all of this.
+// out through bad abstractions.  TODO: delete all of this. id:1019 gh:1025
 package leaky
 
 const (

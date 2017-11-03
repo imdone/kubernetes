@@ -131,7 +131,7 @@ func newHTTP2Server(conn net.Conn, config *ServerConfig) (_ ServerTransport, err
 	framer := newFramer(conn)
 	// Send initial settings as connection preface to client.
 	var settings []http2.Setting
-	// TODO(zhaoq): Have a better way to signal "no limit" because 0 is
+	// TODO (zhaoq): Have a better way to signal "no limit" because 0 is id:3698 gh:3713
 	// permitted in the HTTP2 spec.
 	maxStreams := config.MaxStreams
 	if maxStreams == 0 {
@@ -277,7 +277,7 @@ func (t *http2Server) operateHeaders(frame *http2.MetaHeadersFrame, handle func(
 		}
 		s.ctx, err = t.inTapHandle(s.ctx, info)
 		if err != nil {
-			// TODO: Log the real error.
+			// TODO: Log the real error. id:3112 gh:3127
 			t.controlBuf.put(&resetStream{s.id, http2.ErrCodeRefusedStream})
 			return
 		}
@@ -399,7 +399,7 @@ func (t *http2Server) HandleStreams(handle func(*Stream), traceCtx func(context.
 		case *http2.WindowUpdateFrame:
 			t.handleWindowUpdate(frame)
 		case *http2.GoAwayFrame:
-			// TODO: Handle GoAway from the client appropriately.
+			// TODO: Handle GoAway from the client appropriately. id:3575 gh:3590
 		default:
 			grpclog.Printf("transport: http2Server.HandleStreams found unhandled frame type %v.", frame)
 		}
@@ -480,7 +480,7 @@ func (t *http2Server) handleData(f *http2.DataFrame) {
 			}
 		}
 		s.mu.Unlock()
-		// TODO(bradfitz, zhaoq): A copy is required here because there is no
+		// TODO (bradfitz, zhaoq): A copy is required here because there is no id:3399 gh:3414
 		// guarantee f.Data() is consumed before the arrival of next frame.
 		// Can this copy be eliminated?
 		if len(f.Data()) > 0 {
@@ -669,7 +669,7 @@ func (t *http2Server) WriteHeader(s *Stream, md metadata.MD) error {
 
 // WriteStatus sends stream status to the client and terminates the stream.
 // There is no further I/O operations being able to perform on this stream.
-// TODO(zhaoq): Now it indicates the end of entire stream. Revisit if early
+// TODO (zhaoq): Now it indicates the end of entire stream. Revisit if early id:3390 gh:3405
 // OK is adopted.
 func (t *http2Server) WriteStatus(s *Stream, st *status.Status) error {
 	var headersSent, hasHeader bool
@@ -709,7 +709,7 @@ func (t *http2Server) WriteStatus(s *Stream, st *status.Status) error {
 	if p := st.Proto(); p != nil && len(p.Details) > 0 {
 		stBytes, err := proto.Marshal(p)
 		if err != nil {
-			// TODO: return error instead, when callers are able to handle it.
+			// TODO: return error instead, when callers are able to handle it. id:3699 gh:3714
 			panic(err)
 		}
 
@@ -745,7 +745,7 @@ func (t *http2Server) WriteStatus(s *Stream, st *status.Status) error {
 // Write converts the data into HTTP2 data frame and sends it out. Non-nil error
 // is returns if it fails (e.g., framing error, transport error).
 func (t *http2Server) Write(s *Stream, data []byte, opts *Options) (err error) {
-	// TODO(zhaoq): Support multi-writers for a single stream.
+	// TODO (zhaoq): Support multi-writers for a single stream. id:3113 gh:3128
 	var writeHeaderFrame bool
 	s.mu.Lock()
 	if s.state == streamDone {
@@ -867,7 +867,7 @@ func (t *http2Server) keepalive() {
 	maxIdle := time.NewTimer(t.kp.MaxConnectionIdle)
 	maxAge := time.NewTimer(t.kp.MaxConnectionAge)
 	keepalive := time.NewTimer(t.kp.Time)
-	// NOTE: All exit paths of this function should reset their
+	// NOTE: All exit paths of this function should reset their id:3576 gh:3591
 	// respecitve timers. A failure to do so will cause the
 	// following clean-up to deadlock and eventually leak.
 	defer func() {
@@ -994,7 +994,7 @@ func (t *http2Server) controller() {
 }
 
 // Close starts shutting down the http2Server transport.
-// TODO(zhaoq): Now the destruction is not blocked on any pending streams. This
+// TODO (zhaoq): Now the destruction is not blocked on any pending streams. This id:3400 gh:3415
 // could cause some resource issue. Revisit this later.
 func (t *http2Server) Close() (err error) {
 	t.mu.Lock()

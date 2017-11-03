@@ -127,7 +127,7 @@ func NewProxyServer(config *componentconfig.KubeProxyConfiguration, cleanupAndEx
 			net.ParseIP(config.BindAddress),
 			netshInterface,
 			*utilnet.ParsePortRangeOrDie(config.PortRange),
-			// TODO @pires replace below with default values, if applicable
+			// TODO @pires replace below with default values, if applicable id:130 gh:131
 			config.IPTables.SyncPeriod.Duration,
 			config.UDPIdleTimeout.Duration,
 		)

@@ -22,7 +22,7 @@ import (
 )
 
 var (
-	// TODO(yifan): Maybe set the them as parameters for NewCache().
+	// TODO (yifan): Maybe set the them as parameters for NewCache(). id:841 gh:842
 	defaultCachePeriod = time.Second * 2
 )
 

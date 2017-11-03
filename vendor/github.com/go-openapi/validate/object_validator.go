@@ -41,7 +41,7 @@ func (o *objectValidator) SetPath(path string) {
 }
 
 func (o *objectValidator) Applies(source interface{}, kind reflect.Kind) bool {
-	// TODO: this should also work for structs
+	// TODO: this should also work for structs id:2796 gh:2811
 	// there is a problem in the type validator where it will be unhappy about null values
 	// so that requires more testing
 	r := reflect.TypeOf(source) == specSchemaType && (kind == reflect.Map || kind == reflect.Struct)

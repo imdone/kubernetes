@@ -31,7 +31,7 @@ source "${KUBE_ROOT}/hack/lib/init.sh"
 KUBECTL="${KUBE_OUTPUT_HOSTBIN}/kubectl"
 
 # List of resources to be updated.
-# TODO: Get this list of resources from server once
+# TODO: Get this list of resources from server once id:152 gh:153
 # http://issue.k8s.io/2057 is fixed.
 declare -a resources=(
     "endpoints"
@@ -70,7 +70,7 @@ do
   for namespace in "${namespaces[@]}"
   do
     # If get fails, assume it's because the resource hasn't been installed in the apiserver.
-    # TODO hopefully we can remove this once we use dynamic discovery of gettable/updateable
+    # TODO hopefully we can remove this once we use dynamic discovery of gettable/updateable id:122 gh:123
     # resources.
     set +e
     instances=( $("${KUBECTL}" get "${resource}" --namespace="${namespace}" -o go-template="{{range.items}}{{.metadata.name}} {{end}}"))

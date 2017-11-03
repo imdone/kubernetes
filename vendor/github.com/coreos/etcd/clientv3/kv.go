@@ -139,7 +139,7 @@ func (kv *kv) Do(ctx context.Context, op Op) (OpResponse, error) {
 func (kv *kv) do(ctx context.Context, op Op) (OpResponse, error) {
 	var err error
 	switch op.t {
-	// TODO: handle other ops
+	// TODO: handle other ops id:2755 gh:2770
 	case tRange:
 		var resp *pb.RangeResponse
 		resp, err = kv.remote.Range(ctx, op.toRangeRequest(), grpc.FailFast(false))

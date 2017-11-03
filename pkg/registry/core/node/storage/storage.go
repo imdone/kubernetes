@@ -110,7 +110,7 @@ func NewStorage(optsGetter generic.RESTOptionsGetter, kubeletClientConfig client
 		if !ok {
 			return nil, fmt.Errorf("unexpected type %T", obj)
 		}
-		// TODO: Remove the conversion. Consider only return the NodeAddresses
+		// TODO: Remove the conversion. Consider only return the NodeAddresses id:1313 gh:1319
 		externalNode := &v1.Node{}
 		err = k8s_api_v1.Convert_api_Node_To_v1_Node(node, externalNode, nil)
 		if err != nil {

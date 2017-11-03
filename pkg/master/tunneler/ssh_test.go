@@ -103,7 +103,7 @@ func TestGenerateSSHKey(t *testing.T) {
 	os.Remove(privateKey)
 	os.Remove(publicKey)
 
-	// TODO: testing error cases where the file can not be removed?
+	// TODO: testing error cases where the file can not be removed? id:1146 gh:1152
 }
 
 type FakeTunneler struct {

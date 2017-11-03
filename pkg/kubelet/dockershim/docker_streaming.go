@@ -121,7 +121,7 @@ func (ds *dockerService) PortForward(req *runtimeapi.PortForwardRequest) (*runti
 	if err != nil {
 		return nil, err
 	}
-	// TODO(tallclair): Verify that ports are exposed.
+	// TODO (tallclair): Verify that ports are exposed. id:885 gh:892
 	return ds.streamingServer.GetPortForward(req)
 }
 
@@ -143,7 +143,7 @@ func attachContainer(client libdocker.Interface, containerID string, stdin io.Re
 		client.ResizeContainerTTY(containerID, uint(size.Height), uint(size.Width))
 	})
 
-	// TODO(random-liu): Do we really use the *Logs* field here?
+	// TODO (random-liu): Do we really use the *Logs* field here? id:913 gh:919
 	opts := dockertypes.ContainerAttachOptions{
 		Stream: true,
 		Stdin:  stdin != nil,

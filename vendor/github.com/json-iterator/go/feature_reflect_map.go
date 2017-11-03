@@ -35,7 +35,7 @@ func (decoder *mapDecoder) Decode(ptr unsafe.Pointer, iter *Iterator) {
 		decoder.elemDecoder.Decode(unsafe.Pointer(elem.Pointer()), iter)
 		// to put into map, we have to use reflection
 		keyType := decoder.keyType
-		// TODO: remove this from loop
+		// TODO: remove this from loop id:3066 gh:3081
 		switch {
 		case keyType.Kind() == reflect.String:
 			realVal.SetMapIndex(reflect.ValueOf(keyStr).Convert(keyType), elem.Elem())

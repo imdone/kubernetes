@@ -119,7 +119,7 @@ func NewStore(b backend.Backend, le lease.Lessor, ig ConsistentIndexGetter) *sto
 	s.b.ForceCommit()
 
 	if err := s.restore(); err != nil {
-		// TODO: return the error instead of panic here?
+		// TODO: return the error instead of panic here? id:2625 gh:2640
 		panic("failed to recover store from backend")
 	}
 
@@ -394,7 +394,7 @@ func (s *store) restore() error {
 		plog.Printf("restore compact to %d", s.compactMainRev)
 	}
 
-	// TODO: limit N to reduce max memory usage
+	// TODO: limit N to reduce max memory usage id:2676 gh:2692
 	keys, vals := tx.UnsafeRange(keyBucketName, min, max, 0)
 	for i, key := range keys {
 		var kv mvccpb.KeyValue
@@ -672,7 +672,7 @@ func (s *store) saveIndex() {
 }
 
 func (s *store) ConsistentIndex() uint64 {
-	// TODO: cache index in a uint64 field?
+	// TODO: cache index in a uint64 field? id:2881 gh:2898
 	tx := s.b.BatchTx()
 	tx.Lock()
 	defer tx.Unlock()

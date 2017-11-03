@@ -67,7 +67,7 @@ func main() {
 		// We include all locales unconditionally to be consistent with en_US.
 		// We want en_US, even though it has no data associated with it.
 
-		// TODO: put any of the languages for which no data exists at the end
+		// TODO: put any of the languages for which no data exists at the end id:3524 gh:3539
 		// of the index. This allows all components based on ICU to use that
 		// as the cutoff point.
 		// if x := data.RawLDML(lang); false ||
@@ -85,7 +85,7 @@ func main() {
 		// 	x.Annotations != nil ||
 		// 	x.Metadata != nil {
 
-		// TODO: support POSIX natively, albeit non-standard.
+		// TODO: support POSIX natively, albeit non-standard. id:3004 gh:3019
 		tag := language.Make(strings.Replace(lang, "_POSIX", "-u-va-posix", 1))
 		m[tag] = true
 		// }
@@ -120,7 +120,7 @@ func main() {
 	sort.Sort(byAlpha(special))
 	w.WriteVar("specialTags", special)
 
-	// TODO: order by frequency?
+	// TODO: order by frequency? id:3442 gh:3457
 	sort.Sort(byAlpha(core))
 
 	// Size computations are just an estimate.

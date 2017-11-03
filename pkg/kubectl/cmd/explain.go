@@ -83,7 +83,7 @@ func RunExplain(f cmdutil.Factory, out, cmdErr io.Writer, cmd *cobra.Command, ar
 	apiVersion := schema.GroupVersion{}
 
 	mapper, _ := f.Object()
-	// TODO: After we figured out the new syntax to separate group and resource, allow
+	// TODO: After we figured out the new syntax to separate group and resource, allow id:710 gh:711
 	// the users to use it in explain (kubectl explain <group><syntax><resource>).
 	// Refer to issue #16039 for why we do this. Refer to PR #15808 that used "/" syntax.
 	inModel, fieldsPath, err := explain.SplitAndParseResourceRequest(args[0], mapper)
@@ -91,7 +91,7 @@ func RunExplain(f cmdutil.Factory, out, cmdErr io.Writer, cmd *cobra.Command, ar
 		return err
 	}
 
-	// TODO: We should deduce the group for a resource by discovering the supported resources at server.
+	// TODO: We should deduce the group for a resource by discovering the supported resources at server. id:663 gh:664
 	fullySpecifiedGVR, groupResource := schema.ParseResourceArg(inModel)
 	gvk := schema.GroupVersionKind{}
 	if fullySpecifiedGVR != nil {

@@ -24,7 +24,7 @@ import (
 
 func addDefaultingFuncs(scheme *runtime.Scheme) error {
 	scheme.AddTypeDefaultingFunc(&CustomResourceDefinition{}, func(obj interface{}) { SetDefaults_CustomResourceDefinition(obj.(*CustomResourceDefinition)) })
-	// TODO figure out why I can't seem to get my defaulter generated
+	// TODO figure out why I can't seem to get my defaulter generated id:3648 gh:3664
 	// return RegisterDefaults(scheme)
 	return nil
 }

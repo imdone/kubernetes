@@ -37,7 +37,7 @@ var (
 // GetReference returns an ObjectReference which refers to the given
 // object, or an error if the object doesn't follow the conventions
 // that would allow this.
-// TODO: should take a meta.Interface see http://issue.k8s.io/7127
+// TODO: should take a meta.Interface see http://issue.k8s.io/7127 id:257 gh:258
 func GetReference(scheme *runtime.Scheme, obj runtime.Object) (*api.ObjectReference, error) {
 	if obj == nil {
 		return nil, ErrNilObject
@@ -53,7 +53,7 @@ func GetReference(scheme *runtime.Scheme, obj runtime.Object) (*api.ObjectRefere
 	// if we are building an object reference to something not yet persisted, we should fallback to scheme
 	kind := gvk.Kind
 	if len(kind) == 0 {
-		// TODO: this is wrong
+		// TODO: this is wrong id:251 gh:252
 		gvks, _, err := scheme.ObjectKinds(obj)
 		if err != nil {
 			return nil, err

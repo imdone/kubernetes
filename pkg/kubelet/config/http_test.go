@@ -316,7 +316,7 @@ func TestExtractPodsFromHTTP(t *testing.T) {
 			t.Errorf("%s: Expected: %#v, Got: %#v", testCase.desc, testCase.expected, update)
 		}
 		for _, pod := range update.Pods {
-			// TODO: remove the conversion when validation is performed on versioned objects.
+			// TODO: remove the conversion when validation is performed on versioned objects. id:875 gh:882
 			internalPod := &api.Pod{}
 			if err := k8s_api_v1.Convert_v1_Pod_To_api_Pod(pod, internalPod, nil); err != nil {
 				t.Fatalf("%s: Cannot convert pod %#v, %#v", testCase.desc, pod, err)

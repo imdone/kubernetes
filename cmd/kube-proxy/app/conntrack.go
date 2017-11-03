@@ -79,7 +79,7 @@ func (rct realConntracker) SetMax(max int) error {
 	if !writable {
 		return readOnlySysFSError
 	}
-	// TODO: generify this and sysctl to a new sysfs.WriteInt()
+	// TODO: generify this and sysctl to a new sysfs.WriteInt() id:219 gh:220
 	glog.Infof("Setting conntrack hashsize to %d", max/4)
 	return writeIntStringFile("/sys/module/nf_conntrack/parameters/hashsize", max/4)
 }

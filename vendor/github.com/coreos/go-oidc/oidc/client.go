@@ -85,7 +85,7 @@ var (
 //
 // See http://openid.net/specs/openid-connect-registration-1_0.html#ClientMetadata
 //
-// TODO: support language specific claim representations
+// TODO: support language specific claim representations id:2684 gh:2700
 // http://openid.net/specs/openid-connect-registration-1_0.html#LanguagesAndScripts
 type ClientMetadata struct {
 	RedirectURIs []url.URL // Required
@@ -406,7 +406,7 @@ func emailsToStrings(addrs []mail.Address) []string {
 //
 // Valid is called by UnmarshalJSON.
 //
-// NOTE(ericchiang): For development purposes Valid does not mandate 'https' for
+// NOTE (ericchiang): For development purposes Valid does not mandate 'https' for id:2889 gh:2904
 // URLs fields where the OIDC spec requires it. This may change in future releases
 // of this package. See: https://github.com/coreos/go-oidc/issues/34
 func (m *ClientMetadata) Valid() error {

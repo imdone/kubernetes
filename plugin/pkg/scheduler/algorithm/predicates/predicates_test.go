@@ -889,7 +889,7 @@ func TestISCSIDiskConflicts(t *testing.T) {
 	}
 }
 
-// TODO: Add test case for RequiredDuringSchedulingRequiredDuringExecution after it's implemented.
+// TODO: Add test case for RequiredDuringSchedulingRequiredDuringExecution after it's implemented. id:1445 gh:1451
 func TestPodFitsSelector(t *testing.T) {
 	tests := []struct {
 		pod    *v1.Pod
@@ -2135,7 +2135,7 @@ func TestRunGeneralPredicates(t *testing.T) {
 	}
 }
 
-// TODO: Add test case for RequiredDuringSchedulingRequiredDuringExecution after it's implemented.
+// TODO: Add test case for RequiredDuringSchedulingRequiredDuringExecution after it's implemented. id:1464 gh:1471
 func TestInterPodAffinity(t *testing.T) {
 	podLabel := map[string]string{"service": "securityscan"}
 	labels1 := map[string]string{

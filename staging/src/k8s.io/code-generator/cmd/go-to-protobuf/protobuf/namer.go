@@ -142,7 +142,7 @@ func assignGoTypeToProtoPackage(p *protobufPackage, t *types.Type, local, global
 		}
 		assignGoTypeToProtoPackage(p, m.Type, local, global, optional)
 	}
-	// TODO: should methods be walked?
+	// TODO: should methods be walked? id:3825 gh:3840
 	if t.Elem != nil {
 		assignGoTypeToProtoPackage(p, t.Elem, local, global, optional)
 	}

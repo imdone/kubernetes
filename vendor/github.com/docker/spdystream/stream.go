@@ -302,7 +302,7 @@ func (s *Stream) RemoteAddr() net.Addr {
 	return s.conn.conn.RemoteAddr()
 }
 
-// TODO set per stream values instead of connection-wide
+// TODO set per stream values instead of connection-wide id:2855 gh:2870
 
 func (s *Stream) SetDeadline(t time.Time) error {
 	return s.conn.conn.SetDeadline(t)

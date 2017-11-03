@@ -159,7 +159,7 @@ func (b *gitRepoVolumeMounter) GetAttributes() volume.Attributes {
 	return volume.Attributes{
 		ReadOnly:        false,
 		Managed:         true,
-		SupportsSELinux: true, // xattr change should be okay, TODO: double check
+		SupportsSELinux: true, // xattr change should be okay, TODO: double check id:1380 gh:1386
 	}
 }
 

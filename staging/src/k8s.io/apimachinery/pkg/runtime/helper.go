@@ -112,7 +112,7 @@ func FieldPtr(v reflect.Value, fieldName string, dest interface{}) error {
 }
 
 // EncodeList ensures that each object in an array is converted to a Unknown{} in serialized form.
-// TODO: accept a content type.
+// TODO: accept a content type. id:3674 gh:3689
 func EncodeList(e Encoder, objects []Object) error {
 	var errs []error
 	for i := range objects {
@@ -121,7 +121,7 @@ func EncodeList(e Encoder, objects []Object) error {
 			errs = append(errs, err)
 			continue
 		}
-		// TODO: Set ContentEncoding and ContentType.
+		// TODO: Set ContentEncoding and ContentType. id:3849 gh:3864
 		objects[i] = &Unknown{Raw: data}
 	}
 	return errors.NewAggregate(errs)
@@ -129,7 +129,7 @@ func EncodeList(e Encoder, objects []Object) error {
 
 func decodeListItem(obj *Unknown, decoders []Decoder) (Object, error) {
 	for _, decoder := range decoders {
-		// TODO: Decode based on ContentType.
+		// TODO: Decode based on ContentType. id:3276 gh:3289
 		obj, err := Decode(decoder, obj.Raw)
 		if err != nil {
 			if IsNotRegisteredError(err) {

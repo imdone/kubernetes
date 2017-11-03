@@ -31,7 +31,7 @@ const GroupName = "meta.k8s.io"
 var scheme = runtime.NewScheme()
 
 var (
-	// TODO: move SchemeBuilder with zz_generated.deepcopy.go to k8s.io/api.
+	// TODO: move SchemeBuilder with zz_generated.deepcopy.go to k8s.io/api. id:3666 gh:3681
 	// localSchemeBuilder and AddToScheme will stay in k8s.io/kubernetes.
 	SchemeBuilder      runtime.SchemeBuilder
 	localSchemeBuilder = &SchemeBuilder

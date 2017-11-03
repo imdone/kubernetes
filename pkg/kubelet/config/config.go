@@ -131,9 +131,9 @@ type podStorage struct {
 	recorder record.EventRecorder
 }
 
-// TODO: PodConfigNotificationMode could be handled by a listener to the updates channel
+// TODO: PodConfigNotificationMode could be handled by a listener to the updates channel id:776 gh:777
 // in the future, especially with multiple listeners.
-// TODO: allow initialization of the current state of the store with snapshotted version.
+// TODO: allow initialization of the current state of the store with snapshotted version. id:874 gh:881
 func newPodStorage(updates chan<- kubetypes.PodUpdate, mode PodConfigNotificationMode, recorder record.EventRecorder) *podStorage {
 	return &podStorage{
 		pods:        make(map[string]map[types.UID]*v1.Pod),
@@ -419,7 +419,7 @@ func podsDifferSemantically(existing, ref *v1.Pod) bool {
 func checkAndUpdatePod(existing, ref *v1.Pod) (needUpdate, needReconcile, needGracefulDelete bool) {
 
 	// 1. this is a reconcile
-	// TODO: it would be better to update the whole object and only preserve certain things
+	// TODO: it would be better to update the whole object and only preserve certain things id:818 gh:819
 	//       like the source annotation or the UID (to ensure safety)
 	if !podsDifferSemantically(existing, ref) {
 		// this is not an update

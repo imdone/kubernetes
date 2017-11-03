@@ -1183,7 +1183,7 @@ func setRRSIG(h RR_Header, c chan lex, o, f string) (RR, *ParseError, string) {
 	if i, err := StringToTime(l.token); err != nil {
 		// Try to see if all numeric and use it as epoch
 		if i, err := strconv.ParseInt(l.token, 10, 64); err == nil {
-			// TODO(miek): error out on > MAX_UINT32, same below
+			// TODO (miek): error out on > MAX_UINT32, same below id:2753 gh:2766
 			rr.Expiration = uint32(i)
 		} else {
 			return nil, &ParseError{f, "bad RRSIG Expiration", l}, ""

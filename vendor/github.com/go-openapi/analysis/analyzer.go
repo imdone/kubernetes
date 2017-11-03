@@ -144,13 +144,13 @@ func (s *Spec) initialize() {
 	for name, schema := range s.spec.Definitions {
 		s.analyzeSchema(name, schema, "/definitions")
 	}
-	// TODO: after analyzing all things and flattening schemas etc
+	// TODO: after analyzing all things and flattening schemas etc id:2859 gh:2874
 	// resolve all the collected references to their final representations
 	// best put in a separate method because this could get expensive
 }
 
 func (s *Spec) analyzeOperations(path string, pi *spec.PathItem) {
-	// TODO: resolve refs here?
+	// TODO: resolve refs here? id:2712 gh:2727
 	op := pi
 	s.analyzeOperation("GET", path, op.Get)
 	s.analyzeOperation("PUT", path, op.Put)

@@ -142,7 +142,7 @@ func (d *kubeDockerClient) CreateContainer(opts dockertypes.ContainerCreateConfi
 	ctx, cancel := d.getTimeoutContext()
 	defer cancel()
 	// we provide an explicit default shm size as to not depend on docker daemon.
-	// TODO: evaluate exposing this as a knob in the API
+	// TODO: evaluate exposing this as a knob in the API id:915 gh:921
 	if opts.HostConfig != nil && opts.HostConfig.ShmSize <= 0 {
 		opts.HostConfig.ShmSize = defaultShmSize
 	}
@@ -332,7 +332,7 @@ func (p *progressReporter) start() {
 		ticker := time.NewTicker(defaultImagePullingProgressReportInterval)
 		defer ticker.Stop()
 		for {
-			// TODO(random-liu): Report as events.
+			// TODO (random-liu): Report as events. id:945 gh:951
 			select {
 			case <-ticker.C:
 				progress, timestamp := p.progress.get()
@@ -445,7 +445,7 @@ func (d *kubeDockerClient) Info() (*dockertypes.Info, error) {
 	return &resp, nil
 }
 
-// TODO(random-liu): Add unit test for exec and attach functions, just like what go-dockerclient did.
+// TODO (random-liu): Add unit test for exec and attach functions, just like what go-dockerclient did. id:959 gh:965
 func (d *kubeDockerClient) CreateExec(id string, opts dockertypes.ExecConfig) (*dockertypes.IDResponse, error) {
 	ctx, cancel := d.getTimeoutContext()
 	defer cancel()
@@ -577,7 +577,7 @@ func (d *kubeDockerClient) redirectResponseToOutputStream(tty bool, outputStream
 }
 
 // holdHijackedConnection hold the HijackedResponse, redirect the inputStream to the connection, and redirect the response
-// stream to stdout and stderr. NOTE: If needed, we could also add context in this function.
+// stream to stdout and stderr. NOTE: If needed, we could also add context in this function. id:857 gh:863
 func (d *kubeDockerClient) holdHijackedConnection(tty bool, inputStream io.Reader, outputStream, errorStream io.Writer, resp dockertypes.HijackedResponse) error {
 	receiveStdout := make(chan error)
 	if outputStream != nil || errorStream != nil {

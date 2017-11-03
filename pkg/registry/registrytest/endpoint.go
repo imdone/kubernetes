@@ -39,7 +39,7 @@ type EndpointRegistry struct {
 }
 
 func (e *EndpointRegistry) ListEndpoints(ctx genericapirequest.Context, options *metainternalversion.ListOptions) (*api.EndpointsList, error) {
-	// TODO: support namespaces in this mock
+	// TODO: support namespaces in this mock id:1486 gh:1492
 	e.lock.Lock()
 	defer e.lock.Unlock()
 
@@ -47,7 +47,7 @@ func (e *EndpointRegistry) ListEndpoints(ctx genericapirequest.Context, options 
 }
 
 func (e *EndpointRegistry) GetEndpoints(ctx genericapirequest.Context, name string, options *metav1.GetOptions) (*api.Endpoints, error) {
-	// TODO: support namespaces in this mock
+	// TODO: support namespaces in this mock id:1420 gh:1426
 	e.lock.Lock()
 	defer e.lock.Unlock()
 	if e.Err != nil {
@@ -68,7 +68,7 @@ func (e *EndpointRegistry) WatchEndpoints(ctx genericapirequest.Context, options
 }
 
 func (e *EndpointRegistry) UpdateEndpoints(ctx genericapirequest.Context, endpoints *api.Endpoints, createValidation rest.ValidateObjectFunc, updateValidation rest.ValidateObjectUpdateFunc) error {
-	// TODO: support namespaces in this mock
+	// TODO: support namespaces in this mock id:1337 gh:1343
 	e.lock.Lock()
 	defer e.lock.Unlock()
 
@@ -95,7 +95,7 @@ func (e *EndpointRegistry) UpdateEndpoints(ctx genericapirequest.Context, endpoi
 }
 
 func (e *EndpointRegistry) DeleteEndpoints(ctx genericapirequest.Context, name string) error {
-	// TODO: support namespaces in this mock
+	// TODO: support namespaces in this mock id:1453 gh:1459
 	e.lock.Lock()
 	defer e.lock.Unlock()
 	if e.Err != nil {

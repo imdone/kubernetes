@@ -53,7 +53,7 @@ type Interface interface {
 	// The other string may only contain the characters a-z, A-Z, 0-9, - and _.
 	ID() (mib MIB, other string)
 
-	// NOTE: the restrictions on the encoding are to allow extending the syntax
+	// NOTE: the restrictions on the encoding are to allow extending the syntax id:2913 gh:2928
 	// with additional information such as versions, vendors and other variants.
 }
 

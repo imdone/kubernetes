@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# TODO(jbeda): Provide a way to override project
+# TODO (jbeda): Provide a way to override project id:60 gh:61
 # gcloud multiplexing for shared GCE/GKE tests.
 KUBE_ROOT=$(dirname "${BASH_SOURCE}")/../..
 source "${KUBE_ROOT}/cluster/gce/config-common.sh"
@@ -136,7 +136,7 @@ ENABLE_CLUSTER_MONITORING="${KUBE_ENABLE_CLUSTER_MONITORING:-influxdb}"
 # Optional: Enable Metrics Server. Metrics Server should be enable everywhere,
 # since it's a critical component, but in the first release we need a way to disable
 # this in case of stability issues.
-# TODO(piosz) remove this option once Metrics Server became a stable thing.
+# TODO (piosz) remove this option once Metrics Server became a stable thing. id:6 gh:7
 ENABLE_METRICS_SERVER="${KUBE_ENABLE_METRICS_SERVER:-true}"
 
 # One special node out of NUM_NODES would be created of this type if specified.
@@ -147,7 +147,7 @@ HEAPSTER_MACHINE_TYPE="${HEAPSTER_MACHINE_TYPE:-}"
 # To avoid situation during cluster upgrade when there are two instances
 # of fluentd running on a node, kubelet need to mark node on which
 # fluentd is not running as a manifest pod with appropriate label.
-# TODO(piosz): remove this in 1.8
+# TODO (piosz): remove this in 1.8 id:10 gh:11
 NODE_LABELS="${KUBE_NODE_LABELS:-beta.kubernetes.io/fluentd-ds-ready=true}"
 
 # NON_MASTER_NODE_LABELS are labels will only be applied on non-master nodes.
@@ -162,7 +162,7 @@ fi
 # Enable metadata concealment by firewalling pod traffic to the metadata server
 # and run a proxy daemonset on nodes.
 #
-# TODO(#8867) Enable by default.
+# TODO (#8867) Enable by default. id:16 gh:17
 ENABLE_METADATA_CONCEALMENT="${ENABLE_METADATA_CONCEALMENT:-false}" # true, false
 if [[ ${ENABLE_METADATA_CONCEALMENT:-} == "true" ]]; then
   # Put the necessary label on the node so the daemonset gets scheduled.
@@ -307,7 +307,7 @@ ENABLE_DEFAULT_STORAGE_CLASS="${ENABLE_DEFAULT_STORAGE_CLASS:-true}"
 # Optional: Enable legacy ABAC policy that makes all service accounts superusers.
 ENABLE_LEGACY_ABAC="${ENABLE_LEGACY_ABAC:-false}" # true, false
 
-# TODO(dawn1107): Remove this once the flag is built into CVM image.
+# TODO (dawn1107): Remove this once the flag is built into CVM image. id:68 gh:69
 # Kernel panic upon soft lockup issue
 SOFTLOCKUP_PANIC="${SOFTLOCKUP_PANIC:-false}" # true, false
 
@@ -348,7 +348,7 @@ PROMETHEUS_TO_SD_ENDPOINT="${PROMETHEUS_TO_SD_ENDPOINT:-https://monitoring.googl
 PROMETHEUS_TO_SD_PREFIX="${PROMETHEUS_TO_SD_PREFIX:-custom.googleapis.com}"
 ENABLE_PROMETHEUS_TO_SD="${ENABLE_PROMETHEUS_TO_SD:-false}"
 
-# TODO(#51292): Make kube-proxy Daemonset default and remove the configuration here.
+# TODO (#51292): Make kube-proxy Daemonset default and remove the configuration here. id:61 gh:62
 # Optional: [Experiment Only] Run kube-proxy as a DaemonSet if set to true, run as static pods otherwise.
 KUBE_PROXY_DAEMONSET="${KUBE_PROXY_DAEMONSET:-false}" # true, false
 

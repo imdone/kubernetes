@@ -180,7 +180,7 @@ func init() {
 
 	// Functions
 	pdh_AddCounterW = libpdhDll.MustFindProc("PdhAddCounterW")
-	pdh_AddEnglishCounterW, _ = libpdhDll.FindProc("PdhAddEnglishCounterW") // XXX: only supported on versions > Vista.
+	pdh_AddEnglishCounterW, _ = libpdhDll.FindProc("PdhAddEnglishCounterW") // XXX: only supported on versions > Vista. id:2974 gh:2987
 	pdh_CloseQuery = libpdhDll.MustFindProc("PdhCloseQuery")
 	pdh_CollectQueryData = libpdhDll.MustFindProc("PdhCollectQueryData")
 	pdh_GetFormattedCounterValue = libpdhDll.MustFindProc("PdhGetFormattedCounterValue")

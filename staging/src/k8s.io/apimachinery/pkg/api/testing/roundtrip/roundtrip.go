@@ -201,7 +201,7 @@ func roundTripToAllExternalVersions(t *testing.T, scheme *runtime.Scheme, codecF
 	fuzzInternalObject(t, fuzzer, object)
 
 	// find all potential serializations in the scheme.
-	// TODO fix this up to handle kinds that cross registered with different names.
+	// TODO fix this up to handle kinds that cross registered with different names. id:3730 gh:3745
 	for externalGVK, externalGoType := range scheme.AllKnownTypes() {
 		if externalGVK.Version == runtime.APIVersionInternal {
 			continue
@@ -217,7 +217,7 @@ func roundTripToAllExternalVersions(t *testing.T, scheme *runtime.Scheme, codecF
 
 		roundTrip(t, scheme, apitesting.TestCodec(codecFactory, externalGVK.GroupVersion()), object)
 
-		// TODO remove this hack after we're past the intermediate steps
+		// TODO remove this hack after we're past the intermediate steps id:3495 gh:3510
 		if !skipProtobuf && externalGVK.Group != "kubeadm.k8s.io" {
 			s := protobuf.NewSerializer(scheme, scheme, "application/arbitrary.content.type")
 			protobufCodec := codecFactory.CodecForVersions(s, s, externalGVK.GroupVersion(), nil)
@@ -246,7 +246,7 @@ func roundTripOfExternalType(t *testing.T, scheme *runtime.Scheme, codecFactory 
 
 	roundTrip(t, scheme, json.NewSerializer(json.DefaultMetaFactory, scheme, scheme, false), object)
 
-	// TODO remove this hack after we're past the intermediate steps
+	// TODO remove this hack after we're past the intermediate steps id:3654 gh:3669
 	if !skipProtobuf {
 		roundTrip(t, scheme, protobuf.NewSerializer(scheme, scheme, "application/protobuf"), object)
 	}
@@ -296,7 +296,7 @@ func roundTrip(t *testing.T, scheme *runtime.Scheme, codec runtime.Codec, object
 
 	// ensure that the deep copy is equal to the original; neither the deep
 	// copy or conversion should alter the object
-	// TODO eliminate this global
+	// TODO eliminate this global id:3838 gh:3853
 	if !apiequality.Semantic.DeepEqual(original, object) {
 		t.Errorf("%v: encode altered the object, diff: %v", name, diff.ObjectReflectDiff(original, object))
 		return
@@ -373,7 +373,7 @@ func roundTrip(t *testing.T, scheme *runtime.Scheme, codec runtime.Codec, object
 
 	// do structure-preserving fuzzing of the deep-copied object. If it shares anything with the original,
 	// the deep-copy was actually only a shallow copy. Then original and obj3 will be different after fuzzing.
-	// NOTE: we use the encoding+decoding here as an alternative, guaranteed deep-copy to compare against.
+	// NOTE: we use the encoding+decoding here as an alternative, guaranteed deep-copy to compare against. id:3234 gh:3249
 	fuzzer.ValueFuzz(object)
 	if !apiequality.Semantic.DeepEqual(original, obj3) {
 		t.Errorf("%v: fuzzing a copy altered the original, diff: %v", name, diff.ObjectReflectDiff(original, obj3))

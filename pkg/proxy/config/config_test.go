@@ -429,7 +429,7 @@ func TestNewEndpointsMultipleHandlersAddRemoveSetAndNotified(t *testing.T) {
 	handler2.ValidateEndpoints(t, endpoints)
 }
 
-// TODO: Add a unittest for interrupts getting processed in a timely manner.
+// TODO: Add a unittest for interrupts getting processed in a timely manner. id:1235 gh:1241
 // Currently this module has a circular dependency with config, and so it's
 // named config_test, which means even test methods need to be public. This
 // is refactoring that we can avoid by resolving the dependency.

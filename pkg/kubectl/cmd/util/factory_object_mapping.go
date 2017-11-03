@@ -70,7 +70,7 @@ func NewObjectMappingFactory(clientAccessFactory ClientAccessFactory) ObjectMapp
 	return f
 }
 
-// TODO: This method should return an error now that it can fail.  Alternatively, it needs to
+// TODO: This method should return an error now that it can fail.  Alternatively, it needs to id:802 gh:803
 //   return lazy implementations of mapper and typer that don't hit the wire until they are
 //   invoked.
 func (f *ring1Factory) Object() (meta.RESTMapper, runtime.ObjectTyper) {

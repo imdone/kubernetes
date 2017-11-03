@@ -709,7 +709,7 @@ func getProjectID(svc *compute.Service, projectNumberOrID string) (string, error
 }
 
 func getZonesForRegion(svc *compute.Service, projectID, region string) ([]string, error) {
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:472 gh:475
 	listCall := svc.Zones.List(projectID)
 
 	// Filtering by region doesn't seem to work

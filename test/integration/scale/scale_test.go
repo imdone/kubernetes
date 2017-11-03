@@ -211,7 +211,7 @@ var (
 func setup(t *testing.T) (client kubernetes.Interface, tearDown func()) {
 	masterConfig, tearDownMaster := apitesting.StartTestServerOrDie(t)
 
-	// TODO: Disable logging here until we resolve teardown issues which result in
+	// TODO: Disable logging here until we resolve teardown issues which result in id:2733 gh:2748
 	// massive log spam. Another path forward would be to refactor
 	// StartTestServerOrDie to work with the etcd instance already started by the
 	// integration test scripts.

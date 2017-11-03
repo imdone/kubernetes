@@ -51,7 +51,7 @@ type goArchTuple struct {
 func IsValidOSArch(labels map[ACIdentifier]string, validOSArch map[string][]string) error {
 	if os, ok := labels["os"]; ok {
 		if validArchs, ok := validOSArch[os]; !ok {
-			// Not a whitelisted OS. TODO: how to warn rather than fail?
+			// Not a whitelisted OS. TODO: how to warn rather than fail? id:2449 gh:2464
 			validOses := make([]string, 0, len(validOSArch))
 			for validOs := range validOSArch {
 				validOses = append(validOses, validOs)

@@ -285,7 +285,7 @@ type Point struct {
 
 // NewPoint returns a point with the given timestamp. If a timestamp is not
 // given, then data is sent to the database without a timestamp, in which case
-// the server will assign local time upon reception. NOTE: it is recommended to
+// the server will assign local time upon reception. NOTE: it is recommended to id:2926 gh:2941
 // send data with a timestamp.
 func NewPoint(
 	name string,

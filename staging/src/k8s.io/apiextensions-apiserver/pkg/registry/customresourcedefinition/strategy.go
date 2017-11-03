@@ -120,7 +120,7 @@ func (statusStrategy) PrepareForUpdate(ctx genericapirequest.Context, obj, old r
 	newObj.Spec = oldObj.Spec
 
 	// Status updates are for only for updating status, not objectmeta.
-	// TODO: Update after ResetObjectMetaForStatus is added to meta/v1.
+	// TODO: Update after ResetObjectMetaForStatus is added to meta/v1. id:3561 gh:3576
 	newObj.Labels = oldObj.Labels
 	newObj.Annotations = oldObj.Annotations
 	newObj.OwnerReferences = oldObj.OwnerReferences

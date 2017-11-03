@@ -93,8 +93,8 @@ type CodecFactory struct {
 // and conversion wrappers to define preferred internal and external versions. In the future,
 // as the internal version is used less, callers may instead use a defaulting serializer and
 // only convert objects which are shared internally (Status, common API machinery).
-// TODO: allow other codecs to be compiled in?
-// TODO: accept a scheme interface
+// TODO: allow other codecs to be compiled in? id:3509 gh:3524
+// TODO: accept a scheme interface id:3677 gh:3692
 func NewCodecFactory(scheme *runtime.Scheme) CodecFactory {
 	serializers := newSerializersForScheme(scheme, json.DefaultMetaFactory)
 	return newCodecFactory(scheme, serializers)
@@ -160,7 +160,7 @@ func (f CodecFactory) SupportedMediaTypes() []runtime.SerializerInfo {
 // This method is deprecated - clients and servers should negotiate a serializer by mime-type and
 // invoke CodecForVersions. Callers that need only to read data should use UniversalDecoder().
 //
-// TODO: make this call exist only in pkg/api, and initialize it with the set of default versions.
+// TODO: make this call exist only in pkg/api, and initialize it with the set of default versions. id:3852 gh:3867
 //   All other callers will be forced to request a Codec directly.
 func (f CodecFactory) LegacyCodec(version ...schema.GroupVersion) runtime.Codec {
 	return versioning.NewDefaultingCodecForScheme(f.scheme, f.legacySerializer, f.universal, schema.GroupVersions(version), runtime.InternalGroupVersioner)
@@ -179,8 +179,8 @@ func (f CodecFactory) UniversalDeserializer() runtime.Decoder {
 // unrecognized groups will be returned in the version they are encoded as (no conversion). This decoder performs
 // defaulting.
 //
-// TODO: the decoder will eventually be removed in favor of dealing with objects in their versioned form
-// TODO: only accept a group versioner
+// TODO: the decoder will eventually be removed in favor of dealing with objects in their versioned form id:3279 gh:3294
+// TODO: only accept a group versioner id:3774 gh:3789
 func (f CodecFactory) UniversalDecoder(versions ...schema.GroupVersion) runtime.Decoder {
 	var versioner runtime.GroupVersioner
 	if len(versions) == 0 {
@@ -195,7 +195,7 @@ func (f CodecFactory) UniversalDecoder(versions ...schema.GroupVersion) runtime.
 // it will default to runtime.APIVersionInternal. If encode is not specified for an object's group, the object is not
 // converted. If encode or decode are nil, no conversion is performed.
 func (f CodecFactory) CodecForVersions(encoder runtime.Encoder, decoder runtime.Decoder, encode runtime.GroupVersioner, decode runtime.GroupVersioner) runtime.Codec {
-	// TODO: these are for backcompat, remove them in the future
+	// TODO: these are for backcompat, remove them in the future id:3510 gh:3525
 	if encode == nil {
 		encode = runtime.DisabledGroupVersioner
 	}

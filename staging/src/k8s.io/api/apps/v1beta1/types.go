@@ -157,7 +157,7 @@ type StatefulSetSpec struct {
 	// These are replicas in the sense that they are instantiations of the
 	// same Template, but individual replicas also have a consistent identity.
 	// If unspecified, defaults to 1.
-	// TODO: Consider a rename of this field.
+	// TODO: Consider a rename of this field. id:3581 gh:3596
 	// +optional
 	Replicas *int32 `json:"replicas,omitempty" protobuf:"varint,1,opt,name=replicas"`
 
@@ -179,7 +179,7 @@ type StatefulSetSpec struct {
 	// this list must have at least one matching (by name) volumeMount in one
 	// container in the template. A claim in this list takes precedence over
 	// any volumes in the template, with the same name.
-	// TODO: Define the behavior if a claim already exists with the same name.
+	// TODO: Define the behavior if a claim already exists with the same name. id:3405 gh:3420
 	// +optional
 	VolumeClaimTemplates []v1.PersistentVolumeClaim `json:"volumeClaimTemplates,omitempty" protobuf:"bytes,4,rep,name=volumeClaimTemplates"`
 
@@ -367,7 +367,7 @@ type DeploymentStrategy struct {
 	// Rolling update config params. Present only if DeploymentStrategyType =
 	// RollingUpdate.
 	//---
-	// TODO: Update this to follow our convention for oneOf, whatever we decide it
+	// TODO: Update this to follow our convention for oneOf, whatever we decide it id:3542 gh:3556
 	// to be.
 	// +optional
 	RollingUpdate *RollingUpdateDeployment `json:"rollingUpdate,omitempty" protobuf:"bytes,2,opt,name=rollingUpdate"`

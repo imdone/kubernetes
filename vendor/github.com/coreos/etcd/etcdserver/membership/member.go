@@ -33,7 +33,7 @@ var (
 // RaftAttributes represents the raft related attributes of an etcd member.
 type RaftAttributes struct {
 	// PeerURLs is the list of peers in the raft cluster.
-	// TODO(philips): ensure these are URLs
+	// TODO (philips): ensure these are URLs id:2568 gh:2583
 	PeerURLs []string `json:"peerURLs"`
 }
 

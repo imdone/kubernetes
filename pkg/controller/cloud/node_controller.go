@@ -324,7 +324,7 @@ func (cnc *CloudNodeController) AddCloudNode(obj interface{}) {
 			curNode.ObjectMeta.Labels[kubeletapis.LabelInstanceType] = instanceType
 		}
 
-		// TODO(wlan0): Move this logic to the route controller using the node taint instead of condition
+		// TODO (wlan0): Move this logic to the route controller using the node taint instead of condition id:481 gh:482
 		// Since there are node taints, do we still need this?
 		// This condition marks the node as unusable until routes are initialized in the cloud provider
 		if cnc.cloud.ProviderName() == "gce" {

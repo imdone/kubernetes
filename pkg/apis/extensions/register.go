@@ -45,7 +45,7 @@ var (
 
 // Adds the list of known types to the given scheme.
 func addKnownTypes(scheme *runtime.Scheme) error {
-	// TODO this gets cleaned up when the types are fixed
+	// TODO this gets cleaned up when the types are fixed id:418 gh:419
 	scheme.AddKnownTypes(SchemeGroupVersion,
 		&Deployment{},
 		&DeploymentList{},

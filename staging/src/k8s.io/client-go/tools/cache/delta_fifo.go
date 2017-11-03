@@ -40,11 +40,11 @@ import (
 // this queue "knows about". It is used to decide which items are missing
 // when Replace() is called; 'Deleted' deltas are produced for these items.
 // It may be nil if you don't need to detect all deletions.
-// TODO: consider merging keyLister with this object, tracking a list of
+// TODO: consider merging keyLister with this object, tracking a list of id:3918 gh:3938
 //       "known" keys when Pop() is called. Have to think about how that
 //       affects error retrying.
-// TODO(lavalamp): I believe there is a possible race only when using an
-//                 external known object source that the above TODO would
+// TODO (lavalamp): I believe there is a possible race only when using an id:4049 gh:4069
+//                 external known object source that the above TODO would id:3586 gh:3601
 //                 fix.
 //
 // Also see the comment on DeltaFIFO.
@@ -213,7 +213,7 @@ func (f *DeltaFIFO) Delete(obj interface{}) error {
 		if err == nil && !exists && !itemsExist {
 			// Presumably, this was deleted when a relist happened.
 			// Don't provide a second report of the same deletion.
-			// TODO(lavalamp): This may be racy-- we aren't properly locked
+			// TODO (lavalamp): This may be racy-- we aren't properly locked id:3953 gh:3974
 			// with knownObjects.
 			return nil
 		}
@@ -277,12 +277,12 @@ func dedupDeltas(deltas Deltas) Deltas {
 
 // If a & b represent the same event, returns the delta that ought to be kept.
 // Otherwise, returns nil.
-// TODO: is there anything other than deletions that need deduping?
+// TODO: is there anything other than deletions that need deduping? id:3810 gh:3825
 func isDup(a, b *Delta) *Delta {
 	if out := isDeletionDup(a, b); out != nil {
 		return out
 	}
-	// TODO: Detect other duplicate situations? Are there any?
+	// TODO: Detect other duplicate situations? Are there any? id:3919 gh:3939
 	return nil
 }
 
@@ -503,7 +503,7 @@ func (f *DeltaFIFO) Replace(list []interface{}, resourceVersion string) error {
 	}
 
 	// Detect deletions not already in the queue.
-	// TODO(lavalamp): This may be racy-- we aren't properly locked
+	// TODO (lavalamp): This may be racy-- we aren't properly locked id:4050 gh:4070
 	// with knownObjects. Unproven.
 	knownKeys := f.knownObjects.ListKeys()
 	queuedDeletions := 0

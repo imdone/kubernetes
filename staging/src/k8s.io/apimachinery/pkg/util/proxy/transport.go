@@ -65,7 +65,7 @@ var atomsToAttrs = map[atom.Atom]sets.String{
 	atom.Source:     sets.NewString("src"),
 	atom.Video:      sets.NewString("poster", "src"),
 
-	// TODO: css URLs hidden in style elements.
+	// TODO: css URLs hidden in style elements. id:3602 gh:3616
 }
 
 // Transport is a transport for text/html content that replaces URLs in html
@@ -231,7 +231,7 @@ func (t *Transport) rewriteResponse(req *http.Request, resp *http.Response) (*ht
 		gzw := gzip.NewWriter(writer)
 		defer gzw.Close()
 		writer = gzw
-	// TODO: support flate, other encodings.
+	// TODO: support flate, other encodings. id:3684 gh:3699
 	case "":
 		// This is fine
 	default:
@@ -251,7 +251,7 @@ func (t *Transport) rewriteResponse(req *http.Request, resp *http.Response) (*ht
 
 	resp.Body = ioutil.NopCloser(newContent)
 	// Update header node with new content-length
-	// TODO: Remove any hash/signature headers here?
+	// TODO: Remove any hash/signature headers here? id:3859 gh:3874
 	resp.Header.Del("Content-Length")
 	resp.ContentLength = int64(newContent.Len())
 

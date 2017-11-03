@@ -22,7 +22,7 @@ type ServiceClient struct {
 	ResourceBase string
 
 	// This is the service client type (e.g. compute, sharev2).
-	// NOTE: FOR INTERNAL USE ONLY. DO NOT SET. GOPHERCLOUD WILL SET THIS.
+	// NOTE: FOR INTERNAL USE ONLY. DO NOT SET. GOPHERCLOUD WILL SET THIS. id:2923 gh:2938
 	// It is only exported because it gets set in a different package.
 	Type string
 

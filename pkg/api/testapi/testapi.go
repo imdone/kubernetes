@@ -16,7 +16,7 @@ limitations under the License.
 
 // Package testapi provides a helper for retrieving the KUBE_TEST_API environment variable.
 //
-// TODO(lavalamp): this package is a huge disaster at the moment. I intend to
+// TODO (lavalamp): this package is a huge disaster at the moment. I intend to id:333 gh:334
 // refactor. All code currently using this package should change:
 // 1. Declare your own api.Registry.APIGroupRegistrationManager in your own test code.
 // 2. Import the relevant install packages.
@@ -385,7 +385,7 @@ func (g TestGroup) StorageCodec() runtime.Codec {
 	}
 
 	// etcd2 only supports string data - we must wrap any result before returning
-	// TODO: remove for etcd3 / make parameterizable
+	// TODO: remove for etcd3 / make parameterizable id:281 gh:282
 	if !storageSerializer.EncodesAsText {
 		s = runtime.NewBase64Serializer(s, s)
 	}
@@ -424,7 +424,7 @@ func (g TestGroup) SelfLink(resource, name string) string {
 		}
 		return fmt.Sprintf("/api/%s/%s/%s", g.externalGroupVersion.Version, resource, name)
 	} else {
-		// TODO: will need a /apis prefix once we have proper multi-group
+		// TODO: will need a /apis prefix once we have proper multi-group id:258 gh:259
 		// support
 		if name == "" {
 			return fmt.Sprintf("/apis/%s/%s/%s", g.externalGroupVersion.Group, g.externalGroupVersion.Version, resource)
@@ -441,7 +441,7 @@ func (g TestGroup) ResourcePathWithPrefix(prefix, resource, namespace, name stri
 	if g.externalGroupVersion.Group == api.GroupName {
 		path = "/api/" + g.externalGroupVersion.Version
 	} else {
-		// TODO: switch back once we have proper multiple group support
+		// TODO: switch back once we have proper multiple group support id:252 gh:253
 		// path = "/apis/" + g.Group + "/" + Version(group...)
 		path = "/apis/" + g.externalGroupVersion.Group + "/" + g.externalGroupVersion.Version
 	}

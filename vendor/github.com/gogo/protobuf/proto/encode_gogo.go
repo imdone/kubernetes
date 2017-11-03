@@ -171,7 +171,7 @@ func (o *Buffer) enc_ref_struct_message(p *Properties, base structPointer) error
 	return o.enc_len_struct(p.sprop, structp, &state)
 }
 
-//TODO this is only copied, please fix this
+//TODO this is only copied, please fix this id:2716 gh:2732
 func size_ref_struct_message(p *Properties, base structPointer) int {
 	structp := structPointer_GetRefStructPointer(base, p.field)
 	if structPointer_IsNil(structp) {
@@ -229,7 +229,7 @@ func (o *Buffer) enc_slice_ref_struct_message(p *Properties, base structPointer)
 	return state.err
 }
 
-//TODO this is only copied, please fix this
+//TODO this is only copied, please fix this id:2799 gh:2814
 func size_slice_ref_struct_message(p *Properties, base structPointer) (n int) {
 	ss := structPointer_StructRefSlice(base, p.field, p.stype.Size())
 	l := ss.Len()

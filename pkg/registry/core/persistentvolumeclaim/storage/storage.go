@@ -46,7 +46,7 @@ func NewREST(optsGetter generic.RESTOptionsGetter) (*REST, *StatusREST) {
 	}
 	options := &generic.StoreOptions{RESTOptions: optsGetter, AttrFunc: persistentvolumeclaim.GetAttrs}
 	if err := store.CompleteWithOptions(options); err != nil {
-		panic(err) // TODO: Propagate error up
+		panic(err) // TODO: Propagate error up id:1180 gh:1186
 	}
 
 	statusStore := *store

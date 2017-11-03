@@ -274,7 +274,7 @@ func (p *Decoder) typeForElement(val reflect.Value, start *StartElement) reflect
 	for i, a := range start.Attr {
 		if a.Name == xmlSchemaInstance || a.Name == xsiType {
 			t = a.Value
-			// HACK: ensure xsi:type is last in the list to avoid using that value for
+			// HACK: ensure xsi:type is last in the list to avoid using that value for id:3260 gh:3275
 			// a "type" attribute, such as ManagedObjectReference.Type for example.
 			// Note that xsi:type is already the last attribute in VC/ESX responses.
 			// This is only an issue with govmomi simulator generated responses.
@@ -411,7 +411,7 @@ func (p *Decoder) unmarshal(val reflect.Value, start *StartElement) error {
 		return errors.New("unknown type " + v.Type().String())
 
 	case reflect.Interface:
-		// TODO: For now, simply ignore the field. In the near
+		// TODO: For now, simply ignore the field. In the near id:3085 gh:3100
 		//       future we may choose to unmarshal the start
 		//       element on it, if not nil.
 		return p.Skip()

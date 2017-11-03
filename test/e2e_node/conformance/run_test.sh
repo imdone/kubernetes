@@ -20,8 +20,8 @@
 # In addition, this script will also be used in the node e2e test to let it use
 # the containerized test suite.
 
-# TODO(random-liu): Use standard installer to install kubelet.
-# TODO(random-liu): Use standard tool to start kubelet in production way (such
+# TODO (random-liu): Use standard installer to install kubelet. id:2611 gh:2626
+# TODO (random-liu): Use standard tool to start kubelet in production way (such id:2273 gh:2288
 # as systemd, supervisord etc.)
 
 # Refresh sudo credentials if not running on GCE.

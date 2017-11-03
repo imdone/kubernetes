@@ -100,7 +100,7 @@ func Exist(name string) bool {
 // ZeroToEnd zeros a file starting from SEEK_CUR to its SEEK_END. May temporarily
 // shorten the length of the file.
 func ZeroToEnd(f *os.File) error {
-	// TODO: support FALLOC_FL_ZERO_RANGE
+	// TODO: support FALLOC_FL_ZERO_RANGE id:2677 gh:2693
 	off, err := f.Seek(0, os.SEEK_CUR)
 	if err != nil {
 		return err

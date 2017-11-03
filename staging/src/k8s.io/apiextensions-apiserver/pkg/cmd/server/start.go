@@ -92,7 +92,7 @@ func (o *CustomResourceDefinitionsServerOptions) Complete() error {
 }
 
 func (o CustomResourceDefinitionsServerOptions) Config() (*apiserver.Config, error) {
-	// TODO have a "real" external address
+	// TODO have a "real" external address id:3560 gh:3575
 	if err := o.RecommendedOptions.SecureServing.MaybeDefaultWithSelfSignedCerts("localhost", nil, []net.IP{net.ParseIP("127.0.0.1")}); err != nil {
 		return nil, fmt.Errorf("error creating self-signed certificates: %v", err)
 	}

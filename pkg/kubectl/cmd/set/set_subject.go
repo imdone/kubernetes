@@ -219,7 +219,7 @@ func (o *SubjectOptions) Run(f cmdutil.Factory, fn updateSubjects) error {
 
 		transformed, err := updateSubjectForObject(info.Object, subjects, fn)
 		if transformed && err == nil {
-			// TODO: switch UpdatePodSpecForObject to work on v1.PodSpec, use info.VersionedObject, and avoid conversion completely
+			// TODO: switch UpdatePodSpecForObject to work on v1.PodSpec, use info.VersionedObject, and avoid conversion completely id:742 gh:743
 			versionedEncoder := legacyscheme.Codecs.EncoderForVersion(o.Encoder, info.Mapping.GroupVersionKind.GroupVersion())
 			return runtime.Encode(versionedEncoder, info.Object)
 		}

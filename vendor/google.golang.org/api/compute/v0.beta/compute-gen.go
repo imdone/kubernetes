@@ -4135,7 +4135,7 @@ func (s *BackendServicesScopedListWarningData) MarshalJSON() ([]byte, error) {
 
 // Binding: Associates `members` with a `role`.
 type Binding struct {
-	// Condition: The condition that is associated with this binding. NOTE:
+	// Condition: The condition that is associated with this binding. NOTE: id:3477 gh:3492
 	// an unsatisfied condition will not allow user access via current
 	// binding. Different bindings, including their conditions, are examined
 	// independently. This field is GOOGLE_INTERNAL.

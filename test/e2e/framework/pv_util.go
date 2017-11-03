@@ -431,7 +431,7 @@ func WaitOnPVandPVC(c clientset.Interface, ns string, pv *v1.PersistentVolume, p
 }
 
 // Search for bound PVs and PVCs by examining pvols for non-nil claimRefs.
-// NOTE: Each iteration waits for a maximum of 3 minutes per PV and, if the PV is bound,
+// NOTE: Each iteration waits for a maximum of 3 minutes per PV and, if the PV is bound, id:2457 gh:2472
 //   up to 3 minutes for the PVC. When the number of PVs != number of PVCs, this can lead
 //   to situations where the maximum wait times are reached several times in succession,
 //   extending test time. Thus, it is recommended to keep the delta between PVs and PVCs

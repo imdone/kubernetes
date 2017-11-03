@@ -53,7 +53,7 @@ mkdir -p "${INSTALL_VOLUME}"
 mv /zookeeper "${INSTALL_VOLUME}"/zookeeper
 cp "${INSTALL_VOLUME}"/zookeeper/conf/zoo_sample.cfg "${INSTALL_VOLUME}"/zookeeper/conf/zoo.cfg
 
-# TODO: Should dynamic config be tied to the version?
+# TODO: Should dynamic config be tied to the version? id:2589 gh:2604
 IFS="." read -ra RELEASE <<< "${VERSION}"
 if [ $(expr "${RELEASE[1]}") -gt 4 ]; then
     echo zookeeper-"${VERSION}" supports dynamic reconfiguration, enabling it
@@ -61,7 +61,7 @@ if [ $(expr "${RELEASE[1]}") -gt 4 ]; then
     echo "dynamicConfigFile="${INSTALL_VOLUME}"/zookeeper/conf/zoo.cfg.dynamic" >> "${INSTALL_VOLUME}"/zookeeper/conf/zoo.cfg
 fi
 
-# TODO: This is a hack, netcat is convenient to have in the zookeeper container
+# TODO: This is a hack, netcat is convenient to have in the zookeeper container id:2430 gh:2445
 # I want to avoid using a custom zookeeper image just for this. So copy it.
 NC=$(which nc)
 if [ "${NC}" != "" ]; then

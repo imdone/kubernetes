@@ -149,7 +149,7 @@ const kubeletLauncherLog = "kubelet-launcher.log"
 // kubeletPodManifestPath is a fixed known pod manifest path. We can not use the random pod
 // manifest directory generated in e2e_node.test because we need to mount the directory into
 // the conformance test container, it's easier if it's a known directory.
-// TODO(random-liu): Get rid of this once we switch to cluster e2e node bootstrap script.
+// TODO (random-liu): Get rid of this once we switch to cluster e2e node bootstrap script. id:2483 gh:2498
 var kubeletPodManifestPath = "conformance-pod-manifest-" + timestamp
 
 // getPodManifestPath returns pod manifest full path.
@@ -171,7 +171,7 @@ func isSystemd(host string) (bool, error) {
 // This is a temporary solution, we should change node e2e to use the same node bootstrap
 // with cluster e2e and launch kubelet outside of the test for both regular node e2e and
 // node conformance test.
-// TODO(random-liu): Switch to use standard node bootstrap script.
+// TODO (random-liu): Switch to use standard node bootstrap script. id:2664 gh:2679
 func launchKubelet(host, workspace, results, testArgs string) error {
 	podManifestPath := getPodManifestPath(workspace)
 	if output, err := SSH(host, "mkdir", podManifestPath); err != nil {

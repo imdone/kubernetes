@@ -200,7 +200,7 @@ func TestCommonKindsRegistered(t *testing.T) {
 					t.Errorf("expected %v: %v\n%s", gvk, err, string(data))
 					continue
 				}
-				// TODO: this is wrong, but legacy clients expect it
+				// TODO: this is wrong, but legacy clients expect it id:259 gh:260
 				if !bytes.Contains(data, []byte(`"kind":"`+kind+`","apiVersion":"v1"`)) {
 					t.Errorf("expected %v: %v\n%s", gvk, err, string(data))
 					continue

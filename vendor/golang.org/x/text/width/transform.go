@@ -181,7 +181,7 @@ type wideTransform struct {
 
 func (wideTransform) Span(src []byte, atEOF bool) (n int, err error) {
 	for n < len(src) {
-		// TODO: Consider ASCII fast path. Special-casing ASCII handling can
+		// TODO: Consider ASCII fast path. Special-casing ASCII handling can id:3538 gh:3553
 		// reduce the ns/op of BenchmarkWideASCII by about 30%. This is probably
 		// not enough to warrant the extra code and complexity.
 		v, size := trie.lookup(src[n:])
@@ -205,7 +205,7 @@ func (wideTransform) Span(src []byte, atEOF bool) (n int, err error) {
 
 func (wideTransform) Transform(dst, src []byte, atEOF bool) (nDst, nSrc int, err error) {
 	for nSrc < len(src) {
-		// TODO: Consider ASCII fast path. Special-casing ASCII handling can
+		// TODO: Consider ASCII fast path. Special-casing ASCII handling can id:3018 gh:3033
 		// reduce the ns/op of BenchmarkWideASCII by about 30%. This is probably
 		// not enough to warrant the extra code and complexity.
 		v, size := trie.lookup(src[nSrc:])

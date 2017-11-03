@@ -308,7 +308,7 @@ func (b *flockerVolumeMounter) SetUpAt(dir string, fsGroup *int64) error {
 		}
 	}
 
-	// TODO: handle failed mounts here.
+	// TODO: handle failed mounts here. id:1528 gh:1534
 	notMnt, err := b.mounter.IsLikelyNotMountPoint(dir)
 	glog.V(4).Infof("flockerVolume set up: %s %v %v, datasetUUID %v readOnly %v", dir, !notMnt, err, datasetUUID, b.readOnly)
 	if err != nil && !os.IsNotExist(err) {

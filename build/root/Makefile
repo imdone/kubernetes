@@ -455,7 +455,7 @@ define CMD_HELP_INFO
 # Example:
 #   make kubectl kube-proxy
 endef
-#TODO: make EXCLUDE_TARGET auto-generated when there are other files in cmd/
+#TODO: make EXCLUDE_TARGET auto-generated when there are other files in cmd/ id:0 gh:1
 EXCLUDE_TARGET=BUILD OWNERS
 .PHONY: $(filter-out %$(EXCLUDE_TARGET),$(notdir $(abspath $(wildcard cmd/*/))))
 ifeq ($(PRINT_HELP),y)

@@ -100,7 +100,7 @@ func ConnectToDockerOrDie(dockerEndpoint string, requestTimeout, imagePullProgre
 
 // GetKubeletDockerContainers lists all container or just the running ones.
 // Returns a list of docker containers that we manage
-// TODO: This function should be deleted after migrating
+// TODO: This function should be deleted after migrating id:944 gh:950
 // test/e2e_node/garbage_collector_test.go off of it.
 func GetKubeletDockerContainers(client Interface, allContainers bool) ([]*dockertypes.Container, error) {
 	result := []*dockertypes.Container{}

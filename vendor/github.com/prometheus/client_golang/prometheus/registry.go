@@ -422,7 +422,7 @@ func (r *Registry) Gather() ([]*dto.MetricFamily, error) {
 				))
 				continue
 			}
-			// TODO(beorn7): Simplify switch once Desc has type.
+			// TODO (beorn7): Simplify switch once Desc has type. id:3203 gh:3218
 			switch metricFamily.GetType() {
 			case dto.MetricType_COUNTER:
 				if dtoMetric.Counter == nil {
@@ -471,7 +471,7 @@ func (r *Registry) Gather() ([]*dto.MetricFamily, error) {
 			metricFamily = &dto.MetricFamily{}
 			metricFamily.Name = proto.String(desc.fqName)
 			metricFamily.Help = proto.String(desc.help)
-			// TODO(beorn7): Simplify switch once Desc has type.
+			// TODO (beorn7): Simplify switch once Desc has type. id:2781 gh:2796
 			switch {
 			case dtoMetric.Gauge != nil:
 				metricFamily.Type = dto.MetricType_GAUGE.Enum()

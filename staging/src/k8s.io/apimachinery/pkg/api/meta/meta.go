@@ -38,7 +38,7 @@ var errNotCommon = fmt.Errorf("object does not implement the common interface fo
 
 // CommonAccessor returns a Common interface for the provided object or an error if the object does
 // not provide List.
-// TODO: return bool instead of error
+// TODO: return bool instead of error id:3490 gh:3505
 func CommonAccessor(obj interface{}) (metav1.Common, error) {
 	switch t := obj.(type) {
 	case List:
@@ -71,7 +71,7 @@ func CommonAccessor(obj interface{}) (metav1.Common, error) {
 // not provide List.
 // IMPORTANT: Objects are NOT a superset of lists. Do not use this check to determine whether an
 // object *is* a List.
-// TODO: return bool instead of error
+// TODO: return bool instead of error id:3563 gh:3578
 func ListAccessor(obj interface{}) (List, error) {
 	switch t := obj.(type) {
 	case List:
@@ -101,7 +101,7 @@ var errNotObject = fmt.Errorf("object does not implement the Object interfaces")
 // obj must be a pointer to an API type. An error is returned if the minimum
 // required fields are missing. Fields that are not required return the default
 // value and are a no-op if set.
-// TODO: return bool instead of error
+// TODO: return bool instead of error id:3833 gh:3848
 func Accessor(obj interface{}) (metav1.Object, error) {
 	switch t := obj.(type) {
 	case metav1.Object:
@@ -117,7 +117,7 @@ func Accessor(obj interface{}) (metav1.Object, error) {
 }
 
 // AsPartialObjectMetadata takes the metav1 interface and returns a partial object.
-// TODO: consider making this solely a conversion action.
+// TODO: consider making this solely a conversion action. id:3229 gh:3244
 func AsPartialObjectMetadata(m metav1.Object) *metav1alpha1.PartialObjectMetadata {
 	switch t := m.(type) {
 	case *metav1.ObjectMeta:
@@ -148,7 +148,7 @@ func AsPartialObjectMetadata(m metav1.Object) *metav1alpha1.PartialObjectMetadat
 
 // TypeAccessor returns an interface that allows retrieving and modifying the APIVersion
 // and Kind of an in-memory internal object.
-// TODO: this interface is used to test code that does not have ObjectMeta or ListMeta
+// TODO: this interface is used to test code that does not have ObjectMeta or ListMeta id:3653 gh:3668
 // in round tripping (objects which can use apiVersion/kind, but do not fit the Kube
 // api conventions).
 func TypeAccessor(obj interface{}) (Type, error) {

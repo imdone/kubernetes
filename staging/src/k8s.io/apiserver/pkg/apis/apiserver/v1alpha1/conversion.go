@@ -65,7 +65,7 @@ func decodeNestedRawExtensionOrUnknown(d runtime.Decoder, ext *runtime.RawExtens
 				return
 			}
 		}
-		// TODO: record mime-type with the object
+		// TODO: record mime-type with the object id:3352 gh:3367
 		if gvk != nil {
 			unk.APIVersion = gvk.GroupVersion().String()
 			unk.Kind = gvk.Kind

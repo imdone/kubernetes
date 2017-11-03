@@ -138,7 +138,7 @@ var ResourcesShortcutStatic = []ResourceShortcuts{
 }
 
 // ResourceShortFormFor looks up for a short form of resource names.
-// TODO: Change the signature of this function so that it can
+// TODO: Change the signature of this function so that it can id:724 gh:725
 // make use of ResourceShortcuts.
 func ResourceShortFormFor(resource string) (string, bool) {
 	var alias string

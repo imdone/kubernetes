@@ -282,7 +282,7 @@ func (e *encoder) uintv(tag string, in reflect.Value) {
 }
 
 func (e *encoder) floatv(tag string, in reflect.Value) {
-	// FIXME: Handle 64 bits here.
+	// FIXME: Handle 64 bits here. id:3702 gh:3717
 	s := strconv.FormatFloat(float64(in.Float()), 'g', -1, 32)
 	switch s {
 	case "+Inf":

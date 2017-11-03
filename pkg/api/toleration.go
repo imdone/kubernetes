@@ -14,14 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-//TODO: consider making these methods functions, because we don't want helper
+//TODO: consider making these methods functions, because we don't want helper id:253 gh:254
 //functions in the k8s.io/api repo.
 
 package api
 
 // MatchToleration checks if the toleration matches tolerationToMatch. Tolerations are unique by <key,effect,operator,value>,
 // if the two tolerations have same <key,effect,operator,value> combination, regard as they match.
-// TODO: uniqueness check for tolerations in api validations.
+// TODO: uniqueness check for tolerations in api validations. id:206 gh:207
 func (t *Toleration) MatchToleration(tolerationToMatch *Toleration) bool {
 	return t.Key == tolerationToMatch.Key &&
 		t.Effect == tolerationToMatch.Effect &&

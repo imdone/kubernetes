@@ -69,7 +69,7 @@ var randomKind = schema.GroupKind{Kind: "Random"}
 var knownKinds = []schema.GroupKind{
 	api.Kind("ReplicationController"),
 	extensions.Kind("Deployment"),
-	// TODO: uncomment when Jobs are fixed: #38497
+	// TODO: uncomment when Jobs are fixed: #38497 id:2349 gh:2364
 	//batch.Kind("Job"),
 	extensions.Kind("ReplicaSet"),
 }
@@ -89,7 +89,7 @@ var _ = SIGDescribe("Load capacity", func() {
 	testCaseBaseName := "load"
 
 	// Gathers metrics before teardown
-	// TODO add flag that allows to skip cleanup on failure
+	// TODO add flag that allows to skip cleanup on failure id:2543 gh:2558
 	AfterEach(func() {
 		// Verify latency metrics
 		highLatencyRequests, metrics, err := framework.HighLatencyRequests(clientset, nodeCount)

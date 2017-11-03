@@ -118,7 +118,7 @@ if [ -n "$GALERA_CLUSTER" ]; then
   # if the string is not defined or it only is 'gcomm://', this means bootstrap
   if [ -z "$WSREP_CLUSTER_ADDRESS" -o "$WSREP_CLUSTER_ADDRESS" == "gcomm://" ]; then
     # if empty, set to 'gcomm://'
-    # NOTE: this list does not imply membership. 
+    # NOTE: this list does not imply membership.  id:170 gh:171
     # It only means "obtain SST and join from one of these..."
     if [ -z "$WSREP_CLUSTER_ADDRESS" ]; then
       WSREP_CLUSTER_ADDRESS="gcomm://"

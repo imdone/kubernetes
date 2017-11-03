@@ -121,7 +121,7 @@ func (rsStrategy) ValidateUpdate(ctx genericapirequest.Context, obj, old runtime
 	// Update is not allowed to set Spec.Selector for all groups/versions except extensions/v1beta1.
 	// If RequestInfo is nil, it is better to revert to old behavior (i.e. allow update to set Spec.Selector)
 	// to prevent unintentionally breaking users who may rely on the old behavior.
-	// TODO(#50791): after extensions/v1beta1 is removed, move selector immutability check inside ValidateReplicaSetUpdate().
+	// TODO (#50791): after extensions/v1beta1 is removed, move selector immutability check inside ValidateReplicaSetUpdate(). id:1482 gh:1488
 	if requestInfo, found := genericapirequest.RequestInfoFrom(ctx); found {
 		groupVersion := schema.GroupVersion{Group: requestInfo.APIGroup, Version: requestInfo.APIVersion}
 		switch groupVersion {

@@ -41,10 +41,10 @@ import (
 )
 
 // PatchResource returns a function that will handle a resource patch
-// TODO: Eventually PatchResource should just use GuaranteedUpdate and this routine should be a bit cleaner
+// TODO: Eventually PatchResource should just use GuaranteedUpdate and this routine should be a bit cleaner id:3419 gh:3434
 func PatchResource(r rest.Patcher, scope RequestScope, admit admission.Interface, converter runtime.ObjectConvertor) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
-		// TODO: we either want to remove timeout or document it (if we
+		// TODO: we either want to remove timeout or document it (if we id:3879 gh:3894
 		// document, move timeout out of this function and declare it in
 		// api_installer)
 		timeout := parseTimeout(req.URL.Query().Get("timeout"))
@@ -64,7 +64,7 @@ func PatchResource(r rest.Patcher, scope RequestScope, admit admission.Interface
 			return
 		}
 
-		// TODO: handle this in negotiation
+		// TODO: handle this in negotiation id:3616 gh:3631
 		contentType := req.Header.Get("Content-Type")
 		// Remove "; charset=" if included in header.
 		if idx := strings.Index(contentType, ";"); idx > 0 {
@@ -416,7 +416,7 @@ func patchObjectJSON(
 // <originalObject> and stores the result in <objToUpdate>.
 // It additionally returns the map[string]interface{} representation of the
 // <originalObject> and <patchJS>.
-// NOTE: Both <originalObject> and <objToUpdate> are supposed to be versioned.
+// NOTE: Both <originalObject> and <objToUpdate> are supposed to be versioned. id:3791 gh:3806
 func strategicPatchObject(
 	codec runtime.Codec,
 	defaulter runtime.ObjectDefaulter,
@@ -443,7 +443,7 @@ func strategicPatchObject(
 
 // applyPatchToObject applies a strategic merge patch of <patchMap> to
 // <originalMap> and stores the result in <objToUpdate>.
-// NOTE: <objToUpdate> must be a versioned object.
+// NOTE: <objToUpdate> must be a versioned object. id:3987 gh:4007
 func applyPatchToObject(
 	codec runtime.Codec,
 	defaulter runtime.ObjectDefaulter,

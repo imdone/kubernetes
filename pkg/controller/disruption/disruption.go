@@ -162,7 +162,7 @@ func NewDisruptionController(
 	return dc
 }
 
-// TODO(mml): When controllerRef is implemented (#2210), we *could* simply
+// TODO (mml): When controllerRef is implemented (#2210), we *could* simply id:530 gh:531
 // return controllers without their scales, and access scale type-generically
 // via the scale subresource.  That may not be as much of a win as it sounds,
 // however.  We are accessing everything through the pkg/client/cache API that
@@ -311,7 +311,7 @@ func (dc *DisruptionController) addDb(obj interface{}) {
 }
 
 func (dc *DisruptionController) updateDb(old, cur interface{}) {
-	// TODO(mml) ignore updates where 'old' is equivalent to 'cur'.
+	// TODO (mml) ignore updates where 'old' is equivalent to 'cur'. id:615 gh:616
 	pdb := cur.(*policy.PodDisruptionBudget)
 	glog.V(4).Infof("update DB %q", pdb.Name)
 	dc.enqueuePdb(pdb)
@@ -527,7 +527,7 @@ func (dc *DisruptionController) trySync(pdb *policy.PodDisruptionBudget) error {
 
 func (dc *DisruptionController) getExpectedPodCount(pdb *policy.PodDisruptionBudget, pods []*v1.Pod) (expectedCount, desiredHealthy int32, err error) {
 	err = nil
-	// TODO(davidopp): consider making the way expectedCount and rules about
+	// TODO (davidopp): consider making the way expectedCount and rules about id:557 gh:558
 	// permitted controller configurations (specifically, considering it an error
 	// if a pod covered by a PDB has 0 controllers or > 1 controller) should be
 	// handled the same way for integer and percentage minAvailable

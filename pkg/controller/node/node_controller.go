@@ -153,7 +153,7 @@ type Controller struct {
 	nodeMonitorGracePeriod time.Duration
 	// Value controlling Controller monitoring period, i.e. how often does Controller
 	// check node status posted from kubelet. This value should be lower than nodeMonitorGracePeriod.
-	// TODO: Change node status monitor to watch based.
+	// TODO: Change node status monitor to watch based. id:591 gh:592
 	nodeMonitorPeriod time.Duration
 	// Value used if sync_nodes_status=False, only for node startup. When node
 	// is just created, e.g. cluster bootstrap or node creation, we give a longer grace period.
@@ -398,7 +398,7 @@ func NewNodeController(
 		})
 	}
 
-	// NOTE(resouer): nodeInformer to substitute deprecated taint key (notReady -> not-ready).
+	// NOTE (resouer): nodeInformer to substitute deprecated taint key (notReady -> not-ready). id:629 gh:630
 	// Remove this logic when we don't need this backwards compatibility
 	nodeInformer.Informer().AddEventHandler(cache.ResourceEventHandlerFuncs{
 		AddFunc: util.CreateAddNodeHandler(func(node *v1.Node) error {
@@ -940,7 +940,7 @@ func (nc *Controller) tryUpdateNodeStatus(node *v1.Node) (time.Duration, v1.Node
 	//   everything's in order, no transition occurred, we update only probeTimestamp,
 	// - both saved and current statuses have Ready Conditions, different LastProbeTimes and different Ready Condition State -
 	//   Ready Condition changed it state since we last seen it, so we update both probeTimestamp and readyTransitionTimestamp.
-	// TODO: things to consider:
+	// TODO: things to consider: id:565 gh:566
 	//   - if 'LastProbeTime' have gone back in time its probably an error, currently we ignore it,
 	//   - currently only correct Ready State transition outside of Node Controller is marking it ready by Kubelet, we don't check
 	//     if that's the case, but it does not seem necessary.
@@ -965,7 +965,7 @@ func (nc *Controller) tryUpdateNodeStatus(node *v1.Node) (time.Duration, v1.Node
 		}
 	} else if savedCondition != nil && observedCondition == nil {
 		glog.Errorf("ReadyCondition was removed from Status of Node %s", node.Name)
-		// TODO: figure out what to do in this case. For now we do the same thing as above.
+		// TODO: figure out what to do in this case. For now we do the same thing as above. id:584 gh:585
 		savedNodeStatus = nodeStatusData{
 			status:                   node.Status,
 			probeTimestamp:           nc.now(),

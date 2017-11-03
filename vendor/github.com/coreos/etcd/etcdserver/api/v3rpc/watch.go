@@ -92,7 +92,7 @@ type serverWatchStream struct {
 	mu sync.Mutex
 	// progress tracks the watchID that stream might need to send
 	// progress to.
-	// TODO: combine progress and prevKV into a single struct?
+	// TODO: combine progress and prevKV into a single struct? id:2757 gh:2772
 	progress map[mvcc.WatchID]bool
 	prevKV   map[mvcc.WatchID]bool
 
@@ -258,7 +258,7 @@ func (sws *serverWatchStream) sendLoop() {
 				return
 			}
 
-			// TODO: evs is []mvccpb.Event type
+			// TODO: evs is []mvccpb.Event type id:2617 gh:2632
 			// either return []*mvccpb.Event from the mvcc package
 			// or define protocol buffer with []mvccpb.Event.
 			evs := wresp.Events

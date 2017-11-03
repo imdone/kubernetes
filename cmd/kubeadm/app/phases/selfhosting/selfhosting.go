@@ -157,7 +157,7 @@ func BuildDaemonSet(name string, podSpec *v1.PodSpec, mutators map[string][]PodS
 }
 
 // loadPodSpecFromFile reads and decodes a file containing a specification of a Pod
-// TODO: Consider using "k8s.io/kubernetes/pkg/volume/util".LoadPodFromFile(filename string) in the future instead.
+// TODO: Consider using "k8s.io/kubernetes/pkg/volume/util".LoadPodFromFile(filename string) in the future instead. id:146 gh:147
 func loadPodSpecFromFile(manifestPath string) (*v1.PodSpec, error) {
 	podBytes, err := ioutil.ReadFile(manifestPath)
 	if err != nil {

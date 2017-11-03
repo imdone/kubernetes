@@ -102,7 +102,7 @@ func (DeploymentV1Beta1) Generate(genericParams map[string]interface{}) (runtime
 		return nil, err
 	}
 
-	// TODO: use versioned types for generators so that we don't need to
+	// TODO: use versioned types for generators so that we don't need to id:824 gh:825
 	// set default values manually (see issue #17384)
 	count32 := int32(count)
 	deployment := extensionsv1beta1.Deployment{
@@ -922,7 +922,7 @@ func (BasicPod) Generate(genericParams map[string]interface{}) (runtime.Object, 
 	if len(restartPolicy) == 0 {
 		restartPolicy = v1.RestartPolicyAlways
 	}
-	// TODO: Figure out why we set ImagePullPolicy here, whether we can make it
+	// TODO: Figure out why we set ImagePullPolicy here, whether we can make it id:768 gh:769
 	// consistent with the other places imagePullPolicy is set using flag.
 	pod := v1.Pod{
 		ObjectMeta: metav1.ObjectMeta{

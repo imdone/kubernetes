@@ -45,7 +45,7 @@ func configTLS(config Config, clientset *kubernetes.Clientset) *tls.Config {
 	}
 	return &tls.Config{
 		Certificates: []tls.Certificate{sCert},
-		// TODO: uses mutual tls after we agree on what cert the apiserver should use.
+		// TODO: uses mutual tls after we agree on what cert the apiserver should use. id:2431 gh:2446
 		// ClientAuth:   tls.RequireAndVerifyClientCert,
 	}
 }

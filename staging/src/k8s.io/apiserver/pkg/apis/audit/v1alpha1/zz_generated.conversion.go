@@ -63,7 +63,7 @@ func autoConvert_v1alpha1_Event_To_audit_Event(in *Event, out *audit.Event, s co
 	out.Stage = audit.Stage(in.Stage)
 	out.RequestURI = in.RequestURI
 	out.Verb = in.Verb
-	// TODO: Inefficient conversion - can we improve it?
+	// TODO: Inefficient conversion - can we improve it? id:3608 gh:3623
 	if err := s.Convert(&in.User, &out.User, 0); err != nil {
 		return err
 	}
@@ -92,7 +92,7 @@ func autoConvert_audit_Event_To_v1alpha1_Event(in *audit.Event, out *Event, s co
 	out.Stage = Stage(in.Stage)
 	out.RequestURI = in.RequestURI
 	out.Verb = in.Verb
-	// TODO: Inefficient conversion - can we improve it?
+	// TODO: Inefficient conversion - can we improve it? id:3690 gh:3705
 	if err := s.Convert(&in.User, &out.User, 0); err != nil {
 		return err
 	}

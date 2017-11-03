@@ -107,7 +107,7 @@ type TmpfsOptions struct {
 	// Mode of the tmpfs upon creation
 	Mode os.FileMode `json:",omitempty"`
 
-	// TODO(stevvooe): There are several more tmpfs flags, specified in the
+	// TODO (stevvooe): There are several more tmpfs flags, specified in the id:2850 gh:2865
 	// daemon, that are accepted. Only the most basic are added for now.
 	//
 	// From docker/docker/pkg/mount/flags.go:

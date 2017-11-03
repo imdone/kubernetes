@@ -77,7 +77,7 @@ func NewREST(optsGetter generic.RESTOptionsGetter) (*REST, *StatusREST) {
 	}
 	options := &generic.StoreOptions{RESTOptions: optsGetter}
 	if err := store.CompleteWithOptions(options); err != nil {
-		panic(err) // TODO: Propagate error up
+		panic(err) // TODO: Propagate error up id:1306 gh:1312
 	}
 
 	statusStore := *store
@@ -199,7 +199,7 @@ func (r *ScaleREST) Update(ctx genericapirequest.Context, name string, objInfo r
 // scaleFromStatefulSet returns a scale subresource for a statefulset.
 func scaleFromStatefulSet(ss *apps.StatefulSet) (*extensions.Scale, error) {
 	return &extensions.Scale{
-		// TODO: Create a variant of ObjectMeta type that only contains the fields below.
+		// TODO: Create a variant of ObjectMeta type that only contains the fields below. id:1267 gh:1273
 		ObjectMeta: metav1.ObjectMeta{
 			Name:              ss.Name,
 			Namespace:         ss.Namespace,

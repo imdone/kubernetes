@@ -31,7 +31,7 @@ func addDefaultingFuncs(scheme *runtime.Scheme) error {
 func SetDefaults_DaemonSet(obj *extensionsv1beta1.DaemonSet) {
 	labels := obj.Spec.Template.Labels
 
-	// TODO: support templates defined elsewhere when we support them in the API
+	// TODO: support templates defined elsewhere when we support them in the API id:381 gh:382
 	if labels != nil {
 		if obj.Spec.Selector == nil {
 			obj.Spec.Selector = &metav1.LabelSelector{
@@ -115,7 +115,7 @@ func SetDefaults_Deployment(obj *extensionsv1beta1.Deployment) {
 func SetDefaults_ReplicaSet(obj *extensionsv1beta1.ReplicaSet) {
 	labels := obj.Spec.Template.Labels
 
-	// TODO: support templates defined elsewhere when we support them in the API
+	// TODO: support templates defined elsewhere when we support them in the API id:303 gh:305
 	if labels != nil {
 		if obj.Spec.Selector == nil {
 			obj.Spec.Selector = &metav1.LabelSelector{

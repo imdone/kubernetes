@@ -280,11 +280,11 @@ func (gce *GCECloud) GetAllZones() (sets.String, error) {
 		return sets.NewString(gce.managedZones...), nil
 	}
 
-	// TODO: Caching, but this is currently only called when we are creating a volume,
+	// TODO: Caching, but this is currently only called when we are creating a volume, id:437 gh:438
 	// which is a relatively infrequent operation, and this is only # zones API calls
 	zones := sets.NewString()
 
-	// TODO: Parallelize, although O(zones) so not too bad (N <= 3 typically)
+	// TODO: Parallelize, although O(zones) so not too bad (N <= 3 typically) id:506 gh:507
 	for _, zone := range gce.managedZones {
 		mc := newInstancesMetricContext("list", zone)
 		// We only retrieve one page in each zone - we only care about existence
@@ -432,7 +432,7 @@ func (gce *GCECloud) getInstancesByNames(names []string) ([]*gceInstance, error)
 				listCall = listCall.Filter("name eq " + nodeInstancePrefix + ".*")
 			}
 
-			// TODO(zmerlynn): Internal bug 29524655
+			// TODO (zmerlynn): Internal bug 29524655 id:476 gh:477
 			// listCall = listCall.Fields("items(name,id,disks,machineType)")
 			if pageToken != "" {
 				listCall.PageToken(pageToken)
@@ -568,7 +568,7 @@ func (gce *GCECloud) isCurrentInstance(instanceID string) bool {
 // of the host names in the cluster. Only use it as a fallback if gce.nodeTags
 // is unspecified
 func (gce *GCECloud) computeHostTags(hosts []*gceInstance) ([]string, error) {
-	// TODO: We could store the tags in gceInstance, so we could have already fetched it
+	// TODO: We could store the tags in gceInstance, so we could have already fetched it id:494 gh:496
 	hostNamesByZone := make(map[string]map[string]bool) // map of zones -> map of names -> bool (for easy lookup)
 	nodeInstancePrefix := gce.nodeInstancePrefix
 	for _, host := range hosts {
@@ -599,7 +599,7 @@ func (gce *GCECloud) computeHostTags(hosts []*gceInstance) ([]string, error) {
 			}
 
 			// Add the fields we want
-			// TODO(zmerlynn): Internal bug 29524655
+			// TODO (zmerlynn): Internal bug 29524655 id:466 gh:467
 			// listCall = listCall.Fields("items(name,tags)")
 
 			if pageToken != "" {

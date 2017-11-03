@@ -34,7 +34,7 @@ import (
 	"k8s.io/kubernetes/pkg/kubelet/gpu"
 )
 
-// TODO: rework to use Nvidia's NVML, which is more complex, but also provides more fine-grained information and stats.
+// TODO: rework to use Nvidia's NVML, which is more complex, but also provides more fine-grained information and stats. id:948 gh:954
 const (
 	// All NVIDIA GPUs cards should be mounted with nvidiactl and nvidia-uvm
 	// If the driver installed correctly, the 2 devices will be there.
@@ -60,13 +60,13 @@ type nvidiaGPUManager struct {
 	allocated      *podGPUs
 	defaultDevices []string
 	// The interface which could get GPU mapping from all the containers.
-	// TODO: Should make this independent of Docker in the future.
+	// TODO: Should make this independent of Docker in the future. id:962 gh:968
 	dockerClient     libdocker.Interface
 	activePodsLister activePodsLister
 }
 
 // NewNvidiaGPUManager returns a GPUManager that manages local Nvidia GPUs.
-// TODO: Migrate to use pod level cgroups and make it generic to all runtimes.
+// TODO: Migrate to use pod level cgroups and make it generic to all runtimes. id:860 gh:866
 func NewNvidiaGPUManager(activePodsLister activePodsLister, dockerClient libdocker.Interface) (gpu.GPUManager, error) {
 	if dockerClient == nil {
 		return nil, fmt.Errorf("invalid docker client specified")
@@ -185,7 +185,7 @@ func (ngm *nvidiaGPUManager) updateAllocatedGPUs() {
 }
 
 // discoverGPUs identifies allGPUs NVIDIA GPU devices available on the local node by walking `/dev` directory.
-// TODO: Without NVML support we only can check whether there has GPU devices, but
+// TODO: Without NVML support we only can check whether there has GPU devices, but id:891 gh:897
 // could not give a health check or get more information like GPU cores, memory, or
 // family name. Need to support NVML in the future. But we do not need NVML until
 // we want more features, features like schedule containers according to GPU family
@@ -234,7 +234,7 @@ func (ngm *nvidiaGPUManager) gpusInUse() *podGPUs {
 		if containers.Len() == 0 {
 			continue
 		}
-		// TODO: If kubelet restarts right after allocating a GPU to a pod, the container might not have started yet and so container status might not be available yet.
+		// TODO: If kubelet restarts right after allocating a GPU to a pod, the container might not have started yet and so container status might not be available yet. id:919 gh:925
 		// Use an internal checkpoint instead or try using the CRI if its checkpoint is reliable.
 		var containersToInspect []containerIdentifier
 		for _, container := range pod.Status.ContainerStatuses {

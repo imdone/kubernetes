@@ -76,7 +76,7 @@ func (name kubernetesInstanceID) mapToAWSInstanceID() (awsInstanceID, error) {
 
 	// We sanity check the resulting volume; the two known formats are
 	// i-12345678 and i-12345678abcdef01
-	// TODO: Regex match?
+	// TODO: Regex match? id:470 gh:471
 	if awsID == "" || strings.Contains(awsID, "/") || !strings.HasPrefix(awsID, "i-") {
 		return "", fmt.Errorf("Invalid format for AWS instance (%s)", name)
 	}
@@ -141,7 +141,7 @@ func describeInstance(ec2Client EC2, instanceID awsInstanceID) (*ec2.Instance, e
 
 // instanceCache manages the cache of DescribeInstances
 type instanceCache struct {
-	// TODO: Get rid of this field, send all calls through the instanceCache
+	// TODO: Get rid of this field, send all calls through the instanceCache id:447 gh:448
 	cloud *Cloud
 
 	mutex    sync.Mutex

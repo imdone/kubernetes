@@ -143,7 +143,7 @@ func NewReplicaSetController(rsInformer extensionsinformers.ReplicaSetInformer, 
 // SetEventRecorder replaces the event recorder used by the ReplicaSetController
 // with the given recorder. Only used for testing.
 func (rsc *ReplicaSetController) SetEventRecorder(recorder record.EventRecorder) {
-	// TODO: Hack. We can't cleanly shutdown the event recorder, so benchmarks
+	// TODO: Hack. We can't cleanly shutdown the event recorder, so benchmarks id:550 gh:551
 	// need to pass in a fake.
 	rsc.podControl = controller.RealPodControl{KubeClient: rsc.kubeClient, Recorder: recorder}
 }
@@ -311,7 +311,7 @@ func (rsc *ReplicaSetController) updatePod(old, cur interface{}) {
 		}
 		glog.V(4).Infof("Pod %s updated, objectMeta %+v -> %+v.", curPod.Name, oldPod.ObjectMeta, curPod.ObjectMeta)
 		rsc.enqueueReplicaSet(rs)
-		// TODO: MinReadySeconds in the Pod will generate an Available condition to be added in
+		// TODO: MinReadySeconds in the Pod will generate an Available condition to be added in id:594 gh:595
 		// the Pod status which in turn will trigger a requeue of the owning replica set thus
 		// having its status updated with the newly available replica. For now, we can fake the
 		// update by resyncing the controller MinReadySeconds after the it is requeued because
@@ -442,7 +442,7 @@ func (rsc *ReplicaSetController) manageReplicas(filteredPods []*v1.Pod, rs *exte
 		if diff > rsc.burstReplicas {
 			diff = rsc.burstReplicas
 		}
-		// TODO: Track UIDs of creates just like deletes. The problem currently
+		// TODO: Track UIDs of creates just like deletes. The problem currently id:632 gh:633
 		// is we'd need to wait on the result of a create to record the pod's
 		// UID, which would require locking *across* the create, which will turn
 		// into a performance bottleneck. We should generate a UID for the pod
@@ -571,7 +571,7 @@ func (rsc *ReplicaSetController) syncReplicaSet(key string) error {
 
 	// list all pods to include the pods that don't match the rs`s selector
 	// anymore but has the stale controller ref.
-	// TODO: Do the List and Filter in a single pass, or use an index.
+	// TODO: Do the List and Filter in a single pass, or use an index. id:568 gh:569
 	allPods, err := rsc.podLister.Pods(rs.Namespace).List(labels.Everything())
 	if err != nil {
 		return err
@@ -584,7 +584,7 @@ func (rsc *ReplicaSetController) syncReplicaSet(key string) error {
 		}
 	}
 
-	// NOTE: filteredPods are pointing to objects from cache - if you need to
+	// NOTE: filteredPods are pointing to objects from cache - if you need to id:668 gh:669
 	// modify them, you need to copy it first.
 	filteredPods, err = rsc.claimPods(rs, selector, filteredPods)
 	if err != nil {

@@ -407,8 +407,8 @@ func (ctrl *PersistentVolumeController) syncBoundClaim(claim *v1.PersistentVolum
 			return nil
 		} else if volume.Spec.ClaimRef.UID == claim.UID {
 			// All is well
-			// NOTE: syncPV can handle this so it can be left out.
-			// NOTE: bind() call here will do nothing in most cases as
+			// NOTE: syncPV can handle this so it can be left out. id:687 gh:688
+			// NOTE: bind() call here will do nothing in most cases as id:604 gh:605
 			// everything should be already set.
 			glog.V(4).Infof("synchronizing bound PersistentVolumeClaim[%s]: claim is already correctly bound", claimToClaimKey(claim))
 			if err = ctrl.bind(volume, claim); err != nil {
@@ -487,7 +487,7 @@ func (ctrl *PersistentVolumeController) syncVolume(volume *v1.PersistentVolume) 
 
 		if claim == nil {
 			// If we get into this block, the claim must have been deleted;
-			// NOTE: reclaimVolume may either release the PV back into the pool or
+			// NOTE: reclaimVolume may either release the PV back into the pool or id:642 gh:643
 			// recycle it or do nothing (retain)
 
 			// Do not overwrite previous Failed state - let the user see that

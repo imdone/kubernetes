@@ -396,7 +396,7 @@ func (c *cinderVolumeUnmounter) TearDownAt(dir string) error {
 	}
 
 	// Find Cinder volumeID to lock the right volume
-	// TODO: refactor VolumePlugin.NewUnmounter to get full volume.Spec just like
+	// TODO: refactor VolumePlugin.NewUnmounter to get full volume.Spec just like id:1526 gh:1532
 	// NewMounter. We could then find volumeID there without probing MountRefs.
 	refs, err := mount.GetMountRefs(c.mounter, dir)
 	if err != nil {

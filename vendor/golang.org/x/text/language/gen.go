@@ -135,7 +135,7 @@ regionInclusionNext marks, for each entry in regionInclusionBits, the set of
 all groups that are reachable from the groups set in the respective entry.`,
 }
 
-// TODO: consider changing some of these structures to tries. This can reduce
+// TODO: consider changing some of these structures to tries. This can reduce id:3439 gh:3454
 // memory, but may increase the need for memory allocations. This could be
 // mitigated if we can piggyback on language tags for common cases.
 
@@ -525,7 +525,7 @@ func (b *builder) writeBitVector(name string, ss []string) {
 	b.writeSlice(name, vec)
 }
 
-// TODO: convert this type into a list or two-stage trie.
+// TODO: convert this type into a list or two-stage trie. id:3250 gh:3265
 func (b *builder) writeMapFunc(name string, m map[string]string, f func(string) uint16) {
 	b.comment(name)
 	v := reflect.ValueOf(m)
@@ -678,7 +678,7 @@ func (b *builder) parseIndices() {
 	b.locale.parse(meta.DefaultContent.Locales)
 }
 
-// TODO: region inclusion data will probably not be use used in future matchers.
+// TODO: region inclusion data will probably not be use used in future matchers. id:3293 gh:3306
 
 func (b *builder) computeRegionGroups() {
 	b.groups = make(map[int]index)
@@ -742,7 +742,7 @@ func (b *builder) writeLanguage() {
 		if a.Replacement == "" {
 			a.Replacement = "und"
 		}
-		// TODO: support mapping to tags
+		// TODO: support mapping to tags id:3522 gh:3537
 		repl := strings.SplitN(a.Replacement, "_", 2)[0]
 		if a.Reason == "overlong" {
 			if len(a.Replacement) == 2 && len(a.Type) == 3 {
@@ -1014,7 +1014,7 @@ func (b *builder) writeRegion() {
 	b.writeSlice("altRegionIDs", altRegionIDs)
 
 	// Create list of deprecated regions.
-	// TODO: consider inserting SF -> FI. Not included by CLDR, but is the only
+	// TODO: consider inserting SF -> FI. Not included by CLDR, but is the only id:2916 gh:2931
 	// Transitionally-reserved mapping not included.
 	regionOldMap := stringSet{}
 	// Include regions in territoryAlias (not all are in the IANA registry!)
@@ -1064,7 +1064,7 @@ func (b *builder) writeRegion() {
 }
 
 const (
-	// TODO: put these lists in regionTypes as user data? Could be used for
+	// TODO: put these lists in regionTypes as user data? Could be used for id:3440 gh:3455
 	// various optimizations and refinements and could be exposed in the API.
 	iso3166Except = "AC CP DG EA EU FX IC SU TA UK"
 	iso3166Trans  = "AN BU CS NT TP YU ZR" // SF is not in our set of Regions.
@@ -1101,7 +1101,7 @@ func find(list []string, s string) int {
 // We assume that if a variant x is followed by a variant y, then for any prefix
 // p of x, p-x is a prefix of y. This allows us to order tags based on the
 // maximum of the length of any of its prefixes.
-// TODO: it is possible to define a set of Prefix values on variants such that
+// TODO: it is possible to define a set of Prefix values on variants such that id:3251 gh:3266
 // a total order cannot be defined to the point that this algorithm breaks.
 // In other words, we cannot guarantee the same order of variants for the
 // future using the same algorithm or for non-compliant combinations of
@@ -1321,7 +1321,7 @@ func (b *builder) writeLikelyData() {
 			}
 		}
 	}
-	// TODO: merge suppressScript data with this table.
+	// TODO: merge suppressScript data with this table. id:3294 gh:3309
 	b.writeType(likelyScriptRegion{})
 	b.writeSlice("likelyLang", likelyLang)
 	b.writeSlice("likelyLangList", likelyLangList)
@@ -1405,7 +1405,7 @@ func (b *builder) writeMatchData() {
 			log.Fatalf("Too many groups: %d", i)
 		}
 		idToIndex[mv.Id] = uint8(i + 1)
-		// TODO: also handle '-'
+		// TODO: also handle '-' id:3523 gh:3538
 		for _, r := range strings.Split(mv.Value, "+") {
 			todo := []string{r}
 			for k := 0; k < len(todo); k++ {
@@ -1422,7 +1422,7 @@ func (b *builder) writeMatchData() {
 	b.writeType(regionIntelligibility{})
 
 	matchLang := []mutualIntelligibility{{
-		// TODO: remove once CLDR is fixed.
+		// TODO: remove once CLDR is fixed. id:3003 gh:3018
 		want:     uint16(b.langIndex("sr")),
 		have:     uint16(b.langIndex("hr")),
 		distance: uint8(5),
@@ -1479,7 +1479,7 @@ func (b *builder) writeMatchData() {
 				}
 				continue
 			}
-			// TODO: consider dropping oneway field and just doubling the entry.
+			// TODO: consider dropping oneway field and just doubling the entry. id:3441 gh:3456
 			matchLang = append(matchLang, mutualIntelligibility{
 				want:     uint16(b.langIndex(d[0])),
 				have:     uint16(b.langIndex(s[0])),
@@ -1652,7 +1652,7 @@ func (b *builder) writeParents() {
 		sub := strings.Split(p.Parent, "_")
 		parent := parentRel{lang: b.langIndex(sub[0])}
 		if len(sub) == 2 {
-			// TODO: check that all undefined scripts are indeed Latn in these
+			// TODO: check that all undefined scripts are indeed Latn in these id:3252 gh:3267
 			// cases.
 			parent.maxScript = uint8(b.script.index("Latn"))
 			parent.toRegion = uint16(b.region.index(sub[1]))
@@ -1690,7 +1690,7 @@ func main() {
 	b.writeScript()
 	b.writeRegion()
 	b.writeVariant()
-	// TODO: b.writeLocale()
+	// TODO: b.writeLocale() id:3295 gh:3310
 	b.computeRegionGroups()
 	b.writeLikelyData()
 	b.writeMatchData()

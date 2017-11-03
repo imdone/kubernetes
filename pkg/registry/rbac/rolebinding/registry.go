@@ -56,7 +56,7 @@ func (s *storage) ListRoleBindings(ctx genericapirequest.Context, options *metai
 }
 
 func (s *storage) CreateRoleBinding(ctx genericapirequest.Context, roleBinding *rbac.RoleBinding, createValidation rest.ValidateObjectFunc) error {
-	// TODO(ericchiang): add additional validation
+	// TODO (ericchiang): add additional validation id:1419 gh:1425
 	_, err := s.Create(ctx, roleBinding, createValidation, false)
 	return err
 }

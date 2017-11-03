@@ -39,7 +39,7 @@ type Volume struct {
 	Kind string `json:"kind"`
 
 	// currently used only by "host"
-	// TODO(jonboulle): factor out?
+	// TODO (jonboulle): factor out? id:2818 gh:2833
 	Source    string `json:"source,omitempty"`
 	ReadOnly  *bool  `json:"readOnly,omitempty"`
 	Recursive *bool  `json:"recursive,omitempty"`

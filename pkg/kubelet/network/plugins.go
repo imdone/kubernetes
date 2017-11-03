@@ -115,7 +115,7 @@ type LegacyHost interface {
 }
 
 // Host is an interface that plugins can use to access the kubelet.
-// TODO(#35457): get rid of this backchannel to the kubelet. The scope of
+// TODO (#35457): get rid of this backchannel to the kubelet. The scope of id:986 gh:988
 // the back channel is restricted to host-ports/testing, and restricted
 // to kubenet. No other network plugin wrapper needs it. Other plugins
 // only require a way to access namespace information and port mapping

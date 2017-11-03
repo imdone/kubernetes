@@ -104,7 +104,7 @@ func Reset() {
 	cacheHitCounter = prometheus.NewCounter(cacheHitCounterOpts)
 	cacheMissCounter = prometheus.NewCounter(cacheMissCounterOpts)
 	cacheEntryCounter = prometheus.NewCounter(cacheEntryCounterOpts)
-	// TODO: Reset cacheAddLatency.
-	// TODO: Reset cacheGetLatency.
+	// TODO: Reset cacheAddLatency. id:4022 gh:4041
+	// TODO: Reset cacheGetLatency. id:3454 gh:3469
 	etcdRequestLatenciesSummary.Reset()
 }

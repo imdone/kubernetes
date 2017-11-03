@@ -159,7 +159,7 @@ func (a *azureFileProvisioner) Provision() (*v1.PersistentVolume, error) {
 			return nil, fmt.Errorf("invalid option %q for volume plugin %s", k, a.plugin.GetPluginName())
 		}
 	}
-	// TODO: implement c.options.ProvisionerSelector parsing
+	// TODO: implement c.options.ProvisionerSelector parsing id:1429 gh:1435
 	if a.options.PVC.Spec.Selector != nil {
 		return nil, fmt.Errorf("claim.Spec.Selector is not supported for dynamic provisioning on Azure file")
 	}

@@ -411,7 +411,7 @@ func (c *linuxContainer) commandTemplate(p *Process, childPipe *os.File) (*exec.
 	cmd.Env = append(cmd.Env,
 		fmt.Sprintf("_LIBCONTAINER_INITPIPE=%d", stdioFdCount+len(cmd.ExtraFiles)-1),
 	)
-	// NOTE: when running a container with no PID namespace and the parent process spawning the container is
+	// NOTE: when running a container with no PID namespace and the parent process spawning the container is id:3139 gh:3154
 	// PID1 the pdeathsig is being delivered to the container's init process by the kernel for some reason
 	// even with the parent still running.
 	if c.config.ParentDeathSignal > 0 {
@@ -546,7 +546,7 @@ func (c *linuxContainer) Resume() error {
 }
 
 func (c *linuxContainer) NotifyOOM() (<-chan struct{}, error) {
-	// XXX(cyphar): This requires cgroups.
+	// XXX (cyphar): This requires cgroups. id:3000 gh:3015
 	if c.config.Rootless {
 		return nil, fmt.Errorf("cannot get OOM notifications from rootless container")
 	}
@@ -554,7 +554,7 @@ func (c *linuxContainer) NotifyOOM() (<-chan struct{}, error) {
 }
 
 func (c *linuxContainer) NotifyMemoryPressure(level PressureLevel) (<-chan struct{}, error) {
-	// XXX(cyphar): This requires cgroups.
+	// XXX (cyphar): This requires cgroups. id:2936 gh:2951
 	if c.config.Rootless {
 		return nil, fmt.Errorf("cannot get memory pressure notifications from rootless container")
 	}
@@ -766,7 +766,7 @@ func (c *linuxContainer) Checkpoint(criuOpts *CriuOpts) error {
 	c.m.Lock()
 	defer c.m.Unlock()
 
-	// TODO(avagin): Figure out how to make this work nicely. CRIU 2.0 has
+	// TODO (avagin): Figure out how to make this work nicely. CRIU 2.0 has id:3198 gh:3213
 	//               support for doing unprivileged dumps, but the setup of
 	//               rootless containers might make this complicated.
 	if c.config.Rootless {
@@ -957,7 +957,7 @@ func (c *linuxContainer) Restore(process *Process, criuOpts *CriuOpts) error {
 	c.m.Lock()
 	defer c.m.Unlock()
 
-	// TODO(avagin): Figure out how to make this work nicely. CRIU doesn't have
+	// TODO (avagin): Figure out how to make this work nicely. CRIU doesn't have id:2776 gh:2791
 	//               support for unprivileged restore at the moment.
 	if c.config.Rootless {
 		return fmt.Errorf("cannot restore a rootless container")
@@ -1092,7 +1092,7 @@ func (c *linuxContainer) Restore(process *Process, criuOpts *CriuOpts) error {
 }
 
 func (c *linuxContainer) criuApplyCgroups(pid int, req *criurpc.CriuReq) error {
-	// XXX: Do we need to deal with this case? AFAIK criu still requires root.
+	// XXX: Do we need to deal with this case? AFAIK criu still requires root. id:3140 gh:3155
 	if err := c.cgroupManager.Apply(pid); err != nil {
 		return err
 	}

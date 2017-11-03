@@ -86,7 +86,7 @@ func setUp(t *testing.T) (*etcdtesting.EtcdTestServer, Config, informers.SharedI
 	resourceEncoding.SetVersionEncoding(api.GroupName, legacyscheme.Registry.GroupOrDie(api.GroupName).GroupVersion, schema.GroupVersion{Group: api.GroupName, Version: runtime.APIVersionInternal})
 	resourceEncoding.SetVersionEncoding(autoscaling.GroupName, *testapi.Autoscaling.GroupVersion(), schema.GroupVersion{Group: autoscaling.GroupName, Version: runtime.APIVersionInternal})
 	resourceEncoding.SetVersionEncoding(batch.GroupName, *testapi.Batch.GroupVersion(), schema.GroupVersion{Group: batch.GroupName, Version: runtime.APIVersionInternal})
-	// FIXME (soltysh): this GroupVersionResource override should be configurable
+	// FIXME (soltysh): this GroupVersionResource override should be configurable id:1145 gh:1151
 	resourceEncoding.SetResourceEncoding(schema.GroupResource{Group: "batch", Resource: "cronjobs"}, schema.GroupVersion{Group: batch.GroupName, Version: "v1beta1"}, schema.GroupVersion{Group: batch.GroupName, Version: runtime.APIVersionInternal})
 	resourceEncoding.SetVersionEncoding(apps.GroupName, *testapi.Apps.GroupVersion(), schema.GroupVersion{Group: apps.GroupName, Version: runtime.APIVersionInternal})
 	resourceEncoding.SetVersionEncoding(extensions.GroupName, *testapi.Extensions.GroupVersion(), schema.GroupVersion{Group: extensions.GroupName, Version: runtime.APIVersionInternal})

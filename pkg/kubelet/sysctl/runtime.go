@@ -34,7 +34,7 @@ const (
 	rktTypeName    = "rkt"
 )
 
-// TODO: The admission logic in this file is runtime-dependent. It should be
+// TODO: The admission logic in this file is runtime-dependent. It should be id:1143 gh:1149
 // changed to be generic and CRI-compatible.
 
 type runtimeAdmitHandler struct {

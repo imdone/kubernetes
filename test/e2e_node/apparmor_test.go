@@ -122,7 +122,7 @@ func loadTestProfiles() error {
 		return fmt.Errorf("failed to write profiles to file: %v", err)
 	}
 
-	// TODO(random-liu): The test is run as root now, no need to use sudo here.
+	// TODO (random-liu): The test is run as root now, no need to use sudo here. id:2574 gh:2589
 	cmd := exec.Command("sudo", "apparmor_parser", "-r", "-W", f.Name())
 	stderr := &bytes.Buffer{}
 	cmd.Stderr = stderr
@@ -200,7 +200,7 @@ func expectSoftRejection(status v1.PodStatus) {
 }
 
 func isAppArmorEnabled() bool {
-	// TODO(tallclair): Pass this through the image setup rather than hardcoding.
+	// TODO (tallclair): Pass this through the image setup rather than hardcoding. id:2321 gh:2336
 	if strings.Contains(framework.TestContext.NodeName, "-gci-dev-") {
 		gciVersionRe := regexp.MustCompile("-gci-dev-([0-9]+)-")
 		matches := gciVersionRe.FindStringSubmatch(framework.TestContext.NodeName)

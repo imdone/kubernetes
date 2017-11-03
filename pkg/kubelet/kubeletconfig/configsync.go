@@ -67,7 +67,7 @@ func (cc *Controller) syncConfigSource(client clientset.Interface, nodeName stri
 		syncerr = fmt.Errorf("%s, error: %v", reason, err)
 		return
 	} else if updated {
-		// TODO(mtaufen): Consider adding a "currently restarting kubelet" ConfigOK message for this case
+		// TODO (mtaufen): Consider adding a "currently restarting kubelet" ConfigOK message for this case id:1094 gh:1100
 		utillog.Infof("config updated, Kubelet will restart to begin using new config")
 		os.Exit(0)
 	}

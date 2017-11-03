@@ -504,7 +504,7 @@ function start_apiserver {
     # Create matching certificates for kube-aggregator
     kube::util::create_serving_certkey "${CONTROLPLANE_SUDO}" "${CERT_DIR}" "server-ca" kube-aggregator api.kube-public.svc "localhost" ${API_HOST_IP}
     kube::util::create_client_certkey "${CONTROLPLANE_SUDO}" "${CERT_DIR}" request-header-ca auth-proxy system:auth-proxy
-    # TODO remove masters and add rolebinding
+    # TODO remove masters and add rolebinding id:240 gh:241
     kube::util::create_client_certkey "${CONTROLPLANE_SUDO}" "${CERT_DIR}" 'client-ca' kube-aggregator system:kube-aggregator system:masters
     kube::util::write_client_kubeconfig "${CONTROLPLANE_SUDO}" "${CERT_DIR}" "${ROOT_CA_FILE}" "${API_HOST}" "${API_SECURE_PORT}" kube-aggregator
 
@@ -548,7 +548,7 @@ function start_apiserver {
     echo "Waiting for apiserver to come up"
     # this uses the API port because if you don't have any authenticator, you can't seem to use the secure port at all.
     # this matches what happened with the combination in 1.4.
-    # TODO change this conditionally based on whether API_PORT is on or off
+    # TODO change this conditionally based on whether API_PORT is on or off id:191 gh:192
     kube::util::wait_for_url "https://${API_HOST_IP}:${API_SECURE_PORT}/healthz" "apiserver: " 1 ${WAIT_FOR_URL_API_SERVER} \
         || { echo "check apiserver logs: ${APISERVER_LOG}" ; exit 1 ; }
 
@@ -770,7 +770,7 @@ function start_kubedns {
         sed -i -e "s/{{ pillar\['dns_domain'\] }}/${DNS_DOMAIN}/g" kube-dns.yaml
         sed -i -e "s/{{ pillar\['dns_server'\] }}/${DNS_SERVER_IP}/g" kube-dns.yaml
 
-        # TODO update to dns role once we have one.
+        # TODO update to dns role once we have one. id:197 gh:198
         # use kubectl to create kubedns addon
         ${KUBECTL} --kubeconfig="${CERT_DIR}/admin.kubeconfig" --namespace=kube-system create -f kube-dns.yaml
         echo "Kube-dns addon successfully deployed."
@@ -906,7 +906,7 @@ if [[ "${START_MODE}" != "kubeletonly" ]]; then
 fi
 
 if [[ "${START_MODE}" != "nokubelet" ]]; then
-  ## TODO remove this check if/when kubelet is supported on darwin
+  ## TODO remove this check if/when kubelet is supported on darwin id:234 gh:235
   # Detect the OS name/arch and display appropriate error.
     case "$(uname -s)" in
       Darwin)

@@ -30,7 +30,7 @@ var _ = instrumentation.SIGDescribe("Cluster level logging using Elasticsearch [
 	f := framework.NewDefaultFramework("es-logging")
 
 	ginkgo.BeforeEach(func() {
-		// TODO: For now assume we are only testing cluster logging with Elasticsearch
+		// TODO: For now assume we are only testing cluster logging with Elasticsearch id:2385 gh:2400
 		// on GCE. Once we are sure that Elasticsearch cluster level logging
 		// works for other providers we should widen this scope of this test.
 		framework.SkipUnlessProviderIs("gce")

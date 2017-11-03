@@ -28,7 +28,7 @@ while read -ra LINE; do
     if [[ "${LINE}" == *"${HOSTNAME}"* ]]; then
         sed -i -e "s|^bind.*$|bind ${LINE}|" ${CFG}
     elif [ "$(/opt/redis/redis-cli -h $LINE info | grep role | sed 's,\r$,,')" = "role:master" ]; then
-        # TODO: More restrictive regex?
+        # TODO: More restrictive regex? id:2410 gh:2425
         sed -i -e "s|^# slaveof.*$|slaveof ${LINE} ${PORT}|" ${CFG}
     fi
 done

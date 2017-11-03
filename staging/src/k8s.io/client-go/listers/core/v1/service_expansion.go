@@ -31,7 +31,7 @@ type ServiceListerExpansion interface {
 // ServiceNamespaceLister.
 type ServiceNamespaceListerExpansion interface{}
 
-// TODO: Move this back to scheduler as a helper function that takes a Store,
+// TODO: Move this back to scheduler as a helper function that takes a Store, id:3911 gh:3931
 // rather than a method of ServiceLister.
 func (s *serviceLister) GetPodServices(pod *v1.Pod) ([]*v1.Service, error) {
 	allServices, err := s.Services(pod.Namespace).List(labels.Everything())

@@ -35,7 +35,7 @@ func NewDistributedVirtualSwitch(c *vim25.Client, ref types.ManagedObjectReferen
 }
 
 func (s DistributedVirtualSwitch) EthernetCardBackingInfo(ctx context.Context) (types.BaseVirtualDeviceBackingInfo, error) {
-	return nil, ErrNotSupported // TODO: just to satisfy NetworkReference interface for the finder
+	return nil, ErrNotSupported // TODO: just to satisfy NetworkReference interface for the finder id:2867 gh:2878
 }
 
 func (s DistributedVirtualSwitch) Reconfigure(ctx context.Context, spec types.BaseDVSConfigSpec) (*Task, error) {

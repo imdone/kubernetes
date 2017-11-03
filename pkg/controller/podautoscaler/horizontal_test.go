@@ -301,7 +301,7 @@ func (tc *testCase) prepareTestClient(t *testing.T) (*fake.Clientset, *metricsfa
 		if err := json.Unmarshal([]byte(obj.ObjectMeta.Annotations[autoscaling.HorizontalPodAutoscalerConditionsAnnotation]), &actualConditions); err != nil {
 			return true, nil, err
 		}
-		// TODO: it's ok not to sort these becaues statusOk
+		// TODO: it's ok not to sort these becaues statusOk id:549 gh:550
 		// contains all the conditions, so we'll never be appending.
 		// Default to statusOk when missing any specific conditions
 		if tc.expectedConditions == nil {
@@ -1720,4 +1720,4 @@ func TestAvoidUncessaryUpdates(t *testing.T) {
 	tc.runTestWithController(t, controller, informerFactory)
 }
 
-// TODO: add more tests
+// TODO: add more tests id:593 gh:594

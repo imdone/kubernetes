@@ -65,7 +65,7 @@ func (v replaceStrategy) MergeEmpty(e apply.EmptyElement) (apply.Result, error) 
 // replace returns the local value if specified, otherwise it returns the remote value
 // this works regardless of the approach
 func (v replaceStrategy) doReplace(e apply.Element) (apply.Result, error) {
-	// TODO: Check for conflicts
+	// TODO: Check for conflicts id:657 gh:658
 	if result, done := v.doAddOrDelete(e); done {
 		return result, nil
 	}

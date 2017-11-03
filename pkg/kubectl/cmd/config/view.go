@@ -72,12 +72,12 @@ func NewCmdConfigView(out, errOut io.Writer, ConfigAccess clientcmd.ConfigAccess
 			outputFormat := cmdutil.GetFlagString(cmd, "output")
 			if outputFormat == "wide" {
 				fmt.Fprintf(errOut, "--output wide is not available in kubectl config view; reset to default output format (%s)\n\n", defaultOutputFormat)
-				// TODO: once printing is abstracted, this should be handled at flag declaration time
+				// TODO: once printing is abstracted, this should be handled at flag declaration time id:683 gh:684
 				cmd.Flags().Set("output", defaultOutputFormat)
 			}
 			if outputFormat == "" {
 				fmt.Fprintf(errOut, "Reset to default output format (%s) as --output is empty\n", defaultOutputFormat)
-				// TODO: once printing is abstracted, this should be handled at flag declaration time
+				// TODO: once printing is abstracted, this should be handled at flag declaration time id:693 gh:694
 				cmd.Flags().Set("output", defaultOutputFormat)
 			}
 

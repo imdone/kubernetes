@@ -230,7 +230,7 @@ func (plugin *FakeVolumePlugin) GetVolumeName(spec *Spec) (string, error) {
 }
 
 func (plugin *FakeVolumePlugin) CanSupport(spec *Spec) bool {
-	// TODO: maybe pattern-match on spec.Name() to decide?
+	// TODO: maybe pattern-match on spec.Name() to decide? id:1531 gh:1537
 	return true
 }
 

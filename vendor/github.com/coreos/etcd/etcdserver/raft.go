@@ -47,7 +47,7 @@ const (
 	// Assuming the RTT is around 10ms, 1MB max size is large enough.
 	maxSizePerMsg = 1 * 1024 * 1024
 	// Never overflow the rafthttp buffer, which is 4096.
-	// TODO: a better const?
+	// TODO: a better const? id:2510 gh:2525
 	maxInflightMsgs = 4096 / 8
 )
 
@@ -276,7 +276,7 @@ func (r *raftNode) sendMessages(ms []raftpb.Message) {
 		if ms[i].Type == raftpb.MsgHeartbeat {
 			ok, exceed := r.td.Observe(ms[i].To)
 			if !ok {
-				// TODO: limit request rate.
+				// TODO: limit request rate. id:2758 gh:2773
 				plog.Warningf("failed to send out heartbeat on time (exceeded the %v timeout for %v)", r.heartbeat, exceed)
 				plog.Warningf("server is likely overloaded")
 			}

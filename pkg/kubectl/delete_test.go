@@ -294,7 +294,7 @@ func TestReplicaSetStop(t *testing.T) {
 			StopError:       nil,
 			ExpectedActions: []string{"get", "get", "update", "get", "get", "delete"},
 		},
-		// TODO: Implement tests for overlapping replica sets, similar to replication controllers,
+		// TODO: Implement tests for overlapping replica sets, similar to replication controllers, id:792 gh:793
 		// when the overlapping checks are implemented for replica sets.
 	}
 

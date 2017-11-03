@@ -189,7 +189,7 @@ func (item *primitiveItem) VisitPrimitive(schema *proto.Primitive) {
 	// Some types of primitives can match more than one (a number
 	// can be a string, but not the other way around). Return from
 	// the switch if we have a valid possible type conversion
-	// NOTE(apelisse): This logic is blindly copied from the
+	// NOTE (apelisse): This logic is blindly copied from the id:3978 gh:3998
 	// existing swagger logic, and I'm not sure I agree with it.
 	switch schema.Type {
 	case proto.Boolean:

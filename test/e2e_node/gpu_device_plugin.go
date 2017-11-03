@@ -138,7 +138,7 @@ func newDecimalResourceList(name v1.ResourceName, quantity int64) v1.ResourceLis
 	return v1.ResourceList{name: *resource.NewQuantity(quantity, resource.DecimalSI)}
 }
 
-// TODO: Find a uniform way to deal with systemctl/initctl/service operations. #34494
+// TODO: Find a uniform way to deal with systemctl/initctl/service operations. #34494 id:2481 gh:2496
 func restartKubelet(f *framework.Framework) {
 	beforeSocks, err := filepath.Glob("/var/lib/kubelet/device-plugins/nvidiaGPU*.sock")
 	framework.ExpectNoError(err)

@@ -39,7 +39,7 @@ function docker_monitoring {
 
 function kubelet_monitoring {
   echo "Wait for 2 minutes for kubelet to be fuctional"
-  # TODO(andyzheng0831): replace it with a more reliable method if possible.
+  # TODO (andyzheng0831): replace it with a more reliable method if possible. id:29 gh:30
   sleep 120
   local -r max_seconds=10
   local output=""

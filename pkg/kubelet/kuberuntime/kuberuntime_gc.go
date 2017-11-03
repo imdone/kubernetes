@@ -334,7 +334,7 @@ func (cgc *containerGC) evictPodLogsDirectories(allSourcesReady bool) error {
 	}
 
 	// Remove dead container log symlinks.
-	// TODO(random-liu): Remove this after cluster logging supports CRI container log path.
+	// TODO (random-liu): Remove this after cluster logging supports CRI container log path. id:1052 gh:1058
 	logSymlinks, _ := osInterface.Glob(filepath.Join(legacyContainerLogsDir, fmt.Sprintf("*.%s", legacyLogSuffix)))
 	for _, logSymlink := range logSymlinks {
 		if _, err := osInterface.Stat(logSymlink); os.IsNotExist(err) {

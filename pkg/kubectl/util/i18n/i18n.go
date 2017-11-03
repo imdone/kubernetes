@@ -92,7 +92,7 @@ func LoadTranslations(root string, getLanguageFn func() string) error {
 	}
 
 	glog.V(3).Infof("Setting language to %s", langStr)
-	// TODO: list the directory and load all files.
+	// TODO: list the directory and load all files. id:811 gh:812
 	buf := new(bytes.Buffer)
 	w := zip.NewWriter(buf)
 

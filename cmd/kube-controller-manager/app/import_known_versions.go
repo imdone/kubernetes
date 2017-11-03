@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// TODO: Remove this file when namespace controller and garbage collector
+// TODO: Remove this file when namespace controller and garbage collector id:139 gh:140
 // stops using legacyscheme.Registry.RESTMapper()
 package app
 

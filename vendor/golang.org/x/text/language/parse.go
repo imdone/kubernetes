@@ -33,7 +33,7 @@ func isAlphaNum(s []byte) bool {
 
 // errSyntax is returned by any of the parsing functions when the
 // input is not well-formed, according to BCP 47.
-// TODO: return the position at which the syntax error occurred?
+// TODO: return the position at which the syntax error occurred? id:3257 gh:3272
 var errSyntax = errors.New("language: tag is not well-formed")
 
 // ValueError is returned by any of the parsing functions when the
@@ -238,7 +238,7 @@ func Parse(s string) (t Tag, err error) {
 // http://www.unicode.org/reports/tr35/#Unicode_Language_and_Locale_Identifiers.
 // The resulting tag is canonicalized using the the canonicalization type c.
 func (c CanonType) Parse(s string) (t Tag, err error) {
-	// TODO: consider supporting old-style locale key-value pairs.
+	// TODO: consider supporting old-style locale key-value pairs. id:3300 gh:3315
 	if s == "" {
 		return und, errSyntax
 	}
@@ -306,7 +306,7 @@ func parse(scan *scanner, s string) (t Tag, err error) {
 // It returns a Tag and the end position in the input that was parsed.
 func parseTag(scan *scanner) (t Tag, end int) {
 	var e error
-	// TODO: set an error if an unknown lang, script or region is encountered.
+	// TODO: set an error if an unknown lang, script or region is encountered. id:3529 gh:3544
 	t.lang, e = getLangID(scan.token)
 	scan.setError(e)
 	scan.replace(t.lang.String())
@@ -361,12 +361,12 @@ func parseVariants(scan *scanner, end int, t Tag) int {
 	last := -1
 	needSort := false
 	for ; len(scan.token) >= 4; scan.scan() {
-		// TODO: measure the impact of needing this conversion and redesign
+		// TODO: measure the impact of needing this conversion and redesign id:3009 gh:3024
 		// the data structure if there is an issue.
 		v, ok := variantIndex[string(scan.token)]
 		if !ok {
 			// unknown variant
-			// TODO: allow user-defined variants?
+			// TODO: allow user-defined variants? id:3447 gh:3462
 			scan.gobble(mkErrInvalid(scan.token))
 			continue
 		}
@@ -514,7 +514,7 @@ func parseExtension(scan *scanner) int {
 			key = scan.token
 			keyEnd := scan.end
 			end = scan.acceptMinSize(3)
-			// TODO: check key value validity
+			// TODO: check key value validity id:3309 gh:3324
 			if keyEnd == end || bytes.Compare(key, last) != 1 {
 				// We have an invalid key or the keys are not sorted.
 				// Start scanning keys from scratch and reorder.
@@ -685,7 +685,7 @@ func (b *builder) update(part ...interface{}) (err error) {
 			for _, e := range v {
 				b.update(e)
 			}
-		// TODO: support parsing of raw strings based on morphology or just extensions?
+		// TODO: support parsing of raw strings based on morphology or just extensions? id:3301 gh:3316
 		case error:
 			err = v
 		}

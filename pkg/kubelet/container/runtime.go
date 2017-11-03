@@ -68,7 +68,7 @@ type Runtime interface {
 	// APIVersion returns the cached API version information of the container
 	// runtime. Implementation is expected to update this cache periodically.
 	// This may be different from the runtime engine's version.
-	// TODO(random-liu): We should fold this into Version()
+	// TODO (random-liu): We should fold this into Version() id:846 gh:848
 	APIVersion() (Version, error)
 	// Status returns the status of the runtime. An error is returned if the Status
 	// function itself fails, nil otherwise.
@@ -84,12 +84,12 @@ type Runtime interface {
 	// behavior such as removing all containers of unrecognized pods (yet).
 	// If evictNonDeletedPods is set to true, containers and sandboxes belonging to pods
 	// that are terminated, but not deleted will be evicted.  Otherwise, only deleted pods will be GC'd.
-	// TODO: Revisit this method and make it cleaner.
+	// TODO: Revisit this method and make it cleaner. id:877 gh:883
 	GarbageCollect(gcPolicy ContainerGCPolicy, allSourcesReady bool, evictNonDeletedPods bool) error
 	// Syncs the running pod into the desired pod.
 	SyncPod(pod *v1.Pod, apiPodStatus v1.PodStatus, podStatus *PodStatus, pullSecrets []v1.Secret, backOff *flowcontrol.Backoff) PodSyncResult
 	// KillPod kills all the containers of a pod. Pod may be nil, running pod must not be.
-	// TODO(random-liu): Return PodSyncResult in KillPod.
+	// TODO (random-liu): Return PodSyncResult in KillPod. id:821 gh:822
 	// gracePeriodOverride if specified allows the caller to override the pod default grace period.
 	// only hard kill paths are allowed to specify a gracePeriodOverride in the kubelet in order to not corrupt user data.
 	// it is useful when doing SIGKILL for hard eviction scenarios, or max grace period during soft eviction scenarios.
@@ -100,15 +100,15 @@ type Runtime interface {
 	// Returns the filesystem path of the pod's network namespace; if the
 	// runtime does not handle namespace creation itself, or cannot return
 	// the network namespace path, it should return an error.
-	// TODO: Change ContainerID to a Pod ID since the namespace is shared
+	// TODO: Change ContainerID to a Pod ID since the namespace is shared id:840 gh:841
 	// by all containers in the pod.
 	GetNetNS(containerID ContainerID) (string, error)
 	// Returns the container ID that represents the Pod, as passed to network
 	// plugins. For example, if the runtime uses an infra container, returns
 	// the infra container's ContainerID.
-	// TODO: Change ContainerID to a Pod ID, see GetNetNS()
+	// TODO: Change ContainerID to a Pod ID, see GetNetNS() id:905 gh:912
 	GetPodContainerID(*Pod) (ContainerID, error)
-	// TODO(vmarmol): Unify pod and containerID args.
+	// TODO (vmarmol): Unify pod and containerID args. id:847 gh:849
 	// GetContainerLogs returns logs of a specific container. By
 	// default, it returns a snapshot of the container log. Set 'follow' to true to
 	// stream the log. Set 'follow' to false and specify the number of lines (e.g.
@@ -184,7 +184,7 @@ type Pod struct {
 	// List of sandboxes associated with this pod. The sandboxes are converted
 	// to Container temporariliy to avoid substantial changes to other
 	// components. This is only populated by kuberuntime.
-	// TODO: use the runtimeApi.PodSandbox type directly.
+	// TODO: use the runtimeApi.PodSandbox type directly. id:878 gh:884
 	Sandboxes []*Container
 }
 
@@ -377,7 +377,7 @@ type EnvVar struct {
 
 type Mount struct {
 	// Name of the volume mount.
-	// TODO(yifan): Remove this field, as this is not representing the unique name of the mount,
+	// TODO (yifan): Remove this field, as this is not representing the unique name of the mount, id:906 gh:913
 	// but the volume name only.
 	Name string
 	// Path of the mount within the container.

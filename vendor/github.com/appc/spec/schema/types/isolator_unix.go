@@ -23,7 +23,7 @@ var (
 )
 
 const (
-	//TODO(lucab): add "ulimit" isolators
+	//TODO (lucab): add "ulimit" isolators id:2608 gh:2623
 	UnixSysctlName = "os/unix/sysctl"
 )
 

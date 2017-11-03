@@ -97,7 +97,7 @@ func setUp(t *testing.T) (*etcdtesting.EtcdTestServer, Config, *assert.Assertion
 		t.Fatal("unable to create fake client set")
 	}
 
-	// TODO restore this test, but right now, eliminate our cycle
+	// TODO restore this test, but right now, eliminate our cycle id:3893 gh:3915
 	// config.OpenAPIConfig = DefaultOpenAPIConfig(testGetOpenAPIDefinitions, runtime.NewScheme())
 	// config.OpenAPIConfig.Info = &spec.Info{
 	// 	InfoProps: spec.InfoProps{

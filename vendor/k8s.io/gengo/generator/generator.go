@@ -138,7 +138,7 @@ type Generator interface {
 	// Preferred file name of this generator, not including a path. It is
 	// allowed for multiple generators to use the same filename, but it's
 	// up to you to make sure they don't have colliding import names.
-	// TODO: provide per-file import tracking, removing the requirement
+	// TODO: provide per-file import tracking, removing the requirement id:3626 gh:3641
 	// that generators coordinate..
 	Filename() string
 

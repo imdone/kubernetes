@@ -8,7 +8,7 @@ import (
 	"unicode/utf8"
 )
 
-// TODO: Add contextual character rules from Appendix A of RFC5892.
+// TODO: Add contextual character rules from Appendix A of RFC5892. id:3303 gh:3318
 
 // A class is a set of characters that match certain derived properties. The
 // PRECIS framework defines two classes: The Freeform class and the Identifier

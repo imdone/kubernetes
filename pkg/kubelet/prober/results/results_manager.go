@@ -35,7 +35,7 @@ type Manager interface {
 	Remove(kubecontainer.ContainerID)
 	// Updates creates a channel that receives an Update whenever its result changes (but not
 	// removed).
-	// NOTE: The current implementation only supports a single updates channel.
+	// NOTE: The current implementation only supports a single updates channel. id:1123 gh:1129
 	Updates() <-chan Update
 }
 

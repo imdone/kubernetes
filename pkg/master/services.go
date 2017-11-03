@@ -27,7 +27,7 @@ import (
 
 // DefaultServiceIPRange takes a the serviceIPRange flag and returns the defaulted service ip range (if  needed),
 // api server service IP, and an error
-// TODO move this out of the genericapiserver package
+// TODO move this out of the genericapiserver package id:1206 gh:1212
 func DefaultServiceIPRange(passedServiceClusterIPRange net.IPNet) (net.IPNet, net.IP, error) {
 	serviceClusterIPRange := passedServiceClusterIPRange
 	if passedServiceClusterIPRange.IP == nil {

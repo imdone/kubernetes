@@ -106,7 +106,7 @@ func (gce *GCECloud) CreateAlphaGlobalBackendService(bg *computealpha.BackendSer
 // ListGlobalBackendServices lists all backend services in the project.
 func (gce *GCECloud) ListGlobalBackendServices() (*compute.BackendServiceList, error) {
 	mc := newBackendServiceMetricContext("list", "")
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:462 gh:463
 	v, err := gce.service.BackendServices.List(gce.projectID).Do()
 	return v, mc.Observe(err)
 }
@@ -167,7 +167,7 @@ func (gce *GCECloud) CreateRegionBackendService(bg *compute.BackendService, regi
 // ListRegionBackendServices lists all backend services in the project.
 func (gce *GCECloud) ListRegionBackendServices(region string) (*compute.BackendServiceList, error) {
 	mc := newBackendServiceMetricContext("list", region)
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:379 gh:377
 	v, err := gce.service.RegionBackendServices.List(gce.projectID, region).Do()
 	return v, mc.Observe(err)
 }

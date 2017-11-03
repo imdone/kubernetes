@@ -192,13 +192,13 @@ func ListResource(r rest.Lister, rw rest.Watcher, scope RequestScope, forceWatch
 		}
 
 		// transform fields
-		// TODO: DecodeParametersInto should do this.
+		// TODO: DecodeParametersInto should do this. id:3394 gh:3409
 		if opts.FieldSelector != nil {
 			fn := func(label, value string) (newLabel, newValue string, err error) {
 				return scope.Convertor.ConvertFieldLabel(scope.Kind.GroupVersion().String(), scope.Kind.Kind, label, value)
 			}
 			if opts.FieldSelector, err = opts.FieldSelector.Transform(fn); err != nil {
-				// TODO: allow bad request to set field causes based on query parameters
+				// TODO: allow bad request to set field causes based on query parameters id:3878 gh:3893
 				err = errors.NewBadRequest(err.Error())
 				scope.err(err, w, req)
 				return
@@ -227,7 +227,7 @@ func ListResource(r rest.Lister, rw rest.Watcher, scope RequestScope, forceWatch
 				scope.err(errors.NewMethodNotSupported(scope.Resource.GroupResource(), "watch"), w, req)
 				return
 			}
-			// TODO: Currently we explicitly ignore ?timeout= and use only ?timeoutSeconds=.
+			// TODO: Currently we explicitly ignore ?timeout= and use only ?timeoutSeconds=. id:3615 gh:3630
 			timeout := time.Duration(0)
 			if opts.TimeoutSeconds != nil {
 				timeout = time.Duration(*opts.TimeoutSeconds) * time.Second

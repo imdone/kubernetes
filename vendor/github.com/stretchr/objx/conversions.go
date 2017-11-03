@@ -102,7 +102,7 @@ func (m Map) URLValues() url.Values {
 	vals := make(url.Values)
 
 	for k, v := range m {
-		//TODO: can this be done without sprintf?
+		//TODO: can this be done without sprintf? id:2786 gh:2799
 		vals.Set(k, fmt.Sprintf("%v", v))
 	}
 

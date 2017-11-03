@@ -27,7 +27,7 @@ import (
 // operations in a blocking manner using the App level API provided by rkt.
 type Runtime struct{}
 
-// TODO(tmrts): Fill out the creation configuration fields.
+// TODO (tmrts): Fill out the creation configuration fields. id:1134 gh:1139
 type RuntimeConfig struct{}
 
 // NewRuntime creates a container.Runtime instance using the Runtime.

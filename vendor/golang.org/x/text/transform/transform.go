@@ -201,7 +201,7 @@ func (r *Reader) Read(p []byte) (int, error) {
 	}
 }
 
-// TODO: implement ReadByte (and ReadRune??).
+// TODO: implement ReadByte (and ReadRune??). id:3470 gh:3485
 
 // Writer wraps another io.Writer by transforming the bytes read.
 // The user needs to call Close to flush unwritten bytes that may
@@ -235,7 +235,7 @@ func (w *Writer) Write(data []byte) (n int, err error) {
 	src := data
 	if w.n > 0 {
 		// Append bytes from data to the last remainder.
-		// TODO: limit the amount copied on first try.
+		// TODO: limit the amount copied on first try. id:3313 gh:3328
 		n = copy(w.src[w.n:], data)
 		w.n += n
 		src = w.src[:w.n]
@@ -401,7 +401,7 @@ func (c *chain) Reset() {
 	}
 }
 
-// TODO: make chain use Span (is going to be fun to implement!)
+// TODO: make chain use Span (is going to be fun to implement!) id:3305 gh:3321
 
 // Transform applies the transformers of c in sequence.
 func (c *chain) Transform(dst, src []byte, atEOF bool) (nDst, nSrc int, err error) {
@@ -602,7 +602,7 @@ func String(t Transformer, s string) (result string, n int, err error) {
 		pDst += nDst
 		pSrc += nSrc
 
-		// TODO:  let transformers implement an optional Spanner interface, akin
+		// TODO: let transformers implement an optional Spanner interface, akin id:3534 gh:3550
 		// to norm's QuickSpan. This would even allow us to avoid any allocation.
 		if !bytes.Equal(dst[:nDst], src[:nSrc]) {
 			break

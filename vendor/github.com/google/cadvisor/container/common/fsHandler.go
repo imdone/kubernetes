@@ -78,7 +78,7 @@ func (fh *realFsHandler) update() error {
 		baseUsage, extraDirUsage, inodeUsage    uint64
 		rootDiskErr, rootInodeErr, extraDiskErr error
 	)
-	// TODO(vishh): Add support for external mounts.
+	// TODO (vishh): Add support for external mounts. id:2812 gh:2827
 	if fh.rootfs != "" {
 		baseUsage, rootDiskErr = fh.fsInfo.GetDirDiskUsage(fh.rootfs, timeout)
 		inodeUsage, rootInodeErr = fh.fsInfo.GetDirInodeUsage(fh.rootfs, timeout)

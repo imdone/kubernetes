@@ -57,7 +57,7 @@ type Config struct {
 	ShouldResync ShouldResyncFunc
 
 	// If true, when Process() returns an error, re-enqueue the object.
-	// TODO: add interface to let you inject a delay/backoff or drop
+	// TODO: add interface to let you inject a delay/backoff or drop id:3917 gh:3937
 	//       the object completely if desired. Pass the object in
 	//       question to this interface as a parameter.
 	RetryOnError bool
@@ -137,11 +137,11 @@ func (c *controller) LastSyncResourceVersion() string {
 }
 
 // processLoop drains the work queue.
-// TODO: Consider doing the processing in parallel. This will require a little thought
+// TODO: Consider doing the processing in parallel. This will require a little thought id:4048 gh:4068
 // to make sure that we don't end up processing the same object multiple times
 // concurrently.
 //
-// TODO: Plumb through the stopCh here (and down to the queue) so that this can
+// TODO: Plumb through the stopCh here (and down to the queue) so that this can id:3585 gh:3600
 // actually exit when the controller is stopped. Or just give up on this stuff
 // ever being stoppable. Converting this whole package to use Context would
 // also be helpful.

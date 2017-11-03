@@ -1244,7 +1244,7 @@ type Decoder struct {
 	// Try to put things that go together to fit within a cache line (8 words).
 
 	d decDriver
-	// NOTE: Decoder shouldn't call it's read methods,
+	// NOTE: Decoder shouldn't call it's read methods, id:3210 gh:3225
 	// as the handler MAY need to do some coordination.
 	r decReader
 	// sa [initCollectionCap]decRtidFn
@@ -1714,7 +1714,7 @@ func (d *Decoder) getDecFn(rt reflect.Type, checkFastpath, checkCodecSelfer bool
 	// registered a pointer or non-pointer type, meaning we may have to recurse first
 	// before matching a mapped type, even though the extension byte is already detected.
 	//
-	// NOTE: if decoding into a nil interface{}, we return a non-nil
+	// NOTE: if decoding into a nil interface{}, we return a non-nil id:2788 gh:2803
 	// value except even if the container registers a length of 0.
 	if checkCodecSelfer && ti.cs {
 		fn.f = (*decFnInfo).selferUnmarshal
@@ -1820,7 +1820,7 @@ func (d *Decoder) getDecFn(rt reflect.Type, checkFastpath, checkCodecSelfer bool
 }
 
 func (d *Decoder) structFieldNotFound(index int, rvkencname string) {
-	// NOTE: rvkencname may be a stringView, so don't pass it to another function.
+	// NOTE: rvkencname may be a stringView, so don't pass it to another function. id:3171 gh:3187
 	if d.h.ErrorIfNoField {
 		if index >= 0 {
 			d.errorf("no matching struct field found when decoding stream array at index %v", index)

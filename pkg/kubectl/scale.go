@@ -476,7 +476,7 @@ func (scaler *DeploymentScaler) ScaleSimple(namespace, name string, precondition
 		}
 	}
 
-	// TODO(madhusudancs): Fix this when Scale group issues are resolved (see issue #18528).
+	// TODO (madhusudancs): Fix this when Scale group issues are resolved (see issue #18528). id:797 gh:798
 	// For now I'm falling back to regular Deployment update operation.
 	deployment.Spec.Replicas = int32(newSize)
 	updatedDeployment, err := scaler.c.Deployments(namespace).Update(deployment)

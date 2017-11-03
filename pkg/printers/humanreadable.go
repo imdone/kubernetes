@@ -43,7 +43,7 @@ type PrintHandler interface {
 	DefaultTableHandler(columns []metav1alpha1.TableColumnDefinition, printFunc interface{}) error
 }
 
-var withNamespacePrefixColumns = []string{"NAMESPACE"} // TODO(erictune): print cluster name too.
+var withNamespacePrefixColumns = []string{"NAMESPACE"} // TODO (erictune): print cluster name too. id:1184 gh:1191
 
 type handlerEntry struct {
 	columnDefinitions []metav1alpha1.TableColumnDefinition
@@ -291,7 +291,7 @@ func printHeader(columnNames []string, w io.Writer) error {
 }
 
 // PrintObj prints the obj in a human-friendly format according to the type of the obj.
-// TODO: unify the behavior of PrintObj, which often expects single items and tracks
+// TODO: unify the behavior of PrintObj, which often expects single items and tracks id:1150 gh:1156
 // headers and filtering, with other printers, that expect list objects. The tracking
 // behavior should probably be a higher level wrapper (MultiObjectTablePrinter) that
 // calls into the PrintTable method and then displays consistent output.
@@ -562,7 +562,7 @@ func printRowsForHandlerEntry(output io.Writer, handler *handlerEntry, obj runti
 	}
 
 	if !handler.printRows {
-		// TODO: this code path is deprecated and will be removed when all handlers are row printers
+		// TODO: this code path is deprecated and will be removed when all handlers are row printers id:1207 gh:1213
 		args := []reflect.Value{reflect.ValueOf(obj), reflect.ValueOf(output), reflect.ValueOf(options)}
 		resultValue := handler.printFunc.Call(args)[0]
 		if resultValue.IsNil() {
@@ -595,7 +595,7 @@ func printRows(output io.Writer, rows []metav1alpha1.TableRow, options PrintOpti
 			if i != 0 {
 				fmt.Fprint(output, "\t")
 			} else {
-				// TODO: remove this once we drop the legacy printers
+				// TODO: remove this once we drop the legacy printers id:1231 gh:1237
 				if options.WithKind && len(options.Kind) > 0 {
 					fmt.Fprintf(output, "%s/%s", options.Kind, cell)
 					continue
@@ -619,7 +619,7 @@ func printRows(output io.Writer, rows []metav1alpha1.TableRow, options PrintOpti
 }
 
 // legacyPrinterToTable uses the old printFunc with tabbed writer to generate a table.
-// TODO: remove when all legacy printers are removed.
+// TODO: remove when all legacy printers are removed. id:1147 gh:1153
 func (h *HumanReadablePrinter) legacyPrinterToTable(obj runtime.Object, handler *handlerEntry) (*metav1alpha1.Table, error) {
 	printFunc := handler.printFunc
 	table := &metav1alpha1.Table{
@@ -634,7 +634,7 @@ func (h *HumanReadablePrinter) legacyPrinterToTable(obj runtime.Object, handler 
 	args := []reflect.Value{reflect.ValueOf(obj), reflect.ValueOf(buf), reflect.ValueOf(options)}
 
 	if meta.IsListType(obj) {
-		// TODO: this uses more memory than it has to, as we refactor printers we should remove the need
+		// TODO: this uses more memory than it has to, as we refactor printers we should remove the need id:1185 gh:1192
 		// for this.
 		args[0] = reflect.ValueOf(obj)
 		resultValue := printFunc.Call(args)[0]
@@ -672,7 +672,7 @@ func (h *HumanReadablePrinter) legacyPrinterToTable(obj runtime.Object, handler 
 	return table, nil
 }
 
-// TODO: this method assumes the meta/v1 server API, so should be refactored out of this package
+// TODO: this method assumes the meta/v1 server API, so should be refactored out of this package id:1151 gh:1157
 func printUnstructured(unstructured runtime.Unstructured, w io.Writer, additionalFields []string, options PrintOptions) error {
 	metadata, err := meta.Accessor(unstructured)
 	if err != nil {

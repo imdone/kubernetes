@@ -20,7 +20,7 @@ import (
 	"fmt"
 )
 
-// TODO: Longer term we should read this from some config store, rather than a flag.
+// TODO: Longer term we should read this from some config store, rather than a flag. id:216 gh:218
 func validateClusterIPFlags(options *ServerRunOptions) []error {
 	errors := []error{}
 	if options.ServiceClusterIPRange.IP == nil {

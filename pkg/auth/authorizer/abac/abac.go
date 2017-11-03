@@ -51,7 +51,7 @@ func (p policyLoadError) Error() string {
 
 type policyList []*abac.Policy
 
-// TODO: Have policies be created via an API call and stored in REST storage.
+// TODO: Have policies be created via an API call and stored in REST storage. id:309 gh:310
 func NewFromFile(path string) (policyList, error) {
 	// File format is one map per line.  This allows easy concatentation of files,
 	// comments in files, and identification of errors by line number.
@@ -172,7 +172,7 @@ func subjectMatches(p abac.Policy, user user.Info) bool {
 }
 
 func verbMatches(p abac.Policy, a authorizer.Attributes) bool {
-	// TODO: match on verb
+	// TODO: match on verb id:426 gh:427
 
 	// All policies allow read only requests
 	if a.IsReadOnly() {
@@ -228,7 +228,7 @@ func (pl policyList) Authorize(a authorizer.Attributes) (bool, string, error) {
 		}
 	}
 	return false, "No policy matched.", nil
-	// TODO: Benchmark how much time policy matching takes with a medium size
+	// TODO: Benchmark how much time policy matching takes with a medium size id:409 gh:410
 	// policy file, compared to other steps such as encoding/decoding.
 	// Then, add Caching only if needed.
 }

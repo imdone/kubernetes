@@ -101,7 +101,7 @@ func NewAttachDetachController(
 	disableReconciliationSync bool,
 	reconcilerSyncDuration time.Duration,
 	timerConfig TimerConfig) (AttachDetachController, error) {
-	// TODO: The default resyncPeriod for shared informers is 12 hours, this is
+	// TODO: The default resyncPeriod for shared informers is 12 hours, this is id:640 gh:641
 	// unacceptable for the attach/detach controller. For example, if a pod is
 	// skipped because the node it is scheduled to didn't set its annotation in
 	// time, we don't want to have to wait 12hrs before processing the pod
@@ -440,7 +440,7 @@ func (adc *attachDetachController) podDelete(obj interface{}) {
 
 func (adc *attachDetachController) nodeAdd(obj interface{}) {
 	node, ok := obj.(*v1.Node)
-	// TODO: investigate if nodeName is empty then if we can return
+	// TODO: investigate if nodeName is empty then if we can return id:652 gh:653
 	// kubernetes/kubernetes/issues/37777
 	if node == nil || !ok {
 		return
@@ -456,7 +456,7 @@ func (adc *attachDetachController) nodeAdd(obj interface{}) {
 
 func (adc *attachDetachController) nodeUpdate(oldObj, newObj interface{}) {
 	node, ok := newObj.(*v1.Node)
-	// TODO: investigate if nodeName is empty then if we can return
+	// TODO: investigate if nodeName is empty then if we can return id:676 gh:677
 	if node == nil || !ok {
 		return
 	}

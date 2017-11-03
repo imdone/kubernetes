@@ -26,7 +26,7 @@ import (
 	corev1client "k8s.io/client-go/kubernetes/typed/core/v1"
 )
 
-// TODO: This is almost a exact replica of Endpoints lock.
+// TODO: This is almost a exact replica of Endpoints lock. id:3814 gh:3826
 // going forwards as we self host more and more components
 // and use ConfigMaps as the means to pass that configuration
 // data we will likely move to deprecate the Endpoints lock.

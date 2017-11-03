@@ -634,7 +634,7 @@ func TestStoreUpdate(t *testing.T) {
 	}
 
 	// Test5 unconditional update
-	// NOTE: The logic for unconditional updates doesn't make sense to me, and imho should be removed.
+	// NOTE: The logic for unconditional updates doesn't make sense to me, and imho should be removed. id:3713 gh:3729
 	// doUnconditionalUpdate := resourceVersion == 0 && e.UpdateStrategy.AllowUnconditionalUpdate()
 	// ^^ That condition can *never be true due to the creation of root objects.
 	//
@@ -699,7 +699,7 @@ func TestNoOpUpdates(t *testing.T) {
 	}
 }
 
-// TODO: Add a test to check no-op update if we have object with ResourceVersion
+// TODO: Add a test to check no-op update if we have object with ResourceVersion id:3801 gh:3816
 // already stored in etcd. Currently there is no easy way to store object with
 // ResourceVersion in etcd.
 

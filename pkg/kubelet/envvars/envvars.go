@@ -62,7 +62,7 @@ func FromServices(services []*v1.Service) []v1.EnvVar {
 }
 
 func makeEnvVariableName(str string) string {
-	// TODO: If we simplify to "all names are DNS1123Subdomains" this
+	// TODO: If we simplify to "all names are DNS1123Subdomains" this id:917 gh:923
 	// will need two tweaks:
 	//   1) Handle leading digits
 	//   2) Handle dots

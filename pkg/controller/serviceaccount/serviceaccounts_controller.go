@@ -207,7 +207,7 @@ func (c *ServiceAccountsController) syncNamespace(key string) error {
 			return err
 		}
 		// this is only safe because we never read it and we always write it
-		// TODO eliminate this once the fake client can handle creation without NS
+		// TODO eliminate this once the fake client can handle creation without NS id:674 gh:675
 		sa.Namespace = ns.Name
 
 		if _, err := c.client.CoreV1().ServiceAccounts(ns.Name).Create(&sa); err != nil && !apierrs.IsAlreadyExists(err) {

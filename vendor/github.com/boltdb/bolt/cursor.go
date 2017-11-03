@@ -274,7 +274,7 @@ func (c *Cursor) search(key []byte, pgid pgid) {
 func (c *Cursor) searchNode(key []byte, n *node) {
 	var exact bool
 	index := sort.Search(len(n.inodes), func(i int) bool {
-		// TODO(benbjohnson): Optimize this range search. It's a bit hacky right now.
+		// TODO (benbjohnson): Optimize this range search. It's a bit hacky right now. id:2841 gh:2857
 		// sort.Search() finds the lowest index where f() != -1 but we need the highest index.
 		ret := bytes.Compare(n.inodes[i].key, key)
 		if ret == 0 {
@@ -297,7 +297,7 @@ func (c *Cursor) searchPage(key []byte, p *page) {
 
 	var exact bool
 	index := sort.Search(int(p.count), func(i int) bool {
-		// TODO(benbjohnson): Optimize this range search. It's a bit hacky right now.
+		// TODO (benbjohnson): Optimize this range search. It's a bit hacky right now. id:2492 gh:2508
 		// sort.Search() finds the lowest index where f() != -1 but we need the highest index.
 		ret := bytes.Compare(inodes[i].key(), key)
 		if ret == 0 {

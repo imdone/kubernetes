@@ -279,7 +279,7 @@ func (w *etcdWatcher) translate() {
 						Code:    http.StatusGone, // Gone
 						Reason:  metav1.StatusReasonExpired,
 					}
-				// TODO: need to generate errors using api/errors which has a circular dependency on this package
+				// TODO: need to generate errors using api/errors which has a circular dependency on this package id:3453 gh:3468
 				//   no other way to inject errors
 				// case etcdutil.IsEtcdUnreachable(err):
 				//   status = errors.NewServerTimeout(...)
@@ -360,7 +360,7 @@ func (w *etcdWatcher) sendAdd(res *etcd.Response) {
 	obj, err := w.decodeObject(res.Node)
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("failure to decode api object: %v\n'%v' from %#v %#v", err, string(res.Node.Value), res, res.Node))
-		// TODO: expose an error through watch.Interface?
+		// TODO: expose an error through watch.Interface? id:3934 gh:3955
 		// Ignore this value. If we stop the watch on a bad value, a client that uses
 		// the resourceVersion to resume will never be able to get past a bad value.
 		return
@@ -386,7 +386,7 @@ func (w *etcdWatcher) sendModify(res *etcd.Response) {
 	curObj, err := w.decodeObject(res.Node)
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("failure to decode api object: %v\n'%v' from %#v %#v", err, string(res.Node.Value), res, res.Node))
-		// TODO: expose an error through watch.Interface?
+		// TODO: expose an error through watch.Interface? id:3724 gh:3739
 		// Ignore this value. If we stop the watch on a bad value, a client that uses
 		// the resourceVersion to resume will never be able to get past a bad value.
 		return
@@ -444,7 +444,7 @@ func (w *etcdWatcher) sendDelete(res *etcd.Response) {
 	obj, err := w.decodeObject(&node)
 	if err != nil {
 		utilruntime.HandleError(fmt.Errorf("failure to decode api object: %v\nfrom %#v %#v", err, res, res.Node))
-		// TODO: expose an error through watch.Interface?
+		// TODO: expose an error through watch.Interface? id:3900 gh:3920
 		// Ignore this value. If we stop the watch on a bad value, a client that uses
 		// the resourceVersion to resume will never be able to get past a bad value.
 		return

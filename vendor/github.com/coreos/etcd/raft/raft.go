@@ -148,7 +148,7 @@ type Config struct {
 	// MaxInflightMsgs limits the max number of in-flight append messages during
 	// optimistic replication phase. The application transportation layer usually
 	// has its own sending buffer over TCP/UDP. Setting MaxInflightMsgs to avoid
-	// overflowing that sending buffer. TODO (xiangli): feedback to application to
+	// overflowing that sending buffer. TODO (xiangli): feedback to application to id:2885 gh:2897
 	// limit the proposal rate?
 	MaxInflightMsgs int
 
@@ -270,12 +270,12 @@ func newRaft(c *Config) *raft {
 	raftlog := newLog(c.Storage, c.Logger)
 	hs, cs, err := c.Storage.InitialState()
 	if err != nil {
-		panic(err) // TODO(bdarnell)
+		panic(err) // TODO (bdarnell) id:2522 gh:2537
 	}
 	peers := c.peers
 	if len(cs.Nodes) > 0 {
 		if len(peers) > 0 {
-			// TODO(bdarnell): the peers argument is always nil except in
+			// TODO (bdarnell): the peers argument is always nil except in id:2770 gh:2785
 			// tests; the argument should be removed and these tests should be
 			// updated to specify their nodes through a snapshot.
 			panic("cannot specify both newRaft(peers) and ConfState.Nodes)")
@@ -389,7 +389,7 @@ func (r *raft) sendAppend(to uint64) {
 				r.logger.Debugf("%x failed to send snapshot to %x because snapshot is temporarily unavailable", r.id, to)
 				return
 			}
-			panic(err) // TODO(bdarnell)
+			panic(err) // TODO (bdarnell) id:2630 gh:2645
 		}
 		if IsEmptySnap(snapshot) {
 			panic("need non-empty snapshot")
@@ -476,7 +476,7 @@ func (r *raft) bcastHeartbeatWithCtx(ctx []byte) {
 // the commit index changed (in which case the caller should call
 // r.bcastAppend).
 func (r *raft) maybeCommit() bool {
-	// TODO(bmizerany): optimize.. Currently naive
+	// TODO (bmizerany): optimize.. Currently naive id:2681 gh:2697
 	mis := make(uint64Slice, 0, len(r.prs))
 	for id := range r.prs {
 		mis = append(mis, r.prs[id].Match)
@@ -568,7 +568,7 @@ func (r *raft) becomeFollower(term uint64, lead uint64) {
 }
 
 func (r *raft) becomeCandidate() {
-	// TODO(xiangli) remove the panic when the raft implementation is stable
+	// TODO (xiangli) remove the panic when the raft implementation is stable id:2886 gh:2902
 	if r.state == StateLeader {
 		panic("invalid transition [leader -> candidate]")
 	}
@@ -581,7 +581,7 @@ func (r *raft) becomeCandidate() {
 }
 
 func (r *raft) becomePreCandidate() {
-	// TODO(xiangli) remove the panic when the raft implementation is stable
+	// TODO (xiangli) remove the panic when the raft implementation is stable id:2523 gh:2538
 	if r.state == StateLeader {
 		panic("invalid transition [leader -> pre-candidate]")
 	}
@@ -595,7 +595,7 @@ func (r *raft) becomePreCandidate() {
 }
 
 func (r *raft) becomeLeader() {
-	// TODO(xiangli) remove the panic when the raft implementation is stable
+	// TODO (xiangli) remove the panic when the raft implementation is stable id:2771 gh:2786
 	if r.state == StateFollower {
 		panic("invalid transition [follower -> leader]")
 	}

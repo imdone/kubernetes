@@ -126,7 +126,7 @@ var _ = SIGDescribe("Volumes", func() {
 
 	Describe("GlusterFS", func() {
 		It("should be mountable", func() {
-			//TODO (copejon) GFS is not supported on debian image.
+			//TODO (copejon) GFS is not supported on debian image. id:2609 gh:2624
 			framework.SkipUnlessNodeOSDistroIs("gci", "ubuntu")
 
 			// create gluster server and endpoints

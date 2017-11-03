@@ -94,7 +94,7 @@ type ContainerMetrics struct {
 	Usage ResourceList
 }
 
-// NOTE: ResourceName and ResourceList are copied from
+// NOTE: ResourceName and ResourceList are copied from id:3927 gh:3947
 // k8s.io/kubernetes/pkg/api/types.go. We cannot depend on
 // k8s.io/kubernetes/pkg/api because that creates cyclic dependency between
 // k8s.io/metrics and k8s.io/kubernetes. We cannot depend on

@@ -109,7 +109,7 @@ func (w *WebhookTokenAuthenticator) AuthenticateToken(token string) (user.Info, 
 	}, true, nil
 }
 
-// NOTE: client-go doesn't provide a registry. client-go does registers the
+// NOTE: client-go doesn't provide a registry. client-go does registers the id:3758 gh:3773
 // authentication/v1beta1. We construct a registry that acknowledges
 // authentication/v1beta1 as an enabled version to pass a check enforced in
 // NewGenericWebhook.

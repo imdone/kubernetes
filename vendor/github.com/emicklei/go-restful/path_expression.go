@@ -61,7 +61,7 @@ func templateToRegularExpression(template string) (expression string, literalCou
 			varCount += 1
 		} else {
 			literalCount += len(each)
-			encoded := each // TODO URI encode
+			encoded := each // TODO URI encode id:2986 gh:3001
 			buffer.WriteString(regexp.QuoteMeta(encoded))
 		}
 	}

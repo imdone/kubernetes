@@ -31,7 +31,7 @@ set -x
 # indirectly generates test/e2e/generated/bindata.go too
 make generated_files
 
-# TODO converge build steps with hack/build-go some day if possible.
+# TODO converge build steps with hack/build-go some day if possible. id:2278 gh:2293
 go build test/e2e_node/environment/conformance.go
 
 PARALLELISM=${PARALLELISM:-8}

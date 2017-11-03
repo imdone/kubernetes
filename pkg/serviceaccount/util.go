@@ -52,7 +52,7 @@ func IsServiceAccountToken(secret *v1.Secret, sa *v1.ServiceAccount) bool {
 	return true
 }
 
-// TODO: remove the duplicate code
+// TODO: remove the duplicate code id:1489 gh:1495
 // InternalIsServiceAccountToken returns true if the secret is a valid api token for the service account
 func InternalIsServiceAccountToken(secret *api.Secret, sa *api.ServiceAccount) bool {
 	if secret.Type != api.SecretTypeServiceAccountToken {

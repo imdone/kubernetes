@@ -43,7 +43,7 @@ var (
 		ObjectMeta: metav1.ObjectMeta{
 			GenerateName: "sched-perf-pod-",
 		},
-		// TODO: this needs to be configurable.
+		// TODO: this needs to be configurable. id:2734 gh:2749
 		Spec: testutils.MakePodSpec(),
 	}
 	baseNodeTemplate = &v1.Node{
@@ -51,7 +51,7 @@ var (
 			GenerateName: "sample-node-",
 		},
 		Spec: v1.NodeSpec{
-			// TODO: investigate why this is needed.
+			// TODO: investigate why this is needed. id:2419 gh:2434
 			ExternalID: "foo",
 		},
 		Status: v1.NodeStatus{
@@ -144,7 +144,7 @@ func schedulePods(config *testConfig) int32 {
 			glog.Fatalf("%v", err)
 		}
 		// 30,000 pods -> wait till @ least 300 are scheduled to start measuring.
-		// TODO Find out why sometimes there may be scheduling blips in the beggining.
+		// TODO Find out why sometimes there may be scheduling blips in the beggining. id:2598 gh:2613
 		if len(scheduled) > config.numPods/100 {
 			break
 		}
@@ -156,7 +156,7 @@ func schedulePods(config *testConfig) int32 {
 	for {
 		// This can potentially affect performance of scheduler, since List() is done under mutex.
 		// Listing 10000 pods is an expensive operation, so running it frequently may impact scheduler.
-		// TODO: Setup watch on apiserver and wait until all pods scheduled.
+		// TODO: Setup watch on apiserver and wait until all pods scheduled. id:2439 gh:2454
 		scheduled, err := config.schedulerSupportFunctions.GetScheduledPodLister().List(labels.Everything())
 		if err != nil {
 			glog.Fatalf("%v", err)
@@ -249,7 +249,7 @@ func (inputConfig *schedulerPerfConfig) generatePodAndNodeTopology(config *testC
 		nodeAffinity.mutateNodeTemplate(mutatedNodeTemplate)
 		nodeAffinity.mutatePodTemplate(mutatedPodTemplate)
 
-	} // TODO: other predicates/priorities will be processed in subsequent if statements or a switch:).
+	} // TODO: other predicates/priorities will be processed in subsequent if statements or a switch:). id:2549 gh:2564
 	config.mutatedPodTemplate = mutatedPodTemplate
 	config.mutatedNodeTemplate = mutatedNodeTemplate
 	inputConfig.generateNodes(config)
@@ -258,7 +258,7 @@ func (inputConfig *schedulerPerfConfig) generatePodAndNodeTopology(config *testC
 }
 
 // writePodAndNodeTopologyToConfig reads a configuration and then applies it to a test configuration.
-//TODO: As of now, this function is not doing anything expect for reading input values to priority structs.
+//TODO: As of now, this function is not doing anything expect for reading input values to priority structs. id:2735 gh:2750
 func writePodAndNodeTopologyToConfig(config *testConfig) error {
 	// High Level structure that should be filled for every predicate or priority.
 	inputConfig := &schedulerPerfConfig{

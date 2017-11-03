@@ -35,7 +35,7 @@ import (
 // WARNING: This object has accessors for the v1 standard metadata. You *MUST NOT* use this
 // type if you are dealing with objects that are not in the server meta v1 schema.
 //
-// TODO: make the serialization part of this type distinct from the field accessors.
+// TODO: make the serialization part of this type distinct from the field accessors. id:3501 gh:3516
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +k8s:deepcopy-gen=true
 type Unstructured struct {

@@ -213,7 +213,7 @@ func (p *AttachOptions) Run() error {
 		}
 
 		p.Pod = pod
-		// TODO: convert this to a clean "wait" behavior
+		// TODO: convert this to a clean "wait" behavior id:695 gh:696
 	}
 	pod := p.Pod
 
@@ -267,7 +267,7 @@ func (p *AttachOptions) Run() error {
 		if err != nil {
 			return err
 		}
-		// TODO: consider abstracting into a client invocation or client helper
+		// TODO: consider abstracting into a client invocation or client helper id:646 gh:648
 		req := restClient.Post().
 			Resource("pods").
 			Name(pod.Name).

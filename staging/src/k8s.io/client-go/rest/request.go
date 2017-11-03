@@ -435,7 +435,7 @@ func (r *Request) URL() *url.URL {
 // parameters will be reset. This creates a copy of the request so as not to change the
 // underlying object.  This means some useful request info (like the types of field
 // selectors in use) will be lost.
-// TODO: preserve field selector keys
+// TODO: preserve field selector keys id:3948 gh:3968
 func (r Request) finalURLTemplate() url.URL {
 	if len(r.resourceName) != 0 {
 		r.resourceName = "{name}"
@@ -607,7 +607,7 @@ func (r *Request) request(fn func(*http.Request, *http.Response)) error {
 		return r.err
 	}
 
-	// TODO: added to catch programmer errors (invoking operations with an object with an empty namespace)
+	// TODO: added to catch programmer errors (invoking operations with an object with an empty namespace) id:3805 gh:3821
 	if (r.verb == "GET" || r.verb == "PUT" || r.verb == "DELETE") && r.namespaceSet && len(r.resourceName) > 0 && len(r.namespace) == 0 {
 		return fmt.Errorf("an empty namespace may not be set when a resource name is provided")
 	}
@@ -621,7 +621,7 @@ func (r *Request) request(fn func(*http.Request, *http.Response)) error {
 	}
 
 	// Right now we make about ten retry attempts if we get a Retry-After response.
-	// TODO: Change to a timeout based approach.
+	// TODO: Change to a timeout based approach. id:3914 gh:3934
 	maxRetries := 10
 	retries := 0
 	for {
@@ -658,7 +658,7 @@ func (r *Request) request(fn func(*http.Request, *http.Response)) error {
 				return err
 			}
 			// For the purpose of retry, we set the artificial "retry-after" response.
-			// TODO: Should we clean the original response if it exists?
+			// TODO: Should we clean the original response if it exists? id:4045 gh:4065
 			resp = &http.Response{
 				StatusCode: http.StatusInternalServerError,
 				Header:     http.Header{"Retry-After": []string{"1"}},
@@ -752,7 +752,7 @@ func (r *Request) transformResponse(resp *http.Response, req *http.Request) Resu
 		case http2.StreamError:
 			// This is trying to catch the scenario that the server may close the connection when sending the
 			// response body. This can be caused by server timeout due to a slow network connection.
-			// TODO: Add test for this. Steps may be:
+			// TODO: Add test for this. Steps may be: id:3468 gh:3483
 			// 1. client-go (or kubectl) sends a GET request.
 			// 2. Apiserver sends back the headers and then part of the body
 			// 3. Apiserver closes connection.
@@ -877,7 +877,7 @@ const maxUnstructuredResponseTextBytes = 2048
 //    initial contact, the presence of mismatched body contents from posted content types
 //    - Give these a separate distinct error type and capture as much as possible of the original message
 //
-// TODO: introduce transformation of generic http.Client.Do() errors that separates 4.
+// TODO: introduce transformation of generic http.Client.Do() errors that separates 4. id:3949 gh:3969
 func (r *Request) transformUnstructuredResponseError(resp *http.Response, req *http.Request, body []byte) error {
 	if body == nil && resp.Body != nil {
 		if data, err := ioutil.ReadAll(&io.LimitedReader{R: resp.Body, N: maxUnstructuredResponseTextBytes}); err == nil {

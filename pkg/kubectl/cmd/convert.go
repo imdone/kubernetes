@@ -158,7 +158,7 @@ func (o *ConvertOptions) Complete(f cmdutil.Factory, out io.Writer, cmd *cobra.C
 		} else {
 			outputFormat = "template"
 		}
-		// TODO: once printing is abstracted, this should be handled at flag declaration time
+		// TODO: once printing is abstracted, this should be handled at flag declaration time id:697 gh:698
 		cmd.Flags().Set("output", outputFormat)
 	}
 	o.encoder = f.JSONEncoder()
@@ -259,15 +259,15 @@ func asVersionedObjects(infos []*resource.Info, version schema.GroupVersion, enc
 		}
 
 		// objects that are not part of api.Scheme must be converted to JSON
-		// TODO: convert to map[string]interface{}, attach to runtime.Unknown?
+		// TODO: convert to map[string]interface{}, attach to runtime.Unknown? id:707 gh:708
 		if !version.Empty() {
 			if _, _, err := scheme.Scheme.ObjectKinds(info.Object); runtime.IsNotRegisteredError(err) {
-				// TODO: ideally this would encode to version, but we don't expose multiple codecs here.
+				// TODO: ideally this would encode to version, but we don't expose multiple codecs here. id:660 gh:661
 				data, err := runtime.Encode(encoder, info.Object)
 				if err != nil {
 					return nil, err
 				}
-				// TODO: Set ContentEncoding and ContentType.
+				// TODO: Set ContentEncoding and ContentType. id:684 gh:685
 				objects = append(objects, &runtime.Unknown{Raw: data})
 				continue
 			}

@@ -25,7 +25,7 @@ import (
 
 // NewCodecForScheme is a convenience method for callers that are using a scheme.
 func NewCodecForScheme(
-	// TODO: I should be a scheme interface?
+	// TODO: I should be a scheme interface? id:3854 gh:3869
 	scheme *runtime.Scheme,
 	encoder runtime.Encoder,
 	decoder runtime.Decoder,
@@ -37,7 +37,7 @@ func NewCodecForScheme(
 
 // NewDefaultingCodecForScheme is a convenience method for callers that are using a scheme.
 func NewDefaultingCodecForScheme(
-	// TODO: I should be a scheme interface?
+	// TODO: I should be a scheme interface? id:3281 gh:3296
 	scheme *runtime.Scheme,
 	encoder runtime.Encoder,
 	decoder runtime.Decoder,

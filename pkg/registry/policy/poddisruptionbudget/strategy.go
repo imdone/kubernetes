@@ -109,7 +109,7 @@ func (podDisruptionBudgetStatusStrategy) PrepareForUpdate(ctx genericapirequest.
 
 // ValidateUpdate is the default update validation for an end user updating status
 func (podDisruptionBudgetStatusStrategy) ValidateUpdate(ctx genericapirequest.Context, obj, old runtime.Object) field.ErrorList {
-	// TODO: Validate status updates.
+	// TODO: Validate status updates. id:1406 gh:1412
 	return field.ErrorList{}
 	// return validation.ValidatePodDisruptionBudgetStatusUpdate(obj.(*policy.PodDisruptionBudget), old.(*policy.PodDisruptionBudget))
 }

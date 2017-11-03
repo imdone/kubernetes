@@ -438,7 +438,7 @@ func (g openAPITypeWriter) generateExtensions(CommentLines []string) error {
 	return nil
 }
 
-// TODO(#44005): Move this validation outside of this generator (probably to policy verifier)
+// TODO (#44005): Move this validation outside of this generator (probably to policy verifier) id:3632 gh:3647
 func (g openAPITypeWriter) validatePatchTags(m *types.Member, parent *types.Type) error {
 	patchMergeKeyStructTag, patchStrategyStructTag := getPatchTags(m)
 	patchMergeKeyCommentTag, err := getSingleTagsValue(m.CommentLines, tagPatchMergeKey)
@@ -479,7 +479,7 @@ func (g openAPITypeWriter) generateDescription(CommentLines []string) {
 		case len(line) == 0: // Keep paragraphs
 			delPrevChar()
 			buffer.WriteString("\n\n")
-		case strings.HasPrefix(leading, "TODO"): // Ignore one line TODOs
+		case strings.HasPrefix(leading, "TODO"): // Ignore one line TODO s id:4037 gh:4057
 		case strings.HasPrefix(leading, "+"): // Ignore instructions to go2idl
 		default:
 			if strings.HasPrefix(line, " ") || strings.HasPrefix(line, "\t") {

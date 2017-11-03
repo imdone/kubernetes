@@ -166,7 +166,7 @@ func (r *ProxyHandler) serveHTTP(w http.ResponseWriter, req *http.Request, ctx r
 	newReq.Header = net.CloneHeader(req.Header)
 	newReq.URL = location
 
-	// TODO convert this entire proxy to an UpgradeAwareProxy similar to
+	// TODO convert this entire proxy to an UpgradeAwareProxy similar to id:3420 gh:3435
 	// https://github.com/openshift/origin/blob/master/pkg/util/httpproxy/upgradeawareproxy.go.
 	// That proxy needs to be modified to support multiple backends, not just 1.
 	if r.tryUpgrade(ctx, w, req, newReq, location, roundTripper, gv) {
@@ -234,7 +234,7 @@ func (r *ProxyHandler) tryUpgrade(ctx request.Context, w http.ResponseWriter, re
 	}
 	defer backendConn.Close()
 
-	// TODO should we use _ (a bufio.ReadWriter) instead of requestHijackedConn
+	// TODO should we use _ (a bufio.ReadWriter) instead of requestHijackedConn id:3880 gh:3895
 	// when copying between the client and the backend? Docker doesn't when they
 	// hijack, just for reference...
 	requestHijackedConn, _, err := w.(http.Hijacker).Hijack()

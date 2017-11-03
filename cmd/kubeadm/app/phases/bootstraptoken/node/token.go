@@ -31,7 +31,7 @@ import (
 
 const tokenCreateRetries = 5
 
-// TODO(mattmoyer): Move CreateNewToken, UpdateOrCreateToken and encodeTokenSecretData out of this package to client-go for a generic abstraction and client for a Bootstrap Token
+// TODO (mattmoyer): Move CreateNewToken, UpdateOrCreateToken and encodeTokenSecretData out of this package to client-go for a generic abstraction and client for a Bootstrap Token id:163 gh:164
 
 // CreateNewToken tries to create a token and fails if one with the same ID already exists
 func CreateNewToken(client clientset.Interface, token string, tokenDuration time.Duration, usages []string, extraGroups []string, description string) error {
@@ -105,7 +105,7 @@ func encodeTokenSecretData(tokenID, tokenSecret string, duration time.Duration, 
 		data[bootstrapapi.BootstrapTokenDescriptionKey] = []byte(description)
 	}
 	for _, usage := range usages {
-		// TODO: Validate the usage string here before
+		// TODO: Validate the usage string here before id:133 gh:134
 		data[bootstrapapi.BootstrapTokenUsagePrefix+usage] = []byte("true")
 	}
 	return data

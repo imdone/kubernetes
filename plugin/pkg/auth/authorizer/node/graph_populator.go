@@ -91,7 +91,7 @@ func (g *graphPopulator) addPV(obj interface{}) {
 
 func (g *graphPopulator) updatePV(oldObj, obj interface{}) {
 	pv := obj.(*api.PersistentVolume)
-	// TODO: skip add if uid, pvc, and secrets are all identical between old and new
+	// TODO: skip add if uid, pvc, and secrets are all identical between old and new id:1460 gh:1466
 	g.graph.AddPV(pv)
 }
 

@@ -126,7 +126,7 @@ def detect_github_username():
 
 
 def sig_prefixes(owners):
-    # TODO(rmmh): make sig prefixes the only thing in test_owners!
+    # TODO (rmmh): make sig prefixes the only thing in test_owners! id:329 gh:330
     # Precise test names aren't very interesting.
     owns = []
 

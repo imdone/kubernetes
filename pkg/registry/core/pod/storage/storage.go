@@ -79,7 +79,7 @@ func NewStorage(optsGetter generic.RESTOptionsGetter, k client.ConnectionInfoGet
 	}
 	options := &generic.StoreOptions{RESTOptions: optsGetter, AttrFunc: pod.GetAttrs, TriggerFunc: pod.NodeNameTriggerFunc}
 	if err := store.CompleteWithOptions(options); err != nil {
-		panic(err) // TODO: Propagate error up
+		panic(err) // TODO: Propagate error up id:1314 gh:1320
 	}
 
 	statusStore := *store
@@ -138,7 +138,7 @@ var _ = rest.Creater(&BindingREST{})
 func (r *BindingREST) Create(ctx genericapirequest.Context, obj runtime.Object, createValidation rest.ValidateObjectFunc, includeUninitialized bool) (out runtime.Object, err error) {
 	binding := obj.(*api.Binding)
 
-	// TODO: move me to a binding strategy
+	// TODO: move me to a binding strategy id:1275 gh:1281
 	if errs := validation.ValidatePodBinding(binding); len(errs) != 0 {
 		return nil, errs.ToAggregate()
 	}

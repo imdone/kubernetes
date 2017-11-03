@@ -99,7 +99,7 @@ func TestErrorUsefulMessage(t *testing.T) {
 		"foo", ErrorTypeInvalid.String(),
 		"Baz", "Qux", "Inner", "KV", "detail",
 		"1", "aoeu", "Billy", "2",
-		// "asdf", TODO: reenable once we have a better nested printer
+		// "asdf", TODO: reenable once we have a better nested printer id:3604 gh:3619
 	} {
 		if !strings.Contains(s, part) {
 			t.Errorf("error message did not contain expected part '%v'", part)

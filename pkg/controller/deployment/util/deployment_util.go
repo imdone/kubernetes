@@ -124,7 +124,7 @@ func GetDeploymentCondition(status extensions.DeploymentStatus, condType extensi
 	return nil
 }
 
-// TODO: remove the duplicate
+// TODO: remove the duplicate id:613 gh:614
 // GetDeploymentConditionInternal returns the condition with the provided type.
 func GetDeploymentConditionInternal(status internalextensions.DeploymentStatus, condType internalextensions.DeploymentConditionType) *internalextensions.DeploymentCondition {
 	for i := range status.Conditions {
@@ -302,7 +302,7 @@ var annotationsToSkip = map[string]bool{
 }
 
 // skipCopyAnnotation returns true if we should skip copying the annotation with the given annotation key
-// TODO: How to decide which annotations should / should not be copied?
+// TODO: How to decide which annotations should / should not be copied? id:555 gh:556
 //       See https://github.com/kubernetes/kubernetes/pull/20035#issuecomment-179558615
 func skipCopyAnnotation(key string) bool {
 	return annotationsToSkip[key]
@@ -543,7 +543,7 @@ func RsListFromClient(c extensionsv1beta1.ExtensionsV1beta1Interface) RsListFunc
 	}
 }
 
-// TODO: switch this to full namespacers
+// TODO: switch this to full namespacers id:574 gh:575
 type RsListFunc func(string, metav1.ListOptions) ([]*extensions.ReplicaSet, error)
 type podListFunc func(string, metav1.ListOptions) (*v1.PodList, error)
 
@@ -552,7 +552,7 @@ type podListFunc func(string, metav1.ListOptions) (*v1.PodList, error)
 // because only the controller itself should do that.
 // However, it does filter out anything whose ControllerRef doesn't match.
 func ListReplicaSets(deployment *extensions.Deployment, getRSList RsListFunc) ([]*extensions.ReplicaSet, error) {
-	// TODO: Right now we list replica sets by their labels. We should list them by selector, i.e. the replica set's selector
+	// TODO: Right now we list replica sets by their labels. We should list them by selector, i.e. the replica set's selector id:538 gh:539
 	//       should be a superset of the deployment's selector, see https://github.com/kubernetes/kubernetes/issues/19830.
 	namespace := deployment.Namespace
 	selector, err := metav1.LabelSelectorAsSelector(deployment.Spec.Selector)
@@ -575,7 +575,7 @@ func ListReplicaSets(deployment *extensions.Deployment, getRSList RsListFunc) ([
 }
 
 // ListReplicaSetsInternal is ListReplicaSets for internalextensions.
-// TODO: Remove the duplicate when call sites are updated to ListReplicaSets.
+// TODO: Remove the duplicate when call sites are updated to ListReplicaSets. id:529 gh:527
 func ListReplicaSetsInternal(deployment *internalextensions.Deployment, getRSList func(string, metav1.ListOptions) ([]*internalextensions.ReplicaSet, error)) ([]*internalextensions.ReplicaSet, error) {
 	namespace := deployment.Namespace
 	selector, err := metav1.LabelSelectorAsSelector(deployment.Spec.Selector)
@@ -924,7 +924,7 @@ func IsSaturated(deployment *extensions.Deployment, rs *extensions.ReplicaSet) b
 // WaitForObservedDeployment polls for deployment to be updated so that deployment.Status.ObservedGeneration >= desiredGeneration.
 // Returns error if polling timesout.
 func WaitForObservedDeployment(getDeploymentFunc func() (*extensions.Deployment, error), desiredGeneration int64, interval, timeout time.Duration) error {
-	// TODO: This should take clientset.Interface when all code is updated to use clientset. Keeping it this way allows the function to be used by callers who have client.Interface.
+	// TODO: This should take clientset.Interface when all code is updated to use clientset. Keeping it this way allows the function to be used by callers who have client.Interface. id:614 gh:615
 	return wait.PollImmediate(interval, timeout, func() (bool, error) {
 		deployment, err := getDeploymentFunc()
 		if err != nil {
@@ -934,7 +934,7 @@ func WaitForObservedDeployment(getDeploymentFunc func() (*extensions.Deployment,
 	})
 }
 
-// TODO: remove the duplicate
+// TODO: remove the duplicate id:556 gh:557
 // WaitForObservedInternalDeployment polls for deployment to be updated so that deployment.Status.ObservedGeneration >= desiredGeneration.
 // Returns error if polling timesout.
 func WaitForObservedDeploymentInternal(getDeploymentFunc func() (*internalextensions.Deployment, error), desiredGeneration int64, interval, timeout time.Duration) error {

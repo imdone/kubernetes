@@ -33,7 +33,7 @@ const (
 	timeFormat         = "2006-01-02 15:04:05"
 )
 
-// TODO(piosz): rewrite this once we will migrate into InfluxDB v0.9.
+// TODO (piosz): rewrite this once we will migrate into InfluxDB v0.9. id:1438 gh:1444
 type influxdbSource struct{}
 
 func newInfluxdbSource(host, user, password, db string) (dataSource, error) {
@@ -41,7 +41,7 @@ func newInfluxdbSource(host, user, password, db string) (dataSource, error) {
 }
 
 func (s *influxdbSource) query(query string) ([]*influxdb.Response, error) {
-	// TODO(piosz): add support again
+	// TODO (piosz): add support again id:1386 gh:1392
 	return nil, fmt.Errorf("temporary not supported; see #18826 for more details")
 }
 

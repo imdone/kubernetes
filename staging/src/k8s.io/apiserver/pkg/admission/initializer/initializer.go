@@ -32,7 +32,7 @@ type pluginInitializer struct {
 }
 
 // New creates an instance of admission plugins initializer.
-// TODO(p0lyn0mial): make the parameters public, this construction seems to be redundant.
+// TODO (p0lyn0mial): make the parameters public, this construction seems to be redundant. id:3350 gh:3365
 func New(
 	extClientset kubernetes.Interface,
 	extInformers informers.SharedInformerFactory,

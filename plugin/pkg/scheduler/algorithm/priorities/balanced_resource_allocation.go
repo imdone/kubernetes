@@ -36,7 +36,7 @@ const (
 )
 
 // Also used in most/least_requested nad metadata.
-// TODO: despaghettify it
+// TODO: despaghettify it id:1612 gh:1618
 func getNonZeroRequests(pod *v1.Pod) *schedulercache.Resource {
 	result := &schedulercache.Resource{}
 	for i := range pod.Spec.Containers {

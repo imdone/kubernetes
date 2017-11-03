@@ -20,7 +20,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 )
 
-// TODO: We should split negotiated serializers that we can change versions on from those we can change
+// TODO: We should split negotiated serializers that we can change versions on from those we can change id:3678 gh:3693
 // serialization formats on
 type negotiatedSerializerWrapper struct {
 	info runtime.SerializerInfo

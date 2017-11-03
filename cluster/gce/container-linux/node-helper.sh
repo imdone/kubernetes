@@ -31,5 +31,5 @@ function create-node-instance-template {
   local template_name="$1"
 
   create-node-template "$template_name" "${scope_flags[*]}" "$(get-node-instance-metadata)"
-  # TODO(euank): We should include update-strategy here. We should also switch to ignition
+  # TODO (euank): We should include update-strategy here. We should also switch to ignition id:39 gh:40
 }

@@ -26,7 +26,7 @@ import (
 	"github.com/golang/glog"
 )
 
-// TODO(vmarmol): See about refactoring this class, we have an unecessary redirection of containerCache and InMemoryCache.
+// TODO (vmarmol): See about refactoring this class, we have an unecessary redirection of containerCache and InMemoryCache. id:2827 gh:2842
 // containerCache is used to store per-container information
 type containerCache struct {
 	ref         info.ContainerReference
@@ -84,7 +84,7 @@ func (self *InMemoryCache) AddStats(ref info.ContainerReference, stats *info.Con
 	}()
 
 	if self.backend != nil {
-		// TODO(monnand): To deal with long delay write operations, we
+		// TODO (monnand): To deal with long delay write operations, we id:2811 gh:2826
 		// may want to start a pool of goroutines to do write
 		// operations.
 		if err := self.backend.AddStats(ref, stats); err != nil {

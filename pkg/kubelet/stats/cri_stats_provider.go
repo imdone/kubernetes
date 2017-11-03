@@ -148,7 +148,7 @@ func (p *criStatsProvider) ImageFsStats() (*statsapi.FsStats, error) {
 	// CRI may return the stats of multiple image filesystems but we only
 	// return the first one.
 	//
-	// TODO(yguo0905): Support returning stats of multiple image filesystems.
+	// TODO (yguo0905): Support returning stats of multiple image filesystems. id:1141 gh:1147
 	for _, fs := range resp {
 		s := &statsapi.FsStats{
 			Time:       metav1.NewTime(time.Unix(0, fs.Timestamp)),
@@ -232,7 +232,7 @@ func (p *criStatsProvider) makeContainerStats(
 			Inodes:         rootFsInfo.Inodes,
 			// UsedBytes and InodesUsed are unavailable from CRI stats.
 			//
-			// TODO(yguo0905): Get this information from kubelet and
+			// TODO (yguo0905): Get this information from kubelet and id:1080 gh:1086
 			// populate the two fields here.
 		},
 		// UserDefinedMetrics is not supported by CRI.

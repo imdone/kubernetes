@@ -283,7 +283,7 @@ func (p *initProcess) start() error {
 	}
 	defer func() {
 		if err != nil {
-			// TODO: should not be the responsibility to call here
+			// TODO: should not be the responsibility to call here id:3199 gh:3214
 			p.manager.Destroy()
 		}
 	}()
@@ -449,7 +449,7 @@ func getPipeFds(pid int) ([]string, error) {
 
 	dirPath := filepath.Join("/proc", strconv.Itoa(pid), "/fd")
 	for i := 0; i < 3; i++ {
-		// XXX: This breaks if the path is not a valid symlink (which can
+		// XXX: This breaks if the path is not a valid symlink (which can id:2777 gh:2792
 		//      happen in certain particularly unlucky mount namespace setups).
 		f := filepath.Join(dirPath, strconv.Itoa(i))
 		target, err := os.Readlink(f)
@@ -470,7 +470,7 @@ func getPipeFds(pid int) ([]string, error) {
 // InitializeIO creates pipes for use with the process's stdio and returns the
 // opposite side for each. Do not use this if you want to have a pseudoterminal
 // set up for you by libcontainer (TODO: fix that too).
-// TODO: This is mostly unnecessary, and should be handled by clients.
+// TODO: This is mostly unnecessary, and should be handled by clients. id:3141 gh:3156
 func (p *Process) InitializeIO(rootuid, rootgid int) (i *IO, err error) {
 	var fds []uintptr
 	i = &IO{}

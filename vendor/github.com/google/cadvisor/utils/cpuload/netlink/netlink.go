@@ -35,7 +35,7 @@ const (
 )
 
 var (
-	// TODO(rjnagal): Verify and fix for other architectures.
+	// TODO (rjnagal): Verify and fix for other architectures. id:2659 gh:2674
 	Endian = binary.LittleEndian
 )
 

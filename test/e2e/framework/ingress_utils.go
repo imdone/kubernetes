@@ -77,7 +77,7 @@ const (
 
 	// Cloud resources created by the ingress controller older than this
 	// are automatically purged to prevent running out of quota.
-	// TODO(37335): write soak tests and bump this up to a week.
+	// TODO (37335): write soak tests and bump this up to a week. id:2370 gh:2385
 	maxAge = 48 * time.Hour
 
 	// IngressManifestPath is the parent path to yaml test manifests.
@@ -313,7 +313,7 @@ func createIngressTLSSecret(kubeClient clientset.Interface, ing *extensions.Ingr
 	}
 	var s *v1.Secret
 	if s, err = kubeClient.CoreV1().Secrets(ing.Namespace).Get(tls.SecretName, metav1.GetOptions{}); err == nil {
-		// TODO: Retry the update. We don't really expect anything to conflict though.
+		// TODO: Retry the update. We don't really expect anything to conflict though. id:2102 gh:2117
 		Logf("Updating secret %v in ns %v with hosts %v for ingress %v", secret.Name, secret.Namespace, host, ing.Name)
 		s.Data = secret.Data
 		_, err = kubeClient.CoreV1().Secrets(ing.Namespace).Update(s)
@@ -562,7 +562,7 @@ func (cont *GCEIngressController) deleteSSLCertificate(del bool) (msg string) {
 
 func (cont *GCEIngressController) deleteInstanceGroup(del bool) (msg string) {
 	gceCloud := cont.Cloud.Provider.(*gcecloud.GCECloud)
-	// TODO: E2E cloudprovider has only 1 zone, but the cluster can have many.
+	// TODO: E2E cloudprovider has only 1 zone, but the cluster can have many. id:2358 gh:2373
 	// We need to poll on all IGs across all zones.
 	igList, err := gceCloud.ListInstanceGroups(cont.Cloud.Zone)
 	if err != nil {
@@ -593,7 +593,7 @@ func (cont *GCEIngressController) deleteInstanceGroup(del bool) (msg string) {
 
 func (cont *GCEIngressController) deleteNetworkEndpointGroup(del bool) (msg string) {
 	gceCloud := cont.Cloud.Provider.(*gcecloud.GCECloud)
-	// TODO: E2E cloudprovider has only 1 zone, but the cluster can have many.
+	// TODO: E2E cloudprovider has only 1 zone, but the cluster can have many. id:2186 gh:2201
 	// We need to poll on all NEGs across all zones.
 	negList, err := gceCloud.ListNetworkEndpointGroup(cont.Cloud.Zone)
 	if err != nil {
@@ -780,7 +780,7 @@ func (cont *GCEIngressController) Cleanup(del bool) error {
 	errMsg += cont.deleteFirewallRule(del)
 	errMsg += cont.deleteSSLCertificate(del)
 
-	// TODO: Verify instance-groups, issue #16636. Gcloud mysteriously barfs when told
+	// TODO: Verify instance-groups, issue #16636. Gcloud mysteriously barfs when told id:2224 gh:2239
 	// to unmarshal instance groups into the current vendored gce-client's understanding
 	// of the struct.
 	if errMsg == "" {
@@ -971,7 +971,7 @@ func (j *IngressTestJig) Update(update func(ing *extensions.Ingress)) {
 // AddHTTPS updates the ingress to use this secret for these hosts.
 func (j *IngressTestJig) AddHTTPS(secretName string, hosts ...string) {
 	j.Ingress.Spec.TLS = []extensions.IngressTLS{{Hosts: hosts, SecretName: secretName}}
-	// TODO: Just create the secret in GetRootCAs once we're watching secrets in
+	// TODO: Just create the secret in GetRootCAs once we're watching secrets in id:2371 gh:2386
 	// the ingress controller.
 	_, cert, _, err := createIngressTLSSecret(j.Client, j.Ingress)
 	ExpectNoError(err)
@@ -1053,7 +1053,7 @@ func (j *IngressTestJig) VerifyURL(route, host string, iterations int, interval 
 }
 
 func (j *IngressTestJig) pollServiceNodePort(ns, name string, port int) {
-	// TODO: Curl all nodes?
+	// TODO: Curl all nodes? id:2103 gh:2118
 	u, err := GetNodePortURL(j.Client, ns, name, port)
 	ExpectNoError(err)
 	ExpectNoError(PollURL(u, "", 30*time.Second, j.PollInterval, &http.Client{Timeout: IngressReqTimeout}, false))

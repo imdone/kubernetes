@@ -190,7 +190,7 @@ func (s *specAggregator) buildOpenAPISpec() (specToReturn *spec.Swagger, err err
 	}
 	sortByPriority(specs)
 	for _, specInfo := range specs {
-		// TODO: Make kube-openapi.MergeSpec(s) accept nil or empty spec as destination and just clone the spec in that case.
+		// TODO: Make kube-openapi.MergeSpec(s) accept nil or empty spec as destination and just clone the spec in that case. id:3631 gh:3646
 		if specToReturn == nil {
 			specToReturn, err = aggregator.CloneSpec(specInfo.spec)
 			if err != nil {

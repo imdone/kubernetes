@@ -48,7 +48,7 @@ func NegotiateOutputMediaType(req *http.Request, ns runtime.NegotiatedSerializer
 		supported, _ := MediaTypesForSerializer(ns)
 		return mediaType, runtime.SerializerInfo{}, NewNotAcceptableError(supported)
 	}
-	// TODO: move into resthandler
+	// TODO: move into resthandler id:3790 gh:3805
 	info := mediaType.Accepted.Serializer
 	if (mediaType.Pretty || isPrettyPrint(req)) && info.PrettySerializer != nil {
 		info.Serializer = info.PrettySerializer
@@ -290,7 +290,7 @@ func NegotiateMediaTypeOptions(header string, accepted []AcceptedMediaType, endp
 			case clause.Type == accepts.Type && clause.SubType == accepts.SubType,
 				clause.Type == accepts.Type && clause.SubType == "*",
 				clause.Type == "*" && clause.SubType == "*":
-				// TODO: should we prefer the first type with no unrecognized options?  Do we need to ignore unrecognized
+				// TODO: should we prefer the first type with no unrecognized options?  Do we need to ignore unrecognized id:3986 gh:4006
 				// parameters.
 				return acceptMediaTypeOptions(clause.Params, accepts, endpoint)
 			}

@@ -1258,7 +1258,7 @@ func setDaemonSetToleration(ds *extensions.DaemonSet, tolerations []v1.Toleratio
 }
 
 // DaemonSet should launch a critical pod even when the node with OutOfDisk taints.
-// TODO(#48843) OutOfDisk taints will be removed in 1.10
+// TODO (#48843) OutOfDisk taints will be removed in 1.10 id:460 gh:461
 func TestTaintOutOfDiskNodeDaemonLaunchesCriticalPod(t *testing.T) {
 	for _, strategy := range updateStrategies() {
 		ds := newDaemonSet("critical")
@@ -1271,7 +1271,7 @@ func TestTaintOutOfDiskNodeDaemonLaunchesCriticalPod(t *testing.T) {
 		node.Spec.Taints = []v1.Taint{{Key: algorithm.TaintNodeOutOfDisk, Effect: v1.TaintEffectNoSchedule}}
 		manager.nodeStore.Add(node)
 
-		// NOTE: Whether or not TaintNodesByCondition is enabled, it'll add toleration to DaemonSet pods.
+		// NOTE: Whether or not TaintNodesByCondition is enabled, it'll add toleration to DaemonSet pods. id:610 gh:611
 
 		// Without enabling critical pod annotation feature gate, we shouldn't create critical pod
 		utilfeature.DefaultFeatureGate.Set("ExperimentalCriticalPodAnnotation=False")

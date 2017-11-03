@@ -601,7 +601,7 @@ var (
 	ErrStreamDrain = streamErrorf(codes.Unavailable, "the server stops accepting new RPCs")
 )
 
-// TODO: See if we can replace StreamError with status package errors.
+// TODO: See if we can replace StreamError with status package errors. id:3700 gh:3715
 
 // StreamError is an error that only affects one stream within a connection.
 type StreamError struct {

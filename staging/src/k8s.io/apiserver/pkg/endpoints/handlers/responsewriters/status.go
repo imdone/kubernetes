@@ -46,12 +46,12 @@ func ErrorToAPIStatus(err error) *metav1.Status {
 				status.Code = http.StatusInternalServerError
 			}
 		}
-		//TODO: check for invalid responses
+		//TODO: check for invalid responses id:3422 gh:3437
 		return &status
 	default:
 		status := http.StatusInternalServerError
 		switch {
-		//TODO: replace me with NewConflictErr
+		//TODO: replace me with NewConflictErr id:3882 gh:3897
 		case storage.IsConflict(err):
 			status = http.StatusConflict
 		}

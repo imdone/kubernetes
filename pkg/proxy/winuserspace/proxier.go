@@ -454,7 +454,7 @@ func isTooManyFDsError(err error) bool {
 func isClosedError(err error) bool {
 	// A brief discussion about handling closed error here:
 	// https://code.google.com/p/go/issues/detail?id=4373#c14
-	// TODO: maybe create a stoppable TCP listener that returns a StoppedError
+	// TODO: maybe create a stoppable TCP listener that returns a StoppedError id:1249 gh:1255
 	return strings.HasSuffix(err.Error(), "use of closed network connection")
 }
 

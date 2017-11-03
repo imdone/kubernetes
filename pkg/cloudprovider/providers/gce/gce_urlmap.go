@@ -69,7 +69,7 @@ func (gce *GCECloud) DeleteUrlMap(name string) error {
 // ListUrlMaps lists all UrlMaps in the project.
 func (gce *GCECloud) ListUrlMaps() (*compute.UrlMapList, error) {
 	mc := newUrlMapMetricContext("list")
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:509 gh:510
 	v, err := gce.service.UrlMaps.List(gce.projectID).Do()
 	return v, mc.Observe(err)
 }

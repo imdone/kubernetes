@@ -30,7 +30,7 @@ const (
 	defaultAPIPath = "/apis"
 )
 
-// TODO: Is this obsoleted by the discovery client?
+// TODO: Is this obsoleted by the discovery client? id:4046 gh:4066
 
 // ServerAPIVersions returns the GroupVersions supported by the API server.
 // It creates a RESTClient based on the passed in config, but it doesn't rely

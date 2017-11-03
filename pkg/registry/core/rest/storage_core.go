@@ -83,7 +83,7 @@ type LegacyRESTStorageProvider struct {
 
 // LegacyRESTStorage returns stateful information about particular instances of REST storage to
 // master.go for wiring controllers.
-// TODO remove this by running the controller as a poststarthook
+// TODO remove this by running the controller as a poststarthook id:1316 gh:1322
 type LegacyRESTStorage struct {
 	ServiceClusterIPAllocator rangeallocation.RangeRegistry
 	ServiceNodePortAllocator  rangeallocation.RangeRegistry
@@ -153,7 +153,7 @@ func (c LegacyRESTStorageProvider) NewLegacyRESTStorage(restOptionsGetter generi
 
 	ServiceClusterIPAllocator := ipallocator.NewAllocatorCIDRRange(&serviceClusterIPRange, func(max int, rangeSpec string) allocator.Interface {
 		mem := allocator.NewAllocationMap(max, rangeSpec)
-		// TODO etcdallocator package to return a storage interface via the storageFactory
+		// TODO etcdallocator package to return a storage interface via the storageFactory id:1277 gh:1283
 		etcd := serviceallocator.NewEtcd(mem, "/ranges/serviceips", api.Resource("serviceipallocations"), serviceStorageConfig)
 		serviceClusterIPRegistry = etcd
 		return etcd
@@ -163,7 +163,7 @@ func (c LegacyRESTStorageProvider) NewLegacyRESTStorage(restOptionsGetter generi
 	var serviceNodePortRegistry rangeallocation.RangeRegistry
 	ServiceNodePortAllocator := portallocator.NewPortAllocatorCustom(c.ServiceNodePortRange, func(max int, rangeSpec string) allocator.Interface {
 		mem := allocator.NewAllocationMap(max, rangeSpec)
-		// TODO etcdallocator package to return a storage interface via the storageFactory
+		// TODO etcdallocator package to return a storage interface via the storageFactory id:1323 gh:1329
 		etcd := serviceallocator.NewEtcd(mem, "/ranges/servicenodeports", api.Resource("servicenodeportallocations"), serviceStorageConfig)
 		serviceNodePortRegistry = etcd
 		return etcd
@@ -263,7 +263,7 @@ func (s componentStatusStorage) serversToValidate() map[string]*componentstatus.
 			addr = etcdUrl.Host
 			port = 2379
 		}
-		// TODO: etcd health checking should be abstracted in the storage tier
+		// TODO: etcd health checking should be abstracted in the storage tier id:1356 gh:1362
 		serversToValidate[fmt.Sprintf("etcd-%d", ix)] = &componentstatus.Server{
 			Addr:        addr,
 			EnableHTTPS: etcdUrl.Scheme == "https",

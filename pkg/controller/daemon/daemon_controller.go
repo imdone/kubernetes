@@ -133,7 +133,7 @@ type DaemonSetsController struct {
 func NewDaemonSetsController(daemonSetInformer extensionsinformers.DaemonSetInformer, historyInformer appsinformers.ControllerRevisionInformer, podInformer coreinformers.PodInformer, nodeInformer coreinformers.NodeInformer, kubeClient clientset.Interface) *DaemonSetsController {
 	eventBroadcaster := record.NewBroadcaster()
 	eventBroadcaster.StartLogging(glog.Infof)
-	// TODO: remove the wrapper when every clients have moved to use the clientset.
+	// TODO: remove the wrapper when every clients have moved to use the clientset. id:533 gh:534
 	eventBroadcaster.StartRecordingToSink(&v1core.EventSinkImpl{Interface: v1core.New(kubeClient.CoreV1().RESTClient()).Events("")})
 
 	if kubeClient != nil && kubeClient.CoreV1().RESTClient().GetRateLimiter() != nil {
@@ -273,7 +273,7 @@ func (dsc *DaemonSetsController) enqueue(ds *extensions.DaemonSet) {
 		return
 	}
 
-	// TODO: Handle overlapping controllers better. See comment in ReplicationManager.
+	// TODO: Handle overlapping controllers better. See comment in ReplicationManager. id:459 gh:460
 	dsc.queue.Add(key)
 }
 
@@ -294,7 +294,7 @@ func (dsc *DaemonSetsController) enqueueDaemonSetAfter(obj interface{}, after ti
 		return
 	}
 
-	// TODO: Handle overlapping controllers better. See comment in ReplicationManager.
+	// TODO: Handle overlapping controllers better. See comment in ReplicationManager. id:609 gh:610
 	dsc.queue.AddAfter(key, after)
 }
 
@@ -647,7 +647,7 @@ func (dsc *DaemonSetsController) deletePod(obj interface{}) {
 }
 
 func (dsc *DaemonSetsController) addNode(obj interface{}) {
-	// TODO: it'd be nice to pass a hint with these enqueues, so that each ds would only examine the added node (unless it has other work to do, too).
+	// TODO: it'd be nice to pass a hint with these enqueues, so that each ds would only examine the added node (unless it has other work to do, too). id:487 gh:488
 	dsList, err := dsc.dsLister.List(labels.Everything())
 	if err != nil {
 		glog.V(4).Infof("Error enqueueing daemon sets: %v", err)
@@ -710,7 +710,7 @@ func (dsc *DaemonSetsController) updateNode(old, cur interface{}) {
 		glog.V(4).Infof("Error listing daemon sets: %v", err)
 		return
 	}
-	// TODO: it'd be nice to pass a hint with these enqueues, so that each ds would only examine the added node (unless it has other work to do, too).
+	// TODO: it'd be nice to pass a hint with these enqueues, so that each ds would only examine the added node (unless it has other work to do, too). id:525 gh:526
 	for _, ds := range dsList {
 		_, oldShouldSchedule, oldShouldContinueRunning, err := dsc.nodeShouldRunDaemonPod(oldNode, ds)
 		if err != nil {
@@ -1184,7 +1184,7 @@ func (dsc *DaemonSetsController) simulate(newPod *v1.Pod, node *v1.Node, ds *ext
 		Effect:   v1.TaintEffectNoSchedule,
 	})
 
-	// TODO(#48843) OutOfDisk taints will be removed in 1.10
+	// TODO (#48843) OutOfDisk taints will be removed in 1.10 id:534 gh:535
 	if utilfeature.DefaultFeatureGate.Enabled(features.ExperimentalCriticalPodAnnotation) &&
 		kubelettypes.IsCriticalPod(newPod) {
 		v1helper.AddOrUpdateTolerationInPod(newPod, &v1.Toleration{

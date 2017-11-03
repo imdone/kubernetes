@@ -280,7 +280,7 @@ type KubeletConfiguration struct {
 	// iptablesMasqueradeBit is the bit of the iptables fwmark space to use for SNAT
 	// Values must be within the range [0, 31].
 	// Warning: Please match the value of corresponding parameter in kube-proxy
-	// TODO: clean up IPTablesMasqueradeBit in kube-proxy
+	// TODO: clean up IPTablesMasqueradeBit in kube-proxy id:800 gh:801
 	IPTablesMasqueradeBit int32
 	// iptablesDropBit is the bit of the iptables fwmark space to use for dropping packets. Kubelet will ensure iptables mark and drop rules.
 	// Values must be within the range [0, 31]. Must be different from IPTablesMasqueradeBit

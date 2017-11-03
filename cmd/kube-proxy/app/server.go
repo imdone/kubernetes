@@ -98,7 +98,7 @@ type Options struct {
 	// The fields below here are placeholders for flags that can't be directly mapped into
 	// componentconfig.KubeProxyConfiguration.
 	//
-	// TODO remove these fields once the deprecated flags are removed.
+	// TODO remove these fields once the deprecated flags are removed. id:158 gh:159
 
 	// master is used to override the kubeconfig's URL to the apiserver.
 	master string
@@ -383,7 +383,7 @@ type ProxyServer struct {
 }
 
 // createClients creates a kube client and an event client from the given config and masterOverride.
-// TODO remove masterOverride when CLI flags are removed.
+// TODO remove masterOverride when CLI flags are removed. id:128 gh:129
 func createClients(config componentconfig.ClientConnectionConfiguration, masterOverride string) (clientset.Interface, v1core.EventsGetter, error) {
 	var kubeConfig *rest.Config
 	var err error
@@ -405,7 +405,7 @@ func createClients(config componentconfig.ClientConnectionConfiguration, masterO
 	kubeConfig.AcceptContentTypes = config.AcceptContentTypes
 	kubeConfig.ContentType = config.ContentType
 	kubeConfig.QPS = config.QPS
-	//TODO make config struct use int instead of int32?
+	//TODO make config struct use int instead of int32? id:177 gh:178
 	kubeConfig.Burst = int(config.Burst)
 
 	client, err := clientset.NewForConfig(kubeConfig)
@@ -436,7 +436,7 @@ func (s *ProxyServer) Run() error {
 		return nil
 	}
 
-	// TODO(vmarmol): Use container config for this.
+	// TODO (vmarmol): Use container config for this. id:140 gh:141
 	var oomAdjuster *oom.OOMAdjuster
 	if s.OOMScoreAdj != nil {
 		oomAdjuster = oom.NewOOMAdjuster()
@@ -504,7 +504,7 @@ func (s *ProxyServer) Run() error {
 				// Here we'll send an node event with specific reason and message, the
 				// administrator should decide whether and how to handle this issue,
 				// whether to drain the node and restart docker.
-				// TODO(random-liu): Remove this when the docker bug is fixed.
+				// TODO (random-liu): Remove this when the docker bug is fixed. id:220 gh:221
 				const message = "DOCKER RESTART NEEDED (docker issue #24000): /sys is read-only: " +
 					"cannot modify conntrack limits, problems may arise later."
 				s.Recorder.Eventf(s.NodeRef, api.EventTypeWarning, err.Error(), message)

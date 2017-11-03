@@ -69,7 +69,7 @@ func (c *requestContextMap) Update(req *http.Request, context Context) error {
 	if _, ok := c.contexts[req]; !ok {
 		return errors.New("No context associated")
 	}
-	// TODO: ensure the new context is a descendant of the existing one
+	// TODO: ensure the new context is a descendant of the existing one id:3426 gh:3443
 	c.contexts[req] = context
 	return nil
 }

@@ -43,7 +43,7 @@ func (fn ResourcePrinterFunc) PrintObj(obj runtime.Object, w io.Writer) error {
 	return fn(obj, w)
 }
 
-// TODO: implement HandledResources()
+// TODO: implement HandledResources() id:1208 gh:1214
 func (fn ResourcePrinterFunc) HandledResources() []string {
 	return []string{}
 }

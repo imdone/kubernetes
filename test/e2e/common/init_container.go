@@ -254,7 +254,7 @@ var _ = framework.KubeDescribe("InitContainer", func() {
 						return false, nil
 					}
 					framework.Logf("init container has failed twice: %#v", t)
-					// TODO: more conditions
+					// TODO: more conditions id:2182 gh:2197
 					return true, nil
 				default:
 					return false, fmt.Errorf("unexpected object: %#v", t)

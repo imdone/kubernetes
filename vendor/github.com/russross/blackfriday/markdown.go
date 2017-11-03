@@ -808,7 +808,7 @@ func isletter(c byte) bool {
 }
 
 // Test if a character is a letter or a digit.
-// TODO: check when this is looking for ASCII alnum and when it should use unicode
+// TODO: check when this is looking for ASCII alnum and when it should use unicode id:2783 gh:2798
 func isalnum(c byte) bool {
 	return (c >= '0' && c <= '9') || isletter(c)
 }

@@ -129,7 +129,7 @@ func (t *typeValidator) Validate(data interface{}) *Result {
 	result := new(Result)
 	result.Inc()
 	if data == nil || reflect.DeepEqual(reflect.Zero(reflect.TypeOf(data)), reflect.ValueOf(data)) {
-		if len(t.Type) > 0 && !t.Type.Contains("null") { // TODO: if a property is not required it also passes this
+		if len(t.Type) > 0 && !t.Type.Contains("null") { // TODO: if a property is not required it also passes this id:2861 gh:2876
 			return sErr(errors.InvalidType(t.Path, t.In, strings.Join(t.Type, ","), "null"))
 		}
 		return result

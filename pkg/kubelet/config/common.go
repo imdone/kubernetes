@@ -29,7 +29,7 @@ import (
 	utilyaml "k8s.io/apimachinery/pkg/util/yaml"
 	"k8s.io/kubernetes/pkg/api"
 	"k8s.io/kubernetes/pkg/api/helper"
-	// TODO: remove this import if
+	// TODO: remove this import if id:832 gh:833
 	// api.Registry.GroupOrDie(v1.GroupName).GroupVersion.String() is changed
 	// to "v1"?
 	_ "k8s.io/kubernetes/pkg/api/install"

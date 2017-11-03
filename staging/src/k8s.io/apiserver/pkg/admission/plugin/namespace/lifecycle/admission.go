@@ -181,7 +181,7 @@ func (l *Lifecycle) Admit(a admission.Attributes) error {
 			return nil
 		}
 
-		// TODO: This should probably not be a 403
+		// TODO: This should probably not be a 403 id:3351 gh:3366
 		return admission.NewForbidden(a, fmt.Errorf("unable to create new content in namespace %s because it is being terminated.", a.GetNamespace()))
 	}
 

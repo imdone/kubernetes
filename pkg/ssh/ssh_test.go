@@ -88,7 +88,7 @@ func runTestSSHServer(user, password string) (*testSSHServer, error) {
 	result.Host = host
 	result.Port = port
 	go func() {
-		// TODO: return this port.
+		// TODO: return this port. id:1412 gh:1418
 		defer listener.Close()
 
 		conn, err := listener.Accept()

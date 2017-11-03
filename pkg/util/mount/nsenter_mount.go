@@ -160,7 +160,7 @@ func (n *NsenterMounter) IsLikelyNotMountPoint(file string) (bool, error) {
 	// Add --first-only option: since we are testing for the absence of a mountpoint, it is sufficient to get only
 	// the first of multiple possible mountpoints using --first-only.
 	// Also add fstype output to make sure that the output of target file will give the full path
-	// TODO: Need more refactoring for this function. Track the solution with issue #26996
+	// TODO: Need more refactoring for this function. Track the solution with issue #26996 id:1492 gh:1498
 	args := []string{"-o", "target,fstype", "--noheadings", "--first-only", "--target", file}
 	glog.V(5).Infof("nsenter findmnt args: %v", args)
 	out, err := n.ne.Exec("findmnt", args).CombinedOutput()

@@ -66,7 +66,7 @@ func (az *Cloud) GetLoadBalancer(clusterName string, service *v1.Service) (statu
 			}
 		}
 	} else {
-		// TODO: Consider also read address from lb's FrontendIPConfigurations
+		// TODO: Consider also read address from lb's FrontendIPConfigurations id:448 gh:449
 		pipName, err := az.determinePublicIPName(clusterName, service)
 		if err != nil {
 			return nil, false, err
@@ -113,7 +113,7 @@ func (az *Cloud) determinePublicIPName(clusterName string, service *v1.Service) 
 			}
 		}
 	}
-	// TODO: follow next link here? Will there really ever be that many public IPs?
+	// TODO: follow next link here? Will there really ever be that many public IPs? id:435 gh:436
 
 	return "", fmt.Errorf("user supplied IP Address %s was not found", loadBalancerIP)
 }

@@ -29,7 +29,7 @@ import (
 // if it cannot parse the string.
 func ToGroupVersion(gv string) (GroupVersion, error) {
 	// this can be the internal version for the legacy kube types
-	// TODO once we've cleared the last uses as strings, this special case should be removed.
+	// TODO once we've cleared the last uses as strings, this special case should be removed. id:4006 gh:4026
 	if (len(gv) == 0) || (gv == "/") {
 		return GroupVersion{}, nil
 	}

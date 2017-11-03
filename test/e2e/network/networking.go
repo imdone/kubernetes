@@ -69,7 +69,7 @@ var _ = SIGDescribe("Networking", func() {
 			{path: "/metrics"},
 			{path: "/swaggerapi"},
 			{path: "/version"},
-			// TODO: test proxy links here
+			// TODO: test proxy links here id:2309 gh:2324
 		}
 		if !framework.ProviderIs("gke", "skeleton") {
 			tests = append(tests, struct{ path string }{path: "/logs"})
@@ -86,7 +86,7 @@ var _ = SIGDescribe("Networking", func() {
 	})
 
 	It("should check kube-proxy urls", func() {
-		// TODO: this is overkill we just need the host networking pod
+		// TODO: this is overkill we just need the host networking pod id:2342 gh:2357
 		// to hit kube-proxy urls.
 		config := framework.NewNetworkingTestConfig(f)
 
@@ -98,7 +98,7 @@ var _ = SIGDescribe("Networking", func() {
 		config.GetSelfURLStatusCode(ports.ProxyStatusPort, "/proxyMode", "200")
 	})
 
-	// TODO: Remove [Slow] when this has had enough bake time to prove presubmit worthiness.
+	// TODO: Remove [Slow] when this has had enough bake time to prove presubmit worthiness. id:2475 gh:2487
 	Describe("Granular Checks: Services [Slow]", func() {
 
 		It("should function for pod-Service: http", func() {

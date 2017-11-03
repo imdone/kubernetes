@@ -133,7 +133,7 @@ func dumpClusterInfo(f cmdutil.Factory, cmd *cobra.Command, out io.Writer) error
 		}
 	}
 	for _, namespace := range namespaces {
-		// TODO: this is repetitive in the extreme.  Use reflection or
+		// TODO: this is repetitive in the extreme.  Use reflection or id:692 gh:693
 		// something to make this a for loop.
 		events, err := clientset.Core().Events(namespace).List(metav1.ListOptions{})
 		if err != nil {

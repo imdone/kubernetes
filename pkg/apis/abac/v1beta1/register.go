@@ -28,7 +28,7 @@ const GroupName = "abac.authorization.kubernetes.io"
 var SchemeGroupVersion = schema.GroupVersion{Group: GroupName, Version: "v1beta1"}
 
 func init() {
-	// TODO: delete this, abac should not have its own scheme.
+	// TODO: delete this, abac should not have its own scheme. id:297 gh:298
 	if err := addKnownTypes(abac.Scheme); err != nil {
 		// Programmer error.
 		panic(err)
@@ -40,7 +40,7 @@ func init() {
 }
 
 var (
-	// TODO: move SchemeBuilder with zz_generated.deepcopy.go to k8s.io/api.
+	// TODO: move SchemeBuilder with zz_generated.deepcopy.go to k8s.io/api. id:395 gh:396
 	// localSchemeBuilder and AddToScheme will stay in k8s.io/kubernetes.
 	SchemeBuilder      runtime.SchemeBuilder
 	localSchemeBuilder = &SchemeBuilder

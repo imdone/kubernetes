@@ -189,7 +189,7 @@ var backendProtocolMapping = map[string]string{
 const MaxReadThenCreateRetries = 30
 
 // DefaultVolumeType specifies which storage to use for newly created Volumes
-// TODO: Remove when user/admin can configure volume types and thus we don't
+// TODO: Remove when user/admin can configure volume types and thus we don't id:391 gh:392
 // need hardcoded defaults.
 const DefaultVolumeType = "gp2"
 
@@ -215,7 +215,7 @@ type Services interface {
 
 // EC2 is an abstraction over AWS', to allow mocking/other implementations
 // Note that the DescribeX functions return a list, so callers don't need to deal with paging
-// TODO: Should we rename this to AWS (EBS & ELB are not technically part of EC2)
+// TODO: Should we rename this to AWS (EBS & ELB are not technically part of EC2) id:371 gh:372
 type EC2 interface {
 	// Query EC2 for instances matching the filter
 	DescribeInstances(request *ec2.DescribeInstancesInput) ([]*ec2.Instance, error)
@@ -332,7 +332,7 @@ type VolumeOptions struct {
 }
 
 // Volumes is an interface for managing cloud-provisioned volumes
-// TODO: Allow other clouds to implement this
+// TODO: Allow other clouds to implement this id:430 gh:431
 type Volumes interface {
 	// Attach the disk to the node with the specified NodeName
 	// nodeName can be empty to mean "the instance on which we are running"
@@ -365,7 +365,7 @@ type Volumes interface {
 }
 
 // InstanceGroups is an interface for managing cloud-managed instance groups / autoscaling instance groups
-// TODO: Allow other clouds to implement this
+// TODO: Allow other clouds to implement this id:413 gh:414
 type InstanceGroups interface {
 	// Set the size to the fixed size
 	ResizeInstanceGroup(instanceGroupName string, size int) error
@@ -413,7 +413,7 @@ var _ Volumes = &Cloud{}
 // CloudConfig wraps the settings for the AWS cloud provider.
 type CloudConfig struct {
 	Global struct {
-		// TODO: Is there any use for this?  We can get it from the instance metadata service
+		// TODO: Is there any use for this?  We can get it from the instance metadata service id:442 gh:443
 		// Maybe if we're not running on AWS, e.g. bootstrap; for now it is not very useful
 		Zone string
 
@@ -938,7 +938,7 @@ func newAWSCloud(config io.Reader, awsServices Services) (*Cloud, error) {
 			return nil, err
 		}
 	} else {
-		// TODO: Clean up double-API query
+		// TODO: Clean up double-API query id:392 gh:393
 		info, err := awsCloud.selfAWSInstance.describeInstance()
 		if err != nil {
 			return nil, err
@@ -1028,7 +1028,7 @@ func (c *Cloud) NodeAddresses(name types.NodeName) ([]v1.NodeAddress, error) {
 
 		externalIP, err := c.metadata.GetMetadata("public-ipv4")
 		if err != nil {
-			//TODO: It would be nice to be able to determine the reason for the failure,
+			//TODO: It would be nice to be able to determine the reason for the failure, id:372 gh:373
 			// but the AWS client masks all failures with the same error description.
 			glog.V(4).Info("Could not determine public IP from AWS metadata.")
 		} else {
@@ -1037,7 +1037,7 @@ func (c *Cloud) NodeAddresses(name types.NodeName) ([]v1.NodeAddress, error) {
 
 		internalDNS, err := c.metadata.GetMetadata("local-hostname")
 		if err != nil || len(internalDNS) == 0 {
-			//TODO: It would be nice to be able to determine the reason for the failure,
+			//TODO: It would be nice to be able to determine the reason for the failure, id:489 gh:490
 			// but the AWS client masks all failures with the same error description.
 			glog.V(2).Info("Could not determine private DNS from AWS metadata.")
 		} else {
@@ -1046,7 +1046,7 @@ func (c *Cloud) NodeAddresses(name types.NodeName) ([]v1.NodeAddress, error) {
 
 		externalDNS, err := c.metadata.GetMetadata("public-hostname")
 		if err != nil || len(externalDNS) == 0 {
-			//TODO: It would be nice to be able to determine the reason for the failure,
+			//TODO: It would be nice to be able to determine the reason for the failure, id:414 gh:415
 			// but the AWS client masks all failures with the same error description.
 			glog.V(2).Info("Could not determine public DNS from AWS metadata.")
 		} else {
@@ -1091,7 +1091,7 @@ func extractNodeAddresses(instance *ec2.Instance) ([]v1.NodeAddress, error) {
 		}
 	}
 
-	// TODO: Other IP addresses (multiple ips)?
+	// TODO: Other IP addresses (multiple ips)? id:443 gh:445
 	publicIPAddress := aws.StringValue(instance.PublicIpAddress)
 	if publicIPAddress != "" {
 		ip := net.ParseIP(publicIPAddress)
@@ -1230,8 +1230,8 @@ func (c *Cloud) getCandidateZonesForDynamicVolume() (sets.String, error) {
 	// We don't currently cache this; it is currently used only in volume
 	// creation which is expected to be a comparatively rare occurrence.
 
-	// TODO: Caching / expose v1.Nodes to the cloud provider?
-	// TODO: We could also query for subnets, I think
+	// TODO: Caching / expose v1.Nodes to the cloud provider? id:393 gh:394
+	// TODO: We could also query for subnets, I think id:373 gh:374
 
 	filters := []*ec2.Filter{newEc2Filter("instance-state-name", "running")}
 
@@ -1371,7 +1371,7 @@ func newAWSInstance(ec2Service EC2, instance *ec2.Instance) *awsInstance {
 
 // Gets the awsInstanceType that models the instance type of this instance
 func (i *awsInstance) getInstanceType() *awsInstanceType {
-	// TODO: Make this real
+	// TODO: Make this real id:490 gh:491
 	awsInstanceType := &awsInstanceType{}
 	return awsInstanceType
 }
@@ -1683,8 +1683,8 @@ func (c *Cloud) AttachDisk(diskName KubernetesVolumeID, nodeName types.NodeName,
 	}
 
 	if readOnly {
-		// TODO: We could enforce this when we mount the volume (?)
-		// TODO: We could also snapshot the volume and attach copies of it
+		// TODO: We could enforce this when we mount the volume (?) id:415 gh:416
+		// TODO: We could also snapshot the volume and attach copies of it id:444 gh:446
 		return "", errors.New("AWS volumes cannot be mounted read-only")
 	}
 
@@ -1725,7 +1725,7 @@ func (c *Cloud) AttachDisk(diskName KubernetesVolumeID, nodeName types.NodeName,
 		attachResponse, err := c.ec2.AttachVolume(request)
 		if err != nil {
 			attachEnded = true
-			// TODO: Check if the volume was concurrently attached?
+			// TODO: Check if the volume was concurrently attached? id:431 gh:432
 			return "", wrapAttachError(err, disk, awsInstance.awsID)
 		}
 		if da, ok := c.deviceAllocators[awsInstance.nodeName]; ok {
@@ -1787,7 +1787,7 @@ func (c *Cloud) DetachDisk(diskName KubernetesVolumeID, nodeName types.NodeName)
 
 	if !alreadyAttached {
 		glog.Warningf("DetachDisk called on non-attached disk: %s", diskName)
-		// TODO: Continue?  Tolerate non-attached error from the AWS DetachVolume call?
+		// TODO: Continue?  Tolerate non-attached error from the AWS DetachVolume call? id:374 gh:375
 	}
 
 	request := ec2.DetachVolumeInput{
@@ -1879,7 +1879,7 @@ func (c *Cloud) CreateDisk(volumeOptions *VolumeOptions) (KubernetesVolumeID, er
 		return "", fmt.Errorf("invalid AWS VolumeType %q", volumeOptions.VolumeType)
 	}
 
-	// TODO: Should we tag this with the cluster id (so it gets deleted when the cluster does?)
+	// TODO: Should we tag this with the cluster id (so it gets deleted when the cluster does?) id:491 gh:492
 	request := &ec2.CreateVolumeInput{}
 	request.AvailabilityZone = aws.String(createAZ)
 	request.Size = aws.Int64(int64(volumeOptions.CapacityGB))
@@ -2302,7 +2302,7 @@ func (c *Cloud) setSecurityGroupIngress(securityGroupID string, permissions IPPe
 		return false, nil
 	}
 
-	// TODO: There is a limit in VPC of 100 rules per security group, so we
+	// TODO: There is a limit in VPC of 100 rules per security group, so we id:416 gh:417
 	// probably should try grouping or combining to fit under this limit.
 	// But this is only used on the ELB security group currently, so it
 	// would require (ports * CIDRS) > 100.  Also, it isn't obvious exactly
@@ -2646,7 +2646,7 @@ func (c *Cloud) findELBSubnets(internalELB bool) ([]string, error) {
 		}
 
 		// If we have two subnets for the same AZ we arbitrarily choose the one that is first lexicographically.
-		// TODO: Should this be an error.
+		// TODO: Should this be an error. id:445 gh:447
 		if strings.Compare(*existing.SubnetId, *subnet.SubnetId) > 0 {
 			glog.Warningf("Found multiple subnets in AZ %q; choosing %q between subnets %q and %q", az, *subnet.SubnetId, *existing.SubnetId, *subnet.SubnetId)
 			subnetsByAZ[az] = subnet
@@ -3080,7 +3080,7 @@ func (c *Cloud) EnsureLoadBalancer(clusterName string, apiService *v1.Service, n
 
 	glog.V(1).Infof("Loadbalancer %s (%v) has DNS name %s", loadBalancerName, serviceName, aws.StringValue(loadBalancer.DNSName))
 
-	// TODO: Wait for creation?
+	// TODO: Wait for creation? id:432 gh:434
 
 	status := toStatus(loadBalancer)
 	return status, nil
@@ -3345,7 +3345,7 @@ func (c *Cloud) EnsureLoadBalancerDeleted(clusterName string, service *v1.Servic
 
 		_, err = c.elb.DeleteLoadBalancer(request)
 		if err != nil {
-			// TODO: Check if error was because load balancer was concurrently deleted
+			// TODO: Check if error was because load balancer was concurrently deleted id:375 gh:376
 			glog.Errorf("Error deleting load balancer: %q", err)
 			return err
 		}
@@ -3527,7 +3527,7 @@ func (c *Cloud) getInstancesByNodeNames(nodeNames []string, states ...string) ([
 	return ec2Instances, nil
 }
 
-// TODO: Move to instanceCache
+// TODO: Move to instanceCache id:499 gh:495
 func (c *Cloud) describeInstances(filters []*ec2.Filter) ([]*ec2.Instance, error) {
 	filters = c.tagging.addFilters(filters)
 	request := &ec2.DescribeInstancesInput{

@@ -99,7 +99,7 @@ func buildControllerRoles() ([]rbac.ClusterRole, []rbac.ClusterRoleBinding) {
 			rbac.NewRule("update").Groups(extensionsGroup, appsGroup).Resources("deployments/status").RuleOrDie(),
 			rbac.NewRule("update").Groups(extensionsGroup, appsGroup).Resources("deployments/finalizers").RuleOrDie(),
 			rbac.NewRule("get", "list", "watch", "create", "update", "patch", "delete").Groups(appsGroup, extensionsGroup).Resources("replicasets").RuleOrDie(),
-			// TODO: remove "update" once
+			// TODO: remove "update" once id:1608 gh:1614
 			// https://github.com/kubernetes/kubernetes/issues/36897 is resolved.
 			rbac.NewRule("get", "list", "watch", "update").Groups(legacyGroup).Resources("pods").RuleOrDie(),
 			eventsRule(),
@@ -158,7 +158,7 @@ func buildControllerRoles() ([]rbac.ClusterRole, []rbac.ClusterRoleBinding) {
 			rbac.NewRule("update").Groups(autoscalingGroup).Resources("horizontalpodautoscalers/status").RuleOrDie(),
 			rbac.NewRule("get", "update").Groups("*").Resources("*/scale").RuleOrDie(),
 			rbac.NewRule("list").Groups(legacyGroup).Resources("pods").RuleOrDie(),
-			// TODO: restrict this to the appropriate namespace
+			// TODO: restrict this to the appropriate namespace id:1538 gh:1544
 			rbac.NewRule("get").Groups(legacyGroup).Resources("services/proxy").Names("https:heapster:", "http:heapster:").RuleOrDie(),
 			// allow listing resource metrics and custom metrics
 			rbac.NewRule("list").Groups(resMetricsGroup).Resources("pods").RuleOrDie(),

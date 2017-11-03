@@ -18,7 +18,7 @@ package v1
 
 // MatchToleration checks if the toleration matches tolerationToMatch. Tolerations are unique by <key,effect,operator,value>,
 // if the two tolerations have same <key,effect,operator,value> combination, regard as they match.
-// TODO: uniqueness check for tolerations in api validations.
+// TODO: uniqueness check for tolerations in api validations. id:3548 gh:3563
 func (t *Toleration) MatchToleration(tolerationToMatch *Toleration) bool {
 	return t.Key == tolerationToMatch.Key &&
 		t.Effect == tolerationToMatch.Effect &&
@@ -43,7 +43,7 @@ func (t *Toleration) ToleratesTaint(taint *Taint) bool {
 		return false
 	}
 
-	// TODO: Use proper defaulting when Toleration becomes a field of PodSpec
+	// TODO: Use proper defaulting when Toleration becomes a field of PodSpec id:3739 gh:3754
 	switch t.Operator {
 	// empty operator means Equal
 	case "", TolerationOpEqual:

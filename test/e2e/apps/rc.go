@@ -107,7 +107,7 @@ func TestReplicationControllerServeImageOrFail(f *framework.Framework, test stri
 	Expect(err).NotTo(HaveOccurred())
 
 	// Check that pods for the new RC were created.
-	// TODO: Maybe switch PodsCreated to just check owner references.
+	// TODO: Maybe switch PodsCreated to just check owner references. id:2136 gh:2151
 	pods, err := framework.PodsCreated(f.ClientSet, f.Namespace.Name, name, replicas)
 	Expect(err).NotTo(HaveOccurred())
 

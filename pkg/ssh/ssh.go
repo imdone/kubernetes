@@ -65,7 +65,7 @@ func init() {
 	prometheus.MustRegister(tunnelOpenFailCounter)
 }
 
-// TODO: Unit tests for this code, we can spin up a test SSH server with instructions here:
+// TODO: Unit tests for this code, we can spin up a test SSH server with instructions here: id:1423 gh:1429
 // https://godoc.org/golang.org/x/crypto/ssh#ServerConn
 type SSHTunnel struct {
 	Config  *ssh.ClientConfig
@@ -362,7 +362,7 @@ func (l *SSHTunnelList) healthCheck(e sshTunnelEntry) error {
 	// GET the healthcheck path using the provided tunnel's dial function.
 	transport := utilnet.SetTransportDefaults(&http.Transport{
 		Dial: e.Tunnel.Dial,
-		// TODO(cjcullen): Plumb real TLS options through.
+		// TODO (cjcullen): Plumb real TLS options through. id:1371 gh:1377
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
 		// We don't reuse the clients, so disable the keep-alive to properly
 		// close the connection.
@@ -415,7 +415,7 @@ func (l *SSHTunnelList) pickTunnel(addr string) (tunnel, error) {
 		return nil, fmt.Errorf("No SSH tunnels currently open. Were the targets able to accept an ssh-key for user %q?", l.user)
 	}
 	// Prefer same tunnel as kubelet
-	// TODO: Change l.entries to a map of address->tunnel
+	// TODO: Change l.entries to a map of address->tunnel id:1456 gh:1462
 	for _, entry := range l.entries {
 		if entry.Address == addr {
 			return entry.Tunnel, nil

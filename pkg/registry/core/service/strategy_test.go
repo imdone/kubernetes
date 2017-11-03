@@ -144,7 +144,7 @@ func makeValidService() api.Service {
 	}
 }
 
-// TODO: This should be done on types that are not part of our API
+// TODO: This should be done on types that are not part of our API id:1479 gh:1485
 func TestBeforeUpdate(t *testing.T) {
 	testCases := []struct {
 		name      string

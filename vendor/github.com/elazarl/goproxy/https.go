@@ -167,7 +167,7 @@ func (proxy *ProxyHttpServer) handleHttps(w http.ResponseWriter, r *http.Request
 		// this goes in a separate goroutine, so that the net/http server won't think we're
 		// still handling the request even after hijacking the connection. Those HTTP CONNECT
 		// request can take forever, and the server will be stuck when "closed".
-		// TODO: Allow Server.Close() mechanism to shut down this connection as nicely as possible
+		// TODO: Allow Server.Close() mechanism to shut down this connection as nicely as possible id:2693 gh:2708
 		tlsConfig := defaultTLSConfig
 		if todo.TLSConfig != nil {
 			var err error
@@ -178,7 +178,7 @@ func (proxy *ProxyHttpServer) handleHttps(w http.ResponseWriter, r *http.Request
 			}
 		}
 		go func() {
-			//TODO: cache connections to the remote website
+			//TODO: cache connections to the remote website id:2984 gh:2999
 			rawClientTls := tls.Server(proxyClient, tlsConfig)
 			if err := rawClientTls.Handshake(); err != nil {
 				ctx.Warnf("Cannot handshake client %v %v", r.Host, err)
@@ -235,7 +235,7 @@ func (proxy *ProxyHttpServer) handleHttps(w http.ResponseWriter, r *http.Request
 					return
 				}
 				// Since we don't know the length of resp, return chunked encoded response
-				// TODO: use a more reasonable scheme
+				// TODO: use a more reasonable scheme id:2535 gh:2550
 				resp.Header.Del("Content-Length")
 				resp.Header.Set("Transfer-Encoding", "chunked")
 				if err := resp.Header.Write(rawClientTls); err != nil {

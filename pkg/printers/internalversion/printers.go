@@ -70,7 +70,7 @@ const (
 )
 
 // AddHandlers adds print handlers for default Kubernetes types dealing with internal versions.
-// TODO: handle errors from Handler
+// TODO: handle errors from Handler id:1149 gh:1155
 func AddHandlers(h printers.PrintHandler) {
 	podColumnDefinitions := []metav1alpha1.TableColumnDefinition{
 		{Name: "Name", Type: "string", Format: "name", Description: metav1.ObjectMeta{}.SwaggerDoc()["name"]},
@@ -679,7 +679,7 @@ func printPodDisruptionBudgetList(list *policy.PodDisruptionBudgetList, options 
 	return rows, nil
 }
 
-// TODO(AdoHe): try to put wide output in a single method
+// TODO (AdoHe): try to put wide output in a single method id:1187 gh:1193
 func printReplicationController(obj *api.ReplicationController, options printers.PrintOptions) ([]metav1alpha1.TableRow, error) {
 	row := metav1alpha1.TableRow{
 		Object: runtime.RawExtension{Object: obj},

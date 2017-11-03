@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # Tests a running Kubernetes cluster.
-# TODO: move code from hack/ginkgo-e2e.sh to here
+# TODO: move code from hack/ginkgo-e2e.sh to here id:115 gh:116
 
 set -o errexit
 set -o nounset

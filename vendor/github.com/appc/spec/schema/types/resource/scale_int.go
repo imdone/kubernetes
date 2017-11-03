@@ -79,7 +79,7 @@ func scaledValue(unscaled *big.Int, scale, newScale int) int64 {
 	}()
 
 	// divisor = 10^(dif)
-	// TODO: create loop up table if exp costs too much.
+	// TODO: create loop up table if exp costs too much. id:2489 gh:2504
 	divisor.Exp(bigTen, exp.SetInt64(int64(dif)), nil)
 	// reuse exp
 	remainder := exp

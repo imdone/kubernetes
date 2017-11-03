@@ -351,8 +351,8 @@ func (o *DrainOptions) getPodController(pod corev1.Pod) (*metav1.OwnerReference,
 
 	// We assume the only reason for an error is because the controller is
 	// gone/missing, not for any other cause.
-	// TODO(mml): something more sophisticated than this
-	// TODO(juntee): determine if it's safe to remove getController(),
+	// TODO (mml): something more sophisticated than this id:662 gh:663
+	// TODO (juntee): determine if it's safe to remove getController(), id:779 gh:780
 	// so that drain can work for controller types that we don't know about
 	_, err := o.getController(pod.Namespace, controllerRef)
 	if err != nil {

@@ -64,8 +64,8 @@ var (
 // it uses the custom version of the function.  Rather than try to enumerate everything that someone would want to override
 // we split the factory into rings, where each ring can depend on methods  an earlier ring, but cannot depend
 // upon peer methods in its own ring.
-// TODO: make the functions interfaces
-// TODO: pass the various interfaces on the factory directly into the command constructors (so the
+// TODO: make the functions interfaces id:701 gh:702
+// TODO: pass the various interfaces on the factory directly into the command constructors (so the id:786 gh:787
 // commands are decoupled from the factory).
 type Factory interface {
 	ClientAccessFactory
@@ -83,7 +83,7 @@ type DiscoveryClientFactory interface {
 
 // ClientAccessFactory holds the first level of factory methods.
 // Generally provides discovery, negotiation, and no-dep calls.
-// TODO The polymorphic calls probably deserve their own interface.
+// TODO The polymorphic calls probably deserve their own interface. id:739 gh:740
 type ClientAccessFactory interface {
 	// Returns a discovery client
 	DiscoveryClient() (discovery.CachedDiscoveryInterface, error)
@@ -102,9 +102,9 @@ type ClientAccessFactory interface {
 	// just directions to the server. People use this to build RESTMappers on top of
 	BareClientConfig() (*restclient.Config, error)
 
-	// TODO remove.  This should be rolled into `ClientSet`
+	// TODO remove.  This should be rolled into `ClientSet` id:744 gh:745
 	ClientSetForVersion(requiredVersion *schema.GroupVersion) (internalclientset.Interface, error)
-	// TODO remove.  This should be rolled into `ClientConfig`
+	// TODO remove.  This should be rolled into `ClientConfig` id:717 gh:718
 	ClientConfigForVersion(requiredVersion *schema.GroupVersion) (*restclient.Config, error)
 
 	// Returns interfaces for decoding objects - if toInternal is set, decoded objects will be converted
@@ -139,7 +139,7 @@ type ClientAccessFactory interface {
 	// BindExternalFlags adds any flags defined by external projects (not part of pflags)
 	BindExternalFlags(flags *pflag.FlagSet)
 
-	// TODO: Break the dependency on cmd here.
+	// TODO: Break the dependency on cmd here. id:702 gh:703
 	DefaultResourceFilterOptions(cmd *cobra.Command, withNamespace bool) *printers.PrintOptions
 	// DefaultResourceFilterFunc returns a collection of FilterFuncs suitable for filtering specific resource types.
 	DefaultResourceFilterFunc() kubectl.Filters
@@ -234,7 +234,7 @@ type BuilderFactory interface {
 	// PrinterForCommand returns the default printer for the command. It requires that certain options
 	// are declared on the command (see AddPrinterFlags). Returns a printer, or an error if a printer
 	// could not be found.
-	// TODO: Break the dependency on cmd here.
+	// TODO: Break the dependency on cmd here. id:787 gh:788
 	PrinterForCommand(cmd *cobra.Command, isLocal bool, outputOpts *printers.OutputOptions, options printers.PrintOptions) (printers.ResourcePrinter, error)
 	// PrinterForMapping returns a printer suitable for displaying the provided resource type.
 	// Requires that printer flags have been added to cmd (see AddPrinterFlags).

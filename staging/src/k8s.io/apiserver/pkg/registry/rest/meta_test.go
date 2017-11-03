@@ -67,7 +67,7 @@ func TestHasObjectMetaSystemFieldValues(t *testing.T) {
 func TestValidNamespace(t *testing.T) {
 	ctx := genericapirequest.NewDefaultContext()
 	namespace, _ := genericapirequest.NamespaceFrom(ctx)
-	// TODO: use some genericapiserver type here instead of clientapiv1
+	// TODO: use some genericapiserver type here instead of clientapiv1 id:3890 gh:3910
 	resource := example.Pod{}
 	if !ValidNamespace(ctx, &resource.ObjectMeta) {
 		t.Fatalf("expected success")

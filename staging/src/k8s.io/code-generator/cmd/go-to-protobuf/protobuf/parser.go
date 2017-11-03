@@ -109,7 +109,7 @@ func RewriteGeneratedGogoProtobufFile(name string, extractFn ExtractFunc, option
 // rewriteOptionalMethods makes specific mutations to marshaller methods that belong to types identified
 // as being "optional" (they may be nil on the wire). This allows protobuf to serialize a map or slice and
 // properly discriminate between empty and nil (which is not possible in protobuf).
-// TODO: move into upstream gogo-protobuf once https://github.com/gogo/protobuf/issues/181
+// TODO: move into upstream gogo-protobuf once https://github.com/gogo/protobuf/issues/181 id:4065 gh:4085
 //   has agreement
 func rewriteOptionalMethods(decl ast.Decl, isOptional OptionalFunc) {
 	switch t := decl.(type) {

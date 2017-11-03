@@ -76,7 +76,7 @@ func NewREST(optsGetter generic.RESTOptionsGetter) (*REST, *StatusREST, *Rollbac
 	}
 	options := &generic.StoreOptions{RESTOptions: optsGetter}
 	if err := store.CompleteWithOptions(options); err != nil {
-		panic(err) // TODO: Propagate error up
+		panic(err) // TODO: Propagate error up id:1285 gh:1291
 	}
 
 	statusStore := *store
@@ -270,7 +270,7 @@ func (r *ScaleREST) Update(ctx genericapirequest.Context, name string, objInfo r
 // scaleFromDeployment returns a scale subresource for a deployment.
 func scaleFromDeployment(deployment *extensions.Deployment) (*extensions.Scale, error) {
 	return &extensions.Scale{
-		// TODO: Create a variant of ObjectMeta type that only contains the fields below.
+		// TODO: Create a variant of ObjectMeta type that only contains the fields below. id:1331 gh:1337
 		ObjectMeta: metav1.ObjectMeta{
 			Name:              deployment.Name,
 			Namespace:         deployment.Namespace,

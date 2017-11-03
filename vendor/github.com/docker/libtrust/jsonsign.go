@@ -407,7 +407,7 @@ func NewJSONSignature(content []byte, signatures ...[]byte) (*JSONSignature, err
 				return nil, err
 			}
 
-			// TODO(stevvooe): A lot of the code below is repeated in
+			// TODO (stevvooe): A lot of the code below is repeated in id:2982 gh:2997
 			// ParseJWS. It will require more refactoring to fix that.
 			jsig := jsSignature{
 				Header: jsHeader{

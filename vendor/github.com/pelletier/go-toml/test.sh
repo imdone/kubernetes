@@ -31,7 +31,7 @@ git_clone github.com/BurntSushi/toml-test master HEAD #was: 0.2.0 HEAD
 go build -o toml-test github.com/BurntSushi/toml-test
 
 # vendorize the current lib for testing
-# NOTE: this basically mocks an install without having to go back out to github for code
+# NOTE: this basically mocks an install without having to go back out to github for code id:2939 gh:2954
 mkdir -p src/github.com/pelletier/go-toml/cmd
 cp *.go *.toml src/github.com/pelletier/go-toml
 cp -R cmd/* src/github.com/pelletier/go-toml/cmd

@@ -155,7 +155,7 @@ func main() {
 			if info.IsDir() {
 				scandir(path)
 			} else {
-				// TODO(mml): Remove this once we have all-go-srcs build rules.  See https://github.com/kubernetes/repo-infra/pull/45
+				// TODO (mml): Remove this once we have all-go-srcs build rules.  See https://github.com/kubernetes/repo-infra/pull/45 id:2212 gh:2227
 				if strings.HasSuffix(path, ".go") {
 					scanfile(path)
 				}

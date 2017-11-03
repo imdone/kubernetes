@@ -110,7 +110,7 @@ KUBE_GOVERALLS_BIN=${KUBE_GOVERALLS_BIN:-}
 # Lists of API Versions of each groups that should be tested, groups are
 # separated by comma, lists are separated by semicolon. e.g.,
 # "v1,compute/v1alpha1,experimental/v1alpha2;v1,compute/v2,experimental/v1alpha3"
-# FIXME: due to current implementation of a test client (see: pkg/api/testapi/testapi.go)
+# FIXME: due to current implementation of a test client (see: pkg/api/testapi/testapi.go) id:246 gh:247
 # ONLY the last version is tested in each group.
 ALL_VERSIONS_CSV=$(IFS=',';echo "${KUBE_AVAILABLE_GROUP_VERSIONS[*]// /,}";IFS=$)
 KUBE_TEST_API_VERSIONS="${KUBE_TEST_API_VERSIONS:-${ALL_VERSIONS_CSV}}"

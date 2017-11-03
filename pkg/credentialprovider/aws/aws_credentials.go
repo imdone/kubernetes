@@ -143,7 +143,7 @@ func newEcrProvider(region string, getter tokenGetter) *ecrProvider {
 
 // Enabled implements DockerConfigProvider.Enabled for the AWS token-based implementation.
 // For now, it gets activated only if AWS was chosen as the cloud provider.
-// TODO: figure how to enable it manually for deployments that are not on AWS but still
+// TODO: figure how to enable it manually for deployments that are not on AWS but still id:654 gh:655
 // use ECR somehow?
 func (p *ecrProvider) Enabled() bool {
 	if p.region == "" {
@@ -173,7 +173,7 @@ func (p *ecrProvider) LazyProvide() *credentialprovider.DockerConfigEntry {
 func (p *ecrProvider) Provide() credentialprovider.DockerConfig {
 	cfg := credentialprovider.DockerConfig{}
 
-	// TODO: fill in RegistryIds?
+	// TODO: fill in RegistryIds? id:678 gh:679
 	params := &ecr.GetAuthorizationTokenInput{}
 	output, err := p.getter.GetAuthorizationToken(params)
 	if err != nil {

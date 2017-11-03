@@ -33,7 +33,7 @@ import (
 func main() {
 	command := app.NewProxyCommand()
 
-	// TODO: once we switch everything over to Cobra commands, we can go back to calling
+	// TODO: once we switch everything over to Cobra commands, we can go back to calling id:179 gh:180
 	// utilflag.InitFlags() (by removing its pflag.Parse() call). For now, we have to set the
 	// normalize func and add the go flag set by hand.
 	pflag.CommandLine.SetNormalizeFunc(utilflag.WordSepNormalizeFunc)

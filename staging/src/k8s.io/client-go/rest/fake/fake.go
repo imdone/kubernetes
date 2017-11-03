@@ -99,7 +99,7 @@ func (c *RESTClient) request(verb string) *restclient.Request {
 		Version: runtime.APIVersionInternal,
 	}
 	serializers := restclient.Serializers{
-		// TODO this was hardcoded before, but it doesn't look right
+		// TODO this was hardcoded before, but it doesn't look right id:3467 gh:3482
 		Encoder: ns.EncoderForVersion(info.Serializer, c.GroupVersion),
 		Decoder: ns.DecoderToVersion(info.Serializer, internalVersion),
 	}

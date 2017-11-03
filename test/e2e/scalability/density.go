@@ -135,7 +135,7 @@ func density30AddonResourceVerifier(numNodes int) map[string]framework.ResourceC
 	}
 	constraints["elasticsearch-logging"] = framework.ResourceConstraint{
 		CPUConstraint: 2,
-		// TODO: bring it down to 750MB again, when we lower Kubelet verbosity level. I.e. revert #19164
+		// TODO: bring it down to 750MB again, when we lower Kubelet verbosity level. I.e. revert #19164 id:2542 gh:2557
 		MemoryConstraint: 5000 * (1024 * 1024),
 	}
 	constraints["heapster"] = framework.ResourceConstraint{
@@ -342,7 +342,7 @@ var _ = SIGDescribe("Density", func() {
 		}
 
 		// Verify scheduler metrics.
-		// TODO: Reset metrics at the beginning of the test.
+		// TODO: Reset metrics at the beginning of the test. id:2267 gh:2282
 		// We should do something similar to how we do it for APIserver.
 		latency, err := framework.VerifySchedulerLatency(c)
 		framework.ExpectNoError(err)
@@ -416,7 +416,7 @@ var _ = SIGDescribe("Density", func() {
 	}
 
 	densityTests := []Density{
-		// TODO: Expose runLatencyTest as ginkgo flag.
+		// TODO: Expose runLatencyTest as ginkgo flag. id:2399 gh:2414
 		{podsPerNode: 3, runLatencyTest: false, kind: api.Kind("ReplicationController")},
 		{podsPerNode: 30, runLatencyTest: true, kind: api.Kind("ReplicationController")},
 		{podsPerNode: 50, runLatencyTest: false, kind: api.Kind("ReplicationController")},

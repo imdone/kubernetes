@@ -539,7 +539,7 @@ const (
 // StatusReason is an enumeration of possible failure causes.  Each StatusReason
 // must map to a single HTTP status code, but multiple reasons may map
 // to the same HTTP status code.
-// TODO: move to apiserver
+// TODO: move to apiserver id:3269 gh:3284
 type StatusReason string
 
 const (
@@ -864,12 +864,12 @@ type RootPaths struct {
 	Paths []string `json:"paths" protobuf:"bytes,1,rep,name=paths"`
 }
 
-// TODO: remove me when watch is refactored
+// TODO: remove me when watch is refactored id:3764 gh:3779
 func LabelSelectorQueryParam(version string) string {
 	return "labelSelector"
 }
 
-// TODO: remove me when watch is refactored
+// TODO: remove me when watch is refactored id:3500 gh:3515
 func FieldSelectorQueryParam(version string) string {
 	return "fieldSelector"
 }

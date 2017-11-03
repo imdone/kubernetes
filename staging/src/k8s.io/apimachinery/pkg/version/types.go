@@ -17,7 +17,7 @@ limitations under the License.
 package version
 
 // Info contains versioning information.
-// TODO: Add []string of api versions supported? It's still unclear
+// TODO: Add []string of api versions supported? It's still unclear id:3783 gh:3798
 // how we'll want to distribute that information.
 type Info struct {
 	Major        string `json:"major"`

@@ -146,7 +146,7 @@ func (t *Tester) TestWatch(valid runtime.Object, labelsPass, labelsFail []labels
 		labelsFail,
 		fieldsPass,
 		fieldsFail,
-		// TODO: This should be filtered, the registry should not be aware of this level of detail
+		// TODO: This should be filtered, the registry should not be aware of this level of detail id:1409 gh:1415
 		[]string{etcdstorage.EtcdCreate, etcdstorage.EtcdDelete},
 	)
 }
@@ -159,10 +159,10 @@ func getCodec(obj runtime.Object) (runtime.Codec, error) {
 		return nil, fmt.Errorf("unexpected encoding error: %v", err)
 	}
 	fqKind := fqKinds[0]
-	// TODO: caesarxuchao: we should detect which group an object belongs to
+	// TODO: caesarxuchao: we should detect which group an object belongs to id:1487 gh:1493
 	// by using the version returned by Schem.ObjectVersionAndKind() once we
 	// split the schemes for internal objects.
-	// TODO: caesarxuchao: we should add a map from kind to group in Scheme.
+	// TODO: caesarxuchao: we should add a map from kind to group in Scheme. id:1421 gh:1427
 	var codec runtime.Codec
 	if legacyscheme.Scheme.Recognizes(legacyscheme.Registry.GroupOrDie(api.GroupName).GroupVersion.WithKind(fqKind.Kind)) {
 		codec = testapi.Default.Codec()

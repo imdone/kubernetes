@@ -231,7 +231,7 @@ func RunRun(f cmdutil.Factory, cmdIn io.Reader, cmdOut, cmdErr io.Writer, cmd *c
 	if len(generatorName) == 0 {
 		switch restartPolicy {
 		case api.RestartPolicyAlways:
-			// TODO: we need to deprecate this along with extensions/v1beta1.Deployments
+			// TODO: we need to deprecate this along with extensions/v1beta1.Deployments id:666 gh:667
 			// in favor of the new generator for apps/v1beta1.Deployments
 			hasResource, err := cmdutil.HasResource(clientset.Discovery(), extensionsv1beta1.SchemeGroupVersion.WithResource("deployments"))
 			if err != nil {
@@ -449,7 +449,7 @@ func handleAttachPod(f cmdutil.Factory, podClient coreclient.PodsGetter, ns, nam
 	opts.PodName = name
 	opts.Namespace = ns
 
-	// TODO: opts.Run sets opts.Err to nil, we need to find a better way
+	// TODO: opts.Run sets opts.Err to nil, we need to find a better way id:783 gh:784
 	stderr := opts.Err
 	if err := opts.Run(); err != nil {
 		fmt.Fprintf(stderr, "Error attaching, falling back to logs: %v\n", err)
@@ -570,7 +570,7 @@ func createGeneratedObject(f cmdutil.Factory, cmd *cobra.Command, generator kube
 		return nil, err
 	}
 
-	// TODO: Validate flag usage against selected generator. More tricky since --expose was added.
+	// TODO: Validate flag usage against selected generator. More tricky since --expose was added. id:736 gh:737
 	obj, err := generator.Generate(params)
 	if err != nil {
 		return nil, err

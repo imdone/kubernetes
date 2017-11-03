@@ -109,7 +109,7 @@ func (l *LimitRanger) Admit(a admission.Attributes) (err error) {
 	if len(items) == 0 {
 		lruItemObj, ok := l.liveLookupCache.Get(a.GetNamespace())
 		if !ok || lruItemObj.(liveLookupEntry).expiry.Before(time.Now()) {
-			// TODO: If there are multiple operations at the same time and cache has just expired,
+			// TODO: If there are multiple operations at the same time and cache has just expired, id:1506 gh:1512
 			// this may cause multiple List operations being issued at the same time.
 			// If there is already in-flight List() for a given namespace, we should wait until
 			// it is finished and cache is updated instead of doing the same, also to avoid

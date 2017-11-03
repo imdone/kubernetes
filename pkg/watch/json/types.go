@@ -27,7 +27,7 @@ import (
 
 // WatchEvent objects are streamed from the api server in response to a watch request.
 // These are not API objects and may not be changed in a backward-incompatible way.
-// TODO: move to a public, versioned object now that RawExtension conversions are possible
+// TODO: move to a public, versioned object now that RawExtension conversions are possible id:1504 gh:1510
 // in the schema.
 type WatchEvent struct {
 	// The type of the watch event; added, modified, deleted, or error.

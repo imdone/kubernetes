@@ -122,6 +122,6 @@ func (statefulSetStatusStrategy) PrepareForUpdate(ctx genericapirequest.Context,
 
 // ValidateUpdate is the default update validation for an end user updating status
 func (statefulSetStatusStrategy) ValidateUpdate(ctx genericapirequest.Context, obj, old runtime.Object) field.ErrorList {
-	// TODO: Validate status updates.
+	// TODO: Validate status updates. id:1268 gh:1274
 	return validation.ValidateStatefulSetStatusUpdate(obj.(*apps.StatefulSet), old.(*apps.StatefulSet))
 }

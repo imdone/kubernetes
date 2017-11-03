@@ -108,7 +108,7 @@ func GetStaticPodSpecs(cfg *kubeadmapi.MasterConfiguration, k8sVersion *version.
 // createStaticPodFiles creates all the requested static pod files.
 func createStaticPodFiles(manifestDir string, cfg *kubeadmapi.MasterConfiguration, componentNames ...string) error {
 
-	// TODO: Move the "pkg/util/version".Version object into the internal API instead of always parsing the string
+	// TODO: Move the "pkg/util/version".Version object into the internal API instead of always parsing the string id:225 gh:227
 	k8sVersion, err := version.ParseSemantic(cfg.KubernetesVersion)
 	if err != nil {
 		return err

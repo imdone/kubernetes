@@ -68,7 +68,7 @@ type delayingType struct {
 
 	// heartbeat ensures we wait no more than maxWait before firing
 	//
-	// TODO: replace with Ticker (and add to clock) so this can be cleaned up.
+	// TODO: replace with Ticker (and add to clock) so this can be cleaned up. id:4056 gh:4076
 	// clock.Tick will leak.
 	heartbeat <-chan time.Time
 

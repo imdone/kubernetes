@@ -33,7 +33,7 @@ import (
 
 const (
 	// the max request size that raft accepts.
-	// TODO: make this a flag? But we probably do not want to
+	// TODO: make this a flag? But we probably do not want to id:2877 gh:2892
 	// accept large request which might block raft stream. User
 	// specify a large value might end up with shooting in the foot.
 	maxRequestBytes = 1.5 * 1024 * 1024
@@ -91,7 +91,7 @@ type Authenticator interface {
 }
 
 func (s *EtcdServer) Range(ctx context.Context, r *pb.RangeRequest) (*pb.RangeResponse, error) {
-	// TODO: remove this checking when we release etcd 3.2
+	// TODO: remove this checking when we release etcd 3.2 id:2514 gh:2529
 	if s.ClusterVersion() == nil || s.ClusterVersion().LessThan(newRangeClusterVersion) {
 		return s.legacyRange(ctx, r)
 	}
@@ -114,7 +114,7 @@ func (s *EtcdServer) Range(ctx context.Context, r *pb.RangeRequest) (*pb.RangeRe
 	return resp, err
 }
 
-// TODO: remove this func when we release etcd 3.2
+// TODO: remove this func when we release etcd 3.2 id:2762 gh:2777
 func (s *EtcdServer) legacyRange(ctx context.Context, r *pb.RangeRequest) (*pb.RangeResponse, error) {
 	if r.Serializable {
 		var resp *pb.RangeResponse
@@ -161,7 +161,7 @@ func (s *EtcdServer) DeleteRange(ctx context.Context, r *pb.DeleteRangeRequest) 
 }
 
 func (s *EtcdServer) Txn(ctx context.Context, r *pb.TxnRequest) (*pb.TxnResponse, error) {
-	// TODO: remove this checking when we release etcd 3.2
+	// TODO: remove this checking when we release etcd 3.2 id:2622 gh:2637
 	if s.ClusterVersion() == nil || s.ClusterVersion().LessThan(newRangeClusterVersion) {
 		return s.legacyTxn(ctx, r)
 	}
@@ -194,7 +194,7 @@ func (s *EtcdServer) Txn(ctx context.Context, r *pb.TxnRequest) (*pb.TxnResponse
 	return result.resp.(*pb.TxnResponse), nil
 }
 
-// TODO: remove this func when we release etcd 3.2
+// TODO: remove this func when we release etcd 3.2 id:2573 gh:2588
 func (s *EtcdServer) legacyTxn(ctx context.Context, r *pb.TxnRequest) (*pb.TxnResponse, error) {
 	if isTxnSerializable(r) {
 		var resp *pb.TxnResponse
@@ -337,7 +337,7 @@ func (s *EtcdServer) LeaseTimeToLive(ctx context.Context, r *pb.LeaseTimeToLiveR
 		if le == nil {
 			return nil, lease.ErrLeaseNotFound
 		}
-		// TODO: fill out ResponseHeader
+		// TODO: fill out ResponseHeader id:2878 gh:2893
 		resp := &pb.LeaseTimeToLiveResponse{Header: &pb.ResponseHeader{}, ID: r.ID, TTL: int64(le.Remaining().Seconds()), GrantedTTL: le.TTL()}
 		if r.Keys {
 			ks := le.Keys()

@@ -62,7 +62,7 @@ type MetricValue struct {
 // for all objects matching the given label selector
 const AllObjects = "*"
 
-// NOTE: ObjectReference is copied from k8s.io/kubernetes/pkg/api/types.go. We
+// NOTE: ObjectReference is copied from k8s.io/kubernetes/pkg/api/types.go. We id:4075 gh:4095
 // cannot depend on k8s.io/kubernetes/pkg/api because that creates cyclic
 // dependency between k8s.io/metrics and k8s.io/kubernetes. We cannot depend on
 // k8s.io/client-go/pkg/api because the package is going to be deprecated soon.

@@ -69,7 +69,7 @@ type CronJobController struct {
 func NewCronJobController(kubeClient clientset.Interface) *CronJobController {
 	eventBroadcaster := record.NewBroadcaster()
 	eventBroadcaster.StartLogging(glog.Infof)
-	// TODO: remove the wrapper when every clients have moved to use the clientset.
+	// TODO: remove the wrapper when every clients have moved to use the clientset. id:514 gh:515
 	eventBroadcaster.StartRecordingToSink(&v1core.EventSinkImpl{Interface: v1core.New(kubeClient.CoreV1().RESTClient()).Events("")})
 
 	if kubeClient != nil && kubeClient.CoreV1().RESTClient().GetRateLimiter() != nil {
@@ -214,14 +214,14 @@ func syncOne(sj *batchv1beta1.CronJob, js []batchv1.Job, now time.Time, jc jobCo
 			// or if our jobs list is newer than our sj status after a relist, or if someone intentionally created
 			// a job that they wanted us to adopt.
 
-			// TODO: maybe handle the adoption case?  Concurrency/suspend rules will not apply in that case, obviously, since we can't
+			// TODO: maybe handle the adoption case?  Concurrency/suspend rules will not apply in that case, obviously, since we can't id:484 gh:485
 			// stop users from creating jobs if they have permission.  It is assumed that if a
 			// user has permission to create a job within a namespace, then they have permission to make any scheduledJob
 			// in the same namespace "adopt" that job.  ReplicaSets and their Pods work the same way.
 			// TBS: how to update sj.Status.LastScheduleTime if the adopted job is newer than any we knew about?
 		} else if found && IsJobFinished(&j) {
 			deleteFromActiveList(sj, j.ObjectMeta.UID)
-			// TODO: event to call out failure vs success.
+			// TODO: event to call out failure vs success. id:522 gh:523
 			recorder.Eventf(sj, v1.EventTypeNormal, "SawCompletedJob", "Saw completed job: %v", j.Name)
 		}
 	}
@@ -260,7 +260,7 @@ func syncOne(sj *batchv1beta1.CronJob, js []batchv1.Job, now time.Time, jc jobCo
 		glog.Errorf("Cannot determine if %s needs to be started: %v", nameForLog, err)
 		return
 	}
-	// TODO: handle multiple unmet start times, from oldest to newest, updating status as needed.
+	// TODO: handle multiple unmet start times, from oldest to newest, updating status as needed. id:497 gh:499
 	if len(times) == 0 {
 		glog.V(4).Infof("No unmet start times for %s", nameForLog)
 		return
@@ -276,7 +276,7 @@ func syncOne(sj *batchv1beta1.CronJob, js []batchv1.Job, now time.Time, jc jobCo
 	}
 	if tooLate {
 		glog.V(4).Infof("Missed starting window for %s", nameForLog)
-		// TODO: generate an event for a miss.  Use a warning level event because it indicates a
+		// TODO: generate an event for a miss.  Use a warning level event because it indicates a id:457 gh:458
 		// problem with the controller (restart or long queue), and is not expected by user either.
 		// Since we don't set LastScheduleTime when not scheduling, we are going to keep noticing
 		// the miss every cycle.  In order to avoid sending multiple events, and to avoid processing
@@ -294,7 +294,7 @@ func syncOne(sj *batchv1beta1.CronJob, js []batchv1.Job, now time.Time, jc jobCo
 		// So it is theoretically possible to have concurrency with Forbid.
 		// As long the as the invokations are "far enough apart in time", this usually won't happen.
 		//
-		// TODO: for Forbid, we could use the same name for every execution, as a lock.
+		// TODO: for Forbid, we could use the same name for every execution, as a lock. id:607 gh:608
 		// With replace, we could use a name that is deterministic per execution time.
 		// But that would mean that you could not inspect prior successes or failures of Forbid jobs.
 		glog.V(4).Infof("Not starting job for %s because of prior execution still running and concurrency policy is Forbid", nameForLog)
@@ -302,7 +302,7 @@ func syncOne(sj *batchv1beta1.CronJob, js []batchv1.Job, now time.Time, jc jobCo
 	}
 	if sj.Spec.ConcurrencyPolicy == batchv1beta1.ReplaceConcurrent {
 		for _, j := range sj.Status.Active {
-			// TODO: this should be replaced with server side job deletion
+			// TODO: this should be replaced with server side job deletion id:485 gh:486
 			// currently this mimics JobReaper from pkg/kubectl/stop.go
 			glog.V(4).Infof("Deleting job %s of %s that was still running at next scheduled start time", j.Name, nameForLog)
 
@@ -358,7 +358,7 @@ func syncOne(sj *batchv1beta1.CronJob, js []batchv1.Job, now time.Time, jc jobCo
 // deleteJob reaps a job, deleting the job, the pobs and the reference in the active list
 func deleteJob(sj *batchv1beta1.CronJob, job *batchv1.Job, jc jobControlInterface,
 	pc podControlInterface, recorder record.EventRecorder, reason string) bool {
-	// TODO: this should be replaced with server side job deletion
+	// TODO: this should be replaced with server side job deletion id:523 gh:524
 	// currencontinuetly this mimics JobReaper from pkg/kubectl/stop.go
 	nameForLog := fmt.Sprintf("%s/%s", sj.Namespace, sj.Name)
 

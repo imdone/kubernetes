@@ -105,7 +105,7 @@ type StatefulSetSpec struct {
 	// These are replicas in the sense that they are instantiations of the
 	// same Template, but individual replicas also have a consistent identity.
 	// If unspecified, defaults to 1.
-	// TODO: Consider a rename of this field.
+	// TODO: Consider a rename of this field. id:298 gh:299
 	// +optional
 	Replicas int32
 
@@ -127,7 +127,7 @@ type StatefulSetSpec struct {
 	// this list must have at least one matching (by name) volumeMount in one
 	// container in the template. A claim in this list takes precedence over
 	// any volumes in the template, with the same name.
-	// TODO: Define the behavior if a claim already exists with the same name.
+	// TODO: Define the behavior if a claim already exists with the same name. id:396 gh:397
 	// +optional
 	VolumeClaimTemplates []api.PersistentVolumeClaim
 

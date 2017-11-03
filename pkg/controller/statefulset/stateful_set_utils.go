@@ -97,7 +97,7 @@ func getPodName(set *apps.StatefulSet, ordinal int) string {
 // getPersistentVolumeClaimName gets the name of PersistentVolumeClaim for a Pod with an ordinal index of ordinal. claim
 // must be a PersistentVolumeClaim from set's VolumeClaims template.
 func getPersistentVolumeClaimName(set *apps.StatefulSet, claim *v1.PersistentVolumeClaim, ordinal int) string {
-	// NOTE: This name format is used by the heuristics for zone spreading in ChooseZoneForVolume
+	// NOTE: This name format is used by the heuristics for zone spreading in ChooseZoneForVolume id:675 gh:676
 	return fmt.Sprintf("%s-%s-%d", claim.Name, set.Name, ordinal)
 }
 
@@ -166,7 +166,7 @@ func updateStorage(set *apps.StatefulSet, pod *v1.Pod) {
 			VolumeSource: v1.VolumeSource{
 				PersistentVolumeClaim: &v1.PersistentVolumeClaimVolumeSource{
 					ClaimName: claim.Name,
-					// TODO: Use source definition to set this value when we have one.
+					// TODO: Use source definition to set this value when we have one. id:626 gh:627
 					ReadOnly: false,
 				},
 			},

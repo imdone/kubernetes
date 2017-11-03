@@ -75,7 +75,7 @@ func (e shortcutExpander) RESTMappings(gk schema.GroupKind, versions ...string) 
 // getShortcutMappings returns a set of tuples which holds short names for resources.
 // First the list of potential resources will be taken from the API server.
 // Next we will append the hardcoded list of resources - to be backward compatible with old servers.
-// NOTE that the list is ordered by group priority.
+// NOTE that the list is ordered by group priority. id:762 gh:763
 func (e shortcutExpander) getShortcutMappings() ([]kubectl.ResourceShortcuts, error) {
 	res := []kubectl.ResourceShortcuts{}
 	// get server resources

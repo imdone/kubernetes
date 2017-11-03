@@ -57,7 +57,7 @@ var _ = SIGDescribe("Opaque resources [Feature:OpaqueResources]", func() {
 		addOpaqueResource(f, node.Name, opaqueResName)
 	})
 
-	// TODO: The suite times out if removeOpaqueResource is called as part of
+	// TODO: The suite times out if removeOpaqueResource is called as part of id:2317 gh:2332
 	//       an AfterEach closure. For now, it is the last statement in each
 	//       It block.
 	// AfterEach(func() {

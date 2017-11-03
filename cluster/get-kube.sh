@@ -135,7 +135,7 @@ if [[ -d "./kubernetes" ]]; then
   fi
 fi
 
-# TODO: remove client checks once kubernetes.tar.gz no longer includes client
+# TODO: remove client checks once kubernetes.tar.gz no longer includes client id:99 gh:98
 # binaries by default.
 kernel=$(uname -s)
 case "${kernel}" in

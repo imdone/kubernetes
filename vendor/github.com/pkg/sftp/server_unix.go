@@ -112,7 +112,7 @@ func runLsStatt(dirname string, dirent os.FileInfo, statt *syscall.Stat_t) strin
 	gid := statt.Gid
 	username := fmt.Sprintf("%d", uid)
 	groupname := fmt.Sprintf("%d", gid)
-	// TODO FIXME: uid -> username, gid -> groupname lookup for ls -l format output
+	// TODO FIXME: uid -> username, gid -> groupname lookup for ls -l format output id:3162 gh:3177
 
 	mtime := dirent.ModTime()
 	monthStr := mtime.Month().String()[0:3]

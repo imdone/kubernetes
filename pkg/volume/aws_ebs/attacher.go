@@ -198,7 +198,7 @@ func (attacher *awsElasticBlockStoreAttacher) GetDeviceMountPath(
 	return makeGlobalPDPath(attacher.host, aws.KubernetesVolumeID(volumeSource.VolumeID)), nil
 }
 
-// FIXME: this method can be further pruned.
+// FIXME: this method can be further pruned. id:1510 gh:1516
 func (attacher *awsElasticBlockStoreAttacher) MountDevice(spec *volume.Spec, devicePath string, deviceMountPath string) error {
 	mounter := attacher.host.GetMounter(awsElasticBlockStorePluginName)
 	notMnt, err := mounter.IsLikelyNotMountPoint(deviceMountPath)

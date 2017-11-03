@@ -22,7 +22,7 @@ import (
 )
 
 // SchemeGroupVersion is group version used to register these objects
-// TODO this should be in the "kubeconfig" group
+// TODO this should be in the "kubeconfig" group id:3812 gh:3828
 var SchemeGroupVersion = schema.GroupVersion{Group: "", Version: runtime.APIVersionInternal}
 
 var (

@@ -82,7 +82,7 @@ func TestGetAccessModes(t *testing.T) {
 type fakePDManager struct {
 }
 
-// TODO(jonesdl) To fully test this, we could create a loopback device
+// TODO (jonesdl) To fully test this, we could create a loopback device id:1376 gh:1382
 // and mount that instead.
 func (fake *fakePDManager) CreateVolume(c *awsElasticBlockStoreProvisioner) (volumeID aws.KubernetesVolumeID, volumeSizeGB int, labels map[string]string, fstype string, err error) {
 	labels = make(map[string]string)

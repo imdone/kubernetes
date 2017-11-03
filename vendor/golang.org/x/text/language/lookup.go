@@ -245,8 +245,8 @@ func getRegionM49(n int) (regionID, error) {
 }
 
 // normRegion returns a region if r is deprecated or 0 otherwise.
-// TODO: consider supporting BYS (-> BLR), CSK (-> 200 or CZ), PHI (-> PHL) and AFI (-> DJ).
-// TODO: consider mapping split up regions to new most populous one (like CLDR).
+// TODO: consider supporting BYS (-> BLR), CSK (-> 200 or CZ), PHI (-> PHL) and AFI (-> DJ). id:3006 gh:3021
+// TODO: consider mapping split up regions to new most populous one (like CLDR). id:3444 gh:3459
 func normRegion(r regionID) regionID {
 	m := regionOldMap
 	k := sort.Search(len(m), func(i int) bool {

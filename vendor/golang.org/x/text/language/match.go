@@ -55,7 +55,7 @@ func (m *matcher) Match(want ...Tag) (t Tag, index int, c Confidence) {
 	if match != nil {
 		t, index = match.tag, match.index
 	} else {
-		// TODO: this should be an option
+		// TODO: this should be an option id:3255 gh:3270
 		t = m.default_.tag
 		if m.preferSameScript {
 		outer:
@@ -74,16 +74,16 @@ func (m *matcher) Match(want ...Tag) (t Tag, index int, c Confidence) {
 				}
 			}
 		}
-		// TODO: select first language tag based on script.
+		// TODO: select first language tag based on script. id:3298 gh:3313
 	}
 	if w.region != 0 && t.region != 0 && t.region.contains(w.region) {
 		t, _ = Raw.Compose(t, Region{w.region})
 	}
 	// Copy options from the user-provided tag into the result tag. This is hard
 	// to do after the fact, so we do it here.
-	// TODO: add in alternative variants to -u-va-.
-	// TODO: add preferred region to -u-rg-.
-	// TODO: add other extensions. Merge with existing extensions.
+	// TODO: add in alternative variants to -u-va-. id:3527 gh:3542
+	// TODO: add preferred region to -u-rg-. id:3007 gh:3022
+	// TODO: add other extensions. Merge with existing extensions. id:3445 gh:3460
 	if u, ok := w.Extension('u'); ok {
 		t, _ = Raw.Compose(t, u)
 	}
@@ -473,7 +473,7 @@ func makeHaveTag(tag Tag, index int) (haveTag, langID) {
 // script to map to another and we rely on this to keep the code simple.
 func altScript(l langID, s scriptID) scriptID {
 	for _, alt := range matchScript {
-		// TODO: also match cases where language is not the same.
+		// TODO: also match cases where language is not the same. id:3256 gh:3271
 		if (langID(alt.wantLang) == l || langID(alt.haveLang) == l) &&
 			scriptID(alt.haveScript) == s {
 			return scriptID(alt.wantScript)
@@ -561,7 +561,7 @@ func newMatcher(supported []Tag, options []MatchOption) *matcher {
 		}
 	}
 
-	// TODO: include alt script.
+	// TODO: include alt script. id:3299 gh:3314
 	// - don't replace regions, but allow regions to be made more specific.
 
 	// update is used to add indexes in the map for equivalent languages.
@@ -765,7 +765,7 @@ func (m *bestMatch) update(have *haveTag, tag Tag, maxScript scriptID, maxRegion
 		beaten = true
 	}
 
-	// TODO: remove the region distance rule. Region distance has been replaced
+	// TODO: remove the region distance rule. Region distance has been replaced id:3528 gh:3543
 	// by the region grouping rule. For now we leave it as it still seems to
 	// have a net positive effect when applied after the grouping rule.
 	// Possible solutions:
@@ -798,7 +798,7 @@ func (m *bestMatch) update(have *haveTag, tag Tag, maxScript scriptID, maxRegion
 	}
 
 	// Finally we prefer tags which have a closer parent relationship.
-	// TODO: the parent relationship no longer seems necessary. It doesn't hurt
+	// TODO: the parent relationship no longer seems necessary. It doesn't hurt id:3008 gh:3023
 	// to leave it in as the final tie-breaker, though, especially until the
 	// grouping data has further matured.
 	parentDist := parentDistance(have.tag.region, tag)
@@ -903,7 +903,7 @@ func (t Tag) variantOrPrivateTagStr() string {
 
 // equalsRest compares everything except the language.
 func (a Tag) equalsRest(b Tag) bool {
-	// TODO: don't include extensions in this comparison. To do this efficiently,
+	// TODO: don't include extensions in this comparison. To do this efficiently, id:3446 gh:3461
 	// though, we should handle private tags separately.
 	return a.script == b.script && a.region == b.region && a.variantOrPrivateTagStr() == b.variantOrPrivateTagStr()
 }

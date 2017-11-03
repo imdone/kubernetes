@@ -30,7 +30,7 @@
 # - 2.3.7/etcd2 -> 3.0.17/etcd2
 # - 3.0.17/etcd2 -> 3.0.17/etcd3
 #
-# NOTE: The releases supported in this script has to match release binaries
+# NOTE: The releases supported in this script has to match release binaries id:90 gh:91
 # present in the etcd image (to make this script work correctly).
 #
 # Based on the current etcd version and storage format we detect what
@@ -65,7 +65,7 @@ if [ "${DO_NOT_MOVE_BINARIES:-}" != "true" ]; then
   cp "/usr/local/bin/etcdctl-${TARGET_VERSION}" "/usr/local/bin/etcdctl"
 fi
 
-# NOTE: SUPPORTED_VERSION has to match release binaries present in the
+# NOTE: SUPPORTED_VERSION has to match release binaries present in the id:50 gh:51
 # etcd image (to make this script work correctly).
 # We cannot use array since sh doesn't support it.
 SUPPORTED_VERSIONS_STRING="2.2.1 2.3.7 3.0.17"
@@ -240,7 +240,7 @@ for step in ${SUPPORTED_VERSIONS}; do
 done
 
 # Do the rollback of needed.
-# NOTE: Rollback is only supported from "3.0.x" version in 'etcd3' mode to
+# NOTE: Rollback is only supported from "3.0.x" version in 'etcd3' mode to id:111 gh:112
 # "2.2.1" version in 'etcd2' mode.
 if [ "${CURRENT_STORAGE}" = "etcd3" -a "${TARGET_STORAGE}" = "etcd2" ]; then
   if [ "$(echo ${CURRENT_VERSION} | cut -c1-4)" != "3.0." -o "${TARGET_VERSION}" != "2.2.1" ]; then

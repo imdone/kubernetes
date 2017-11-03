@@ -30,7 +30,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // Protocol buffer deep copy and merge.
-// TODO: RawMessage.
+// TODO: RawMessage. id:2636 gh:2651
 
 package proto
 

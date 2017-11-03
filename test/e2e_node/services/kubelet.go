@@ -34,7 +34,7 @@ import (
 	"k8s.io/kubernetes/test/e2e_node/builder"
 )
 
-// TODO(random-liu): Replace this with standard kubelet launcher.
+// TODO (random-liu): Replace this with standard kubelet launcher. id:2585 gh:2600
 
 // args is the type used to accumulate args from the flags with the same name.
 type args []string
@@ -48,7 +48,7 @@ func (a *args) String() string {
 func (a *args) Set(value string) error {
 	// Someone else is calling flag.Parse after the flags are parsed in the
 	// test framework. Use this to avoid the flag being parsed twice.
-	// TODO(random-liu): Figure out who is parsing the flags.
+	// TODO (random-liu): Figure out who is parsing the flags. id:2426 gh:2441
 	if flag.Parsed() {
 		return nil
 	}
@@ -139,7 +139,7 @@ func (e *E2EServices) startKubelet() (*server, error) {
 	} else {
 		cmdArgs = append(cmdArgs, builder.GetKubeletServerBin())
 		cmdArgs = append(cmdArgs,
-			// TODO(random-liu): Get rid of this docker specific thing.
+			// TODO (random-liu): Get rid of this docker specific thing. id:2497 gh:2513
 			"--runtime-cgroups=/docker-daemon",
 			"--kubelet-cgroups=/kubelet",
 			"--cgroup-root=/",

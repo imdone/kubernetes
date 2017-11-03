@@ -81,7 +81,7 @@ func Test_AttachDetachControllerStateOfWolrdPopulators_Positive(t *testing.T) {
 
 	// Act
 	plugins := controllervolumetesting.CreateTestPlugin()
-	var prober volume.DynamicPluginProber = nil // TODO (#51147) inject mock
+	var prober volume.DynamicPluginProber = nil // TODO (#51147) inject mock id:686 gh:687
 
 	if err := adc.volumePluginMgr.InitPlugins(plugins, prober, adc); err != nil {
 		t.Fatalf("Could not initialize volume plugins for Attach/Detach Controller: %+v", err)
@@ -148,7 +148,7 @@ func attachDetachRecoveryTestCase(t *testing.T, extraPods1 []*v1.Pod, extraPods2
 	informerFactory := informers.NewSharedInformerFactory(fakeKubeClient, time.Second*1)
 	//informerFactory := informers.NewSharedInformerFactory(fakeKubeClient, time.Second*1)
 	plugins := controllervolumetesting.CreateTestPlugin()
-	var prober volume.DynamicPluginProber = nil // TODO (#51147) inject mock
+	var prober volume.DynamicPluginProber = nil // TODO (#51147) inject mock id:603 gh:604
 	nodeInformer := informerFactory.Core().V1().Nodes().Informer()
 	podInformer := informerFactory.Core().V1().Pods().Informer()
 	var podsNum, extraPodsNum, nodesNum, i int

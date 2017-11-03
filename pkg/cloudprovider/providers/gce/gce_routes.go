@@ -59,7 +59,7 @@ func (gce *GCECloud) ListRoutes(clusterName string) ([]*cloudprovider.Route, err
 		pageToken = res.NextPageToken
 		for _, r := range res.Items {
 			target := path.Base(r.NextHopInstance)
-			// TODO: Should we lastComponent(target) this?
+			// TODO: Should we lastComponent(target) this? id:516 gh:517
 			targetNodeName := types.NodeName(target) // NodeName == Instance Name on GCE
 			routes = append(routes, &cloudprovider.Route{Name: r.Name, TargetNode: targetNodeName, DestinationCIDR: r.DestRange})
 		}

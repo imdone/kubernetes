@@ -24,7 +24,7 @@ func (q ClassAttrs) String() string {
 }
 
 type HtbClassAttrs struct {
-	// TODO handle all attributes
+	// TODO handle all attributes id:3079 gh:3094
 	Rate    uint64
 	Ceil    uint64
 	Buffer  uint32

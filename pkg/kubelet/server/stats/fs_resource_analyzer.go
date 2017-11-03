@@ -98,7 +98,7 @@ func (s *fsResourceAnalyzer) updateCachedPodVolumeStats() {
 func (s *fsResourceAnalyzer) GetPodVolumeStats(uid types.UID) (PodVolumeStats, bool) {
 	cache := s.cachedVolumeStats.Load().(Cache)
 	if statCalc, found := cache[uid]; !found {
-		// TODO: Differentiate between stats being empty
+		// TODO: Differentiate between stats being empty id:1079 gh:1085
 		// See issue #20679
 		return PodVolumeStats{}, false
 	} else {

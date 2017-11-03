@@ -474,7 +474,7 @@ type processorListener struct {
 	// pendingNotifications is an unbounded ring buffer that holds all notifications not yet distributed.
 	// There is one per listener, but a failing/stalled listener will have infinite pendingNotifications
 	// added until we OOM.
-	// TODO: This is no worse than before, since reflectors were backed by unbounded DeltaFIFOs, but
+	// TODO: This is no worse than before, since reflectors were backed by unbounded DeltaFIFOs, but id:4051 gh:4071
 	// we should try to do something better.
 	pendingNotifications buffer.RingGrowing
 

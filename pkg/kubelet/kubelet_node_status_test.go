@@ -144,7 +144,7 @@ func TestNodeStatusWithCloudProviderNodeIP(t *testing.T) {
 		Spec:       v1.NodeSpec{},
 	}
 
-	// TODO : is it possible to mock kubelet.validateNodeIP() to avoid relying on the host interface addresses ?
+	// TODO : is it possible to mock kubelet.validateNodeIP() to avoid relying on the host interface addresses ? id:972 gh:978
 	addrs, err := net.InterfaceAddrs()
 	assert.NoError(t, err)
 	for _, addr := range addrs {
@@ -726,7 +726,7 @@ func TestUpdateNodeStatusWithRuntimeStateError(t *testing.T) {
 		assert.True(t, apiequality.Semantic.DeepEqual(expectedNode, updatedNode), "%s", diff.ObjectDiff(expectedNode, updatedNode))
 	}
 
-	// TODO(random-liu): Refactor the unit test to be table driven test.
+	// TODO (random-liu): Refactor the unit test to be table driven test. id:870 gh:876
 	// Should report kubelet not ready if the runtime check is out of date
 	clock.SetTime(time.Now().Add(-maxWaitForContainerRuntime))
 	kubelet.updateRuntimeUp()

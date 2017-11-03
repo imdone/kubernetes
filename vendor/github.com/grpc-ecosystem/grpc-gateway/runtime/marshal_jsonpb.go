@@ -23,7 +23,7 @@ func (*JSONPb) ContentType() string {
 
 // Marshal marshals "v" into JSON
 // Currently it can marshal only proto.Message.
-// TODO(yugui) Support fields of primitive types in a message.
+// TODO (yugui) Support fields of primitive types in a message. id:3062 gh:3078
 func (j *JSONPb) Marshal(v interface{}) ([]byte, error) {
 	if _, ok := v.(proto.Message); !ok {
 		return j.marshalNonProtoField(v)
@@ -85,7 +85,7 @@ func (j *JSONPb) marshalNonProtoField(v interface{}) ([]byte, error) {
 
 // Unmarshal unmarshals JSON "data" into "v"
 // Currently it can marshal only proto.Message.
-// TODO(yugui) Support fields of primitive types in a message.
+// TODO (yugui) Support fields of primitive types in a message. id:2662 gh:2677
 func (j *JSONPb) Unmarshal(data []byte, v interface{}) error {
 	return unmarshalJSONPb(data, v)
 }
@@ -164,7 +164,7 @@ func decodeNonProtoField(d *json.Decoder, v interface{}) error {
 		}
 		switch repr.(type) {
 		case string:
-			// TODO(yugui) Should use proto.StructProperties?
+			// TODO (yugui) Should use proto.StructProperties? id:2965 gh:2980
 			return fmt.Errorf("unmarshaling of symbolic enum %q not supported: %T", repr, rv.Interface())
 		case float64:
 			rv.Set(reflect.ValueOf(int32(repr.(float64))).Convert(rv.Type()))

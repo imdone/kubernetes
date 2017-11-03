@@ -55,7 +55,7 @@ func TestEnforceVersionPolicies(t *testing.T) {
 			newK8sVersion:         "v1.8.2",
 			expectedSkippableErrs: 1,
 		},
-		{ // upgrades without bumping the version number not supported yet. TODO: Change this?
+		{ // upgrades without bumping the version number not supported yet. TODO: Change this? id:165 gh:166
 			vg: &fakeVersionGetter{
 				clusterVersion: "v1.8.3",
 				kubeletVersion: "v1.8.3",

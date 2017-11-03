@@ -80,13 +80,13 @@ const (
 	DefaultTimeout = 30 * time.Minute
 
 	// Rc manifest used to create pods for benchmarks.
-	// TODO: Convert this to a full path?
+	// TODO: Convert this to a full path? id:2505 gh:2521
 	TestRCManifest = "benchmark-controller.json"
 )
 
 // MasterComponents is a control struct for all master components started via NewMasterComponents.
-// TODO: Include all master components (scheduler, nodecontroller).
-// TODO: Reconcile with integration.go, currently the master used there doesn't understand
+// TODO: Include all master components (scheduler, nodecontroller). id:2730 gh:2745
+// TODO: Reconcile with integration.go, currently the master used there doesn't understand id:2415 gh:2430
 // how to restart cleanly, which is required for each iteration of a benchmark. The integration
 // tests also don't make it easy to isolate and turn off components at will.
 type MasterComponents struct {
@@ -115,21 +115,21 @@ type Config struct {
 	QPS float32
 	// Client burst qps, also burst replicas allowed in rc manager
 	Burst int
-	// TODO: Add configs for endpoints controller, scheduler etc
+	// TODO: Add configs for endpoints controller, scheduler etc id:2594 gh:2609
 }
 
 // NewMasterComponents creates, initializes and starts master components based on the given config.
 func NewMasterComponents(c *Config) *MasterComponents {
 	m, s, closeFn := startMasterOrDie(c.MasterConfig, nil, nil)
-	// TODO: Allow callers to pipe through a different master url and create a client/start components using it.
+	// TODO: Allow callers to pipe through a different master url and create a client/start components using it. id:2435 gh:2450
 	glog.Infof("Master %+v", s.URL)
-	// TODO: caesarxuchao: remove this client when the refactoring of client libraray is done.
+	// TODO: caesarxuchao: remove this client when the refactoring of client libraray is done. id:2506 gh:2522
 	clientset := clientset.NewForConfigOrDie(&restclient.Config{Host: s.URL, ContentConfig: restclient.ContentConfig{GroupVersion: testapi.Groups[v1.GroupName].GroupVersion()}, QPS: c.QPS, Burst: c.Burst})
 	rcStopCh := make(chan struct{})
 	informerFactory := informers.NewSharedInformerFactory(clientset, controller.NoResyncPeriodFunc())
 	controllerManager := replicationcontroller.NewReplicationManager(informerFactory.Core().V1().Pods(), informerFactory.Core().V1().ReplicationControllers(), clientset, c.Burst)
 
-	// TODO: Support events once we can cleanly shutdown an event recorder.
+	// TODO: Support events once we can cleanly shutdown an event recorder. id:2731 gh:2746
 	controllerManager.SetEventRecorder(&record.FakeRecorder{})
 	if c.StartReplicationManager {
 		informerFactory.Start(rcStopCh)
@@ -260,7 +260,7 @@ func startMasterOrDie(masterConfig *master.Config, incomingServer *httptest.Serv
 		masterReceiver.SetMaster(m)
 	}
 
-	// TODO have this start method actually use the normal start sequence for the API server
+	// TODO have this start method actually use the normal start sequence for the API server id:2416 gh:2431
 	// this method never actually calls the `Run` method for the API server
 	// fire the post hooks ourselves
 	m.GenericAPIServer.PrepareRun()
@@ -302,7 +302,7 @@ func NewMasterConfig() *master.Config {
 	ns := NewSingleContentTypeSerializer(legacyscheme.Scheme, info)
 
 	resourceEncoding := serverstorage.NewDefaultResourceEncodingConfig(legacyscheme.Registry)
-	// FIXME (soltysh): this GroupVersionResource override should be configurable
+	// FIXME (soltysh): this GroupVersionResource override should be configurable id:2595 gh:2610
 	// we need to set both for the whole group and for cronjobs, separately
 	resourceEncoding.SetVersionEncoding(batch.GroupName, *testapi.Batch.GroupVersion(), schema.GroupVersion{Group: batch.GroupName, Version: runtime.APIVersionInternal})
 	resourceEncoding.SetResourceEncoding(schema.GroupResource{Group: "batch", Resource: "cronjobs"}, schema.GroupVersion{Group: batch.GroupName, Version: "v1beta1"}, schema.GroupVersion{Group: batch.GroupName, Version: runtime.APIVersionInternal})
@@ -396,19 +396,19 @@ func (m *MasterComponents) Stop(apiServer, rcManager bool) {
 }
 
 func CreateTestingNamespace(baseName string, apiserver *httptest.Server, t *testing.T) *v1.Namespace {
-	// TODO: Create a namespace with a given basename.
+	// TODO: Create a namespace with a given basename. id:2436 gh:2451
 	// Currently we neither create the namespace nor delete all its contents at the end.
 	// But as long as tests are not using the same namespaces, this should work fine.
 	return &v1.Namespace{
 		ObjectMeta: metav1.ObjectMeta{
-			// TODO: Once we start creating namespaces, switch to GenerateName.
+			// TODO: Once we start creating namespaces, switch to GenerateName. id:2546 gh:2561
 			Name: baseName,
 		},
 	}
 }
 
 func DeleteTestingNamespace(ns *v1.Namespace, apiserver *httptest.Server, t *testing.T) {
-	// TODO: Remove all resources from a given namespace once we implement CreateTestingNamespace.
+	// TODO: Remove all resources from a given namespace once we implement CreateTestingNamespace. id:2732 gh:2747
 }
 
 // RCFromManifest reads a .json file and returns the rc in it.

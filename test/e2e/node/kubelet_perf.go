@@ -68,7 +68,7 @@ func runResourceTrackingTest(f *framework.Framework, podsPerNode int, nodeNames 
 	By(fmt.Sprintf("Creating a RC of %d pods and wait until all pods of this RC are running", totalPods))
 	rcName := fmt.Sprintf("resource%d-%s", totalPods, string(uuid.NewUUID()))
 
-	// TODO: Use a more realistic workload
+	// TODO: Use a more realistic workload id:2397 gh:2412
 	Expect(framework.RunRC(testutils.RCConfig{
 		Client:         f.ClientSet,
 		InternalClient: f.InternalClientset,
@@ -104,7 +104,7 @@ func runResourceTrackingTest(f *framework.Framework, podsPerNode int, nodeNames 
 	logPodsOnNodes(f.ClientSet, nodeNames.List())
 	usageSummary, err := rm.GetLatest()
 	Expect(err).NotTo(HaveOccurred())
-	// TODO(random-liu): Remove the original log when we migrate to new perfdash
+	// TODO (random-liu): Remove the original log when we migrate to new perfdash id:2314 gh:2329
 	framework.Logf("%s", rm.FormatResourceUsage(usageSummary))
 	// Log perf result
 	framework.PrintPerfData(framework.ResourceUsageToPerfData(rm.GetMasterNodeLatest(usageSummary)))
@@ -234,7 +234,7 @@ var _ = SIGDescribe("Kubelet [Serial] [Slow]", func() {
 		// kubelet/runtime resource usage, please see the node e2e benchmark
 		// dashboard. http://node-perf-dash.k8s.io/
 		//
-		// TODO(#36621): Deprecate this test once we have a node e2e soak
+		// TODO (#36621): Deprecate this test once we have a node e2e soak id:2347 gh:2363
 		// cluster.
 		rTests := []resourceTest{
 			{

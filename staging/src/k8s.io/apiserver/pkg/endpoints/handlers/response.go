@@ -34,7 +34,7 @@ import (
 // transformResponseObject takes an object loaded from storage and performs any necessary transformations.
 // Will write the complete response object.
 func transformResponseObject(ctx request.Context, scope RequestScope, req *http.Request, w http.ResponseWriter, statusCode int, result runtime.Object) {
-	// TODO: fetch the media type much earlier in request processing and pass it into this method.
+	// TODO: fetch the media type much earlier in request processing and pass it into this method. id:3617 gh:3632
 	mediaType, _, err := negotiation.NegotiateOutputMediaType(req, scope.Serializer, &scope)
 	if err != nil {
 		status := responsewriters.ErrorToAPIStatus(err)
@@ -48,7 +48,7 @@ func transformResponseObject(ctx request.Context, scope RequestScope, req *http.
 
 		case target.Kind == "PartialObjectMetadata" && target.GroupVersion() == metav1alpha1.SchemeGroupVersion:
 			if meta.IsListType(result) {
-				// TODO: this should be calculated earlier
+				// TODO: this should be calculated earlier id:3792 gh:3809
 				err = newNotAcceptableError(fmt.Sprintf("you requested PartialObjectMetadata, but the requested object is a list (%T)", result))
 				scope.err(err, w, req)
 				return
@@ -73,7 +73,7 @@ func transformResponseObject(ctx request.Context, scope RequestScope, req *http.
 
 		case target.Kind == "PartialObjectMetadataList" && target.GroupVersion() == metav1alpha1.SchemeGroupVersion:
 			if !meta.IsListType(result) {
-				// TODO: this should be calculated earlier
+				// TODO: this should be calculated earlier id:3988 gh:4008
 				err = newNotAcceptableError(fmt.Sprintf("you requested PartialObjectMetadataList, but the requested object is not a list (%T)", result))
 				scope.err(err, w, req)
 				return
@@ -105,8 +105,8 @@ func transformResponseObject(ctx request.Context, scope RequestScope, req *http.
 			return
 
 		case target.Kind == "Table" && target.GroupVersion() == metav1alpha1.SchemeGroupVersion:
-			// TODO: relax the version abstraction
-			// TODO: skip if this is a status response (delete without body)?
+			// TODO: relax the version abstraction id:3421 gh:3436
+			// TODO: skip if this is a status response (delete without body)? id:3881 gh:3896
 
 			opts := &metav1alpha1.TableOptions{}
 			if err := metav1alpha1.ParameterCodec.DecodeParameters(req.URL.Query(), metav1alpha1.SchemeGroupVersion, opts); err != nil {
@@ -129,21 +129,21 @@ func transformResponseObject(ctx request.Context, scope RequestScope, req *http.
 						scope.err(err, w, req)
 						return
 					}
-				// TODO: rely on defaulting for the value here?
+				// TODO: rely on defaulting for the value here? id:3618 gh:3633
 				case metav1alpha1.IncludeMetadata, "":
 					m, err := meta.Accessor(item.Object.Object)
 					if err != nil {
 						scope.err(err, w, req)
 						return
 					}
-					// TODO: turn this into an internal type and do conversion in order to get object kind automatically set?
+					// TODO: turn this into an internal type and do conversion in order to get object kind automatically set? id:3793 gh:3807
 					partial := meta.AsPartialObjectMetadata(m)
 					partial.GetObjectKind().SetGroupVersionKind(metav1alpha1.SchemeGroupVersion.WithKind("PartialObjectMetadata"))
 					item.Object.Object = partial
 				case metav1alpha1.IncludeNone:
 					item.Object.Object = nil
 				default:
-					// TODO: move this to validation on the table options?
+					// TODO: move this to validation on the table options? id:3989 gh:4009
 					err = errors.NewBadRequest(fmt.Sprintf("unrecognized includeObject value: %q", opts.IncludeObject))
 					scope.err(err, w, req)
 				}

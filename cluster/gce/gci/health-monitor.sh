@@ -39,7 +39,7 @@ function docker_monitoring {
 
 function kubelet_monitoring {
   echo "Wait for 2 minutes for kubelet to be functional"
-  # TODO(andyzheng0831): replace it with a more reliable method if possible.
+  # TODO (andyzheng0831): replace it with a more reliable method if possible. id:34 gh:35
   sleep 120
   local -r max_seconds=10
   local output=""
@@ -81,3 +81,4 @@ elif [[ "${component}" == "kubelet" ]]; then
 else
   echo "Health monitoring for component "${component}" is not supported!"
 fi
+i

@@ -1355,7 +1355,7 @@ func TestDescribeEvents(t *testing.T) {
 				},
 			}, events),
 		},
-		// TODO(jchaloup): add tests for:
+		// TODO (jchaloup): add tests for: id:1233 gh:1239
 		// - IngressDescriber
 		// - JobDescriber
 		"NodeDescriber": &NodeDescriber{

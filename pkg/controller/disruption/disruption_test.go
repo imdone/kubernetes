@@ -508,7 +508,7 @@ func TestMultipleControllers(t *testing.T) {
 	dc.sync(pdbName)
 
 	// 100%>1% healthy BUT two RCs => no disruption allowed
-	// TODO: Find out if this assert is still needed
+	// TODO: Find out if this assert is still needed id:576 gh:577
 	//ps.VerifyDisruptionAllowed(t, pdbName, 0)
 }
 
@@ -533,7 +533,7 @@ func TestReplicationController(t *testing.T) {
 	dc.sync(pdbName)
 
 	// It starts out at 0 expected because, with no pods, the PDB doesn't know
-	// about the RC.  This is a known bug.  TODO(mml): file issue
+	// about the RC.  This is a known bug.  TODO (mml): file issue id:540 gh:541
 	ps.VerifyPdbStatus(t, pdbName, 0, 0, 0, 0, map[string]metav1.Time{})
 
 	pods := []*v1.Pod{}
@@ -574,7 +574,7 @@ func TestStatefulSetController(t *testing.T) {
 	dc.sync(pdbName)
 
 	// It starts out at 0 expected because, with no pods, the PDB doesn't know
-	// about the SS.  This is a known bug.  TODO(mml): file issue
+	// about the SS.  This is a known bug.  TODO (mml): file issue id:531 gh:532
 	ps.VerifyPdbStatus(t, pdbName, 0, 0, 0, 0, map[string]metav1.Time{})
 
 	pods := []*v1.Pod{}

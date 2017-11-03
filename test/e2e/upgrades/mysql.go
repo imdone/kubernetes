@@ -146,7 +146,7 @@ func (t *MySqlUpgradeTest) Test(f *framework.Framework, done <-chan struct{}, up
 	framework.Logf("Failed reads: %d", readFailure)
 	framework.Logf("Failed writes: %d", writeFailure)
 
-	// TODO: Not sure what the ratio defining a successful test run should be. At time of writing the
+	// TODO: Not sure what the ratio defining a successful test run should be. At time of writing the id:2610 gh:2625
 	// test, failures only seem to happen when a race condition occurs (read/write starts, doesn't
 	// finish before upgrade interferes).
 

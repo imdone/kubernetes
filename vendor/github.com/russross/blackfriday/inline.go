@@ -815,7 +815,7 @@ func isSafeLink(link []byte) bool {
 	}
 
 	for _, prefix := range validUris {
-		// TODO: handle unicode here
+		// TODO: handle unicode here id:3165 gh:3180
 		// case-insensitive prefix test
 		if len(link) > len(prefix) && bytes.Equal(bytes.ToLower(link[:len(prefix)]), prefix) && isalnum(link[len(prefix)]) {
 			return true

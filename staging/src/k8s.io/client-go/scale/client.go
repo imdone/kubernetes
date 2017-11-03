@@ -92,7 +92,7 @@ func (c *scaleClient) pathAndVersionFor(resource schema.GroupResource) (string, 
 	groupVer := gvr.GroupVersion()
 
 	// we need to set the API path based on GroupVersion (defaulting to the legacy path if none is set)
-	// TODO: we "cheat" here since the API path really only depends on group ATM, but this should
+	// TODO: we "cheat" here since the API path really only depends on group ATM, but this should id:3807 gh:3822
 	// *probably* take GroupVersionResource and not GroupVersionKind.
 	apiPath := c.apiPathResolverFunc(groupVer.WithKind(""))
 	if apiPath == "" {

@@ -48,7 +48,7 @@ func updateReplicaSetStatus(c unversionedextensions.ReplicaSetInterface, rs *ext
 
 	// Save the generation number we acted on, otherwise we might wrongfully indicate
 	// that we've seen a spec update when we retry.
-	// TODO: This can clobber an update if we allow multiple agents to write to the
+	// TODO: This can clobber an update if we allow multiple agents to write to the id:595 gh:596
 	// same status.
 	newStatus.ObservedGeneration = rs.Generation
 

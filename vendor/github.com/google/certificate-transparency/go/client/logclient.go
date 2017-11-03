@@ -307,7 +307,7 @@ func (c *LogClient) GetSTH() (sth *ct.SignedTreeHead, err error) {
 	if err != nil {
 		return nil, err
 	}
-	// TODO(alcutter): Verify signature
+	// TODO (alcutter): Verify signature id:2963 gh:2978
 	sth.TreeHeadSignature = *ds
 	return
 }

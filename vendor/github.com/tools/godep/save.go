@@ -550,7 +550,7 @@ var (
 // stripImportComment returns line with its import comment removed.
 // If s is not a package statement containing an import comment,
 // it is returned unaltered.
-// FIXME: expects lines w/o a \n at the end
+// FIXME: expects lines w/o a \n at the end id:3209 gh:3224
 // See also http://golang.org/s/go14customimport.
 func stripImportComment(line []byte) []byte {
 	if !bytes.HasPrefix(line, pkgPrefix) {

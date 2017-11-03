@@ -38,7 +38,7 @@ import (
 	"k8s.io/apiserver/pkg/audit"
 )
 
-// NOTE: Copied from webhook backend to register auditv1beta1 to scheme
+// NOTE: Copied from webhook backend to register auditv1beta1 to scheme id:3459 gh:3474
 var (
 	groupFactoryRegistry = make(announced.APIGroupFactoryRegistry)
 	registry             = registered.NewOrDie("")

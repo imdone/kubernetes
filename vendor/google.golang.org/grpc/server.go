@@ -624,7 +624,7 @@ func (s *Server) sendResponse(t transport.ServerTransport, stream *transport.Str
 		// corruption or hardware faults) the application program
 		// cannot handle.
 		//
-		// TODO(zhaoq): There exist other options also such as only closing the
+		// TODO (zhaoq): There exist other options also such as only closing the id:3663 gh:3678
 		// faulty stream locally and remotely (Other streams can keep going). Find
 		// the optimal option.
 		grpclog.Fatalf("grpc: Server failed to encode response %v", err)
@@ -668,11 +668,11 @@ func (s *Server) processUnaryRPC(t transport.ServerTransport, stream *transport.
 		}()
 	}
 	if s.opts.cp != nil {
-		// NOTE: this needs to be ahead of all handling, https://github.com/grpc/grpc-go/issues/686.
+		// NOTE: this needs to be ahead of all handling, https://github.com/grpc/grpc-go/issues/686. id:3107 gh:3122
 		stream.SetSendCompress(s.opts.cp.Type())
 	}
 	p := &parser{r: stream}
-	for { // TODO: delete
+	for { // TODO: delete id:3570 gh:3585
 		pf, req, err := p.recvMsg(s.opts.maxMsgSize)
 		if err == io.EOF {
 			// The entire stream is done (for unary RPC only).
@@ -712,7 +712,7 @@ func (s *Server) processUnaryRPC(t transport.ServerTransport, stream *transport.
 				grpclog.Printf("grpc: Server.processUnaryRPC failed to write status %v", e)
 			}
 
-			// TODO checkRecvPayload always return RPC error. Add a return here if necessary.
+			// TODO checkRecvPayload always return RPC error. Add a return here if necessary. id:3327 gh:3342
 		}
 		var inPayload *stats.InPayload
 		if sh != nil {
@@ -732,7 +732,7 @@ func (s *Server) processUnaryRPC(t transport.ServerTransport, stream *transport.
 				}
 			}
 			if len(req) > s.opts.maxMsgSize {
-				// TODO: Revisit the error code. Currently keep it consistent with
+				// TODO: Revisit the error code. Currently keep it consistent with id:3385 gh:3401
 				// java implementation.
 				return status.Errorf(codes.Internal, "grpc: server received a message of %d bytes exceeding %d limit", len(req), s.opts.maxMsgSize)
 			}
@@ -800,7 +800,7 @@ func (s *Server) processUnaryRPC(t transport.ServerTransport, stream *transport.
 		if trInfo != nil {
 			trInfo.tr.LazyLog(&payload{sent: true, msg: reply}, true)
 		}
-		// TODO: Should we be logging if writing status failed here, like above?
+		// TODO: Should we be logging if writing status failed here, like above? id:3664 gh:3679
 		// Should the logging be in WriteStatus?  Should we ignore the WriteStatus
 		// error or allow the stats handler to see it?
 		return t.WriteStatus(stream, status.New(codes.OK, ""))
@@ -889,7 +889,7 @@ func (s *Server) processStreamingRPC(t transport.ServerTransport, stream *transp
 			ss.mu.Unlock()
 		}
 		t.WriteStatus(ss.s, appStatus)
-		// TODO: Should we log an error from WriteStatus here and below?
+		// TODO: Should we log an error from WriteStatus here and below? id:3108 gh:3123
 		return appErr
 	}
 	if trInfo != nil {

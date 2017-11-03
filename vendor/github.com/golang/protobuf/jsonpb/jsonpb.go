@@ -128,7 +128,7 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 			return out.err
 		case "Struct":
 			// Let marshalValue handle the `fields` map.
-			// TODO: pass the correct Properties if needed.
+			// TODO: pass the correct Properties if needed. id:2806 gh:2821
 			return m.marshalValue(out, &proto.Properties{}, s.Field(0), indent)
 		case "Timestamp":
 			// "RFC 3339, where generated output will always be Z-normalized
@@ -152,7 +152,7 @@ func (m *Marshaler) marshalObject(out *errWriter, v proto.Message, indent, typeU
 			}
 			// oneof -> *T -> T -> T.F
 			x := kind.Elem().Elem().Field(0)
-			// TODO: pass the correct Properties if needed.
+			// TODO: pass the correct Properties if needed. id:3045 gh:3060
 			return m.marshalValue(out, &proto.Properties{}, x, indent)
 		}
 	}
@@ -732,7 +732,7 @@ func (u *Unmarshaler) unmarshalValue(target reflect.Value, inputValue json.RawMe
 		var keyprop, valprop *proto.Properties
 		if prop != nil {
 			// These could still be nil if the protobuf metadata is broken somehow.
-			// TODO: This won't work because the fields are unexported.
+			// TODO: This won't work because the fields are unexported. id:2645 gh:2660
 			// We should probably just reparse them.
 			//keyprop, valprop = prop.mkeyprop, prop.mvalprop
 		}

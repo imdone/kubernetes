@@ -63,7 +63,7 @@ type PerRPCCredentials interface {
 	// context. uri is the URI of the entry point for the request. When
 	// supported by the underlying implementation, ctx can be used for
 	// timeout and cancellation.
-	// TODO(zhaoq): Define the set of the qualified keys instead of leaving
+	// TODO (zhaoq): Define the set of the qualified keys instead of leaving id:3323 gh:3338
 	// it as an arbitrary string.
 	GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error)
 	// RequireTransportSecurity indicates whether the credentials requires

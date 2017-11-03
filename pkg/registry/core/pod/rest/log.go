@@ -42,7 +42,7 @@ var _ = rest.GetterWithOptions(&LogREST{})
 
 // New creates a new Pod log options object
 func (r *LogREST) New() runtime.Object {
-	// TODO - return a resource that represents a log
+	// TODO - return a resource that represents a log id:1353 gh:1360
 	return &api.Pod{}
 }
 

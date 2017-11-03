@@ -54,7 +54,7 @@ kube::version::get_version_vars() {
       # compatible semantic version that looks something like this:
       #   v1.1.0-alpha.0.6+84c76d1142ea4d
       #
-      # TODO: We continue calling this "git version" because so many
+      # TODO: We continue calling this "git version" because so many id:172 gh:173
       # downstream consumers are expecting it there.
       DASHES_IN_VERSION=$(echo "${KUBE_GIT_VERSION}" | sed "s/[^-]//g")
       if [[ "${DASHES_IN_VERSION}" == "---" ]] ; then

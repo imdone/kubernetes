@@ -38,7 +38,7 @@ import (
 
 const (
 	// Kubernetes DNS suffix search list
-	// TODO: Get DNS suffix search list from docker containers.
+	// TODO: Get DNS suffix search list from docker containers. id:1263 gh:1269
 	// --dns-search option doesn't work on Windows containers and has been
 	// fixed recently in docker.
 
@@ -135,7 +135,7 @@ func tryConnect(service ServicePortPortalName, srcAddr net.Addr, protocol string
 			return nil, err
 		}
 		glog.V(3).Infof("Mapped service %q to endpoint %s", service, endpoint)
-		// TODO: This could spin up a new goroutine to make the outbound connection,
+		// TODO: This could spin up a new goroutine to make the outbound connection, id:1169 gh:1175
 		// and keep accepting inbound traffic.
 		outConn, err := net.DialTimeout(protocol, endpoint, dialTimeout)
 		if err != nil {
@@ -213,7 +213,7 @@ func copyBytes(direction string, dest, src *net.TCPConn, wg *sync.WaitGroup) {
 
 // udpProxySocket implements proxySocket.  Close() is implemented by net.UDPConn.  When Close() is called,
 // no new connections are allowed and existing connections are broken.
-// TODO: We could lame-duck this ourselves, if it becomes important.
+// TODO: We could lame-duck this ourselves, if it becomes important. id:1226 gh:1232
 type udpProxySocket struct {
 	*net.UDPConn
 	port int
@@ -332,7 +332,7 @@ func processUnpackedDNSQueryPacket(
 		return length
 	}
 
-	// TODO: handle concurrent queries from a client
+	// TODO: handle concurrent queries from a client id:1250 gh:1256
 	dnsClients.mu.Lock()
 	state, found := dnsClients.clients[dnsClientQuery{host, dnsQType}]
 	if !found {
@@ -518,7 +518,7 @@ func (udp *udpProxySocket) ProxyLoop(service ServicePortPortalName, myInfo *serv
 		}
 
 		// Block until data arrives.
-		// TODO: Accumulate a histogram of n or something, to fine tune the buffer size.
+		// TODO: Accumulate a histogram of n or something, to fine tune the buffer size. id:1303 gh:1309
 		n, cliAddr, err := udp.ReadFrom(buffer[0:])
 		if err != nil {
 			if e, ok := err.(net.Error); ok {
@@ -544,13 +544,13 @@ func (udp *udpProxySocket) ProxyLoop(service ServicePortPortalName, myInfo *serv
 		if err != nil {
 			continue
 		}
-		// TODO: It would be nice to let the goroutine handle this write, but we don't
+		// TODO: It would be nice to let the goroutine handle this write, but we don't id:1264 gh:1270
 		// really want to copy the buffer.  We could do a pool of buffers or something.
 		_, err = svrConn.Write(buffer[0:n])
 		if err != nil {
 			if !logTimeout(err) {
 				glog.Errorf("Write failed: %v", err)
-				// TODO: Maybe tear down the goroutine for this client/server pair?
+				// TODO: Maybe tear down the goroutine for this client/server pair? id:1170 gh:1176
 			}
 			continue
 		}
@@ -568,7 +568,7 @@ func (udp *udpProxySocket) getBackendConn(activeClients *clientCache, dnsClients
 
 	svrConn, found := activeClients.clients[cliAddr.String()]
 	if !found {
-		// TODO: This could spin up a new goroutine to make the outbound connection,
+		// TODO: This could spin up a new goroutine to make the outbound connection, id:1227 gh:1233
 		// and keep accepting inbound traffic.
 		glog.V(3).Infof("New UDP connection from %s", cliAddr)
 		var err error
@@ -590,7 +590,7 @@ func (udp *udpProxySocket) getBackendConn(activeClients *clientCache, dnsClients
 }
 
 // This function is expected to be called as a goroutine.
-// TODO: Track and log bytes copied, like TCP
+// TODO: Track and log bytes copied, like TCP id:1339 gh:1345
 func (udp *udpProxySocket) proxyClient(cliAddr net.Addr, svrConn net.Conn, activeClients *clientCache, dnsClients *dnsClientCache, service ServicePortPortalName, timeout time.Duration, dnsSearch []string) {
 	defer svrConn.Close()
 	var buffer [4096]byte

@@ -323,7 +323,7 @@ func contains(sli []string, ele string) bool {
 //
 // Valid is called by UnmarshalJSON.
 //
-// NOTE(ericchiang): For development purposes Valid does not mandate 'https' for
+// NOTE (ericchiang): For development purposes Valid does not mandate 'https' for id:2526 gh:2541
 // URLs fields where the OIDC spec requires it. This may change in future releases
 // of this package. See: https://github.com/coreos/go-oidc/issues/34
 func (p ProviderConfig) Valid() error {
@@ -454,7 +454,7 @@ func (p ProviderConfig) Supports(c ClientMetadata) error {
 		}
 	}
 
-	// TODO(ericchiang): Are there more checks we feel comfortable with begin strict about?
+	// TODO (ericchiang): Are there more checks we feel comfortable with begin strict about? id:2847 gh:2862
 
 	return nil
 }

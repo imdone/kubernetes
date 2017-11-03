@@ -106,12 +106,12 @@ func (s *Serializer) Decode(originalData []byte, gvk *schema.GroupVersionKind, i
 	prefixLen := len(s.prefix)
 	switch {
 	case len(originalData) == 0:
-		// TODO: treat like decoding {} from JSON with defaulting
+		// TODO: treat like decoding {} from JSON with defaulting id:3853 gh:3868
 		return nil, nil, fmt.Errorf("empty data")
 	case len(originalData) < prefixLen || !bytes.Equal(s.prefix, originalData[:prefixLen]):
 		return nil, nil, fmt.Errorf("provided data does not appear to be a protobuf message, expected prefix %v", s.prefix)
 	case len(originalData) == prefixLen:
-		// TODO: treat like decoding {} from JSON with defaulting
+		// TODO: treat like decoding {} from JSON with defaulting id:3280 gh:3295
 		return nil, nil, fmt.Errorf("empty body")
 	}
 
@@ -233,7 +233,7 @@ func (s *Serializer) Encode(obj runtime.Object, w io.Writer) error {
 		return err
 
 	default:
-		// TODO: marshal with a different content type and serializer (JSON for third party objects)
+		// TODO: marshal with a different content type and serializer (JSON for third party objects) id:3775 gh:3791
 		return errNotMarshalable{reflect.TypeOf(obj)}
 	}
 }
@@ -336,7 +336,7 @@ func (s *RawSerializer) Decode(originalData []byte, gvk *schema.GroupVersionKind
 	}
 
 	if len(originalData) == 0 {
-		// TODO: treat like decoding {} from JSON with defaulting
+		// TODO: treat like decoding {} from JSON with defaulting id:3511 gh:3526
 		return nil, nil, fmt.Errorf("empty data")
 	}
 	data := originalData

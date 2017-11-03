@@ -274,7 +274,7 @@ func startResourceQuotaController(ctx ControllerContext) (bool, error) {
 }
 
 func startNamespaceController(ctx ControllerContext) (bool, error) {
-	// TODO: should use a dynamic RESTMapper built from the discovery results.
+	// TODO: should use a dynamic RESTMapper built from the discovery results. id:127 gh:128
 	restMapper := legacyscheme.Registry.RESTMapper()
 
 	// the namespace cleanup controller is very chatty.  It makes lots of discovery calls and then it makes lots of delete calls
@@ -333,7 +333,7 @@ func startGarbageCollectorController(ctx ControllerContext) (bool, error) {
 
 	config := ctx.ClientBuilder.ConfigOrDie("generic-garbage-collector")
 	config.ContentConfig = dynamic.ContentConfig()
-	// TODO: Make NewMetadataCodecFactory support arbitrary (non-compiled)
+	// TODO: Make NewMetadataCodecFactory support arbitrary (non-compiled) id:176 gh:177
 	// resource types. Otherwise we'll be storing full Unstructured data in our
 	// caches for custom resources. Consider porting it to work with
 	// metav1alpha1.PartialObjectMetadata.

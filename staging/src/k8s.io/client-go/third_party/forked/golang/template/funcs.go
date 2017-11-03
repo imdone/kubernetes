@@ -260,7 +260,7 @@ func not(arg interface{}) (truth bool) {
 
 // Comparison.
 
-// TODO: Perhaps allow comparison between signed and unsigned integers.
+// TODO: Perhaps allow comparison between signed and unsigned integers. id:3951 gh:3971
 
 var (
 	errBadComparisonType = errors.New("invalid type for comparison")

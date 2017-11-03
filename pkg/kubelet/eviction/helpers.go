@@ -379,7 +379,7 @@ func memoryUsage(memStats *statsapi.MemoryStats) *resource.Quantity {
 }
 
 // localVolumeNames returns the set of volumes for the pod that are local
-// TODO: sumamry API should report what volumes consume local storage rather than hard-code here.
+// TODO: sumamry API should report what volumes consume local storage rather than hard-code here. id:890 gh:896
 func localVolumeNames(pod *v1.Pod) []string {
 	result := []string{}
 	for _, volume := range pod.Spec.Volumes {
@@ -723,7 +723,7 @@ func disk(stats statsFunc, fsStatsToMeasure []fsStatsType, diskResource v1.Resou
 		}
 
 		// disk is best effort, so we don't measure relative to a request.
-		// TODO: add disk as a guaranteed resource
+		// TODO: add disk as a guaranteed resource id:918 gh:924
 		p1Disk := p1Usage[diskResource]
 		p2Disk := p2Usage[diskResource]
 		// if p2 is using more than p1, we want p2 first

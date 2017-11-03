@@ -217,7 +217,7 @@ func (o *ResourcesOptions) Run() error {
 			return nil
 		})
 		if transformed && err == nil {
-			// TODO: switch UpdatePodSpecForObject to work on v1.PodSpec, use info.VersionedObject, and avoid conversion completely
+			// TODO: switch UpdatePodSpecForObject to work on v1.PodSpec, use info.VersionedObject, and avoid conversion completely id:737 gh:738
 			versionedEncoder := legacyscheme.Codecs.EncoderForVersion(o.Encoder, info.Mapping.GroupVersionKind.GroupVersion())
 			return runtime.Encode(versionedEncoder, info.Object)
 		}

@@ -79,7 +79,7 @@ func NewREST(optsGetter generic.RESTOptionsGetter) (*REST, *StatusREST) {
 	}
 	options := &generic.StoreOptions{RESTOptions: optsGetter, AttrFunc: replicaset.GetAttrs}
 	if err := store.CompleteWithOptions(options); err != nil {
-		panic(err) // TODO: Propagate error up
+		panic(err) // TODO: Propagate error up id:1332 gh:1338
 	}
 
 	statusStore := *store
@@ -172,7 +172,7 @@ func (r *ScaleREST) Update(ctx genericapirequest.Context, name string, objInfo r
 		return nil, false, err
 	}
 
-	// TODO: should this pass admission?
+	// TODO: should this pass admission? id:1365 gh:1371
 	obj, err := objInfo.UpdatedObject(ctx, oldScale)
 	if err != nil {
 		return nil, false, err
@@ -205,7 +205,7 @@ func (r *ScaleREST) Update(ctx genericapirequest.Context, name string, objInfo r
 // scaleFromReplicaSet returns a scale subresource for a replica set.
 func scaleFromReplicaSet(rs *extensions.ReplicaSet) (*extensions.Scale, error) {
 	return &extensions.Scale{
-		// TODO: Create a variant of ObjectMeta type that only contains the fields below.
+		// TODO: Create a variant of ObjectMeta type that only contains the fields below. id:1404 gh:1410
 		ObjectMeta: metav1.ObjectMeta{
 			Name:              rs.Name,
 			Namespace:         rs.Namespace,

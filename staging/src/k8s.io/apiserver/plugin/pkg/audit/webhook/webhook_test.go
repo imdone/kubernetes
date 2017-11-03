@@ -113,7 +113,7 @@ func newWebhook(t *testing.T, endpoint string, mode string, groupVersion schema.
 		os.Remove(f.Name())
 	}()
 
-	// NOTE(ericchiang): Do we need to use a proper serializer?
+	// NOTE (ericchiang): Do we need to use a proper serializer? id:3460 gh:3475
 	require.NoError(t, stdjson.NewEncoder(f).Encode(config), "writing kubeconfig")
 
 	backend, err := NewBackend(f.Name(), mode, groupVersion)

@@ -190,7 +190,7 @@ func (q *writeQueue) shift() FrameWriteRequest {
 		panic("invalid use of queue")
 	}
 	wr := q.s[0]
-	// TODO: less copy-happy queue.
+	// TODO: less copy-happy queue. id:3334 gh:3350
 	copy(q.s, q.s[1:])
 	q.s[len(q.s)-1] = FrameWriteRequest{}
 	q.s = q.s[:len(q.s)-1]

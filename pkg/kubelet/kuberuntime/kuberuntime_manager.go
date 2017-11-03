@@ -174,7 +174,7 @@ func NewKubeGenericRuntimeManager(
 	}
 
 	// Only matching kubeRuntimeAPIVersion is supported now
-	// TODO: Runtime API machinery is under discussion at https://github.com/kubernetes/kubernetes/issues/28642
+	// TODO: Runtime API machinery is under discussion at https://github.com/kubernetes/kubernetes/issues/28642 id:1114 gh:1118
 	if typedVersion.Version != kubeRuntimeAPIVersion {
 		glog.Errorf("Runtime api version %s is not supported, only %s is supported now",
 			typedVersion.Version,
@@ -189,7 +189,7 @@ func NewKubeGenericRuntimeManager(
 		typedVersion.RuntimeApiVersion)
 
 	// If the container logs directory does not exist, create it.
-	// TODO: create podLogsRootDirectory at kubelet.go when kubelet is refactored to
+	// TODO: create podLogsRootDirectory at kubelet.go when kubelet is refactored to id:1053 gh:1059
 	// new runtime interface
 	if _, err := osInterface.Stat(podLogsRootDirectory); os.IsNotExist(err) {
 		if err := osInterface.MkdirAll(podLogsRootDirectory, 0755); err != nil {
@@ -837,7 +837,7 @@ func (m *kubeGenericRuntimeManager) GetPodStatus(uid kubetypes.UID, name, namesp
 	//	we can only assume their restart count is 0.
 	// Anyhow, we only promised "best-effort" restart count reporting, we can just ignore
 	// these limitations now.
-	// TODO: move this comment to SyncPod.
+	// TODO: move this comment to SyncPod. id:980 gh:986
 	podSandboxIDs, err := m.getSandboxIDByPodUID(uid, nil)
 	if err != nil {
 		return nil, err
@@ -913,7 +913,7 @@ func (m *kubeGenericRuntimeManager) GetPodContainerID(pod *kubecontainer.Pod) (k
 // UpdatePodCIDR is just a passthrough method to update the runtimeConfig of the shim
 // with the podCIDR supplied by the kubelet.
 func (m *kubeGenericRuntimeManager) UpdatePodCIDR(podCIDR string) error {
-	// TODO(#35531): do we really want to write a method on this manager for each
+	// TODO (#35531): do we really want to write a method on this manager for each id:1098 gh:1104
 	// field of the config?
 	glog.Infof("updating runtime config through cri with podcidr %v", podCIDR)
 	return m.runtimeService.UpdateRuntimeConfig(

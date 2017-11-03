@@ -280,11 +280,11 @@ func TestHammerController(t *testing.T) {
 	wg.Wait()
 
 	// Let's wait for the controller to finish processing the things we just added.
-	// TODO: look in the queue to see how many items need to be processed.
+	// TODO: look in the queue to see how many items need to be processed. id:3952 gh:3973
 	time.Sleep(100 * time.Millisecond)
 	close(stop)
 
-	// TODO: Verify that no goroutines were leaked here and that everything shut
+	// TODO: Verify that no goroutines were leaked here and that everything shut id:3809 gh:3824
 	// down cleanly.
 
 	outputSetLock.Lock()

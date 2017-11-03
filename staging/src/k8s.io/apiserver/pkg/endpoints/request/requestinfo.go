@@ -56,7 +56,7 @@ type RequestInfo struct {
 
 // specialVerbs contains just strings which are used in REST paths for special actions that don't fall under the normal
 // CRUDdy GET/POST/PUT/DELETE actions on REST objects.
-// TODO: find a way to keep this up to date automatically.  Maybe dynamically populate list as handlers added to
+// TODO: find a way to keep this up to date automatically.  Maybe dynamically populate list as handlers added to id:3886 gh:3905
 // master's Mux.
 var specialVerbs = sets.NewString("proxy", "watch")
 
@@ -75,7 +75,7 @@ type RequestInfoFactory struct {
 	GrouplessAPIPrefixes sets.String // without leading and trailing slashes
 }
 
-// TODO write an integration test against the swagger doc to test the RequestInfo and match up behavior to responses
+// TODO write an integration test against the swagger doc to test the RequestInfo and match up behavior to responses id:3710 gh:3725
 // NewRequestInfo returns the information from the http request.  If error is not nil, RequestInfo holds the information as best it is known before the failure
 // It handles both resource and non-resource requests and fills in all the pertinent information for each.
 // Valid Inputs:
@@ -178,7 +178,7 @@ func (r *RequestInfoFactory) NewRequestInfo(req *http.Request) (*RequestInfo, er
 			}
 		}
 	} else {
-		requestInfo.Namespace = "" // TODO(sttts): solve import cycle when using metav1.NamespaceNone
+		requestInfo.Namespace = "" // TODO (sttts): solve import cycle when using metav1.NamespaceNone id:3798 gh:3813
 	}
 
 	// parsing successful, so we now know the proper value for .Parts

@@ -196,7 +196,7 @@ func deleteTaints(taintsToRemove []v1.Taint, newTaints *[]v1.Taint) ([]error, bo
 }
 
 // addTaints adds the newTaints list to existing ones and updates the newTaints List.
-// TODO: This needs a rewrite to take only the new values instead of appended newTaints list to be consistent.
+// TODO: This needs a rewrite to take only the new values instead of appended newTaints list to be consistent. id:1375 gh:1381
 func addTaints(oldTaints []v1.Taint, newTaints *[]v1.Taint) bool {
 	for _, oldTaint := range oldTaints {
 		existsInNew := false

@@ -15,7 +15,7 @@
 package v2
 
 import (
-	// TODO(rjnagal): Move structs from v1.
+	// TODO (rjnagal): Move structs from v1. id:2834 gh:2850
 	"time"
 
 	"github.com/google/cadvisor/info/v1"

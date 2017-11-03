@@ -60,12 +60,12 @@ type RuntimeHelper interface {
 }
 
 // ShouldContainerBeRestarted checks whether a container needs to be restarted.
-// TODO(yifan): Think about how to refactor this.
+// TODO (yifan): Think about how to refactor this. id:838 gh:839
 func ShouldContainerBeRestarted(container *v1.Container, pod *v1.Pod, podStatus *PodStatus) bool {
 	// Get latest container status.
 	status := podStatus.FindContainerStatusByName(container.Name)
 	// If the container was never started before, we should start it.
-	// NOTE(random-liu): If all historical containers were GC'd, we'll also return true here.
+	// NOTE (random-liu): If all historical containers were GC'd, we'll also return true here. id:834 gh:835
 	if status == nil {
 		return true
 	}
@@ -103,7 +103,7 @@ func HashContainer(container *v1.Container) uint64 {
 // HashContainerLegacy returns the hash of the container. It is used to compare
 // the running container with its desired spec.
 // This is used by rktnetes and dockershim (for handling <=1.5 containers).
-// TODO: Remove this function when kubernetes version is >=1.8 AND rktnetes
+// TODO: Remove this function when kubernetes version is >=1.8 AND rktnetes id:778 gh:779
 // update its hash function.
 func HashContainerLegacy(container *v1.Container) uint64 {
 	hash := adler32.New()
@@ -134,7 +134,7 @@ func V1EnvVarsToMap(envs []v1.EnvVar) map[string]string {
 
 // ExpandContainerCommandOnlyStatic substitutes only static environment variable values from the
 // container environment definitions. This does *not* include valueFrom substitutions.
-// TODO: callers should use ExpandContainerCommandAndArgs with a fully resolved list of environment.
+// TODO: callers should use ExpandContainerCommandAndArgs with a fully resolved list of environment. id:876 gh:879
 func ExpandContainerCommandOnlyStatic(containerCommand []string, envs []v1.EnvVar) (command []string) {
 	mapping := expansion.MappingFuncFor(V1EnvVarsToMap(envs))
 	if len(containerCommand) != 0 {
@@ -210,7 +210,7 @@ func IsHostNetworkPod(pod *v1.Pod) bool {
 	return pod.Spec.HostNetwork
 }
 
-// TODO(random-liu): Convert PodStatus to running Pod, should be deprecated soon
+// TODO (random-liu): Convert PodStatus to running Pod, should be deprecated soon id:820 gh:821
 func ConvertPodStatusToRunningPod(runtimeName string, podStatus *PodStatus) Pod {
 	runningPod := Pod{
 		ID:        podStatus.ID,
@@ -246,7 +246,7 @@ func ConvertPodStatusToRunningPod(runtimeName string, podStatus *PodStatus) Pod 
 // kubecontainer.ContainerState.
 // This is only needed because we need to return sandboxes as if they were
 // kubecontainer.Containers to avoid substantial changes to PLEG.
-// TODO: Remove this once it becomes obsolete.
+// TODO: Remove this once it becomes obsolete. id:839 gh:840
 func SandboxToContainerState(state runtimeapi.PodSandboxState) ContainerState {
 	switch state {
 	case runtimeapi.PodSandboxState_SANDBOX_READY:

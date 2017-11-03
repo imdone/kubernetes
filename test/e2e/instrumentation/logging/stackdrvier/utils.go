@@ -209,7 +209,7 @@ func (p *sdLogProvider) buildFilter() (string, error) {
 		return fmt.Sprintf("resource.type=\"gke_cluster\" AND jsonPayload.metadata.namespace=\"%s\"",
 			p.framework.Namespace.Name), nil
 	case systemScope:
-		// TODO(instrumentation): Filter logs from the current project only.
+		// TODO (instrumentation): Filter logs from the current project only. id:2254 gh:2269
 		return "resource.type=\"gce_instance\"", nil
 	}
 	return "", fmt.Errorf("Unknown log provider scope: %v", p.scope)

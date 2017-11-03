@@ -23,7 +23,7 @@ import (
 )
 
 // SchemeGroupVersion is group version used to register these objects
-// TODO this should be in the "scheduler" group
+// TODO this should be in the "scheduler" group id:1604 gh:1610
 var SchemeGroupVersion = schema.GroupVersion{Group: "", Version: "v1"}
 
 func init() {
@@ -34,7 +34,7 @@ func init() {
 }
 
 var (
-	// TODO: move SchemeBuilder with zz_generated.deepcopy.go to k8s.io/api.
+	// TODO: move SchemeBuilder with zz_generated.deepcopy.go to k8s.io/api. id:1589 gh:1595
 	// localSchemeBuilder and AddToScheme will stay in k8s.io/kubernetes.
 	SchemeBuilder      runtime.SchemeBuilder
 	localSchemeBuilder = &SchemeBuilder

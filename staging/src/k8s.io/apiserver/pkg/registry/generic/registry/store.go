@@ -74,7 +74,7 @@ type GenericStore interface {
 // RESTDeleteStrategy are generic across all backends, and encapsulate logic
 // specific to the API.
 //
-// TODO: make the default exposed methods exactly match a generic RESTStorage
+// TODO: make the default exposed methods exactly match a generic RESTStorage id:3888 gh:3907
 type Store struct {
 	// NewFunc returns a new instance of the type this registry returns for a
 	// GET of a single object, e.g.:
@@ -586,7 +586,7 @@ func (e *Store) Update(ctx genericapirequest.Context, name string, objInfo rest.
 				return nil, nil, err
 			}
 			if newVersion == 0 {
-				// TODO: The Invalid error should have a field for Resource.
+				// TODO: The Invalid error should have a field for Resource. id:3712 gh:3728
 				// After that field is added, we should fill the Resource and
 				// leave the Kind field empty. See the discussion in #18526.
 				qualifiedKind := schema.GroupKind{Group: qualifiedResource.Group, Kind: qualifiedResource.Resource}
@@ -973,7 +973,7 @@ func (e *Store) Delete(ctx genericapirequest.Context, name string, options *meta
 	// Handle combinations of graceful deletion and finalization by issuing
 	// the correct updates.
 	shouldUpdateFinalizers, _ := deletionFinalizersForGarbageCollection(e, accessor, options)
-	// TODO: remove the check, because we support no-op updates now.
+	// TODO: remove the check, because we support no-op updates now. id:3800 gh:3815
 	if graceful || pendingFinalizers || shouldUpdateFinalizers {
 		err, ignoreNotFound, deleteImmediately, out, lastExisting = e.updateForGracefulDeletionAndFinalizers(ctx, name, key, options, preconditions, obj)
 	}
@@ -1007,7 +1007,7 @@ func (e *Store) Delete(ctx genericapirequest.Context, name string, options *meta
 // will be deleted from storage, and then an error will be returned.
 // In case of success, the list of deleted objects will be returned.
 //
-// TODO: Currently, there is no easy way to remove 'directory' entry from storage (if we
+// TODO: Currently, there is no easy way to remove 'directory' entry from storage (if we id:3996 gh:4016
 // are removing all objects of a given type) with the current API (it's technically
 // possibly with storage API, but watch is not delivered correctly then).
 // It will be possible to fix it with v3 etcd API.
@@ -1033,7 +1033,7 @@ func (e *Store) DeleteCollection(ctx genericapirequest.Context, options *metav1.
 	}
 	// Spawn a number of goroutines, so that we can issue requests to storage
 	// in parallel to speed up deletion.
-	// TODO: Make this proportional to the number of items to delete, up to
+	// TODO: Make this proportional to the number of items to delete, up to id:3429 gh:3441
 	// DeleteCollectionWorkers (it doesn't make much sense to spawn 16
 	// workers to delete 10 items).
 	workersNumber := e.DeleteCollectionWorkers
@@ -1177,7 +1177,7 @@ func (e *Store) WatchPredicate(ctx genericapirequest.Context, p storage.Selectio
 // returning an error if the TTL cannot be calculated. The defaultTTL is
 // changed to 1 if less than zero. Zero means no TTL, not expire immediately.
 func (e *Store) calculateTTL(obj runtime.Object, defaultTTL int64, update bool) (ttl uint64, err error) {
-	// TODO: validate this is assertion is still valid.
+	// TODO: validate this is assertion is still valid. id:3889 gh:3908
 
 	// etcd may return a negative TTL for a node if the expiration has not
 	// occurred due to server lag - we will ensure that the value is at least

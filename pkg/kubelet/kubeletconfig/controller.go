@@ -143,7 +143,7 @@ func (cc *Controller) Bootstrap() (*kubeletconfig.KubeletConfiguration, error) {
 	// assert: now we know that a dynamicConfigDir was provided, and we can rely on that existing
 
 	// make sure the filesystem is set up properly
-	// TODO(mtaufen): rename this to initializeDynamicConfigDir
+	// TODO (mtaufen): rename this to initializeDynamicConfigDir id:1014 gh:1020
 	if err := cc.initialize(); err != nil {
 		return nil, err
 	}
@@ -161,14 +161,14 @@ func (cc *Controller) Bootstrap() (*kubeletconfig.KubeletConfiguration, error) {
 		return cc.localConfig(), nil
 	} // Assert: we will not use the local configurations, unless we roll back to lkg; curUID is non-empty
 
-	// TODO(mtaufen): consider re-verifying integrity and re-attempting download when a load/verify/parse/validate
+	// TODO (mtaufen): consider re-verifying integrity and re-attempting download when a load/verify/parse/validate id:1090 gh:1096
 	// error happens outside trial period, we already made it past the trial so it's probably filesystem corruption
 	// or something else scary (unless someone is using a 0-length trial period)
 
 	// load the current config
 	checkpoint, err := cc.checkpointStore.Load(curUID)
 	if err != nil {
-		// TODO(mtaufen): rollback for now, but this could reasonably be handled by re-attempting a download,
+		// TODO (mtaufen): rollback for now, but this could reasonably be handled by re-attempting a download, id:1050 gh:1056
 		// it probably indicates some sort of corruption
 		return cc.lkgRollback(fmt.Sprintf(status.CurFailLoadReasonFmt, curUID), fmt.Sprintf("error: %v", err))
 	}

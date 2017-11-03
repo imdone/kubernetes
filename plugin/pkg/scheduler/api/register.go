@@ -23,11 +23,11 @@ import (
 )
 
 // Scheme is the default instance of runtime.Scheme to which types in the Kubernetes API are already registered.
-// TODO: remove this, scheduler should not have its own scheme.
+// TODO: remove this, scheduler should not have its own scheme. id:1467 gh:1474
 var Scheme = runtime.NewScheme()
 
 // SchemeGroupVersion is group version used to register these objects
-// TODO this should be in the "scheduler" group
+// TODO this should be in the "scheduler" group id:1615 gh:1621
 var SchemeGroupVersion = schema.GroupVersion{Group: "", Version: runtime.APIVersionInternal}
 
 var (

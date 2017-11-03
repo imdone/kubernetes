@@ -25,7 +25,7 @@ const (
 // Finds the patchStrategy and patchMergeKey struct tag fields on a given
 // struct field given the struct type and the JSON name of the field.
 // It returns field type, a slice of patch strategies, merge key and error.
-// TODO: fix the returned errors to be introspectable.
+// TODO: fix the returned errors to be introspectable. id:3862 gh:3877
 func LookupPatchMetadata(t reflect.Type, jsonField string) (
 	elemType reflect.Type, patchStrategies []string, patchMergeKey string, e error) {
 	if t.Kind() == reflect.Ptr {

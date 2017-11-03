@@ -33,10 +33,10 @@ var GroupFactoryRegistry = make(announced.APIGroupFactoryRegistry)
 var Registry = registered.NewOrDie(os.Getenv("KUBE_API_VERSIONS"))
 
 // Scheme is the default instance of runtime.Scheme to which types in the Kubernetes API are already registered.
-// NOTE: If you are copying this file to start a new api group, STOP! Copy the
+// NOTE: If you are copying this file to start a new api group, STOP! Copy the id:203 gh:204
 // extensions group instead. This Scheme is special and should appear ONLY in
 // the api group, unless you really know what you're doing.
-// TODO(lavalamp): make the above error impossible.
+// TODO (lavalamp): make the above error impossible. id:332 gh:333
 var Scheme = runtime.NewScheme()
 
 // Codecs provides access to encoding and decoding for the scheme

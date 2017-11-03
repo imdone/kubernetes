@@ -54,7 +54,7 @@ const (
 //     privileged container.
 // 5.  The volume path used by the Kubelet must be the same inside and outside
 //     the container and be writable by the container (to initialize volume)
-//     contents. TODO: remove this requirement.
+//     contents. TODO: remove this requirement. id:1494 gh:1500
 // 6.  The host image must have "mount", "findmnt", "umount", "stat", "touch",
 //     "mkdir", "ls", "sh" and "chmod" binaries in /bin, /usr/sbin, or /usr/bin
 // 7.  The host image should have systemd-run in /bin, /usr/sbin, or /usr/bin
@@ -93,7 +93,7 @@ func NewNsenter() *Nsenter {
 			ne.paths[binary] = binPath
 			break
 		}
-		// TODO: error, so that the kubelet can stop if the paths don't exist
+		// TODO: error, so that the kubelet can stop if the paths don't exist id:1415 gh:1421
 		// (don't forget that systemd-run is optional)
 	}
 	return ne

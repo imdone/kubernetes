@@ -178,7 +178,7 @@ func diffMaps(original, modified map[string]interface{}, t reflect.Type, diffOpt
 		}
 
 		// The patch may have a patch directive
-		// TODO: figure out if we need this. This shouldn't be needed by apply. When would the original map have patch directives in it?
+		// TODO: figure out if we need this. This shouldn't be needed by apply. When would the original map have patch directives in it? id:3860 gh:3875
 		foundDirectiveMarker, err := handleDirectiveMarker(key, originalValue, modifiedValue, patch)
 		if err != nil {
 			return nil, err

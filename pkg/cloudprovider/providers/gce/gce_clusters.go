@@ -28,7 +28,7 @@ func (gce *GCECloud) ListClusters() ([]string, error) {
 		if err != nil {
 			return nil, err
 		}
-		// TODO: Scoping?  Do we need to qualify the cluster name?
+		// TODO: Scoping?  Do we need to qualify the cluster name? id:473 gh:473
 		allClusters = append(allClusters, clusters...)
 	}
 
@@ -41,7 +41,7 @@ func (gce *GCECloud) Master(clusterName string) (string, error) {
 
 func (gce *GCECloud) listClustersInZone(zone string) ([]string, error) {
 	mc := newClustersMetricContext("list_zone", zone)
-	// TODO: use PageToken to list all not just the first 500
+	// TODO: use PageToken to list all not just the first 500 id:450 gh:451
 	list, err := gce.containerService.Projects.Zones.Clusters.List(gce.projectID, zone).Do()
 	if err != nil {
 		return nil, mc.Observe(err)

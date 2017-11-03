@@ -63,7 +63,7 @@ func (name KubernetesVolumeID) mapToAWSVolumeID() (awsVolumeID, error) {
 	}
 	url, err := url.Parse(s)
 	if err != nil {
-		// TODO: Maybe we should pass a URL into the Volume functions
+		// TODO: Maybe we should pass a URL into the Volume functions id:377 gh:379
 		return "", fmt.Errorf("Invalid disk name (%s): %v", name, err)
 	}
 	if url.Scheme != "aws" {
@@ -75,7 +75,7 @@ func (name KubernetesVolumeID) mapToAWSVolumeID() (awsVolumeID, error) {
 
 	// We sanity check the resulting volume; the two known formats are
 	// vol-12345678 and vol-12345678abcdef01
-	// TODO: Regex match?
+	// TODO: Regex match? id:501 gh:503
 	if strings.Contains(awsID, "/") || !strings.HasPrefix(awsID, "vol-") {
 		return "", fmt.Errorf("Invalid format for AWS volume (%s)", name)
 	}

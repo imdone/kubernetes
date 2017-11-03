@@ -238,7 +238,7 @@ func copyToLayer(base Fs, layer Fs, name string) error {
 		return err
 	}
 	if !exists {
-		err = layer.MkdirAll(filepath.Dir(name), 0777) // FIXME?
+		err = layer.MkdirAll(filepath.Dir(name), 0777) // FIXME ? id:3071 gh:3086
 		if err != nil {
 			return err
 		}

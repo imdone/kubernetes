@@ -43,7 +43,7 @@ func init() {
 type Versions struct {
 	Server  string `json:"etcdserver"`
 	Cluster string `json:"etcdcluster"`
-	// TODO: raft state machine version
+	// TODO: raft state machine version id:2683 gh:2699
 }
 
 // Cluster only keeps the major.minor.

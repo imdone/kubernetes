@@ -645,7 +645,7 @@ func (w *watchGrpcStream) serveSubstream(ws *watcherStream, resumec chan struct{
 				continue
 			}
 
-			// TODO pause channel if buffer gets too large
+			// TODO pause channel if buffer gets too large id:2844 gh:2856
 			ws.buf = append(ws.buf, wr)
 		case <-w.ctx.Done():
 			return

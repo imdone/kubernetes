@@ -136,7 +136,7 @@ const (
 	// if resetSliceElemToZeroValue, then on decoding a slice, reset the element to a zero value first.
 	// Only concern is that, if the slice already contained some garbage, we will decode into that garbage.
 	// The chances of this are slim, so leave this "optimization".
-	// TODO: should this be true, to ensure that we always decode into a "zero" "empty" value?
+	// TODO: should this be true, to ensure that we always decode into a "zero" "empty" value? id:3034 gh:3049
 	resetSliceElemToZeroValue bool = false
 )
 
@@ -744,7 +744,7 @@ type typeInfo struct {
 }
 
 func (ti *typeInfo) indexForEncName(name string) int {
-	// NOTE: name may be a stringView, so don't pass it to another function.
+	// NOTE: name may be a stringView, so don't pass it to another function. id:3214 gh:3230
 	//tisfi := ti.sfi
 	const binarySearchThreshold = 16
 	if sfilen := len(ti.sfi); sfilen < binarySearchThreshold {
@@ -1004,7 +1004,7 @@ LOOP:
 func rgetResolveSFI(x []*structFieldInfo, pv []sfiIdx) (y, z []*structFieldInfo) {
 	var n int
 	for i, v := range x {
-		xn := v.encName //TODO: fieldName or encName? use encName for now.
+		xn := v.encName //TODO: fieldName or encName? use encName for now. id:2792 gh:2807
 		var found bool
 		for j, k := range pv {
 			if k.name == xn {

@@ -55,7 +55,7 @@ func PerformPostUpgradeTasks(client clientset.Interface, cfg *kubeadmapi.MasterC
 		errs = append(errs, err)
 	}
 
-	// TODO: Is this needed to do here? I think that updating cluster info should probably be separate from a normal upgrade
+	// TODO: Is this needed to do here? I think that updating cluster info should probably be separate from a normal upgrade id:135 gh:136
 	// Create the cluster-info ConfigMap with the associated RBAC rules
 	// if err := clusterinfo.CreateBootstrapConfigMapIfNotExists(client, kubeadmconstants.GetAdminKubeConfigPath()); err != nil {
 	// 	return err

@@ -36,7 +36,7 @@ func getMasterUsageByPrefix(prefix string) (string, error) {
 	return sshResult.Stdout, nil
 }
 
-// TODO: figure out how to move this to kubemark directory (need to factor test SSH out of e2e framework)
+// TODO: figure out how to move this to kubemark directory (need to factor test SSH out of e2e framework) id:2101 gh:2116
 func GetKubemarkMasterComponentsResourceUsage() map[string]*KubemarkResourceUsage {
 	result := make(map[string]*KubemarkResourceUsage)
 	// Get kuberenetes component resource usage

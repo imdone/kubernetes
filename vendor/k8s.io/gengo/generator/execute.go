@@ -131,7 +131,7 @@ func assembleGolangFile(w io.Writer, f *File) {
 
 	if len(f.Imports) > 0 {
 		fmt.Fprint(w, "import (\n")
-		// TODO: sort imports like goimports does.
+		// TODO: sort imports like goimports does. id:4068 gh:4088
 		for i := range f.Imports {
 			if strings.Contains(i, "\"") {
 				// they included quotes, or are using the

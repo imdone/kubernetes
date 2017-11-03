@@ -121,7 +121,7 @@ func (cb passwordCallback) auth(session []byte, user string, c packetConn, rand 
 	}
 
 	pw, err := cb()
-	// REVIEW NOTE: is there a need to support skipping a password attempt?
+	// REVIEW NOTE: is there a need to support skipping a password attempt? id:3262 gh:3277
 	// The program may only find out that the user doesn't have a password
 	// when prompting.
 	if err != nil {
@@ -283,7 +283,7 @@ func confirmKeyAck(key PublicKey, c packetConn) (bool, error) {
 		}
 		switch packet[0] {
 		case msgUserAuthBanner:
-			// TODO(gpaul): add callback to present the banner to the user
+			// TODO (gpaul): add callback to present the banner to the user id:3087 gh:3102
 		case msgUserAuthPubKeyOk:
 			var msg userAuthPubKeyOkMsg
 			if err := Unmarshal(packet, &msg); err != nil {
@@ -325,7 +325,7 @@ func handleAuthResponse(c packetConn) (bool, []string, error) {
 
 		switch packet[0] {
 		case msgUserAuthBanner:
-			// TODO: add callback to present the banner to the user
+			// TODO: add callback to present the banner to the user id:3123 gh:3138
 		case msgUserAuthFailure:
 			var msg userAuthFailureMsg
 			if err := Unmarshal(packet, &msg); err != nil {
@@ -385,7 +385,7 @@ func (cb KeyboardInteractiveChallenge) auth(session []byte, user string, c packe
 		// like handleAuthResponse, but with less options.
 		switch packet[0] {
 		case msgUserAuthBanner:
-			// TODO: Print banners during userauth.
+			// TODO: Print banners during userauth. id:3223 gh:3238
 			continue
 		case msgUserAuthInfoRequest:
 			// OK

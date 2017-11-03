@@ -43,7 +43,7 @@ type MemoryStats struct {
 	Usage uint64 `json:"usage"`
 	// maximum usage ever recorded.
 	MaxUsage uint64 `json:"max_usage"`
-	// TODO(vishh): Export these as stronger types.
+	// TODO (vishh): Export these as stronger types. id:2532 gh:2547
 	// all the stats exported via memory.stat.
 	Stats map[string]uint64 `json:"stats"`
 	// number of times memory usage hits limits.
@@ -52,7 +52,7 @@ type MemoryStats struct {
 }
 
 // BlkioStatEntry is one small entity to store a piece of Blkio stats
-// TODO Windows: This can be factored out
+// TODO Windows: This can be factored out id:2853 gh:2868
 type BlkioStatEntry struct {
 	Major uint64 `json:"major"`
 	Minor uint64 `json:"minor"`
@@ -61,7 +61,7 @@ type BlkioStatEntry struct {
 }
 
 // BlkioStats stores All IO service stats for data read and write
-// TODO Windows: This can be factored out
+// TODO Windows: This can be factored out id:2706 gh:2721
 type BlkioStats struct {
 	// number of bytes transferred to and from the block device
 	IoServiceBytesRecursive []BlkioStatEntry `json:"io_service_bytes_recursive"`
@@ -75,7 +75,7 @@ type BlkioStats struct {
 }
 
 // NetworkStats aggregates All network stats of one container
-// TODO Windows: This will require refactoring
+// TODO Windows: This will require refactoring id:2691 gh:2706
 type NetworkStats struct {
 	RxBytes   uint64 `json:"rx_bytes"`
 	RxPackets uint64 `json:"rx_packets"`

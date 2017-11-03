@@ -41,7 +41,7 @@ func MatchElements(identifier Identifier, options Options, elements Elements) ty
 
 // ElementsMatcher is a NestingMatcher that applies custom matchers to each element of a slice mapped
 // by the Identifier function.
-// TODO: Extend this to work with arrays & maps (map the key) as well.
+// TODO: Extend this to work with arrays & maps (map the key) as well. id:3194 gh:3209
 type ElementsMatcher struct {
 	// Matchers for each element.
 	Elements Elements
@@ -88,7 +88,7 @@ func (m *ElementsMatcher) matchElements(actual interface{}) (errs []error) {
 	for i := 0; i < val.Len(); i++ {
 		element := val.Index(i).Interface()
 		id := m.Identifier(element)
-		// TODO: Add options to ignore & match duplicates.
+		// TODO: Add options to ignore & match duplicates. id:2772 gh:2787
 		if elements[id] {
 			errs = append(errs, fmt.Errorf("found duplicate element ID %s", id))
 			continue

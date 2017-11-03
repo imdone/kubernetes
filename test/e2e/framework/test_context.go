@@ -44,7 +44,7 @@ type TestContextType struct {
 	KubeVolumeDir              string
 	CertDir                    string
 	Host                       string
-	// TODO: Deprecating this over time... instead just use gobindata_util.go , see #23987.
+	// TODO: Deprecating this over time... instead just use gobindata_util.go , see #23987. id:2232 gh:2247
 	RepoRoot                string
 	DockershimCheckpointDir string
 
@@ -222,7 +222,7 @@ func RegisterClusterFlags() {
 	flag.StringVar(&TestContext.MasterOSDistro, "master-os-distro", "debian", "The OS distribution of cluster master (debian, trusty, or coreos).")
 	flag.StringVar(&TestContext.NodeOSDistro, "node-os-distro", "debian", "The OS distribution of cluster VM instances (debian, trusty, or coreos).")
 
-	// TODO: Flags per provider?  Rename gce-project/gce-zone?
+	// TODO: Flags per provider?  Rename gce-project/gce-zone? id:2461 gh:2476
 	cloudConfig := &TestContext.CloudConfig
 	flag.StringVar(&cloudConfig.MasterName, "kube-master", "", "Name of the kubernetes master. Only required if provider is gce or gke")
 	flag.StringVar(&cloudConfig.ApiEndpoint, "gce-api-endpoint", "", "The GCE ApiEndpoint being used, if applicable")
@@ -257,8 +257,8 @@ func RegisterNodeFlags() {
 	// Mark the test as node e2e when node flags are api.Registry.
 	TestContext.NodeE2E = true
 	flag.StringVar(&TestContext.NodeName, "node-name", "", "Name of the node to run tests on.")
-	// TODO(random-liu): Move kubelet start logic out of the test.
-	// TODO(random-liu): Move log fetch logic out of the test.
+	// TODO (random-liu): Move kubelet start logic out of the test. id:2111 gh:2126
+	// TODO (random-liu): Move log fetch logic out of the test. id:2379 gh:2394
 	// There are different ways to start kubelet (systemd, initd, docker, rkt, manually started etc.)
 	// and manage logs (journald, upstart etc.).
 	// For different situation we need to mount different things into the container, run different commands.
@@ -273,7 +273,7 @@ func RegisterNodeFlags() {
 func ViperizeFlags() {
 
 	// Part 1: Set regular flags.
-	// TODO: Future, lets eliminate e2e 'flag' deps entirely in favor of viper only,
+	// TODO: Future, lets eliminate e2e 'flag' deps entirely in favor of viper only, id:2244 gh:2259
 	// since go test 'flag's are sort of incompatible w/ flag, glog, etc.
 	RegisterCommonFlags()
 	RegisterClusterFlags()
@@ -285,7 +285,7 @@ func ViperizeFlags() {
 	viper.AddConfigPath(".")
 	viper.ReadInConfig()
 
-	// TODO Consider wether or not we want to use overwriteFlagsWithViperConfig().
+	// TODO Consider wether or not we want to use overwriteFlagsWithViperConfig(). id:2233 gh:2248
 	viper.Unmarshal(&TestContext)
 
 	AfterReadingAllFlags(&TestContext)

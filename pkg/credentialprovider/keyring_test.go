@@ -573,7 +573,7 @@ func TestDockerKeyringLookup(t *testing.T) {
 
 // This validates that dockercfg entries with a scheme and url path are properly matched
 // by images that only match the hostname.
-// NOTE: the above covers the case of a more specific match trumping just hostname.
+// NOTE: the above covers the case of a more specific match trumping just hostname. id:605 gh:606
 func TestIssue3797(t *testing.T) {
 	rex := LazyAuthConfiguration{
 		AuthConfig: dockertypes.AuthConfig{

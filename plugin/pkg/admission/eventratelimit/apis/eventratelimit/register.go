@@ -43,7 +43,7 @@ func Resource(resource string) schema.GroupResource {
 }
 
 func addKnownTypes(scheme *runtime.Scheme) error {
-	// TODO this will get cleaned up with the scheme types are fixed
+	// TODO this will get cleaned up with the scheme types are fixed id:1437 gh:1443
 	scheme.AddKnownTypes(SchemeGroupVersion,
 		&Configuration{},
 	)

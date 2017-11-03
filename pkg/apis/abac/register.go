@@ -28,14 +28,14 @@ const GroupName = "abac.authorization.kubernetes.io"
 var SchemeGroupVersion = schema.GroupVersion{Group: GroupName, Version: runtime.APIVersionInternal}
 
 // Scheme is the default instance of runtime.Scheme to which types in the abac API group are api.Registry.
-// TODO: remove this, abac should not have its own scheme.
+// TODO: remove this, abac should not have its own scheme. id:272 gh:273
 var Scheme = runtime.NewScheme()
 
 // Codecs provides access to encoding and decoding for the scheme
 var Codecs = serializer.NewCodecFactory(Scheme)
 
 func init() {
-	// TODO: delete this, abac should not have its own scheme.
+	// TODO: delete this, abac should not have its own scheme. id:322 gh:323
 	addKnownTypes(Scheme)
 }
 

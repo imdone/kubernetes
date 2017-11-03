@@ -118,11 +118,11 @@ func (m *monitor) Run() {
 type monitors map[schema.GroupVersionResource]*monitor
 
 func (qm *QuotaMonitor) controllerFor(resource schema.GroupVersionResource) (cache.Controller, error) {
-	// TODO: pass this down
+	// TODO: pass this down id:597 gh:598
 	clock := clock.RealClock{}
 	handlers := cache.ResourceEventHandlerFuncs{
 		UpdateFunc: func(oldObj, newObj interface{}) {
-			// TODO: leaky abstraction!  live w/ it for now, but should pass down an update filter func.
+			// TODO: leaky abstraction!  live w/ it for now, but should pass down an update filter func. id:635 gh:636
 			// we only want to queue the updates we care about though as too much noise will overwhelm queue.
 			notifyUpdate := false
 			switch resource.GroupResource() {
@@ -166,7 +166,7 @@ func (qm *QuotaMonitor) controllerFor(resource schema.GroupVersionResource) (cac
 	}
 	glog.V(4).Infof("QuotaMonitor unable to use a shared informer for resource %q: %v", resource.String(), err)
 
-	// TODO: if we can share storage with garbage collector, it may make sense to support other resources
+	// TODO: if we can share storage with garbage collector, it may make sense to support other resources id:647 gh:646
 	// until that time, aggregated api servers will have to run their own controller to reconcile their own quota.
 	return nil, fmt.Errorf("unable to monitor quota for resource %q", resource.String())
 }

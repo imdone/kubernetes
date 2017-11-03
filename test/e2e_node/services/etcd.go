@@ -30,11 +30,11 @@ import (
 	"github.com/golang/glog"
 )
 
-// TODO: These tests should not be leveraging v2http
-// TODO(random-liu): Add service interface to manage services with the same behaviour.
+// TODO: These tests should not be leveraging v2http id:2331 gh:2346
+// TODO (random-liu): Add service interface to manage services with the same behaviour. id:2496 gh:2512
 
 // All following configurations are got from etcd source code.
-// TODO(random-liu): Use embed.NewConfig after etcd3 is supported.
+// TODO (random-liu): Use embed.NewConfig after etcd3 is supported. id:2667 gh:2682
 const (
 	etcdName           = "etcd"
 	clientURLStr       = "http://localhost:4001" // clientURL has listener created and handles etcd API traffic

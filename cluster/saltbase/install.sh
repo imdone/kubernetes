@@ -84,7 +84,7 @@ cat <<EOF >>"${docker_images_sls_file}"
 kube_docker_registry: '$(echo ${KUBE_DOCKER_REGISTRY:-gcr.io/google_containers})'
 EOF
 
-# TODO(zmerlynn): Forgive me, this is really gross. But in order to
+# TODO (zmerlynn): Forgive me, this is really gross. But in order to id:121 gh:122
 # avoid breaking the non-Salt deployments, which already painfully
 # have to templatize a couple of the add-ons anyways, manually
 # templatize the addon registry for regional support. When we get

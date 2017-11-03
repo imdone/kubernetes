@@ -36,7 +36,7 @@ const (
 //   // If you didn't use all timeout, return what you didn't use
 //   budget.returnUnused(<unused part of timeout>)
 //
-// NOTE: It's not recommended to be used concurrently from multiple threads -
+// NOTE: It's not recommended to be used concurrently from multiple threads - id:4026 gh:4046
 // if first user takes the whole timeout, the second one will get 0 timeout
 // even though the first one may return something later.
 type timeBudget struct {

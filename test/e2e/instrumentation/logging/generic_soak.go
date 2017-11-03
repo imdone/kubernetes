@@ -41,7 +41,7 @@ var _ = instrumentation.SIGDescribe("Logging soak [Performance] [Slow] [Disrupti
 	// This test is designed to run and confirm that logs are being generated at a large scale, and that they can be grabbed by the kubelet.
 	// By running it repeatedly in the background, you can simulate large collections of chatty containers.
 	// This can expose problems in your docker configuration (logging), log searching infrastructure, to tune deployments to match high load
-	// scenarios.  TODO jayunit100 add this to the kube CI in a follow on infra patch.
+	// scenarios.  TODO jayunit100 add this to the kube CI in a follow on infra patch. id:2335 gh:2351
 
 	// Returns scale (how many waves of pods).
 	// Returns wave interval (how many seconds to wait before dumping the next wave of pods).

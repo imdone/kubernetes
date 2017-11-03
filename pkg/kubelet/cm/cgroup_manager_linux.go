@@ -104,10 +104,10 @@ func ConvertCgroupNameToSystemd(cgroupName CgroupName, outputToCgroupFs bool) st
 
 // ConvertCgroupFsNameToSystemd converts an expanded cgroupfs name to its systemd name.
 // For example, it will convert test.slice/test-a.slice/test-a-b.slice to become test-a-b.slice
-// NOTE: this is public right now to allow its usage in dockermanager and dockershim, ideally both those
+// NOTE: this is public right now to allow its usage in dockermanager and dockershim, ideally both those id:814 gh:815
 // code areas could use something from libcontainer if we get this style function upstream.
 func ConvertCgroupFsNameToSystemd(cgroupfsName string) (string, error) {
-	// TODO: see if libcontainer systemd implementation could use something similar, and if so, move
+	// TODO: see if libcontainer systemd implementation could use something similar, and if so, move id:759 gh:760
 	// this function up to that library.  At that time, it would most likely do validation specific to systemd
 	// above and beyond the simple assumption here that the base of the path encodes the hierarchy
 	// per systemd convention.

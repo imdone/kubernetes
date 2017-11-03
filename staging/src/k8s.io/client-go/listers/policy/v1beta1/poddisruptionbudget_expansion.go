@@ -55,7 +55,7 @@ func (s *podDisruptionBudgetLister) GetPodPodDisruptionBudgets(pod *v1.Pod) ([]*
 		selector, err = metav1.LabelSelectorAsSelector(pdb.Spec.Selector)
 		if err != nil {
 			glog.Warningf("invalid selector: %v", err)
-			// TODO(mml): add an event to the PDB
+			// TODO (mml): add an event to the PDB id:3465 gh:3480
 			continue
 		}
 

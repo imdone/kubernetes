@@ -24,7 +24,7 @@ set -o pipefail
 KUBE_ROOT=$(dirname "${BASH_SOURCE}")/../..
 source "${KUBE_ROOT}/hack/lib/init.sh"
 
-# NOTE: Using "${array[*]}" here is correct.  [@] becomes distinct words (in
+# NOTE: Using "${array[*]}" here is correct.  [@] becomes distinct words (in id:173 gh:174
 # bash parlance).
 
 make all WHAT="${KUBE_SERVER_TARGETS[*]}" KUBE_BUILD_PLATFORMS="${KUBE_SERVER_PLATFORMS[*]}"

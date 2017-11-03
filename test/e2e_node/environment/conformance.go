@@ -48,7 +48,7 @@ func init() {
 	flag.Parse()
 }
 
-// TODO: Should we write an e2e test for this?
+// TODO: Should we write an e2e test for this? id:2277 gh:2292
 func main() {
 	o := strings.Split(*checkFlag, ",")
 	errs := check(o...)

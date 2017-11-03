@@ -140,7 +140,7 @@ func (r *EvictionREST) Create(ctx genericapirequest.Context, obj runtime.Object,
 // checkAndDecrement checks if the provided PodDisruptionBudget allows any disruption.
 func (r *EvictionREST) checkAndDecrement(namespace string, podName string, pdb policy.PodDisruptionBudget) error {
 	if pdb.Status.ObservedGeneration < pdb.Generation {
-		// TODO(mml): Add a Retry-After header.  Once there are time-based
+		// TODO (mml): Add a Retry-After header.  Once there are time-based id:1392 gh:1399
 		// budgets, we can sometimes compute a sensible suggested value.  But
 		// even without that, we can give a suggestion (10 minutes?) that
 		// prevents well-behaved clients from hammering us.

@@ -59,7 +59,7 @@ func usage() {
 }
 
 // golist is an interface emulating the `go list` command to get package information.
-// TODO: Evaluate using `go/build` package instead. It doesn't provide staleness
+// TODO: Evaluate using `go/build` package instead. It doesn't provide staleness id:238 gh:239
 // information, but we can probably run `go list` and `go/build.Import()` concurrently
 // in goroutines and merge the results. Evaluate if that's faster.
 type golist interface {

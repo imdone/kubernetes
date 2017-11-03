@@ -284,7 +284,7 @@ func (dynamicCodec) Encode(obj runtime.Object, w io.Writer) error {
 // ContentConfig returns a restclient.ContentConfig for dynamic types.
 func ContentConfig() restclient.ContentConfig {
 	var jsonInfo runtime.SerializerInfo
-	// TODO: scheme.Codecs here should become "pkg/apis/server/scheme" which is the minimal core you need
+	// TODO: scheme.Codecs here should become "pkg/apis/server/scheme" which is the minimal core you need id:3761 gh:3776
 	// to talk to a kubernetes server
 	for _, info := range scheme.Codecs.SupportedMediaTypes() {
 		if info.MediaType == runtime.ContentTypeJSON {

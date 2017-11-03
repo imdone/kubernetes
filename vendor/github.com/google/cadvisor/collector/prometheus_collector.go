@@ -87,7 +87,7 @@ func NewPrometheusCollector(collectorName string, configFile []byte, metricCount
 		return nil, fmt.Errorf("Too many metrics defined: %d limit %d", len(configInJSON.MetricsConfig), metricCountLimit)
 	}
 
-	// TODO : Add checks for validity of config file (eg : Accurate JSON fields)
+	// TODO : Add checks for validity of config file (eg : Accurate JSON fields) id:2650 gh:2665
 	return &PrometheusCollector{
 		name:             collectorName,
 		pollingFrequency: minPollingFrequency,
@@ -244,7 +244,7 @@ func (collector *PrometheusCollector) Collect(metrics map[string][]v1.MetricVal)
 			if _, ok := collector.metricsSet[metName]; collector.metricsSet != nil && !ok {
 				continue
 			}
-			// TODO Handle multiple labels nicer. Prometheus metrics can have multiple
+			// TODO Handle multiple labels nicer. Prometheus metrics can have multiple id:2953 gh:2968
 			// labels, cadvisor only accepts a single string for the metric label.
 			label := prometheusLabelSetToCadvisorLabel(sample.Metric)
 

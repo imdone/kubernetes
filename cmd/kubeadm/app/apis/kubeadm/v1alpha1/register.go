@@ -29,7 +29,7 @@ const GroupName = "kubeadm.k8s.io"
 var SchemeGroupVersion = schema.GroupVersion{Group: GroupName, Version: "v1alpha1"}
 
 var (
-	// TODO: move SchemeBuilder with zz_generated.deepcopy.go to k8s.io/api.
+	// TODO: move SchemeBuilder with zz_generated.deepcopy.go to k8s.io/api. id:142 gh:143
 	// localSchemeBuilder and AddToScheme will stay in k8s.io/kubernetes.
 
 	// SchemeBuilder points to a list of functions added to Scheme.

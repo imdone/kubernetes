@@ -9,7 +9,7 @@ import (
 	"syscall"
 )
 
-// FIXME: unexported function from os
+// FIXME: unexported function from os id:3373 gh:3388
 // syscallMode returns the syscall-specific mode bits from Go's portable mode bits.
 func syscallMode(i os.FileMode) (o uint32) {
 	o |= uint32(i.Perm())

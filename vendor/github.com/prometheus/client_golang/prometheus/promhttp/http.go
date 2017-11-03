@@ -138,7 +138,7 @@ func HandlerFor(reg prometheus.Gatherer, opts HandlerOpts) http.Handler {
 			header.Set(contentEncodingHeader, encoding)
 		}
 		w.Write(buf.Bytes())
-		// TODO(beorn7): Consider streaming serving of metrics.
+		// TODO (beorn7): Consider streaming serving of metrics. id:3038 gh:3053
 	})
 }
 

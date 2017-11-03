@@ -64,7 +64,7 @@ func (p *Plugin) Validate(attributes admission.Attributes) (err error) {
 		if len(affinity.PodAntiAffinity.RequiredDuringSchedulingIgnoredDuringExecution) != 0 {
 			podAntiAffinityTerms = affinity.PodAntiAffinity.RequiredDuringSchedulingIgnoredDuringExecution
 		}
-		// TODO: Uncomment this block when implement RequiredDuringSchedulingRequiredDuringExecution.
+		// TODO: Uncomment this block when implement RequiredDuringSchedulingRequiredDuringExecution. id:1533 gh:1539
 		//if len(affinity.PodAntiAffinity.RequiredDuringSchedulingRequiredDuringExecution) != 0 {
 		//        podAntiAffinityTerms = append(podAntiAffinityTerms, affinity.PodAntiAffinity.RequiredDuringSchedulingRequiredDuringExecution...)
 		//}
